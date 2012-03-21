@@ -1,0 +1,46 @@
+{% extends "item_common_mountain.html" %}
+{% load content %}
+
+{% block title %}{{ mountain.title }} {{ block.super }}{% endblock %}
+
+{% block page_title %}<a href="{% url mountains %}">Все горы</a> » {{ mountain.title }}{% endblock %}
+
+
+{%block content%}
+       	<table border="0" cellpadding="0" cellspacing="10" width="100%"><tbody>
+       		<tr><td valign="top">
+				<table border="0" cellspacing="5"><tbody>
+                    {%if mountain.region%}<tr><td valign="top"><b>Регион:</b></td><td>{{mountain.region|link}}</td></tr>{%endif%}
+                    {%if mountain.district%}<tr><td valign="top"><b>Область:</b></td><td>{{mountain.district}}</td></tr>{%endif%}
+					{%if mountain.pistes%}<tr><td valign="top"><b>Кол-во трасс:</b></td><td>{{mountain.pistes}}</td></tr>{%endif%}
+					{%if mountain.overfall%}<tr><td valign="top"><b>Перепад высот:</b></td><td>{{mountain.overfall}}</td></tr>{%endif%}
+					{%if mountain.pisteslength%}<tr><td valign="top"><b>Общая длина трасс:</b></td><td>{{mountain.pisteslength}}</td></tr>{%endif%}
+					{%if mountain.lifts%}<tr><td valign="top"><b>Подъемники:</b></td><td>{{mountain.lifts}}</td></tr>{%endif%}
+					{%if mountain.snow%}<tr><td valign="top"><b>Иск. снег:</b></td><td>{{mountain.snow}}</td></tr>{%endif%}
+					{%if mountain.light%}<tr><td valign="top"><b>Освещение:</b></td><td>{{mountain.light}}</td></tr>{%endif%}
+
+					{%if mountain.nightwork%}<tr><td valign="top"><b>Ночное катание:</b></td><td>{{mountain.nightwork}}</td></tr>{%endif%}
+					{%if mountain.service%}<tr><td valign="top"><b>Услуги:</b></td><td>{{mountain.service}}</td></tr>{%endif%}
+					{%if mountain.address%}<tr><td valign="top"><b>Адрес:</b></td><td>{{mountain.address}}</td></tr>{%endif%}
+                    {%if mountain.url%}<tr><td valign="top"><b>Сайт:</b></td><td><a href="{{mountain.url}}" rel="nofollow">{{mountain.url}}</a></td></tr>{%endif%}
+                    {%if mountain.tel%}<tr><td valign="top"><b>Телефоны:</b></td><td>{{mountain.tel}}</td></tr>{%endif%}
+
+				</tbody></table>
+
+				<p>{{mountain.content|parser}}</p>
+
+			</td><td valign="top" width="1">
+                {%if mountain.image%}<a href="{{mountain.image.url}}" style="float: right;"><img src="{% MEDIA_URL %}{{mountain.image.get_thumbnail_url}}" alt="{{mountain.title}} - основное фото" border="0"></a><br><br>{%endif%}
+
+				{%for p in photos%}
+					<a href="{{p.get_absolute_url}}"><img src="{% MEDIA_URL %}{{p.image.get_thumbnail_url}}"></a><br><br>
+				{%endfor%}
+			</td></tr>
+		</tbody></table>
+
+
+    {% post_panel mountain user %}
+
+    {% comments mountain request %}
+
+{%endblock%}

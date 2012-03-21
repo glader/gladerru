@@ -1,0 +1,14 @@
+.g-line:after
+{
+    font: 0/0 a;
+
+    display: block;
+    /* TODO: remove? */ /**/
+    visibility: hidden;
+    clear: both;
+
+    /* TODO: remove? */ /**/
+    height: 0;
+
+    content: ".";
+}

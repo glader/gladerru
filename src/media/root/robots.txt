@@ -1,0 +1,9 @@
+User-agent: Yandex
+Disallow: /search
+Disallow: /auth
+Host: glader.ru
+
+User-agent: *
+Disallow: /search
+Disallow: /auth
+Disallow: /top

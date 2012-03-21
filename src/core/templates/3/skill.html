@@ -1,0 +1,36 @@
+{% extends "tab_articles.html" %}
+{% load content %}
+
+{% block page_title %}<a href="{% url skills %}">Статьи</a> » {{ skill.title }}{% endblock %}
+
+{% block title %}{{ skill.title }} - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu skill.slug 'articles' %}
+{% endblock %}
+
+{% block content %}
+	<div class="b-skill">
+		<img src="{{ skill.image.url }}" alt="{{ skill.title }}" class="image">
+
+		{{ skill.description|safe }}
+
+		{% if articles %}
+			<h2>Статьи</h2>
+			<ul>
+				{% for article in articles %}
+					<li>{{ article|link }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+
+		{% if tags %}
+			<h2>Еще почитать по этому поводу</h2>
+			<div>
+				{% for tag in tags %}
+					{{ tag|link }}{% if not forloop.last %}, {% endif %}
+				{% endfor %}
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,9 @@
+{%load content%}Поздравляем с регистрацией на сайте Glader.ru
+<html><body>
+Вы успешно зарегистрировались на сноубордическом сайте <a href="http://glader.ru">Glader.ru</a>.<br><br>
+
+Ваше имя на сайте: {{ user.first_name }}<br>
+Ваш пароль: {{ form.cleaned_data.password }}<br><br>
+
+Начните с редактирования информации о себе на странице <a href="http://glader.ru{{ user.get_absolute_url }}">вашего профиля</a>.
+</body></html>

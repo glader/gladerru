@@ -1,0 +1,67 @@
+{% extends "tab_movies.html" %}
+{% load content %}
+{% load russian %}
+
+{% block top_menu %}
+    {% top_menu "people" %}
+{% endblock %}
+
+{% block breadcrumbs %}<a href="{% url movies %}">Сноубордические фильмы</a> / <a href="{% url people %}">Райдеры</a> / {{ item.title }}{% endblock %}
+
+{% block title %}{{ item.title }} - райдеры - {{ block.super }}{% endblock %}
+
+{% block page_title %}{{ item.title }}{% endblock %}
+
+{%block content%}
+	<div class="b-static-text">
+        {%if item.image%}<a href="{{item.image.url}}" style="float: right;"><img src="{% MEDIA_URL %}{{item.image.get_thumbnail_url}}" alt="{{item.title}} - портрет" border="0"></a><br>{%endif%}
+       	
+		<table border="0" cellspacing="5"><tbody>
+		
+			{%if item.birthday%}<tr><td valign="top"><b>Дата рождения:</b></td><td>{{item.birthday|human_date}}</td></tr>{%endif%}
+			{%if item.stance%}<tr><td valign="top"><b>Стойка:</b></td><td>{{item.stance}}</td></tr>{%endif%}
+			{%if item.width%}<tr><td valign="top"><b>Ширина стойки:</b></td><td>{{item.width}}</td></tr>{%endif%}
+			{%if item.angles%}<tr><td valign="top"><b>Углы стойки:</b></td><td>{{item.angles}}</td></tr>{%endif%}
+			{%if item.footsize%}<tr><td valign="top"><b>Размер ноги:</b></td><td>{{item.footsize}}</td></tr>{%endif%}
+			{%if country%}<tr><td valign="top"><b>Родился:</b></td><td>{{country}}</td></tr>{%endif%}
+						
+			{%if sponsors%}<tr><td valign="top"><b>Спонсоры:</b></td><td valign="top">{%items_list sponsors%}</td></tr>{%endif%}
+		</tbody></table>
+	
+       	{{item.content|parser}}
+
+		{%if movies%}<h3>Фильмы</h3>
+			<ul>
+			{%for m in movies%}
+				<li><a href="{{m.get_absolute_url}}" class="header_link">{{m.title}}</a> 
+					({%if m.studio%}<span class="comment">{{ m.studio|link }}{% if m.year %},{% endif %}</span>{%endif%}{%if m.year%} {{m.year}}{%endif%}) 
+				</li>
+			{%endfor%}
+			</ul>				
+		{%endif%}
+
+		{%if photos%}<h3>Фотографии с {% ifequal item.gender 'm' %}его{% else %}её{% endifequal %} участием</h3>
+			{%for p in photos%}
+				<a href="{{p.get_absolute_url}}"><img src="{% MEDIA_URL %}{{p.image.get_thumbnail_url}}"></a>
+			{%endfor%}
+			</ul>
+            {% if more_photos %}
+                <div><a href="{% url man_photos item.slug %}">Все фотографии</a></div>
+            {% endif %}   
+		{%endif%}
+		
+		{%if author_photos%}<h3>Сделанные {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</h3>
+			{%for p in author_photos%}
+				<a href="{{p.get_absolute_url}}"><img src="{% MEDIA_URL %}{{p.image.get_thumbnail_url}}"></a>
+			{%endfor%}
+			</ul>
+            {% if more_author_photos %}
+                <div><a href="{% url man_author_photos item.slug %}">Все снятые {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</a></div>
+            {% endif %}   
+		{%endif%}
+				
+		{%if interviews%}<h3>Интервью</h3>
+			{%items_ul_list interviews%}
+		{%endif%}
+	</div>
+{%endblock%}

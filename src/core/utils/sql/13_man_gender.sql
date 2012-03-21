@@ -1,0 +1,1 @@
+alter table core_man add column gender char(1) default 'm' not null after footsize;

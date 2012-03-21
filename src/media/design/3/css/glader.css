@@ -1,0 +1,112 @@
+@import url(block/global/global.css);
+@import url(block/global/global.reset.css);
+@import url(block/g-line/g-line.css);
+
+@import url(block/b-popup/b-popup.css);
+@import url(block/l-page/l-page.css);
+@import url(block/l-head/l-head.css);
+@import url(block/b-round/b-round.css);
+@import url(block/b-pager/b-pager.css);
+@import url(block/b-usertab/b-usertab.css);
+@import url(block/b-menu/b-menu.css);
+
+@import url(block/b-page-title/b-page-title.css);
+@import url(block/b-head-ill/b-head-ill.css);
+@import url(block/b-logo/b-logo.css);
+@import url(block/b-navigate/b-navigate.css);
+@import url(block/b-hint/b-hint.css);
+@import url(block/b-movie-list/b-movie-list.css);
+@import url(block/b-pseudo-link/b-pseudo-link.css);
+@import url(block/b-rubric-icon/b-rubric-icon.css);
+@import url(block/b-local-links/b-local-links.css);
+@import url(block/b-picturebox/b-picturebox.css);
+
+@import url(block/b-feed/b-feed.css);
+@import url(block/b-bar/b-bar.css);
+@import url(block/b-bar/b-bar-social.css);
+@import url(block/b-static-text/b-static-text.css);
+@import url(block/b-skill/b-skill.css);
+@import url(block/b-dictionary/b-dictionary.css);
+@import url(block/b-discount/b-discount.css);
+@import url(block/b-studio/b-studio.css);
+@import url(block/b-movie/b-movie.css);
+@import url(block/b-messages/b-messages.css);
+
+@import url(block/b-new-post/b-new-post.css);
+@import url(block/b-tag/b-tag.css);
+@import url(block/b-tags-list/b-tags-list.css);
+@import url(block/b-block-title/b-block-title.css);
+@import url(block/b-adv/b-adv.css);
+@import url(block/b-online/b-online.css);
+@import url(block/b-comments/b-comments.css);
+@import url(block/b-track-list/b-track-list.css);
+@import url(block/b-search/b-search.css);
+
+@import url(block/b-auth-form/b-auth-form.css);
+
+@import url(block/b-foot/b-foot.css);
+
+a:link
+{
+    color: #317cb4;
+}
+
+a:hover
+{
+    color: #b00;
+}
+
+a:active
+{
+    color: #f00;
+}
+
+body
+{
+    min-width: 980px;
+
+    color: #403f3f;
+}
+
+.float_right {
+    float:right;
+    padding: 10px;
+}
+
+.float_left {
+    float:left;
+    padding: 10px;
+}
+
+.g-hidden {
+    display: none;
+}
+
+.question {
+    font-weight: bold;
+}
+
+.answer {
+    margin-bottom: 10px;
+}
+
+.para {
+    margin-bottom: 10px;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+.schedule {width: 100%; border-collapse:collapse;}
+.schedule th {border: 1px solid gray; }
+.schedule td {border: 1px solid gray; vertical-align: top; padding: 3px; width:14%; height: 90px;}
+.schedule .no_day {border: 1px solid gray; background-color: #ddd; width:14%; height: 90px;}
+.schedule td .header {text-align: right; white-space:nowrap; margin-bottom: 5px; color: #333}
+.schedule td .today { border-bottom: 1px solid gray; background-color:#eee; }
+.schedule .month {border: 0px; height: auto; padding-top:10px;}
+.schedule .time {font-size:80%; font-weight:bold; color:#999;}
+.schedule .training {padding:0px 0px 10px 0px;}
+.schedule .presentation {color:#a00; font-weight:bold;}
+.schedule a.event:link, .schedule a.event:visited { color: #315D6E; text-decoration: none;}
+.schedule a.event:hover, .schedule a.event:active { color: #22414D; text-decoration: underline;}

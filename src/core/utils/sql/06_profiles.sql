@@ -1,0 +1,1 @@
+update auth_user u join core_profile p ON u.id=p.user_id set u.first_name = if(length(p.title) < 30, p.title, p.name)

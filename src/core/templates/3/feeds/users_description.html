@@ -1,0 +1,8 @@
+{% load content %}
+{% ifequal obj.type_id 46 %}
+    {{ obj|post_cut|parser }}
+{% else %}{% ifequal obj.type_id 47 %}
+    {{ obj.content|parser }}
+{% else %}
+    {{ obj|link|safe }}
+{% endifequal %}{% endifequal %}

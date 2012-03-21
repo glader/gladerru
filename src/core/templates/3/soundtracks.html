@@ -1,0 +1,30 @@
+{% extends "tab_movies.html" %}
+{% load content %}
+
+{% block head %}
+    <script type='text/javascript' src='{% MEDIA_URL %}js/swfobject.js'></script>
+    <script type='text/javascript' src='{% MEDIA_URL %}js/player_utils.js'></script>
+{% endblock head %}
+
+{% block top_menu %}
+    {% top_menu 'soundtracks' %}
+{% endblock %}
+
+{% block title %}Саундтреки сноубордических фильмов{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+
+{% block page_title %}Саундтреки сноубордических фильмов{% endblock %}
+
+{% block content %}
+	<div class="b-feed">
+	    {% for m in items %}
+	        <div class="item">
+	            <div class="title"><h2>{{ m|link }} ({{ m.year|default:"" }}{% if m.year %}, {% endif %}{{ m.rating|default:"0" }})</h2></div><br />
+	            <div style="margin-left: 20px;">
+	                {% soundtrack_list m.song_set.all %}
+	            </div>
+	        </div>
+	    {% endfor %}
+	</div>
+
+	{% pagination %}
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "item_common.html" %}
+{% load content %}
+
+{% block top_menu %}
+    {% top_menu 'dictionary' %}
+{% endblock %}
+
+{% block title %}Сноубордический словарь{% endblock %}
+
+{% block page_title %}Сноубордический словарь{% endblock %}
+
+{% ifnotequal filter 'common' %}
+    <div><a href="?filter='">Все слова</a></div>
+{% endifnotequal %}
+
+{% block content %}
+	<div class="b-dictionary">
+	    {% include "block_alphabet_local.html" %}
+
+	    <ul>
+	    {% for letters_list in alphabet_letters %}
+	        {% for l in letters_list %}
+	            {% if present_letters|el:l  %}
+	                <li><a name="{{ l }}"><h2>{{ l }}</h2></a></li>
+	                {% for w in present_letters|el:l %}
+	                    <li itemscope itemtype="http://webmaster.yandex.ru/vocabularies/term-def.xml">
+	                    	<span class="word" itemprop="term">{{ w.title }}</span> -
+	                    	<span itemprop="definition">{{ w.abstract|parser }}</span>
+	                    	{% if w.content %}(<small><a href="{{w.get_absolute_url}}" class="dict_full">подробнее</a></small>){% endif %}
+	                    </li>
+	                {% endfor %}
+	            {% endif %}
+	        {% endfor %}
+	    {% endfor %}
+	    </ul>
+	</div>
+{% endblock %}

@@ -1,0 +1,43 @@
+/* Skill page (begin) */
+	.b-skill table
+	{
+		border-collapse: none;
+		border: 0px;
+	}
+	
+	.b-skill td
+	{
+		padding-right: 10px;
+	}
+	
+	.b-skill ul 
+	{
+	    list-style: disc;
+	}
+
+	.b-skill ol 
+	{
+	    list-style: decimal;
+	}
+	
+	.b-skill li
+	{
+	    margin-left: 20px;
+	    margin-bottom: 5px;
+	}
+	
+	.b-skill h2
+	{
+		color: #EE3124;
+		font-size: 120%;
+		font-weight: bold;
+		margin: 1em 0 1em;
+	}
+	
+	.b-skill .image
+	{
+		border: 1px solid black;
+		float: right;
+	}
+	
+/* Skill (end) */

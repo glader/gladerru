@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block page_title %}Удалить дисконтную карту{% endblock %}
+
+{% block content %}
+	<div class="b-discount">
+		<p>Вы уверены, что хотите удалить дисконтную карту <strong>{{ discount }}</strong>?</p>
+		<br />
+		<form action="" method="POST">
+			<input type="hidden" name="action" value="delete">
+			<input type="submit" value="Удалить"> или <a href="{% url discounts %}">вернуться</a>
+		</form>
+	</div>
+{% endblock %}
+	
+{% block title %}Удаление дисконтной карты {{ block.super }}{% endblock %}

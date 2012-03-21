@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block page_title %}Добавить дисконтную карту{% endblock %}
+
+{% block content %}
+	<div class="b-discount">
+		<form action="" method="POST">
+			<table>
+				{{ form }}
+				<tr><td></td><td><input type="submit" value="Сохранить"></td></tr>
+			</table>
+		</form> 
+	</div>
+{% endblock %}
+	
+{% block title %}Добавление дисконтной карты {{ block.super }}{% endblock %}

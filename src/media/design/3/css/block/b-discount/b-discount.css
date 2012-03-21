@@ -1,0 +1,18 @@
+/* Дисконтные карты (begin) */ /**/
+    .b-discount .city
+    {
+    	font-weight: bold;
+    	margin-bottom: 5px;
+    }
+
+    .b-discount table
+    {
+    	margin-bottom: 20px;
+    }
+
+    .b-discount table td
+    {
+        padding-left: 20px;
+    }
+
+/* Дисконтные карты (end) */ /**/

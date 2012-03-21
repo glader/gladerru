@@ -1,0 +1,24 @@
+{% extends "item_common_article.html" %}
+{% load content %}
+
+{% block title %}{{ rubric.title }} {{ block.super }}{% endblock %}
+
+{% block page_title %}<a href="{% url skills %}">Статьи</a> » {{ rubric.title }}{% endblock %}
+
+{%block content%}
+		{%if children%}
+			<ul>
+			{%for child in children%}
+				<li>{{child|link}}<div class='para'><small>{{child.abstract|default:""}}</small></div></li>
+			{%endfor%}
+			</ul>
+		{%endif%}
+
+		{%if articles%}
+			<ul>
+			{%for child in articles%}
+				<li>{{child|link}}</li>
+			{%endfor%}
+			</ul>
+		{%endif%}
+{%endblock%}

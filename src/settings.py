@@ -1,0 +1,178 @@
+# -*- coding: utf-8 -*-
+# Django settings for gladerru project.
+import os, platform, sys
+import logging
+
+APPEND_SLASH=False
+
+ADMINS = (('Glader', 'glader.ru@gmail.com'),)
+MANAGERS = ADMINS
+SERVER_EMAIL = DEFAULT_FROM_EMAIL = 'glader.ru@gmail.com'
+
+AUTH_PROFILE_MODULE = 'core.Profile'
+
+FORCE_SCRIPT_NAME = ""
+TIME_ZONE = 'Asia/Yekaterinburg'
+LANGUAGE_CODE = 'ru-ru'
+SITE_ID = 1
+USE_I18N = True
+SECRET_KEY = '12345'
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.load_template_source',
+    'django.template.loaders.app_directories.load_template_source',
+)
+DEBUG = False
+TEMPLATE_DEBUG = False
+IS_DEVEL = False
+TIMING = True
+
+ADMIN_MEDIA_PREFIX = '/admind/media/'
+
+
+MIDDLEWARE_CLASSES = (
+    'django.middleware.gzip.GZipMiddleware',
+    'core.middleware.Timing',
+    'core.middleware.SpacelessMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.doc.XViewMiddleware',
+    'core.middleware.LastLogin',
+    'core.middleware.UserReferer',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.media',
+    'core.context.default',
+    'messages.context_processors.inbox',
+)
+
+ROOT_URLCONF = 'urls'
+
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'core/templates/3'),
+)
+
+INSTALLED_APPS = (
+    'admin_tools',
+    'admin_tools.theming',
+    'admin_tools.menu',
+    'admin_tools.dashboard',
+    'django.contrib.auth',
+    'django.contrib.admin',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.markup',
+    'django_errorlog',
+    'django_russian',
+    'debug_toolbar',
+    'core',
+    'shop',
+    'sape',
+    'south',
+    'messages',
+    'django_glader_queue',
+)
+
+# Absolute path to the directory that holds media.
+PROJECT_PATH = os.path.dirname(__file__)
+
+MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+MEDIA_URL = '/media/'
+
+THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails' # os.path.join(MEDIA_ROOT, 'data/thumbnails')
+THUMBNAIL_URL = 'data/thumbnails/'
+THUMBNAIL_SIZE = 300, 150
+
+USERPIC_ROOT = os.path.join(MEDIA_ROOT, 'data/userpics')
+USERPIC_URL = 'data/userpics/'
+
+YAPHOTO_HOST = 'api-fotki.yandex.ru'
+
+LOGIN_URL = '/auth/login'
+
+DESIGN_ID = 3
+
+MAIN_PAGE_LEVEL = 1
+
+SMILES = (':-?\)+', ':-?\(+', '\s:D+')
+
+CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
+CACHE_LONG_TIMEOUT = 60*60*12 # Долгий таймаут, для практически не изменяющихся данных
+
+DOMAIN = 'glader.ru'
+MEDIA_DOMAIN = DOMAIN
+SESSION_COOKIE_DOMAIN = '.' + DOMAIN
+
+SAPE_DIR = '/var/cache/gladerru'
+SAPE_CHARSET = 'utf-8'
+SAPE_DOMAIN = DOMAIN
+SAPE_LOG = '/var/log/projects/gladerru/sape.log'
+
+CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+
+ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
+TIMINGLOG_PATH = '/var/log/projects/gladerru/timing.log'
+
+VK_API_ID = 2009513
+
+LOG_PATH = '/var/log/projects/gladerru'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'verbose': {
+            'format': '%(asctime)s %(name)-15s %(levelname)s %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        },
+    'handlers': {
+        'console':{
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter':'simple'
+        },
+        'file':{
+            'level': 'WARNING',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_PATH, 'traceback.log'),
+            'formatter': 'verbose',
+            },
+        'mail_admins': {
+            'level': 'ERROR',
+            'class': 'django.utils.log.AdminEmailHandler',
+            }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins', 'file'],
+            'level': 'WARNING',
+            'propagate': True,
+            },
+        }
+}
+
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
+
+# Разнообразные логи
+
+LOGGING_FORMAT = '%(asctime)s %(name)-15s %(levelname)s %(message)s'
+LOGGING_MAX_FILE_SIZE = 1 * 1024 * 1024 #: Максимальный размер файла с логами в байтах.
+LOGGING_MAX_FILES_COUNT = 10 #: Количество бекапов файлов с логами.
+
+CRON_LOG_PATH = os.path.join(LOG_PATH, 'cron.log')
+QUEUE_LOG_PATH = os.path.join(LOG_PATH, 'queue.log')
+TIMING_LOG_PATH = os.path.join(LOG_PATH, 'timing.log')
+SEARCH_LOG_PATH = os.path.join(LOG_PATH, 'search.log')
+
+ADMIN_TOOLS_INDEX_DASHBOARD = 'gladerru.dashboard.CustomIndexDashboard'

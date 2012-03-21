@@ -1,0 +1,90 @@
+.b-new-post
+{
+    width: 100%
+}
+
+.b-new-post td
+{
+    padding-right: 30px;
+}
+
+.b-new-post .b-form-main
+{
+    width: 70%;
+}
+
+.b-new-post .input
+{
+    border:1px solid #febe29; 
+    width: 100%; 
+    font-size: 20px; 
+    color: #0f4c79;
+    padding: 3px 10px 3px 10px;
+}
+
+.b-new-post .content
+{
+    padding: 3px 10px 3px 10px; 
+    width:100%;
+    height: 300px;
+    font-size: 14px;
+    color:#403f3f;
+    line-height: 1.5;
+    border:1px solid #febe29;
+}
+
+.b-new-post .tags
+{
+    padding: 3px 10px 3px 10px;
+    border: 1px solid #febe29; 
+    width: 100%; 
+    height: 28px; 
+    font-size: 14px;
+}
+
+.b-new-post .categories
+{
+    padding: 3px;
+    border: 1px solid #febe29; 
+    font-size: 14px;
+}
+
+.b-new-post .picture
+{
+    padding: 3px;
+    border: 1px solid #febe29; 
+    font-size: 14px;
+}
+
+.b-new-post .all_categories
+{
+    padding: 5px;
+    border: 1px solid #febe29;
+    width: 50%;
+}
+
+.b-new-post .categories
+{
+    margin-bottom: 7px;
+}
+
+.b-new-post .content-btn img
+{
+    background-color:#F7F7F7;
+    background-position:50% 50%;
+    background-repeat:no-repeat;
+    border:1px solid #DDDDDD;
+    margin-right:6px;
+    padding:4px;
+}
+
+.b-new-post .content-btn img:hover
+{
+    border-color: black;
+}
+
+.b-new-post .b-picture
+{
+    padding-bottom: 10px;
+}
+ 

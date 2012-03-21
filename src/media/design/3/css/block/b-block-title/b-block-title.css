@@ -1,0 +1,15 @@
+/* Заголовки блоков (begin) */ /**/
+    .b-block-title
+    {
+        font-size: 160%;
+        
+        margin-top: 1.2em;
+
+        color: #403f3f;
+    }
+
+    .b-block-title__first
+    {
+        margin-top: 0 !important;
+    }
+/* Заголовки блоков (end) */ /**/

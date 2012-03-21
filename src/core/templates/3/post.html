@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load content %}
+{% load cache %}
+{% load russian %}
+
+{% block title %}{{ post.title }} - {{ parent.title }}{{ block.super }}{% endblock %}
+
+{% block rss_link %}
+   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/posts/{{ post.id }}" title="Glader.ru: комментарии поста '{{ post.title }}'">
+{% endblock %}
+
+{% block top_menu %}
+    {% top_menu 'posts' %}
+{% endblock %}
+
+{# FIXME: сделать внятные сообщения о статусах сообщений #}
+{% block page_title %}<img src="{% MEDIA_URL %}{{ post.author.get_profile|get_avatar_url:"32" }}" class="userpic" alt=""/> {{ post.author|link }}: {{ post|link }} {% if post.event_date_start %}&nbsp;<span style="font-size: 80%">(<a href="{% url schedule_month post.event_date_start.year, post.event_date_start.month %}">{{ post.event_date_start|human_date }}</a>)</span> {% endif %}{% post_edit_link post user %}
+{% post_status post %}
+{% endblock %}
+
+{% block content %}
+        <div style="clear:both">
+        <div class="b-feed">
+        <div class="item">
+            <div class="text g-line">
+                <p>
+                    {{post.content|parser}}
+                </p>
+            </div>
+
+            {{ post.tags_html|safe }}
+
+            {% post_panel post user %}
+
+            {% comments post request %}
+        </div>
+        </div>
+{% endblock %}
+
+{% block sidebar %}
+    <h2 class="b-block-title">Прямой эфир</h2>
+    {% last_conversations %}
+{% endblock %}

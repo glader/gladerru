@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}{{ title }}{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+
+{% block rss_link %}
+   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/all" title="Glader.ru: свежие сообщения">
+{% endblock %}
+
+{% block top_menu %}
+    {% top_menu menu_item %}
+{% endblock %}
+
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <div class="b-feed">
+        {% for post in posts %}
+            {{ post }}
+        {% endfor %}
+    </div>
+
+    {% pagination "/all" %}
+{% endblock content %}
+
+{% block sidebar %}
+    {% include "block_index_sidebar.html" %}
+{% endblock sidebar %}

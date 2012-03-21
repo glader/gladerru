@@ -1,0 +1,42 @@
+{% load content %}
+
+    <ul class="b-pager">
+        {% for y in years %}
+            {% ifequal y year %}
+                <li class="current">
+                    <b>{{ y }}</b>
+                </li>
+            {% else %}
+                <li><a href="?page={{ y }}">{{ y }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+        <li>|</li>
+        <li><a href="/content/teasers.htm" title="Все тизеры сноуфильмов">Тизеры</a></li>
+        <li><a href="/content/soundtracks.htm" title="Все саундтреки сноуфильмов">Саундтреки</a></li>
+    </ul>
+    
+    <br />
+    
+	<table class="sortable b-movie-list">
+		<tr>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Наименование</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Студия</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Год</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Тизер</span></span></td>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Торрент</span></span></td>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Треки</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Рейтинг</span></span></td>
+		</tr>
+
+	{% for movie in movies %}
+		<tr>
+			<td>{{movie|link}}</td>
+			<td>{%if movie.makers%}{%items_list movie.makers%}{%endif%}</td>
+            <td>{{movie.year|default:""}}</td>
+            <td class="center">{%if movie.youtube%}есть{%endif%}</td>
+            <td class="center">{%if movie.torrent%}<a href="{{ movie.torrent }}"><img src="{% MEDIA_URL %}design/3/img/b-movie-list/disk.png" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{% if movie.tracklist %}<img src="{% MEDIA_URL %}design/3/img/b-movie-list/music.png" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{{movie.rating|decimal_cut}}</td>
+		</tr>
+	{%endfor%}
+	</table>

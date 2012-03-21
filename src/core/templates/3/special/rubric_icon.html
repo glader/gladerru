@@ -1,0 +1,32 @@
+{% extends "item_common_article.html" %}
+{% load content %}
+
+{% block title %}{{ rubric.title }} {{ block.super }}{% endblock %}
+
+{% block page_title %}<a href="{% url skills %}">Статьи</a> » {{ rubric.title }}{% endblock %}
+
+{%block content%}
+        {%if children%}
+            <table class="b-rubric-icon">
+            <tr>
+            {% for child in children %}
+                <td><div class="img"><a href="{{ child.get_absolute_url }}"><img src="{% if child.image %}{{ child.image.url }}{% else %}{% MEDIA_URL %}data/images/icons/default.png{% endif %}"></a></div></td>
+                <td><strong>{{ child|link }}</strong><br />{{ child.abstract|default:"" }}</td>
+                {% cycle "<td class='g'><i></i></td>" "</tr><tr>" %}
+            {% endfor %}
+            </tr>
+            </table>
+        {%endif%}
+
+        {%if articles%}
+            <table class="b-rubric-icon">
+            <tr>
+            {% for child in articles %}
+                <td><div class="img"><a href="{{ child.get_absolute_url }}"><img src="{% if child.icon %}{{ child.icon.url }}{% else %}{% MEDIA_URL %}data/images/icons/default.png{% endif %}"></a></div></td>
+                <td><strong>{{ child|link }}</strong><br />{{ child.abstract|default:"" }}</td>
+                {% cycle "<td class='g'><i></i></td>" "</tr><tr>" %}
+            {% endfor %}
+            </tr>
+            </table>
+        {%endif%}
+{%endblock%}

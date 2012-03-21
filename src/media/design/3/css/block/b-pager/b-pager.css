@@ -1,0 +1,19 @@
+/* Пагинатор (begin) */ /**/
+    .b-pager
+    {
+        margin: 0 0;
+    }
+
+    .b-pager li
+    {
+        float: left;
+        padding: 5px 8px 15px 8px;
+    }
+
+    .b-pager .current
+    {
+        color: #fff;
+        
+        background: #ffcc43 url(/media/design/3/img/b-pager/bg.png) repeat-x;
+    }
+/* Пагинатор (end) */ /**/

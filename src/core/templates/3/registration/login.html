@@ -1,0 +1,64 @@
+{% extends "tab_none.html" %}
+{% load content %}
+
+{%block title%}Авторизация - {{ block.super }}{%endblock%}
+
+{% block page %}
+
+       <!-- Основная часть -->
+       <!-- Заголовок страницы -->
+		<div class="page_header"><table><tr><td><h1>Авторизация</h1></td><td class="page_header_right"></td></tr></table></div>
+		<!-- /Заголовок страницы -->
+
+       <div class="content">
+       <div class="text">
+       
+       <div>{{message}}</div>
+       
+        {%if login_form.str_errors%}
+            <div style="border: 1px solid red; padding: 3px;">{{login_form.str_errors}}</div>
+        {%endif%}
+        {%if registration_form.str_errors%}
+            <div style="border: 1px solid red; padding: 3px;">{{registration_form.str_errors}}</div>
+        {%endif%}
+       
+			<table width='100%'><tr><td valign='top'>
+                <td>
+                <h4 id="login-form-link">Я зарегистрирован на сайте</h2>
+                <div class="b-login-form">
+                    <form method='post' action="{% url login %}">
+                        {{ login_form.retpath }}              
+                        Имя:<br>
+                        {{ login_form.login }}<br><br>
+                        Пароль:<br>
+                        {{ login_form.passwd }} (<a href='{% url password_reset %}'>я забыл пароль</a>)
+                        <br><br>
+                        <input type='submit' value='Войти на сайт'>
+                    </form>
+                </div>
+            </td><td>
+                <h4 id="registration-form-link">Новый участник</h2>
+                <div class="b-registration-form">
+                    <form method='post' action="{% url registration %}">
+                        {{ registration_form.retpath }}
+                        {{ registration_form.login }}                
+                        Email <span class='grey'>(обязательно)</span>:<br>
+                        {{ registration_form.email }}<br><br>
+                        Имя (по желанию):<br>
+                        {{ registration_form.name }}<br><br>
+                        Пароль (по желанию):<br>
+                        {{ registration_form.password1 }}<br><br>
+                        Пароль еще раз (по желанию):<br>
+                        {{ registration_form.password2 }}<br><br>
+                        
+                        <input type='submit' value='Зарегистрироваться'></form>
+                    </form>
+                </div>
+
+                Если у вас возникают проблемы с регистрацией, <a href="{% url feedback %}">напишите нам</a>
+            </td></tr></table>
+
+       </div>
+       </div>
+   
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "tab_articles.html" %}
+{% load content %}
+
+{% block title %}Статьи по направлениям - {{ block.super }}{% endblock %}
+
+{% block page_title %}Статьи по направлениям{% endblock %}
+
+{% block content %}
+	<div style="position:relative; height: 800px;">
+		{% for block in blocks %}
+			{% if block.3 %}
+				<a href="{{ block.3.get_absolute_url }}">
+			{% endif %}
+			<img style="position: absolute; left: {{ block.1 }}px; top: {{ block.2 }}px" src="{% MEDIA_URL %}design/3/img/b-skills/{{ block.0 }}" alt="">
+			{% if block.3 %}
+				</a>
+			{% endif %}
+		{% endfor %}
+	</div>
+
+	<div class="b-page-title"><h1>Статьи по рубрикам</h1></div>
+	<ul>
+	   {% for r in rubrics %}
+	       <li><a href="{{ r.get_absolute_url }}">{{ r.title }}</a></li>
+	   {% endfor %}
+	</ul>
+{% endblock %}

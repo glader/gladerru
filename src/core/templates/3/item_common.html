@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}{{ item.title }} - {{ block.super }}{% endblock %}
+
+{% block content %}
+    <a name="{{ item.name }}"></a>
+
+    {{ item.content|parser }}
+
+    {{ post.tags_html|safe }}
+
+    {% post_panel item user %}
+
+    {% comments item request %}
+{% endblock %}
+
+{% block top_menu %}
+    {% top_menu "" %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% load content %}
+                <div class="item">
+                    <div class="text">
+                        <p>
+                            <a href="{{ post.get_absolute_url }}"><img class="userphoto" src="{% MEDIA_URL %}{{ post.image.get_thumbnail_url }}" alt="{{ post.title }}"></a>
+                        </p>
+                    </div>
+
+                    {{ post.tags_html|safe }}
+
+                    {% post_panel post user mode %}
+                </div>

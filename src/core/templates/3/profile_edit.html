@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load content %}
+
+{%block title%}Профиль пользователя {{domain_user.title}} - {{ block.super }}{%endblock%}
+
+{% block top_menu %}
+    {% top_menu '' %}
+{% endblock %}
+
+{% block page %}
+    <table border="0">
+        <form action="" method="post">
+        <tr><th><label for="id_board">Доска:</label></th><td>{{form.board}}</td></tr>
+        <tr><th><label for="id_bindings">Крепления:</label></th><td>{{form.bindings}}</td></tr>
+        <tr><th><label for="id_boots">Ботинки:</label></th><td>{{form.boots}}</td></tr>
+        <tr><th><label for="id_clothes">Одежда:</label></th><td>{{form.clothes}}</td></tr>
+        <tr><th><label for="id_equip">Снаряга:</label></th><td>{{form.equip}}</td></tr>
+        <tr><th><label for="id_mountains">Места катания:</label></th><td>{{form.mountains}}</td></tr>
+        <tr><th><label for="id_riding_style">Стиль катания:</label></th><td>{{form.riding_style}}</td></tr>
+        
+        <tr><td colspan="2"><hr></td></tr>
+
+        <tr><th><label for="id_city">Город:</label></th><td>{{form.city}}</td></tr>
+        <tr><th><label for="id_country">Страна:</label></th><td>{{form.country}}</td></tr>
+        <tr><th><label for="id_gender">Пол:</label></th><td>{{form.gender}}</td></tr>
+        <tr><th><label for="id_icq">ICQ:</label></th><td>{{form.icq}}</td></tr>
+        <tr><th><label for="id_content">О себе:</label></th><td>{{form.content}}</td></tr>
+    
+            <tr><td colspan="2" align="right">
+            <input type="submit" value="Сохранить">
+        </td></tr>
+        </form>
+    </table>
+{% endblock %}
+
+{% block sape %}{% endblock %}

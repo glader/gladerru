@@ -1,0 +1,26 @@
+{% extends "my/base.html" %}
+{% load content %}
+{% load russian %}
+
+{% block top_menu %}
+    {% top_menu 'news' %}
+{% endblock %}
+
+{% block title %}Мои новости - {{ block.super }}{%endblock%}
+
+{% block page_title %}Мои новости{%endblock%}
+
+{% block content %}
+	{% if news %}
+		{% for date in news %}
+			<h2 style="font-size:120%; font-weight: bold; padding-bottom:5px;">{{ date.date|human_date }}</h2>
+			<ul style="padding-left: 20px; padding-bottom: 10px;">
+				{% for announce in date.news %}
+					<li><img src="{% MEDIA_URL %}design/3/img/b-announce/{{ announce.type }}.png" alt="{{ announce.type.title }}"/> {{ announce.content|add_referrer:"news"|safe }}</li>
+				{% endfor %}
+			</ul>
+		{% endfor %}
+	{% else %}
+		<p>Новостей пока нет. Почитайте <a href="/all">ленту свежих постов</a>.</p>
+	{% endif %}
+{% endblock %}

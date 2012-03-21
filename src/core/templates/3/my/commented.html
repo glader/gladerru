@@ -1,0 +1,30 @@
+{% extends "my/base.html" %}
+{% load content %}
+
+{% block title %}Свежие комментарии - {{ block.super }}{% endblock %}
+
+{% block rss_link %}
+   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/all" title="Glader.ru: свежие сообщения">
+{% endblock %}
+
+{% block top_menu %}
+    {% top_menu 'commented' %}
+{% endblock %}
+
+{% block page_title %}Свежие комментарии{% endblock %}
+
+{% block content %}
+    {% if items %}
+        <div class="b-feed">
+            {% for item in items %}
+                {% cut_view item user 'new_comments' %}
+            {% endfor %}
+        </div>    
+    {% else %}
+        <div>Новых комментариев пока нет. Вы можете пока почитать <a href="/all">ленту новых сообщений</a>.</div>
+    {% endif %}
+{% endblock content %}
+
+{% block sidebar %}
+    {% include "block_index_sidebar.html" %}
+{% endblock sidebar %}

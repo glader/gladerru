@@ -1,0 +1,77 @@
+{% extends "item_common_world.html" %}
+{% load content %}
+
+{% block title %}ГЛК на карте{% endblock %}
+
+{% block top_menu %}
+    {% top_menu 'map' %}
+{% endblock %}
+
+{% block head %}
+	<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YAMAPS_API_KEY }}" type="text/javascript"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            var map = new YMaps.Map(document.getElementById("YMapsID"));
+            map.setCenter(new YMaps.GeoPoint(37.64, 55.76), 10);
+			map.addControl(new YMaps.TypeControl());
+			map.addControl(new YMaps.ToolBar());
+			map.addControl(new YMaps.Zoom());
+			map.addControl(new YMaps.ScaleLine());
+
+			{% for mountain in mountains %}
+				{% if mountain.latitude %}
+					var placemark_{{ mountain.id }} = new YMaps.Placemark(new YMaps.GeoPoint({{ mountain.longitude }}, {{ mountain.latitude }}));
+					placemark_{{ mountain.id }}.name = "{{ mountain.title }}";
+					placemark_{{ mountain.id }}.description = "<a href=\"{{ mountain.get_absolute_url }}\">описание</a>";
+					map.addOverlay(placemark_{{ mountain.id }});
+				{% endif %}
+			{% endfor %}
+        }
+    </script>
+  </head>
+{% endblock head %}
+
+{% block content %}
+    <div>{{item.content|parser}}</div>
+
+	<div id="YMapsID" style="width:800px;height:400px"></div>
+
+    <br><br>
+
+    <table class="profile_list">
+    <tbody><tr>
+        <th>Название</th>
+        <th>Кол-во трасс</th>
+        <th>Перепад высот</th>
+        <th>Общая длина трасс</th>
+        <th>Подъемники <small>(<a href="http://glader.ru/content/lifts">подробнее</a>)</small></th>
+        <th>Иск. снег</th>
+        <th>Ночное катание</th>
+        <th>Сайт</th>
+        <th>Телефон</th>
+        <th>Мнения</th>
+    </tr>
+
+    {% for region in regions %}
+        <tr class="tr_odd">
+            <td class="tr_header" colspan="10">{{ region|link }}</td>
+        </tr>
+
+        {% for m in region.mountains %}
+            <tr class="{%cycle "tr_odd" "tr_even"%}">
+                <td><strong>{{ m|link }}</strong></td>
+                <td>{{m.pistes|default:"&nbsp;"}}</td>
+                <td>{{m.overfall|default:"&nbsp;"}}</td>
+                <td>{{m.pistelength|default:"&nbsp;"}}</td>
+                <td>{{m.lifts|default:"&nbsp;"}}</td>
+                <td>{{m.snow|default:"&nbsp;"}}</td>
+                <td>{{m.nightwork|default:"&nbsp;"}}</td>
+                <td>{{m.url|default:"&nbsp;"}}</td>
+                <td>{{m.tel|default:"&nbsp;"}}</td>
+            </tr>
+        {% endfor %}
+    {%endfor%}
+
+    </tbody></table>
+
+{%endblock%}

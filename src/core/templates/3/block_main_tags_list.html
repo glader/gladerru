@@ -1,0 +1,8 @@
+{% load content %}
+{% load cache %}
+<ul class="tags_list">
+    {% for tag in tags %}
+        <li>{{ tag|link }}</li>
+    {% endfor %}
+</ul>
+<div class="tags_list_other"><a href="{% url tags_all %}">все теги</a></div>

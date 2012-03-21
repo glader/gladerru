@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load content %}
+
+{%block title%}Все сообщения - {{ block.super }}{%endblock%}
+
+{% block page %}
+
+       <!-- Основная часть -->
+       <!-- Заголовок страницы -->
+<div class="page_header"><table><tr><td><h1>Карта сайта</h1></td><td class="page_header_right"></td></tr></table></div>
+<!-- /Заголовок страницы -->
+
+       <div class="content">
+       <div class="text">
+       	
+		{%items_list items%}
+
+       </div>
+       </div>
+   
+{% endblock %}

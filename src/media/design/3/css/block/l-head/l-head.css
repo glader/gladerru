@@ -1,0 +1,28 @@
+/* Раскладка шапки (begin) */ /**/
+    .l-head
+    {
+        width: 100%;
+    }
+
+    .l-head .l-head-g
+    {
+        width: 2%;
+    }
+
+    .l-head .l-head-g i,
+    .l-head .l-head-r-g i
+    {
+        display: block;
+        width: 20px;
+    }
+
+	.l-head .l-head-r-g
+    {
+        width: 4%;
+    }
+    
+    .l-head .l-head-r
+    {
+        width: 24%;
+    }
+/* Раскладка шапки (end) */ /**/

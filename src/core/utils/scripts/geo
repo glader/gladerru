@@ -1,0 +1,922 @@
+var point_1 = new GLatLng(56.283227, 37.476300);
+markerOptions = { title:"Волен" , icon:icon_resort };
+var marker_1 = new GMarker(point_1, markerOptions);
+GEvent.addListener(marker_1, "click", function() { var myHtml = "<p align=left><b>Волен</b><br>&#149;&nbsp;<a href=http://www.volen.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://82.149.204.180/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>15 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=1>Подробнее...</a></td></tr></table><br>(<a href=?id=1&a=1>+</a>) <a href=?id=1&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=1>+</a>) <a href=/calendar/?a=6&resortid=1>Создать поездку</a></p>";map.openInfoWindowHtml(point_1,myHtml);});
+map.addOverlay(marker_1);
+
+
+var point_2 = new GLatLng(56.27432, 37.565050);
+markerOptions = { title:"Сорочаны" , icon:icon_resort };
+var marker_2 = new GMarker(point_2, markerOptions);
+GEvent.addListener(marker_2, "click", function() { var myHtml = "<p align=left><b>Сорочаны</b><br>&#149;&nbsp;<a href=http://www.sorochany.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.sorochany.ru/webcam/webcam3.html>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>13 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=2>Подробнее...</a></td></tr></table><br>(<a href=?id=2&a=1>+</a>) <a href=?id=2&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=2>+</a>) <a href=/calendar/?a=6&resortid=2>Создать поездку</a></p>";map.openInfoWindowHtml(point_2,myHtml);});
+map.addOverlay(marker_2);
+
+
+var point_3 = new GLatLng(56.24028550964836, 38.210352659225464);
+markerOptions = { title:"Лоза" , icon:icon_resort };
+var marker_3 = new GMarker(point_3, markerOptions);
+GEvent.addListener(marker_3, "click", function() { var myHtml = "<p align=left><b>Лоза</b><br>&#149;&nbsp;<a href=http://www.lozaski.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>05 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=3>Подробнее...</a></td></tr></table><br>(<a href=?id=3&a=1>+</a>) <a href=?id=3&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=3>+</a>) <a href=/calendar/?a=6&resortid=3>Создать поездку</a></p>";map.openInfoWindowHtml(point_3,myHtml);});
+map.addOverlay(marker_3);
+
+
+var point_4 = new GLatLng(55.752646, 37.426863);
+markerOptions = { title:"Крылатское" , icon:icon_resort };
+var marker_4 = new GMarker(point_4, markerOptions);
+GEvent.addListener(marker_4, "click", function() { var myHtml = "<p align=left><b>Крылатское</b><br>&#149;&nbsp;<a href=http://www.spusk.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>15 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=4>Подробнее...</a></td></tr></table><br>(<a href=?id=4&a=1>+</a>) <a href=?id=4&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=4>+</a>) <a href=/calendar/?a=6&resortid=4>Создать поездку</a></p>";map.openInfoWindowHtml(point_4,myHtml);});
+map.addOverlay(marker_4);
+
+
+var point_5 = new GLatLng(55.676403, 37.612451);
+markerOptions = { title:"Нагорная / Кант" , icon:icon_resort };
+var marker_5 = new GMarker(point_5, markerOptions);
+GEvent.addListener(marker_5, "click", function() { var myHtml = "<p align=left><b>Нагорная / Кант</b><br>&#149;&nbsp;<a href=http://www.kant.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>16 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_4.gif width=24 height=24></td><td  width=100% valign=middle>Лед</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=5>Подробнее...</a></td></tr></table><br>(<a href=?id=5&a=1>+</a>) <a href=?id=5&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=5>+</a>) <a href=/calendar/?a=6&resortid=5>Создать поездку</a></p>";map.openInfoWindowHtml(point_5,myHtml);});
+map.addOverlay(marker_5);
+
+
+var point_6 = new GLatLng(56.290426, 37.517496);
+markerOptions = { title:"Семешки" , icon:icon_resort };
+var marker_6 = new GMarker(point_6, markerOptions);
+GEvent.addListener(marker_6, "click", function() { var myHtml = "<p align=left><b>Семешки</b><br><br>(<a href=?id=6&a=1>+</a>) <a href=?id=6&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=6>+</a>) <a href=/calendar/?a=6&resortid=6>Создать поездку</a></p>";map.openInfoWindowHtml(point_6,myHtml);});
+map.addOverlay(marker_6);
+
+
+var point_7 = new GLatLng(56.27481453918062, 37.59615898132324);
+markerOptions = { title:"Ильинское" , icon:icon_resort };
+var marker_7 = new GMarker(point_7, markerOptions);
+GEvent.addListener(marker_7, "click", function() { var myHtml = "<p align=left><b>Ильинское</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>09 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_3.gif width=24 height=24></td><td  width=100% valign=middle>Мокрая каша</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=7>Подробнее...</a></td></tr></table><br>(<a href=?id=7&a=1>+</a>) <a href=?id=7&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=7>+</a>) <a href=/calendar/?a=6&resortid=7>Создать поездку</a></p>";map.openInfoWindowHtml(point_7,myHtml);});
+map.addOverlay(marker_7);
+
+
+var point_8 = new GLatLng(56.238740, 37.436029);
+markerOptions = { title:"Парамоново" , icon:icon_resort };
+var marker_8 = new GMarker(point_8, markerOptions);
+GEvent.addListener(marker_8, "click", function() { var myHtml = "<p align=left><b>Парамоново</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>15 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=8>Подробнее...</a></td></tr></table><br>(<a href=?id=8&a=1>+</a>) <a href=?id=8&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=8>+</a>) <a href=/calendar/?a=6&resortid=8>Создать поездку</a></p>";map.openInfoWindowHtml(point_8,myHtml);});
+map.addOverlay(marker_8);
+
+
+var point_9 = new GLatLng(56.25098008514787, 37.474365234375);
+markerOptions = { title:"Муханки" , icon:icon_resort };
+var marker_9 = new GMarker(point_9, markerOptions);
+GEvent.addListener(marker_9, "click", function() { var myHtml = "<p align=left><b>Муханки</b><br><br>(<a href=?id=9&a=1>+</a>) <a href=?id=9&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=9>+</a>) <a href=/calendar/?a=6&resortid=9>Создать поездку</a></p>";map.openInfoWindowHtml(point_9,myHtml);});
+map.addOverlay(marker_9);
+
+
+var point_10 = new GLatLng(56.230979, 37.496486);
+markerOptions = { title:"Шуколово" , icon:icon_resort };
+var marker_10 = new GMarker(point_10, markerOptions);
+GEvent.addListener(marker_10, "click", function() { var myHtml = "<p align=left><b>Шуколово</b><br>&#149;&nbsp;<a href=http://www.shukolovo.ru/>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>14 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=10>Подробнее...</a></td></tr></table><br>(<a href=?id=10&a=1>+</a>) <a href=?id=10&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=10>+</a>) <a href=/calendar/?a=6&resortid=10>Создать поездку</a></p>";map.openInfoWindowHtml(point_10,myHtml);});
+map.addOverlay(marker_10);
+
+
+var point_12 = new GLatLng(55.942871, 37.322987);
+markerOptions = { title:"Подрезково" , icon:icon_resort };
+var marker_12 = new GMarker(point_12, markerOptions);
+GEvent.addListener(marker_12, "click", function() { var myHtml = "<p align=left><b>Подрезково</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>08 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_5.gif width=24 height=24></td><td  width=100% valign=middle>Снега нет</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=12>Подробнее...</a></td></tr></table><br>(<a href=?id=12&a=1>+</a>) <a href=?id=12&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=12>+</a>) <a href=/calendar/?a=6&resortid=12>Создать поездку</a></p>";map.openInfoWindowHtml(point_12,myHtml);});
+map.addOverlay(marker_12);
+
+
+var point_13 = new GLatLng(55.839012, 37.292596);
+markerOptions = { title:"Чернево" , icon:icon_resort };
+var marker_13 = new GMarker(point_13, markerOptions);
+GEvent.addListener(marker_13, "click", function() { var myHtml = "<p align=left><b>Чернево</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>24 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_4.gif width=24 height=24></td><td  width=100% valign=middle>Лед</td></tr><tr><td valign=middle><img src=icons/hill_5.gif width=24 height=24></td><td valign=middle>Окончательно разбитые склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=13>Подробнее...</a></td></tr></table><br>(<a href=?id=13&a=1>+</a>) <a href=?id=13&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=13>+</a>) <a href=/calendar/?a=6&resortid=13>Создать поездку</a></p>";map.openInfoWindowHtml(point_13,myHtml);});
+map.addOverlay(marker_13);
+
+
+var point_14 = new GLatLng(56.1912812187563, 37.488956451416016);
+markerOptions = { title:"Икша" , icon:icon_resort };
+var marker_14 = new GMarker(point_14, markerOptions);
+GEvent.addListener(marker_14, "click", function() { var myHtml = "<p align=left><b>Икша</b><br>&#149;&nbsp;<a href=http://www.iksha.info>Сайт курорта</a><br>&#149;&nbsp;<a href=http://iksha.info/modules/mod_webcam_pop_up.php?refresh=3&altText=%CD%E0%F8%E0+%F2%F0%E0%F1%F1%E0&camImgY=360&camImgX=480&imageurl=http://iksha.info/webcam/image_triggered.jpg>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>30 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=14>Подробнее...</a></td></tr></table><br>(<a href=?id=14&a=1>+</a>) <a href=?id=14&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=14>+</a>) <a href=/calendar/?a=6&resortid=14>Создать поездку</a></p>";map.openInfoWindowHtml(point_14,myHtml);});
+map.addOverlay(marker_14);
+
+
+var point_15 = new GLatLng(55.922223334725665, 36.82800650596619);
+markerOptions = { title:"Истра" , icon:icon_resort };
+var marker_15 = new GMarker(point_15, markerOptions);
+GEvent.addListener(marker_15, "click", function() { var myHtml = "<p align=left><b>Истра</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>07 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=15>Подробнее...</a></td></tr></table><br>(<a href=?id=15&a=1>+</a>) <a href=?id=15&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=15>+</a>) <a href=/calendar/?a=6&resortid=15>Создать поездку</a></p>";map.openInfoWindowHtml(point_15,myHtml);});
+map.addOverlay(marker_15);
+
+
+var point_17 = new GLatLng(56.260371, 37.432108);
+markerOptions = { title:"Степаново" , icon:icon_resort };
+var marker_17 = new GMarker(point_17, markerOptions);
+GEvent.addListener(marker_17, "click", function() { var myHtml = "<p align=left><b>Степаново</b><br>&#149;&nbsp;<a href=http://www.volen.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://82.149.204.180/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>18 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=17>Подробнее...</a></td></tr></table><br>(<a href=?id=17&a=1>+</a>) <a href=?id=17&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=17>+</a>) <a href=/calendar/?a=6&resortid=17>Создать поездку</a></p>";map.openInfoWindowHtml(point_17,myHtml);});
+map.addOverlay(marker_17);
+
+
+var point_18 = new GLatLng(55.708104, 37.545398);
+markerOptions = { title:"Воробьевы горы" , icon:icon_resort };
+var marker_18 = new GMarker(point_18, markerOptions);
+GEvent.addListener(marker_18, "click", function() { var myHtml = "<p align=left><b>Воробьевы горы</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>05 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=18>Подробнее...</a></td></tr></table><br>(<a href=?id=18&a=1>+</a>) <a href=?id=18&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=18>+</a>) <a href=/calendar/?a=6&resortid=18>Создать поездку</a></p>";map.openInfoWindowHtml(point_18,myHtml);});
+map.addOverlay(marker_18);
+
+
+var point_19 = new GLatLng(55.627337, 37.543491);
+markerOptions = { title:"Узкое" , icon:icon_resort };
+var marker_19 = new GMarker(point_19, markerOptions);
+GEvent.addListener(marker_19, "click", function() { var myHtml = "<p align=left><b>Узкое</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>11 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=19>Подробнее...</a></td></tr></table><br>(<a href=?id=19&a=1>+</a>) <a href=?id=19&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=19>+</a>) <a href=/calendar/?a=6&resortid=19>Создать поездку</a></p>";map.openInfoWindowHtml(point_19,myHtml);});
+map.addOverlay(marker_19);
+
+
+var point_21 = new GLatLng(60.499993, 29.729505);
+markerOptions = { title:"Коробицино" , icon:icon_resort };
+var marker_21 = new GMarker(point_21, markerOptions);
+GEvent.addListener(marker_21, "click", function() { var myHtml = "<p align=left><b>Коробицино</b><br>&#149;&nbsp;<a href=http://www.snegny.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.cam.snegny.ru>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>31 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=21>Подробнее...</a></td></tr></table><br>(<a href=?id=21&a=1>+</a>) <a href=?id=21&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=21>+</a>) <a href=/calendar/?a=6&resortid=21>Создать поездку</a></p>";map.openInfoWindowHtml(point_21,myHtml);});
+map.addOverlay(marker_21);
+
+
+var point_23 = new GLatLng(57.442470, 57.005203);
+markerOptions = { title:"Кунгур" , icon:icon_resort };
+var marker_23 = new GMarker(point_23, markerOptions);
+GEvent.addListener(marker_23, "click", function() { var myHtml = "<p align=left><b>Кунгур</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>24 декабря 06</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=23>Подробнее...</a></td></tr></table><br>(<a href=?id=23&a=1>+</a>) <a href=?id=23&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=23>+</a>) <a href=/calendar/?a=6&resortid=23>Создать поездку</a></p>";map.openInfoWindowHtml(point_23,myHtml);});
+map.addOverlay(marker_23);
+
+
+var point_24 = new GLatLng(60.126657, 30.444494);
+markerOptions = { title:"Охта-парк" , icon:icon_resort };
+var marker_24 = new GMarker(point_24, markerOptions);
+GEvent.addListener(marker_24, "click", function() { var myHtml = "<p align=left><b>Охта-парк</b><br>&#149;&nbsp;<a href=http://www.ohta-park.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>13 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=24>Подробнее...</a></td></tr></table><br>(<a href=?id=24&a=1>+</a>) <a href=?id=24&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=24>+</a>) <a href=/calendar/?a=6&resortid=24>Создать поездку</a></p>";map.openInfoWindowHtml(point_24,myHtml);});
+map.addOverlay(marker_24);
+
+
+var point_25 = new GLatLng(60.231810, 29.683790);
+markerOptions = { title:"Пухтолова гора" , icon:icon_resort };
+var marker_25 = new GMarker(point_25, markerOptions);
+GEvent.addListener(marker_25, "click", function() { var myHtml = "<p align=left><b>Пухтолова гора</b><br>&#149;&nbsp;<a href=http://www.puhgora.spb.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>08 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=25>Подробнее...</a></td></tr></table><br>(<a href=?id=25&a=1>+</a>) <a href=?id=25&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=25>+</a>) <a href=/calendar/?a=6&resortid=25>Создать поездку</a></p>";map.openInfoWindowHtml(point_25,myHtml);});
+map.addOverlay(marker_25);
+
+
+var point_26 = new GLatLng(59.697951, 30.145887);
+markerOptions = { title:"Туутари-парк" , icon:icon_resort };
+var marker_26 = new GMarker(point_26, markerOptions);
+GEvent.addListener(marker_26, "click", function() { var myHtml = "<p align=left><b>Туутари-парк</b><br>&#149;&nbsp;<a href=http://tyytari.spb.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://tyytari.spb.ru/camera/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>06 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_5.gif width=24 height=24></td><td valign=middle>Не протолкнуться</td></tr><tr><td colspan=2><a href=/resort/?id=26>Подробнее...</a></td></tr></table><br>(<a href=?id=26&a=1>+</a>) <a href=?id=26&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=26>+</a>) <a href=/calendar/?a=6&resortid=26>Создать поездку</a></p>";map.openInfoWindowHtml(point_26,myHtml);});
+map.addOverlay(marker_26);
+
+
+var point_27 = new GLatLng(60.155551, 30.546260);
+markerOptions = { title:"Северный склон" , icon:icon_resort };
+var marker_27 = new GMarker(point_27, markerOptions);
+GEvent.addListener(marker_27, "click", function() { var myHtml = "<p align=left><b>Северный склон</b><br>&#149;&nbsp;<a href=http://www.sevsklon.spb.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>15 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=27>Подробнее...</a></td></tr></table><br>(<a href=?id=27&a=1>+</a>) <a href=?id=27&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=27>+</a>) <a href=/calendar/?a=6&resortid=27>Создать поездку</a></p>";map.openInfoWindowHtml(point_27,myHtml);});
+map.addOverlay(marker_27);
+
+
+var point_28 = new GLatLng(51.509237, 104.120888);
+markerOptions = { title:"Соболиная гора" , icon:icon_resort };
+var marker_28 = new GMarker(point_28, markerOptions);
+GEvent.addListener(marker_28, "click", function() { var myHtml = "<p align=left><b>Соболиная гора</b><br>&#149;&nbsp;<a href=http://www.baikalski.com>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.baikalski.com/w_webcam.html>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>17 декабря 07</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=28>Подробнее...</a></td></tr></table><br>(<a href=?id=28&a=1>+</a>) <a href=?id=28&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=28>+</a>) <a href=/calendar/?a=6&resortid=28>Создать поездку</a></p>";map.openInfoWindowHtml(point_28,myHtml);});
+map.addOverlay(marker_28);
+
+
+var point_29 = new GLatLng(43.67581809328341, 40.28411865234375);
+markerOptions = { title:"Красная Поляна" , icon:icon_resort };
+var marker_29 = new GMarker(point_29, markerOptions);
+GEvent.addListener(marker_29, "click", function() { var myHtml = "<p align=left><b>Красная Поляна</b><br>&#149;&nbsp;<a href=http://www.alpikaservice.com/>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.xsochi.ru/?page_id=506>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>07 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_3.gif width=24 height=24></td><td  width=100% valign=middle>Мокрая каша</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=29>Подробнее...</a></td></tr></table><br>(<a href=?id=29&a=1>+</a>) <a href=?id=29&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=29>+</a>) <a href=/calendar/?a=6&resortid=29>Создать поездку</a></p>";map.openInfoWindowHtml(point_29,myHtml);});
+map.addOverlay(marker_29);
+
+
+var point_30 = new GLatLng(67.61092067135503, 33.69852304458618);
+markerOptions = { title:"Кировск" , icon:icon_resort };
+var marker_30 = new GMarker(point_30, markerOptions);
+GEvent.addListener(marker_30, "click", function() { var myHtml = "<p align=left><b>Кировск</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>04 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=30>Подробнее...</a></td></tr></table><br>(<a href=?id=30&a=1>+</a>) <a href=?id=30&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=30>+</a>) <a href=/calendar/?a=6&resortid=30>Создать поездку</a></p>";map.openInfoWindowHtml(point_30,myHtml);});
+map.addOverlay(marker_30);
+
+
+var point_31 = new GLatLng(43.286053, 41.657258);
+markerOptions = { title:"Домбай" , icon:icon_resort };
+var marker_31 = new GMarker(point_31, markerOptions);
+GEvent.addListener(marker_31, "click", function() { var myHtml = "<p align=left><b>Домбай</b><br>&#149;&nbsp;<a href=http://www.dombayinfo.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.dombayinfo.ru/skloni/webcam>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>27 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=31>Подробнее...</a></td></tr></table><br>(<a href=?id=31&a=1>+</a>) <a href=?id=31&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=31>+</a>) <a href=/calendar/?a=6&resortid=31>Создать поездку</a></p>";map.openInfoWindowHtml(point_31,myHtml);});
+map.addOverlay(marker_31);
+
+
+var point_32 = new GLatLng(43.315853, 42.466227);
+markerOptions = { title:"Приэльбрусье" , icon:icon_resort };
+var marker_32 = new GMarker(point_32, markerOptions);
+GEvent.addListener(marker_32, "click", function() { var myHtml = "<p align=left><b>Приэльбрусье</b><br>&#149;&nbsp;<a href=http://www.elbrusrussia.ru/>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.elx.ru/web/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>07 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=32>Подробнее...</a></td></tr></table><br>(<a href=?id=32&a=1>+</a>) <a href=?id=32&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=32>+</a>) <a href=/calendar/?a=6&resortid=32>Создать поездку</a></p>";map.openInfoWindowHtml(point_32,myHtml);});
+map.addOverlay(marker_32);
+
+
+var point_34 = new GLatLng(52.953261, 87.958571);
+markerOptions = { title:"Шерегеш" , icon:icon_resort };
+var marker_34 = new GMarker(point_34, markerOptions);
+GEvent.addListener(marker_34, "click", function() { var myHtml = "<p align=left><b>Шерегеш</b><br>&#149;&nbsp;<a href=http://www.mustag.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://snow-show.ru/?&kh_mcap=9>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>08 декабря 08</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=34>Подробнее...</a></td></tr></table><br>(<a href=?id=34&a=1>+</a>) <a href=?id=34&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=34>+</a>) <a href=/calendar/?a=6&resortid=34>Создать поездку</a></p>";map.openInfoWindowHtml(point_34,myHtml);});
+map.addOverlay(marker_34);
+
+
+var point_35 = new GLatLng(55.948571, 92.371955);
+markerOptions = { title:"Дивногорск" , icon:icon_resort };
+var marker_35 = new GMarker(point_35, markerOptions);
+GEvent.addListener(marker_35, "click", function() { var myHtml = "<p align=left><b>Дивногорск</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>13 февраля 06</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_5.gif width=24 height=24></td><td valign=middle>Не протолкнуться</td></tr><tr><td colspan=2><a href=/resort/?id=35>Подробнее...</a></td></tr></table><br>(<a href=?id=35&a=1>+</a>) <a href=?id=35&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=35>+</a>) <a href=/calendar/?a=6&resortid=35>Создать поездку</a></p>";map.openInfoWindowHtml(point_35,myHtml);});
+map.addOverlay(marker_35);
+
+
+var point_37 = new GLatLng(67.909683, 32.944252);
+markerOptions = { title:"Мончегорск" , icon:icon_resort };
+var marker_37 = new GMarker(point_37, markerOptions);
+GEvent.addListener(marker_37, "click", function() { var myHtml = "<p align=left><b>Мончегорск</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>28 декабря 07</b></td></tr><tr><td valign=middle><img src=icons/snow_5.gif width=24 height=24></td><td  width=100% valign=middle>Снега нет</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=37>Подробнее...</a></td></tr></table><br>(<a href=?id=37&a=1>+</a>) <a href=?id=37&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=37>+</a>) <a href=/calendar/?a=6&resortid=37>Создать поездку</a></p>";map.openInfoWindowHtml(point_37,myHtml);});
+map.addOverlay(marker_37);
+
+
+var point_38 = new GLatLng(55.628218, 37.375148);
+markerOptions = { title:"Новопеределкино" , icon:icon_resort };
+var marker_38 = new GMarker(point_38, markerOptions);
+GEvent.addListener(marker_38, "click", function() { var myHtml = "<p align=left><b>Новопеределкино</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>18 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=38>Подробнее...</a></td></tr></table><br>(<a href=?id=38&a=1>+</a>) <a href=?id=38&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=38>+</a>) <a href=/calendar/?a=6&resortid=38>Создать поездку</a></p>";map.openInfoWindowHtml(point_38,myHtml);});
+map.addOverlay(marker_38);
+
+
+var point_39 = new GLatLng(53.796330, 58.621661);
+markerOptions = { title:"Абзаково" , icon:icon_resort };
+var marker_39 = new GMarker(point_39, markerOptions);
+GEvent.addListener(marker_39, "click", function() { var myHtml = "<p align=left><b>Абзаково</b><br>&#149;&nbsp;<a href=http://www.abzakovo.com/>Сайт курорта</a><br>&#149;&nbsp;<a href=http://193.16.208.134/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>07 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=39>Подробнее...</a></td></tr></table><br>(<a href=?id=39&a=1>+</a>) <a href=?id=39&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=39>+</a>) <a href=/calendar/?a=6&resortid=39>Создать поездку</a></p>";map.openInfoWindowHtml(point_39,myHtml);});
+map.addOverlay(marker_39);
+
+
+var point_41 = new GLatLng(60.177142, 30.537764);
+markerOptions = { title:"Орлиная гора" , icon:icon_resort };
+var marker_41 = new GMarker(point_41, markerOptions);
+GEvent.addListener(marker_41, "click", function() { var myHtml = "<p align=left><b>Орлиная гора</b><br>&#149;&nbsp;<a href=http://www.parksporta.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>16 ноября 06</b></td></tr><tr><td valign=middle><img src=icons/snow_5.gif width=24 height=24></td><td  width=100% valign=middle>Снега нет</td></tr><tr><td valign=middle><img src=icons/hill_5.gif width=24 height=24></td><td valign=middle>Окончательно разбитые склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=41>Подробнее...</a></td></tr></table><br>(<a href=?id=41&a=1>+</a>) <a href=?id=41&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=41>+</a>) <a href=/calendar/?a=6&resortid=41>Создать поездку</a></p>";map.openInfoWindowHtml(point_41,myHtml);});
+map.addOverlay(marker_41);
+
+
+var point_42 = new GLatLng(67.666535, 33.722350);
+markerOptions = { title:"25-й км" , icon:icon_resort };
+var marker_42 = new GMarker(point_42, markerOptions);
+GEvent.addListener(marker_42, "click", function() { var myHtml = "<p align=left><b>25-й км</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>04 января 08</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=42>Подробнее...</a></td></tr></table><br>(<a href=?id=42&a=1>+</a>) <a href=?id=42&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=42>+</a>) <a href=/calendar/?a=6&resortid=42>Создать поездку</a></p>";map.openInfoWindowHtml(point_42,myHtml);});
+map.addOverlay(marker_42);
+
+
+var point_43 = new GLatLng(54.977771, 57.334331);
+markerOptions = { title:"Аджигардак" , icon:icon_resort };
+var marker_43 = new GMarker(point_43, markerOptions);
+GEvent.addListener(marker_43, "click", function() { var myHtml = "<p align=left><b>Аджигардак</b><br>&#149;&nbsp;<a href=http://www.adjigardak.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>14 января 08</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=43>Подробнее...</a></td></tr></table><br>(<a href=?id=43&a=1>+</a>) <a href=?id=43&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=43>+</a>) <a href=/calendar/?a=6&resortid=43>Создать поездку</a></p>";map.openInfoWindowHtml(point_43,myHtml);});
+map.addOverlay(marker_43);
+
+
+var point_44 = new GLatLng(54.812198, 56.055082);
+markerOptions = { title:"Ак-йорт" , icon:icon_resort };
+var marker_44 = new GMarker(point_44, markerOptions);
+GEvent.addListener(marker_44, "click", function() { var myHtml = "<p align=left><b>Ак-йорт</b><br>&#149;&nbsp;<a href=http://ak-yort.on.ufanet.ru/>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>30 ноября 03</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=44>Подробнее...</a></td></tr></table><br>(<a href=?id=44&a=1>+</a>) <a href=?id=44&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=44>+</a>) <a href=/calendar/?a=6&resortid=44>Создать поездку</a></p>";map.openInfoWindowHtml(point_44,myHtml);});
+map.addOverlay(marker_44);
+
+
+var point_47 = new GLatLng(56.285157, 43.969587);
+markerOptions = { title:"Слуда" , icon:icon_resort };
+var marker_47 = new GMarker(point_47, markerOptions);
+GEvent.addListener(marker_47, "click", function() { var myHtml = "<p align=left><b>Слуда</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>13 ноября 07</b></td></tr><tr><td valign=middle><img src=icons/snow_5.gif width=24 height=24></td><td  width=100% valign=middle>Снега нет</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=47>Подробнее...</a></td></tr></table><br>(<a href=?id=47&a=1>+</a>) <a href=?id=47&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=47>+</a>) <a href=/calendar/?a=6&resortid=47>Создать поездку</a></p>";map.openInfoWindowHtml(point_47,myHtml);});
+map.addOverlay(marker_47);
+
+
+var point_48 = new GLatLng(53.665251, 88.088108);
+markerOptions = { title:"Югус" , icon:icon_resort };
+var marker_48 = new GMarker(point_48, markerOptions);
+GEvent.addListener(marker_48, "click", function() { var myHtml = "<p align=left><b>Югус</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>31 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=48>Подробнее...</a></td></tr></table><br>(<a href=?id=48&a=1>+</a>) <a href=?id=48&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=48>+</a>) <a href=/calendar/?a=6&resortid=48>Создать поездку</a></p>";map.openInfoWindowHtml(point_48,myHtml);});
+map.addOverlay(marker_48);
+
+
+var point_50 = new GLatLng(55.556011, 38.027128);
+markerOptions = { title:"Чулково" , icon:icon_resort };
+var marker_50 = new GMarker(point_50, markerOptions);
+GEvent.addListener(marker_50, "click", function() { var myHtml = "<p align=left><b>Чулково</b><br>&#149;&nbsp;<a href=http://www.chylkovo.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>14 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_3.gif width=24 height=24></td><td  width=100% valign=middle>Мокрая каша</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=50>Подробнее...</a></td></tr></table><br>(<a href=?id=50&a=1>+</a>) <a href=?id=50&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=50>+</a>) <a href=/calendar/?a=6&resortid=50>Создать поездку</a></p>";map.openInfoWindowHtml(point_50,myHtml);});
+map.addOverlay(marker_50);
+
+
+var point_51 = new GLatLng(55.87841041021314, 36.93635702133179);
+markerOptions = { title:"Манихино" , icon:icon_resort };
+var marker_51 = new GMarker(point_51, markerOptions);
+GEvent.addListener(marker_51, "click", function() { var myHtml = "<p align=left><b>Манихино</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>07 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=51>Подробнее...</a></td></tr></table><br>(<a href=?id=51&a=1>+</a>) <a href=?id=51&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=51>+</a>) <a href=/calendar/?a=6&resortid=51>Создать поездку</a></p>";map.openInfoWindowHtml(point_51,myHtml);});
+map.addOverlay(marker_51);
+
+
+var point_54 = new GLatLng(55.075787, 57.545993);
+markerOptions = { title:"Миньяр" , icon:icon_resort };
+var marker_54 = new GMarker(point_54, markerOptions);
+GEvent.addListener(marker_54, "click", function() { var myHtml = "<p align=left><b>Миньяр</b><br>&#149;&nbsp;<a href=http://gc-minyar.pochta.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>29 января 07</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=54>Подробнее...</a></td></tr></table><br>(<a href=?id=54&a=1>+</a>) <a href=?id=54&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=54>+</a>) <a href=/calendar/?a=6&resortid=54>Создать поездку</a></p>";map.openInfoWindowHtml(point_54,myHtml);});
+map.addOverlay(marker_54);
+
+
+var point_56 = new GLatLng(54.792603, 58.536376);
+markerOptions = { title:"Завьялиха" , icon:icon_resort };
+var marker_56 = new GMarker(point_56, markerOptions);
+GEvent.addListener(marker_56, "click", function() { var myHtml = "<p align=left><b>Завьялиха</b><br>&#149;&nbsp;<a href=http://www.zavjalikha.su>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.zavjalikha.su/web/cam1.html>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>24 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=56>Подробнее...</a></td></tr></table><br>(<a href=?id=56&a=1>+</a>) <a href=?id=56&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=56>+</a>) <a href=/calendar/?a=6&resortid=56>Создать поездку</a></p>";map.openInfoWindowHtml(point_56,myHtml);});
+map.addOverlay(marker_56);
+
+
+var point_57 = new GLatLng(54.737406673126514, 56.03031635284424);
+markerOptions = { title:"Олимпик-парк" , icon:icon_resort };
+var marker_57 = new GMarker(point_57, markerOptions);
+GEvent.addListener(marker_57, "click", function() { var myHtml = "<p align=left><b>Олимпик-парк</b><br>&#149;&nbsp;<a href=http://www.olympicpark.ru >Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>18 ноября 07</b></td></tr><tr><td valign=middle><img src=icons/snow_3.gif width=24 height=24></td><td  width=100% valign=middle>Мокрая каша</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=57>Подробнее...</a></td></tr></table><br>(<a href=?id=57&a=1>+</a>) <a href=?id=57&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=57>+</a>) <a href=/calendar/?a=6&resortid=57>Создать поездку</a></p>";map.openInfoWindowHtml(point_57,myHtml);});
+map.addOverlay(marker_57);
+
+
+var point_60 = new GLatLng(57.448076, 59.951075);
+markerOptions = { title:"Ежовая гора" , icon:icon_resort };
+var marker_60 = new GMarker(point_60, markerOptions);
+GEvent.addListener(marker_60, "click", function() { var myHtml = "<p align=left><b>Ежовая гора</b><br>&#149;&nbsp;<a href=http://www.ezhovaya.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>02 марта 08</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=60>Подробнее...</a></td></tr></table><br>(<a href=?id=60&a=1>+</a>) <a href=?id=60&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=60>+</a>) <a href=/calendar/?a=6&resortid=60>Создать поездку</a></p>";map.openInfoWindowHtml(point_60,myHtml);});
+map.addOverlay(marker_60);
+
+
+var point_61 = new GLatLng(56.181523, 43.435673);
+markerOptions = { title:"Хабарское" , icon:icon_resort };
+var marker_61 = new GMarker(point_61, markerOptions);
+GEvent.addListener(marker_61, "click", function() { var myHtml = "<p align=left><b>Хабарское</b><br>&#149;&nbsp;<a href=http://www.habarskoe.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.doroga.tv/cams/13>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>30 января 07</b></td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=61>Подробнее...</a></td></tr></table><br>(<a href=?id=61&a=1>+</a>) <a href=?id=61&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=61>+</a>) <a href=/calendar/?a=6&resortid=61>Создать поездку</a></p>";map.openInfoWindowHtml(point_61,myHtml);});
+map.addOverlay(marker_61);
+
+
+var point_62 = new GLatLng(53.590308, 58.581116);
+markerOptions = { title:"Озеро Банное" , icon:icon_resort };
+var marker_62 = new GMarker(point_62, markerOptions);
+GEvent.addListener(marker_62, "click", function() { var myHtml = "<p align=left><b>Озеро Банное</b><br>&#149;&nbsp;<a href=http://ski-bannoe.mgn.ru/>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>23 марта 08</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=62>Подробнее...</a></td></tr></table><br>(<a href=?id=62&a=1>+</a>) <a href=?id=62&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=62>+</a>) <a href=/calendar/?a=6&resortid=62>Создать поездку</a></p>";map.openInfoWindowHtml(point_62,myHtml);});
+map.addOverlay(marker_62);
+
+
+var point_63 = new GLatLng(56.269379, 37.463200);
+markerOptions = { title:"Парк Яхрома" , icon:icon_resort };
+var marker_63 = new GMarker(point_63, markerOptions);
+GEvent.addListener(marker_63, "click", function() { var myHtml = "<p align=left><b>Парк Яхрома</b><br>&#149;&nbsp;<a href=http://www.ya-park.ru/>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.ya-park.ru/media/webcam/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>16 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=63>Подробнее...</a></td></tr></table><br>(<a href=?id=63&a=1>+</a>) <a href=?id=63&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=63>+</a>) <a href=/calendar/?a=6&resortid=63>Создать поездку</a></p>";map.openInfoWindowHtml(point_63,myHtml);});
+map.addOverlay(marker_63);
+
+
+var point_64 = new GLatLng(68.918806, 33.109122);
+markerOptions = { title:"Ледокольный" , icon:icon_resort };
+var marker_64 = new GMarker(point_64, markerOptions);
+GEvent.addListener(marker_64, "click", function() { var myHtml = "<p align=left><b>Ледокольный</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>25 октября 03</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=64>Подробнее...</a></td></tr></table><br>(<a href=?id=64&a=1>+</a>) <a href=?id=64&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=64>+</a>) <a href=/calendar/?a=6&resortid=64>Создать поездку</a></p>";map.openInfoWindowHtml(point_64,myHtml);});
+map.addOverlay(marker_64);
+
+
+var point_70 = new GLatLng(69.016462, 33.135316);
+markerOptions = { title:"Южный склон" , icon:icon_resort };
+var marker_70 = new GMarker(point_70, markerOptions);
+GEvent.addListener(marker_70, "click", function() { var myHtml = "<p align=left><b>Южный склон</b><br>&#149;&nbsp;<a href=http://www.sklon.murmansk.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>01 февраля 07</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=70>Подробнее...</a></td></tr></table><br>(<a href=?id=70&a=1>+</a>) <a href=?id=70&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=70>+</a>) <a href=/calendar/?a=6&resortid=70>Создать поездку</a></p>";map.openInfoWindowHtml(point_70,myHtml);});
+map.addOverlay(marker_70);
+
+
+var point_71 = new GLatLng(67.130057, 32.467757);
+markerOptions = { title:"Кандалакша" , icon:icon_resort };
+var marker_71 = new GMarker(point_71, markerOptions);
+GEvent.addListener(marker_71, "click", function() { var myHtml = "<p align=left><b>Кандалакша</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>08 февраля 05</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=71>Подробнее...</a></td></tr></table><br>(<a href=?id=71&a=1>+</a>) <a href=?id=71&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=71>+</a>) <a href=/calendar/?a=6&resortid=71>Создать поездку</a></p>";map.openInfoWindowHtml(point_71,myHtml);});
+map.addOverlay(marker_71);
+
+
+var point_73 = new GLatLng(43.20570759677519, 132.0879364013672);
+markerOptions = { title:"Комета" , icon:icon_resort };
+var marker_73 = new GMarker(point_73, markerOptions);
+GEvent.addListener(marker_73, "click", function() { var myHtml = "<p align=left><b>Комета</b><br>&#149;&nbsp;<a href=http://www.kometasport.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>01 января 05</b></td></tr><tr><td valign=middle><img src=icons/snow_4.gif width=24 height=24></td><td  width=100% valign=middle>Лед</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=73>Подробнее...</a></td></tr></table><br>(<a href=?id=73&a=1>+</a>) <a href=?id=73&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=73>+</a>) <a href=/calendar/?a=6&resortid=73>Создать поездку</a></p>";map.openInfoWindowHtml(point_73,myHtml);});
+map.addOverlay(marker_73);
+
+
+var point_74 = new GLatLng(53.388037995495075, 50.17250061035156);
+markerOptions = { title:"Красная Глинка" , icon:icon_resort };
+var marker_74 = new GMarker(point_74, markerOptions);
+GEvent.addListener(marker_74, "click", function() { var myHtml = "<p align=left><b>Красная Глинка</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>10 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=74>Подробнее...</a></td></tr></table><br>(<a href=?id=74&a=1>+</a>) <a href=?id=74&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=74>+</a>) <a href=/calendar/?a=6&resortid=74>Создать поездку</a></p>";map.openInfoWindowHtml(point_74,myHtml);});
+map.addOverlay(marker_74);
+
+
+var point_75 = new GLatLng(55.881606023097824, 37.3887437582016);
+markerOptions = { title:"Куркино" , icon:icon_resort };
+var marker_75 = new GMarker(point_75, markerOptions);
+GEvent.addListener(marker_75, "click", function() { var myHtml = "<p align=left><b>Куркино</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>17 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=75>Подробнее...</a></td></tr></table><br>(<a href=?id=75&a=1>+</a>) <a href=?id=75&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=75>+</a>) <a href=/calendar/?a=6&resortid=75>Создать поездку</a></p>";map.openInfoWindowHtml(point_75,myHtml);});
+map.addOverlay(marker_75);
+
+
+var point_77 = new GLatLng(56.037727, 44.630489);
+markerOptions = { title:"Татинец" , icon:icon_resort };
+var marker_77 = new GMarker(point_77, markerOptions);
+GEvent.addListener(marker_77, "click", function() { var myHtml = "<p align=left><b>Татинец</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>24 января 04</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=77>Подробнее...</a></td></tr></table><br>(<a href=?id=77&a=1>+</a>) <a href=?id=77&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=77>+</a>) <a href=/calendar/?a=6&resortid=77>Создать поездку</a></p>";map.openInfoWindowHtml(point_77,myHtml);});
+map.addOverlay(marker_77);
+
+
+var point_80 = new GLatLng(58.864449, 57.578881);
+markerOptions = { title:"Губаха" , icon:icon_resort };
+var marker_80 = new GMarker(point_80, markerOptions);
+GEvent.addListener(marker_80, "click", function() { var myHtml = "<p align=left><b>Губаха</b><br>&#149;&nbsp;<a href=http://www.gubaha.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>01 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=80>Подробнее...</a></td></tr></table><br>(<a href=?id=80&a=1>+</a>) <a href=?id=80&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=80>+</a>) <a href=/calendar/?a=6&resortid=80>Создать поездку</a></p>";map.openInfoWindowHtml(point_80,myHtml);});
+map.addOverlay(marker_80);
+
+
+var point_81 = new GLatLng(52.931448, 91.428169);
+markerOptions = { title:"Гладенькая гора" , icon:icon_resort };
+var marker_81 = new GMarker(point_81, markerOptions);
+GEvent.addListener(marker_81, "click", function() { var myHtml = "<p align=left><b>Гладенькая гора</b><br>&#149;&nbsp;<a href=http://www.ski-gladenkaya.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://snow-show.ru/?&kh_mcap=0>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>04 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_4.gif width=24 height=24></td><td  width=100% valign=middle>Лед</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=81>Подробнее...</a></td></tr></table><br>(<a href=?id=81&a=1>+</a>) <a href=?id=81&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=81>+</a>) <a href=/calendar/?a=6&resortid=81>Создать поездку</a></p>";map.openInfoWindowHtml(point_81,myHtml);});
+map.addOverlay(marker_81);
+
+
+var point_82 = new GLatLng(55.959597, 92.782016);
+markerOptions = { title:"Каштак" , icon:icon_resort };
+var marker_82 = new GMarker(point_82, markerOptions);
+GEvent.addListener(marker_82, "click", function() { var myHtml = "<p align=left><b>Каштак</b><br><br>(<a href=?id=82&a=1>+</a>) <a href=?id=82&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=82>+</a>) <a href=/calendar/?a=6&resortid=82>Создать поездку</a></p>";map.openInfoWindowHtml(point_82,myHtml);});
+map.addOverlay(marker_82);
+
+
+var point_86 = new GLatLng(46.955736, 142.782486);
+markerOptions = { title:"Горный Воздух" , icon:icon_resort };
+var marker_86 = new GMarker(point_86, markerOptions);
+GEvent.addListener(marker_86, "click", function() { var myHtml = "<p align=left><b>Горный Воздух</b><br>&#149;&nbsp;<a href=http://www.stkgv.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>18 марта 08</b></td></tr><tr><td valign=middle><img src=icons/snow_3.gif width=24 height=24></td><td  width=100% valign=middle>Мокрая каша</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=86>Подробнее...</a></td></tr></table><br>(<a href=?id=86&a=1>+</a>) <a href=?id=86&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=86>+</a>) <a href=/calendar/?a=6&resortid=86>Создать поездку</a></p>";map.openInfoWindowHtml(point_86,myHtml);});
+map.addOverlay(marker_86);
+
+
+var point_88 = new GLatLng(60.53330597245227, 30.202789306640625);
+markerOptions = { title:"Игора" , icon:icon_resort };
+var marker_88 = new GMarker(point_88, markerOptions);
+GEvent.addListener(marker_88, "click", function() { var myHtml = "<p align=left><b>Игора</b><br>&#149;&nbsp;<a href=http://www.igora.biz/>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.igora.biz/index.php?nma=resortmap&fla=index&id=2>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>01 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=88>Подробнее...</a></td></tr></table><br>(<a href=?id=88&a=1>+</a>) <a href=?id=88&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=88>+</a>) <a href=/calendar/?a=6&resortid=88>Создать поездку</a></p>";map.openInfoWindowHtml(point_88,myHtml);});
+map.addOverlay(marker_88);
+
+
+var point_89 = new GLatLng(55.960463, 92.796195);
+markerOptions = { title:"Бобровый Лог" , icon:icon_resort };
+var marker_89 = new GMarker(point_89, markerOptions);
+GEvent.addListener(marker_89, "click", function() { var myHtml = "<p align=left><b>Бобровый Лог</b><br>&#149;&nbsp;<a href=http://www.bobrolog.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://bobrolog.ru/index.php?option=com_content&task=view&id=123&Itemid=69>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>24 ноября 07</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=89>Подробнее...</a></td></tr></table><br>(<a href=?id=89&a=1>+</a>) <a href=?id=89&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=89>+</a>) <a href=/calendar/?a=6&resortid=89>Создать поездку</a></p>";map.openInfoWindowHtml(point_89,myHtml);});
+map.addOverlay(marker_89);
+
+
+var point_97 = new GLatLng(42.780750, 43.901283);
+markerOptions = { title:"Цей" , icon:icon_resort };
+var marker_97 = new GMarker(point_97, markerOptions);
+GEvent.addListener(marker_97, "click", function() { var myHtml = "<p align=left><b>Цей</b><br>&#149;&nbsp;<a href=http://www.tseyski.ru/>Сайт курорта</a><br>&#149;&nbsp;<a href=http://osetia.ru/index.php?page=wcmt>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>08 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=97>Подробнее...</a></td></tr></table><br>(<a href=?id=97&a=1>+</a>) <a href=?id=97&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=97>+</a>) <a href=/calendar/?a=6&resortid=97>Создать поездку</a></p>";map.openInfoWindowHtml(point_97,myHtml);});
+map.addOverlay(marker_97);
+
+
+var point_98 = new GLatLng(52.45224343876414, 48.04218292236328);
+markerOptions = { title:"Хвалынск" , icon:icon_resort };
+var marker_98 = new GMarker(point_98, markerOptions);
+GEvent.addListener(marker_98, "click", function() { var myHtml = "<p align=left><b>Хвалынск</b><br>&#149;&nbsp;<a href=http://www.hvalin.ru/>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>14 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=98>Подробнее...</a></td></tr></table><br>(<a href=?id=98&a=1>+</a>) <a href=?id=98&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=98>+</a>) <a href=/calendar/?a=6&resortid=98>Создать поездку</a></p>";map.openInfoWindowHtml(point_98,myHtml);});
+map.addOverlay(marker_98);
+
+
+var point_99 = new GLatLng(55.815416, 37.363490);
+markerOptions = { title:"Снеж.Ком" , icon:icon_resort };
+var marker_99 = new GMarker(point_99, markerOptions);
+GEvent.addListener(marker_99, "click", function() { var myHtml = "<p align=left><b>Снеж.Ком</b><br>&#149;&nbsp;<a href=http://www.snej.com>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.snej.com/web_camers/>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>02 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=99>Подробнее...</a></td></tr></table><br>(<a href=?id=99&a=1>+</a>) <a href=?id=99&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=99>+</a>) <a href=/calendar/?a=6&resortid=99>Создать поездку</a></p>";map.openInfoWindowHtml(point_99,myHtml);});
+map.addOverlay(marker_99);
+
+
+var point_100 = new GLatLng(60.534511, 29.740037);
+markerOptions = { title:"Красное Озеро" , icon:icon_resort };
+var marker_100 = new GMarker(point_100, markerOptions);
+GEvent.addListener(marker_100, "click", function() { var myHtml = "<p align=left><b>Красное Озеро</b><br>&#149;&nbsp;<a href=http://www.krasnoeozero.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.krasnoeozero.ru/web.htm>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>25 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=100>Подробнее...</a></td></tr></table><br>(<a href=?id=100&a=1>+</a>) <a href=?id=100&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=100>+</a>) <a href=/calendar/?a=6&resortid=100>Создать поездку</a></p>";map.openInfoWindowHtml(point_100,myHtml);});
+map.addOverlay(marker_100);
+
+
+var point_101 = new GLatLng(60.108253, 30.314939);
+markerOptions = { title:"Юкки-парк" , icon:icon_resort };
+var marker_101 = new GMarker(point_101, markerOptions);
+GEvent.addListener(marker_101, "click", function() { var myHtml = "<p align=left><b>Юкки-парк</b><br><br>(<a href=?id=101&a=1>+</a>) <a href=?id=101&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=101>+</a>) <a href=/calendar/?a=6&resortid=101>Создать поездку</a></p>";map.openInfoWindowHtml(point_101,myHtml);});
+map.addOverlay(marker_101);
+
+
+var point_102 = new GLatLng(67.432035, 32.450992);
+markerOptions = { title:"Лысая гора" , icon:icon_resort };
+var marker_102 = new GMarker(point_102, markerOptions);
+GEvent.addListener(marker_102, "click", function() { var myHtml = "<p align=left><b>Лысая гора</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>15 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=102>Подробнее...</a></td></tr></table><br>(<a href=?id=102&a=1>+</a>) <a href=?id=102&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=102>+</a>) <a href=/calendar/?a=6&resortid=102>Создать поездку</a></p>";map.openInfoWindowHtml(point_102,myHtml);});
+map.addOverlay(marker_102);
+
+
+var point_103 = new GLatLng(53.994242, 58.447676);
+markerOptions = { title:"Белорецк" , icon:icon_resort };
+var marker_103 = new GMarker(point_103, markerOptions);
+GEvent.addListener(marker_103, "click", function() { var myHtml = "<p align=left><b>Белорецк</b><br>&#149;&nbsp;<a href=http://www.beloretsk.ru/mratkino/>Сайт курорта</a><br><br>(<a href=?id=103&a=1>+</a>) <a href=?id=103&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=103>+</a>) <a href=/calendar/?a=6&resortid=103>Создать поездку</a></p>";map.openInfoWindowHtml(point_103,myHtml);});
+map.addOverlay(marker_103);
+
+
+var point_104 = new GLatLng(58.353480, 57.773648);
+markerOptions = { title:"Такманаиха" , icon:icon_resort };
+var marker_104 = new GMarker(point_104, markerOptions);
+GEvent.addListener(marker_104, "click", function() { var myHtml = "<p align=left><b>Такманаиха</b><br>&#149;&nbsp;<a href=http://www.tackman.narod.ru>Сайт курорта</a><br><br>(<a href=?id=104&a=1>+</a>) <a href=?id=104&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=104>+</a>) <a href=/calendar/?a=6&resortid=104>Создать поездку</a></p>";map.openInfoWindowHtml(point_104,myHtml);});
+map.addOverlay(marker_104);
+
+
+var point_105 = new GLatLng(55.976370, 60.644595);
+markerOptions = { title:"Вишневая гора" , icon:icon_resort };
+var marker_105 = new GMarker(point_105, markerOptions);
+GEvent.addListener(marker_105, "click", function() { var myHtml = "<p align=left><b>Вишневая гора</b><br><br>(<a href=?id=105&a=1>+</a>) <a href=?id=105&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=105>+</a>) <a href=/calendar/?a=6&resortid=105>Создать поездку</a></p>";map.openInfoWindowHtml(point_105,myHtml);});
+map.addOverlay(marker_105);
+
+
+var point_106 = new GLatLng(55.753037, 60.465898);
+markerOptions = { title:"Егоза" , icon:icon_resort };
+var marker_106 = new GMarker(point_106, markerOptions);
+GEvent.addListener(marker_106, "click", function() { var myHtml = "<p align=left><b>Егоза</b><br><br>(<a href=?id=106&a=1>+</a>) <a href=?id=106&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=106>+</a>) <a href=/calendar/?a=6&resortid=106>Создать поездку</a></p>";map.openInfoWindowHtml(point_106,myHtml);});
+map.addOverlay(marker_106);
+
+
+var point_107 = new GLatLng(55.043824, 59.967869);
+markerOptions = { title:"Солнечная Долина" , icon:icon_resort };
+var marker_107 = new GMarker(point_107, markerOptions);
+GEvent.addListener(marker_107, "click", function() { var myHtml = "<p align=left><b>Солнечная Долина</b><br>&#149;&nbsp;<a href=http://www.dolina.su>Сайт курорта</a><br><br>(<a href=?id=107&a=1>+</a>) <a href=?id=107&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=107>+</a>) <a href=/calendar/?a=6&resortid=107>Создать поездку</a></p>";map.openInfoWindowHtml(point_107,myHtml);});
+map.addOverlay(marker_107);
+
+
+var point_108 = new GLatLng(57.658108, 59.697298);
+markerOptions = { title:"Белая гора" , icon:icon_resort };
+var marker_108 = new GMarker(point_108, markerOptions);
+GEvent.addListener(marker_108, "click", function() { var myHtml = "<p align=left><b>Белая гора</b><br>&#149;&nbsp;<a href=http://www.gorabelaya.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>25 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=108>Подробнее...</a></td></tr></table><br>(<a href=?id=108&a=1>+</a>) <a href=?id=108&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=108>+</a>) <a href=/calendar/?a=6&resortid=108>Создать поездку</a></p>";map.openInfoWindowHtml(point_108,myHtml);});
+map.addOverlay(marker_108);
+
+
+var point_109 = new GLatLng(56.817984, 59.995274);
+markerOptions = { title:"Волчиха" , icon:icon_resort };
+var marker_109 = new GMarker(point_109, markerOptions);
+GEvent.addListener(marker_109, "click", function() { var myHtml = "<p align=left><b>Волчиха</b><br>&#149;&nbsp;<a href=http://www.volchixa.ru>Сайт курорта</a><br><br>(<a href=?id=109&a=1>+</a>) <a href=?id=109&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=109>+</a>) <a href=/calendar/?a=6&resortid=109>Создать поездку</a></p>";map.openInfoWindowHtml(point_109,myHtml);});
+map.addOverlay(marker_109);
+
+
+var point_110 = new GLatLng(58.747874, 59.455001);
+markerOptions = { title:"Качканар" , icon:icon_resort };
+var marker_110 = new GMarker(point_110, markerOptions);
+GEvent.addListener(marker_110, "click", function() { var myHtml = "<p align=left><b>Качканар</b><br><br>(<a href=?id=110&a=1>+</a>) <a href=?id=110&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=110>+</a>) <a href=/calendar/?a=6&resortid=110>Создать поездку</a></p>";map.openInfoWindowHtml(point_110,myHtml);});
+map.addOverlay(marker_110);
+
+
+var point_111 = new GLatLng(52.843381, 93.277053);
+markerOptions = { title:"Ергаки" , icon:icon_resort };
+var marker_111 = new GMarker(point_111, markerOptions);
+GEvent.addListener(marker_111, "click", function() { var myHtml = "<p align=left><b>Ергаки</b><br>&#149;&nbsp;<a href=http://www.ergaki.com>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>05 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=111>Подробнее...</a></td></tr></table><br>(<a href=?id=111&a=1>+</a>) <a href=?id=111&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=111>+</a>) <a href=/calendar/?a=6&resortid=111>Создать поездку</a></p>";map.openInfoWindowHtml(point_111,myHtml);});
+map.addOverlay(marker_111);
+
+
+var point_112 = new GLatLng(51.986626, 84.964901);
+markerOptions = { title:"Белокуриха" , icon:icon_resort };
+var marker_112 = new GMarker(point_112, markerOptions);
+GEvent.addListener(marker_112, "click", function() { var myHtml = "<p align=left><b>Белокуриха</b><br><br>(<a href=?id=112&a=1>+</a>) <a href=?id=112&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=112>+</a>) <a href=/calendar/?a=6&resortid=112>Создать поездку</a></p>";map.openInfoWindowHtml(point_112,myHtml);});
+map.addOverlay(marker_112);
+
+
+var point_113 = new GLatLng(53.001692, 158.661752);
+markerOptions = { title:"Красная Сопка" , icon:icon_resort };
+var marker_113 = new GMarker(point_113, markerOptions);
+GEvent.addListener(marker_113, "click", function() { var myHtml = "<p align=left><b>Красная Сопка</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>10 января 08</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=113>Подробнее...</a></td></tr></table><br>(<a href=?id=113&a=1>+</a>) <a href=?id=113&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=113>+</a>) <a href=/calendar/?a=6&resortid=113>Создать поездку</a></p>";map.openInfoWindowHtml(point_113,myHtml);});
+map.addOverlay(marker_113);
+
+
+var point_114 = new GLatLng(55.131415, 88.539017);
+markerOptions = { title:"Горная Саланга" , icon:icon_resort };
+var marker_114 = new GMarker(point_114, markerOptions);
+GEvent.addListener(marker_114, "click", function() { var myHtml = "<p align=left><b>Горная Саланга</b><br>&#149;&nbsp;<a href=http://www.salanga.ru>Сайт курорта</a><br><br>(<a href=?id=114&a=1>+</a>) <a href=?id=114&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=114>+</a>) <a href=/calendar/?a=6&resortid=114>Создать поездку</a></p>";map.openInfoWindowHtml(point_114,myHtml);});
+map.addOverlay(marker_114);
+
+
+var point_115 = new GLatLng(56.204919, 42.677366);
+markerOptions = { title:"Пужалова Гора" , icon:icon_resort };
+var marker_115 = new GMarker(point_115, markerOptions);
+GEvent.addListener(marker_115, "click", function() { var myHtml = "<p align=left><b>Пужалова Гора</b><br>&#149;&nbsp;<a href=http://www.puzhalova.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=mms://84.53.244.233:1755>Веб-камера</a><br><br>(<a href=?id=115&a=1>+</a>) <a href=?id=115&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=115>+</a>) <a href=/calendar/?a=6&resortid=115>Создать поездку</a></p>";map.openInfoWindowHtml(point_115,myHtml);});
+map.addOverlay(marker_115);
+
+
+var point_116 = new GLatLng(55.727956, 48.720287);
+markerOptions = { title:"Свияга" , icon:icon_resort };
+var marker_116 = new GMarker(point_116, markerOptions);
+GEvent.addListener(marker_116, "click", function() { var myHtml = "<p align=left><b>Свияга</b><br>&#149;&nbsp;<a href=http://www.ski-kazan.ru/>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>04 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=116>Подробнее...</a></td></tr></table><br>(<a href=?id=116&a=1>+</a>) <a href=?id=116&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=116>+</a>) <a href=/calendar/?a=6&resortid=116>Создать поездку</a></p>";map.openInfoWindowHtml(point_116,myHtml);});
+map.addOverlay(marker_116);
+
+
+var point_117 = new GLatLng(50.759599, 136.358364);
+markerOptions = { title:"Амут" , icon:icon_resort };
+var marker_117 = new GMarker(point_117, markerOptions);
+GEvent.addListener(marker_117, "click", function() { var myHtml = "<p align=left><b>Амут</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>03 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=117>Подробнее...</a></td></tr></table><br>(<a href=?id=117&a=1>+</a>) <a href=?id=117&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=117>+</a>) <a href=/calendar/?a=6&resortid=117>Создать поездку</a></p>";map.openInfoWindowHtml(point_117,myHtml);});
+map.addOverlay(marker_117);
+
+
+var point_118 = new GLatLng(50.738203, 136.574350);
+markerOptions = { title:"Холдоми" , icon:icon_resort };
+var marker_118 = new GMarker(point_118, markerOptions);
+GEvent.addListener(marker_118, "click", function() { var myHtml = "<p align=left><b>Холдоми</b><br>&#149;&nbsp;<a href=http://www.holdomi.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>03 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=118>Подробнее...</a></td></tr></table><br>(<a href=?id=118&a=1>+</a>) <a href=?id=118&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=118>+</a>) <a href=/calendar/?a=6&resortid=118>Создать поездку</a></p>";map.openInfoWindowHtml(point_118,myHtml);});
+map.addOverlay(marker_118);
+
+
+var point_119 = new GLatLng(55.602772, 37.704466);
+markerOptions = { title:"Орехово" , icon:icon_resort };
+var marker_119 = new GMarker(point_119, markerOptions);
+GEvent.addListener(marker_119, "click", function() { var myHtml = "<p align=left><b>Орехово</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>10 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=119>Подробнее...</a></td></tr></table><br>(<a href=?id=119&a=1>+</a>) <a href=?id=119&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=119>+</a>) <a href=/calendar/?a=6&resortid=119>Создать поездку</a></p>";map.openInfoWindowHtml(point_119,myHtml);});
+map.addOverlay(marker_119);
+
+
+var point_120 = new GLatLng(56.23972506491715, 37.399091720581055);
+markerOptions = { title:"Сказка" , icon:icon_resort };
+var marker_120 = new GMarker(point_120, markerOptions);
+GEvent.addListener(marker_120, "click", function() { var myHtml = "<p align=left><b>Сказка</b><br><br>(<a href=?id=120&a=1>+</a>) <a href=?id=120&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=120>+</a>) <a href=/calendar/?a=6&resortid=120>Создать поездку</a></p>";map.openInfoWindowHtml(point_120,myHtml);});
+map.addOverlay(marker_120);
+
+
+var point_121 = new GLatLng(55.730505, 36.882105);
+markerOptions = { title:"Звенигород" , icon:icon_resort };
+var marker_121 = new GMarker(point_121, markerOptions);
+GEvent.addListener(marker_121, "click", function() { var myHtml = "<p align=left><b>Звенигород</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>05 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_4.gif width=24 height=24></td><td valign=middle>Бугристо и ухабисто</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=121>Подробнее...</a></td></tr></table><br>(<a href=?id=121&a=1>+</a>) <a href=?id=121&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=121>+</a>) <a href=/calendar/?a=6&resortid=121>Создать поездку</a></p>";map.openInfoWindowHtml(point_121,myHtml);});
+map.addOverlay(marker_121);
+
+
+var point_122 = new GLatLng(55.744960, 37.433808);
+markerOptions = { title:"Спортшкола ЦСКА" , icon:icon_resort };
+var marker_122 = new GMarker(point_122, markerOptions);
+GEvent.addListener(marker_122, "click", function() { var myHtml = "<p align=left><b>Спортшкола ЦСКА</b><br><br>(<a href=?id=122&a=1>+</a>) <a href=?id=122&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=122>+</a>) <a href=/calendar/?a=6&resortid=122>Создать поездку</a></p>";map.openInfoWindowHtml(point_122,myHtml);});
+map.addOverlay(marker_122);
+
+
+var point_194 = new GLatLng(56.771617375052294, 60.64027190208435);
+markerOptions = { title:"Уктус" , icon:icon_resort };
+var marker_194 = new GMarker(point_194, markerOptions);
+GEvent.addListener(marker_194, "click", function() { var myHtml = "<p align=left><b>Уктус</b><br><br>(<a href=?id=194&a=1>+</a>) <a href=?id=194&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=194>+</a>) <a href=/calendar/?a=6&resortid=194>Создать поездку</a></p>";map.openInfoWindowHtml(point_194,myHtml);});
+map.addOverlay(marker_194);
+
+
+var point_182 = new GLatLng(51.4918584186485, 57.33936309814453);
+markerOptions = { title:"Долина Кувандык" , icon:icon_resort };
+var marker_182 = new GMarker(point_182, markerOptions);
+GEvent.addListener(marker_182, "click", function() { var myHtml = "<p align=left><b>Долина Кувандык</b><br>&#149;&nbsp;<a href=http://www.skidolina.narod.ru/>Сайт курорта</a><br><br>(<a href=?id=182&a=1>+</a>) <a href=?id=182&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=182>+</a>) <a href=/calendar/?a=6&resortid=182>Создать поездку</a></p>";map.openInfoWindowHtml(point_182,myHtml);});
+map.addOverlay(marker_182);
+
+
+var point_244 = new GLatLng(54.881988906926715, 37.95368671417236);
+markerOptions = { title:"Ступино" , icon:icon_resort };
+var marker_244 = new GMarker(point_244, markerOptions);
+GEvent.addListener(marker_244, "click", function() { var myHtml = "<p align=left><b>Ступино</b><br><br>(<a href=?id=244&a=1>+</a>) <a href=?id=244&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=244>+</a>) <a href=/calendar/?a=6&resortid=244>Создать поездку</a></p>";map.openInfoWindowHtml(point_244,myHtml);});
+map.addOverlay(marker_244);
+
+
+var point_252 = new GLatLng(56.671509002015526, 53.74580383300781);
+markerOptions = { title:"Нечкино" , icon:icon_resort };
+var marker_252 = new GMarker(point_252, markerOptions);
+GEvent.addListener(marker_252, "click", function() { var myHtml = "<p align=left><b>Нечкино</b><br>&#149;&nbsp;<a href=http://www.nechkino.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>03 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=252>Подробнее...</a></td></tr></table><br>(<a href=?id=252&a=1>+</a>) <a href=?id=252&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=252>+</a>) <a href=/calendar/?a=6&resortid=252>Создать поездку</a></p>";map.openInfoWindowHtml(point_252,myHtml);});
+map.addOverlay(marker_252);
+
+
+var point_253 = new GLatLng(56.94619137317702, 59.88424301147461);
+markerOptions = { title:"Теплая гора" , icon:icon_resort };
+var marker_253 = new GMarker(point_253, markerOptions);
+GEvent.addListener(marker_253, "click", function() { var myHtml = "<p align=left><b>Теплая гора</b><br>&#149;&nbsp;<a href=http://www.teplaya.ru>Сайт курорта</a><br><br>(<a href=?id=253&a=1>+</a>) <a href=?id=253&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=253>+</a>) <a href=/calendar/?a=6&resortid=253>Создать поездку</a></p>";map.openInfoWindowHtml(point_253,myHtml);});
+map.addOverlay(marker_253);
+
+
+var point_254 = new GLatLng(57.892968602933415, 59.87450122833252);
+markerOptions = { title:"Долгая гора" , icon:icon_resort };
+var marker_254 = new GMarker(point_254, markerOptions);
+GEvent.addListener(marker_254, "click", function() { var myHtml = "<p align=left><b>Долгая гора</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>04 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=254>Подробнее...</a></td></tr></table><br>(<a href=?id=254&a=1>+</a>) <a href=?id=254&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=254>+</a>) <a href=/calendar/?a=6&resortid=254>Создать поездку</a></p>";map.openInfoWindowHtml(point_254,myHtml);});
+map.addOverlay(marker_254);
+
+
+var point_255 = new GLatLng(56.924442, 55.616722);
+markerOptions = { title:"Ашатли" , icon:icon_resort };
+var marker_255 = new GMarker(point_255, markerOptions);
+GEvent.addListener(marker_255, "click", function() { var myHtml = "<p align=left><b>Ашатли</b><br>&#149;&nbsp;<a href=http://www.ashatly.ru>Сайт курорта</a><br><br>(<a href=?id=255&a=1>+</a>) <a href=?id=255&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=255>+</a>) <a href=/calendar/?a=6&resortid=255>Создать поездку</a></p>";map.openInfoWindowHtml(point_255,myHtml);});
+map.addOverlay(marker_255);
+
+
+var point_256 = new GLatLng(53.22546013252258, 55.968990325927734);
+markerOptions = { title:"Зирган-Тау" , icon:icon_resort };
+var marker_256 = new GMarker(point_256, markerOptions);
+GEvent.addListener(marker_256, "click", function() { var myHtml = "<p align=left><b>Зирган-Тау</b><br><br>(<a href=?id=256&a=1>+</a>) <a href=?id=256&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=256>+</a>) <a href=/calendar/?a=6&resortid=256>Создать поездку</a></p>";map.openInfoWindowHtml(point_256,myHtml);});
+map.addOverlay(marker_256);
+
+
+var point_257 = new GLatLng(57.82720544890436, 56.06151580810547);
+markerOptions = { title:"Иван гора" , icon:icon_resort };
+var marker_257 = new GMarker(point_257, markerOptions);
+GEvent.addListener(marker_257, "click", function() { var myHtml = "<p align=left><b>Иван гора</b><br>&#149;&nbsp;<a href=http://www.ivan-gora.ru>Сайт курорта</a><br><br>(<a href=?id=257&a=1>+</a>) <a href=?id=257&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=257>+</a>) <a href=/calendar/?a=6&resortid=257>Создать поездку</a></p>";map.openInfoWindowHtml(point_257,myHtml);});
+map.addOverlay(marker_257);
+
+
+var point_258 = new GLatLng(53.692971269283426, 56.0967493057251);
+markerOptions = { title:"Куш-Тау" , icon:icon_resort };
+var marker_258 = new GMarker(point_258, markerOptions);
+GEvent.addListener(marker_258, "click", function() { var myHtml = "<p align=left><b>Куш-Тау</b><br><br>(<a href=?id=258&a=1>+</a>) <a href=?id=258&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=258>+</a>) <a href=/calendar/?a=6&resortid=258>Создать поездку</a></p>";map.openInfoWindowHtml(point_258,myHtml);});
+map.addOverlay(marker_258);
+
+
+var point_259 = new GLatLng(54.952632134235756, 52.25398063659668);
+markerOptions = { title:"Татнефть" , icon:icon_resort };
+var marker_259 = new GMarker(point_259, markerOptions);
+GEvent.addListener(marker_259, "click", function() { var myHtml = "<p align=left><b>Татнефть</b><br>&#149;&nbsp;<a href=http://www.apres-ski.boom.ru>Сайт курорта</a><br><br>(<a href=?id=259&a=1>+</a>) <a href=?id=259&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=259>+</a>) <a href=/calendar/?a=6&resortid=259>Создать поездку</a></p>";map.openInfoWindowHtml(point_259,myHtml);});
+map.addOverlay(marker_259);
+
+
+var point_260 = new GLatLng(56.91874808482143, 60.025177001953125);
+markerOptions = { title:"Пильная гора" , icon:icon_resort };
+var marker_260 = new GMarker(point_260, markerOptions);
+GEvent.addListener(marker_260, "click", function() { var myHtml = "<p align=left><b>Пильная гора</b><br>&#149;&nbsp;<a href=http://www.pilnaya.ru>Сайт курорта</a><br><br>(<a href=?id=260&a=1>+</a>) <a href=?id=260&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=260>+</a>) <a href=/calendar/?a=6&resortid=260>Создать поездку</a></p>";map.openInfoWindowHtml(point_260,myHtml);});
+map.addOverlay(marker_260);
+
+
+var point_331 = new GLatLng(55.785671421643634, 37.95452356338501);
+markerOptions = { title:"Лисья гора" , icon:icon_resort };
+var marker_331 = new GMarker(point_331, markerOptions);
+GEvent.addListener(marker_331, "click", function() { var myHtml = "<p align=left><b>Лисья гора</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>17 февраля 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_3.gif width=24 height=24></td><td valign=middle>Сильно раскатано</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=331>Подробнее...</a></td></tr></table><br>(<a href=?id=331&a=1>+</a>) <a href=?id=331&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=331>+</a>) <a href=/calendar/?a=6&resortid=331>Создать поездку</a></p>";map.openInfoWindowHtml(point_331,myHtml);});
+map.addOverlay(marker_331);
+
+
+var point_391 = new GLatLng(54.652264, 88.700076);
+markerOptions = { title:"Приисковый" , icon:icon_resort };
+var marker_391 = new GMarker(point_391, markerOptions);
+GEvent.addListener(marker_391, "click", function() { var myHtml = "<p align=left><b>Приисковый</b><br>&#149;&nbsp;<a href=http://www.priiskovy.ru/>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>24 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=391>Подробнее...</a></td></tr></table><br>(<a href=?id=391&a=1>+</a>) <a href=?id=391&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=391>+</a>) <a href=/calendar/?a=6&resortid=391>Создать поездку</a></p>";map.openInfoWindowHtml(point_391,myHtml);});
+map.addOverlay(marker_391);
+
+
+var point_392 = new GLatLng(55.85674432199471, 36.98214769363403);
+markerOptions = { title:"Подмосковная Слобода" , icon:icon_resort };
+var marker_392 = new GMarker(point_392, markerOptions);
+GEvent.addListener(marker_392, "click", function() { var myHtml = "<p align=left><b>Подмосковная Слобода</b><br>&#149;&nbsp;<a href=http://www.p-sloboda.h16.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>03 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=392>Подробнее...</a></td></tr></table><br>(<a href=?id=392&a=1>+</a>) <a href=?id=392&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=392>+</a>) <a href=/calendar/?a=6&resortid=392>Создать поездку</a></p>";map.openInfoWindowHtml(point_392,myHtml);});
+map.addOverlay(marker_392);
+
+
+var point_393 = new GLatLng(55.57173046842517, 37.584083676338196);
+markerOptions = { title:"Северное Бутово" , icon:icon_resort };
+var marker_393 = new GMarker(point_393, markerOptions);
+GEvent.addListener(marker_393, "click", function() { var myHtml = "<p align=left><b>Северное Бутово</b><br>&#149;&nbsp;<a href=http://www.ras-s.ru>Сайт курорта</a><br><br>(<a href=?id=393&a=1>+</a>) <a href=?id=393&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=393>+</a>) <a href=/calendar/?a=6&resortid=393>Создать поездку</a></p>";map.openInfoWindowHtml(point_393,myHtml);});
+map.addOverlay(marker_393);
+
+
+var point_394 = new GLatLng(55.635027630504815, 37.852803468704224);
+markerOptions = { title:"Лыткарино" , icon:icon_resort };
+var marker_394 = new GMarker(point_394, markerOptions);
+GEvent.addListener(marker_394, "click", function() { var myHtml = "<p align=left><b>Лыткарино</b><br><br>(<a href=?id=394&a=1>+</a>) <a href=?id=394&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=394>+</a>) <a href=/calendar/?a=6&resortid=394>Создать поездку</a></p>";map.openInfoWindowHtml(point_394,myHtml);});
+map.addOverlay(marker_394);
+
+
+var point_395 = new GLatLng(54.99203133960902, 82.91557788848877);
+markerOptions = { title:"<Горский> сноуборд парк" , icon:icon_resort };
+var marker_395 = new GMarker(point_395, markerOptions);
+GEvent.addListener(marker_395, "click", function() { var myHtml = "<p align=left><b><Горский> сноуборд парк</b><br>&#149;&nbsp;<a href=http://www.gorskaya.sib.ru>Сайт курорта</a><br><br>(<a href=?id=395&a=1>+</a>) <a href=?id=395&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=395>+</a>) <a href=/calendar/?a=6&resortid=395>Создать поездку</a></p>";map.openInfoWindowHtml(point_395,myHtml);});
+map.addOverlay(marker_395);
+
+
+var point_397 = new GLatLng(52.222042266809545, 104.3251633644104);
+markerOptions = { title:"Ерши" , icon:icon_resort };
+var marker_397 = new GMarker(point_397, markerOptions);
+GEvent.addListener(marker_397, "click", function() { var myHtml = "<p align=left><b>Ерши</b><br><br>(<a href=?id=397&a=1>+</a>) <a href=?id=397&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=397>+</a>) <a href=/calendar/?a=6&resortid=397>Создать поездку</a></p>";map.openInfoWindowHtml(point_397,myHtml);});
+map.addOverlay(marker_397);
+
+
+var point_399 = new GLatLng(52.437686568794554, 103.73135447502136);
+markerOptions = { title:"Ангарская горка" , icon:icon_resort };
+var marker_399 = new GMarker(point_399, markerOptions);
+GEvent.addListener(marker_399, "click", function() { var myHtml = "<p align=left><b>Ангарская горка</b><br><br>(<a href=?id=399&a=1>+</a>) <a href=?id=399&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=399>+</a>) <a href=/calendar/?a=6&resortid=399>Создать поездку</a></p>";map.openInfoWindowHtml(point_399,myHtml);});
+map.addOverlay(marker_399);
+
+
+var point_400 = new GLatLng(52.15686742547752, 104.09875273704529);
+markerOptions = { title:"Ольха" , icon:icon_resort };
+var marker_400 = new GMarker(point_400, markerOptions);
+GEvent.addListener(marker_400, "click", function() { var myHtml = "<p align=left><b>Ольха</b><br><br>(<a href=?id=400&a=1>+</a>) <a href=?id=400&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=400>+</a>) <a href=/calendar/?a=6&resortid=400>Создать поездку</a></p>";map.openInfoWindowHtml(point_400,myHtml);});
+map.addOverlay(marker_400);
+
+
+var point_401 = new GLatLng(67.58775900428078, 33.73651385307312);
+markerOptions = { title:"Большой Вудьявр" , icon:icon_resort };
+var marker_401 = new GMarker(point_401, markerOptions);
+GEvent.addListener(marker_401, "click", function() { var myHtml = "<p align=left><b>Большой Вудьявр</b><br>&#149;&nbsp;<a href=http://www.bigwood.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>03 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_4.gif width=24 height=24></td><td valign=middle>Много катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=401>Подробнее...</a></td></tr></table><br>(<a href=?id=401&a=1>+</a>) <a href=?id=401&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=401>+</a>) <a href=/calendar/?a=6&resortid=401>Создать поездку</a></p>";map.openInfoWindowHtml(point_401,myHtml);});
+map.addOverlay(marker_401);
+
+
+var point_403 = new GLatLng(51.817210992860566, 85.80785751342773);
+markerOptions = { title:"Манжерок" , icon:icon_resort };
+var marker_403 = new GMarker(point_403, markerOptions);
+GEvent.addListener(marker_403, "click", function() { var myHtml = "<p align=left><b>Манжерок</b><br>&#149;&nbsp;<a href=http://www.manjerok.ru>Сайт курорта</a><br><br>(<a href=?id=403&a=1>+</a>) <a href=?id=403&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=403>+</a>) <a href=/calendar/?a=6&resortid=403>Создать поездку</a></p>";map.openInfoWindowHtml(point_403,myHtml);});
+map.addOverlay(marker_403);
+
+
+var point_404 = new GLatLng(55.73396086729731, 37.34624147415161);
+markerOptions = { title:"Ромашково" , icon:icon_resort };
+var marker_404 = new GMarker(point_404, markerOptions);
+GEvent.addListener(marker_404, "click", function() { var myHtml = "<p align=left><b>Ромашково</b><br><br>(<a href=?id=404&a=1>+</a>) <a href=?id=404&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=404>+</a>) <a href=/calendar/?a=6&resortid=404>Создать поездку</a></p>";map.openInfoWindowHtml(point_404,myHtml);});
+map.addOverlay(marker_404);
+
+
+var point_407 = new GLatLng(43.683142825367206, 40.266523361206055);
+markerOptions = { title:"Горная Карусель" , icon:icon_resort };
+var marker_407 = new GMarker(point_407, markerOptions);
+GEvent.addListener(marker_407, "click", function() { var myHtml = "<p align=left><b>Горная Карусель</b><br>&#149;&nbsp;<a href=http://www.gornaya-karusel.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.xsochi.ru/2008/11/14/vebkamera-v-krasnoi-polyane>Веб-камера</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>02 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_5.gif width=24 height=24></td><td  width=100% valign=middle>Снега нет</td></tr><tr><td valign=middle><img src=icons/hill_5.gif width=24 height=24></td><td valign=middle>Окончательно разбитые склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=407>Подробнее...</a></td></tr></table><br>(<a href=?id=407&a=1>+</a>) <a href=?id=407&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=407>+</a>) <a href=/calendar/?a=6&resortid=407>Создать поездку</a></p>";map.openInfoWindowHtml(point_407,myHtml);});
+map.addOverlay(marker_407);
+
+
+var point_408 = new GLatLng(43.68537731137408, 40.27931213378906);
+markerOptions = { title:"Лаура Газпром" , icon:icon_resort };
+var marker_408 = new GMarker(point_408, markerOptions);
+GEvent.addListener(marker_408, "click", function() { var myHtml = "<p align=left><b>Лаура Газпром</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>13 ноября 08</b></td></tr><tr><td valign=middle><img src=icons/snow_5.gif width=24 height=24></td><td  width=100% valign=middle>Снега нет</td></tr><tr><td valign=middle><img src=icons/hill_5.gif width=24 height=24></td><td valign=middle>Окончательно разбитые склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=408>Подробнее...</a></td></tr></table><br>(<a href=?id=408&a=1>+</a>) <a href=?id=408&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=408>+</a>) <a href=/calendar/?a=6&resortid=408>Создать поездку</a></p>";map.openInfoWindowHtml(point_408,myHtml);});
+map.addOverlay(marker_408);
+
+
+var point_409 = new GLatLng(43.671844983221604, 40.31639099121094);
+markerOptions = { title:"Роза Хутор" , icon:icon_resort };
+var marker_409 = new GMarker(point_409, markerOptions);
+GEvent.addListener(marker_409, "click", function() { var myHtml = "<p align=left><b>Роза Хутор</b><br>&#149;&nbsp;<a href=http://www.rosakhutor.ru>Сайт курорта</a><br><br>(<a href=?id=409&a=1>+</a>) <a href=?id=409&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=409>+</a>) <a href=/calendar/?a=6&resortid=409>Создать поездку</a></p>";map.openInfoWindowHtml(point_409,myHtml);});
+map.addOverlay(marker_409);
+
+
+var point_410 = new GLatLng(58.334279373451224, 56.42294883728027);
+markerOptions = { title:"Полазна" , icon:icon_resort };
+var marker_410 = new GMarker(point_410, markerOptions);
+GEvent.addListener(marker_410, "click", function() { var myHtml = "<p align=left><b>Полазна</b><br>&#149;&nbsp;<a href=http://www.polazna.ru>Сайт курорта</a><br><br>(<a href=?id=410&a=1>+</a>) <a href=?id=410&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=410>+</a>) <a href=/calendar/?a=6&resortid=410>Создать поездку</a></p>";map.openInfoWindowHtml(point_410,myHtml);});
+map.addOverlay(marker_410);
+
+
+var point_411 = new GLatLng(50.712765085329615, 137.30764389038086);
+markerOptions = { title:"Шарголь" , icon:icon_resort };
+var marker_411 = new GMarker(point_411, markerOptions);
+GEvent.addListener(marker_411, "click", function() { var myHtml = "<p align=left><b>Шарголь</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>13 декабря 08</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_2.gif width=24 height=24></td><td valign=middle>Мало катающихся</td></tr><tr><td colspan=2><a href=/resort/?id=411>Подробнее...</a></td></tr></table><br>(<a href=?id=411&a=1>+</a>) <a href=?id=411&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=411>+</a>) <a href=/calendar/?a=6&resortid=411>Создать поездку</a></p>";map.openInfoWindowHtml(point_411,myHtml);});
+map.addOverlay(marker_411);
+
+
+var point_412 = new GLatLng(50.53896282711907, 137.0859432220459);
+markerOptions = { title:"Пивань" , icon:icon_resort };
+var marker_412 = new GMarker(point_412, markerOptions);
+GEvent.addListener(marker_412, "click", function() { var myHtml = "<p align=left><b>Пивань</b><br><br>(<a href=?id=412&a=1>+</a>) <a href=?id=412&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=412>+</a>) <a href=/calendar/?a=6&resortid=412>Создать поездку</a></p>";map.openInfoWindowHtml(point_412,myHtml);});
+map.addOverlay(marker_412);
+
+
+var point_413 = new GLatLng(55.85650345287809, 37.393373250961304);
+markerOptions = { title:"Вейпарк / Мосмарт" , icon:icon_resort };
+var marker_413 = new GMarker(point_413, markerOptions);
+GEvent.addListener(marker_413, "click", function() { var myHtml = "<p align=left><b>Вейпарк / Мосмарт</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>30 декабря 08</b></td></tr><tr><td valign=middle><img src=icons/snow_1.gif width=24 height=24></td><td  width=100% valign=middle>Свежий снег</td></tr><tr><td valign=middle><img src=icons/hill_1.gif width=24 height=24></td><td valign=middle>Чистые и ровные склоны</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=413>Подробнее...</a></td></tr></table><br>(<a href=?id=413&a=1>+</a>) <a href=?id=413&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=413>+</a>) <a href=/calendar/?a=6&resortid=413>Создать поездку</a></p>";map.openInfoWindowHtml(point_413,myHtml);});
+map.addOverlay(marker_413);
+
+
+var point_415 = new GLatLng(54.924577151855175, 61.347999572753906);
+markerOptions = { title:"Снежные Холмы" , icon:icon_resort };
+var marker_415 = new GMarker(point_415, markerOptions);
+GEvent.addListener(marker_415, "click", function() { var myHtml = "<p align=left><b>Снежные Холмы</b><br>&#149;&nbsp;<a href=http://www.snow-hills.ru>Сайт курорта</a><br><br>(<a href=?id=415&a=1>+</a>) <a href=?id=415&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=415>+</a>) <a href=/calendar/?a=6&resortid=415>Создать поездку</a></p>";map.openInfoWindowHtml(point_415,myHtml);});
+map.addOverlay(marker_415);
+
+
+var point_416 = new GLatLng(51.38678061104847, 39.040775299072266);
+markerOptions = { title:"Костенки" , icon:icon_resort };
+var marker_416 = new GMarker(point_416, markerOptions);
+GEvent.addListener(marker_416, "click", function() { var myHtml = "<p align=left><b>Костенки</b><br>&#149;&nbsp;<a href=http://www.kostenski.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>01 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_3.gif width=24 height=24></td><td valign=middle>Средненько</td></tr><tr><td colspan=2><a href=/resort/?id=416>Подробнее...</a></td></tr></table><br>(<a href=?id=416&a=1>+</a>) <a href=?id=416&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=416>+</a>) <a href=/calendar/?a=6&resortid=416>Создать поездку</a></p>";map.openInfoWindowHtml(point_416,myHtml);});
+map.addOverlay(marker_416);
+
+
+var point_417 = new GLatLng(59.92401173884448, 38.5590934753418);
+markerOptions = { title:"Цыпина Гора" , icon:icon_resort };
+var marker_417 = new GMarker(point_417, markerOptions);
+GEvent.addListener(marker_417, "click", function() { var myHtml = "<p align=left><b>Цыпина Гора</b><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>07 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=417>Подробнее...</a></td></tr></table><br>(<a href=?id=417&a=1>+</a>) <a href=?id=417&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=417>+</a>) <a href=/calendar/?a=6&resortid=417>Создать поездку</a></p>";map.openInfoWindowHtml(point_417,myHtml);});
+map.addOverlay(marker_417);
+
+
+var point_418 = new GLatLng(62.21915609429387, 33.82415771484375);
+markerOptions = { title:"Спасская Губа" , icon:icon_resort };
+var marker_418 = new GMarker(point_418, markerOptions);
+GEvent.addListener(marker_418, "click", function() { var myHtml = "<p align=left><b>Спасская Губа</b><br><br>(<a href=?id=418&a=1>+</a>) <a href=?id=418&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=418>+</a>) <a href=/calendar/?a=6&resortid=418>Создать поездку</a></p>";map.openInfoWindowHtml(point_418,myHtml);});
+map.addOverlay(marker_418);
+
+
+var point_419 = new GLatLng(61.76500282551682, 34.34901237487793);
+markerOptions = { title:"Горка" , icon:icon_resort };
+var marker_419 = new GMarker(point_419, markerOptions);
+GEvent.addListener(marker_419, "click", function() { var myHtml = "<p align=left><b>Горка</b><br>&#149;&nbsp;<a href=http://www.gorkasport.ru/>Сайт курорта</a><br><br>(<a href=?id=419&a=1>+</a>) <a href=?id=419&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=419>+</a>) <a href=/calendar/?a=6&resortid=419>Создать поездку</a></p>";map.openInfoWindowHtml(point_419,myHtml);});
+map.addOverlay(marker_419);
+
+
+var point_420 = new GLatLng(64.70343352867461, 43.456077575683594);
+markerOptions = { title:"Красная Горка" , icon:icon_resort };
+var marker_420 = new GMarker(point_420, markerOptions);
+GEvent.addListener(marker_420, "click", function() { var myHtml = "<p align=left><b>Красная Горка</b><br><br>(<a href=?id=420&a=1>+</a>) <a href=?id=420&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=420>+</a>) <a href=/calendar/?a=6&resortid=420>Создать поездку</a></p>";map.openInfoWindowHtml(point_420,myHtml);});
+map.addOverlay(marker_420);
+
+
+var point_422 = new GLatLng(44.12382424688647, 133.33033561706543);
+markerOptions = { title:"Восток" , icon:icon_resort };
+var marker_422 = new GMarker(point_422, markerOptions);
+GEvent.addListener(marker_422, "click", function() { var myHtml = "<p align=left><b>Восток</b><br>&#149;&nbsp;<a href=http://www.snow-vostok.ru>Сайт курорта</a><br>&#149;&nbsp;<a href=http://www.shamora.info/webcam.php>Веб-камера</a><br><br>(<a href=?id=422&a=1>+</a>) <a href=?id=422&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=422>+</a>) <a href=/calendar/?a=6&resortid=422>Создать поездку</a></p>";map.openInfoWindowHtml(point_422,myHtml);});
+map.addOverlay(marker_422);
+
+
+var point_423 = new GLatLng(43.141641758166465, 132.78968811035156);
+markerOptions = { title:"Грибановка" , icon:icon_resort };
+var marker_423 = new GMarker(point_423, markerOptions);
+GEvent.addListener(marker_423, "click", function() { var myHtml = "<p align=left><b>Грибановка</b><br>&#149;&nbsp;<a href=http://www.gribanowka.ru>Сайт курорта</a><br><br>(<a href=?id=423&a=1>+</a>) <a href=?id=423&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=423>+</a>) <a href=/calendar/?a=6&resortid=423>Создать поездку</a></p>";map.openInfoWindowHtml(point_423,myHtml);});
+map.addOverlay(marker_423);
+
+
+var point_424 = new GLatLng(56.269810535261016, 37.62096405029297);
+markerOptions = { title:"Пуриха" , icon:icon_resort };
+var marker_424 = new GMarker(point_424, markerOptions);
+GEvent.addListener(marker_424, "click", function() { var myHtml = "<p align=left><b>Пуриха</b><br>&#149;&nbsp;<a href=http://www.puriha.ru>Сайт курорта</a><br><br><table width=200px cellpadding=0 cellspacing=5 bgcolor=#ededed><tr><td colspan=2 style=padding: 5px;><b>10 января 09</b></td></tr><tr><td valign=middle><img src=icons/snow_2.gif width=24 height=24></td><td  width=100% valign=middle>Хороший снег</td></tr><tr><td valign=middle><img src=icons/hill_2.gif width=24 height=24></td><td valign=middle>Хорошее состояние склона</td></tr><tr><td valign=middle><img src=icons/people_1.gif width=24 height=24></td><td valign=middle>Никого на склоне</td></tr><tr><td colspan=2><a href=/resort/?id=424>Подробнее...</a></td></tr></table><br>(<a href=?id=424&a=1>+</a>) <a href=?id=424&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=424>+</a>) <a href=/calendar/?a=6&resortid=424>Создать поездку</a></p>";map.openInfoWindowHtml(point_424,myHtml);});
+map.addOverlay(marker_424);
+
+
+var point_425 = new GLatLng(43.16654684763797, 132.7152943611145);
+markerOptions = { title:"Пидан Сихотэ" , icon:icon_resort };
+var marker_425 = new GMarker(point_425, markerOptions);
+GEvent.addListener(marker_425, "click", function() { var myHtml = "<p align=left><b>Пидан Сихотэ</b><br><br>(<a href=?id=425&a=1>+</a>) <a href=?id=425&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=425>+</a>) <a href=/calendar/?a=6&resortid=425>Создать поездку</a></p>";map.openInfoWindowHtml(point_425,myHtml);});
+map.addOverlay(marker_425);
+
+
+var point_427 = new GLatLng(55.10419736125278, 36.57843768596649);
+markerOptions = { title:"Обнинск" , icon:icon_resort };
+var marker_427 = new GMarker(point_427, markerOptions);
+GEvent.addListener(marker_427, "click", function() { var myHtml = "<p align=left><b>Обнинск</b><br><br>(<a href=?id=427&a=1>+</a>) <a href=?id=427&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=427>+</a>) <a href=/calendar/?a=6&resortid=427>Создать поездку</a></p>";map.openInfoWindowHtml(point_427,myHtml);});
+map.addOverlay(marker_427);
+
+
+var point_428 = new GLatLng(54.50365448513427, 36.2089204788208);
+markerOptions = { title:"Квань" , icon:icon_resort };
+var marker_428 = new GMarker(point_428, markerOptions);
+GEvent.addListener(marker_428, "click", function() { var myHtml = "<p align=left><b>Квань</b><br><br>(<a href=?id=428&a=1>+</a>) <a href=?id=428&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=428>+</a>) <a href=/calendar/?a=6&resortid=428>Создать поездку</a></p>";map.openInfoWindowHtml(point_428,myHtml);});
+map.addOverlay(marker_428);
+
+
+var point_429 = new GLatLng(57.871783637222386, 39.55910682678223);
+markerOptions = { title:"Николина Гора" , icon:icon_resort };
+var marker_429 = new GMarker(point_429, markerOptions);
+GEvent.addListener(marker_429, "click", function() { var myHtml = "<p align=left><b>Николина Гора</b><br>&#149;&nbsp;<a href=http://www.nikolina-gora.com>Сайт курорта</a><br><br>(<a href=?id=429&a=1>+</a>) <a href=?id=429&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=429>+</a>) <a href=/calendar/?a=6&resortid=429>Создать поездку</a></p>";map.openInfoWindowHtml(point_429,myHtml);});
+map.addOverlay(marker_429);
+
+
+var point_430 = new GLatLng(57.51510835810191, 39.74501609802246);
+markerOptions = { title:"Изгиб" , icon:icon_resort };
+var marker_430 = new GMarker(point_430, markerOptions);
+GEvent.addListener(marker_430, "click", function() { var myHtml = "<p align=left><b>Изгиб</b><br>&#149;&nbsp;<a href=http://www.izgib.ru>Сайт курорта</a><br><br>(<a href=?id=430&a=1>+</a>) <a href=?id=430&a=1>Добавить отчет</a><br>(<a href=/calendar/?a=6&resortid=430>+</a>) <a href=/calendar/?a=6&resortid=430>Создать поездку</a></p>";map.openInfoWindowHtml(point_430,myHtml);});
+map.addOverlay(marker_430);

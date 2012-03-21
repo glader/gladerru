@@ -1,0 +1,27 @@
+{% load content %}
+    {% with post.item as movie %}
+        <div class="item">
+            <a name="{{ post.name }}"></a>
+            <div class="title"><h2>Выложен тизер фильма "{{ movie|link }}"</h2></div>
+
+            <div class="text g-line">
+                {% if movie.studio %}
+                    <p><strong>Студия</strong>: {{ movie.studio|link }} {% if movie.year %}({{ movie.year }}){% endif %}</p>
+                {%  endif %}
+
+                <table>
+                    {% riders movie %}
+                </table>
+
+				{% if movie.content %}
+					<p>{{ movie.content|parser }}</p>
+				{% endif %}
+
+                <p>
+                    {{ movie.teaser|safe }}
+                </p>
+            </div>
+
+            {% post_panel movie user "normal" %}
+        </div>
+    {% endwith %}

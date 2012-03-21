@@ -1,0 +1,12 @@
+Django
+MySQL-python
+PIL
+South
+boto
+django-ses
+flup
+logging
+wsgiref
+pytils
+-e git+https://gladerru@bitbucket.org/gladerru/sape.git#egg=sape
+-e git+https://github.com/glader/django_glader_queue.git#egg=django_glader_queue

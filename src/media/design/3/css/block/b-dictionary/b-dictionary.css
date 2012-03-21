@@ -1,0 +1,14 @@
+/* Словарик (begin) */ /**/
+    .b-dictionary h2
+    {
+    	font-size: 150%;
+    	font-weight: bold;
+    	padding-top: 10px;
+    }
+    
+    .b-dictionary .word
+    {
+    	color: #EE3124;
+    }
+
+/* Словарик (end) */ /**/

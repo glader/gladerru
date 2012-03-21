@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul>
+	{% for link in links %}
+		<li style="padding: 4px; background-color: #eee; margin-bottom: 3px; border: 1px solid gray;">
+			<a href="" onclick="$('#block_{{ link.0 }}').toggleClass('g-hidden'); return false;">+</a> {{ link.1 }} ({{ links.3|length }})</li>
+		<div class="g-hidden" id="block_{{ link.0 }}" style="padding: 3px 0px 10px 20px;">
+			{% for rec in link.3 %}
+				{{ rec.dt }} {{ rec.referrer }} {{ rec.ua }}<br>
+			{% endfor %}
+		</div>
+	{% endfor %}
+</ul>
+{% endblock %}

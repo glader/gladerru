@@ -1,0 +1,43 @@
+.b-tag
+{
+    padding-left: 17px;
+    background: url(/media/design/3/img/b-post/tags.png) no-repeat;  
+}
+
+.b-tag, .b-tag li
+{
+    display: inline;
+
+    list-style: none;
+}
+
+.b-tag li:first-child:before
+{
+    content: "";
+}
+
+.b-tag li:before
+{
+    content: ",\20";
+}
+
+.b-tag .l1
+{
+    font-size: 90%;
+}
+
+.b-tag .l2
+{
+    font-size: 110%;
+}
+
+.b-tag .l3
+{
+    font-size: 130%;
+}
+
+.b-tag .l4
+{
+    font-size: 150%;
+}
+

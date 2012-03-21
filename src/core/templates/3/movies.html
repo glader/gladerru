@@ -1,0 +1,45 @@
+{% extends "tab_movies.html" %}
+{% load content %}
+
+{% block head %}
+    <script type="text/javascript" src="{% MEDIA_URL %}js/sorttable.js"></script>
+{% endblock %}
+
+{% block top_menu %}
+    {% top_menu year %}
+{% endblock %}
+
+{% block page_title %}Сноубордические фильмы{% endblock %}
+
+{% block title %}Сноубордические фильмы - {{ block.super }}{% endblock %}
+
+{% block content %}
+
+	<table class="sortable b-movie-list">
+		<tr>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Наименование</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Студия</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Год</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Тизер</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Фильм</span></span></td>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Торрент</span></span></td>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Треки</span></span></td>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Рейтинг</span></span></td>
+		</tr>
+
+	{% for movie in movies %}
+		<tr>
+			<td>{{movie|link}}</td>
+			<td>{% if movie.studio %}{{ movie.studio|link }}{% endif %}</td>
+            <td>{{movie.year|default:""}}</td>
+            <td class="center">{%if movie.teaser%}есть{%endif%}</td>
+            <td class="center">{%if movie.full_movie%}есть{%endif%}</td>
+            <td class="center">{%if movie.torrent%}<a href="{{ movie.torrent }}"><img src="{% MEDIA_URL %}design/3/img/b-movie-list/disk.png" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{% if movie.has_songs %}<img src="{% MEDIA_URL %}design/3/img/b-movie-list/music.png" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{{movie.rating|decimal_cut}}</td>
+		</tr>
+	{%endfor%}
+	</table>
+
+    <div style="margin-top:20px;"><a href="{% url offer_movie %}" rel="nofollow" title="Не нашли любимый фильм? Расскажите нам о нем!">добавить фильм</a></div>
+{% endblock %}

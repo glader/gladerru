@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load content %}
+{% load cache %}
+
+{% block top_menu %}
+    {% top_menu 'articles' %}
+{% endblock %}
+
+{% block sidebar %}
+	<div class="b-static-text">
+	    <h2>Рубрики</h2>
+	    {% cache 86400 dop_menu_articles %}
+		   {% dop_menu 'articles_menu' %}
+		{% endcache %}
+	</div>
+{% endblock %}

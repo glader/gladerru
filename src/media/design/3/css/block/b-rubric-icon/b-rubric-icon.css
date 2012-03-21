@@ -1,0 +1,26 @@
+/* Каталог статей с иконками (begin) */ /**/
+.b-rubric-icon td
+{
+    padding-bottom: 2em;
+}
+
+.b-rubric-icon .img
+{
+    margin-right: 1em;
+    padding: 1px;
+    
+    border: 1px solid #ccc;
+}
+
+.b-rubric-icon .img img
+{
+    display: block;
+}
+
+.b-rubric-icon .g i
+{
+    display: block;
+    
+    width: 2em;
+}
+/* Каталог статей с иконками (end) */ /**/

@@ -1,0 +1,65 @@
+/* Бар под сообщениями (begin) */ /**/
+    .b-bar
+    {
+        margin: 1em 0;
+	    clear: both;
+    }
+
+    .b-bar table
+    {
+        width: 100%;
+    }
+
+    .b-bar td
+    {
+        font-family: Tahoma, sans-serif;
+        font-size: 85%;
+
+        padding: 5px 20px;
+
+        white-space: nowrap;
+
+        color: #403f3f;
+
+        background: #d1d1d1;
+    }
+
+    .b-bar .points
+    {
+        width: 100%;
+    }
+
+    .b-bar .comments,
+    .b-bar .user,
+    .b-bar .date,
+    .b-bar .favorites
+    {
+        border-left: 1px dotted #fff;
+    }
+
+    .b-bar .dec
+    {
+        position: relative;
+    }
+
+    .b-bar .lg,
+    .b-bar .rg
+    {
+        position: absolute;
+        height: 17px;
+
+        background: url(/media/design/3/img/b-bar/dec.png) no-repeat;
+    }
+
+    .b-bar .dec .lg
+    {
+        left: 0;
+        width: 185px;
+    }
+
+    .b-bar .dec .rg
+    {
+        right: 0;
+        width: 410px;
+    }
+/* Бар под сообщениями (end) */ /**/

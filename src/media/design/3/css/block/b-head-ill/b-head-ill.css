@@ -1,0 +1,11 @@
+/* Иллюстрации в шапке (begin) */ /**/
+    .b-head-ill_left
+    {
+        background: url(/media/design/3/img/head/tl.png) 0 0 no-repeat;
+    }
+
+    .b-head-ill_right
+    {
+        background: url(/media/design/3/img/head/tr.png) 100% 0 no-repeat;
+    }
+/* Иллюстрации в шапке (end) */ /**/

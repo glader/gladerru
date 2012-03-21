@@ -1,0 +1,18 @@
+{% extends "item_common.html" %}
+{% load content %}
+
+{% block top_menu %}
+    {% top_menu 'dictionary' %}
+{% endblock %}
+
+{% block page %}
+    <div itemscope itemtype="http://webmaster.yandex.ru/vocabularies/term-def.xml">
+    <div class="b-page-title"><h1 itemprop="term">{{ item.title }}</h1></div>
+
+    <div class="dict_entry" itemprop="definition">
+        <div class="g-hidden">{{ item.title }}:</div>
+        {{ item.abstract|parser }}
+        {{ item.content|parser }}
+    </div>
+    
+{% endblock page %}

@@ -1,0 +1,11 @@
+{% load content %}
+    {% if user %}
+        {% if in_favorites %}
+            <img src="{% MEDIA_URL %}design/3/img/b-bar/favorites_on.png" alt="В избранном">
+        {% else %}
+             <a href="#" onclick="addToFav(this, '{{post.id}}', '{{ klass }}'); return false;" class="icon" title="Добавить в избранное"><img id="{{post.id}}_fav" src="{% MEDIA_URL %}design/3/img/b-bar/favorites_off.png" alt="Добавить в избранное"></a>
+        {% endif %}
+    {% else %}
+        <img src="{% MEDIA_URL %}design/3/img/b-bar/favorites_off.png" alt="Зарегистрируйтесь, чтобы добавлять в избранное">
+    {% endif %}
+

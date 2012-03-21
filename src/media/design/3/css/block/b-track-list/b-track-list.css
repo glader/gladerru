@@ -1,0 +1,10 @@
+.b-track-list .absent 
+{
+    color: #999;
+}
+
+.b-track-list .play img,
+.b-track-list .stop img
+{
+	margin-right: 5px;
+}

@@ -1,0 +1,8 @@
+{%load content%}
+
+
+<ul class="movie-categories">
+{%for c in categories%}
+	<li>{%ifequal c current%}{{c.title}}{%else%}{{c|link}}{%endifequal%}</li>
+{%endfor%}
+</ul>

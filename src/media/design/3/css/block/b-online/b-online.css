@@ -1,0 +1,39 @@
+/* В прямом эфире (begin) */ /**/
+    .b-online .item
+    {
+        margin: 1em 0;
+    }
+
+    .b-online .item .topic
+    {
+        font-weight: bold;
+        
+        display: block;
+    }
+
+    .b-online .item .comments
+    {
+        font-size: 80%;
+        
+        display: block;
+    }
+
+    .b-online .item .b-tag
+    {
+        font-size: 80%;
+    }
+
+    .b-online .item .tags
+    {
+        display: block;
+    }
+
+    .b-online .item .tags a:link,
+    .b-online .item .tags a:visited,
+    .b-online .item .tags a:hover,
+    .b-online .item .tags a:active,
+    {
+        color: #999;
+    }
+    
+/* В прямом эфире (end) */ /**/

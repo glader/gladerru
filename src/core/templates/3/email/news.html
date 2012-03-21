@@ -1,0 +1,13 @@
+{% load russian %}{% load content %}Новости от сайта Glader.ru
+{% for date in news %}
+    <h2 style="font-size:120%; font-weight: bold; padding-bottom:5px;">{{ date.date|human_date }}</h2>
+    <ul style="padding-left: 20px; padding-bottom: 10px;">
+        {% for announce in date.news %}
+            <li>{{ announce.content|add_referrer:"email"|safe }}</li>
+        {% endfor %}
+    </ul>
+{% endfor %}
+<br><br>
+А еще у нас появилась <a href="http://www.facebook.com/pages/Сноубордический-сайт-Gladerru/146465652083096">страница в FaceBook</a>. Присоединяйтесь!
+<br><br>
+<small>Отписаться от рассылки вы можете <a href="http://glader.ru/my/settings">на странице настроек</a>.</small>

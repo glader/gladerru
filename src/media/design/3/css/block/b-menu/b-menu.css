@@ -1,0 +1,155 @@
+.b-menu
+{
+	margin: 2em 0 1em 0;
+}
+
+.b-menu__level1
+{
+    padding: 3px 5px 0 5px;
+
+    -moz-border-radius: 6px 6px 0 0;
+    -webkit-border-radius: 6px 6px 0 0;
+    -khtml-border-radius: 6px 6px 0 0;
+    border-radius: 6px 6px 0 0;
+    background: #104d7a url(/media/design/3/img/b-menu/b-menu__level1.png) 100% 0 no-repeat;
+}
+
+.b-menu__level2
+{
+    padding: 3px 5px 3px 5px;
+
+    -moz-border-radius: 0 0 6px 6px;
+    -webkit-border-radius: 0 0 6px 6px;
+    -khtml-border-radius: 0 0 6px 6px;
+    border-radius: 0 0 6px 6px;
+    background: #febe29;
+}
+
+.b-menu__item
+{
+    font-size: 18px;
+
+    position: relative;
+
+    display: -moz-inline-box;
+    display: inline-block;
+
+    padding: 1px 15px 5px 15px;
+}
+
+.b-menu__subitem
+{
+    font-size: 15px;
+
+    display: -moz-inline-box;
+    display: inline-block;
+
+    padding: 2px 15px 3px 15px;
+}
+
+.b-menu__item__fade
+{
+    position: absolute !important;
+    z-index: 1 !important;
+
+    display: none;
+
+    margin: 1px 0 0 1px;
+
+    color: #fff4da !important;
+}
+
+.b-menu__item a:link,
+.b-menu__item a:visited,
+.b-menu__item a:active
+{
+    color: #4c7a9b;
+}
+
+.b-menu__item a:hover
+{
+    color: #4c7a9b;
+}
+
+.b-menu__item a span
+{
+    position: relative;
+    z-index: 2;
+
+    text-decoration: none;
+
+    color: #fff;
+}
+
+.b-menu__item a:hover span
+{
+    color: #e0ebfb;
+}
+
+.b-menu__item_state_current .b-menu__item__fade
+{
+    display: block;
+}
+
+.b-menu__item_state_current
+{
+    -moz-border-radius: 3px 3px 0 0;
+    -webkit-border-radius: 3px 3px 0 0;
+    -khtml-border-radius: 3px 3px 0 0;
+    border-radius: 3px 3px 0 0;
+    background: #febe29 url(/media/design/3/img/b-menu/b-menu__item_state_current.png) repeat-x;
+}
+
+.b-menu__item_state_current a:link,
+.b-menu__item_state_current a:visited,
+.b-menu__item_state_current a:active
+{
+    color: #878e70;
+}
+
+.b-menu__item_state_current a span
+{
+    text-decoration: none;
+
+    color: #104d7a;
+}
+
+.b-menu__item_state_current a:hover span
+{
+    color: #326890;
+}
+
+.b-menu__subitem_state_current
+{
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    background: #fff;
+}
+
+.b-menu__subitem a:link,
+.b-menu__subitem a:visited,
+.b-menu__subitem a:active,
+.b-menu__subitem a:hover
+{
+    color: #878552
+}
+
+.b-menu__subitem a span
+{
+    color: #104d7a;
+    text-decoration: none;
+}
+
+.b-menu__subitem_state_current a
+{
+    text-decoration: none !important;
+
+    cursor: default;
+}
+
+.b-menu__subitem a:hover span
+{
+    color: #2e668f;
+}

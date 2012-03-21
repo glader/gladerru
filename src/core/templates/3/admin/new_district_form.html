@@ -1,0 +1,9 @@
+{%if is_mountain %}
+<form action="/create/district" method="post">
+    <strong>Область</strong>:
+    <select name="mm"><option value="">выберите</option>{%for mm in districts%}<option value="{{mm.id}}">{{mm.title}}</option>{%endfor%}</select><br /> 
+    или новая <input type="text" name="district" id="id_district" size="30"/><br />
+    <input type="submit" value="Добавить">
+    <input type="hidden" name="object_id" value="{{object_id}}">
+</form>
+{% endif %}

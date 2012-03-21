@@ -1,0 +1,7 @@
+{%if is_movie %}
+<form action="/create/rider" method="post">
+    <strong>Райдер</strong>: <input type="text" name="rider" id="id_rider" />
+    <input type="submit" value="Добавить">
+    <input type="hidden" name="object_id" value="{{object_id}}">
+</form>
+{% endif %}

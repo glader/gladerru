@@ -1,0 +1,9 @@
+{% extends "admin_tools/dashboard/module.html" %}
+{% block module_content %}
+
+	{% for block in module.blocks %}
+		<h4>{{ block.title }}</h4>
+		<img src="http://chart.apis.google.com/chart?chxt=x,y&chs=500x100&cht=lc&chco=3072F3&chxl=0:{{ block.days }}&chxr=1,0,{{ block.max }}&chds=0,{{ block.max }}&chd=t:{{ block.data }}&chdlp=b&chls=1&chma=5,5,5,25" />
+	{% endfor %}
+
+{% endblock %}

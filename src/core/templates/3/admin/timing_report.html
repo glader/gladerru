@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+	td,th { padding-right: 5px; }
+</style>
+
+<table>
+	<tr>
+		<th>Урл</th>
+		<th>Среднее время</th>
+		<th>Минимальное</th>
+		<th>Максимальное</th>
+		<th>Общее количество</th>
+	</tr>
+		
+	{% for link in links %}
+		<tr>
+			<td><a href="" onclick="$('#block_{{ link.id }}').toggleClass('g-hidden'); return false;">+</a>
+				<a href="http://glader.ru{{ link.url }}">{{ link.url }}</a></td>
+			<td>{{ link.average }}</td>
+			<td>{{ link.min }}</td>
+			<td>{{ link.max }}</td>
+			<td>{{ link.amount }}</td>
+		</tr>
+		<tr class="g-hidden" id="block_{{ link.id }}">
+			<td colspan="5" style="padding-left: 30px;">
+				{% for rec in link.all %}
+					{{ rec }}<br>
+				{% endfor %}
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+
+{% endblock %}

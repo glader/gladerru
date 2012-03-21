@@ -1,0 +1,201 @@
+{% load sape_extras %}{% load content %}{% load russian %}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
+
+<head>
+
+    <title>{% block title %}Glader.ru{% endblock %}</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="сноуборд фото видео экстремальные фильмы райдеры фирмы школа обучение">
+    <meta name="description" content="{% block description %}Все о сноуборде: статьи, обучение, матчасть, трюки, райдеры, курорты, фирмы, фото, видео и многое другое{% endblock %}">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7"/>
+    <META name="y_key" content="8b1f8e24033cbc55" />
+
+
+    {% if debug %}
+        <!--[if gt IE 7]><!--><link rel="stylesheet" href="{% MEDIA_URL %}design/3/css/glader.css"/><!--<![endif]-->
+        <!--[if lt IE 8]><link rel=stylesheet href="{% MEDIA_URL %}design/3/css/glader.ie.css"/><![endif]-->
+    {% else %}
+        <!--[if gt IE 7]><!--><link rel="stylesheet" href="{% MEDIA_URL %}design/3/css/glader_.css?6"/><!--<![endif]-->
+        <!--[if lt IE 8]><link rel=stylesheet href="{% MEDIA_URL %}design/3/css/glader.ie_.css?6"/><![endif]-->
+    {% endif %}
+
+    {% block rss_link %}
+       <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/best" title="Сноубордические новости: лучшее">
+    {% endblock %}
+
+    <link rel="shortcut icon" href="http://glader.ru/favicon.png">
+
+    <script type="text/javascript">
+        MEDIA_URL = '{% MEDIA_URL %}';
+        logged_in = {% if user %}true{% else %}false{% endif %};
+        domain = "{% DOMAIN %}";
+    </script>
+    <script type="text/javascript" src="{% MEDIA_URL %}js/ba-debug.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{% MEDIA_URL %}js/jquery.metadata.min.js"></script>
+    <script type="text/javascript" src="{% MEDIA_URL %}js/ajax.js?8"></script>
+    <script type="text/javascript" src="{% MEDIA_URL %}js/common.js?8"></script>
+    <script type="text/javascript" src="http://vkontakte.ru/js/api/share.js?11" charset="windows-1251"></script>
+    <script src="http://vkontakte.ru/js/api/openapi.js" type="text/javascript" charset="windows-1251"></script>
+	<script type="text/javascript" src="http://userapi.com/js/api/openapi.js?29"></script>
+    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+
+    <script src="http://connect.facebook.net/ru_RU/all.js?sdavvs#xfbml=1"></script>
+
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+    <div class="b-head-ill_left"><div class="b-head-ill_right">
+    <table class="l-head">
+    <tr>
+        <td class="l-head-g"><i></i></td>
+        <td class="l-head-l">
+
+            <div class="b-logo"><a href="/"><img src="{% MEDIA_URL %}design/3/img/logo.gif" alt="Glader.ru" /></a></div>
+
+            <div class="g-line">
+                {% block top_menu %}
+                    {% top_menu '' %}
+                {% endblock %}
+            </div>
+        </td>
+        <td class="l-head-r-g"><i></i></td>
+        <td class="l-head-r">
+            <div class="b-usertab">
+            	<noindex>
+                <div class="b-usertab-i">
+                    {% if user %}
+                        <i class="bg"></i>
+                        <i class="userpic">
+                            <img src="{% MEDIA_URL %}{{ profile|get_avatar_url:"64" }}" alt="" />
+                            <span class="g-png"><img src="{% MEDIA_URL %}design/3/img/usertab/userpic_border.png" alt="" /></span>
+                        </i>
+
+                        <span class="username">{%if user%}{{user|link}} {%if profile.is_moderator and item%}<small>(<a href="{% get_admin_url item %}">ред.</a>)</small>{%endif%}{%else%}<a href="http://{% DOMAIN %}/auth/login" class="reg">вход / регистрация</a>{%endif%}</span>
+                        <span class="logout"><a href="{%url logout%}"><img src="{% MEDIA_URL %}design/3/img/usertab/logout.gif" alt="Выход" /></a></span>
+
+                        <span class="text {% if messages_inbox_count %}text_active {% endif %} num-pm"><img src="{% MEDIA_URL %}design/3/img/usertab/pm.gif" alt="" />&times;&nbsp;{{ messages_inbox_count }}</span>
+                        <span class="text {% if profile.unread_news_count %}text_active {% endif %}num-post"><img src="{% MEDIA_URL %}design/3/img/usertab/post.gif" alt="" />=&nbsp;{{ profile.unread_news_count|default:"0" }}</span>
+                        <span class="text {% if profile.unread_comment_count %}text_active {% endif %}num-comment"><img src="{% MEDIA_URL %}design/3/img/usertab/comment.gif" alt="" />=&nbsp;{{ profile.unread_comment_count|default:"0" }}</span>
+
+                        <span class="text {% if messages_inbox_count %}text_active {% endif %} text-pm"><a href="{% url messages_inbox %}" title="входящие">личных сообщений</a></span>
+                        <span class="text {% if profile.unread_news_count %}text_active {% endif %}text-post"><a href="{% url news %}">{{ profile.unread_news_count|human_number:"новый" }} {{ profile.unread_news_count|human_number:"анонс" }}</a></span>
+                        <span class="text {% if profile.unread_comment_count %}text_active {% endif %}text-comment">{% if profile.unread_comment_count %}<a href="{% url commented %}">{{ profile.unread_comment_count|human_number:"новый" }} {{ profile.unread_comment_count|human_number:"комментарий" }}</a>
+                                                    {% else %}новых комментариев{% endif %}</span>
+
+                        <span class="zoom"><img src="{% MEDIA_URL %}design/3/img/usertab/zoom.gif" alt="+" /><a class="text_active" href="{{ profile.get_absolute_url }}">zoom</a></span>
+
+                    {% else %}
+                        <i class="bg_unreg"></i>
+
+                        <span class="text text-not-reg">Вы не авторизованы!</span>
+                        <span class="text text-login"><a href="{% url login %}" id="login-link">Войти</a> в Glader.ru</span>
+                        <span class="text text-reg"><a href="{% url login %}" id="registration-link">Зарегистрироваться</a> сейчас</span>
+
+                    {% endif %}
+                </div>
+                </noindex>
+            </div>
+        </td>
+        <td class="l-head-g"><i></i></td>
+    </tr>
+    </table>
+
+    {% block full_page %}
+        <table class="l-page">
+        <tr>
+            <td class="l-page-g"><i></i></td>
+            <td class="l-page-l">
+                {% block page %}
+                	<!--<div class="b-breadcrumbs">{% block breadcrumbs %}{% endblock %}</div>-->
+                    <div class="b-page-title"><h1>{% block page_title %}{% endblock %}</h1></div>
+
+                    {% block content %}{% endblock %}
+
+                {% endblock page %}
+            </td>
+            <td class="l-page-r-g"><i></i></td>
+            <td class="l-page-r">
+
+                {% block search_form %}
+                    <h2 class="b-block-title b-block-title__first">Поиск по сайту</h2>
+                    <form action="/search" id="cse-search-box" method="post">
+                      <div>
+                        <input type="text" name="query" size="31" />
+                        <input type="submit" value="Искать" />
+                      </div>
+                    </form>
+                {% endblock %}
+
+                {% include "block_banner.html" %}
+
+                {% block sidebar %}
+                    {% block picturebox %}
+                        {% picturebox user %}
+                    {% endblock %}
+                {% endblock %}
+
+                {% block sape %}
+                    <h2 class="b-block-title">Реклама</h2>
+                    {% yadirect 'right_vertical' %}
+
+                    <div style="margin-top:20px;">{% sape_links request %}</div>
+                {% endblock %}
+            </td>
+            <td class="l-page-g"><i></i></td>
+        </tr>
+        </table>
+    {% endblock full_page %}
+
+    <table class="l-page">
+    <tr>
+        <td class="l-page-g"><i></i></td>
+        <td>
+            <i class="b-round b-round_6"><i class="l t"><i></i></i></i>
+            <div class="b-foot">
+                <a href="{% url feedback %}">Обратная связь</a>
+            </div>
+            <i class="b-round b-round_6"><i class="l b"><i></i></i></i>
+            <br />
+            <div class="b-copyright" style="float:right">Размещение рекламы: <a href="mailto:{{ "sale@glader.ru"|parser }}">{{ "sale@glader.ru"|parser }}</a><br>
+                <a href="http://ampseo.ru">Продвижение сайта</a>
+                </div>
+            <div class="b-copyright">&copy;2007-2011 <a href="/">Glader.ru</a></div>
+        </td>
+        <td class="l-page-g"><i></i></td>
+    </tr>
+    </table>
+
+    </div></div>
+
+{% if not user %}
+    {% include "block_reg_popup.html" %}
+{% endif %}
+
+{%if not is_devel%}
+<!-- Yandex.Metrika counter -->
+<script src="//mc.yandex.ru/metrika/watch_visor.js" type="text/javascript"></script>
+<div style="display:none;"><script type="text/javascript">
+try { var yaCounter8400 = new Ya.Metrika({id:8400, clickmap:true, type:1,
+              login: '{% if user %}{{ user.username }}{% else %}Аноним{% endif %}'}); }
+catch(e) { }
+</script></div>
+<noscript><div><img src="//mc.yandex.ru/watch/8400?cnt-class=1" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='http://counter.yadro.ru/hit?t44.1;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet' "+
+"border=0 width=31 height=31><\/a>")//--></script><!--/LiveInternet-->
+{%endif%}
+
+</body>
+</html>

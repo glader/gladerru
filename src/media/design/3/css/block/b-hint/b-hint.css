@@ -1,0 +1,26 @@
+/* Подсказка на главной странице (begin) */ /**/
+    .b-hint
+    {
+        overflow: hidden;
+        
+        min-height: 40px;
+        padding: 10px 15px 10px 70px;
+        margin: 0 0px 25px 0px;
+        
+        background-color: #fff5df;
+        border: 1px solid #febe29;
+        
+	    -moz-border-radius: 6px;
+	    -webkit-border-radius: 6px;
+	    -khtml-border-radius: 6px;
+	    border-radius: 6px;        
+    }
+    
+    .b-hint .img
+    {
+        position: absolute;
+        
+        margin: -6px 0 0 -63px;
+    }
+
+/* Подсказка на главной странице (end) */ /**/

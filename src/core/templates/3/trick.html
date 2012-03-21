@@ -1,0 +1,17 @@
+{% extends "item_common_article.html" %}
+{% load content %}
+
+{% block top_menu %}
+    {% top_menu 'dictionary' %}
+{% endblock %}
+
+{% block title %}{{ item.title }} - {{ block.super }}{% endblock %}
+
+{%block content%}
+    {{ item.abstract|parser }}
+
+    {{ item.content|parser }}
+
+    {% comments item request %}
+
+{%endblock%}

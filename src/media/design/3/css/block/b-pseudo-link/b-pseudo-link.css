@@ -1,0 +1,38 @@
+/* Pseudo link (begin) */ /**/
+    .b-pseudo-link
+    {
+        white-space: nowrap;
+
+        color: #1a3dc1;
+    }
+
+    .b-pseudo-link:link,
+    .b-pseudo-link:visited
+    {
+        cursor: pointer;
+    }
+
+    #js .b-pseudo-link:hover,
+    .b-pseudo-link:link:hover,
+    .b-pseudo-link:visited:hover
+    {
+        color: #f00 !important;
+    }
+
+    #js .b-pseudo-link
+    {
+        position: relative;
+        top: -0.14em;
+
+        cursor: pointer;
+        text-decoration: none;
+
+        border-bottom: 1px dotted;
+    }
+
+    #js .b-pseudo-link span
+    {
+        position: relative;
+        top: 0.14em;
+    }
+/* Pseudo link (end) */ /**/

@@ -1,0 +1,15 @@
+.tags_list
+{
+    font-weight: bold;
+}
+
+.tags_list li
+{
+    margin-left: 5px;
+}
+
+.tags_list_other
+{
+    margin-top: 5px;
+    margin-left: 5px;
+}

@@ -1,0 +1,20 @@
+{% extends "tab_movies.html" %}
+{% load content %}
+
+{% block top_menu %}
+    {% top_menu 'studies' %}
+{% endblock %}
+
+{% block page_title %}Студии{% endblock %}
+
+{% block title %}Студии - Сноубордические фильмы - {{ block.super }}{% endblock %}
+
+{% block content %}
+	<ul>
+	{% for studio in studies %}
+    	<li>{{ studio|link }}</li>
+	{% endfor %}
+	</ul>
+
+	<div style="margin-top:20px"><a href="{% url offer_moviemaker %}" rel="nofollow">Добавить студию</a></div>
+{% endblock %}

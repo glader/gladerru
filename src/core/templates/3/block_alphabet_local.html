@@ -1,0 +1,12 @@
+{% load content %}
+{% for letters_list in alphabet_letters %}
+    <ul class="b-pager g-line">
+        {% for l in letters_list %}
+            {% if present_letters|el:l  %}
+                <li><a href="#{{ l }}">{{ l }}</a></li>
+            {% else %}
+                <li>{{ l }}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endfor %}

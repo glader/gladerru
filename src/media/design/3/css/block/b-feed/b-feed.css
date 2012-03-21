@@ -1,0 +1,52 @@
+/* Лента сообщений (begin) */ /**/
+    .b-feed
+    {
+        
+    }
+
+    .b-feed .item
+    {
+        margin: 0 0 3em;
+    }
+
+    .b-feed .item .title h2
+    {
+        font-size: 140%;
+
+        display: inline;
+    }
+
+    .b-feed .item .title .userpic
+    {
+        position: relative;
+
+        margin: -10px 10px -5px 0;
+        
+        vertical-align: middle;
+    }
+
+    .b-feed .item .text p
+    {
+        margin: 1em 0;
+        
+        line-height: 1.3em;
+    }
+
+    .b-feed .item .text h3
+    {
+    	font-size: 120%;
+    	font-weight: bold;
+    }
+
+    .b-feed .b-tag
+    {
+        margin: 1em 0;
+    }
+
+    .userphoto
+    {
+        border: 1px solid black;
+    }
+    
+    
+/* Лента сообщений (end) */ /**/

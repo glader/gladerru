@@ -1,0 +1,11 @@
+{% extends "item_common_world.html" %}
+{% load content %}
+
+{%block content%}		
+			<div>{{item.content|parser}}</div>
+
+			{%for c in item.get_children%}
+				<h3>{{c.title}}</h3>
+				{% items_ul_list c.get_children%}
+			{%endfor%}
+{%endblock%}

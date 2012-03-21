@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load content %}
+
+{%block title%}Ошибка на сайте - {{ block.super }}{%endblock%}
+
+{% block page %}
+
+       <!-- Основная часть -->
+       <!-- Заголовок страницы -->
+<div class="page_header"><table><tr><td><h1>Ошибка на сайте</h1></td><td class="page_header_right"></td></tr></table></div>
+<!-- /Заголовок страницы -->
+
+       <div class="content">
+       <div class="text">
+       	<br>
+       	<div>К сожалению, произошла какая-то ошибка на сайте.Пожалуйста, сообщите об этом нам по адресу 
+       			<script>document.write('<a href="'+'mailto:' + 'info' + '@'); document.write('glader.ru'); document.write('">info' + '@'); document.write('glader.ru</a>');</script><noscript>Включите javascript, чтобы увидеть адрес</noscript>.
+       		</div>      	
+
+       </div>
+       </div>
+   
+{% endblock %}

@@ -1,0 +1,17 @@
+.b-search h2
+{
+	font-weight: bold;
+    font-size: 120%;    
+    margin-bottom: 5px;  
+}
+
+.b-search ul li
+{
+	margin-left: 15px;
+}
+
+.b-search-postdate
+{
+    font-size: 80%;
+    color: #999;
+}

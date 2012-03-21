@@ -1,0 +1,24 @@
+.b-round
+{
+    text-align: right;
+}
+
+.b-round .l
+{
+    position: relative;
+
+    float: left;
+}
+
+.b-round .r
+{
+    position: relative;
+
+    display: inline-block;
+}
+
+* html .b-round .l i, * html .b-round .r i
+{
+    background: none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=/media/design/3/img/b-round/b-round.png);
+}

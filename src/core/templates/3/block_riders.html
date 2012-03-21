@@ -1,0 +1,4 @@
+{% load content %}
+    {% if riders %}<tr><td valign="top"><strong>Райдеры:</strong>&nbsp;</td>
+       <td>{% for r in riders %}{% if r.hidden %}{{ r.title }}{% else %}{{ r|link }}{% endif %}{% if not forloop.last %}, {% endif %}{% endfor %}</td></tr>
+    {% endif %} 

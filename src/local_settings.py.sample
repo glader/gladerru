@@ -1,0 +1,32 @@
+# production
+
+DATABASES = {
+    'default': {
+        'HOST': '%(DATABASE_HOST)s',
+        'NAME': 'uralsocionics',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': '%(DATABASE_USER)s',
+        'PASSWORD': '%(DATABASE_PASSWORD)s',
+    }
+}
+
+LOG_PATH = '/var/log/projects/gladerru'
+
+EMAIL_BACKEND = 'django_ses.SESBackend'
+AWS_ACCESS_KEY_ID = '%(SES_ACCESS_KEY_ID)s'
+AWS_SECRET_ACCESS_KEY = '%(SES_SECRET_ACCESS_KEY)s'
+
+SECRET_KEY = '%(DJANGO_SECRET_KEY)s'
+
+YAPHOTO_TOKEN = '%(YAPHOTO_TOKEN)s'
+YAPHOTO_POST = '%(YAPHOTO_POST)s'
+
+SAPE_USER = '%(SAPE_USER)s'
+SAPE_USERNAME = '%(SAPE_USERNAME)s'
+SAPE_PASSWORD = '%(SAPE_PASSWORD)s'
+SAPE_SITE_ID = %(SAPE_SITE_ID)d
+
+YAMAPS_API_KEY = '%(YAMAPS_API_KEY)s'
+
+YANDEX_XML_LOGIN = '%(YANDEX_XML_LOGIN)s'
+YANDEX_XML_KEY = '%(YANDEX_XML_KEY)s'

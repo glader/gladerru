@@ -1,0 +1,21 @@
+DATABASE_HOST = ''
+DATABASE_USER = ''
+DATABASE_PASSWORD = ''
+
+SES_ACCESS_KEY_ID = ''
+SES_SECRET_ACCESS_KEY = ''
+
+DJANGO_SECRET_KEY = ''
+
+YAPHOTO_TOKEN = ''
+YAPHOTO_POST = '/api/users/username/photos/'
+
+SAPE_DOMAIN = 'example.com
+SAPE_USER = 'user_id'
+SAPE_LOG = '/var/log/projects/gladerru/sape.log'
+SAPE_USERNAME = ''
+SAPE_PASSWORD = ''
+SAPE_SITE_ID = 111
+
+YAMAPS_API_KEY = ''
+

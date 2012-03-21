@@ -1,0 +1,23 @@
+{% extends "item_common.html" %}
+{% load content %}
+
+{% block top_menu %}
+    {% top_menu 'map' %}
+{% endblock %}
+
+{% block page_title %}{{ item.title }}{% endblock %}
+
+{% block content %}
+    {{ item.content|parser }}
+
+    {{ post.tags_html|safe }}
+
+    {% post_panel item user %}
+
+    {% comments item request %}
+{% endblock %}
+
+{% block sidebar %}
+    <h2>Соседние горки</h2>
+    {% mountains_list mountain.region %}
+{% endblock %}

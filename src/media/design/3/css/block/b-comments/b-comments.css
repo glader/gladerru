@@ -1,0 +1,76 @@
+/* Комментарии (begin) */ /**/
+    .b-comments
+    {
+        padding-left: 40px;
+    }
+
+    .b-comments .item
+    {
+        margin: 1em 0;
+    }
+
+    .b-comments .l1
+    {
+        margin-left: 0;
+    }
+
+    .b-comments .l2
+    {
+        margin-left: 2em;
+    }
+
+    .b-comments .l3
+    {
+        margin-left: 4em;
+    }
+
+    .b-comments .userpic
+    {
+        position: absolute;
+        
+        margin: -5px 0 0 -40px;
+    }
+
+    .b-comments .head
+    {
+        padding: 5px 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .b-comments .head .date
+    {
+        margin-left: 1em;
+        
+        color: #999;
+    }
+
+    .b-comments .head .permalink
+    {
+        float: right;
+        margin-left: 1em;
+    }
+
+    .b-comments .head .point
+    {
+        float: right;
+    }
+
+    .b-comments .b-static-text
+    {
+        margin-top: 0.8em;
+    }
+
+	.b-comments-best_answer .content
+	{
+		background-color: #cfc;
+		width: 100%;
+		padding: 3px 3px 3px 7px;
+	}
+
+	.b-comments-best_answer h2
+	{
+		margin-top: 20px;
+		font-size: 120%;
+		font-weight: bold;
+	}
+/* Комментарии (end) */ /**/

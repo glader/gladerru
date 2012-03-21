@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load content %}
+{% load cache %}
+
+{% block title %}Облако тегов {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu "" %}
+{% endblock %}
+
+{% block page_title %}<b>Облако тегов</b>{% endblock %}
+
+{% block content %}
+    <ul class="b-tag g-line">
+        {% for t in tags %}<li><a href="{{ t.get_absolute_url }}" style="font-size: {{ t.rel_size }}px">{{ t.title }}</a></li
+        >{% endfor %}
+    </ul> 
+{% endblock content %}

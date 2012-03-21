@@ -1,0 +1,66 @@
+.b-round
+{
+    position: relative;
+    z-index: 1;
+
+    display: block;
+}
+
+.b-round .l, .b-round .r
+{
+    position: absolute;
+    left: 0;
+
+    overflow: hidden;
+}
+
+.b-round .r
+{
+    right: 0;
+    left: auto;
+}
+
+.b-round .l *, .b-round .r *
+{
+    position: absolute;
+    left: 0;
+
+    width: 80px;
+    height: 528px;
+}
+
+.b-round .l i, .b-round .r i
+{
+    background: url(/media/design/3/img/b-round/b-round.png);
+}
+
+.b-round_6 .l, .b-round_6 .r
+{
+    width: 6px;
+    height: 6px;
+}
+
+.b-round_6 .r *
+{
+    margin-left: -6px;
+}
+
+.b-round_6 .t
+{
+    margin-bottom: -6px;
+}
+
+.b-round_6 .t *
+{
+    margin-top: -28px;
+}
+
+.b-round_6 .b
+{
+    margin-top: -6px;
+}
+
+.b-round_6 .b *
+{
+    margin-top: -34px;
+}

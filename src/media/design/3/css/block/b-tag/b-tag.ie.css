@@ -1,0 +1,7 @@
+.b-tag li
+{
+    list-style-type: expression(
+        runtimeStyle.listStyleType = 'none',
+        previousSibling && parentNode.insertBefore(createTextNode(String.fromCharCode(44,32)), this)
+    );
+}

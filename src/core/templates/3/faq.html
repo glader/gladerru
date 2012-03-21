@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}Вопросы и ответы{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu 'all' %}
+{% endblock %}
+
+{% block page_title %}Вопросы и ответы{% endblock %}
+
+{% block content %}
+    <div class="b-feed">
+        {% for post in posts %}
+            {{ post }}
+        {% endfor %}
+    </div>
+
+    {% pagination %}
+{% endblock content %}
+
+{% block sidebar %}
+    {% include "block_index_sidebar.html" %}
+{% endblock sidebar %}

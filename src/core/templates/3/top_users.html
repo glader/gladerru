@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}{{ title }} - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu menu %}
+{% endblock %}
+
+{% block page_title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <table>
+        {% for profile in profiles %}
+            <tr>
+                <td><img src="{% MEDIA_URL %}{{ profile|get_avatar_url:"32" }}" class="userpic" alt=""/ width="32px">&nbsp;{{ profile.user|link }}&nbsp;</td>
+                <td style="vertical-align:bottom">{{ profile.rating }}</td>
+            </tr>
+            <tr>
+                <td style="height: 7px;" colspan="2"></td>
+            </tr>
+        {% endfor %}
+    </table>    
+{% endblock content %}
+
+{% block sidebar %}
+    {% include "block_index_sidebar.html" %}
+{% endblock sidebar %}

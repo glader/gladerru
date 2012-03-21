@@ -1,0 +1,24 @@
+# Cron actions for glader.ru
+MAILTO="glader.ru@gmail.com"
+
+#minute (0-59),
+#|      hour (0-23),
+#|      |       day of the month (1-31),
+#|      |       |       month of the year (1-12),
+#|      |       |       |       day of the week (0-6 with 0=Sunday).
+#|      |       |       |       |       commands
+30      4       *       *       *       www python /home/www/projects/gladerru/manage.py recalc > /dev/null
+45      5       *       *       *       www python /home/www/projects/gladerru/manage.py maintenance > /dev/null
+
+*/5     *       *       *       *       www python /home/www/projects/gladerru/manage.py process_queue
+*/5     *       *       *       *       www python /home/www/projects/gladerru/manage.py publish_deferred
+10,40   *       *       *       *       www python /home/www/projects/gladerru/manage.py random_vote
+
+#0	*	*	*	*	cd /home/www/projects/gladerru/media/data && find -type f | xargs chmod 644
+
+55      23      *       *       *       www python /home/www/projects/gladerru/manage.py save_users_visits
+
+# Sape links
+15      *       *       *       *       www python /home/www/projects/gladerru/manage.py fetch_sape
+0       5,17    *       *       *       www python /home/www/projects/gladerru/manage.py check_sape_errors
+

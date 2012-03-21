@@ -1,0 +1,38 @@
+{% load content %}
+{% load russian %}
+
+<div style='clear:both'></div>
+<br>
+<a name="comments"></a>
+
+<div id="vk_comments"></div>
+
+<script type="text/javascript">
+	post_id = '{{ post.pk }}';
+	klass = '{{ klass }}';
+	item_id = '{{ post.uid }}';
+
+    VK.init({apiId: {% VK_API_ID %}, onlyWidgets: true});
+    VK.Widgets.Comments("vk_comments", {limit: 15, width: "600", attach: "*", onChange: addVKComment}, item_id);
+</script>
+<br>
+
+{% for comment in comments %}
+	{% include "blocks/b-comment.html" %}
+{% endfor %}
+
+<div id='aftercomment'></div>
+
+<a href='#' id="commentform_link" class="g-hidden">Написать комментарий</a>
+<form id='commentform' action="/ajax/add_comment" class="{post: '{{ post.pk }}', klass:'{{ klass }}'}">
+	<input type='hidden' name='action' value='add_comment'>
+	<input type='hidden' name='comment' value=''>
+	<input type='hidden' name='post' value='{{ post.pk }}'>
+	<input type='hidden' name='klass' value='{{ klass }}'>
+	<input type='hidden' name='retpath' value='{{ post.get_absolute_url }}'>
+	<textarea name='content' id='content' cols='60' rows='5'></textarea><br>
+	<input type='submit' value='Отправить'>
+</form>
+
+<br /><br /><br />
+{% yadirect 'comments' %}

@@ -1,0 +1,114 @@
+    <div id="opaco" class="g-hidden"></div>
+    <div id="popup" class="g-hidden"></div>
+    
+    <div id="login_popup" class="g-hidden">
+    
+        <div class="b-auth-form b-auth-form_auth g-hidden" id="login_form_block">
+            <table class="control">
+            <tr>
+                <td class="auth">
+                    <i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
+                    <b class="auth-i"><i class="arrow"><i></i></i>Авторизация</b>
+                    <i class="b-round b-round_6"><i class="l b"><i></i></i><i class="r b"><i></i></i></i>
+                </td>
+                <td class="control-g"><i></i></td>
+                <td class="reg">
+                    <i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
+                    <a href="/" onclick="return switchAuthForms()"><b class="reg-i"><i class="arrow"><i></i></i>Регистрация</b></a>
+                    <i class="b-round b-round_6"><i class="l b"><i></i></i><i class="r b"><i></i></i></i>
+                </td>
+            </tr>
+            </table>
+            
+            <form action="/" method="post"  id="login_form">
+                <input type="hidden" name="retpath" id="id_retpath" value="" />
+                <div class="item">
+                    <label for="name">Ваше имя или email</label>
+                    <input type="text" name="login" id="id_login" value="" />
+                </div>
+    
+                <table class="l50">
+                <tr>
+                    <td class="col">
+                        <div class="item">
+                            <label for="passwd">Пароль</label>
+                            <input type="password" name="passwd" id="id_passwd" value="" />
+                        </div>
+                    </td>
+                    <td class="l50-g"><i></i></td>
+                    <td class="col">
+                        <div class="lost"><a href="{% url password_reset %}">Забыли пароль?</a></div>
+                    </td>
+                </tr>
+                </table>
+                <div class="submit">
+                    <input type="submit" value="Войти"/>
+                </div>
+    
+            </form>
+        </div>
+
+    
+      <div class="b-auth-form b-auth-form_reg g-hidden" id="registration_form_block">
+     
+        <table class="control">
+        <tr>
+            <td class="auth">
+                <i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
+                <a href="/" onclick="return switchAuthForms()"><b class="auth-i"><i class="arrow"><i></i></i>Авторизация</b></a>
+                <i class="b-round b-round_6"><i class="l b"><i></i></i><i class="r b"><i></i></i></i>
+            </td>
+            <td class="control-g"><i></i></td>
+            <td class="reg">
+                <i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
+                <b class="reg-i"><i class="arrow"><i></i></i>Регистрация</b>
+                <i class="b-round b-round_6"><i class="l b"><i></i></i><i class="r b"><i></i></i></i>
+            </td>
+        </tr>
+        </table>
+        
+        <form action="/" method="post" id="registration_form">
+            <input type="hidden" name="retpath" id="id_retpath" value="" />
+            <input type="hidden" name="login" id="id_login" value="" />
+            <div class="item">
+                <label for="email">Ваш E-mail</label>
+                <input type="text" name="email" id="id_email" value="" />
+            </div>
+            
+            <div class="g-hidden" id="dop_parameters">
+                <div class="item">
+                    <label for="name">Отображаемое имя</label>
+                    <input type="text" name="name" id="id_name" value="" />
+                </div>
+                <table class="l50">
+                <tr>
+                    <td class="col">
+                        <div class="item">
+                            <label for="passwd">Пароль</label>
+                            <input type="password" name="password1" id="id_password1" value="" />
+                        </div>
+                    </td>
+                    <td class="l50-g"><i></i></td>
+                    <td class="col">
+                        <div class="item">
+                            <label for="passwd_confirm">Повтор пароля</label>
+                            <input type="password" name="password2" id="id_password2" value="" />
+                        </div>
+                    </td>
+                </tr>
+                </table>
+            </div>
+            
+            <div class="submit">
+                <input type="submit" value="Зарегистрироваться"/>
+            </div>
+
+            <div style="margin-top: 7px;">
+                <a href="#" id="dop_link" onclick="$('#dop_link').toggleClass('g-hidden'); $('#dop_parameters').toggleClass('g-hidden'); return false;" 
+                    style="text-decoration: none; border-bottom: 1px dashed blue;">имя и пароль, по желанию</a>
+            </div>
+            
+        </form>
+        
+      </div>
+    </div>

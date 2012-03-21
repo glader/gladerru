@@ -1,0 +1,5 @@
+{% load content %}
+    <ul class="b-tag g-line">
+        {% for t in tags %}<li style="font-size: {{ t.font_size }}px">{% ifequal t.type 210 %}1<strong>{{ t|link }}</strong>{% else %}{{ t|link }}{% endifequal %}</a></li
+        >{% endfor %}
+    </ul> 

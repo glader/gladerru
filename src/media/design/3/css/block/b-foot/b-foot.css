@@ -1,0 +1,33 @@
+/* Footer (begin) */ /**/
+    .b-foot
+    {
+        font-size: 80%;
+
+        padding: 8px 10px;
+        
+        background: #0f4c79 url(/media/design/3/img/b-foot/bg.png) 100% 0 no-repeat;
+
+        color: #fff;
+    }
+
+    .b-foot a:link,
+    .b-foot a:visited
+    {
+        color: #ffc235;
+
+        text-decoration: none;
+    }
+
+    .b-foot a:active,
+    .b-foot a:hover
+    {
+        color: #fff;
+    }
+    
+    .b-copyright
+    {
+        font-size: 80%;
+        
+        margin-left: 10px;
+    }
+/* Footer (end) */ /**/

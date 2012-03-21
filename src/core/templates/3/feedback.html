@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}Обратная связь - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu 'none' %}
+{% endblock %}
+
+{% block page_title %}Обратная связь{% endblock %}
+
+{% block content %}
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% else %}
+        <form action="{% url feedback %}" method="POST">
+        <table border="0">
+            {{ form }}
+        <tr><td></td><td>
+            <input type="submit" value="Отправить сообщение">
+        </td></tr>
+        </table>
+        </form>
+        <div>Звездочкой отмечены обязательные поля.</div>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}Картинки с тегом "{{ tag.title }}"{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+
+{% block rss_link %}
+   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/tags/{{ tag.id }}" title="Glader.ru: {{ tag.title }}">
+{% endblock %}
+
+{% block top_menu %}
+    {% top_menu "posts" %}
+{% endblock %}
+
+{% block page_title %}<b>Cообщения с тегом</b> {{ tag.title }}{% endblock %}
+
+{% block content %}
+    <ul class="b-pager">
+        {% for f in filters %}
+            {% ifequal f.code filter %}
+                <li class="current">{{ f.title }}</li>
+            {% else %}
+                <li><a href="{{ tag.get_absolute_url }}{% if f.code %}?filter={{ f.code }}{% endif %}">{{ f.title }}</a></li>
+            {% endifequal %}
+        {% endfor %}
+    </ul>
+    <br /><br /><br />
+
+    <div class="b-feed">
+        {% for item in items %}
+            {{ item|link }}
+        {% endfor %}
+    </div>
+
+    {% pagination %}
+{% endblock content %}

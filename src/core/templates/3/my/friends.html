@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load content %}
+{% load russian %}
+
+{% block top_menu %}
+	{% ifequal user domain_user %}
+	    {% top_menu 'friends' %}
+	{% else %}
+		{% top_menu '' %}
+	{% endifequal %}	
+{% endblock %}
+
+{% block title %}Друзья {{ domain_user.name }} - {{ block.super }}{%endblock%}
+
+{% block page_title %}
+	{% ifequal domain_user user %}Мои друзья{% else %}Друзья {{ domain_user.name }}{% endifequal %}:
+{% endblock %}
+
+{% block content %}
+	<ul style="padding-left: 20px;">
+		{% for friend in friends %}
+			<li><img src="{% MEDIA_URL %}{{ friend.user_b.get_profile|get_avatar_url:"16" }}" class="userpic" alt=""/>&nbsp;<a href="{{ friend.user_b.get_absolute_url }}">{{ friend.user_b.name }}</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

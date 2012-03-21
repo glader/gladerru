@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block head %}<script type="text/javascript" src="{% MEDIA_URL %}js/highcharts.js"></script>{% endblock %}
+
+{% block content %}
+<div><a href="/reports">за год</a> | <a href="/reports?full=1">за все время</a> | <a href="/reports/memcache">memcached</a>
+| <a href="/reports/404">404</a>
+</div><br />
+<div style="width:800px">
+	<div id="registrations"></div>
+	<hr>
+	<div id="posts"></div>
+	<hr>
+	<div id="good_posts"></div>
+	<hr>
+	<div id="comments"></div>
+	<hr>
+	<div id="votes"></div>
+	<hr>
+	<hr>
+	<div id="content"></div>
+</div>
+
+<script>
+function make_chart(container_id, title, data){
+
+	var chart = new Highcharts.Chart({
+	   chart: {
+	      renderTo: container_id,
+	      zoomType: 'x'
+	   },
+	        title: {
+	      text: title
+	   },
+	        subtitle: {
+	      text: 'Click and drag in the plot area to zoom in'
+	   },
+	   xAxis: {
+	      type: 'datetime',
+	      maxZoom: 14 * 24 * 3600000, // fourteen days
+	      title: {
+	         text: null
+	      }
+	   },
+	   yAxis: {
+	      title: {
+	         text: 'Exchange rate'
+	      },
+	      min: 0.6,
+	      showFirstLabel: false
+	   },
+	   tooltip: {
+	      formatter: function() {
+	         return Highcharts.dateFormat('%A %B %e %Y', this.x) + ':<br/>'+
+	            title + ': '+ this.y;
+	      }
+	   },
+	   legend: {
+	      enabled: false
+	   },
+	   plotOptions: {
+	      area: {
+	         fillColor: {
+	            linearGradient: [0, 0, 0, 300],
+	            stops: [
+	               [0, 'rgba(100, 0, 0, 0)'],
+	               [1, 'rgba(0,0,0,0)']
+	            ]
+	         },
+	         lineWidth: 1,
+	         marker: {
+	            enabled: false,
+	            states: {
+	               hover: {
+	                  enabled: true
+	               }
+	            }
+	         },
+	         shadow: false,
+	         states: {
+	            hover: {
+	               lineWidth: 1                  
+	            }
+	         }
+	      }
+	   },
+	
+	   series: [{
+	      type: 'area',
+	      name: '',
+	      data: data
+	   }]
+	});
+};
+
+registrations = [
+	      	{% for row in registrations %}
+	      		[Date.UTC({{ row.0.year }}, {{ row.0.month }}-1, {{ row.0.day }}), {{ row.1 }}]{% if not forloop.last %}, {% endif %}
+	      	{% endfor %}
+	      ];
+
+make_chart('registrations', 'Регистрации', registrations);
+
+
+posts = [
+	      	{% for row in posts %}
+	      		[Date.UTC({{ row.0.year }}, {{ row.0.month }}-1, {{ row.0.day }}), {{ row.1 }}]{% if not forloop.last %}, {% endif %}
+	      	{% endfor %}
+	      ];
+
+make_chart('posts', 'Посты', posts);
+
+good_posts = [
+	      	{% for row in good_posts %}
+	      		[Date.UTC({{ row.0.year }}, {{ row.0.month }}-1, {{ row.0.day }}), {{ row.1 }}]{% if not forloop.last %}, {% endif %}
+	      	{% endfor %}
+	      ];
+
+make_chart('good_posts', 'Посты пользователей', good_posts);
+
+
+comments = [
+	      	{% for row in comments %}
+	      		[Date.UTC({{ row.0.year }}, {{ row.0.month }}-1, {{ row.0.day }}), {{ row.1 }}]{% if not forloop.last %}, {% endif %}
+	      	{% endfor %}
+	      ];
+
+make_chart('comments', 'Комментарии', comments);
+
+votes = [
+	      	{% for row in votes %}
+	      		[Date.UTC({{ row.0.year }}, {{ row.0.month }}-1, {{ row.0.day }}), {{ row.1 }}]{% if not forloop.last %}, {% endif %}
+	      	{% endfor %}
+	      ];
+
+make_chart('votes', 'Оценки', votes);
+
+content = [
+	      	{% for row in content %}
+	      		[Date.UTC({{ row.0.year }}, {{ row.0.month }}-1, {{ row.0.day }}), {{ row.1 }}]{% if not forloop.last %}, {% endif %}
+	      	{% endfor %}
+	      ];
+
+make_chart('content', 'Лахматый', content);
+
+		
+</script>
+
+{% endblock content %}
+
+{% block sape %}{% endblock %}

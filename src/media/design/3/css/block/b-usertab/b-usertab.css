@@ -1,0 +1,215 @@
+/* Юзертаб (begin) */ /**/
+    .b-usertab
+    {
+        position: relative;
+    }
+
+    .b-usertab-i
+    {
+        position: absolute;
+        right: -10px;
+
+        width: 341px;
+        height: 187px;
+    }
+
+    .b-usertab .bg
+    {
+        position: absolute;
+
+        width: 341px;
+        height: 187px;
+
+        background: url(/media/design/3/img/usertab/bg.png) no-repeat;
+    }
+
+    .b-usertab .bg_unreg
+    {
+        position: absolute;
+
+        width: 341px;
+        height: 187px;
+
+        background: url(/media/design/3/img/usertab/bg_unreg.png) no-repeat;
+    }
+
+    .b-usertab .userpic
+    {
+        position: absolute;
+        top: 45px;
+        left: 77px;
+
+        width: 64px;
+        height: 64px;
+    }
+
+    .b-usertab .userpic .g-png
+    {
+        position: absolute;
+        top: 0;
+        left: 0;        
+    }
+
+    .b-usertab .username
+    {
+        font-size: 10px;
+
+        position: absolute;
+        top: 18px;
+        right: 45px;
+
+        text-transform: uppercase;
+
+        color: #febf2d;
+    }
+
+    .username a:link, .username a:hover,
+    .username a:active, .username a:visited   
+    {
+        color: #febf2d;
+    }
+    
+    .b-usertab .logout
+    {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+    }
+
+    .b-usertab .zoom
+    {
+        font-size: 11px;
+
+        position: absolute;
+        left: 77px;
+        top: 120px;
+
+        color: #fff;
+    }
+
+    .b-usertab .zoom img
+    {
+        margin-right: 5px;
+        
+        vertical-align: middle;
+    }
+
+    .b-usertab .text
+    {
+        font: 10px Tahoma, sans-serif;
+
+        display: block;
+
+        white-space: nowrap;
+        
+        color: #7daacb;
+    }
+
+    .b-usertab .text_active
+    {
+        color: #fff;
+    }
+
+    .b-usertab .text_active a:link,
+    .b-usertab .text_active a:hover,
+    .b-usertab .text_active a:active,
+    .b-usertab .text_active a:visited
+    {
+        color: #fff;
+    }
+
+    .b-usertab .text-pm,
+    .b-usertab .text-post,
+    .b-usertab .text-comment
+    {
+        position: absolute;
+        right: 35px;
+    }
+
+    .b-usertab .num-pm,
+    .b-usertab .num-post,
+    .b-usertab .num-comment
+    {
+        position: absolute;
+        left: 153px;
+    }
+
+    .b-usertab .num-pm img,
+    .b-usertab .num-post img,
+    .b-usertab .num-comment img
+    {
+        position: relative;
+
+        margin: -7px 3px -5px 0;
+
+        vertical-align: middle;
+    }
+
+    .b-usertab .text-pm,
+    .b-usertab .num-pm
+    {
+        top: 49px;
+    }
+
+    .b-usertab .text-post,
+    .b-usertab .num-post
+    {
+        top: 69px;
+    }
+
+    .b-usertab .text-comment,
+    .b-usertab .num-comment
+    {
+        top: 89px;
+    }
+    
+    .b-usertab .text-not-reg,
+    .b-usertab .text-login,
+    .b-usertab .text-reg
+    {
+        display: block;
+        position: absolute;
+
+        left: 97px;
+        width: 200px;
+        
+        text-align: center;
+        color: #7daacb;
+    }
+
+    .b-usertab .text-not-reg
+    {
+        top: 55px;
+    }
+
+    .b-usertab .text-login
+    {
+        top: 74px;
+    }
+
+    .b-usertab .text-reg
+    {
+        top: 93px;
+    }
+    
+    .text-pm a:link, .text-pm a:visited,
+    .text-post a:link, .text-post a:visited
+    {
+    	color: #7DAACB;
+    }
+
+    .text-pm a:hover, .text-pm a:active
+    {
+    	color: white;
+    }
+
+    .text-login a:link, .text-login a:hover,
+    .text-login a:active, .text-login a:visited,   
+    .text-reg a:link, .text-reg a:hover,
+    .text-regn a:active, .text-reg a:visited   
+    {
+        color: white;
+    }
+
+
+/* Юзертаб (end) */ /**/

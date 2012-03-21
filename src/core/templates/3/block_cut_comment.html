@@ -1,0 +1,15 @@
+{% load content %}
+{% with post.author as author %}
+{% with post.item as parent %}
+	<table border="0" width="100%">
+		<tbody><tr><td style="width: 200px;" valign="top">
+			<small>{{ parent|link }}</small></td>
+	
+	<td>{{ author|link }} <a href="{{ post.get_absolute_url }}" style="text-decoration: none; color: gray;">#</a>
+    <br>
+	
+	{{post.content|parser}}
+	</td></tr></tbody></table>
+<br />
+{% endwith %}
+{% endwith %}

@@ -1,0 +1,11 @@
+{% if teaser %}
+	<a href="{% url create_teaser_announce %}?movie_pk={{ object_id }}">Создать анонс о тизере</a><br />
+{% endif %}
+
+{% if full %}
+    <a href="{% url create_fullmovie_announce %}?movie_pk={{ object_id }}">Создать анонс о полноформатном фильме</a><br />
+{% endif %}
+
+{% if soundtrack %}
+	<a href="{% url create_tracklist_announce %}?movie_pk={{ object_id }}">Создать анонс о саундтреке</a>
+{% endif %}

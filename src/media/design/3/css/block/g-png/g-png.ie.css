@@ -1,0 +1,37 @@
+* html .g-png
+{
+    zoom: expression(
+        runtimeStyle.zoom = 1,
+        runtimeStyle.filter +=
+            "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" +
+                getElementsByTagName("img")[0].src + "')"
+    );
+
+    background: none;
+}
+
+* html*.g-png png
+{
+    font-size: 0;
+
+    p\osition: absolute;
+
+    width: expression(runtimeStyle.width = parentNode.offsetWidth + "px");
+    height: expression(runtimeStyle.height = parentNode.offsetHeight + "px");
+}
+
+* html .g-png img
+{
+    visibility: expression(
+        runtimeStyle.visibility="hidden",
+
+        parentNode.insertBefore(createElement("png"), this)
+    );
+}
+
+* html a.g-png,
+* html a .g-png,
+* html .g-png a
+{
+    cursor: hand;
+}

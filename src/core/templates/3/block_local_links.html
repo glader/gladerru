@@ -1,0 +1,8 @@
+<div class="b-local-links">
+	Наш сайт находят по запросам:
+	<ul>
+	{% for link in links %}
+		<li><a href="{{ link.link }}" title="{{ link.query }}">{{ link.query }}</a>&nbsp;</li>
+	{% endfor %}
+	</ul>
+</div>

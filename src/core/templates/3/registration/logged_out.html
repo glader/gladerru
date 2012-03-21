@@ -1,0 +1,16 @@
+{% extends "tab_none.html" %}
+{% load content %}
+
+{%block title%}Выход с сайта - {{ block.super }}{%endblock%}
+
+{% block top_menu %}
+    {% top_menu '' %}
+{% endblock %}
+
+{% block page_title %}Мы будем помнить Вас!{% endblock %}
+
+{% block content %}
+       <div>Вы успешно покинули сайт. До свидания. Заходите к нам почаще.</div>
+       
+       <div>Я передумал, возьмите меня <a href="/auth/login">обратно</a>!</div>
+{% endblock %}

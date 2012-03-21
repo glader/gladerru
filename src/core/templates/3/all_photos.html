@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}{{item.title}} - все фотографии - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu 'world' %}
+{% endblock %}
+
+{% block page %}
+    <div id="all_events">
+        <h1>{{item|link}} - все фотографии</h1><br>
+
+		{% for p in photos %}
+			{% cut_view p user %}
+		{% endfor %}
+
+    </div>
+   
+{% endblock %}

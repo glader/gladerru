@@ -1,0 +1,13 @@
+{% load content %}
+                <div class="item">
+                    <div class="title"><h2><img src="{% MEDIA_URL %}{{post.author|get_avatar_url:"32"}}" class="userpic" alt=""/>{{post|link}} {%post_edit_link post user%}</h2></div>
+                    <div class="text">
+                        <p>
+                            <a href="{{ post.get_absolute_url }}"><img src="{% MEDIA_URL %}{{ post.image.get_thumbnail_url }}" alt="{{ post.title }}"></a>
+                        </p>
+                    </div>
+
+                    {{ post.tags_html|safe }}
+
+                    {% post_panel post user mode %}
+                </div>

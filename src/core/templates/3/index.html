@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load content %}
+{% load cache %}
+
+{% block top_menu %}
+    {% top_menu 'best' %}
+{% endblock %}
+
+{% block title %}{% ifequal page_number 1 %}Лучший сноубордический сайт {% else %}Лучшие сообщения, стр. {{ page_number }} - {% endifequal %}{{ block.super }}{% endblock %}
+
+{% block page %}
+    <div class="b-page-title"><h1>Самое <b>интересное</b></h1></div>
+
+    <div class="b-feed">
+        {% for post in posts %}
+            {{ post }}
+
+			{% ifequal forloop.counter 1 %}
+				{% ifequal page_number 1%}
+					{% cache 86400 tags_list_index %}
+						<div class="item">
+							{% tags_list 50 %}
+							<div class="b-bar">
+								<i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
+								<table>
+								<tr>
+									<td class="points">&nbsp;</td>
+									<td></td>
+									<td class="date"></td>
+									<td class="user"></td>
+									<td class="favorites"></td>
+									<td class="comments"></td>
+								</tr>
+								</table>
+								<i class="b-round b-round_6"><i class="l b"><i></i></i><i class="r b"><i></i></i></i>
+								<div class="dec">
+									<i class="lg"></i>
+									<i class="rg"></i>
+								</div>
+							</div>
+						</div>
+					{% endcache %}
+				{% endifequal %}
+			{% endifequal %}
+        {% endfor %}
+    </div>
+
+    {% pagination "/" %}
+
+{% endblock page %}
+
+{% block sidebar %}
+    {% include "block_index_sidebar.html" %}
+{% endblock sidebar %}
+
+{% block sape %}
+<script type="text/javascript" src="http://cetrk.com/pages/scripts/0004/9348.js"> </script>
+{% endblock %}

@@ -1,0 +1,5 @@
+{% load content %}
+<ul class="b-tag">
+    {% for t in tags %}<li>{% ifequal t.type 30 %}{{ t|link }}{% else %}<strong>{{ t|link }}</strong>{% endifequal %}</li
+        >{% endfor %}
+</ul>

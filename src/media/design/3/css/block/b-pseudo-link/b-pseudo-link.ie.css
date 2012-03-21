@@ -1,0 +1,29 @@
+/* Pseudo link (begin) */ /**/
+    .b-pseudo-link
+    {
+        /* hasLayout */ /**/
+        _height: 0;
+        zoom: 1;
+    }
+
+    #js .b-pseudo-link,
+    .b-pseudo-link:link,
+    .b-pseudo-link:visited
+    {
+        cursor: hand;
+    }
+
+    * html .b-pseudo-link
+    {
+        behavior: expression(
+            runtimeStyle.behavior = 0,
+            attachEvent("onmouseover", function() { className += " b-pseudo-link_hover" }),
+            attachEvent("onmouseout", function() { className = className.replace(/ b-pseudo-link_hover/g, "") })
+        );
+    }
+
+    * html .b-pseudo-link_hover
+    {
+        color: #f00 !important;
+    }
+/* Pseudo link (end) */ /**/
