@@ -144,7 +144,7 @@ def migrate():
 
 
 def restart():
-    sudo('sv restart gladerru')
+    run('sudo sv restart gladerru')
 
 
 def local_env():

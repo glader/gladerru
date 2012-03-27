@@ -3,7 +3,6 @@ import datetime
 from south.db import db
 from south.v2 import DataMigration
 from django.db import models
-
 from core.templatetags.content import thumbnail
 
 class Migration(DataMigration):
@@ -251,10 +250,7 @@ class Migration(DataMigration):
             'status': ('django.db.models.fields.CharField', [], {'default': "'pub'", 'max_length': '50'}),
             'tags': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'to': "orm['core.Tag']", 'null': 'True', 'blank': 'True'}),
             'tags_str': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'thumbnail_path': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'thumbnail_size': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-            'yandex_fotki_image_id': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
             'yandex_fotki_image_src': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'})
         },
         'core.picturebox': {
