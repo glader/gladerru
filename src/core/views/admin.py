@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db import connection
 
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 
 from core.models import Movie, Man, Tag, Man2Movie, Post
 from core.views.common import render_to_response

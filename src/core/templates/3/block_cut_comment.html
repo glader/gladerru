@@ -8,7 +8,7 @@
 	<td>{{ author|link }} <a href="{{ post.get_absolute_url }}" style="text-decoration: none; color: gray;">#</a>
     <br>
 	
-	{{post.content|parser}}
+	{{ post.content|parser }}
 	</td></tr></tbody></table>
 <br />
 {% endwith %}

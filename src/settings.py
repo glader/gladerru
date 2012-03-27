@@ -18,13 +18,14 @@ SITE_ID = 1
 USE_I18N = True
 SECRET_KEY = '12345'
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.load_template_source',
-    'django.template.loaders.app_directories.load_template_source',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
 )
 DEBUG = False
 TEMPLATE_DEBUG = False
 IS_DEVEL = False
 TIMING = True
+LOG_LEVEL = logging.WARNING
 
 ADMIN_MEDIA_PREFIX = '/admind/media/'
 
@@ -42,7 +43,7 @@ MIDDLEWARE_CLASSES = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+    'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'core.context.default',
@@ -66,15 +67,14 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
-    'django_errorlog',
-    'django_russian',
     'debug_toolbar',
     'core',
     'shop',
     'sape',
     'south',
     'messages',
-    'django_glader_queue',
+    'django_queue',
+    'django_russian',
 )
 
 # Absolute path to the directory that holds media.
@@ -101,11 +101,10 @@ MAIN_PAGE_LEVEL = 1
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
 CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
-CACHE_LONG_TIMEOUT = 60*60*12 # Долгий таймаут, для практически не изменяющихся данных
+CACHE_LONG_TIMEOUT = 60*60*24 # Долгий таймаут, для практически не изменяющихся данных
 
 DOMAIN = 'glader.ru'
 MEDIA_DOMAIN = DOMAIN
-SESSION_COOKIE_DOMAIN = '.' + DOMAIN
 
 SAPE_DIR = '/var/cache/gladerru'
 SAPE_CHARSET = 'utf-8'
@@ -175,4 +174,4 @@ QUEUE_LOG_PATH = os.path.join(LOG_PATH, 'queue.log')
 TIMING_LOG_PATH = os.path.join(LOG_PATH, 'timing.log')
 SEARCH_LOG_PATH = os.path.join(LOG_PATH, 'search.log')
 
-ADMIN_TOOLS_INDEX_DASHBOARD = 'gladerru.dashboard.CustomIndexDashboard'
+ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'

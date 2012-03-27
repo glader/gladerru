@@ -14,7 +14,7 @@ from django.db.models import Q
 from core.models import Profile, Post, Tag, Photo, Movie, Song, Discount, Comment, Mountain
 from core.utils.common import notice_admin, process_template
 
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 
 def sanitizeHTML(value, mode='none'):
     """ Удаляет из value html-теги.

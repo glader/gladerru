@@ -10,7 +10,7 @@
 	{% endifequal %}	
 {% endblock %}
 
-{% block title %}Друзья {{ domain_user.name }} - {{ block.super }}{%endblock%}
+{% block title %}Друзья {{ domain_user.name }} - {{ block.super }}{% endblock %}
 
 {% block page_title %}
 	{% ifequal domain_user user %}Мои друзья{% else %}Друзья {{ domain_user.name }}{% endifequal %}:

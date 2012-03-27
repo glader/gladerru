@@ -7,15 +7,15 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 
 from core.models import News, UserNews, Movie, Friend, Post, Tag
- 
+
 class Command(NoArgsCommand):
     def send_email(self, data):
-        message = EmailMessage(data['subject'].strip(), 
-                               data['content'], 
-                               'Glader.ru <robot@glader.ru>', 
+        message = EmailMessage(data['subject'].strip(),
+                               data['content'],
+                               'Glader.ru <robot@glader.ru>',
                                [data['email']],
                                )
         message.content_subtype = "html"
@@ -30,29 +30,29 @@ class Command(NoArgsCommand):
         if tag:
             params['tag_url'] = tag.get_absolute_url()
             params['tag_title'] = tag.title
-        
+
         news = News.objects.create(type=announce_type, content=News.messages[announce_type] % params, item=post)
         return news
-    
+
     def new_post(self, data):
         u""" Добавить уведомление о посте в новости юзеров """
         post = Post.objects.get(pk=data['post_id'])
         news = self.post_announce(post, 'new_post')
-        
+
         # Друзьям автора
         for friend in Friend.objects.filter(user_b=post.author):
             UserNews.objects.create(user=friend.user_a, news=news)
-        
+
         # Подписанным на теги поста
         #for tag in post.tags.all():
         #    for user in tag.in_favorites():
         #        self.post_announce(post, 'tagged_post', tag=tag)
-        
+
         # Теги поста
         for tag in post.tags.all():
             tag.recalc_posts()
-                      
-        
+
+
     def best_post(self, data):
         u"""Добавить уведомление о посте в новости юзеров"""
         if not data['klass'] == 'Post':
@@ -66,8 +66,8 @@ class Command(NoArgsCommand):
                 continue
             UserNews.objects.create(user=user, news=news)
 
-    
-    def new_friend(self, data): 
+
+    def new_friend(self, data):
         u"""Уведомление юзерам что их друг нашел нового друга"""
         user = User.objects.get(pk=data['user'])
         new_friend = User.objects.get(pk=data['new_friend'])
@@ -78,7 +78,7 @@ class Command(NoArgsCommand):
                   }
         message = News.messages['new_friend'] % params
         news = News.objects.create(type='new_friend', content=message, item=new_friend)
-        
+
         for friend in Friend.objects.filter(user_b=user):
             if friend.user_a == new_friend:
                 continue
@@ -103,10 +103,10 @@ class Command(NoArgsCommand):
                   'movie_title': movie.title,
                   }
         news = News.objects.create(type='new_fullmovie', content=News.messages['new_fullmovie'] % params, item=movie)
-        
+
         for user in User.objects.all():
             UserNews.objects.create(user=user, news=news)
-            
+
 
     def new_tracklist(self, data):
         movie = Movie.objects.get(pk=data['movie_id'])
@@ -114,15 +114,15 @@ class Command(NoArgsCommand):
                   'movie_title': movie.title,
                   }
         news = News.objects.create(type='new_tracklist', content=News.messages['new_tracklist'] % params, item=movie)
-        
+
         for user in User.objects.all():
             UserNews.objects.create(user=user, news=news)
-            
-    
+
+
     def tag_synonim(self, data):
         u"""Тегу назначен синоним, надо пересчитать все посты с этим тегом"""
         tag = Tag.objects.get(pk=data['tag_id'])
-            
+
         items = tag.item_set.all()
         for i in items:
             i.tags.remove(tag)
@@ -133,8 +133,8 @@ class Command(NoArgsCommand):
             i.tags.remove(tag)
             i.tags.add(tag.primary_synonim)
             i.rebuild_tags()
-        
-        tag.primary_synonim.recalc_posts()        
+
+        tag.primary_synonim.recalc_posts()
 
 
     def handle_noargs(self, **options):
@@ -146,7 +146,7 @@ class Command(NoArgsCommand):
         handler.setFormatter(logging.Formatter(LOG_FORMAT, LOG_TIME_FORMAT))
         log.addHandler(handler)
         log.info('Start work')
-        
+
         handlers = {'email': self.send_email,
                     'best_post': self.best_post,
                     'new_post': self.new_post,
@@ -156,7 +156,7 @@ class Command(NoArgsCommand):
                     'new_tracklist': self.new_tracklist,
                     'tag_synonim': self.tag_synonim,
                     }
-        
+
         for task in Queue.get_tasks():
             log.info('Task %s - start' % task.id)
             log.info("%s: %s" % (task.id, task.data))
@@ -165,10 +165,10 @@ class Command(NoArgsCommand):
                 handlers[task.task](task.data)
                 task.finish()
                 log.info('Task %s - finish' % task.id)
-                
+
             except Exception, e:
                 task.error(unicode(e))
                 log.info('Task %s - error' % task.id)
-                    
+
         Queue.flush()
         log.info('Finish work')

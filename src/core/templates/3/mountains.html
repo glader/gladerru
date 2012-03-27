@@ -32,7 +32,7 @@
 {% endblock head %}
 
 {% block content %}
-    <div>{{item.content|parser}}</div>
+    <div>{{ item.content|parser }}</div>
 
 	<div id="YMapsID" style="width:800px;height:400px"></div>
 
@@ -58,20 +58,20 @@
         </tr>
 
         {% for m in region.mountains %}
-            <tr class="{%cycle "tr_odd" "tr_even"%}">
+            <tr class="{% cycle "tr_odd" "tr_even" %}">
                 <td><strong>{{ m|link }}</strong></td>
-                <td>{{m.pistes|default:"&nbsp;"}}</td>
-                <td>{{m.overfall|default:"&nbsp;"}}</td>
-                <td>{{m.pistelength|default:"&nbsp;"}}</td>
-                <td>{{m.lifts|default:"&nbsp;"}}</td>
-                <td>{{m.snow|default:"&nbsp;"}}</td>
-                <td>{{m.nightwork|default:"&nbsp;"}}</td>
-                <td>{{m.url|default:"&nbsp;"}}</td>
-                <td>{{m.tel|default:"&nbsp;"}}</td>
+                <td>{{ m.pistes|default:"&nbsp;" }}</td>
+                <td>{{ m.overfall|default:"&nbsp;" }}</td>
+                <td>{{ m.pistelength|default:"&nbsp;" }}</td>
+                <td>{{ m.lifts|default:"&nbsp;" }}</td>
+                <td>{{ m.snow|default:"&nbsp;" }}</td>
+                <td>{{ m.nightwork|default:"&nbsp;" }}</td>
+                <td>{{ m.url|default:"&nbsp;" }}</td>
+                <td>{{ m.tel|default:"&nbsp;" }}</td>
             </tr>
         {% endfor %}
-    {%endfor%}
+    {% endfor %}
 
     </tbody></table>
 
-{%endblock%}
+{% endblock %}

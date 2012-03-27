@@ -3,7 +3,7 @@ import Image
 from hashlib import md5
 import os
 import uuid
-from ID3 import *
+from utils.ID3 import *
 import random
 from urllib import urlopen
 from StringIO import StringIO
@@ -16,7 +16,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.template import Context, loader
 from south.modelsinspector import add_introspection_rules
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 from django.core.cache import cache
 
 from core.utils.common import cached, slug
@@ -853,32 +853,6 @@ class Man2Movie(models.Model):
         verbose_name_plural = u"Райдеры фильмов"
 
 
-def make_thumbnail(name, content):
-    u""" Возвращает tuple (урл, (размеры))"""
-    if not name:
-        return "", (0, 0)
-
-    thumbnail_file = md5(name.encode('utf8')).hexdigest()
-    thumbnail_dir = thumbnail_file[0:2]
-    thumbnail_path = os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir, thumbnail_file)
-
-    if not os.path.exists(os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir)):
-        os.mkdir(os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir))
-
-    try:
-        import imghdr
-        content.seek(0)
-        format = imghdr.what('', content.read(2048)) or 'jpeg'
-        content.seek(0)
-
-        im = Image.open(content)
-        im.thumbnail(settings.THUMBNAIL_SIZE, Image.ANTIALIAS)
-        im.save(thumbnail_path, format=format)
-        return "%s/%s" % (thumbnail_dir, thumbnail_file), im.size
-
-    except IOError, e:
-        return "cannot create thumbnail for %s: %s" % (name, e), (0, 0)
-
 class Photo(models.Model, VoteMixin, UIDMixin):
     slug = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Код картинки")
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
@@ -893,10 +867,7 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     place = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Место")
 
     image = models.ImageField(upload_to=get_image_path, null=True, blank=True, verbose_name=u"Картинка")
-    yandex_fotki_image_id = models.CharField(null=True, blank=True, verbose_name=u"Код на ЯФотках", max_length=255)
     yandex_fotki_image_src = models.CharField(null=True, blank=True, verbose_name=u"Путь к картинке", max_length=255)
-    thumbnail_path = models.CharField(null=True, blank=True, verbose_name=u"Путь к превьюшке", max_length=255)
-    thumbnail_size = models.CharField(null=True, blank=True, verbose_name=u"Размер превьюшки", max_length=255)
 
     rating = models.FloatField(default=0.0, verbose_name=u"Рейтинг")
     best = models.DateTimeField(null=True, blank=True, verbose_name=u"На главной")
@@ -920,7 +891,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     def hidden(self):
         return self.status != 'pub'
 
-
     def get_photo_url(self):
         if self.yandex_fotki_image_src:
             return self.yandex_fotki_image_src
@@ -928,37 +898,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
             return self.image.url
         else:
             raise ValueError("Empty photo %s" % self.pk)
-
-    def get_thumbnail_url(self):
-        if not self.thumbnail_path:
-            self.make_thumbnail()
-
-        return "%s%s" % (settings.THUMBNAIL_URL, self.thumbnail_path)
-
-    def get_thumbnail_size(self):
-        if not self.thumbnail_size:
-            self.make_thumbnail()
-
-        return self.thumbnail_size.split(',')
-
-    def make_thumbnail(self):
-        if self.yandex_fotki_image_id:
-            path, size = make_thumbnail(self.yandex_fotki_image_id,
-                                        StringIO(urlopen(self.yandex_fotki_image_src).read())
-                                        )
-
-        elif self.image:
-            filename = os.path.join(settings.MEDIA_ROOT, self.image.name)
-            path, size = make_thumbnail(self.image.name,
-                                        open(filename, 'rb')
-                                        )
-
-        else:
-            raise ValueError("Empty photo %s" % self.pk)
-
-        self.thumbnail_path = path
-        self.thumbnail_size = "%s,%s" % size
-        self.save()
 
     def get_absolute_url(self):
         return self.local_url
@@ -988,8 +927,9 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     def is_photo(self): return True
 
     def save(self, *args, **kwargs):
-        self.local_url = "/users/%s/photos/%s" % (self.author.username.lower(), self.id)
+        super(Photo, self).save(*args, **kwargs)
 
+        self.local_url = "/users/%s/photos/%s" % (self.author.username.lower(), self.id)
         super(Photo, self).save(*args, **kwargs)
 
     class Meta:

@@ -1,7 +1,7 @@
 {% extends "tab_none.html" %}
 {% load content %}
 
-{%block title%}Авторизация - {{ block.super }}{%endblock%}
+{% block title %}Авторизация - {{ block.super }}{% endblock %}
 
 {% block page %}
 
@@ -13,14 +13,14 @@
        <div class="content">
        <div class="text">
        
-       <div>{{message}}</div>
+       <div>{{ message }}</div>
        
-        {%if login_form.str_errors%}
-            <div style="border: 1px solid red; padding: 3px;">{{login_form.str_errors}}</div>
-        {%endif%}
-        {%if registration_form.str_errors%}
-            <div style="border: 1px solid red; padding: 3px;">{{registration_form.str_errors}}</div>
-        {%endif%}
+        {% if login_form.str_errors %}
+            <div style="border: 1px solid red; padding: 3px;">{{ login_form.str_errors }}</div>
+        {% endif %}
+        {% if registration_form.str_errors %}
+            <div style="border: 1px solid red; padding: 3px;">{{ registration_form.str_errors }}</div>
+        {% endif %}
        
 			<table width='100%'><tr><td valign='top'>
                 <td>
