@@ -67,7 +67,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
-    'debug_toolbar',
     'core',
     'shop',
     'sape',
