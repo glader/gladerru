@@ -65,6 +65,7 @@ def init():
 
     if not exists('/etc/cron.d/gladerru'):
         sudo('touch /etc/cron.d/gladerru')
+        sudo('chown %s /etc/cron.d/gladerru' % SSH_USER)
 
     sudo('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
     sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
@@ -86,7 +87,6 @@ def production():
 
 
 def upload():
-    run('mkdir -p /home/www/projects/gladerru')
     local('git archive -o archive.tar.gz HEAD')
     put('archive.tar.gz', env.directory + '/archive.tar.gz')
     with cd(env.directory):
