@@ -1,5 +1,5 @@
 <div class="nav">
-{%for item in links%}
- {%if item.link%}<a href="{{item.link}}">{%endif%}{{item.title}}{%if item.link%}</a>{%endif%}{%if not forloop.last%} - {%endif%}
-{%endfor%}
+{% for item in links %}
+ {% if item.link %}<a href="{{ item.link }}">{% endif %}{{ item.title }}{% if item.link %}</a>{% endif %}{% if not forloop.last %} - {% endif %}
+{% endfor %}
 </div>

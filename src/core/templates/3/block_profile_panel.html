@@ -1,19 +1,19 @@
-{%load content%}
-{%with domain_user.get_absolute_url as url%}
-	{%ifequal user domain_user%}<div class="tab"><a href="/post/new">Написать</a></div>{%endifequal%} 
+{% load content %}
+{% with domain_user.get_absolute_url as url %}
+	{% ifequal user domain_user %}<div class="tab"><a href="/post/new">Написать</a></div>{% endifequal %} 
 
-	<div class="tab_active"><a href="{{url}}">Профиль</a></div>
+	<div class="tab_active"><a href="{{ url }}">Профиль</a></div>
 	
-	<div class="tab"><a href="{{url}}/posts">Посты</a> ({{domain_user.count.pub_post_count}}) <a href="{{url}}my/rss"><img src="{% MEDIA_URL %}design/3/img/feed-icon-10.gif" class="icon" border="0"></a></div>
+	<div class="tab"><a href="{{ url }}/posts">Посты</a> ({{ domain_user.count.pub_post_count }}) <a href="{{ url }}my/rss"><img src="{% MEDIA_URL %}design/3/img/feed-icon-10.gif" class="icon" border="0"></a></div>
 	
-	<div class="tab"><a href="{{url}}/comments">Комментарии</a> ({{domain_user.count.comment_count}})</div>
+	<div class="tab"><a href="{{ url }}/comments">Комментарии</a> ({{ domain_user.count.comment_count }})</div>
 	
-	<div class="tab"><a href="{{url}}/favorites">Избранное</a></div>
+	<div class="tab"><a href="{{ url }}/favorites">Избранное</a></div>
 	
-	<div class="tab"><a href="{{url}}/photos">Картинки</a> <a href="{{url}}my/pics/rss"><img src="{% MEDIA_URL %}design/3/img/feed-icon-10.gif" class="icon" border="0"></a></div>
+	<div class="tab"><a href="{{ url }}/photos">Картинки</a> <a href="{{ url }}my/pics/rss"><img src="{% MEDIA_URL %}design/3/img/feed-icon-10.gif" class="icon" border="0"></a></div>
 	
-<!--	<div class="tab"><a href="{{url}}/friends">Френдлента</a> <a href="{{url}}friends/rss"><img src="{% MEDIA_URL %}design/3/img/feed-icon-10.gif" class="icon" border="0"></a></div>-->
+<!--	<div class="tab"><a href="{{ url }}/friends">Френдлента</a> <a href="{{ url }}friends/rss"><img src="{% MEDIA_URL %}design/3/img/feed-icon-10.gif" class="icon" border="0"></a></div>-->
 	
 	<div class="clear"></div>
 
-{%endwith%}
+{% endwith %}

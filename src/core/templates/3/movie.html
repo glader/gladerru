@@ -10,33 +10,33 @@
 
 {% block page_title %}<b>Фильм</b> {{ movie.title }}
 	&nbsp;&nbsp;
-    <span id="{{movie.slug}}_rating">{{movie.rating|decimal_cut:1}}</span>
+    <span id="{{ movie.slug }}_rating">{{ movie.rating|decimal_cut:1 }}</span>
 {% if can_vote %}
-    <a href="" onclick="addPostVotes('{{movie.slug}}', 1); return false;"
-        ><img id="'{{movie.slug}}'_rating_up" src="{% MEDIA_URL %}design/2/img/arrow_up.gif" alt="Нравится" class="icon"></a>
-{%else%}
+    <a href="" onclick="addPostVotes('{{ movie.slug }}', 1); return false;"
+        ><img id="'{{ movie.slug }}'_rating_up" src="{% MEDIA_URL %}design/2/img/arrow_up.gif" alt="Нравится" class="icon"></a>
+{% else %}
     <img src="{% MEDIA_URL %}design/2/img/arrow_up_dis.gif" alt="Нравится" class="icon">
-{%endif%}
-{%endblock%}
+{% endif %}
+{% endblock %}
 
 
 {% block content %}
 	<div class="b-movie">
 		{% if movie.cover %}
-			<a href="{{movie.cover.url}}" class="float_right"><img src="{% MEDIA_URL %}{{movie.cover.get_thumbnail_url}}" alt="{{movie.title}} - обложка" border="0"></a>
+			<a href="{{ movie.cover.url }}" class="float_right"><img src="{% MEDIA_URL %}{{ movie.cover.get_thumbnail_url }}" alt="{{ movie.title }} - обложка" border="0"></a>
 		{% endif %}
 
 	    <table class="b-movie_info"><tbody>
 	        {% if movie.studio %}<tr><td valign="top"><strong>Студия:</strong></td><td>{{ movie.studio|link }}</td></tr>{% endif %}
 
-	        <tr><td valign="top"><strong>Год:</strong></td><td>{{movie.year|default:"-"}}</td></tr>
+	        <tr><td valign="top"><strong>Год:</strong></td><td>{{ movie.year|default:"-" }}</td></tr>
 
 	        {% if movie.url %}
 	        	<tr><td valign="top"><strong>Адрес:</strong></td><td><a href="{{ movie.url }}">{{ movie.url }}</a></td></tr>
 	       	{% endif %}
 
 	        <tr><td valign="top"><strong>Торрент:</strong></td><td>
-	            {%if movie.torrent%}
+	            {% if movie.torrent %}
 	                <a href="{{ movie.torrent }}">скачать</a>
 	            {% else %}
 	                <span title="Вы можете попросить или предложить ссылку на торрент в комментариях." style="border-bottom: 1px dashed #317CB4">пока нету</span>
@@ -75,4 +75,4 @@
 
     {% comments movie request %}
 
-{%endblock%}
+{% endblock %}

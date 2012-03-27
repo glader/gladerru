@@ -31,7 +31,7 @@
         {% ifequal period "week" %}
             <li><a href="?{% get_params request "period" "month" %}">За месяц</a></li>
             <li class="current">За неделю</li>
-        {% else%}
+        {% else %}
             <li class="current">За месяц</li>
             <li><a href="?{% get_params request "period" "week" %}">За неделю</a></li>
         {% endifequal %}       

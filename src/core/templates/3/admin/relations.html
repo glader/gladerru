@@ -1,7 +1,7 @@
 
 <ul>
 {% for r in relations %}
-    <li><a href="/admin/core/item/{{r.item_a.id}}/">{{r.item_a}}</a> -> <a href="/admin/core/item/{{r.item_b.id}}/">{{r.item_b}}</a> (<a href="/admin/core/relation/{{r.id}}/">{{r.rel_type.name}}</a>)</li>
-{%endfor%}
+    <li><a href="/admin/core/item/{{ r.item_a.id }}/">{{ r.item_a }}</a> -> <a href="/admin/core/item/{{ r.item_b.id }}/">{{ r.item_b }}</a> (<a href="/admin/core/relation/{{ r.id }}/">{{ r.rel_type.name }}</a>)</li>
+{% endfor %}
 </ul> 
     

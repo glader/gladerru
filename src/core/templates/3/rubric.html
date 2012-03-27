@@ -5,20 +5,20 @@
 
 {% block page_title %}<a href="{% url skills %}">Статьи</a> » {{ rubric.title }}{% endblock %}
 
-{%block content%}
-		{%if children%}
+{% block content %}
+		{% if children %}
 			<ul>
-			{%for child in children%}
-				<li>{{child|link}}<div class='para'><small>{{child.abstract|default:""}}</small></div></li>
-			{%endfor%}
+			{% for child in children %}
+				<li>{{ child|link }}<div class='para'><small>{{ child.abstract|default:"" }}</small></div></li>
+			{% endfor %}
 			</ul>
-		{%endif%}
+		{% endif %}
 
-		{%if articles%}
+		{% if articles %}
 			<ul>
-			{%for child in articles%}
-				<li>{{child|link}}</li>
-			{%endfor%}
+			{% for child in articles %}
+				<li>{{ child|link }}</li>
+			{% endfor %}
 			</ul>
-		{%endif%}
-{%endblock%}
+		{% endif %}
+{% endblock %}

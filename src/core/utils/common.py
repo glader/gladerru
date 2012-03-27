@@ -8,7 +8,7 @@ import re
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Context, loader
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 
 
 

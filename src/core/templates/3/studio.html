@@ -11,18 +11,18 @@
 
 {% block page_title %}<b>Студия</b> {{ studio.title }}{% endblock %}
 
-{%block content%}
+{% block content %}
 	<div class="b-studio">
-        {%if studio.image%}<a href="{{studio.image.url}}" class="float_right"><img src="{% MEDIA_URL %}{{studio.image.get_thumbnail_url}}" alt="{{studio.title}} - логотип" border="0"></a><br>{%endif%}
+        {% if studio.image %}<a href="{{ studio.image.url }}" class="float_right"><img src="{% MEDIA_URL %}{{ studio.image.get_thumbnail_url }}" alt="{{ studio.title }} - логотип" border="0"></a><br>{% endif %}
        	
 		{% if studio.url %}<strong>Адрес:</strong> <a href="{{ studio.url }}" title="Официальный сайт">{{ studio.url }}</a><br/><br/>{% endif %}
 	
-       	{{studio.content|parser}}
+       	{{ studio.content|parser }}
 		
-		{%if movies%}<h3>Фильмы</h3>
-			<ul class="b-studio_movies">{%for m in movies%}
-				<li>{{m|link}}{%if m.year%} ({{m.year}}){%endif%}</li>
-			{%endfor%}</ul>
-		{%endif%}
+		{% if movies %}<h3>Фильмы</h3>
+			<ul class="b-studio_movies">{% for m in movies %}
+				<li>{{ m|link }}{% if m.year %} ({{ m.year }}){% endif %}</li>
+			{% endfor %}</ul>
+		{% endif %}
 	</div>
-{%endblock%}
+{% endblock %}

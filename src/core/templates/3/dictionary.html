@@ -26,7 +26,7 @@
 	                    <li itemscope itemtype="http://webmaster.yandex.ru/vocabularies/term-def.xml">
 	                    	<span class="word" itemprop="term">{{ w.title }}</span> -
 	                    	<span itemprop="definition">{{ w.abstract|parser }}</span>
-	                    	{% if w.content %}(<small><a href="{{w.get_absolute_url}}" class="dict_full">подробнее</a></small>){% endif %}
+	                    	{% if w.content %}(<small><a href="{{ w.get_absolute_url }}" class="dict_full">подробнее</a></small>){% endif %}
 	                    </li>
 	                {% endfor %}
 	            {% endif %}

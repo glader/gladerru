@@ -1,13 +1,13 @@
 {% load content %}
                 <div class="item">
                     <a name="{{ post.name }}"></a>
-                    <div class="title"><h2><img src="{% MEDIA_URL %}{{post.author.get_profile|get_avatar_url:"32"}}" class="userpic" alt=""/> {{ post.author|link }}: {{post|link}} 
+                    <div class="title"><h2><img src="{% MEDIA_URL %}{{ post.author.get_profile|get_avatar_url:"32" }}" class="userpic" alt=""/> {{ post.author|link }}: {{ post|link }} 
                         {% post_edit_link post user %}
                         {% post_status post %}
                     </h2></div>
                     <div class="text g-line">
                         <p>
-                            {{post|post_cut|parser}}
+                            {{ post|post_cut|parser }}
                         </p>
                     </div>
 

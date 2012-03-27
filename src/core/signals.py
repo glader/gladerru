@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 import django.dispatch
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 from django.core.cache import cache
 
 from core.utils.common import process_template
@@ -20,8 +20,8 @@ def notice_about_comment(sender, **kwargs):
             Queue.add_task('email', {'email': post_author.email,
                                      'subject': subject,
                                      'content': content})
-            
-    
+
+
         comment_author = kwargs['answer_on'].author
         if comment_author and comment_author != current and comment_author != post_author and comment_author.email:
             subject, content = process_template('email/new_comment_comment.html', {

@@ -1,2 +1,2 @@
-{%load content%}
-{%for i in items%}{{i|link}}{%if not forloop.last%}, {%endif%}{%endfor%}
+{% load content %}
+{% for i in items %}{{ i|link }}{% if not forloop.last %}, {% endif %}{% endfor %}

@@ -6,12 +6,12 @@ from django.core.management.base import NoArgsCommand
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 
 from core.models import Post, Photo
 
 AUTHORS = ['LAhmatyi', 'tinki', 'skyslayer', 'akafist', 'prophoter']
- 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         count = 0
@@ -27,12 +27,12 @@ class Command(NoArgsCommand):
                 for p in Photo.objects.filter(post=item):
                     p.author = author
                     p.save()
-            
+
             item.status = 'pub'
             item.save()
 
             Queue.add_task('new_post', {"post_id":item.id})
-                
+
             count += 1
-        
+
         open(settings.CRON_LOG_PATH, "a").write("%s\tpublish deferred: %s\n" % (datetime.now(), count))

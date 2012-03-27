@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404
 from django.template import Context, loader
 from django.utils import simplejson
 
-from django_glader_queue.models import Queue
+from django_queue.models import Queue
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
     PhotoForm, PostCommentForm, PostVoteForm, CommentVoteForm, CommentForm, sanitizeHTML
@@ -25,7 +25,7 @@ from core.models import Post, Friend, UserNews, ItemVote, Movie, Photo, Comment,
     Keyword, PictureBox, TagsCloud
 from core.signals import new_comment_signal
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
-    make_pages, make_tag_pages, get_avatar_url
+    make_pages, make_tag_pages, get_avatar_url, thumbnail
 from core.utils.common import process_template
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
@@ -824,11 +824,12 @@ def add_photo(request):
     if not form.is_valid():
         raise Http404()
 
-    id, url = add_to_yaphoto(form.cleaned_data['Filedata'])
-    image = Photo(author=user, post=post, title='', yandex_fotki_image_id=id, yandex_fotki_image_src=url)
+    yafotki_id, url = add_to_yaphoto(form.cleaned_data['Filedata'])
+    id = yafotki_id.split(':')[-1]
+    image = Photo(author=user, post=post, title='', yandex_fotki_image_src="%s#%s" % (url, id))
     image.save()
 
-    image.make_thumbnail()
+    thumbnail_url = thumbnail(image.yandex_fotki_image_src)
 
     post.content += ' <glader pic="%s">' % image.pk
     post.save()
@@ -836,8 +837,9 @@ def add_photo(request):
     return HttpResponse( simplejson.dumps({'success':True,
                                            'picture_id':image.pk,
                                            'absolute_url': image.get_absolute_url(),
-                                           'thumbnail_url': settings.MEDIA_URL + image.get_thumbnail_url()
+                                           'thumbnail_url': settings.MEDIA_URL + thumbnail_url
                                            }))
+
 
 def add_to_yaphoto(content):
     from core.utils.post_multipart import post_multipart

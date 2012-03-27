@@ -1,9 +1,9 @@
-{%if is_movie %}
+{% if is_movie %}
 <form action="/create/moviemaker" method="post">
     <strong>Студия</strong>:
-    <select name="mm"><option value="">выберите</option>{%for mm in moviemakers%}<option value="{{mm.id}}">{{mm.title}}</option>{%endfor%}</select><br /> 
+    <select name="mm"><option value="">выберите</option>{% for mm in moviemakers %}<option value="{{ mm.id }}">{{ mm.title }}</option>{% endfor %}</select><br /> 
     или новая <input type="text" name="moviemaker" id="id_moviemaker" size="30"/><br />
     <input type="submit" value="Добавить">
-    <input type="hidden" name="object_id" value="{{object_id}}">
+    <input type="hidden" name="object_id" value="{{ object_id }}">
 </form>
 {% endif %}
