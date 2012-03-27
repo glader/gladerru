@@ -11,16 +11,13 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
 
-        for photo in orm.Photo.objects.all():
-            if photo.yandex_fotki_image_id:
-                if len(photo.yandex_fotki_image_src.split("#")) >= 3:
-                    photo.yandex_fotki_image_src = "#".join(photo.yandex_fotki_image_src.split("#")[:2])
+        for number, photo in enumerate(orm.Photo.objects.all()):
+            if photo.yandex_fotki_image_src:
+                thumbnail(photo.yandex_fotki_image_src)
 
-                elif not '#' in photo.yandex_fotki_image_src:
-                    id = photo.yandex_fotki_image_id.split(':')[-1]
-                    photo.yandex_fotki_image_src += '#%s' % id
+                if number % 100 == 0:
+                    print number
 
-                photo.save()
 
     def backwards(self, orm):
         "Write your backwards methods here."
