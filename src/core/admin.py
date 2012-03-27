@@ -30,7 +30,7 @@ class PostAdmin(admin.ModelAdmin):
     list_filter = ('status',)
     search_fields = ('name', 'title')
     raw_id_fields = ('author', 'best_answer')
-    exclude = ('tags', 'favorites')
+    exclude = ('tags',)
 
 class RubricAdmin(admin.ModelAdmin):
     list_display = ('name', 'title')
@@ -88,7 +88,7 @@ class PhotoAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'slug', 'author', 'post', 'date_created')
     ordering = ('-date_created',)
     raw_id_fields = ('author', 'post', 'rider', 'photographer')
-    exclude = ('tags', 'favorites')
+    exclude = ('tags',)
     search_fields = ('slug', 'title')
 
 class DiscountAdmin(admin.ModelAdmin):
@@ -118,7 +118,6 @@ class MovieAdmin(admin.ModelAdmin):
     list_display = ('title', 'studio', 'year', 'status')
     ordering = ('-year', 'title')
     raw_id_fields = ('studio', 'tag')
-    exclude = ('favorites',)
     search_fields = ('slug', 'title')
     inlines = (Man2MovieInline, SongInline)
 
@@ -127,7 +126,7 @@ class PictureBoxAdmin(admin.ModelAdmin):
     ordering = ('-dt',)
 
 
-admin.site.register(Profile, ProfileAdmin)
+#admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Friend, FriendAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(UserNews, UserNewsAdmin)

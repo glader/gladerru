@@ -181,7 +181,6 @@ def top_menu(level2='best', level1=None):
                         ['news', '/my/news', u'новости', u'Анонсы событий, интересных мне'],
                         ['commented', '/my/commented', u'комментарии', u'Новые комментарии к постам, за которыми вы следите'],
                         ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
-                        #['favorites', '/my/favorites', u'избранное', u'Посты, отмеченные мной'],
                         ['settings', '/my/settings', u'настройки', u''],
                         ]
                }
@@ -597,10 +596,6 @@ def post_panel(post, user, mode='normal'):
             'mode':mode,
             'klass': post.__class__.__name__.lower(),
     }
-
-@register.inclusion_tag('block_profile_panel.html')
-def profile_panel(domain_user, user):
-    return {'domain_user': domain_user, 'user':user}
 
 
 @cached(cache_key=lambda post, r:'/%s/comments' % post.uid, timeout_seconds=settings.CACHE_LONG_TIMEOUT)

@@ -129,7 +129,6 @@ urlpatterns = patterns('',
 
     #Old urls
     url(r'^my/posts$', old_my_posts),
-    url(r'^my/favorites$', old_my_favorites),
     url(r'^posts/(\d+)$', old_user_post),
     url(r'^pic/(\d+)$', old_pic),
     url(r'^cat/([\w\d_-]+)$', old_post_category),

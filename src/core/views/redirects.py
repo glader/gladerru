@@ -28,9 +28,6 @@ def old_my(request):
 def old_my_posts(request):
     return HttpResponsePermanentRedirect(add_domain(reverse('user_staff', args=[get_username(request), 'posts'] )))
 
-def old_my_favorites(request):
-    return HttpResponsePermanentRedirect(add_domain(reverse('user_staff', args=[get_username(request), 'favorites'] )))
-
 def old_user_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return HttpResponsePermanentRedirect(post.get_absolute_url())

@@ -379,32 +379,6 @@ class CommentVoteForm(CommentForm):
         return self.cleaned_data
 
 
-class FavoritesForm(CommonForm):
-    """ Добавление в избранное """
-    item = IntegerField(label=u'Элемент', error_messages={'required': u'Отсутствует код элемента'})
-    klass = CharField(label=u'Тип элемента', error_messages={'required': u'Отсутствует тип элемента'})
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super(FavoritesForm, self).__init__(*args, **kwargs)
-
-    def clean(self):
-        klass = {'post': Post, 'photo': Photo, 'movie': Movie}.get(self.cleaned_data['klass'], None)
-        try:
-            post = klass.objects.get(pk=self.cleaned_data['item'])
-        except klass.DoesNotExist:
-            raise ValidationError(u'Добавление в избранное неизвестной страницы')
-
-        if post.in_favorites(self.user):
-            raise ValidationError(u'Эта страница уже в избранном')
-
-        self.cleaned_data['post'] = post
-        return self.cleaned_data
-
-    def save(self):
-        self.cleaned_data['post'].favorites.add(self.user.get_profile())
-
-
 class FeedbackForm(CommonForm):
     name = CharField(label=u'Имя', required=False)
     email = EmailField(label=u'Email', required=False, error_messages={'invalid': u'Введенный email некорректен'})
