@@ -19,3 +19,5 @@ SAPE_SITE_ID = 111
 
 YAMAPS_API_KEY = ''
 
+SSH_USER = 'www'
+
