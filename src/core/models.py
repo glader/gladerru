@@ -727,7 +727,7 @@ class Man(models.Model):
         ('f', u'Девочка'),
     )
     gender = models.CharField(choices=GENDER_CHOICES, default='m', max_length=1, verbose_name=u"Пол")
-    image = models.ImageField(upload_to='data/riders', null=True, blank=True, verbose_name=u"Портрет")
+    image = YFField(verbose_name=u"Портрет", upload_to='gladerru', null=True, blank=True)
     ridingsince = models.PositiveIntegerField(null=True, blank=True, verbose_name=u"Катается с года")
     sponsors = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Спонсоры")
     stance = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Стойка")
