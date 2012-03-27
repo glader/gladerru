@@ -657,7 +657,7 @@ def human_month(monthNumber):
     return months[monthNumber - 1]
 
 
-@cached(cache_key=lambda image_url: 'thumbnails/' + md5(image_url).hexdigest(), timeout_seconds=settings.CACHE_LONG_TIMEOUT)
+@cached(cache_key=lambda image_url: 'thumbnails/' + md5(image_url).hexdigest(), timeout_seconds=None)
 @register.filter
 def thumbnail(image_url):
     try:
