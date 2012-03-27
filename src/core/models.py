@@ -5,8 +5,6 @@ import os
 import uuid
 from utils.ID3 import *
 import random
-from urllib import urlopen
-from StringIO import StringIO
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -18,6 +16,8 @@ from django.template import Context, loader
 from south.modelsinspector import add_introspection_rules
 from django_queue.models import Queue
 from django.core.cache import cache
+
+from yafotki.fields import YFField
 
 from core.utils.common import cached, slug
 from core.utils.log import get_logger
@@ -795,7 +795,7 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     content = models.TextField(verbose_name=u"Описание", null=True, blank=True)
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    cover = models.ImageField(verbose_name=u"Обложка", upload_to='data/movies', null=True, blank=True)
+    cover = YFField(verbose_name=u"Обложка", upload_to='gladerru', null=True, blank=True)
     torrent = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"Ссылка на торрент")
     teaser = models.TextField(verbose_name=u"Тизер", null=True, blank=True)
     full_movie = models.TextField(verbose_name=u"Видео", null=True, blank=True)
