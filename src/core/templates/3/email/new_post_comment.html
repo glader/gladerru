@@ -1,6 +1,6 @@
-{%load content%}Glader.ru: Ответ на ваш пост
+{% load content %}Glader.ru: Ответ на ваш пост
 <html><body>
-Пользователь {{comment.author|link}} ответил на ваш топик "{{post|link}}":<br><br>
-                        <i>{{comment.content}}</i><br><br>
-                        <a href='http://glader.ru{{comment.get_absolute_url}}'>Ответить</a>.
+Пользователь {{ comment.author|link }} ответил на ваш топик "{{ post|link }}":<br><br>
+                        <i>{{ comment.content }}</i><br><br>
+                        <a href='http://glader.ru{{ comment.get_absolute_url }}'>Ответить</a>.
 </body></html>

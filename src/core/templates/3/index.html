@@ -16,7 +16,7 @@
             {{ post }}
 
 			{% ifequal forloop.counter 1 %}
-				{% ifequal page_number 1%}
+				{% ifequal page_number 1 %}
 					{% cache 86400 tags_list_index %}
 						<div class="item">
 							{% tags_list 50 %}

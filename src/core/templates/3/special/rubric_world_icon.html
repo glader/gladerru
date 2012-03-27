@@ -5,8 +5,8 @@
     {% top_menu rubric.menu_type %}
 {% endblock %}
 
-{%block content%}
-        {%if children%}
+{% block content %}
+        {% if children %}
             <table class="b-rubric-icon">
             <tr>
             {% for child in children %}
@@ -16,9 +16,9 @@
             {% endfor %}
             </tr>
             </table>
-        {%endif%}
+        {% endif %}
 
-        {%if articles%}
+        {% if articles %}
             <table class="b-rubric-icon">
             <tr>
             {% for child in articles %}
@@ -28,5 +28,5 @@
             {% endfor %}
             </tr>
             </table>
-        {%endif%}
-{%endblock%}
+        {% endif %}
+{% endblock %}

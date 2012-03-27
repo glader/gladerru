@@ -1,11 +1,11 @@
 {% load content %}
                 <div class="item">
-                    <div class="title"><h2>{{post|link}} 
+                    <div class="title"><h2>{{ post|link }} 
                         {% post_edit_link post user %}
                     </h2></div>
                     <div class="text">
                         <p>
-                            {{ post|first_paragraph|parser}}
+                            {{ post|first_paragraph|parser }}
                         </p>
                     </div>
 

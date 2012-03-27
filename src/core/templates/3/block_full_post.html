@@ -1,12 +1,12 @@
-{%load content%}
-<h3>{{post.get_parent|link}}: {{post|link}} {% post_edit_link post user %}</h3>
+{% load content %}
+<h3>{{ post.get_parent|link }}: {{ post|link }} {% post_edit_link post user %}</h3>
 <blockquote>
     <div class="text g-line">
-	   {{post.content|parser}}
+	   {{ post.content|parser }}
     </div>
 
     <br><br>
-	{%post_panel post user%}
+	{% post_panel post user %}
 	
 </blockquote>
 <br>

@@ -1,8 +1,8 @@
-{%load content%}
-{%if items%}<table class="profile_list" style="width:90%"><tbody>
-	{%for i in items%}
-		<tr class="{%cycle 'tr_odd' 'tr_even'%}">
-			<td width="100%">{{i|link}}</td>
+{% load content %}
+{% if items %}<table class="profile_list" style="width:90%"><tbody>
+	{% for i in items %}
+		<tr class="{% cycle 'tr_odd' 'tr_even' %}">
+			<td width="100%">{{ i|link }}</td>
 		</tr>
-	{%endfor%}
-</tbody></table>{%endif%}
+	{% endfor %}
+</tbody></table>{% endif %}

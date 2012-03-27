@@ -3,7 +3,7 @@
 DATABASES = {
     'default': {
         'HOST': '%(DATABASE_HOST)s',
-        'NAME': 'uralsocionics',
+        'NAME': 'gladerru',
         'ENGINE': 'django.db.backends.mysql',
         'USER': '%(DATABASE_USER)s',
         'PASSWORD': '%(DATABASE_PASSWORD)s',

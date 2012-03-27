@@ -10,7 +10,7 @@
 		<tr><td class="label">{% trans "Sender" %}</td>
 			<td>{{ message.sender }}</td></tr>
 		<tr><td class="label">{% trans "Date" %}</td>
-			<td>{{ message.sent_at|date:_("DATETIME_FORMAT")}}</td></tr>
+			<td>{{ message.sent_at|date:_("DATETIME_FORMAT") }}</td></tr>
 		<tr><td class="label">{% trans "Recipient" %}</td>
 			<td>{{ message.recipient }}</td></tr>
 	</table>

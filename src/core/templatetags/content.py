@@ -1,9 +1,13 @@
 # encoding: utf-8
 
+import os
+from StringIO import StringIO
+from hashlib import md5
 from datetime import datetime
 import re
 import urllib
 from urllib import quote
+import Image
 
 from django import template
 from django.template import Context, loader, TemplateDoesNotExist
@@ -330,8 +334,8 @@ def parser(text):
         if tag == "EndPre":
             return "</pre>"
         if tag == 'ImageLink':
-            return '<a href="%s" style="%s"><img class="userphoto" src="%s%s" width="%s" height="%s"></a>' \
-                    % (item.get_absolute_url(), params.get('style', ""), settings.MEDIA_URL, item.get_thumbnail_url(), item.get_thumbnail_size()[0], item.get_thumbnail_size()[1])
+            return '<a href="%s" style="%s"><img class="userphoto" src="%s%s"></a>' \
+                    % (item.get_absolute_url(), params.get('style', ""), settings.MEDIA_URL, thumbnail(item.yandex_fotki_image_src))
         if tag == 'ItemLink':
             return '<a href="%s" style="%s">%s</a>' \
                     % (item and item.get_absolute_url() or "", params.get('style', ""), params.get('title', item and item.title or ""))
@@ -360,9 +364,8 @@ def parser(text):
             except (Photo.DoesNotExist, ValueError):
                 return u""
 
-        return '<a href="%s"><img class="userphoto" src="%s%s" width="%s" height="%s"></a>&#32;' % \
-               (picture.get_absolute_url(), settings.MEDIA_URL,
-                picture.get_thumbnail_url(), picture.get_thumbnail_size()[0], picture.get_thumbnail_size()[1])
+        return '<a href="%s"><img class="userphoto" src="%s%s"></a>&#32;' % \
+               (picture.get_absolute_url(), settings.MEDIA_URL, thumbnail(picture.yandex_fotki_image_src))
 
     def pageParser(result):
         try:
@@ -537,7 +540,7 @@ def link(item):
 
     if isinstance(item, Photo):
         return mark_safe(u'<a href="http://%s%s"><img class="userphoto" src="%s" alt="%s"></a>'
-                         % (settings.DOMAIN, item.get_absolute_url(), settings.MEDIA_URL + item.get_thumbnail_url(), item.title ))
+                         % (settings.DOMAIN, item.get_absolute_url(), settings.MEDIA_URL + thumbnail(item.yandex_fotki_image_src), item.title ))
 
     return mark_safe(u'<a href="http://%s%s">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.title))
 
@@ -652,6 +655,36 @@ def human_month(monthNumber):
     months = (u'январь', u'февраль', u'март', u'апрель', u'май', u'июнь', u'июль', u'август',
               u'сентябрь', u'октябрь', u'ноябрь', u'декабрь')
     return months[monthNumber - 1]
+
+
+@cached(cache_key=lambda image_url: 'thumbnails/' + md5(image_url).hexdigest(), timeout_seconds=settings.CACHE_LONG_TIMEOUT)
+@register.filter
+def thumbnail(image_url):
+    try:
+        content = StringIO(urllib.urlopen(image_url).read())
+
+        thumbnail_file = md5(image_url).hexdigest()
+        thumbnail_dir = thumbnail_file[0:2]
+        thumbnail_path = os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir, thumbnail_file)
+
+        if os.path.exists(thumbnail_path):
+            return "%s%s/%s" % (settings.THUMBNAIL_URL, thumbnail_dir, thumbnail_file)
+
+        if not os.path.exists(os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir)):
+            os.mkdir(os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir))
+
+        import imghdr
+        content.seek(0)
+        format = imghdr.what('', content.read(2048)) or 'jpeg'
+        content.seek(0)
+
+        im = Image.open(content)
+        im.thumbnail(settings.THUMBNAIL_SIZE, Image.ANTIALIAS)
+        im.save(thumbnail_path, format=format)
+        return "%s%s/%s" % (settings.THUMBNAIL_URL, thumbnail_dir, thumbnail_file)
+
+    except IOError, e:
+        return "cannot create thumbnail for %s: %s" % (image_url, e)
 
 
 ##########################################################################################
