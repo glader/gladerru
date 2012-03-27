@@ -371,16 +371,12 @@ def user_staff(request, username, section):
     """ Посты, комментарии, картинки, избранное отдельного юзера """
     user = get_user(username)
     context = {'domain_user':user, 'domain_profile': user.get_profile(), 'page': request.GET.get('page', "")}
-    if section == 'favorites' and \
-        (not request.user.is_authenticated() or user != request.user):
-            raise Http404()
 
     objects = get_section_objects(user, section)
     context.update(make_pages(objects, current_page=context.get('page')))
     context['title'] = user.name + ": " + \
                         {'comments': u"Комментарии",
-                        'photos': u"Картинки",
-                        'favorites': u"Избранное"}.get(section)
+                        'photos': u"Картинки"}.get(section)
     return render_to_response(request, 'my/%s.html' % section, context)
 
 
@@ -388,7 +384,7 @@ def user_item(request, username, section, item_id):
     """ Пост, картинка юзера """
     user = get_user(username)
 
-    if section == 'posts' or section == 'favorites':
+    if section == 'posts':
         return user_post(request, user, item_id)
     if section == 'photos':
         return user_photo(request, user, item_id)

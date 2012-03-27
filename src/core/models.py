@@ -5,8 +5,6 @@ import os
 import uuid
 from utils.ID3 import *
 import random
-from urllib import urlopen
-from StringIO import StringIO
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -18,6 +16,8 @@ from django.template import Context, loader
 from south.modelsinspector import add_introspection_rules
 from django_queue.models import Queue
 from django.core.cache import cache
+
+from yafotki.fields import YFField
 
 from core.utils.common import cached, slug
 from core.utils.log import get_logger
@@ -268,7 +268,6 @@ class Profile(models.Model):
     referer = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Откуда пришел")
 
     comment_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество комментариев")
-    favorites_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество постов в избранном")
     pic_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество картинок")
     pub_post_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество постов")
     unread_comment_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество непрочитанных комментариев")
@@ -279,7 +278,6 @@ class Profile(models.Model):
     def calculate(self):
         self.comment_count = Comment.objects.filter(author=self.user).count()
         self.pub_post_count = Post.objects.filter(author=self.user, status='pub').count()
-        self.favorites_count = Post.objects.filter(favorites=self.user.get_profile()).filter(status='pub').count()
         self.pic_count = Photo.objects.filter(author=self.user).count()
         self.save()
 
@@ -558,8 +556,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
     tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
     comments = generic.GenericRelation(Comment)
 
-    favorites = models.ManyToManyField(Profile, verbose_name=u"Избранное", null=True, blank=True)
-
     item_type = models.ForeignKey(ContentType, null=True, blank=True)
     item_id = models.PositiveIntegerField(null=True, blank=True)
     item = generic.GenericForeignKey('item_type', 'item_id')
@@ -578,13 +574,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
         if not user.is_authenticated(): return False
         if user.get_profile().is_moderator: return True
         return self.author == user
-
-    # вынести в отдельную модель
-    def in_favorites(self, user):
-        if not user: return False
-        count = Post.objects.filter(favorites=user.get_profile()).filter(pk=self.pk).count()
-        return count > 0
-
 
     def tags_html(self):
         if self.tags_str is None:
@@ -738,7 +727,7 @@ class Man(models.Model):
         ('f', u'Девочка'),
     )
     gender = models.CharField(choices=GENDER_CHOICES, default='m', max_length=1, verbose_name=u"Пол")
-    image = models.ImageField(upload_to='data/riders', null=True, blank=True, verbose_name=u"Портрет")
+    image = YFField(verbose_name=u"Портрет", upload_to='gladerru', null=True, blank=True, default=None)
     ridingsince = models.PositiveIntegerField(null=True, blank=True, verbose_name=u"Катается с года")
     sponsors = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Спонсоры")
     stance = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Стойка")
@@ -806,7 +795,7 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     content = models.TextField(verbose_name=u"Описание", null=True, blank=True)
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    cover = models.ImageField(verbose_name=u"Обложка", upload_to='data/movies', null=True, blank=True)
+    cover = YFField(verbose_name=u"Обложка", upload_to='gladerru', null=True, blank=True)
     torrent = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"Ссылка на торрент")
     teaser = models.TextField(verbose_name=u"Тизер", null=True, blank=True)
     full_movie = models.TextField(verbose_name=u"Видео", null=True, blank=True)
@@ -818,7 +807,6 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     comments = generic.GenericRelation(Comment)
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
-    favorites = models.ManyToManyField(Profile, verbose_name=u"Избранное", null=True, blank=True)
     date_created = None
 
     all = GenericManager( )
@@ -827,11 +815,6 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     def get_absolute_url(self): return reverse('movie', args=[self.slug])
 
     def __unicode__(self): return self.title
-
-    def in_favorites(self, user):
-        if not user: return False
-        count = Movie.objects.filter(favorites=user.get_profile()).filter(pk=self.pk).count()
-        return count > 0
 
     class Meta:
         verbose_name = u"Фильм"
@@ -880,8 +863,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
 
-    favorites = models.ManyToManyField(Profile, verbose_name=u"Избранное", null=True, blank=True)
-
     all = GenericManager( )
     objects = GenericManager(status='pub')
 
@@ -907,11 +888,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
         if not user.is_authenticated(): return False
         if user.get_profile().is_moderator: return True
         return self.author == user
-
-    def in_favorites(self, user):
-        if not user: return False
-        count = Photo.objects.filter(favorites=user.get_profile()).filter(pk=self.pk).count()
-        return count > 0
 
     def tags_html(self):
         if self.tags_str is None:

@@ -43,11 +43,6 @@ class Command(NoArgsCommand):
         for friend in Friend.objects.filter(user_b=post.author):
             UserNews.objects.create(user=friend.user_a, news=news)
 
-        # Подписанным на теги поста
-        #for tag in post.tags.all():
-        #    for user in tag.in_favorites():
-        #        self.post_announce(post, 'tagged_post', tag=tag)
-
         # Теги поста
         for tag in post.tags.all():
             tag.recalc_posts()

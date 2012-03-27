@@ -32,7 +32,6 @@
     .b-bar .comments,
     .b-bar .user,
     .b-bar .date,
-    .b-bar .favorites
     {
         border-left: 1px dotted #fff;
     }
