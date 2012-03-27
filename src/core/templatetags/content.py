@@ -1,8 +1,6 @@
 # encoding: utf-8
 
 import os
-from StringIO import StringIO
-from hashlib import md5
 from datetime import datetime
 import re
 import urllib
@@ -22,6 +20,7 @@ from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
 from core.views.common import render_to_string
+from core.utils.thumbnails import get_thumbnail_url
 
 register = template.Library()
 
@@ -652,35 +651,9 @@ def human_month(monthNumber):
     return months[monthNumber - 1]
 
 
-@cached(cache_key=lambda image_url: 'thumbnails/' + md5(image_url).hexdigest(), timeout_seconds=None)
 @register.filter
 def thumbnail(image_url):
-    try:
-        content = StringIO(urllib.urlopen(image_url).read())
-
-        thumbnail_file = md5(image_url).hexdigest()
-        thumbnail_dir = thumbnail_file[0:2]
-        thumbnail_path = os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir, thumbnail_file)
-
-        if os.path.exists(thumbnail_path):
-            return "%s%s/%s" % (settings.THUMBNAIL_URL, thumbnail_dir, thumbnail_file)
-
-        if not os.path.exists(os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir)):
-            os.mkdir(os.path.join(settings.THUMBNAIL_ROOT, thumbnail_dir))
-
-        import imghdr
-        content.seek(0)
-        format = imghdr.what('', content.read(2048)) or 'jpeg'
-        content.seek(0)
-
-        im = Image.open(content)
-        im.thumbnail(settings.THUMBNAIL_SIZE, Image.ANTIALIAS)
-        im.save(thumbnail_path, format=format)
-        return "%s%s/%s" % (settings.THUMBNAIL_URL, thumbnail_dir, thumbnail_file)
-
-    except IOError, e:
-        return "cannot create thumbnail for %s: %s" % (image_url, e)
-
+    return get_thumbnail_url(image_url)
 
 ##########################################################################################
 # Admin site tags
