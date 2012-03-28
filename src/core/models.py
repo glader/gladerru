@@ -454,6 +454,9 @@ class Comment(models.Model):
     def __unicode__(self): return u"%s: %s" % (self.author, self.item)
 
     def save(self, *args, **kwargs):
+        if not self.pk:
+            super(Comment, self).save(*args, **kwargs)
+
         cache.delete(settings.CACHE_MIDDLEWARE_KEY_PREFIX + 'last_conversations')
         if self.item:
             cache.delete(settings.CACHE_MIDDLEWARE_KEY_PREFIX + '/%s/comments' % self.item.uid)
@@ -573,6 +576,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
             for t in self.tags.all():
                 if t.name == 'question':
                     self.is_question = True
+        else:
+            super(Post, self).save(*args, **kwargs)
 
         if self.status != 'pub':
             self.hidden = True
