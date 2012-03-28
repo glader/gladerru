@@ -1,3 +1,3 @@
 {% load content %}
-Ответ на "{{ obj.item.title }}":<br>
+{{ obj.author.username }} - ответ на "{{ obj.item.title }}":<br>
 {{ obj.content|parser }}

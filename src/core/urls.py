@@ -8,13 +8,6 @@ from feeds import *
 from django.contrib.auth.views import password_reset
 from django.views.generic.simple import redirect_to
 
-feeds = {
-    'best': BestPosts,
-    'all': AllPosts,
-    'tags': Tags,
-    'users': Users,
-    'comments': NewComments,
-}
 
 urlpatterns = patterns('',
     url(r'^content/([^/]+)\.htm$', article, name='article'),
@@ -100,7 +93,10 @@ urlpatterns = patterns('',
     url(r'^ajax/picturebox', picturebox),
 
     #Feeds
-    url(r'^feeds/(?P<url>.*)$', 'django.contrib.syndication.views.feed', {'feed_dict': feeds}, name='feed'),
+    (r'^feeds/best$', BestPosts()),
+    (r'^feeds/all', AllPosts()),
+    (r'^feeds/comments', NewComments()),
+    (r'^feeds/tags/(?P<tag_name>.+)$', Tags()),
 
     #Editing
     url(r'^post/new$', new_post, name='new_post'),

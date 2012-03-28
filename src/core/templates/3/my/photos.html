@@ -1,10 +1,6 @@
 {% extends "my/posts_list.html" %}
 {% load content %}
 
-{% block rss_link %}
-    <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/users/{{ domain_profile.name }}/photos" title="Glader.ru: картинки пользователя {{ domain_profile.title }}">
-{% endblock %}
-
 {% block page_title %}{{ domain_user|link }} » <b>фотографии</b> {% endblock %}
 
 {% block title %}Фотографии {{ domain_user.name }}{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
