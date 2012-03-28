@@ -35,26 +35,6 @@ class GenericManager( models.Manager ):
         return super( GenericManager, self ).get_query_set().filter( **self.selectors )
 
 
-class ThumbnailImageFieldFile(models.fields.files.ImageFieldFile):
-    @cached(cache_key=lambda self:'/thumbnails/%s' % md5(self.name.encode('utf8')).hexdigest())
-    def get_thumbnail(self):
-        pass
-    def get_thumbnail_url(self):
-        return self.get_thumbnail()[0]
-
-
-class ThumbnailImageField(models.ImageField):
-    attr_class = ThumbnailImageFieldFile
-
-rules = [(
-            (ThumbnailImageField, ),
-            [],
-            {},
-        ),]
-
-add_introspection_rules(rules, ["^core",])
-
-
 class Tag(models.Model):
     u"""Теги"""
     name = models.CharField(max_length=200, verbose_name=u"Код")
@@ -431,7 +411,7 @@ class Skill(models.Model):
     title = models.CharField(verbose_name=u"Название", max_length=200)
     slug = models.CharField(verbose_name=u"Код", max_length=200)
     description = models.TextField(verbose_name=u"Описание")
-    image = models.ImageField(verbose_name=u"Картинка", upload_to='data/skills', null=True, blank=True)
+    image = YFField(verbose_name=u"Картинка", upload_to='gladerru', null=True, blank=True, default=None)
 
     def __unicode__(self): return self.title
 
@@ -493,7 +473,7 @@ class Rubric(models.Model):
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
     content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
-    image = models.ImageField(upload_to=get_image_path, null=True, blank=True, verbose_name=u"Картинка")
+    image = YFField(upload_to='gladerru', null=True, blank=True, verbose_name=u"Картинка")
     menu_type = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Тип меню")
     order = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Порядок")
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
@@ -550,12 +530,13 @@ class Post(models.Model, VoteMixin, UIDMixin):
     ask_for_answer_amount = models.PositiveSmallIntegerField(verbose_name=u"Количество напоминаний", default=0,
                                                              help_text=u"Сколько раз напомнили о необходимости выбира лучшего ответа")
     ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
-    icon = models.ImageField(verbose_name=u"Иконка", null=True, blank=True, upload_to=get_image_path)
+    icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
     local_url = models.CharField(verbose_name=u"Адрес", max_length=70, default="")
 
     tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
     comments = generic.GenericRelation(Comment)
 
+    # WTF?
     item_type = models.ForeignKey(ContentType, null=True, blank=True)
     item_id = models.PositiveIntegerField(null=True, blank=True)
     item = generic.GenericForeignKey('item_type', 'item_id')
@@ -649,7 +630,7 @@ class Mountain(models.Model, VoteMixin, UIDMixin):
     district = models.ForeignKey(District, null=True, blank=True, verbose_name=u"Область")
     has_ratrack = models.BooleanField(default=False, verbose_name=u"Есть ратрак")
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
-    image = models.ImageField(upload_to="data/mountains", null=True, blank=True, verbose_name=u"Схема трасс")
+    image = YFField(upload_to="gladerru", null=True, blank=True, verbose_name=u"Схема трасс", default=None)
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     lifts = models.TextField(null=True, blank=True, verbose_name=u"Подъемники")
     latitude = models.CharField(max_length=20, null=True, blank=True, verbose_name=u"Широта")
@@ -704,7 +685,7 @@ class Mountain(models.Model, VoteMixin, UIDMixin):
 
 class MountainPhoto(models.Model):
     mountain = models.ForeignKey(Mountain, verbose_name="Гора")
-    image = models.ImageField(upload_to='data/mountains', verbose_name=u"Картинка")
+    image = YFField(upload_to='gladerru', verbose_name=u"Картинка")
 
     class Meta:
         verbose_name = u"Фото горы"
@@ -774,7 +755,6 @@ class Studio(models.Model):
     content = models.TextField(verbose_name=u"Описание", null=True, blank=True)
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    logo = models.ImageField(verbose_name=u"Логотип", upload_to='data/studies', null=True, blank=True)
 
     all = GenericManager( )
     objects = GenericManager(status='pub')
@@ -849,7 +829,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     photographer = models.ForeignKey(Man, verbose_name=u"Фотограф", null=True, blank=True, related_name="photographer")
     place = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Место")
 
-    image = models.ImageField(upload_to=get_image_path, null=True, blank=True, verbose_name=u"Картинка")
     yandex_fotki_image_src = models.CharField(null=True, blank=True, verbose_name=u"Путь к картинке", max_length=255)
 
     rating = models.FloatField(default=0.0, verbose_name=u"Рейтинг")
@@ -871,14 +850,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     @property
     def hidden(self):
         return self.status != 'pub'
-
-    def get_photo_url(self):
-        if self.yandex_fotki_image_src:
-            return self.yandex_fotki_image_src
-        elif self.image:
-            return self.image.url
-        else:
-            raise ValueError("Empty photo %s" % self.pk)
 
     def get_absolute_url(self):
         return self.local_url

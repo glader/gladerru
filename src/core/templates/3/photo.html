@@ -43,10 +43,10 @@ function wshow(url) {
 
         <div style="text-align:center; overflow: hidden; width: 100%">
             {% if next_photo %}
-                   <a href="{{ next_photo.get_absolute_url }}" title="Следующая фотография"><img class="userphoto" style="max-width: 100%" src="{{ photo.get_photo_url }}" alt=""></a>
-               {% else %}
-                   <img class="userphoto" style="max-width: 100%" src="{{ photo.get_photo_url }}" alt="">
-               {% endif %}
+               <a href="{{ next_photo.get_absolute_url }}" title="Следующая фотография"><img class="userphoto" style="max-width: 100%" src="{{ photo.yandex_fotki_image_src }}" alt=""></a>
+           {% else %}
+               <img class="userphoto" style="max-width: 100%" src="{{ photo.yandex_fotki_image_src }}" alt="">
+           {% endif %}
         </div>
 	</div>
 

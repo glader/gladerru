@@ -12,7 +12,6 @@
 {% block content %}
     <div class="b-feed">
         {% for item in items %}
-            {{ item.uid }} {{ item.local_url }} {{ item.get_absolute_url }}
             {{ item|link }}
         {% endfor %}
     </div>
