@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 import re
 from BeautifulSoup import BeautifulSoup, Comment as HtmlComment
-from datetime import datetime
 import urllib
-from copy import copy
 import random
+from datetime import datetime
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django.forms import *
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Photo, Movie, Song, Discount, Comment, Mountain
-from core.utils.common import notice_admin, process_template
+from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain
+from core.utils.common import notice_admin, process_template, send_html_mail
 
-from django_queue.models import Queue
 
 def sanitizeHTML(value, mode='none'):
     """ Удаляет из value html-теги.
@@ -145,8 +143,7 @@ class RegistrationForm(CommonForm):
                                                         'user': new_user,
                                                         'form': self
                                                     })
-        Queue.add_task('email', {'email': self.cleaned_data['email'],
-                                'subject': subject, 'content': content})
+        send_html_mail(subject, content, [self.cleaned_data['email']])
 
 
 class LoginForm(CommonForm):
@@ -386,18 +383,6 @@ class FeedbackForm(CommonForm):
                         error_messages={'required': u'Введите текст сообщения'},
                         widget=Textarea())
     code = CharField(label="Код", required=False, widget=HiddenInput)
-
-    def __init__(self, *args, **kwargs):
-        super(FeedbackForm, self).__init__(*args, **kwargs)
-        if 'code' in self.initial:
-            code = self.initial['code']
-            self.initial = copy(self.initial)
-            if code.startswith('song'):
-                song = Song.objects.get(pk=code[4:])
-                self.initial['email'] = u'Ваша почта'
-                self.initial['message'] = u"Привет! У меня есть песня '%s' из фильма '%s'. Могу отправить на почту/фтп/narod.ru (нужное подчеркнуть)." \
-                                            % (song, song.movie.title)
-
 
     def clean_message(self):
         if '[url=' in self.cleaned_data.get('message', ''):

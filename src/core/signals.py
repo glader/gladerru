@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 import django.dispatch
-from django_queue.models import Queue
 from django.core.cache import cache
 
-from core.utils.common import process_template
+from core.utils.common import process_template, send_html_mail
 
 new_comment_signal = django.dispatch.Signal()
 
@@ -17,9 +16,7 @@ def notice_about_comment(sender, **kwargs):
                                                         'post': kwargs['post'],
                                                         'comment': sender
                                                     })
-            Queue.add_task('email', {'email': post_author.email,
-                                     'subject': subject,
-                                     'content': content})
+            send_html_mail(subject, content, [post_author.email])
 
 
         comment_author = kwargs['answer_on'].author
@@ -29,9 +26,7 @@ def notice_about_comment(sender, **kwargs):
                                                         'answer_on': kwargs['answer_on'],
                                                         'comment': sender
                                                     })
-            Queue.add_task('email', {'email': comment_author.email,
-                                     'subject': subject,
-                                     'content': content})
+            send_html_mail(subject, content, [comment_author.email])
 
 
 def movie_rating(sender, **kwargs):
@@ -39,8 +34,10 @@ def movie_rating(sender, **kwargs):
         kwargs['post'].rating += 0.1
         kwargs['post'].save()
 
+
 def invalidate_comments_cache(sender, **kwargs):
     cache.delete(settings.CACHE_MIDDLEWARE_KEY_PREFIX + 'last_conversations')
+
 
 new_comment_signal.connect(notice_about_comment)
 new_comment_signal.connect(movie_rating)

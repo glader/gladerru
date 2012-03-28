@@ -12,15 +12,6 @@ from django_queue.models import Queue
 from core.models import News, UserNews, Movie, Friend, Post, Tag
 
 class Command(NoArgsCommand):
-    def send_email(self, data):
-        message = EmailMessage(data['subject'].strip(),
-                               data['content'],
-                               'Glader.ru <robot@glader.ru>',
-                               [data['email']],
-                               )
-        message.content_subtype = "html"
-        message.send()
-
     def post_announce(self, post, announce_type, tag=None):
         params = {'user_url': post.author.get_absolute_url(),
                   'username': post.author.first_name,
@@ -142,8 +133,7 @@ class Command(NoArgsCommand):
         log.addHandler(handler)
         log.info('Start work')
 
-        handlers = {'email': self.send_email,
-                    'best_post': self.best_post,
+        handlers = {'best_post': self.best_post,
                     'new_post': self.new_post,
                     'new_friend': self.new_friend,
                     'new_teaser': self.new_teaser,

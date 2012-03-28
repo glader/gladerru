@@ -8,8 +8,6 @@ from django.core.management.base import NoArgsCommand
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from django_queue.models import Queue
-
 from core.models import Post
 from core.views.ugc import add_vote
 

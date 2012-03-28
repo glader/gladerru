@@ -4,7 +4,6 @@ from datetime import datetime, date, timedelta
 from itertools import groupby
 import calendar
 import re
-import imghdr
 from xml.etree import ElementTree as ET
 
 from django.conf import settings
@@ -26,7 +25,7 @@ from core.models import Post, Friend, UserNews, ItemVote, Movie, Photo, Comment,
 from core.signals import new_comment_signal
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
     make_pages, make_tag_pages, get_avatar_url, thumbnail
-from core.utils.common import process_template
+from core.utils.common import process_template, send_html_mail
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 
@@ -750,13 +749,13 @@ def add_comment(request, user=None, hidden=False):
 
 def vk_comment(request):
     user = User.objects.get(username='vkontakte')
-
-    Queue.add_task('email', {'email': 'glader.ru@gmail.com',
-                             'subject': 'new comment',
-                             'content': u"New comment: '%s' on item '%s_%s'" % (request.GET.get('content'),
-                                                                             request.GET.get('klass'),
-                                                                             request.GET.get('post')),
-                             })
+    send_html_mail(
+        'Glader.ru: new vk comment',
+        u"New comment: '%s' on item '%s_%s'" % ( request.GET.get('content'),
+                                                 request.GET.get('klass'),
+                                                 request.GET.get('post')),
+        'glader.ru@gmail.com'
+    )
 
     return add_comment(request, user=user, hidden=True)
 

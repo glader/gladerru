@@ -8,9 +8,7 @@ import re
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Context, loader
-from django_queue.models import Queue
-
-
+from django.core.mail import send_mail, mail_admins, EmailMessage
 
 translit = {u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g', u'д': u'd', u'е': u'e',
             u'ж': u'zh', u'з': u'z', u'и': u'i', u'й': u'j', u'к': u'k', u'л': u'l',
@@ -43,11 +41,17 @@ def slug(title):
     return re.sub("\s", "", rus2translit(title.strip())).lower().replace('-', '')
 
 
+def send_html_mail(subject, message, recipient_list):
+    if not isinstance(recipient_list, list):
+        recipient_list = [recipient_list]
+    message = EmailMessage(subject, message, to=recipient_list)
+    message.content_subtype = "html"
+    message.send()
+
+
 def notice_admin(text, subject=u"Glader.ru: Ошибка на сайте"):
-    for admin in settings.ADMINS:
-        Queue.add_task('email', {'email': admin[1],
-                                'subject': subject,
-                                'content': "<html><body>%s</body></html>" % text})
+    text = "<html><body>%s</body></html>" % text
+    mail_admins(subject, text, html_message=text)
 
 
 def cached(cache_key='', timeout_seconds=1800):
