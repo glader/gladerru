@@ -11,18 +11,18 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
 
-        for r in Item.objects.filter(type=28):
-            new_rubric = orm.Rubric(name=r.name, template=r.template, title=r.title, content=r.content, 
-                                abstract=r.abstract, image=r.image, menu_type=r.menu_type, order=r.order, 
+        for r in orm.Item.objects.filter(type=28):
+            new_rubric = orm.Rubric(name=r.name, template=r.template, title=r.title, content=r.content,
+                                abstract=r.abstract, image=r.image, menu_type=r.menu_type, order=r.order,
                                 skill=r.skill, url=r.url)
             new_rubric.save()
-            
+
             # Статьи и посты
             for i in r.get_items('children', 'BELONGS', item_types=['POST', 'ARTICLE']):
                 orm.Post.objects.filter(name=i.name).update(rubric=new_rubric)
-        
+
         # Связи
-        for r in Item.objects.filter(type=28):
+        for r in orm.Item.objects.filter(type=28):
             for i in r.get_items('children', 'BELONGS', item_types=['RUBRIC']):
                 orm.Rubric.objects.filter(name=i.name).update(parent=orm.Rubric.objects.get(name=r.name))
 

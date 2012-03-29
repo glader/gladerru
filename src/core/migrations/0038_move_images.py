@@ -11,11 +11,11 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
 
-        for image in Item.objects.filter(type__in=[22, 35]):
-            new_image = orm.Photo(slug=image.name, title=image.title, content=image.content, 
+        for image in orm.Item.objects.filter(type__in=[22, 35]):
+            new_image = orm.Photo(slug=image.name, title=image.title, content=image.content,
                                 status=image.status, date_created=image.date_created,
                                 image=image.image)
-            
+
             # Статьи и посты
             for i in image.get_items('parents', 'BELONGS', item_types=['POST', 'ARTICLE']):
                 new_image.post = orm.Post.objects.get(name=i.name)
