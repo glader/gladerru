@@ -1,11 +1,9 @@
 # encoding: utf-8
 
-import os
 from datetime import datetime
 import re
 import urllib
 from urllib import quote
-import Image
 
 from django import template
 from django.template import Context, loader, TemplateDoesNotExist
@@ -15,7 +13,7 @@ from django.core.paginator import QuerySetPaginator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Mountain, Region, PictureBox, Item, Photo, Word, Man, Tag, Comment, Song, Movie, Studio, Profile
+from core.models import Post, Mountain, Region, PictureBox, Photo, Word, Man, Tag, Comment, Song, Movie, Studio, Profile
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
@@ -253,15 +251,16 @@ def decimal_cut(value, numbers=1):
     format = "%%0.%df" % numbers
     return format % value
 
-# WTF
 @register.filter
 def type_name(item):
-    if isinstance(item, Item):
-        if item.type_id == 1:
+    u"""Имя для иконки в поиске"""
+    if isinstance(item, Post):
+        if item.name:
             return 'article'
         else:
             return 'post'
     return item.__class__.__name__.lower()
+
 
 @register.inclusion_tag('block_pagination.html', takes_context=True)
 def pagination(context, url=""):

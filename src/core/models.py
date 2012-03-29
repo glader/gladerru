@@ -493,19 +493,21 @@ class Rubric(models.Model):
         verbose_name_plural = u"Рубрики"
 
 
-STATUSES = (('pub', u'Опубликовано'),
-            ('save', u'Черновик'),
-            ('deferred', u'Отложено'),
-            ('del', u'Удалено'),
-            ('ban', u'Забанено'),
-            ('premoderate', u'Премодерация')
-            )
+STATUSES = (
+    ('pub', u'Опубликовано'),
+    ('save', u'Черновик'),
+    ('deferred', u'Отложено'),
+    ('del', u'Удалено'),
+    ('ban', u'Забанено'),
+    ('premoderate', u'Премодерация')
+)
 
-TYPES = (('post', u'Пост'),
-        ('teaser', u'Тизер фильма'),
-        ('full_movie', u'Полноформатный фильм'),
-         ('soundtrack', u'Музыка к фильму'),
-        )
+TYPES = (
+    ('post', u'Пост'),
+    ('teaser', u'Тизер фильма'),
+    ('full_movie', u'Полноформатный фильм'),
+    ('soundtrack', u'Музыка к фильму'),
+)
 
 class Post(models.Model, VoteMixin, UIDMixin):
     name = models.CharField(max_length=250, null=True, blank=True, unique=True, verbose_name=u"Имя элемента")
@@ -539,7 +541,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
     comments = generic.GenericRelation(Comment)
 
-    # WTF?
+    # привязка анонсов к фильмам
     item_type = models.ForeignKey(ContentType, null=True, blank=True)
     item_id = models.PositiveIntegerField(null=True, blank=True)
     item = generic.GenericForeignKey('item_type', 'item_id')
@@ -1073,7 +1075,3 @@ class UserVisitStat(models.Model):
 
 #User.profile = property(lambda u: Item.objects.get_or_create(user=u)[0])
 User.name = property(lambda u:u.first_name or u.username)
-
-# WTF?
-class Item(object):
-    pass
