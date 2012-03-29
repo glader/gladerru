@@ -268,13 +268,7 @@ def man_author_photos(request, slug):
 def search(request):
     query = request.POST.get('query', '')
 
-    log = logging.getLogger(settings.SEARCH_LOG_PATH)
-    log.setLevel(logging.INFO)
-    handler = logging.handlers.RotatingFileHandler(settings.SEARCH_LOG_PATH, maxBytes=1000000)
-    LOG_FORMAT = u'%(asctime)s: %(message)s'
-    LOG_TIME_FORMAT = u'%Y-%m-%d %H:%M:%S'
-    handler.setFormatter(logging.Formatter(LOG_FORMAT, LOG_TIME_FORMAT))
-    log.addHandler(handler)
+    log = logging.getLogger('django.search')
     log.info(u"%s\t%s", request.META['REMOTE_ADDR'], query)
 
     return render_to_response(request, 'search.html', {'result': search_provider(query),

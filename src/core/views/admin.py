@@ -290,7 +290,7 @@ def timing_report(request):
     u""" Страница с просмотром хронометража проекта """
     links = {}
     measures = []
-    for l in open(settings.TIMINGLOG_PATH):
+    for l in open(settings.LOGGING['handlers']['search']['filename']):
         row = l.strip().split('\t')
         row[0] = int(re.sub('[^\d]', '', row[0]))
         links.setdefault(row[1], []).append(row[0])

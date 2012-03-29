@@ -124,13 +124,7 @@ class Command(NoArgsCommand):
 
 
     def handle_noargs(self, **options):
-        log = logging.getLogger()
-        log.setLevel(logging.INFO)
-        handler = logging.handlers.RotatingFileHandler(settings.QUEUE_LOG_PATH, maxBytes=1000000)
-        LOG_FORMAT = u'%(levelname)s %(asctime)s: %(message)s'
-        LOG_TIME_FORMAT = u'%Y-%m-%d %H:%M:%S'
-        handler.setFormatter(logging.Formatter(LOG_FORMAT, LOG_TIME_FORMAT))
-        log.addHandler(handler)
+        log = logging.getLogger('django.queue')
         log.info('Start work')
 
         handlers = {'best_post': self.best_post,

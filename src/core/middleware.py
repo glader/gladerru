@@ -4,20 +4,18 @@ import os
 from datetime import datetime
 from django.conf import settings
 from django.utils.html import strip_spaces_between_tags as short
+import logging
+from time import time
 
 class Timing:
     def process_request(self, request):
         if settings.TIMING:
-            self.start = datetime.now()
+            self.start = time()
 
     def process_response(self, request, response):
         if settings.TIMING:
-            try:
-                log = open(settings.TIMING_LOG_PATH, 'a')
-                log.write("%s\t%s\t%s\n" % (datetime.now() - self.start, request.META['PATH_INFO'], datetime.now()))
-                log.close()
-            except:
-                pass
+            log = logging.getLogger('django.timing')
+            log.info("%0.3f\t%s", time() - self.start, request.META['PATH_INFO'])
 
         return response
 

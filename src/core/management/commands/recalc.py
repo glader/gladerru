@@ -8,8 +8,11 @@ from django.db import connection
 from django.contrib.auth.models import User
 
 from core.models import Post, Movie, Tag, Man2Movie, Comment, ItemVote
+import logging
 
 settings.TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../templates/3'), )
+
+log = logging.getLogger('django.cron')
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
@@ -80,4 +83,4 @@ class Command(NoArgsCommand):
             profile.rating = rating
             profile.save()
 
-        open(settings.CRON_LOG_PATH, "a").write("%s\trecalc\n" % datetime.now())
+        log.info(u"recalc")

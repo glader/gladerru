@@ -9,20 +9,23 @@ from django.contrib.auth.models import User
 from django_queue.models import Queue
 
 from core.models import Post, Photo
+import logging
 
 AUTHORS = ['LAhmatyi', 'tinki', 'skyslayer', 'akafist', 'prophoter']
+
+log = logging.getLogger('django.cron')
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         count = 0
         for item in Post.all.filter(status='deferred', date_created__lt=datetime.now()):
 
-            open(settings.CRON_LOG_PATH, "a").write("%s\tDeferred publication for post %s (%s)\n" % (datetime.now(), item.pk, item.get_absolute_url()))
+            log.info(u"Deferred publication for post %s (%s)", item.pk, item.get_absolute_url())
             if item.author.username == 'LAhmatyi':
                 author = User.objects.get(username=choice(AUTHORS))
                 item.author = author
                 item.abstract = 'LAhmatyi'
-                open(settings.CRON_LOG_PATH, "a").write("%s\tAuthor changed to %s for post %s (%s)\n" % (datetime.now(), author.username, item.pk, item.get_absolute_url()))
+                log.info(u"Author changed to %s for post %s (%s)", author.username, item.pk, item.get_absolute_url())
 
                 for p in Photo.objects.filter(post=item):
                     p.author = author
@@ -35,4 +38,4 @@ class Command(NoArgsCommand):
 
             count += 1
 
-        open(settings.CRON_LOG_PATH, "a").write("%s\tpublish deferred: %s\n" % (datetime.now(), count))
+        log.info(u"publish deferred: %s processed", count)

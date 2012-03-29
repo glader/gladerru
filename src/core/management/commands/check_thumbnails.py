@@ -2,10 +2,12 @@
 from itertools import chain
 
 from django.core.management.base import NoArgsCommand
-from django.core.mail import mail_admins
 
 from core.models import Photo, Man, Movie
 from core.utils.thumbnails import make_thumbnail
+import logging
+
+log = logging.getLogger('django.cron')
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
@@ -26,4 +28,4 @@ class Command(NoArgsCommand):
             except IOError, e:
                 print e
 
-        mail_admins('Glader.ru: thumbnails', "%s/%s thumbnails processed" % (count, total))
+        log.info(u"%s/%s thumbnails processed", count, total)

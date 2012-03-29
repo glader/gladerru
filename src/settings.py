@@ -94,9 +94,8 @@ YAPHOTO_HOST = 'api-fotki.yandex.ru'
 LOGIN_URL = '/auth/login'
 
 DESIGN_ID = 3
-
 MAIN_PAGE_LEVEL = 1
-
+ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
 CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
@@ -113,7 +112,6 @@ SAPE_LOG = '/var/log/projects/gladerru/sape.log'
 CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
 
 ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
-TIMINGLOG_PATH = '/var/log/projects/gladerru/timing.log'
 
 VK_API_ID = 2009513
 
@@ -127,7 +125,7 @@ LOGGING = {
             'format': '%(asctime)s %(name)-15s %(levelname)s %(message)s'
         },
         'simple': {
-            'format': '%(levelname)s %(message)s'
+            'format': '%(asctime)s %(levelname)s %(message)s'
         },
         },
     'handlers': {
@@ -145,32 +143,62 @@ LOGGING = {
         'mail_admins': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            }
-    },
+            },
+        'cron':{
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_PATH, 'cron.log'),
+            'formatter': 'verbose',
+            },
+        'queue':{
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_PATH, 'queue.log'),
+            'formatter': 'simple',
+            },
+        'timing':{
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_PATH, 'timing.log'),
+            'formatter': 'simple',
+            },
+        'search':{
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_PATH, 'search.log'),
+            'formatter': 'simple',
+            },
+        },
     'loggers': {
-        'django.request': {
+        'django.cron': {
+            'handlers': ['cron'],
+            'level': 'INFO',
+            'propagate': True,
+            },
+        'django.timing': {
+            'handlers': ['timing'],
+            'level': 'INFO',
+            'propagate': True,
+            },
+        'django.search': {
+            'handlers': ['search'],
+            'level': 'INFO',
+            'propagate': True,
+            },
+        'django.queue': {
+            'handlers': ['queue'],
+            'level': 'INFO',
+            'propagate': True,
+            },
+        'django': {
             'handlers': ['mail_admins', 'file'],
             'level': 'WARNING',
             'propagate': True,
             },
-        }
-}
+        },
+    }
 
 try:
     from local_settings import *
 except ImportError:
     pass
-
-
-# Разнообразные логи
-
-LOGGING_FORMAT = '%(asctime)s %(name)-15s %(levelname)s %(message)s'
-LOGGING_MAX_FILE_SIZE = 1 * 1024 * 1024 #: Максимальный размер файла с логами в байтах.
-LOGGING_MAX_FILES_COUNT = 10 #: Количество бекапов файлов с логами.
-
-CRON_LOG_PATH = os.path.join(LOG_PATH, 'cron.log')
-QUEUE_LOG_PATH = os.path.join(LOG_PATH, 'queue.log')
-TIMING_LOG_PATH = os.path.join(LOG_PATH, 'timing.log')
-SEARCH_LOG_PATH = os.path.join(LOG_PATH, 'search.log')
-
-ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
