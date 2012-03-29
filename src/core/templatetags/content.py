@@ -657,9 +657,9 @@ def thumbnail(image_url):
 ##########################################################################################
 # Admin site tags
 
-# WTF
 @register.simple_tag
 def get_admin_url(object):
+    u"""Ссылка на редактирование эелмента"""
     return u"http://%(domain)s/admind/%(app_label)s/%(module_name)s/%(object_id)s/" % {
         'domain': settings.DOMAIN,
         'app_label': object._meta.app_label,

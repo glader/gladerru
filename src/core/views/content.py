@@ -164,7 +164,7 @@ def movies(request):
 def movie(request, movie_name):
     movie = get_object_or_404(Movie, slug=movie_name)
     songs = Song.objects.filter(movie=movie)
-    return render_to_response(request, 'movie.html', {'movie':movie, 'songs':songs})
+    return render_to_response(request, 'movie.html', {'movie':movie, 'songs':songs, 'item': movie})
 
 def teasers(request):
     movies = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-year', '-rating')
