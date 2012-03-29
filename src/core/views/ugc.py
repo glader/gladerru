@@ -28,6 +28,7 @@ from core.templatetags.content import link, good_or_bad, signed_number, decimal_
 from core.utils.common import process_template, send_html_mail
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
+from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
 
 
 class JsonResponse(HttpResponse):
@@ -824,7 +825,8 @@ def add_photo(request):
     image = Photo(author=user, post=post, title='', yandex_fotki_image_src="%s#%s" % (url, id))
     image.save()
 
-    thumbnail_url = thumbnail(image.yandex_fotki_image_src)
+    make_thumbnail(image.yandex_fotki_image_src)
+    thumbnail_url = get_thumbnail_url(image.yandex_fotki_image_src)
 
     post.content += ' <glader pic="%s">' % image.pk
     post.save()
