@@ -14,12 +14,12 @@ class Migration(SchemaMigration):
         # Deleting field 'Studio.logo'
         db.delete_column('core_studio', 'logo')
 
-
         # Changing field 'Post.icon'
         db.alter_column('core_post', 'icon', self.gf('yafotki.fields.YFField')(max_length=255, null=True))
 
         # Changing field 'Mountain.image'
         db.alter_column('core_mountain', 'image', self.gf('yafotki.fields.YFField')(max_length=255, null=True))
+
     def backwards(self, orm):
 
         # Changing field 'MountainPhoto.image'
@@ -28,7 +28,6 @@ class Migration(SchemaMigration):
         db.add_column('core_studio', 'logo',
                       self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True, blank=True),
                       keep_default=False)
-
 
         # Changing field 'Post.icon'
         db.alter_column('core_post', 'icon', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True))

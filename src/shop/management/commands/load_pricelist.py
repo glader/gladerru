@@ -13,6 +13,7 @@ from shop.models import Category, Brand, Item
 
 URL = 'http://www.dosok.net/vkontakte-xml.php'
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         #log = get_logger('shop_load')
@@ -36,19 +37,17 @@ class Command(NoArgsCommand):
                 item_dict['category'] = self.get_category(item_dict)
                 if not item_dict['category']:
                     continue
-                
+
                 item_dict['brand'] = self.get_brand(item_dict['brand'])
                 item_dict['update'] = datetime.now()
                 del item_dict['podcategory']
-                
-                Item.objects.create(**item_dict)
 
+                Item.objects.create(**item_dict)
 
     def get_pricelist(self):
         #pricelist = urllib.urlopen(URL).read()
         path = os.path.dirname(__file__)
         return open(os.path.join(path, 'sample.xml')).read()
-
 
     def get_item(self, item_el):
         result = {}
@@ -59,11 +58,10 @@ class Command(NoArgsCommand):
 
         return result
 
-
     def get_category(self, item_dict):
         if not item_dict['category'] or not item_dict['podcategory']:
             return
-        
+
         try:
             category = Category.objects.get(title=item_dict['category'])
         except Category.DoesNotExist:
@@ -79,7 +77,6 @@ class Command(NoArgsCommand):
 
         else:
             return category
-
 
     def get_brand(self, brand_title):
         try:

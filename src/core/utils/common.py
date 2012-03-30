@@ -105,5 +105,3 @@ def clean_choice(variant, variants):
         return variant
     else:
         return variants[0]
-
-

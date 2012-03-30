@@ -40,7 +40,7 @@ class JsonResponse(HttpResponse):
 class JsonErrorResponse(JsonResponse):
     """ Error message """
     def __init__(self, data):
-        super(JsonErrorResponse, self).__init__({'error':data})
+        super(JsonErrorResponse, self).__init__({'error': data})
 
 
 def best_posts(page=None):
@@ -75,20 +75,20 @@ def tag(request, name):
                'filter': filter,
                'filters': [{'code':'best', 'title':u'Лучшие посты'},
                            {'code':'', 'title':u'Все посты'},
-                           {'code':'userphoto', 'title':u'Фотографии'},]
+                           {'code':'userphoto', 'title':u'Фотографии'}, ]
                }
 
     if filter == 'best':
         item_ids = [int(id) for id in tag.posts.split(',')] if tag.posts else []
         items = Post.objects.filter(pk__in=item_ids, hidden=False, best__isnull=False).order_by('-date_created')
-        context.update(make_pages(items, current_page=context.get('page')) )
+        context.update(make_pages(items, current_page=context.get('page')))
 
     elif filter == 'userphoto':
         items = tag.photo_set.filter(status='pub').order_by('-date_created')
-        context.update(make_pages(items, current_page=context.get('page')) )
+        context.update(make_pages(items, current_page=context.get('page')))
 
     else:
-        context.update(make_tag_pages(tag, current_page=context.get('page')) )
+        context.update(make_tag_pages(tag, current_page=context.get('page')))
 
     template = filter == 'userphoto' and 'tag_photos.html' or 'tag.html'
     return render_to_response(request, template, context)
@@ -98,7 +98,7 @@ def tags(request):
     tags = Tag.objects.filter(size__gt=1, type__gt=10).order_by('title')
     tags_cloud = TagsCloud(tags)
     tags_cloud.set_rel_sizes(12, 30)
-    return render_to_response(request, 'tags_all.html', {'tags':tags})
+    return render_to_response(request, 'tags_all.html', {'tags': tags})
 
 
 def messages_compose(request):
@@ -112,12 +112,13 @@ def messages_compose(request):
 # UGC
 ###############################################################################
 
+
 @time_slow
 @posts_feed()
 def all(request):
     """ Свежие записи во всех блогах """
     context = {'page': request.GET.get('page', ""),
-               'title':u'Все сообщения',
+               'title': u'Все сообщения',
                'menu_item': 'all_posts',
                }
     context.update(make_pages(Post.objects.filter(status='pub').order_by('-date_created'), current_page=context.get('page')))
@@ -131,10 +132,10 @@ def hidden(request):
     if not request.user.get_profile().is_moderator:
         raise Http404
     context = {'page': request.GET.get('page', ""),
-               'title':u'Все сообщения',
+               'title': u'Все сообщения',
                'menu_item': 'all_posts',
                }
-    context.update(make_pages(Post.objects.all().order_by('-date_created'), 30, context.get('page')) )
+    context.update(make_pages(Post.objects.all().order_by('-date_created'), 30, context.get('page')))
     return context
 
 
@@ -143,9 +144,9 @@ def hidden(request):
 def top_rating(request):
     u""" Лучшие за месяц """
     items = Post.objects \
-                .filter(date_created__gte=date.today()-timedelta(days=30)) \
+                .filter(date_created__gte=date.today() - timedelta(days=30)) \
                 .order_by('-rating')[:10]
-    return {'items': items, 'title':u'Лучшие за месяц', 'menu_item': 'rating'}
+    return {'items': items, 'title': u'Лучшие за месяц', 'menu_item': 'rating'}
 
 
 @time_slow
@@ -155,7 +156,7 @@ def top_discussed(request):
     items = Post.objects \
                 .filter(date_created__gte=date.today() - timedelta(days=30), comment_count__gt=0) \
                 .order_by('-comment_count')[:10]
-    return {'items': items, 'title':u'Самые обсуждаемые за месяц', 'menu_item': 'discussed'}
+    return {'items': items, 'title': u'Самые обсуждаемые за месяц', 'menu_item': 'discussed'}
 
 
 @time_slow
@@ -177,7 +178,7 @@ def users_new(request):
 @posts_feed(template="faq.html")
 def faq(request):
     u""" Посты с пометкой 'Вопрос' """
-    context = {'page': request.GET.get('page', ""),}
+    context = {'page': request.GET.get('page', ""), }
     context.update(make_pages(Post.objects.filter(tags__name='question').order_by('-date_created'), current_page=context.get('page')))
     return context
 
@@ -203,7 +204,7 @@ def schedule(request, year=None, month=None):
     for day in Post.objects.filter(event_date_start__gte=request_date, event_date_start__lte=request_date + timedelta(60)):
         eventdays.setdefault(day.event_date_start.date(), []).append(day)
 
-    for m in xrange(startMonth, startMonth+months_count):
+    for m in xrange(startMonth, startMonth + months_count):
         if m > 12:
             month = m - 12
             year = request_date.year + 1
@@ -216,7 +217,7 @@ def schedule(request, year=None, month=None):
         # FIXME: сделать предзагрузку дней тренингов
         for week in month_days:
             for i in xrange(0, len(week)):
-                week[i] = {'day':week[i]}
+                week[i] = {'day': week[i]}
                 try:
                     week[i]['date'] = date(year, month, int(week[i]['day']))
                     if today == week[i]['date']:
@@ -226,13 +227,13 @@ def schedule(request, year=None, month=None):
                 except ValueError:
                     week[i]['date'] = ''
 
-        schedule.append({'month':month_days,
-                         'number':month,
+        schedule.append({'month': month_days,
+                         'number': month,
                          })
 
     prev_date = (request_date - timedelta(days=15)).replace(day=1)
     next_date = (request_date + timedelta(days=45)).replace(day=1)
-    return render_to_response(request, 'schedule.html', {'schedule':schedule,
+    return render_to_response(request, 'schedule.html', {'schedule': schedule,
                                                          'prev_date': prev_date > today - timedelta(days=90) and prev_date or None,
                                                          'prev_link': reverse('schedule_month', args=[prev_date.year, prev_date.month]),
                                                          'next_date': next_date < today + timedelta(days=365) and next_date or None,
@@ -302,8 +303,8 @@ def my_friends(request):
 def get_user_news(user):
     usernews = UserNews.objects.filter(user=user)
     news = list(News.objects.filter(pk__in=[n.news_id for n in usernews]))
-    news.sort(key=lambda n:n.date_created, reverse=True)
-    news = [ {'date': k, 'news': list(v)} for k, v in groupby(news, key=lambda n:n.date_created.date()) ]
+    news.sort(key=lambda n: n.date_created, reverse=True)
+    news = [{'date': k, 'news': list(v)} for k, v in groupby(news, key=lambda n:n.date_created.date())]
     return news
 
 
@@ -356,7 +357,7 @@ def my_settings(request):
 @posts_feed(template="my/posts.html")
 def user_posts(request, username):
     user = get_user(username)
-    context = {'domain_user':user,
+    context = {'domain_user': user,
                'domain_profile': user.get_profile(),
                'page': request.GET.get('page', ""),
                'title': u"%s: Сообщения" % user.name,
@@ -370,7 +371,7 @@ def user_posts(request, username):
 def user_staff(request, username, section):
     """ Посты, комментарии, картинки, избранное отдельного юзера """
     user = get_user(username)
-    context = {'domain_user':user, 'domain_profile': user.get_profile(), 'page': request.GET.get('page', "")}
+    context = {'domain_user': user, 'domain_profile': user.get_profile(), 'page': request.GET.get('page', "")}
 
     objects = get_section_objects(user, section)
     context.update(make_pages(objects, current_page=context.get('page')))
@@ -396,17 +397,18 @@ def user_item(request, username, section, item_id):
 @time_slow
 def user_post(request, user, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    if not ( post.status == 'pub' or ( request.user.is_authenticated() and post.can_edit(request.user)) ):
+    if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
         raise Http404
 
     profile = user.get_profile()
-    context = {'domain_user':user,
+    context = {'domain_user': user,
                'profile': profile,
                'post': post,
                'can_edit': post.can_edit(request.user)
                }
 
     return render_to_response(request, 'post.html', context)
+
 
 @time_slow
 def user_photo(request, user, pic_id):
@@ -434,6 +436,7 @@ def user_photo(request, user, pic_id):
                                                       'can_edit': photo.can_edit(request.user),
                                                       'user': user})
 
+
 @auth_only
 def commented(request):
     # TODO: складывать новые комментарии в новости отдельного типа
@@ -450,6 +453,7 @@ def offer_movie(request):
                          request.META['REMOTE_ADDR'])
     return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
 
+
 @login_required
 def offer_rider(request):
     """ Формирование поста с новым райдером """
@@ -459,6 +463,7 @@ def offer_rider(request):
                          request.user,
                          request.META['REMOTE_ADDR'])
     return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
+
 
 @login_required
 def offer_moviemaker(request):
@@ -470,6 +475,7 @@ def offer_moviemaker(request):
                          request.META['REMOTE_ADDR'])
     return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
 
+
 def template_post(template, context, tags, author, ip):
     title, content = process_template('posts/%s' % template, context)
     post = Post(title=title, content=content, comment_count=0, status='save', author=author, ip=ip)
@@ -480,13 +486,14 @@ def template_post(template, context, tags, author, ip):
     post.rebuild_tags()
     return post
 
+
 def process_keywords(post):
     u"""Заменяет слова на ссылки по таблице Keywords"""
     words = list(Keyword.objects.all())
     words.sort(key=lambda word: len(word.keyword), reverse=True)
     for word in words:
         if word.keyword in post.content:
-            content = re.sub(u'(<[^>]+)%s' % word.keyword, lambda res:res.group(1) + u'ЪЪЪЪЪ', post.content, re.I)
+            content = re.sub(u'(<[^>]+)%s' % word.keyword, lambda res: res.group(1) + u'ЪЪЪЪЪ', post.content, re.I)
             content = re.sub(u'(?<!>)%s(?!<)' % word.keyword,
                                   u'<a href="%s" title="ЪЪЪЪЪ">%s</a>' % (word.url, word.keyword),
                                   content,
@@ -496,12 +503,14 @@ def process_keywords(post):
                                   content)
             post.content = re.sub(u'ЪЪЪЪЪ', word.keyword, content)
 
+
 @login_required
 def new_post(request):
     post = Post(title='', content='', comment_count=0,
                 status='save', author=request.user, ip=request.META['REMOTE_ADDR'])
     post.save()
     return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
+
 
 @login_required
 def edit_post(request, post_id):
@@ -523,7 +532,7 @@ def edit_post(request, post_id):
 
             # Теги
             post.tags.clear()
-            post.tags.add( *form.cleaned_data['tags'] )
+            post.tags.add(*form.cleaned_data['tags'])
 
             video_tag = Tag.objects.get(name='video')
             if ('<youtube' in post.content or '<embed' in post.content) and \
@@ -531,7 +540,7 @@ def edit_post(request, post_id):
                     post.tags.add(video_tag)
 
             # Статус
-            status = {u'Удалить':'del', u'Опубликовать':'pub', u'В черновики':'save'} \
+            status = {u'Удалить': 'del', u'Опубликовать': 'pub', u'В черновики': 'save'} \
                     .get(request.POST['action'])
             if status:
                 post.status = status
@@ -558,10 +567,10 @@ def edit_post(request, post_id):
                 if request.POST['action'] == u'Опубликовать':
                     for p in Photo.objects.filter(post=post):
                         p.tags.clear()
-                        p.tags.add( *form.cleaned_data['tags'] )
+                        p.tags.add(*form.cleaned_data['tags'])
 
                     if post.status == 'pub':
-                        Queue.add_task('new_post', {"post_id":post.id})
+                        Queue.add_task('new_post', {"post_id": post.id})
                     return HttpResponseRedirect(post.get_absolute_url())
 
                 elif request.POST['action'] == u'Удалить':
@@ -572,9 +581,9 @@ def edit_post(request, post_id):
             pass
     else:
         tags = post.tags.all().order_by('type', '-size')
-        initial = {'post':post.id,
-                   'title':post.title,
-                   'content':post.content,
+        initial = {'post': post.id,
+                   'title': post.title,
+                   'content': post.content,
                    'tags': [t.title for t in tags],
                    }
         form = PostForm(user=user, initial=initial, post=post)
@@ -583,8 +592,9 @@ def edit_post(request, post_id):
 
     return render_to_response(request,
                               'post_new.html',
-                              {'post':post, 'form':form, 'pictures': pictures}
+                              {'post': post, 'form': form, 'pictures': pictures}
                               )
+
 
 def edit_photo(request, photo_id):
     photo = get_object_or_404(Photo, pk=photo_id)
@@ -615,7 +625,8 @@ def edit_photo(request, photo_id):
     else:
         form = PhotoForm(photo=photo)
 
-    return render_to_response(request, 'photo_edit.html', {'form':form, 'photo':photo})
+    return render_to_response(request, 'photo_edit.html', {'form': form, 'photo': photo})
+
 
 @login_required
 def editprofile(request):
@@ -630,7 +641,8 @@ def editprofile(request):
     else:
         form = ProfileForm(instance=profile)
 
-    return render_to_response(request, 'profile_edit.html', {'form':form, 'domain_user':user})
+    return render_to_response(request, 'profile_edit.html', {'form': form, 'domain_user': user})
+
 
 @login_required
 def editavatar(request):
@@ -643,7 +655,7 @@ def editavatar(request):
     else:
         form = AvatarForm(initial={})
 
-    return render_to_response(request, 'avatar_edit.html', {'form':form, 'domain_user':user})
+    return render_to_response(request, 'avatar_edit.html', {'form': form, 'domain_user': user})
 
 
 def editpassword(request):
@@ -651,6 +663,7 @@ def editpassword(request):
 
 ###############################################################################
 # AJAX
+
 
 def add_comment(request, user=None, hidden=False):
     if not user:
@@ -680,7 +693,7 @@ def add_comment(request, user=None, hidden=False):
         if last_answers:
             def get_next_number(order, digits=3):
                 next = str(int(order) + 1)
-                return '0'*(digits-len(next))+next
+                return '0' * (digits - len(next)) + next
 
             curr_order = last_answers[0].order
             curr_order = re.sub('(\d{3})$', lambda res: get_next_number(res.group(1)), curr_order)
@@ -725,15 +738,15 @@ def add_comment(request, user=None, hidden=False):
         comment.profile_link = link(user)
 
         template = loader.get_template("blocks/b-comment.html")
-        html = template.render(Context({'comment':comment,
+        html = template.render(Context({'comment': comment,
                                         'post': form.cleaned_data['post'],
                                         'MEDIA_URL': settings.MEDIA_URL,
                                         'klass': form.cleaned_data['post'].__class__.__name__.lower()
                                         }))
 
-        result = {'success':True,
+        result = {'success': True,
                   'html': html,
-                  'afterComment':comment_place
+                  'afterComment': comment_place
                   }
 
     else:
@@ -745,14 +758,14 @@ def add_comment(request, user=None, hidden=False):
     if 'retpath' in request.GET:
         return HttpResponseRedirect(request.GET['retpath'])
 
-    return HttpResponse( simplejson.dumps(result) )
+    return HttpResponse(simplejson.dumps(result))
 
 
 def vk_comment(request):
     user = User.objects.get(username='vkontakte')
     send_html_mail(
         'Glader.ru: new vk comment',
-        u"New comment: '%s' on item '%s_%s'" % ( request.GET.get('content'),
+        u"New comment: '%s' on item '%s_%s'" % (request.GET.get('content'),
                                                  request.GET.get('klass'),
                                                  request.GET.get('post')),
         'glader.ru@gmail.com'
@@ -769,7 +782,7 @@ def add_post_vote(request):
         post = form.cleaned_data['post']
         add_vote(post, user, request.META['REMOTE_ADDR'])
         template_filter = isinstance(post, Movie) and decimal_cut or signed_number
-        result = {'success':True,
+        result = {'success': True,
                   'vote_class': 'rating_' + good_or_bad(post.rating),
                   'rating': str(template_filter(post.rating))
         }
@@ -783,7 +796,7 @@ def add_post_vote(request):
     if 'retpath' in request.GET:
         return HttpResponseRedirect(request.GET['retpath'])
     else:
-        return HttpResponse( simplejson.dumps(result) )
+        return HttpResponse(simplejson.dumps(result))
 
 
 def add_vote(post, user, ip):
@@ -797,7 +810,7 @@ def add_vote(post, user, ip):
 
     if hasattr(post, 'best') and not post.best and post.rating >= settings.MAIN_PAGE_LEVEL:
         post.best = datetime.now()
-        Queue.add_task('best_post', {"post_id":post.id, "klass": post.__class__.__name__})
+        Queue.add_task('best_post', {"post_id": post.id, "klass": post.__class__.__name__})
 
     post.save()
 
@@ -831,8 +844,8 @@ def add_photo(request):
     post.content += ' <glader pic="%s">' % image.pk
     post.save()
 
-    return HttpResponse( simplejson.dumps({'success':True,
-                                           'picture_id':image.pk,
+    return HttpResponse(simplejson.dumps({'success': True,
+                                           'picture_id': image.pk,
                                            'absolute_url': image.get_absolute_url(),
                                            'thumbnail_url': settings.MEDIA_URL + thumbnail_url
                                            }))
@@ -842,7 +855,7 @@ def add_to_yaphoto(content):
     from core.utils.post_multipart import post_multipart
     content = content.read()
 
-    files = [('image', 'image', content),]
+    files = [('image', 'image', content), ]
     status, reason, result = post_multipart(settings.YAPHOTO_HOST,
                                             None,
                                             settings.YAPHOTO_POST,
@@ -880,7 +893,7 @@ def best_answer(request):
             post.best_answer = comment
         post.save()
 
-        result = {'success':True}
+        result = {'success': True}
     else:
         if 'retpath' in request.GET:
             return HttpResponseRedirect(request.GET['retpath'])
@@ -891,6 +904,7 @@ def best_answer(request):
         return HttpResponseRedirect(request.GET['retpath'])
     else:
         return JsonResponse(result)
+
 
 @auth_only
 def add_friend(request):
@@ -904,8 +918,9 @@ def add_friend(request):
         return JsonErrorResponse(u"Вы уже дружите с этим пользователем")
 
     Friend.objects.create(user_a=user, user_b=new_friend)
-    Queue.add_task('new_friend', {"user":user.id, "new_friend":new_friend.id})
-    return JsonResponse( {'success':True})
+    Queue.add_task('new_friend', {"user": user.id, "new_friend": new_friend.id})
+    return JsonResponse({'success': True})
+
 
 @auth_only
 def cancel_friend(request):
@@ -919,7 +934,8 @@ def cancel_friend(request):
         return JsonErrorResponse(u"Вы и так не дружите с этим пользователем")
 
     Friend.objects.filter(user_a=user, user_b=new_friend).delete()
-    return JsonResponse( {'success':True})
+    return JsonResponse({'success': True})
+
 
 @auth_only
 def set_name(request):
@@ -937,7 +953,7 @@ def set_name(request):
 
     user.first_name = name
     user.save()
-    return JsonResponse( {'success':True})
+    return JsonResponse({'success': True})
 
 
 @auth_only
@@ -950,7 +966,7 @@ def set_news(request):
         profile.send_news = False
 
     profile.save()
-    return JsonResponse( {'success':True})
+    return JsonResponse({'success': True})
 
 
 def crossdomain(request):
@@ -965,8 +981,8 @@ def crossdomain(request):
 def tags_suggest(request):
     query = request.GET.get('tag', '')
     tags = [{'caption':t.title, 'value':t.title} for t in Tag.get_by_query(query)]
-    if len(query) >= 3 and not {'caption':query, 'value':query} in tags:
-        tags.append({'caption':u'+' + query, 'value':query})
+    if len(query) >= 3 and not {'caption': query, 'value': query} in tags:
+        tags.append({'caption': u'+' + query, 'value': query})
     return variants_to_response(tags)
 
 
@@ -983,7 +999,7 @@ def picturebox(request):
         result = {}
     else:
         next_picture = PictureBox.get_next_picture(user)
-        result = {'success':True, 'picture_id': next_picture.pk, 'preview': link(next_picture)}
+        result = {'success': True, 'picture_id': next_picture.pk, 'preview': link(next_picture)}
     return JsonResponse(result)
 
 
@@ -1002,7 +1018,7 @@ def registration(request):
                 profile.referer = request.session['referer']
                 profile.save()
             if request.is_ajax():
-                return HttpResponse( simplejson.dumps({'success': True, 'retpath':retpath}) )
+                return HttpResponse(simplejson.dumps({'success': True, 'retpath': retpath}))
             else:
                 return HttpResponseRedirect(retpath)
 
@@ -1010,10 +1026,11 @@ def registration(request):
             return JsonErrorResponse(form.str_errors())
 
     else:
-        form = RegistrationForm(initial={'retpath':request.GET.get('next')})
+        form = RegistrationForm(initial={'retpath': request.GET.get('next')})
 
-    return render_to_response(request, 'registration/login.html', {'registration_form':form,
+    return render_to_response(request, 'registration/login.html', {'registration_form': form,
                                                                    'login_form': LoginForm()})
+
 
 def login(request):
     if request.POST:
@@ -1023,7 +1040,7 @@ def login(request):
             auth.login(request, user)
             retpath = request.POST.get('retpath') or form.user.get_absolute_url()
             if request.is_ajax():
-                return HttpResponse( simplejson.dumps({'success': True, 'retpath':retpath}) )
+                return HttpResponse(simplejson.dumps({'success': True, 'retpath': retpath}))
             else:
                 return HttpResponseRedirect(retpath)
 
@@ -1031,7 +1048,7 @@ def login(request):
             return JsonErrorResponse(form.str_errors())
 
     else:
-        login_form = LoginForm(initial={'retpath':request.GET.get('next')})
+        login_form = LoginForm(initial={'retpath': request.GET.get('next')})
 
     registration_form = RegistrationForm(initial=request.GET)
     return render_to_response(request, 'registration/login.html', locals())

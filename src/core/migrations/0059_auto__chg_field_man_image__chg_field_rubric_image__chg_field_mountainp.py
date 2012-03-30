@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Changing field 'Man.image'
         db.alter_column('core_man', 'image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True))
 
@@ -26,9 +27,8 @@ class Migration(SchemaMigration):
         # Changing field 'Mountain.image'
         db.alter_column('core_mountain', 'image', self.gf('django.db.models.fields.files.ImageField')(max_length=100, null=True))
 
-
     def backwards(self, orm):
-        
+
         # Changing field 'Man.image'
         db.alter_column('core_man', 'image', self.gf('core.models.ThumbnailImageField')(max_length=100, null=True))
 
@@ -46,7 +46,6 @@ class Migration(SchemaMigration):
 
         # Changing field 'Mountain.image'
         db.alter_column('core_mountain', 'image', self.gf('core.models.ThumbnailImageField')(max_length=100, null=True))
-
 
     models = {
         'auth.group': {

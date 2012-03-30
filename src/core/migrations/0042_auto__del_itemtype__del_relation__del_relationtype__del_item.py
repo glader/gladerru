@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting model 'ItemType'
         db.delete_table('core_itemtype')
 
@@ -26,9 +27,8 @@ class Migration(SchemaMigration):
         # Removing M2M table for field favorites on 'Item'
         db.delete_table('core_item_favorites')
 
-
     def backwards(self, orm):
-        
+
         # Adding model 'ItemType'
         db.create_table('core_itemtype', (
             ('template', self.gf('django.db.models.fields.CharField')(max_length=250)),
@@ -111,7 +111,6 @@ class Migration(SchemaMigration):
             ('profile', models.ForeignKey(orm['core.profile'], null=False))
         ))
         db.create_unique('core_item_favorites', ['item_id', 'profile_id'])
-
 
     models = {
         'auth.group': {

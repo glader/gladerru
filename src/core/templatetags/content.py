@@ -22,6 +22,7 @@ from core.utils.thumbnails import get_thumbnail_url
 
 register = template.Library()
 
+
 @register.simple_tag
 def DOMAIN():
     return settings.DOMAIN
@@ -47,7 +48,7 @@ def get_params(request, param1, value1, param2=None, value2=None):
     params[param1] = value1
     if param2:
         params[param2] = value2
-    return "&".join( "%s=%s" % (k, urllib.quote(v)) for k, v in params.iteritems()  )
+    return "&".join("%s=%s" % (k, urllib.quote(v)) for k, v in params.iteritems())
 
 
 def make_pages(querySet, items_at_page=20, current_page=None):
@@ -62,12 +63,12 @@ def make_pages(querySet, items_at_page=20, current_page=None):
 
 def make_tag_pages(tag, items_at_page=20, current_page=None):
     item_ids = [int(id) for id in tag.posts.split(',')] if tag.posts else []
-    num_pages = (len(item_ids)+items_at_page-1) / items_at_page
+    num_pages = (len(item_ids) + items_at_page - 1) / items_at_page
     page_number = validate_page_number(current_page, num_pages)
 
-    page_ids = item_ids[(page_number-1) * items_at_page:page_number * items_at_page]
+    page_ids = item_ids[(page_number - 1) * items_at_page:page_number * items_at_page]
     posts = list(Post.objects.filter(hidden=False, id__in=page_ids))
-    posts.sort(key=lambda p:p.date_created, reverse=True)
+    posts.sort(key=lambda p: p.date_created, reverse=True)
     context = {'items': posts}
     context.update(other_pages(page_number, num_pages))
     return context
@@ -87,7 +88,7 @@ def get_mountains(region=None):
             regions_dict[m.region_id].mountains = []
         regions_dict[m.region_id].mountains.append(m)
 
-    return {'regions':regions, 'mountains': mountains}
+    return {'regions': regions, 'mountains': mountains}
 
 
 def validate_page_number(page, total):
@@ -104,8 +105,8 @@ def validate_page_number(page, total):
 
 def other_pages(page, total):
     return {
-               'pages': range(1, total+1),
-               'showed_pages': [p for p in range(1, total+1) if abs(p-page) <= 4],
+               'pages': range(1, total + 1),
+               'showed_pages': [p for p in range(1, total + 1) if abs(p - page) <= 4],
                'page_number': page,
                'first_page': page != 1 and 1 or None,
                'prev_page': page != 1 and page - 1 or None,
@@ -122,7 +123,7 @@ def hierarchy(item):
         p = item.get_parent()
         if p:
             item = p
-            parents.append({'title':item.title, 'link':item.get_absolute_url()})
+            parents.append({'title': item.title, 'link': item.get_absolute_url()})
         else:
             break
         i += 1
@@ -130,12 +131,12 @@ def hierarchy(item):
         raise IndexError(u"Что-то не так с иерархией, глубина вложенности - %s" % i)
 
     parents.reverse()
-    return {'links':parents}
+    return {'links': parents}
 
 
 @register.inclusion_tag("block_top_menu.html")
 def top_menu(level2='best', level1=None):
-    submenu = {'posts':[
+    submenu = {'posts': [
                         ['new', '/post/new', u'написать', u'Все ждут от тебя новый пост'],
                         ['best', '/', u'лучшие', u'Сообщения, выбранные читателями'],
                         ['all_posts', '/all', u'новые', u'Голосуй за лучшее'],
@@ -143,11 +144,11 @@ def top_menu(level2='best', level1=None):
                         ['rating', '/top/best', u'рейтинг', u'Самые лучшие за месяц'],
                         ['discussed', '/top/comments', u'обсуждаемые', u'Самые обсуждаемые за месяц'],
                         ],
-                'users':[
+                'users': [
                         ['users_best', '/rating/users/best', u'лучшие', u'доска почета'],
                         ['users_new', '/rating/users/new', u'новые', u'youngblood'],
                         ],
-                'articles':[
+                'articles': [
                         ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
                         ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],
                         ['freestyle', '/skills/freestyle', u'фристайл', u'те, кто хочет прыгать с трамплинов'],
@@ -155,7 +156,7 @@ def top_menu(level2='best', level1=None):
                         ['jibbing', '/skills/jibbing', u'джиббинг', u'тем, кто хочет слайдить по перилам'],
                         ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
                         ],
-                'movies':[
+                'movies': [
                         ['2011', '/movies?page=2011', u'2011', u'Фильмы 2011 года'],
                         ['2010', '/movies?page=2010', u'2010', u'Фильмы 2010 года'],
                         ['2009', '/movies?page=2009', u'2009', u'Фильмы 2009 года'],
@@ -164,15 +165,15 @@ def top_menu(level2='best', level1=None):
                         ['soundtracks', '/movies/soundtracks', u'саундтреки', u'Музыкальные треки к фильмам'],
                         ['studies', '/studies', u'студии', u'Авторы фильмов'],
                         ],
-                'mountains':[
+                'mountains': [
                         ['map', '/mountains', u'карта', u'Горки: информация, фотографии, цены, отзывы.'],
                         ],
-                'reference':[
+                'reference': [
                         ['people', '/people', u'люди', u'Райдеры, фотографы и прочие'],
                         ['dictionary', '/terms', u'словарь', u'Словарь всяких терминов'],
                         #['companies', '/content/companies.htm', u'фирмы', u'производители оборудования'],
                         ],
-                'profile':[
+                'profile': [
                         ['messages', '/messages/inbox/', u'сообщения', u'Личные сообщения'],
                         ['friends', '/my/friends', u'друзья', u'Список моих друзей'],
                         ['news', '/my/news', u'новости', u'Анонсы событий, интересных мне'],
@@ -181,6 +182,7 @@ def top_menu(level2='best', level1=None):
                         ['settings', '/my/settings', u'настройки', u''],
                         ]
                }
+
     def find_levels(level1, level2):
         if level1:
             return level1, level2
@@ -197,14 +199,15 @@ def top_menu(level2='best', level1=None):
 
     level1, level2 = find_levels(level1, level2)
 
-    return {'level1':level1, 'level2': level2, 'submenu': level1 and submenu[level1] or []}
+    return {'level1': level1, 'level2': level2, 'submenu': level1 and submenu[level1] or []}
+
 
 @register.inclusion_tag("block_dop_menu.html")
 def dop_menu(type):
     if not type:
-        return {'items':[]}
-    title = {'movie_menu':u'Фильмы', 'articles_menu':u'Статьи', 'world_menu':u'Мир'}.get(type, "").upper()
-    return {'items':Post.objects.filter(rubric__name=type), 'title':title}
+        return {'items': []}
+    title = {'movie_menu': u'Фильмы', 'articles_menu': u'Статьи', 'world_menu': u'Мир'}.get(type, "").upper()
+    return {'items': Post.objects.filter(rubric__name=type), 'title': title}
 
 
 @register.inclusion_tag("blocks/b-picturebox.html")
@@ -235,21 +238,30 @@ def first_paragraph(item):
         return ""
     return item.content.split("\n")[0] + u'<a href="%s">%s</a>' % (item.get_absolute_url(), u"Читать далее »")
 
+
 @register.filter
 def good_or_bad(rating):
-    if rating > 0: return "good"
-    elif rating < 0: return "bad"
-    else: return "zero"
+    if rating > 0:
+        return "good"
+    elif rating < 0:
+        return "bad"
+    else:
+        return "zero"
+
 
 @register.filter
 def signed_number(number):
-    if number > 0: return "+%d" % number
-    else: return "%d" % number
+    if number > 0:
+        return "+%d" % number
+    else:
+        return "%d" % number
+
 
 @register.filter
 def decimal_cut(value, numbers=1):
     format = "%%0.%df" % numbers
     return format % value
+
 
 @register.filter
 def type_name(item):
@@ -288,10 +300,14 @@ def riders(movie):
     return {'riders': riders}
 
 ##########################################################
+
+
 @register.filter
 def linebreaks(text):
-    if not text: return ""
+    if not text:
+        return ""
     return re.sub('\r?\n', '<br/>\n', text)
+
 
 @register.filter
 def parser(text):
@@ -303,14 +319,14 @@ def parser(text):
             tag, tokens = result.group(1).split(' ', 1)
         else:
             tag, tokens = result.group(1), ""
-        params = dict( (p, v) for p, v in re.findall('(\w+)=[\'\"]([^\'\"]+)[\'\"]', tokens))
+        params = dict((p, v) for p, v in re.findall('(\w+)=[\'\"]([^\'\"]+)[\'\"]', tokens))
         item = None
         if 'item' in params:
             if tag == 'ImageLink':
                 try:
                     item = Photo.objects.get(slug=params['item'])
                 except Photo.DoesNotExist:
-                    open('/var/log/projects/gladerru/miss', 'a').write( (u"[неизвестная картинка %s in fragment '%s']\n"% (params['item'], result.group(1))).encode('utf8' ))
+                    open('/var/log/projects/gladerru/miss', 'a').write((u"[неизвестная картинка %s in fragment '%s']\n" % (params['item'], result.group(1))).encode('utf8'))
                     return ""
             else:
                 for model, field in ((Post, 'name'), (Movie, 'slug'), (Word, 'slug'), (Man, 'slug'), (Mountain, 'name'), (Studio, 'slug')):
@@ -413,7 +429,7 @@ def parser(text):
     def emailHider(result):
         email = result.group(1)
         message = "<script>\n" \
-                + "".join( "document.write('%s');\n" % email[i:i+4] for i in xrange(0, len(email), 4)) \
+                + "".join("document.write('%s');\n" % email[i:i + 4] for i in xrange(0, len(email), 4)) \
                 + "</script>\n" \
                 + u"<noscript>[Email скрыт от роботов. Включите javascript, чтобы увидеть его.]</noscript>"
         return message
@@ -437,9 +453,9 @@ def parser(text):
     text = re.sub('<rutube>(\d+)</rutube>', rutubeId, text)
 
     for s in settings.SMILES:
-        text = re.sub('('+s+')', smiles, text)
+        text = re.sub('(' + s + ')', smiles, text)
 
-    BBCODE = {'\[b\]':'<strong>', '\[/b\]': '</strong>', '<blue>':'<span class="text_blue">', '</blue>':'</span>'}
+    BBCODE = {'\[b\]': '<strong>', '\[/b\]': '</strong>', '<blue>': '<span class="text_blue">', '</blue>': '</span>'}
     for b in BBCODE:
         text = re.sub(b, BBCODE[b], text)
     text = re.sub('\[img\](.+?)\[/img\]', r'<img src="\1">', text)
@@ -450,19 +466,25 @@ def parser(text):
     return mark_safe(text)
 
 ##########################################################
+
+
 @register.inclusion_tag('block_items_list.html')
 def items_list(items):
-    return {'items':items}
+    return {'items': items}
+
 
 @register.inclusion_tag('block_items_ul_list.html')
 def items_ul_list(items):
-    return {'items':items}
+    return {'items': items}
+
 
 @register.inclusion_tag('block_items_table_list.html')
 def items_table_list(items):
-    return {'items':items}
+    return {'items': items}
 
 ######################################################
+
+
 @cached(cache_key='last_conversations', timeout_seconds=settings.CACHE_LONG_TIMEOUT)
 def get_last_coversations():
     items = list(Post.objects.filter(status='pub').order_by('-last_comment_date')[:15]) + \
@@ -471,7 +493,7 @@ def get_last_coversations():
             list(Mountain.objects.all().order_by('-last_comment_date')[:15]) + \
             list(Movie.objects.all().order_by('-last_comment_date')[:15])
     anno = datetime(1900, 1, 1)
-    items.sort(key=lambda i:i.last_comment_date or anno, reverse=True)
+    items.sort(key=lambda i: i.last_comment_date or anno, reverse=True)
     items = items[:20]
 
     authors_ids = [item.author_id for item in items if hasattr(item, 'author_id')]
@@ -483,6 +505,7 @@ def get_last_coversations():
             item.author_name = None
 
     return items
+
 
 @register.inclusion_tag('block_last_conversations.html')
 def last_conversations():
@@ -511,13 +534,16 @@ def main_tags_list(amount=10):
 def el(dic, key):
     return dic.get(key)
 
+
 @register.inclusion_tag('block_items_ul_list.html')
 def mountains_list(region):
     return {'items': get_mountains(region)['mountains'][:20]}
 
+
 @register.inclusion_tag('block_soundtrack_list.html')
 def soundtrack_list(songs):
     return {'songs': songs}
+
 
 @register.inclusion_tag('block_soundtrack_list.html')
 def soundtrack(movie):
@@ -527,7 +553,8 @@ def soundtrack(movie):
 @time_slow(threshold=0)
 @register.filter
 def link(item):
-    if not item: return u"[Отсутствует объект]"
+    if not item:
+        return u"[Отсутствует объект]"
 
     if isinstance(item, Tag):
         return mark_safe(u'<a href="http://%s%s" rel="tag">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.title))
@@ -537,7 +564,7 @@ def link(item):
 
     if isinstance(item, Photo):
         return mark_safe(u'<a href="http://%s%s"><img class="userphoto" src="%s" alt="%s"></a>'
-                         % (settings.DOMAIN, item.get_absolute_url(), settings.MEDIA_URL + thumbnail(item.yandex_fotki_image_src), item.title ))
+                         % (settings.DOMAIN, item.get_absolute_url(), settings.MEDIA_URL + thumbnail(item.yandex_fotki_image_src), item.title))
 
     return mark_safe(u'<a href="http://%s%s">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.title))
 
@@ -548,6 +575,7 @@ def post_edit_link(post, user):
         return mark_safe('(<a href="%s">ред.</a>)' % reverse('edit_post', args=[post.pk]))
     return ""
 
+
 @register.simple_tag
 def post_status(post):
     if post.status == 'save':
@@ -557,6 +585,7 @@ def post_status(post):
     if post.status == 'deferred':
         return u"(будет опубликован %s)" % post.date_created
     return u""
+
 
 @register.filter
 def get_avatar_url(profile, size):
@@ -574,6 +603,8 @@ def add_referrer(html, referrer):
 
 ################################################################################
 # Блоги
+
+
 @register.simple_tag
 def cut_view(post, user, mode='normal'):
     if isinstance(post, Comment):
@@ -582,21 +613,22 @@ def cut_view(post, user, mode='normal'):
         template = "block_cut_post.html"
     try:
         t = loader.get_template(template)
-        return t.render(Context({'post':post, 'user':user, 'mode':mode}))
+        return t.render(Context({'post': post, 'user': user, 'mode': mode}))
     except TemplateDoesNotExist:
         return link(post)
 
+
 @register.inclusion_tag('block_post_panel.html')
 def post_panel(post, user, mode='normal'):
-    return {'post':post,
-            'user':user,
+    return {'post': post,
+            'user': user,
             'already_voted': post.get_vote(user) is not None,
-            'mode':mode,
+            'mode': mode,
             'klass': post.__class__.__name__.lower(),
     }
 
 
-@cached(cache_key=lambda post, r:'/%s/comments' % post.uid, timeout_seconds=settings.CACHE_LONG_TIMEOUT)
+@cached(cache_key=lambda post, r: '/%s/comments' % post.uid, timeout_seconds=settings.CACHE_LONG_TIMEOUT)
 def get_comments(post, request):
     comments = post.comments.filter(status='pub', hidden=False).order_by('order')
     users = User.objects.in_bulk(set(comment.author_id for comment in comments))
@@ -623,12 +655,12 @@ def comments(post, request):
 
 @register.filter
 def indent(order, add=0):
-    return (len(order) + add*3) * 10
+    return (len(order) + add * 3) * 10
 
 
 @register.inclusion_tag('block_post_vote.html')
 def post_vote_arrows(user, post):
-    return {'user':user, 'post':post,
+    return {'user': user, 'post': post,
             'can_vote': post.can_vote(user),
             }
 
@@ -657,6 +689,7 @@ def thumbnail(image_url):
 ##########################################################################################
 # Admin site tags
 
+
 @register.simple_tag
 def get_admin_url(object):
     u"""Ссылка на редактирование эелмента"""
@@ -666,6 +699,7 @@ def get_admin_url(object):
         'module_name': object._meta.module_name,
         'object_id': quote(unicode(object.pk).encode('utf8'))
     }
+
 
 @register.inclusion_tag('admin/tag_replace_form.html')
 def admin_tag_replace(object_id):

@@ -4,31 +4,31 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        
+
         for post in orm.Item.objects.filter(type=46):
-            new_post = orm.Post(name=post.name, author=post.author, date_created=post.date_created, 
-                                title=post.title, content=post.content, status=post.status, 
-                                abstract=post.abstract, best=post.best, comment_count=post.comment_count, 
-                                date=post.date, hidden=post.hidden, last_comment_date=post.last_comment_date, 
-                                rating=post.rating, skill=post.skill, tags_str=post.tags_str, url=post.url, 
-                                is_question=post.is_question, best_answer=post.best_answer, 
+            new_post = orm.Post(name=post.name, author=post.author, date_created=post.date_created,
+                                title=post.title, content=post.content, status=post.status,
+                                abstract=post.abstract, best=post.best, comment_count=post.comment_count,
+                                date=post.date, hidden=post.hidden, last_comment_date=post.last_comment_date,
+                                rating=post.rating, skill=post.skill, tags_str=post.tags_str, url=post.url,
+                                is_question=post.is_question, best_answer=post.best_answer,
                                 ask_for_answer_amount=post.ask_for_answer_amount, ip=post.ip)
             new_post.pk = int(post.name.replace('post_', ''))
             new_post.save()
-            
+
             new_post.tags.add(*list(post.tags.all()))
             new_post.favorites.add(*list(post.favorites.all()))
-            
+
             orm.Comment.objects.filter(content_type=16, object_id=post.pk).update(content_type=52, object_id=new_post.pk)
             orm.ItemVote.objects.filter(content_type=16, object_id=post.pk).update(content_type=52, object_id=new_post.pk)
 
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

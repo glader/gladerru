@@ -52,20 +52,17 @@ def init():
 
     if not exists('/etc/lighttpd/conf-available/90-gladerru.conf'):
         sudo('touch /etc/lighttpd/conf-available/90-gladerru.conf')
-        sudo('chown %s /etc/lighttpd/conf-available/90-gladerru.conf' % SSH_USER)
     if not exists('/etc/lighttpd/conf-enabled/90-gladerru.conf'):
         sudo('ln -s /etc/lighttpd/conf-available/90-gladerru.conf /etc/lighttpd/conf-enabled/90-gladerru.conf', shell=False)
 
     if not exists('/etc/sv/gladerru'):
         sudo('mkdir -p /etc/sv/gladerru/supervise')
         sudo('touch /etc/sv/gladerru/run')
-        sudo('chown %s /etc/sv/gladerru/run' % SSH_USER)
         sudo('chmod 755 /etc/sv/gladerru/run')
         sudo('ln -s /etc/sv/gladerru /etc/service/gladerru', shell=False)
 
     if not exists('/etc/cron.d/gladerru'):
         sudo('touch /etc/cron.d/gladerru')
-        sudo('chown %s /etc/cron.d/gladerru' % SSH_USER)
 
     sudo('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
     sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
@@ -84,6 +81,8 @@ def production():
     dump()
     migrate()
     restart()
+
+    restart_services()
 
 
 def upload():
@@ -119,16 +118,16 @@ def local_settings():
 
 def lighttpd():
     run('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env, shell=False)
-#    sudo('/etc/init.d/lighttpd reload', shell=False)
 
 
 def runit():
-    run('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env, shell=False)
+    env.deploy_user = env.user = 'ubuntu'
+    sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
 
 
 def cron():
-    run('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env, shell=False)
-    #run('sudo /etc/init.d/cron reload')
+    env.deploy_user = env.user = 'ubuntu'
+    sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
 
 
 def dump():
@@ -136,6 +135,7 @@ def dump():
 
 
 def manage_py(command):
+    env.deploy_user = env.user = SSH_USER
     virtualenv('cd %s && python manage.py %s' % (env.manage_dir, command))
 
 
@@ -144,7 +144,14 @@ def migrate():
 
 
 def restart():
+    env.deploy_user = env.user = SSH_USER
     run('sudo sv restart gladerru')
+
+
+def restart_services():
+    env.deploy_user = env.user = 'ubuntu'
+    sudo('/etc/init.d/cron reload')
+    sudo('/etc/init.d/lighttpd restart')
 
 
 def local_env():

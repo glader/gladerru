@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'Photo.yandex_fotki_image'
         db.delete_column('core_photo', 'yandex_fotki_image')
 
@@ -17,9 +18,8 @@ class Migration(SchemaMigration):
         # Adding field 'Photo.yandex_fotki_image_src'
         db.add_column('core_photo', 'yandex_fotki_image_src', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Adding field 'Photo.yandex_fotki_image'
         db.add_column('core_photo', 'yandex_fotki_image', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True), keep_default=False)
 
@@ -28,7 +28,6 @@ class Migration(SchemaMigration):
 
         # Deleting field 'Photo.yandex_fotki_image_src'
         db.delete_column('core_photo', 'yandex_fotki_image_src')
-
 
     models = {
         'auth.group': {

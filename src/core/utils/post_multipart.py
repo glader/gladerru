@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 # from http://aspn.activestate.com/ASPN/Cookbook/Python/Recipe/146306
-import httplib, mimetypes
+import httplib
+import mimetypes
 
 #XXX: это весьма ограниченный конструктор multipart запросов:
 # 1) не поддерживаются не ascii имена полей (нужно использовать quopri),
 # 2) нельзя управлять content-type полей
 # 3) unicode-значения полей считаются text/plain, и передаются в utf-8
+
 
 def force_str(s, encoding='utf-8'):
     if isinstance(s, unicode):
@@ -14,6 +16,8 @@ def force_str(s, encoding='utf-8'):
     return str(s)
 
 #FIXME: не ascii-имена файлов вообще-то требуется кодировать в quoted-printable
+
+
 def encode_multipart_formdata(fields, files):
     """
     fields is a sequence of (name, value) elements for regular form fields.
@@ -65,6 +69,7 @@ def encode_multipart_formdata(fields, files):
 #        parts.append(part)
 #    m = MIMEMultipart.MIMEMultipart('form-data', None, parts)
 #    return m.as_string()
+
 
 def get_content_type(filename):
     return mimetypes.guess_type(filename)[0] or 'application/octet-stream'

@@ -4,6 +4,7 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
@@ -24,10 +25,8 @@ class Migration(DataMigration):
             for i in r.get_items('children', 'BELONGS', item_types=['RUBRIC']):
                 orm.Rubric.objects.filter(name=i.name).update(parent=orm.Rubric.objects.get(name=r.name))
 
-
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

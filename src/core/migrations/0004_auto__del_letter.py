@@ -4,16 +4,16 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Deleting model 'Letter'
         db.delete_table('core_letter')
-    
-    
+
     def backwards(self, orm):
-        
+
         # Adding model 'Letter'
         db.create_table('core_letter', (
             ('date_sended', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
@@ -24,8 +24,7 @@ class Migration(SchemaMigration):
             ('subject', self.gf('django.db.models.fields.CharField')(max_length=200)),
         ))
         db.send_create_signal('core', ['Letter'])
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -400,5 +399,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

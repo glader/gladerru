@@ -4,11 +4,12 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        
+
         for n in orm.UserNews.objects.filter(news__isnull=True):
             try:
                 news = orm.News.objects.get(content=n.content, type=n.type)
@@ -18,14 +19,12 @@ class Migration(DataMigration):
                 news.save()
                 news.date_created = n.date_created
                 news.save()
-                
+
             n.news = news
             n.save()
 
-
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

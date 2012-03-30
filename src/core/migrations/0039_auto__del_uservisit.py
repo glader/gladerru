@@ -4,16 +4,16 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting model 'UserVisit'
         db.delete_table('core_uservisit')
 
-
     def backwards(self, orm):
-        
+
         # Adding model 'UserVisit'
         db.create_table('core_uservisit', (
             ('comments', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
@@ -23,7 +23,6 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
         ))
         db.send_create_signal('core', ['UserVisit'])
-
 
     models = {
         'auth.group': {

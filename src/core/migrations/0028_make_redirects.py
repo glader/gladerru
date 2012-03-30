@@ -4,19 +4,19 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        
+
         for r in orm.Item.objects.filter(type=52):
             orm.Redirect.objects.create(source='/content/%s.htm' % r.name, destination=r.url.replace('http://glader.ru', ''))
-        
+
         orm.Item.objects.filter(type=52).delete()
 
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

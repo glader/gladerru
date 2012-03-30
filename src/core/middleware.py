@@ -7,6 +7,7 @@ from django.utils.html import strip_spaces_between_tags as short
 import logging
 from time import time
 
+
 class Timing:
     def process_request(self, request):
         if settings.TIMING:

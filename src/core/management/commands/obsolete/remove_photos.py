@@ -10,6 +10,7 @@ from xml.etree import ElementTree as ET
 import httplib
 import re
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         for i, photo in enumerate(Photo.objects.filter(yandex_fotki_image_id__isnull=False).order_by('pk')):
@@ -23,7 +24,7 @@ class Command(NoArgsCommand):
                         sh = open('drop.sh', 'a')
                         sh.write('rm %s\n' % path)
                         sh.close()
-                        
+
                         photo.image = None
                         photo.save()
                     else:

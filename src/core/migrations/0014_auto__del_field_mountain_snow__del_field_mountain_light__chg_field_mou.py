@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Deleting field 'Mountain.snow'
         db.delete_column('core_mountain', 'snow')
 
@@ -16,10 +17,9 @@ class Migration(SchemaMigration):
 
         # Changing field 'Mountain.nightwork'
         db.alter_column('core_mountain', 'nightwork', self.gf('django.db.models.fields.TextField')(null=True, blank=True))
-    
-    
+
     def backwards(self, orm):
-        
+
         # Adding field 'Mountain.snow'
         db.add_column('core_mountain', 'snow', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True), keep_default=False)
 
@@ -28,8 +28,7 @@ class Migration(SchemaMigration):
 
         # Changing field 'Mountain.nightwork'
         db.alter_column('core_mountain', 'nightwork', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True))
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -433,5 +432,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

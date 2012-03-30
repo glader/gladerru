@@ -4,16 +4,16 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Deleting model 'UserPostNotice'
         db.delete_table('core_userpostnotice')
-    
-    
+
     def backwards(self, orm):
-        
+
         # Adding model 'UserPostNotice'
         db.create_table('core_userpostnotice', (
             ('post', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Item'])),
@@ -21,8 +21,7 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
         db.send_create_signal('core', ['UserPostNotice'])
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -420,5 +419,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

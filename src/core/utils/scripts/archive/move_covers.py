@@ -3,7 +3,8 @@
 
 import re
 from datetime import datetime
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings
@@ -20,6 +21,6 @@ for movie in Item.objects.filter(type=t):
     for i in movie.get_children():
         if 'cover' in i.name:
             print movie.name,
-            cursor.execute("UPDATE core_item SET cover=%s WHERE name=%s", ['data'+i.filename, movie.name])
+            cursor.execute("UPDATE core_item SET cover=%s WHERE name=%s", ['data' + i.filename, movie.name])
             i.delete()
             print "ok"

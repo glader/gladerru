@@ -52,14 +52,14 @@ class RegistrationForm(CommonForm):
     email = EmailField(max_length=100, error_messages={'required': u'Укажите свой email'})
     name = CharField(label=u'Имя пользователя', required=False)
     login = CharField(label=u'Логин', required=False, help_text=u'Поле для отсечения автоматических регистраторов',
-                      widget=TextInput(attrs={'class':'g-hidden'}))
+                      widget=TextInput(attrs={'class': 'g-hidden'}))
     password1 = CharField(max_length=100, required=False, widget=PasswordInput)
     password2 = CharField(max_length=100, required=False, widget=PasswordInput)
     retpath = CharField(max_length=2000, required=False, widget=HiddenInput)
 
     def free_credentials(self, s):
         u""" Проверяет строку на емейл, логин или имя пользователя """
-        return User.objects.filter(Q(username=s)|Q(email=s)|Q(first_name=s)).count() == 0
+        return User.objects.filter(Q(username=s) | Q(email=s) | Q(first_name=s)).count() == 0
 
     def make_login(self, desired_login=None):
         u""" Генерация логина на основе емейла """
@@ -101,7 +101,7 @@ class RegistrationForm(CommonForm):
         consonants = 'qwrtypsdfghjklzxcvbnm'
         digits = '123456789'
         pattern = 'cvcvcdcvcvc'
-        return ''.join( random.choice( {'v':vowels, 'c':consonants, 'd':digits}[c] ) for c in pattern )
+        return ''.join(random.choice({'v': vowels, 'c': consonants, 'd': digits}[c]) for c in pattern)
 
     def clean(self):
         if self.errors:
@@ -153,7 +153,7 @@ class LoginForm(CommonForm):
 
     def get_user(self, s):
         u""" Проверяет строку на емейл, логин или имя пользователя """
-        return User.objects.get(Q(username=s)|Q(email=s)|Q(first_name=s))
+        return User.objects.get(Q(username=s) | Q(email=s) | Q(first_name=s))
 
     def clean(self):
         login = self.cleaned_data.get('login', '')
@@ -201,9 +201,9 @@ class OpenMultipleChoiceField(MultipleChoiceField):
 class PostForm(CommonForm):
     post = IntegerField(label=u'Пост', required=False, widget=HiddenInput, help_text=u'Пост')
     title = CharField(label=u'Заголовок', error_messages={'required': u'Введите заголовок поста'},
-                      widget=TextInput(attrs={'class':'input'}))
+                      widget=TextInput(attrs={'class': 'input'}))
     content = CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
-                        widget=Textarea(attrs={'class':'content'}))
+                        widget=Textarea(attrs={'class': 'content'}))
     geography = BooleanField(label=u'Относится к моему городу', required=False)
     #tags = CharField(label=u'Теги', required=False,
     #                  widget=TextInput(attrs={'class':'tags'}))
@@ -211,12 +211,12 @@ class PostForm(CommonForm):
 
     #Картинка
     picture = ImageField(label=u'Картинка', required=False,
-                         widget=FileInput(attrs={'class':'picture'}))
+                         widget=FileInput(attrs={'class': 'picture'}))
 
     deferred_date = DateField(label=u"Дата публикации", required=False, initial=datetime.now().date)
     deferred_time = TimeField(label=u"Время публикации", required=False, initial=datetime.now().time)
 
-    event_date_start = DateField(label=u"Дата события", required=False, widget=DateInput(attrs={'class':'vDateField'}))
+    event_date_start = DateField(label=u"Дата события", required=False, widget=DateInput(attrs={'class': 'vDateField'}))
     event_date_finish = DateField(label=u"Дата окончания события", required=False)
 
     def __init__(self, *args, **kwargs):
@@ -228,9 +228,9 @@ class PostForm(CommonForm):
         if 'initial' in kwargs:
             self.fields['tags'].choices = [(t, t) for t in kwargs['initial']['tags']]
 
-
     def clean_post(self):
-        if not self.cleaned_data['post']: return None
+        if not self.cleaned_data['post']:
+            return None
         try:
             post = Post.all.get(id=self.cleaned_data['post'])
             author = post.author
@@ -242,7 +242,6 @@ class PostForm(CommonForm):
             raise ValidationError(u'Редактирование неизвестного поста.')
         except IndexError:
             raise ValidationError(u'Ошибка в посте, сообщите администрации.')
-
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
@@ -293,7 +292,8 @@ class PostCommentForm(CommonForm):
             return sanitizeHTML(content, mode='strict')
 
     def clean_comment(self):
-        if not self.cleaned_data['comment']: return None
+        if not self.cleaned_data['comment']:
+            return None
         try:
             return Comment.objects.get(pk=self.cleaned_data['comment'])
         except Comment.DoesNotExist:
@@ -401,14 +401,14 @@ class FeedbackForm(CommonForm):
 
 
 class PhotoForm(CommonForm):
-    title = CharField(label=u'Название', required=False, widget=TextInput(attrs={'size':'60'}))
-    tags = CharField(label=u'Теги', required=False, widget=TextInput(attrs={'size':'70'}))
+    title = CharField(label=u'Название', required=False, widget=TextInput(attrs={'size': '60'}))
+    tags = CharField(label=u'Теги', required=False, widget=TextInput(attrs={'size': '70'}))
 
     def __init__(self, *args, **kwargs):
         self.photo = kwargs.pop('photo')
         super(PhotoForm, self).__init__(*args, **kwargs)
         self.fields['title'].initial = self.photo.title
-        self.fields['tags'].initial = ", ".join( t.title for t in self.photo.tags.all())
+        self.fields['tags'].initial = ", ".join(t.title for t in self.photo.tags.all())
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
@@ -419,7 +419,7 @@ class PhotoForm(CommonForm):
     def save(self):
         self.photo.title = self.cleaned_data['title']
         self.photo.tags.clear()
-        self.photo.tags.add( *self.cleaned_data['tags'] )
+        self.photo.tags.add(*self.cleaned_data['tags'])
         self.photo.rebuild_tags()
 
 

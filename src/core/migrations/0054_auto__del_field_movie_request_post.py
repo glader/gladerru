@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'Movie.request_post'
         db.delete_column('core_movie', 'request_post_id')
 
-
     def backwards(self, orm):
-        
+
         # Adding field 'Movie.request_post'
         db.add_column('core_movie', 'request_post', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Post'], null=True, blank=True), keep_default=False)
-
 
     models = {
         'auth.group': {

@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 # Проверяет <glader page=""> и <ItemLink> на правильность
 
-import re, sys, os
+import re
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings

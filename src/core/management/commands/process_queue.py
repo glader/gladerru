@@ -11,6 +11,7 @@ from django_queue.models import Queue
 
 from core.models import News, UserNews, Movie, Friend, Post, Tag
 
+
 class Command(NoArgsCommand):
     def post_announce(self, post, announce_type, tag=None):
         params = {'user_url': post.author.get_absolute_url(),
@@ -38,7 +39,6 @@ class Command(NoArgsCommand):
         for tag in post.tags.all():
             tag.recalc_posts()
 
-
     def best_post(self, data):
         u"""Добавить уведомление о посте в новости юзеров"""
         if not data['klass'] == 'Post':
@@ -51,7 +51,6 @@ class Command(NoArgsCommand):
             if user == post.author:
                 continue
             UserNews.objects.create(user=user, news=news)
-
 
     def new_friend(self, data):
         u"""Уведомление юзерам что их друг нашел нового друга"""
@@ -71,7 +70,6 @@ class Command(NoArgsCommand):
 
             UserNews.objects.create(user=friend.user_a, news=news)
 
-
     def new_teaser(self, data):
         movie = Movie.objects.get(pk=data['movie_id'])
         params = {'movie_url': movie.get_absolute_url(),
@@ -81,7 +79,6 @@ class Command(NoArgsCommand):
 
         for user in User.objects.all():
             UserNews.objects.create(user=user, news=news)
-
 
     def new_fullmovie(self, data):
         movie = Movie.objects.get(pk=data['movie_id'])
@@ -93,7 +90,6 @@ class Command(NoArgsCommand):
         for user in User.objects.all():
             UserNews.objects.create(user=user, news=news)
 
-
     def new_tracklist(self, data):
         movie = Movie.objects.get(pk=data['movie_id'])
         params = {'movie_url': movie.get_absolute_url(),
@@ -103,7 +99,6 @@ class Command(NoArgsCommand):
 
         for user in User.objects.all():
             UserNews.objects.create(user=user, news=news)
-
 
     def tag_synonim(self, data):
         u"""Тегу назначен синоним, надо пересчитать все посты с этим тегом"""
@@ -121,7 +116,6 @@ class Command(NoArgsCommand):
             i.rebuild_tags()
 
         tag.primary_synonim.recalc_posts()
-
 
     def handle_noargs(self, **options):
         log = logging.getLogger('django.queue')

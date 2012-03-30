@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'Comment.rating'
         db.delete_column('core_comment', 'rating')
 
-
     def backwards(self, orm):
-        
+
         # Adding field 'Comment.rating'
         db.add_column('core_comment', 'rating', self.gf('django.db.models.fields.FloatField')(default=0.0), keep_default=False)
-
 
     models = {
         'auth.group': {

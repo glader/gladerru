@@ -25,6 +25,7 @@ def change_user(request):
 ###############################################################################
 # Админка
 
+
 def moderator_required(func):
     def wrapper(request, *args, **kwargs):
         if request.user.is_authenticated() and request.user.get_profile().is_moderator:
@@ -146,6 +147,7 @@ def tag_replace(request):
 
     return HttpResponseRedirect('/admind/core/tag/%s/delete/' % object_id)
 
+
 @moderator_required
 def reports(request):
     if request.GET.get('full'):
@@ -201,6 +203,7 @@ def reports(request):
 
     return render_to_response(request, 'reports.html', locals())
 
+
 @moderator_required
 def memcache_report(request):
     try:
@@ -250,8 +253,9 @@ def memcache_report(request):
         'reports_memcached.html', dict(
             stats=stats,
             hit_rate=100 * stats.get_hits / stats.cmd_get,
-            time=datetime.now(), # server time
+            time=datetime.now(),  # server time
         ))
+
 
 @moderator_required
 def observe_404(request):
@@ -273,10 +277,10 @@ def observe_404(request):
 
         links.setdefault(record['url'], []).append(record)
 
-    unique_links = [ (i, url, links[url][-1]['dt'], reversed(links[url])) for i, url in enumerate(links) ]
-    unique_links.sort(key=lambda rec:rec[2], reverse=True)
+    unique_links = [(i, url, links[url][-1]['dt'], reversed(links[url])) for i, url in enumerate(links)]
+    unique_links.sort(key=lambda rec: rec[2], reverse=True)
 
-    return render_to_response(request, 'admin/observe_404.html', {'links':unique_links})
+    return render_to_response(request, 'admin/observe_404.html', {'links': unique_links})
 
 
 def human_timedelta(t):
@@ -298,15 +302,15 @@ def timing_report(request):
     for i, url in enumerate(links):
         links[url].sort(reverse=True)
 
-        measures.append( {'id': i,
-                          'url':url,
+        measures.append({'id': i,
+                          'url': url,
                           'amount': len(links[url]),
                           'average': human_timedelta(sum(links[url]) / len(links[url])),
                           'min': human_timedelta(links[url][-1]),
                           'max': human_timedelta(links[url][0]),
-                          'all': [ human_timedelta(t) for t in links[url] ],
-                          } )
+                          'all': [human_timedelta(t) for t in links[url]],
+})
 
-    measures.sort(key=lambda r:r['average'], reverse=True)
+    measures.sort(key=lambda r: r['average'], reverse=True)
 
-    return render_to_response(request, 'admin/timing_report.html', {'links':measures[:60]})
+    return render_to_response(request, 'admin/timing_report.html', {'links': measures[: 60]})

@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding model 'Redirect'
         db.create_table('core_redirect', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -16,12 +17,10 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('core', ['Redirect'])
 
-
     def backwards(self, orm):
-        
+
         # Deleting model 'Redirect'
         db.delete_table('core_redirect')
-
 
     models = {
         'auth.group': {

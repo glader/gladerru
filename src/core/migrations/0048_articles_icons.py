@@ -4,11 +4,12 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        
+
         icons = [["training", "data/images/icons/training.jpg"],
                 ["avalancheforecast", "data/images/icons/avalanche2.jpg"],
                 ["avalancheprobes", "data/images/icons/schup.jpg"],
@@ -72,14 +73,12 @@ class Migration(DataMigration):
                 ["thermo", "data/images/icons/thermo.jpg"],
                 ["trackers", "data/images/icons/tracker.gif"],
                 ]
-        
+
         for i in icons:
             orm.Post.objects.filter(name=i[0]).update(icon=i[1])
 
-
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

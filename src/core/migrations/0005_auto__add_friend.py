@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'Friend'
         db.create_table('core_friend', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -16,16 +17,14 @@ class Migration(SchemaMigration):
             ('date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal('core', ['Friend'])
-        
+
         db.execute("ALTER TABLE core_friend ADD UNIQUE INDEX `relation` (`user_a_id`, `user_b_id`)")
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting model 'Friend'
         db.delete_table('core_friend')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -401,5 +400,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

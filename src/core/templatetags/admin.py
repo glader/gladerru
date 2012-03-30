@@ -5,6 +5,7 @@ from core.models import Movie, Post
 
 register = template.Library()
 
+
 @register.inclusion_tag("admin/core/movie/announces.html")
 def movie_announces(movie_id):
     announces = {'object_id': movie_id}

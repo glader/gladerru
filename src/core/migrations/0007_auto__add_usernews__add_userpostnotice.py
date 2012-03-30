@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'UserNews'
         db.create_table('core_usernews', (
             ('object_id', self.gf('django.db.models.fields.PositiveIntegerField')()),
@@ -27,17 +28,15 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
         ))
         db.send_create_signal('core', ['UserPostNotice'])
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting model 'UserNews'
         db.delete_table('core_usernews')
 
         # Deleting model 'UserPostNotice'
         db.delete_table('core_userpostnotice')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -429,5 +428,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

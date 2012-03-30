@@ -27,7 +27,8 @@ class Brand(models.Model):
     u"""Бренд"""
     title = models.CharField(max_length=200, verbose_name=u"Название")
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         verbose_name = u"Бренд"
@@ -48,7 +49,8 @@ class Item(models.Model):
     url = models.CharField(max_length=255, verbose_name=u"Адрес")
     update = models.DateTimeField(verbose_name=u"Обновлено")
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         verbose_name = u"Товар"

@@ -7,6 +7,7 @@ from django.db import connection
 
 from admin_tools.dashboard import modules, Dashboard, AppIndexDashboard
 
+
 class UGCStat(modules.DashboardModule):
     def __init__(self, **kwargs):
         super(UGCStat, self).__init__(**kwargs)
@@ -22,10 +23,10 @@ class UGCStat(modules.DashboardModule):
                             group by d.date""" % (date.today(), date.today() - self.interval))
         registrations = cursor.fetchall()
         if registrations:
-            self.blocks.append({'title':u'Регистрации',
-                            'max':max(row[1] for row in registrations),
-                            'data':','.join(str(row[1]) for row in registrations),
-                            'days':'|%s|' % '|'.join(str(row[0].day) for row in registrations)
+            self.blocks.append({'title': u'Регистрации',
+                            'max': max(row[1] for row in registrations),
+                            'data': ','.join(str(row[1]) for row in registrations),
+                            'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
                             })
 
         cursor.execute("""SELECT d.date, COUNT(p.id)
@@ -35,10 +36,10 @@ class UGCStat(modules.DashboardModule):
                             group by d.date""" % (date.today(), date.today() - self.interval))
         comments = cursor.fetchall()
         if comments:
-            self.blocks.append({'title':u'Комментарии',
-                            'max':max(row[1] for row in comments),
-                            'data':','.join(str(row[1]) for row in comments),
-                            'days':'|%s|' % '|'.join(str(row[0].day) for row in registrations)
+            self.blocks.append({'title': u'Комментарии',
+                            'max': max(row[1] for row in comments),
+                            'data': ','.join(str(row[1]) for row in comments),
+                            'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
                             })
 
         cursor.execute("""SELECT d.date, COUNT(p.id)
@@ -48,12 +49,11 @@ class UGCStat(modules.DashboardModule):
                             group by d.date""" % (date.today(), date.today() - self.interval))
         visits = cursor.fetchall()
         if visits:
-            self.blocks.append({'title':u'Залогиненные',
-                            'max':max(row[1] for row in visits),
-                            'data':','.join(str(row[1]) for row in visits),
-                            'days':'|%s|' % '|'.join(str(row[0].day) for row in registrations)
+            self.blocks.append({'title': u'Залогиненные',
+                            'max': max(row[1] for row in visits),
+                            'data': ','.join(str(row[1]) for row in visits),
+                            'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
                             })
-
 
     def is_empty(self):
         return False
@@ -100,7 +100,6 @@ class CustomIndexDashboard(Dashboard):
             include_list=('django.contrib',),
         ))
 
-       
         self.children.append(modules.Group(
             title=u"Ссылки",
             display="tabs",
@@ -157,18 +156,17 @@ class CustomIndexDashboard(Dashboard):
                 ),
             ]
         ))
-                    
+
         self.children.append(modules.Group(
             title=u"Статистика",
             display="tabs",
             children=[
                 UGCStat(
-                    title=u"Месяц", 
+                    title=u"Месяц",
                     days=30
                 ),
             ]
         ))
-                
 
     def init_with_context(self, context):
         """
@@ -179,6 +177,7 @@ class CustomIndexDashboard(Dashboard):
 # to activate your app index dashboard add the following to your settings.py:
 #
 # ADMIN_TOOLS_APP_INDEX_DASHBOARD = 'glader.dashboard.CustomAppIndexDashboard'
+
 
 class CustomAppIndexDashboard(AppIndexDashboard):
     """

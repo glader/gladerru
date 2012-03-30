@@ -7,6 +7,7 @@ from core.utils.common import process_template, send_html_mail
 
 new_comment_signal = django.dispatch.Signal()
 
+
 def notice_about_comment(sender, **kwargs):
     current = sender.author
     if hasattr(kwargs['post'], 'author'):
@@ -17,7 +18,6 @@ def notice_about_comment(sender, **kwargs):
                                                         'comment': sender
                                                     })
             send_html_mail(subject, content, [post_author.email])
-
 
         comment_author = kwargs['answer_on'].author
         if comment_author and comment_author != current and comment_author != post_author and comment_author.email:

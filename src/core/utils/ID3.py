@@ -85,7 +85,7 @@
 #     Genre of the song. Integer value from 0 to 255. Genre specification
 #     comes from (sorry) WinAMP. http://mp3.musichall.cz/id3master/faq.htm
 #     has a list of current genres; I spell-checked this list against
-#     WinAMP's by running strings(1) on the file Winamp/Plugins/in_mp3.dll 
+#     WinAMP's by running strings(1) on the file Winamp/Plugins/in_mp3.dll
 #     and made a few corrections.
 #   ID3['GENRE']
 #     String value corresponding to the integer in ID3.genre.  If there
@@ -112,12 +112,12 @@
 #
 #     NOTE: write() is called from ID3's deconstructor, so it's technically
 #     unnecessary to call it. However, write() can raise an InvalidTagError,
-#     which can't be caught during deconstruction, so generally it's 
+#     which can't be caught during deconstruction, so generally it's
 #     nicer to call it when writing is desired.
-#   
+#
 #   delete()
 #     Flags the ID3 tag for deletion upon destruction of the object
-#   
+#
 #   find_genre(genre_string)
 #     Searches for the numerical value of the given genre string in the
 #     ID3.genres table. The search is performed case-insensitively. Returns
@@ -132,61 +132,68 @@
 #     See the notes above for the dictionary interface.
 #
 
-import string, types
+import string
+import types
 
 try:
-    string_types = [ types.StringType, types.UnicodeType ]
+    string_types = [types.StringType, types.UnicodeType]
 except AttributeError:                  # if no unicode support
 
-    string_types = [ types.StringType ]
+    string_types = [types.StringType]
+
 
 def lengthen(string, num_spaces):
     string = string[:num_spaces]
     return string + (' ' * (num_spaces - len(string)))
 
 # We would normally use string.rstrip(), but that doesn't remove \0 characters.
+
+
 def strip_padding(s):
     while len(s) > 0 and s[-1] in string.whitespace + "\0":
         s = s[:-1]
 
     return s
 
+
 class InvalidTagError:
     def __init__(self, msg):
 	self.msg = msg
+
     def __str__(self):
 	return self.msg
 
+
 class ID3:
 
-    genres = [ 
-	"Blues", "Classic Rock", "Country", "Dance", "Disco", "Funk", 
-	"Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other", 
-	"Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial", 
-	"Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack", 
-	"Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion", 
-	"Trance", "Classical", "Instrumental", "Acid", "House", "Game", 
-	"Sound Clip", "Gospel", "Noise", "Alt. Rock", "Bass", "Soul", 
-	"Punk", "Space", "Meditative", "Instrum. Pop", "Instrum. Rock", 
-	"Ethnic", "Gothic", "Darkwave", "Techno-Indust.", "Electronic", 
-	"Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy", 
-	"Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle", 
-	"Native American", "Cabaret", "New Wave", "Psychadelic", "Rave", 
-	"Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz", 
-	"Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk", 
-	"Folk/Rock", "National Folk", "Swing", "Fusion", "Bebob", "Latin", 
-	"Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock", 
-	"Progress. Rock", "Psychadel. Rock", "Symphonic Rock", "Slow Rock", 
-	"Big Band", "Chorus", "Easy Listening", "Acoustic", "Humour", 
-	"Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony", 
-	"Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam", 
-	"Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad", 
-	"Rhythmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo", 
-	"A Capella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass", 
-	"Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk", 
-	"Polsk Punk", "Beat", "Christian Gangsta Rap", "Heavy Metal", 
+    genres = [
+	"Blues", "Classic Rock", "Country", "Dance", "Disco", "Funk",
+	"Grunge", "Hip-Hop", "Jazz", "Metal", "New Age", "Oldies", "Other",
+	"Pop", "R&B", "Rap", "Reggae", "Rock", "Techno", "Industrial",
+	"Alternative", "Ska", "Death Metal", "Pranks", "Soundtrack",
+	"Euro-Techno", "Ambient", "Trip-Hop", "Vocal", "Jazz+Funk", "Fusion",
+	"Trance", "Classical", "Instrumental", "Acid", "House", "Game",
+	"Sound Clip", "Gospel", "Noise", "Alt. Rock", "Bass", "Soul",
+	"Punk", "Space", "Meditative", "Instrum. Pop", "Instrum. Rock",
+	"Ethnic", "Gothic", "Darkwave", "Techno-Indust.", "Electronic",
+	"Pop-Folk", "Eurodance", "Dream", "Southern Rock", "Comedy",
+	"Cult", "Gangsta", "Top 40", "Christian Rap", "Pop/Funk", "Jungle",
+	"Native American", "Cabaret", "New Wave", "Psychadelic", "Rave",
+	"Showtunes", "Trailer", "Lo-Fi", "Tribal", "Acid Punk", "Acid Jazz",
+	"Polka", "Retro", "Musical", "Rock & Roll", "Hard Rock", "Folk",
+	"Folk/Rock", "National Folk", "Swing", "Fusion", "Bebob", "Latin",
+	"Revival", "Celtic", "Bluegrass", "Avantgarde", "Gothic Rock",
+	"Progress. Rock", "Psychadel. Rock", "Symphonic Rock", "Slow Rock",
+	"Big Band", "Chorus", "Easy Listening", "Acoustic", "Humour",
+	"Speech", "Chanson", "Opera", "Chamber Music", "Sonata", "Symphony",
+	"Booty Bass", "Primus", "Porn Groove", "Satire", "Slow Jam",
+	"Club", "Tango", "Samba", "Folklore", "Ballad", "Power Ballad",
+	"Rhythmic Soul", "Freestyle", "Duet", "Punk Rock", "Drum Solo",
+	"A Capella", "Euro-House", "Dance Hall", "Goa", "Drum & Bass",
+	"Club-House", "Hardcore", "Terror", "Indie", "BritPop", "Negerpunk",
+	"Polsk Punk", "Beat", "Christian Gangsta Rap", "Heavy Metal",
 	"Black Metal", "Crossover", "Contemporary Christian", "Christian Rock",
-	"Merengue", "Salsa", "Thrash Metal", "Anime", "Jpop", "Synthpop" 
+	"Merengue", "Salsa", "Thrash Metal", "Anime", "Jpop", "Synthpop"
 	]
 
     def __init__(self, file, name='unknown filename', as_tuple=0):
@@ -195,7 +202,7 @@ class ID3:
         # We don't open in r+b if we don't have to, to allow read-only access
             self.file = open(file, 'rb')
             self.can_reopen = 1
-        elif hasattr(file, 'seek'): # assume it's an open file
+        elif hasattr(file, 'seek'):  # assume it's an open file
             if name == 'unknown filename' and hasattr(file, 'name'):
                 self.filename = file.name
             else:
@@ -203,7 +210,7 @@ class ID3:
 
             self.file = file
             self.can_reopen = 0
-            
+
 	self.d = {}
 	self.as_tuple = as_tuple
 	self.delete_tag = 0
@@ -211,7 +218,7 @@ class ID3:
 	self.modified = 0
 	self.has_tag = 0
 	self.had_tag = 0
-        
+
 	try:
 	    self.file.seek(-128, 2)
 
@@ -254,16 +261,22 @@ class ID3:
 
     def setup_dict(self):
         self.d = {}
-        if self.title: self.d["TITLE"] = self.tupleize(self.title)
-        if self.artist: self.d["ARTIST"] = self.tupleize(self.artist)
-        if self.album: self.d["ALBUM"] = self.tupleize(self.album)
-        if self.year: self.d["YEAR"] = self.tupleize(self.year)
-        if self.comment: self.d["COMMENT"] = self.tupleize(self.comment)
+        if self.title:
+            self.d["TITLE"] = self.tupleize(self.title)
+        if self.artist:
+            self.d["ARTIST"] = self.tupleize(self.artist)
+        if self.album:
+            self.d["ALBUM"] = self.tupleize(self.album)
+        if self.year:
+            self.d["YEAR"] = self.tupleize(self.year)
+        if self.comment:
+            self.d["COMMENT"] = self.tupleize(self.comment)
         if self.legal_genre(self.genre):
             self.d["GENRE"] = self.tupleize(self.genres[self.genre])
         else:
             self.d["GENRE"] = self.tupleize("Unknown Genre")
-        if self.track: self.d["TRACKNUMBER"] = self.tupleize(str(self.track))
+        if self.track:
+            self.d["TRACKNUMBER"] = self.tupleize(str(self.track))
 
     def delete(self):
 	self.zero()
@@ -277,9 +290,9 @@ class ID3:
 	self.year = ''
 	self.comment = ''
         self.track = None
-	self.genre = 255 # 'unknown', not 'blues'
+	self.genre = 255  # 'unknown', not 'blues'
         self.setup_dict()
-        
+
     def tupleize(self, s):
         if self.as_tuple and type(s) is not types.TupleType:
             return (s,)
@@ -315,7 +328,7 @@ class ID3:
 		if self.had_tag:
                     self.file.seek(-128, 2)
                 else:
-                    self.file.seek(0, 2) # a new tag is appended at the end
+                    self.file.seek(0, 2)  # a new tag is appended at the end
 		if self.delete_tag and self.had_tag:
 		    self.file.truncate()
                     self.had_tag = 0
@@ -371,10 +384,10 @@ class ID3:
             return self.d.values()
 
     def has_key(self, k):
-        return self.d.has_key(k)
+        return k in self.d
 
     def get(self, k, x=None):
-        if self.d.has_key(k):
+        if k in self.d:
             return self.d[k]
         else:
             return x

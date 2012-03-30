@@ -4,24 +4,23 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        
-        db.execute("DELETE FROM core_item WHERE type_id in (2, 3, 5, 14, 15, 16, 17, 23, 27, 34, 52)")
-        
-        db.execute("""DELETE r
-                    FROM core_relation r 
-                    LEFT JOIN core_item i ON r.item_a_id=i.id or r.item_b_id=i.id
-                    WHERE i.id is NULL""")  
-        
-        db.execute("DELETE FROM core_itemtype WHERE id in (2, 3, 5, 14, 15, 16, 17, 23, 27, 34, 52)")  
 
+        db.execute("DELETE FROM core_item WHERE type_id in (2, 3, 5, 14, 15, 16, 17, 23, 27, 34, 52)")
+
+        db.execute("""DELETE r
+                    FROM core_relation r
+                    LEFT JOIN core_item i ON r.item_a_id=i.id or r.item_b_id=i.id
+                    WHERE i.id is NULL""")
+
+        db.execute("DELETE FROM core_itemtype WHERE id in (2, 3, 5, 14, 15, 16, 17, 23, 27, 34, 52)")
 
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

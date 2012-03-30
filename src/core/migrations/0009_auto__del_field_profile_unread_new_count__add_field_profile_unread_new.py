@@ -4,8 +4,9 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
         # Adding field 'Mountain.parking'
         db.add_column('core_mountain', 'parking', self.gf('django.db.models.fields.BooleanField')(default=False, blank=True), keep_default=False)
@@ -39,9 +40,6 @@ class Migration(SchemaMigration):
         # Adding field 'Mountain.rental'
         db.add_column('core_mountain', 'has_service', self.gf('django.db.models.fields.BooleanField')(default=False, blank=True), keep_default=False)
 
-
-    
-    
     def backwards(self, orm):
         # Deleting field 'Mountain.parking'
         db.delete_column('core_mountain', 'parking')
@@ -72,8 +70,7 @@ class Migration(SchemaMigration):
 
         # Deleting field 'Mountain.email'
         db.delete_column('core_mountain', 'email')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -476,5 +473,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

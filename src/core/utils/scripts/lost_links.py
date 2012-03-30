@@ -3,7 +3,8 @@
 
 import re
 from datetime import datetime
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings
@@ -19,7 +20,7 @@ for i in Item.objects.all():
             tag, tokens = result.group(1).split(' ', 1)
         else:
             tag, tokens = result.group(1), ""
-        params = dict( (p, v) for p, v in re.findall('(\w+)=[\'\"]([^\'\"]+)[\'\"]', tokens))
+        params = dict((p, v) for p, v in re.findall('(\w+)=[\'\"]([^\'\"]+)[\'\"]', tokens))
         item = None
         if 'item' in params:
             try:
@@ -33,7 +34,6 @@ for i in Item.objects.all():
         except Item.DoesNotExist:
             print "Page '%s' not found in content '%s'" % (result.group(1), i.name)
 
-    
     for text in (i.content, i.abstract):
         if text:
             re.sub('<:(.+?):>', tagsParser, text)

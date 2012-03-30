@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'Post.date'
         db.delete_column('core_post', 'date')
 
@@ -17,9 +18,8 @@ class Migration(SchemaMigration):
         # Adding field 'Post.event_date_finish'
         db.add_column('core_post', 'event_date_finish', self.gf('django.db.models.fields.DateTimeField')(default=None, null=True, blank=True), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Adding field 'Post.date'
         db.add_column('core_post', 'date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True), keep_default=False)
 
@@ -28,7 +28,6 @@ class Migration(SchemaMigration):
 
         # Deleting field 'Post.event_date_finish'
         db.delete_column('core_post', 'event_date_finish')
-
 
     models = {
         'auth.group': {

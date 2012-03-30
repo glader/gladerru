@@ -4,20 +4,19 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'Movie.full_movie'
         db.add_column('core_movie', 'full_movie', self.gf('django.db.models.fields.TextField')(null=True, blank=True))
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting field 'Movie.full_movie'
         db.delete_column('core_movie', 'full_movie')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -401,5 +400,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

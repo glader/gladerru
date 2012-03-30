@@ -3,7 +3,8 @@
 
 import re
 from datetime import datetime
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings
@@ -17,16 +18,15 @@ reports = Item.objects.get(name='reports').get_children()
 for r in reports:
     type = ItemType.by_name['POST']
     name = Item.get_next_name('POST')
-    post = Item(name=name, type=type, 
-                title=r.title, content=r.content, 
-                comment_count=0, status='pub', 
-                
+    post = Item(name=name, type=type,
+                title=r.title, content=r.content,
+                comment_count=0, status='pub',
+
                 )
     post.save()
     author = Item.objects.get(pk=1)
     post.add_rel(author, 'parents', 'AUTHOR')
-    post.tags.add( *Tag.process_tags(u'Разное, Отчет') )
-    post.date_created=r.date_created
+    post.tags.add(*Tag.process_tags(u'Разное, Отчет'))
+    post.date_created = r.date_created
     post.save()
     print post.get_absolute_url()
-    

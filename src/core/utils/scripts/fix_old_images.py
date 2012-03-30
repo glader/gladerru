@@ -3,7 +3,8 @@
 
 import re
 from datetime import datetime
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings
@@ -25,7 +26,7 @@ def picture(result):
 for i in Item.objects.filter(content__contains="/files/"):
 	i.content = re.sub("files/other", "media/data/other", i.content)
 	i.content = re.sub("files/images", "media/data/images", i.content)
-	
+
 	i.content = re.sub('(<a href="http://glader.ru/files/users/.+?/(\d+).JPG".+?</a>)', picture, i.content)
 
 	i.save()

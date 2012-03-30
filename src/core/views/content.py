@@ -66,8 +66,8 @@ def get_article_content(request, item):
     return {'content': content,
             'menu': menu,
             'page': page,
-            'previous': page > 0 and (page-1, menu[page-1]) or None,
-            'next': page < len(menu)-1 and (page+1, menu[page+1]) or None,
+            'previous': page > 0 and (page - 1, menu[page - 1]) or None,
+            'next': page < len(menu) - 1 and (page + 1, menu[page + 1]) or None,
             }
 
 
@@ -85,11 +85,13 @@ def rubric(request, name):
 
     return render_to_response(request, template, context)
 
+
 @time_slow
 def mountains(request):
     context = get_mountains()
     context['YAMAPS_API_KEY'] = settings.YAMAPS_API_KEY
     return render_to_response(request, 'mountains.html', context)
+
 
 @time_slow
 def mountain(request, name):
@@ -104,6 +106,7 @@ def region(request, region_id):
 alphabet_letters = [[u'A', u'B', u'C', u'D', u'E', u'F', u'G', u'H', u'I', u'J', u'K', u'L', u'M', u'N', u'O', u'P', u'Q', u'R', u'S', u'T', u'U', u'V', u'W', u'X', u'Y', u'Z'],
                     [u'А', u'Б', u'В', u'Г', u'Д', u'Е', u'Ж', u'З', u'И', u'Й', u'К', u'Л', u'М', u'Н', u'О', u'П', u'Р', u'С', u'Т', u'У', u'Ф', u'Х', u'Ц', u'Ч', u'Ш', u'Щ', u'Ъ', u'Ы', u'Ь', u'Э', u'Ю', u'Я']]
 
+
 def dictionary(request):
     filter = clean_choice(request.GET.get('filter'), [''] + [d[0] for d in Word.DICTIONARIES])
     words = Word.objects.all().order_by('title')
@@ -113,22 +116,25 @@ def dictionary(request):
     present_letters = {}
     for word in words:
         present_letters.setdefault(word.title[0], []).append(word)
-    return render_to_response(request, 'dictionary.html', {'filter':filter,
-                                                           'alphabet_letters':alphabet_letters,
+    return render_to_response(request, 'dictionary.html', {'filter': filter,
+                                                           'alphabet_letters': alphabet_letters,
                                                            'present_letters': present_letters
                                                            })
+
 
 def dictionary_word(request, name):
     word = get_object_or_404(Word, slug=name)
     return render_to_response(request, 'word.html', {'item': word})
 
+
 def tricks(request):
     all_tricks = [t for t in Word.objects.all().order_by('type', 'title') if t.is_trick]
     cats = []
     for cat in Word.DICTIONARIES[2:]:
-        cats.append((cat[0], cat[1], [ t for t in all_tricks if t.type == cat[0]]))
+        cats.append((cat[0], cat[1], [t for t in all_tricks if t.type == cat[0]]))
 
-    return render_to_response(request, 'tricks.html', {'cats':cats})
+    return render_to_response(request, 'tricks.html', {'cats': cats})
+
 
 def trick(request, name):
     item = get_object_or_404(Word, slug=name)
@@ -137,12 +143,14 @@ def trick(request, name):
 
 def studies(request):
     studies = Studio.objects.all().order_by('title')
-    return render_to_response(request, 'studies.html', {'studies':studies})
+    return render_to_response(request, 'studies.html', {'studies': studies})
+
 
 def studio(request, studio_name):
     studio = get_object_or_404(Studio, slug=studio_name)
     movies = Movie.objects.filter(studio=studio).order_by('-year', 'title')
-    return render_to_response(request, 'studio.html', {'studio':studio, 'movies':movies})
+    return render_to_response(request, 'studio.html', {'studio': studio, 'movies': movies})
+
 
 @time_slow
 def movies(request):
@@ -151,24 +159,27 @@ def movies(request):
 
     movies = Movie.objects.all().order_by('-rating', 'title')
     if year == '06-00':
-        movies = movies.filter(Q(year__lte='2006') | Q(year__isnull=True) )
+        movies = movies.filter(Q(year__lte='2006') | Q(year__isnull=True))
     elif re.match('^\d+$', year):
         movies = movies.filter(year=year)
 
     if not len(movies):
         movies = Movie.objects.all().order_by('-rating', 'title')
 
-    return render_to_response(request, 'movies.html', {'movies':movies, 'year':year})
+    return render_to_response(request, 'movies.html', {'movies': movies, 'year': year})
+
 
 @time_slow
 def movie(request, movie_name):
     movie = get_object_or_404(Movie, slug=movie_name)
     songs = Song.objects.filter(movie=movie)
-    return render_to_response(request, 'movie.html', {'movie':movie, 'songs':songs, 'item': movie})
+    return render_to_response(request, 'movie.html', {'movie': movie, 'songs': songs, 'item': movie})
+
 
 def teasers(request):
     movies = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-year', '-rating')
     return render_to_response(request, 'teasers.html', make_pages(movies, 10, request.GET.get('page', "")))
+
 
 def soundtracks(request):
     movies = Movie.objects.filter(has_songs=True).order_by('-year', 'title')
@@ -176,8 +187,9 @@ def soundtracks(request):
 
 
 def discounts(request):
-    discounts = [ (k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'), lambda d: d.city) ]
+    discounts = [(k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'), lambda d: d.city)]
     return render_to_response(request, 'discounts.html', {'discounts': discounts})
+
 
 def discount_new(request):
     if not request.user.is_authenticated():
@@ -227,7 +239,7 @@ def discount_delete(request, discount_id):
         discount.delete()
         return HttpResponseRedirect(reverse('discounts'))
 
-    return render_to_response(request, 'discount_delete.html', {'discount':discount})
+    return render_to_response(request, 'discount_delete.html', {'discount': discount})
 
 
 def people(request):
@@ -235,8 +247,9 @@ def people(request):
     present_letters = {}
     for r in riders:
         present_letters.setdefault(r.title[0], []).append(r)
-    content = {'alphabet_letters':alphabet_letters, 'present_letters': present_letters}
+    content = {'alphabet_letters': alphabet_letters, 'present_letters': present_letters}
     return render_to_response(request, 'people.html', content)
+
 
 def man(request, man_name):
     item = get_object_or_404(Man, slug=man_name)
@@ -253,17 +266,20 @@ def man(request, man_name):
                                                       'more_author_photos': len(author_photos) > 3,
                                                       })
 
+
 def man_photos(request, slug):
     item = get_object_or_404(Man, slug=slug)
     context = make_pages(Photo.objects.filter(rider=item).order_by('-date_created'), current_page=request.GET.get('page', ""))
     context['title'] = mark_safe(u'%s - фотографии с %s участием' % (link(item), item.gender == 'm' and u'его' or u'её'))
     return render_to_response(request, 'rider_photos.html', context)
 
+
 def man_author_photos(request, slug):
     item = get_object_or_404(Man, slug=slug)
     context = make_pages(Photo.objects.filter(photographer=item).order_by('-date_created'), current_page=request.GET.get('page', ""))
     context['title'] = mark_safe(u'%s - фотографии %s авторства' % (link(item), item.gender == 'm' and u'его' or u'её'))
     return render_to_response(request, 'rider_photos.html', context)
+
 
 def search(request):
     query = request.POST.get('query', '')
@@ -274,6 +290,7 @@ def search(request):
     return render_to_response(request, 'search.html', {'result': search_provider(query),
                                                        'query': query
                                                        })
+
 
 def feedback(request):
     if request.POST:
@@ -352,7 +369,7 @@ def skills(request):
               ['icon_photo.jpg', 20, 0],
               ]
 
-    skills = dict( (s.slug, s) for s in Skill.objects.all())
+    skills = dict((s.slug, s) for s in Skill.objects.all())
     dop_blocks = []
 
     for block in blocks:
@@ -362,10 +379,11 @@ def skills(request):
 
         if code in skills:
             block.append(skills[code])
-            dop_blocks.append(('text_%s.jpg' % code, block[1], block[2] + 90, skills[code]) )
+            dop_blocks.append(('text_%s.jpg' % code, block[1], block[2] + 90, skills[code]))
 
     return render_to_response(request, 'skills.html', {'blocks': blocks + dop_blocks,
                                                        'rubrics': Rubric.objects.all().order_by('title')})
+
 
 def skill(request, name):
     skill = get_object_or_404(Skill, slug=name)

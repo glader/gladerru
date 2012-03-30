@@ -2,7 +2,8 @@
 
 import re
 from datetime import datetime
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings
@@ -13,21 +14,22 @@ from django.db import connection
 
 from core.models import Item, ItemType
 
+
 def thumbnail(result):
     url = result.group(1)
     if not 'thumbnails' in url:
         return url
-    
+
     print "found thumbnail", url,
-    
-    res = re.search('/files_users_([^/]+)_(\d+)\.jpg', url) 
+
+    res = re.search('/files_users_([^/]+)_(\d+)\.jpg', url)
     if res:
         name = 'files/users/' + res.group(1) + '/' + res.group(2) + '.jpg'
-        print name, 
+        print name,
         pic = Item.objects.get(filename=name)
         print pic.get_thumbnail_url()
         return pic.get_thumbnail_url()
-    
+
     else:
         print "BAD URL"
         exit(0)

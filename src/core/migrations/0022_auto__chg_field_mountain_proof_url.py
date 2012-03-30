@@ -4,19 +4,18 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Changing field 'Mountain.proof_url'
         db.alter_column('core_mountain', 'proof_url', self.gf('django.db.models.fields.TextField')(null=True, blank=True))
 
-
     def backwards(self, orm):
-        
+
         # Changing field 'Mountain.proof_url'
         db.alter_column('core_mountain', 'proof_url', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True))
-
 
     models = {
         'auth.group': {

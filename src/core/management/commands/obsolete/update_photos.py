@@ -10,6 +10,7 @@ from xml.etree import ElementTree as ET
 import httplib
 import re
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         ids = ()
@@ -50,7 +51,6 @@ class Command(NoArgsCommand):
                 else:
                     entry = entry.replace('</title>', '</title><summary>%s</summary>' % photo_descr)
 
-
                 h = httplib.HTTPConnection(settings.YAPHOTO_HOST, 80)
                 all_headers = {
                     'Content-Type': 'application/atom+xml; type=entry',
@@ -65,4 +65,3 @@ class Command(NoArgsCommand):
                 log = open('errors', 'a')
                 log.write("%s, " % photo.id)
                 log.close()
-

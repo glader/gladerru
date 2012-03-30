@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding model 'ItemType'
         db.create_table('core_itemtype', (
             ('description', self.gf('django.db.models.fields.CharField')(max_length=50)),
@@ -422,10 +423,9 @@ class Migration(SchemaMigration):
             ('user', self.gf('django.db.models.fields.PositiveIntegerField')()),
         ))
         db.send_create_signal('core', ['VKontakteInvite'])
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting model 'ItemType'
         db.delete_table('core_itemtype')
 
@@ -512,8 +512,7 @@ class Migration(SchemaMigration):
 
         # Deleting model 'VKontakteInvite'
         db.delete_table('core_vkontakteinvite')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -889,5 +888,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

@@ -4,11 +4,12 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
-    
+
     def forwards(self, orm):
         "Write your forwards methods here."
-        
+
         queries = """/ сноуборд
 / сноуборд фирмы
 / сноуборд форум
@@ -71,7 +72,7 @@ class Migration(DataMigration):
 /content/avalanchetracks.htm?page=4 погребённые лавиной
 /content/avalanchetracks.htm?page=4 погибли в лавине
 /content/avalanchetracks.htm?page=4 поиск в лавинах
-/content/avalanchetracks.htm?page=4 Пострадавший находится под завалом (завалена првая нога) в течение трех часов. Как называется состояние, которое обязательно разоьется у пострадавшего в подобной ситуации? 
+/content/avalanchetracks.htm?page=4 Пострадавший находится под завалом (завалена првая нога) в течение трех часов. Как называется состояние, которое обязательно разоьется у пострадавшего в подобной ситуации?
 /content/avalanchetracks.htm?page=5  прогнозирование лавин в европе
 /content/avalanchetracks.htm?page=5 снегозадерживающая конструкция по проекту специалистов института "Сахалингражданпроект" была установлена на склоне у санатория "Сахалин"
 /content/avalanchetracks.htm?page=5 штрафы за вынос поваленных деревьев из леса
@@ -99,7 +100,7 @@ class Migration(DataMigration):
 /content/batut.htm /content/batut.htm чтобы прыгать высоко не нужен нам батут
 /content/batut.htm реклама на батутах
 /content/batut.htm разряды батут
-/content/batut.htm стоимость прыжков на батуте 
+/content/batut.htm стоимость прыжков на батуте
 /content/batut.htm сетки и пружины для батутов
 /content/batut.htm трюки на батуте
 /content/batut.htm травмоопасный батут
@@ -122,7 +123,7 @@ class Migration(DataMigration):
 /content/batut.htm как правильно вращаться на батуте
 /content/batut.htm какой батут лучше
 /content/batut.htm прыгать на батуте
-/content/batut.htm правила установки батута 
+/content/batut.htm правила установки батута
 /content/batut.htm поролоновая яма с камеры
 /content/batut.htm полезные свойства батута
 /content/batut.htm отработка трюков на батуте
@@ -186,7 +187,7 @@ class Migration(DataMigration):
 /content/bigairbag.htm надувные замки
 /content/bigairbag.htm аэроподушка
 /content/bigairbag.htm аэроподушка видео
-/content/bigairbag.htm Bigair Bag 
+/content/bigairbag.htm Bigair Bag
 /content/bigblind.htm The Big Blind
 /content/bigbugel.htm фото канатно бугельного подъемника
 /content/bigbugel.htm куплю бугельный подъемник
@@ -199,7 +200,7 @@ class Migration(DataMigration):
 /content/bindings_detailed.htm /content/bindings_detailed.htm крепления
 /content/bindings_detailed.htm снимающиеся крепления
 /content/bindings_detailed.htm крепления
-/content/bindings_detailed.htm крепления 
+/content/bindings_detailed.htm крепления
 /content/bindings_detailed.htm как настроить крепления флоу
 /content/bindings_detailed.htm ботинки для креплений flow
 /content/bindings_detailed.htm Крепления фирмы Flow (Flow-In Bindings)
@@ -250,16 +251,16 @@ class Migration(DataMigration):
 /content/buy_goggles.htm сноубордические маски
 /content/buy_goggles.htm сварочные очки в горах
 /content/buy_goggles.htm купить лыжную маску
-/content/buy_goggles.htm купить маску 
-/content/buy_goggles.htm куплю маску 
+/content/buy_goggles.htm купить маску
+/content/buy_goggles.htm куплю маску
 /content/buy_goggles.htm маске
 /content/buy_goggles.htm КУПИТЬ МАСКА
 /content/buy_goggles.htm МАСКЕ
 /content/buy_helmets.htm размер шлема
-/content/buy_helmets.htm стоимость шлемов 
+/content/buy_helmets.htm стоимость шлемов
 /content/buy_helmets.htm стоимость шлема
 /content/buy_helmets.htm сноубордический шлем
-/content/buy_helmets.htm сноубордический шлем 
+/content/buy_helmets.htm сноубордический шлем
 /content/buy_helmets.htm шлём
 /content/buy_helmets.htm шлем
 /content/buy_helmets.htm шлем сноубордический
@@ -269,7 +270,7 @@ class Migration(DataMigration):
 /content/buy_helmets.htm шлем для каякинга
 /content/buy_helmets.htm шлем 55
 /content/buy_helmets.htm шлемы
-/content/buy_helmets.htm шлемы 
+/content/buy_helmets.htm шлемы
 /content/buy_helmets.htm шлема
 /content/buy_helmets.htm купит шлем
 /content/buy_helmets.htm купить шлем
@@ -309,7 +310,7 @@ class Migration(DataMigration):
 /content/buy_thermo.htm шерсть и запах пота
 /content/buy_thermo.htm купить тёплое термобельё
 /content/buy_thermo.htm купить термобелье
-/content/buy_thermo.htm купить нити Trevira 
+/content/buy_thermo.htm купить нити Trevira
 /content/buy_thermo.htm где лучше купить термобелье
 /content/buy_thermo.htm какой фирмы термобелье самое теплое
 /content/buy_thermo.htm какое купить термобелье
@@ -352,7 +353,7 @@ class Migration(DataMigration):
 /content/choose_cobra.htm купить рацию кобра
 /content/choose_cobra.htm кобра 4000
 /content/choose_cobra.htm кобра 4000 цена
-/content/choose_cobra.htm посоветуйте радиостанцию COBRA 
+/content/choose_cobra.htm посоветуйте радиостанцию COBRA
 /content/choose_cobra.htm посоветуйте хорошую рацию 3000 4000
 /content/choose_cobra.htm митинский рынок  раций
 /content/choose_cobra.htm Радиостанция kobra
@@ -450,8 +451,8 @@ class Migration(DataMigration):
 /content/gearing.htm вывод при покупке сноубордической одежды
 /content/gearing.htm большой выбор сноубордических курток
 /content/gearing.htm Сноубордическая зимняя куртка
-/content/gearing.htm Сноубордическая одежда 
-/content/gearing.htm Одежда сноубордическая 
+/content/gearing.htm Сноубордическая одежда
+/content/gearing.htm Одежда сноубордическая
 /content/gearing.htm Под термо бельё трусы не одевают?
 /content/gearing.htm ifgrb pbvybt cyje,jhlbxtcrbt
 /content/gondola.htm гондольные
@@ -468,10 +469,10 @@ class Migration(DataMigration):
 /content/grinding.htm что помогает от царапин на носу
 /content/grinding.htm как сделать парафин?
 /content/grinding.htm как парафинить сноуборд
-/content/grinding.htm как парафинить сноуборд 
+/content/grinding.htm как парафинить сноуборд
 /content/grinding.htm как заделывать скользяк
 /content/grinding.htm как gfhfabybnm сноуборд
-/content/grinding.htm предмет заусенцев 
+/content/grinding.htm предмет заусенцев
 /content/grinding.htm починка скользяка сноуборда
 /content/grinding.htm подготовить скользяк нового сноуборда
 /content/grinding.htm парафин хороший для сноуборда
@@ -518,7 +519,7 @@ class Migration(DataMigration):
 /content/halfpipe.htm катание на сноуборде выполнение трюков тренировка летом
 /content/halfpipe.htm как сделать инверт трюк
 /content/halfpipe.htm инверт трюк
-/content/halfpipe.htm пайп 
+/content/halfpipe.htm пайп
 /content/halfpipe.htm олимпиада в нагано halfpipe
 /content/halfpipe.htm Хафпайп
 /content/halfpipe.htm halfpipe
@@ -570,7 +571,7 @@ class Migration(DataMigration):
 /content/injuries.htm Крипления на лодижку
 /content/inshort.htm сноубордический фильм In Short
 /content/inshort.htm Toymaker — It was Supposedly An Easy Energy Release
-/content/irideparkcity.htm I Ride Park City 
+/content/irideparkcity.htm I Ride Park City
 /content/irideparkcity.htm Ride Park
 /content/jealouse_img_002.htm Victoria Jealouse
 /content/jibbing_articles.htm джиббинг
@@ -586,7 +587,7 @@ class Migration(DataMigration):
 /content/kropachev_img_01.htm паша кропачев
 /content/kropachev_img_01.htm павел кропачев
 /content/lame.htm сноубордическое видео
-/content/lame.htm видео сноубордическое Lame 
+/content/lame.htm видео сноубордическое Lame
 /content/lapina/all_photos наталья лапина новые фото
 /content/last_words.htm ПОСЛЕДНЕЕ ВИДЕО СНОУБОРДИСТОВ
 /content/lavrov_int_001.htm кто такой громель
@@ -604,7 +605,7 @@ class Migration(DataMigration):
 /content/manaraga.htm сноубордичесая экипировка Нижний Тагил
 /content/manglomoves.htm Manglo  Moves
 /content/maraphon.htm Марафон сноуборд видео торрент
-/content/mat.htm сноуборд vfn xfcnm 
+/content/mat.htm сноуборд vfn xfcnm
 /content/mat.htm мат часть
 /content/mat.htm матчасть
 /content/membrana_full.htm   мембранная ткань продать
@@ -630,12 +631,12 @@ class Migration(DataMigration):
 /content/membrana_full.htm трикотажная мембрана
 /content/membrana_full.htm трехслойная система одежды
 /content/membrana_full.htm трехслойная мембрана - ткань
-/content/membrana_full.htm ткань с сеткой трехслойноя 
+/content/membrana_full.htm ткань с сеткой трехслойноя
 /content/membrana_full.htm ткань с мембранным покрытием
 /content/membrana_full.htm ткань с мембраной
 /content/membrana_full.htm ткань сетка трехслойная
 /content/membrana_full.htm ткань трикотаж на мембране
-/content/membrana_full.htm ткань трехслойная мембранная 
+/content/membrana_full.htm ткань трехслойная мембранная
 /content/membrana_full.htm ткань из 3-х букв
 /content/membrana_full.htm ткань мемрана
 /content/membrana_full.htm ткань мембранная
@@ -643,7 +644,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm ткань мембранная купить
 /content/membrana_full.htm ткань мембранная:
 /content/membrana_full.htm ткань мембрана
-/content/membrana_full.htm ткань мембрана Toray 
+/content/membrana_full.htm ткань мембрана Toray
 /content/membrana_full.htm ткань для мембрана строение
 /content/membrana_full.htm ткани с мембраной
 /content/membrana_full.htm технические характеристики двухслойной мембраны
@@ -657,7 +658,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm куртка из мембранных тканей
 /content/membrana_full.htm куртка мембранная
 /content/membrana_full.htm купть мембранную ткань
-/content/membrana_full.htm купить  ткань с полиуретановой мембраной 
+/content/membrana_full.htm купить  ткань с полиуретановой мембраной
 /content/membrana_full.htm купить онлайн ткани для одежды
 /content/membrana_full.htm купить мембранную ткань
 /content/membrana_full.htm купить мембранную ткань для курток
@@ -672,7 +673,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm профессиональные моющие средства для стирки мембранных тканей
 /content/membrana_full.htm проклейка швов
 /content/membrana_full.htm из мембранного трикотажа
-/content/membrana_full.htm изделия из клапанная ткань 
+/content/membrana_full.htm изделия из клапанная ткань
 /content/membrana_full.htm изделия из мембраны
 /content/membrana_full.htm покрытие мебрана
 /content/membrana_full.htm полиуретановая мембрана
@@ -682,7 +683,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm лента для защиты швов ткани от воды
 /content/membrana_full.htm мировые бренды одежды из мембраны
 /content/membrana_full.htm можноли стирать мембранную ткань
-/content/membrana_full.htm мембран. ткани 
+/content/membrana_full.htm мембран. ткани
 /content/membrana_full.htm мембраны
 /content/membrana_full.htm мембраны ткани
 /content/membrana_full.htm мембраны и ткани
@@ -690,7 +691,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm мембраны в  одежде трехслойной системы
 /content/membrana_full.htm мембраные ткани
 /content/membrana_full.htm мембранных
-/content/membrana_full.htm мембранных тканей 
+/content/membrana_full.htm мембранных тканей
 /content/membrana_full.htm мембранных тканей eVent®
 /content/membrana_full.htm мембранные    ткани
 /content/membrana_full.htm мембранные   ткани
@@ -703,7 +704,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm мембранной ткани
 /content/membrana_full.htm мембранна ткань
 /content/membrana_full.htm мембранная ткань
-/content/membrana_full.htm мембранная ткань 
+/content/membrana_full.htm мембранная ткань
 /content/membrana_full.htm мембранная ткань уход
 /content/membrana_full.htm мембранная ткань купить
 /content/membrana_full.htm мембранная ткань eVENT
@@ -723,7 +724,7 @@ class Migration(DataMigration):
 /content/membrana_full.htm одежда из мембран
 /content/membrana_full.htm одежда из мембраны
 /content/membrana_full.htm одежда из мембранной ткани
-/content/membrana_full.htm одежда из мембранной ткани 
+/content/membrana_full.htm одежда из мембранной ткани
 /content/membrana_full.htm одежда из мембрана от производителя
 /content/membrana_full.htm одежда для рыбалки из мембранной ткани от мировых брендов
 /content/membrana_full.htm двухслойная водонепроницаемая мембрана
@@ -819,8 +820,8 @@ class Migration(DataMigration):
 /content/poetry_01.htm Стихи сноуборд
 /content/ponytale.htm pony tale
 /content/ponytale.htm Pony Tale - (2008)
-/content/ponytale.htm The Presets - This Boy's in Love The Golden Dogs - Never Meant Any Harm 
-/content/ponytale.htm The Presets - This Boy's In Love The Golden Dogs - Never Meant Any Harm 
+/content/ponytale.htm The Presets - This Boy's in Love The Golden Dogs - Never Meant Any Harm
+/content/ponytale.htm The Presets - This Boy's In Love The Golden Dogs - Never Meant Any Harm
 /content/radio.htm  каналы для раций
 /content/radio.htm рация от батареек
 /content/radio.htm рации дальность приема от5 до 10 км
@@ -864,7 +865,7 @@ class Migration(DataMigration):
 /content/rightspins.htm заезд на сноуборде трамплин
 /content/rossignol.htm rossignol сайт
 /content/rossignol.htm rossignol одежда
-/content/saturation.htm saturation сноубордические фильмы 
+/content/saturation.htm saturation сноубордические фильмы
 /content/saturation.htm saturation видеоъ torrent
 /content/saturation_quot_1.htm Absinthe Films Saturation
 /content/saturation_quot_1.htm saturation absinthe
@@ -876,7 +877,7 @@ class Migration(DataMigration):
 /content/shaun_img_07.htm Скачать бесплатно видео Shaun White Олимпиада 2010
 /content/shootingsheet.htm раскадровку
 /content/shootingsheet.htm раскадровки
-/content/shootingsheet.htm раскадровки 
+/content/shootingsheet.htm раскадровки
 /content/shootingsheet.htm раскадровка
 /content/shootingsheet.htm раскадровка сайтов
 /content/shootingsheet.htm раскадровка как делать
@@ -910,7 +911,7 @@ class Migration(DataMigration):
 /content/snow_making.htm производство снега
 /content/snow_making.htm производство искусственного снега
 /content/snow_making.htm искусственный снег
-/content/snow_making.htm искусственный снег 
+/content/snow_making.htm искусственный снег
 /content/snow_making.htm искуственный снег
 /content/snow_making.htm искуственный снег технические характеристики
 /content/snow_making.htm плотность снега
@@ -934,7 +935,7 @@ class Migration(DataMigration):
 /content/snowstyles.htm стиль катания
 /content/snowstyles.htm стили сноуборд катания
 /content/snowstyles.htm стили сноубординга
-/content/snowstyles.htm стили сноубординга 
+/content/snowstyles.htm стили сноубординга
 /content/snowstyles.htm стили сноуборда
 /content/snowstyles.htm стили катания
 /content/snowstyles.htm стили катания сноуборд
@@ -977,7 +978,7 @@ class Migration(DataMigration):
 /content/snowstyles.htm snowboard стиди
 /content/snowsurf.htm снерф
 /content/snowtypes.htm снег
-/content/snowtypes.htm снег 
+/content/snowtypes.htm снег
 /content/snowtypes.htm типы снега
 /content/snowtypes.htm типы снежинок
 /content/snowtypes.htm твердый снег
@@ -997,20 +998,20 @@ class Migration(DataMigration):
 /content/stances.htm стойки
 /content/stances.htm крепление
 /content/stances.htm настройка креплений сноуборда
-/content/stances.htm размер задней стойки 
+/content/stances.htm размер задней стойки
 /content/stances.htm стойки
 /content/stances.htm стойки для крепления
 /content/stances.htm стойки для дисков с деревом
 /content/stances.htm стойка на углу
 /content/stances.htm стойка для вышивания купить
-/content/stances.htm скейт для начинающих стойки повороты 
+/content/stances.htm скейт для начинающих стойки повороты
 /content/stances.htm смещение креплений на сноуборде
 /content/stances.htm утиная стойка
 /content/stances.htm чешские стойки для душа
 /content/stances.htm ширина стоек
 /content/stances.htm ширина стойки
 /content/stances.htm широкая стойка
-/content/stances.htm крепления стоек 
+/content/stances.htm крепления стоек
 /content/stances.htm крепление
 /content/stances.htm крепление основания деревянных стоек
 /content/stances.htm купить закладную под люстру
@@ -1059,9 +1060,9 @@ class Migration(DataMigration):
 /content/trackers.htm бипер Tracker
 /content/trackers.htm биперы
 /content/trackers.htm Бипер
-/content/trackers.htm Бипер 
+/content/trackers.htm Бипер
 /content/trackers.htm Биперы
-/content/trackers.htm БИПЕР 
+/content/trackers.htm БИПЕР
 /content/trackers.htm БИПЕР TRACKER
 /content/trackers.htm Какой купить бипер
 /content/training.htm vnytrennie mushcy bedra
@@ -1091,9 +1092,9 @@ class Migration(DataMigration):
 /content/yearbook.htm Yearbook ФИЛЬМ
 /content/zagovalko.htm без шлема я бы погиб, а так остался инвалидом
 /discounts походы дисконтные карты
-/mountains кувандык орлиная 
+/mountains кувандык орлиная
 /mountains глц сполохи
-/mountains глк г. кувандык 
+/mountains глк г. кувандык
 /mountains подьёмник бэби лифт
 /mountains волчиха лыткарино
 /mountains Гора Айкуавенчорр
@@ -1145,10 +1146,10 @@ class Migration(DataMigration):
 /mountains/vorobinaya_gora архангельские авиалинии апатиты
 /movies сноубордические сайты
 /movies сноубордические фильмы
-/movies сноубордические фильмы 
+/movies сноубордические фильмы
 /movies гладер
 /movies самый сноубордический сайт
-/movies/aesthetica   	 Army Of The Pharaohs - Dump The Clip 
+/movies/aesthetica   	 Army Of The Pharaohs - Dump The Clip
 /movies/aesthetica  	Army Of The Pharaohs   -   Dump The Clip crfxfnm
 /movies/aesthetica скачать мр3 Army Of The Pharaohs - Dump The Clip
 /movies/aesthetica скачать бесплатно фильм Aesthetica
@@ -1199,7 +1200,7 @@ class Migration(DataMigration):
 /movies/avalance_scream лавина фильм ТОРРЕНТ
 /movies/azbuka  Cable Toy    -   Loshadka Party
 /movies/azbuka Азбука сноуборд
-/movies/azbuka Loshadka party Msc 
+/movies/azbuka Loshadka party Msc
 /movies/azbuka Loshadka party Msc - Cable скачать
 /movies/azbuka Loshadka party Msc - Cable To
 /movies/azbuka Loshadka party Msc - Cable Toy скачать
@@ -1225,7 +1226,7 @@ class Migration(DataMigration):
 /movies/childsupport Miko Mission - How Old Are You
 /movies/chulksmack chulksmack
 /movies/coolstory фильм Cool Story
-/movies/coolstory кул стори 
+/movies/coolstory кул стори
 /movies/coolstory go motion different in time
 /movies/cozmos cozmos
 /movies/decade Bye Bye Fatman
@@ -1266,9 +1267,9 @@ class Migration(DataMigration):
 /movies/easymoves Простые Движения торрент
 /movies/elekrep elekrep njhhtyn
 /movies/familia  the grass roots - lets live for today      - скачать
-/movies/familia скачать  Bone Thugs-N-Harmony   -   East 
+/movies/familia скачать  Bone Thugs-N-Harmony   -   East
 /movies/familia скачать с торрента фильм  Murder Was the Case
-/movies/familia скачать Snoop Dogg & Daz 
+/movies/familia скачать Snoop Dogg & Daz
 /movies/familia Electric Light Orchestra «Evil Woman
 /movies/familia electric light orchestra evil woman
 /movies/familia Im Gonna Love You   Barry White
@@ -1295,7 +1296,7 @@ class Migration(DataMigration):
 /movies/frostedflakes frosted flakes
 /movies/frostedflakes The knife pass this one
 /movies/fullmetaledges Youth Brigade - I hate my Life
-/movies/fullmetaledges Youth Brigade - I Hate My Life - 
+/movies/fullmetaledges Youth Brigade - I Hate My Life -
 /movies/fullmetaledges Youth Brigade - I Hate My Life crfxfnm
 /movies/fullmetaledges youth brigade скачать альбом
 /movies/futureproof futureproof﻿
@@ -1312,12 +1313,12 @@ class Migration(DataMigration):
 /movies/inshort toymaker  it was supposedly an easy
 /movies/inshort Toymaker — It was Supposedly An Easy Energy Release
 /movies/intransit The Hombres — Let It Out
-/movies/irideparkcity I Ride Park City 
+/movies/irideparkcity I Ride Park City
 /movies/irideparkcity i ride the park city
 /movies/irideparkcity Ride Park
 /movies/itsalwayssnowingsomewhere скачать Jay Reatard-My Shadow
 /movies/itsalwayssnowingsomewhere смотреть онлайн It's Always Snowing Somewhere
-/movies/itsalwayssnowingsomewhere прослушать The Heavy - Coleen 
+/movies/itsalwayssnowingsomewhere прослушать The Heavy - Coleen
 /movies/itsalwayssnowingsomewhere Adham shaikh is it safe
 /movies/itsalwayssnowingsomewhere Adham shaikh it is safe
 /movies/itsalwayssnowingsomewhere Amon Tobin - Always
@@ -1338,7 +1339,7 @@ class Migration(DataMigration):
 /movies/lame скачать Stereo Total   -   L'Amour à Trois
 /movies/lame сноуборд видео Royksopp
 /movies/lame сноубордическое видео
-/movies/lame видео сноубордическое Lame 
+/movies/lame видео сноубордическое Lame
 /movies/lame film Lame
 /movies/lame stereo total - l amour a trois
 /movies/lame Stereo Total L' Amour à Trois
@@ -1347,7 +1348,7 @@ class Migration(DataMigration):
 /movies/lostin саундтрек Lost in transition
 /movies/lostin ФИЛЬМЫ lost films.ru
 /movies/lostin lost in transition
-/movies/lostin mos def -﻿ wylin out (rjd2 remix) 
+/movies/lostin mos def -﻿ wylin out (rjd2 remix)
 /movies/lovehate skateboarding торрент
 /movies/magicmovie magicmovies
 /movies/manglomoves Manglo  Moves
@@ -1367,7 +1368,7 @@ class Migration(DataMigration):
 /movies/neverland сноубордические видосы скачать торрент
 /movies/neverland Neverland фильм
 /movies/nevertrust Never trust a man without a moustache
-/movies/nixonjibfest  Swollen Members - Fuel Injected  
+/movies/nixonjibfest  Swollen Members - Fuel Injected
 /movies/nixonjibfest buc fifty
 /movies/nixonjibfest faces buc mail.ru
 /movies/nixonjibfest moka only red dragons
@@ -1379,12 +1380,12 @@ class Migration(DataMigration):
 /movies/notes сноубордический фильм notes
 /movies/onelove one love фильм
 /movies/optimistic  Ain't Cha (Clipse)
-/movies/optimistic  silversun pickups - Rusted Wheel 
+/movies/optimistic  silversun pickups - Rusted Wheel
 /movies/optimistic скачать Ain't Cha (Clipse)
 /movies/optimistic ел ромен хан
 /movies/optimistic busta rhymes i love my chick
 /movies/optimistic busta rhymes i love my chick mp3
-/movies/optimistic optimistic orchestra скачать бесплатно MP3  альбом  
+/movies/optimistic optimistic orchestra скачать бесплатно MP3  альбом
 /movies/optimistic Silversun Pickup Rusted Wheel скачать
 /movies/optimistic Silversun Pickups - Rusted Wheel
 /movies/optimistic Silversun Pickups  -  Rusted Wheel скачать бесплатно mp3
@@ -1395,10 +1396,10 @@ class Migration(DataMigration):
 /movies/patchworkpatterns Think Thank - Patchwork Patterns
 /movies/pauza рекламная пауза Артем Теймуров, Виктор Теймуров, Александр Брагин
 /movies/pauza вижу как встает с колен моя родина   рекламная пауза
-/movies/picturethis   	 Awol One and Daddy Kev - rhythm  скачать 
+/movies/picturethis   	 Awol One and Daddy Kev - rhythm  скачать
 /movies/picturethis  Shawn Lee's Ping Pong Orchestra - Kiss The Skyскачать
 /movies/picturethis скачать Awol One & Daddy Kev - Rhythm
-/movies/picturethis скачать mp3  Awol One & Daddy Kev - Rhythm 
+/movies/picturethis скачать mp3  Awol One & Daddy Kev - Rhythm
 /movies/picturethis AWOL One - Rhythm скачать
 /movies/picturethis Awol One & Daddy Kev - Rhythm
 /movies/picturethis Awol One and Daddy Kev
@@ -1413,19 +1414,19 @@ class Migration(DataMigration):
 /movies/ponytale pony tale
 /movies/ponytale Pony Tale
 /movies/ponytale Pony Tale - (2008)
-/movies/ponytale The Presets - This Boy's In Love The Golden Dogs - Never Meant Any Harm 
-/movies/ponytale The Presets - This Boy's in Love The Golden Dogs - Never Meant Any Harm 
-/movies/ponytale The Presets - This Boy's In Love The Golden Dogs - Never Meant Any Harm 
+/movies/ponytale The Presets - This Boy's In Love The Golden Dogs - Never Meant Any Harm
+/movies/ponytale The Presets - This Boy's in Love The Golden Dogs - Never Meant Any Harm
+/movies/ponytale The Presets - This Boy's In Love The Golden Dogs - Never Meant Any Harm
 /movies/positron my pen & my pad Skysoo
 /movies/prediculous  Lo-Fi-FNK - Steppin' Out  скачать
 /movies/prediculous  Lo-Fi-Fnk - Steppin' Out  скачать
-/movies/prediculous  Sweatshop Union - Try 
+/movies/prediculous  Sweatshop Union - Try
 /movies/prediculous скачать песню royal uniform surferosa
 /movies/prediculous скачать бесплатно  Surferosa_-_Royal_Uniform
 /movies/prediculous alice in videoland cut the crap
 /movies/prediculous Isenseven - Prediculous 2006 скачать бесплатно
 /movies/prediculous surferosa royal uniform
-/movies/prediculous sweatshop union try 
+/movies/prediculous sweatshop union try
 /movies/prediculous sweatshop union try скачать
 /movies/prediculous Sweatshop Union Try.mp3
 /movies/prediculous Try – Sweatshop Union
@@ -1436,7 +1437,7 @@ class Migration(DataMigration):
 /movies/ridingforaliving riding for a living nitro
 /movies/rightorwrong Burton for right or wrong скачать бесплатно
 /movies/rightorwrong FOR RIGHT OR WRONG
-/movies/saturation saturation сноубордические фильмы 
+/movies/saturation saturation сноубордические фильмы
 /movies/saturation saturation видеоъ torrent
 /movies/scrapbook scrapbook films
 /movies/shakedown Juvenile - Back That Thang Up скачать
@@ -1449,7 +1450,7 @@ class Migration(DataMigration):
 /movies/soultrack фильм-След Души скачать
 /movies/soultrack След души
 /movies/soultrack whitelabelfilms
-/movies/soundtracks  саундтрек Coolio Gangsters paradise саундтрек к фильму 
+/movies/soundtracks  саундтрек Coolio Gangsters paradise саундтрек к фильму
 /movies/soundtracks сноубордических саундтреков
 /movies/soundtracks саундреки к сноубордическим фильмам
 /movies/soundtracks саундтрек к сноубордическому видео
@@ -1481,7 +1482,7 @@ class Migration(DataMigration):
 /movies/soundtracks?&page=4 скачать Nina Simone - Sinnerman
 /movies/soundtracks?&page=4 Blonde Redhead - in particular mp3
 /movies/soundtracks?&page=4 Louis XIV -- Pledge of Allegiance
-/movies/soundtracks?&page=4 Metric - Hustle Rose 
+/movies/soundtracks?&page=4 Metric - Hustle Rose
 /movies/soundtracks?&page=4 Metric - Hustle Rose скачать
 /movies/soundtracks?&page=4 metric hustle rose mp3
 /movies/soundtracks?&page=4 Nina Simone - "SinnerMan"
@@ -1511,7 +1512,7 @@ class Migration(DataMigration):
 /movies/teenagelovegraffiti teenage love graffiti скачать
 /movies/thanksbrain  	The Finches   -   Step Outside скачать бесплатно
 /movies/thanksbrain  3oh!3 - Dont Dance    скачать
-/movies/thanksbrain скачать 3oh!3 - Dont Dance 
+/movies/thanksbrain скачать 3oh!3 - Dont Dance
 /movies/thanksbrain 3OH!3 — Hornz
 /movies/thanksbrain Mockba — Cheap Vodka
 /movies/thanksbrain thanks brain фильм
@@ -1533,8 +1534,8 @@ class Migration(DataMigration):
 /movies/thatsitthatsall chains of humanity скачать бесплатно
 /movies/thatsitthatsall cvjnhtnm That’s It That’s All
 /movies/thatsitthatsall exodus call to arms скачать
-/movies/thatsitthatsall God Forbid - Chains Of Humanity.mp3 
-/movies/thatsitthatsall god forbid chains of humanity 
+/movies/thatsitthatsall God Forbid - Chains Of Humanity.mp3
+/movies/thatsitthatsall god forbid chains of humanity
 /movies/thatsitthatsall http:/Torrentino.ru
 /movies/thatsitthatsall soulsavers revival перевод
 /movies/thatsitthatsall that's it
@@ -1545,7 +1546,7 @@ class Migration(DataMigration):
 /movies/thatsitthatsall That's It That's All торрент
 /movies/thatsitthatsall that's it that's all torrent
 /movies/thatsitthatsall That's It, That's All
-/movies/thatsitthatsall That's it, that's all 
+/movies/thatsitthatsall That's it, that's all
 /movies/thatsitthatsall That's it, that's all СКАЧАТЬ ФИЛЬМ
 /movies/thatsitthatsall That's it,that's all
 /movies/thatsitthatsall That’s It, That’s All скачать
@@ -1556,7 +1557,7 @@ class Migration(DataMigration):
 /movies/theb  	The Chesterfield Kings   -   Up And Down скачать
 /movies/theb metalika b
 /movies/theb The Jackson Sisters - I Believe in Miracles
-/movies/theb The Jackson Sisters - I Believe In Miracles 
+/movies/theb The Jackson Sisters - I Believe In Miracles
 /movies/theb The Morning Benders - Waiting for A War
 /movies/theb the morning benders - waiting for a war скачать песню бесплатно
 /movies/theb The Morning Benders_Waiting For A War.mp3
@@ -1620,7 +1621,7 @@ class Migration(DataMigration):
 /people/bragin александр брагин
 /people/bragin Александр Брагин
 /people/christopheschmidt Christophe Schmidt
-/people/curtiswoodman Вудман на Украине - повтор 
+/people/curtiswoodman Вудман на Украине - повтор
 /people/danielbuhman buhmans.ru
 /people/dannydavis infomiran
 /people/dannykass danny kass
@@ -1637,7 +1638,7 @@ class Migration(DataMigration):
 /people/eeroettala Eero .ru
 /people/eeroettala Eero Ettala
 /people/eeroettala eero ettala
-/people/eliweiner eli weiner 
+/people/eliweiner eli weiner
 /people/elmarbossard Elmar видео
 /people/evgeniyagol_dman евгения Гольдман
 /people/fesenko фесенко таракан
@@ -1645,7 +1646,7 @@ class Migration(DataMigration):
 /people/fesenko митя фесенко
 /people/fesenko митя фесенко таракан
 /people/fesenko дмитрий фесенко
-/people/fesenko дмитрий фесенко 
+/people/fesenko дмитрий фесенко
 /people/fesenko дмитрий фесенко видео
 /people/fesenko Дмитрий таракан фесенко
 /people/fesenko Дмитрий Фесенко
@@ -1660,7 +1661,7 @@ class Migration(DataMigration):
 /people/halin халин
 /people/halin халин маким
 /people/halin максим халин
-/people/halin максим халин 
+/people/halin максим халин
 /people/halin Максим Халин
 /people/heikkisorsa Heikki Sorsa
 /people/hryachkov геннадий хрячков
@@ -1671,7 +1672,7 @@ class Migration(DataMigration):
 /people/johnjackson John Jackson
 /people/jonimalmi malmi
 /people/jussioksanen юсси оксанен  picture this
-/people/jussioksanen Jussi Oksanen 
+/people/jussioksanen Jussi Oksanen
 /people/kareemel-rafie Kareem El Rafie
 /people/katrina екатерина дяктерева
 /people/katrina Екатерина Дегтярева
@@ -1685,7 +1686,7 @@ class Migration(DataMigration):
 /people/kuntsevich кунцевич кирилл
 /people/kushtanov илья куштанов
 /people/kyleclancy grenade kyle clancy
-/people/lapina фотограф наталья лапина 
+/people/lapina фотограф наталья лапина
 /people/lapina наталья лапина
 /people/lapina Лапина Наталья фотограф
 /people/larsjohnsen lars johnsen
@@ -1696,7 +1697,7 @@ class Migration(DataMigration):
 /people/lavrov fylhtq gthtcnhtrf
 /people/levchenko павел левченко
 /people/lisafilzmoser lisa filzmoser
-/people/louiefountain LOUIE FOUNTAIN 
+/people/louiefountain LOUIE FOUNTAIN
 /people/lucasmagoon lucas magoon
 /people/ludwiglejkner ludwig lejkner
 /people/ludwiglejkner Ludwig Lejkner
@@ -1711,7 +1712,7 @@ class Migration(DataMigration):
 /people/marklandvik landvik
 /people/matshofgaard mats hofgaard
 /people/melnikov ян мельников
-/people/mihailadolf Adolf Raider 
+/people/mihailadolf Adolf Raider
 /people/mikhailov сайт Виталия Михайлова
 /people/mikhailov виталий михайлов
 /people/mikhailov Виталик Михайлов
@@ -1759,7 +1760,7 @@ class Migration(DataMigration):
 /people/titushkin титушкин дмитрий
 /people/titushkin дмитрий титушкин
 /people/titushkin дмитрий титушкин истра
-/people/tomburt Tom Burt 
+/people/tomburt Tom Burt
 /people/tomipassi  tomi passi
 /people/torahbright Torah Bright
 /people/torsteinhorgmo torstein horgmo видео с участием
@@ -1818,7 +1819,7 @@ class Migration(DataMigration):
 /tags/allinclusive саундтрек к фильму all inclusive
 /tags/allinclusive all inclusive сноубордическое видео
 /tags/alyaska сноубординг на аляске
-/tags/amplid Amplid HiDef 
+/tags/amplid Amplid HiDef
 /tags/analog О одежде Analog 2009-2010
 /tags/analog analog одежда
 /tags/analog Analog Ryder  jacket
@@ -1830,7 +1831,7 @@ class Migration(DataMigration):
 /tags/angar16 ангар 16 екатеринбург
 /tags/angar16 ангар 16 екатеринбург джиббинг
 /tags/angar16 ангар 16 в екатеринбурге
-/tags/angar16 Экстрим-парк «ANGAR-16» 
+/tags/angar16 Экстрим-парк «ANGAR-16»
 /tags/angar16 Ангар 16
 /tags/angar16 ANGAR-16
 /tags/animacziya сноуборд анимация
@@ -1862,7 +1863,7 @@ class Migration(DataMigration):
 /tags/belaya официальный сайт горы Белой
 /tags/bentmetal bent metal сноуборды реклама
 /tags/betty стильно одета для сноубординга
-/tags/bettyrides Одежда фирмы бетти 
+/tags/bettyrides Одежда фирмы бетти
 /tags/bettyrides Betty Rides одежда
 /tags/bettyrides Betty Rides 09-10
 /tags/bettyrides bettyrides в москве
@@ -1888,7 +1889,7 @@ class Migration(DataMigration):
 /tags/botinki сноуборд ботинки Nike Kaiju купить
 /tags/botinki очень старые ботинки
 /tags/botinki ботинки est
-/tags/bozwreck Bozwreck 2 
+/tags/bozwreck Bozwreck 2
 /tags/builttoshred built to shred
 /tags/bungee  	   Banshee Bungee
 /tags/bungee Banshee Bungee
@@ -1926,7 +1927,7 @@ class Migration(DataMigration):
 /tags/chili когда лучше ехать в чили
 /tags/chriscole за что катается chris cole
 /tags/chuckbuddies chuckbuddies
-/tags/chuckbuddies Chuckbuddies 
+/tags/chuckbuddies Chuckbuddies
 /tags/codered журнал код ред
 /tags/codered www.coderedmag.com
 /tags/contest контесты статьи
@@ -1948,7 +1949,7 @@ class Migration(DataMigration):
 /tags/dc DC скейтерки
 /tags/dc dc shoes в москве
 /tags/dc.kirovsk.lab dc kirovsk lab 2010
-/tags/dc.kirovsk.lab DC Kirovsk Lab 2010 
+/tags/dc.kirovsk.lab DC Kirovsk Lab 2010
 /tags/dc?page=2 dc одежда зима
 /tags/deeper Jeremy Jones' Deeper скачать
 /tags/devchonki очень отвязные девчонки
@@ -1960,10 +1961,10 @@ class Migration(DataMigration):
 /tags/devushki?page=3 Ира Кособукина Nikita
 /tags/dewtour оффициальный сайт dew tour
 /tags/dizajn работа дизайн сноубордических досок
-/tags/dizajn купить продукцию core77 
+/tags/dizajn купить продукцию core77
 /tags/dizajn конкурс на лучшего дизайнера онлайн
 /tags/djtactics dj тактикс
-/tags/djtactics dj тактикс 
+/tags/djtactics dj тактикс
 /tags/djtactics dj tactics песни
 /tags/dmitrijkuksenok куксёнок
 /tags/dmitrijkuksenok дмитрий куксенок
@@ -2014,7 +2015,7 @@ class Migration(DataMigration):
 /tags/ergaki КУРСЫ УПРАВЛЕНИЯ РАТРАКОМ
 /tags/eroone ERO RU
 /tags/events?filter=best&page=3 27 06 10 хип хоп контест г Абакан участники
-/tags/events?page=11   весенний сноуборд-лагерь ''Вудсток'' 
+/tags/events?page=11   весенний сноуборд-лагерь ''Вудсток''
 /tags/events?page=15 размеры выкидного трамплина для роллеров
 /tags/events?page=7 Тельнова Марина Александровна 2 августа 1993 года
 /tags/extreme смерть владимира шилина
@@ -2119,7 +2120,7 @@ class Migration(DataMigration):
 /tags/jeremyjones джереми джонс
 /tags/jeremyjones Jeremy Jones
 /tags/jeremyjones Jeremy Jones' Deeper
-/tags/jeremyjones jeremy jones 
+/tags/jeremyjones jeremy jones
 /tags/jibbing джибинг
 /tags/jibbing?filter=best&page=3 чертежи фигур для джиббинга
 /tags/jollyroger Jolly Roger (PMP) 09/10
@@ -2164,7 +2165,7 @@ class Migration(DataMigration):
 /tags/lager_?page=2 открытие летнего лагеря сценарий миссис и мистер лагерь
 /tags/lakai кеды lakai
 /tags/lakai select by LAKAI
-/tags/latatrek "Лата-трек" 
+/tags/latatrek "Лата-трек"
 /tags/latatrek Лата-трек в Крылатском
 /tags/lavina сход лавины Чимбулак
 /tags/lavina кириллин лавина
@@ -2244,7 +2245,7 @@ class Migration(DataMigration):
 /tags/neverland neverland absinthe films клип с падениями
 /tags/neverland neverland absinthe films видео с падениями
 /tags/neverland neverland adsinthe видео с падениями
-/tags/nicetry nice try  
+/tags/nicetry nice try
 /tags/nidecker Nidecker
 /tags/nike реклама nike 6.0
 /tags/nike райдеры из NIKE 6.0
@@ -2270,7 +2271,7 @@ class Migration(DataMigration):
 /tags/oboi?page=2 обои 686
 /tags/oboi?page=2 джинсовые обои на рабочий стол
 /tags/oboi?page=3 психоделичные обои на рабочий стол
-/tags/ocumelyerucki очумелые ручки холодильник 
+/tags/ocumelyerucki очумелые ручки холодильник
 /tags/odezda химчистка для сноубордической одежды
 /tags/omni signal omni
 /tags/onboard журнал onboard
@@ -2332,7 +2333,7 @@ class Migration(DataMigration):
 /tags/rampa vbyb hfvgf lkz crtqnf
 /tags/raskras_dosku раскрашивание досок
 /tags/raynsheckler rayn sheckler
-/tags/raynsheckler rayn sheckler 
+/tags/raynsheckler rayn sheckler
 /tags/re: RE: фильм о сноубординге скачать
 /tags/redbull  редбул дабл шот
 /tags/redbull redbull rock for glory
@@ -2353,7 +2354,7 @@ class Migration(DataMigration):
 /tags/riders?page=8 райдер костя смирнов
 /tags/riders?page=8 райдеры из сша
 /tags/riders?page=9 теги известны райдеров
-/tags/ripcurl официальный сайт rip curl 
+/tags/ripcurl официальный сайт rip curl
 /tags/ripcurl Rip Curl фильм
 /tags/ripzone одежда  ripzone
 /tags/ripzone ripzone
@@ -2401,7 +2402,7 @@ class Migration(DataMigration):
 /tags/shaunwhite shaun white
 /tags/sheregesh шерегеш где это?
 /tags/sheregesh шерегеш, где это
-/tags/sheregesh шерегешь новая дорога 
+/tags/sheregesh шерегешь новая дорога
 /tags/sheregesh отчёт о шерегеш
 /tags/shmotki шмотки
 /tags/shmotki шмотки повседневные мужские
@@ -2412,11 +2413,11 @@ class Migration(DataMigration):
 /tags/shmotki одежда для подростков
 /tags/shmotki 24,шмотки.ru
 /tags/shveczariya Сообщение о Швецарий
-/tags/siatradeshow фотографии с выставки sia 2010 
+/tags/siatradeshow фотографии с выставки sia 2010
 /tags/signalsnowboards сноуборд signal 09-10
 /tags/signalsnowboards доски signal
 /tags/signalsnowboards Signal Snowboards
-/tags/sims радостные симс 
+/tags/sims радостные симс
 /tags/sims доски Sims
 /tags/skachat_fil_m скачать сноубордический фильм
 /tags/skachat_fil_m скачать сноубордические фильмы
@@ -2459,7 +2460,7 @@ class Migration(DataMigration):
 /tags/snezkom длина склона в снежком
 /tags/snezkom Горнолыжный комплекс снежком фотографии
 /tags/snoubord-lagerj сноубордический лагерь 10
-/tags/snoubord-lagerj лагерь в питер из перми 
+/tags/snoubord-lagerj лагерь в питер из перми
 /tags/snoubord-lagerj лагеря неподолёку от екатеринбурга
 /tags/snoubord-park сноуборд парк
 /tags/snoubord-park оборудывание для сноуборд парков
@@ -2541,9 +2542,9 @@ class Migration(DataMigration):
 /tags/summercamp летние покатушки на эльбрусе
 /tags/summercamp летний лагерь
 /tags/summercamp летний лагерь на эльбрусе 2010
-/tags/summercamp летний лагерь на эльбрусе 2010 
+/tags/summercamp летний лагерь на эльбрусе 2010
 /tags/summercamp летний лагерь европа 2010
-/tags/summercamp летний лагерь в ле дез альп 
+/tags/summercamp летний лагерь в ле дез альп
 /tags/summercamp летний лагерь 2010 а июле
 /tags/summercamp летом на эльбрусе
 /tags/summercamp лагерь эльбрус 2010
@@ -2568,10 +2569,10 @@ class Migration(DataMigration):
 /tags/texnologii технологии в сноуборде
 /tags/texnologii производство сноубордов. технологии
 /tags/texnologii описание технологии Rocker  в сноубордах
-/tags/texnologii snowboards libtech обзор 
+/tags/texnologii snowboards libtech обзор
 /tags/thepeaceprocess The Peace Process Teaser
 /tags/thereason фильм the reason
-/tags/theycamefrom скачать фильм Factor Films: "They Came From..." 
+/tags/theycamefrom скачать фильм Factor Films: "They Came From..."
 /tags/theycamefrom скачать they came from
 /tags/theycamefrom they came from
 /tags/theycamefrom They came from
@@ -2589,7 +2590,7 @@ class Migration(DataMigration):
 /tags/torrent?page=3 torrents.ru скачать бесплатно фильмы без регистрации
 /tags/torrent?page=3 www.torrent.ru скачать фильмы
 /tags/torsteinhorgmo  	Torstein Horgmo
-/tags/travis%20rice сноубордист Rice, Travis 
+/tags/travis%20rice сноубордист Rice, Travis
 /tags/travis%20rice фильм трэвиса райса
 /tags/travis%20rice Обои Travis Rice
 /tags/travis%20rice Travis Rice обои freestyle
@@ -2640,7 +2641,7 @@ class Migration(DataMigration):
 /tags/viktortejmurov Виктор Теймуров
 /tags/ving-serfing винг сёрфинг
 /tags/volcom фирма VOLCOM
-/tags/volcom штаны   сноубордские volcom 
+/tags/volcom штаны   сноубордские volcom
 /tags/volcom обои volkom
 /tags/volcom volcom
 /tags/volcom Volcom
@@ -2715,7 +2716,7 @@ class Migration(DataMigration):
 /terms/catch_kant поймать кант
 /terms/fakie Fakie
 /terms/freeride фрирайдер
-/terms/freeride фрирайдер 
+/terms/freeride фрирайдер
 /terms/freeride фрирайдеры
 /terms/freeride Фрирайдер
 /terms/freeride url:"glader.ru/terms/freeride" | url:"www.glader.ru/terms/freeride"
@@ -2744,12 +2745,12 @@ class Migration(DataMigration):
 /users/a-lexus/posts/120 учебное видео фристайла
 /users/a-lexus/posts/166 саундтрек к MDP Picture this
 /users/a1_cr/posts/3246 triple cork
-/users/agant шлем агант 
+/users/agant шлем агант
 /users/akafist/posts/1494 артём халявин
 /users/akafist/posts/1494 артем халявин
 /users/akafist/posts/1494 вейксерф в москве
 /users/akafist/posts/1494 вейкборд кремль
-/users/akafist/posts/1494 Тем не менее, маломерным судам, катерам и яхтам не запрещено курсировать вдоль кремлевской стены по 
+/users/akafist/posts/1494 Тем не менее, маломерным судам, катерам и яхтам не запрещено курсировать вдоль кремлевской стены по
 /users/akafist/posts/1494 Вейксерф в Москве
 /users/akafist/posts/1623 как научится кататься на скейтборде
 /users/akafist/posts/1623 первый скейтборд в россии
@@ -2763,7 +2764,7 @@ class Migration(DataMigration):
 /users/akafist/posts/2704 Lindsey Vonn
 /users/akafist/posts/2746 madic-movie
 /users/akafist/posts/2746 magicmovies
-/users/akafist/posts/2746 magicmovies 
+/users/akafist/posts/2746 magicmovies
 /users/akafist/posts/3010 PassTheJoint #14
 /users/akafist/posts/3072 голый лыжник..
 /users/akafist/posts/3072 голые лыжники
@@ -2828,7 +2829,7 @@ class Migration(DataMigration):
 /users/extrememag/posts/69 Соревнования по кайтсёрфингу
 /users/Fizruk/posts/566 самые дорогие сноуборды
 /users/Fizruk/posts/566 самый дорогой сноуборд
-/users/Fizruk/posts/566 САМЫЙ ДОРОГОЙ Сноуборд 
+/users/Fizruk/posts/566 САМЫЙ ДОРОГОЙ Сноуборд
 /users/glader/comments?page=2 как делать бекролл
 /users/glader/comments?page=41 что такое сноуборд-парк
 /users/glader/photos/4288 маньяк в михайловске
@@ -2844,7 +2845,7 @@ class Migration(DataMigration):
 /users/glader/posts/1180 где купить роллерсерф
 /users/glader/posts/1197 девушка и море
 /users/glader/posts/1242 видео геленджик САЛАМАНДРА
-/users/glader/posts/1251 lightwind-freestyle 
+/users/glader/posts/1251 lightwind-freestyle
 /users/glader/posts/1260 гостиницы на поляна чегет
 /users/glader/posts/1264 онлайн журналы зарубежные
 /users/glader/posts/1311 банджи резинка купить цена
@@ -2878,7 +2879,7 @@ class Migration(DataMigration):
 /users/glader/posts/192 фото 9 мая в пильне
 /users/glader/posts/202 белый в картинках
 /users/glader/posts/236 денюха
-/users/glader/posts/245 Burton в екатеринбурге 
+/users/glader/posts/245 Burton в екатеринбурге
 /users/glader/posts/2535 double kickflip
 /users/glader/posts/2653 самый долгое падение
 /users/glader/posts/2679 Chuck Buddies
@@ -2891,7 +2892,7 @@ class Migration(DataMigration):
 /users/glader/posts/2783 рампа для сноуборда на ул. Косыгина
 /users/glader/posts/2783 рампа для сноуборда на ул. Косыгина фото
 /users/glader/posts/2828 отвязные девчонки
-/users/glader/posts/2835 гусеничный сноуборт 
+/users/glader/posts/2835 гусеничный сноуборт
 /users/glader/posts/2835 Сноуборд  гусеничный
 /users/glader/posts/2907 миша кириллин
 /users/glader/posts/2914 фото ежовой
@@ -2932,7 +2933,7 @@ class Migration(DataMigration):
 /users/glader/posts/694 вингуру погода
 /users/glader/posts/694 сайт погоды вингуру
 /users/glader/posts/694 погода по вингуру
-/users/glader/posts/694 погода по вингуру 
+/users/glader/posts/694 погода по вингуру
 /users/glader/posts/694 погода вингуру
 /users/glader/posts/694 вингуру
 /users/glader/posts/694 вингуру погода
@@ -2963,7 +2964,7 @@ class Migration(DataMigration):
 /users/glader/posts/861 скачать сноуборд игру
 /users/glader/posts/861 скачать игру сноуборд на копьютер
 /users/glader/posts/861 скачать игру сноуборд на компьютер
-/users/glader/posts/861 скачать игру сноуборд на компьютер 
+/users/glader/posts/861 скачать игру сноуборд на компьютер
 /users/glader/posts/861 скачать игру трюки и катание на сноубордах
 /users/glader/posts/861 скачать игру катание на сноуборде
 /users/glader/posts/861 скачать игру катание на сноубордах
@@ -2988,9 +2989,9 @@ class Migration(DataMigration):
 /users/glader/posts/861 сноуборд скачать на компьютер
 /users/glader/posts/861 сноуборд игры на компьютер
 /users/glader/posts/861 сноуборд игры на pc
-/users/glader/posts/861 сноуборд игры на pc 
+/users/glader/posts/861 сноуборд игры на pc
 /users/glader/posts/861 сноуборд игры на pc скачать
-/users/glader/posts/861 сноуборд игры на pc скачать 
+/users/glader/posts/861 сноуборд игры на pc скачать
 /users/glader/posts/861 сноуборд игры на pc скачать бесплатно
 /users/glader/posts/861 сноуборд игры на pc бесплатно
 /users/glader/posts/861 сноуборд игры pc
@@ -3001,7 +3002,7 @@ class Migration(DataMigration):
 /users/glader/posts/861 сноуборд на PC
 /users/glader/posts/861 сноуборд на pc
 /users/glader/posts/861 сноуборд xbox360
-/users/glader/posts/861 сноубордический симулятор 
+/users/glader/posts/861 сноубордический симулятор
 /users/glader/posts/861 самые крутые игры на сноуборде
 /users/glader/posts/861 компьютерные игры сноуборд
 /users/glader/posts/861 компьютерные игры про сноуборд
@@ -3033,7 +3034,7 @@ class Migration(DataMigration):
 /users/glader/posts/861 игры на сноубордах на pc
 /users/glader/posts/861 игры на сноубордах на PC
 /users/glader/posts/861 игры на сноубордах на pc
-/users/glader/posts/861 игры на компьютер про сноуборд 
+/users/glader/posts/861 игры на компьютер про сноуборд
 /users/glader/posts/861 игры на pc на сноубордах
 /users/glader/posts/861 игры для компьютера
 /users/glader/posts/861 игры для компьютера сноуборд
@@ -3055,7 +3056,7 @@ class Migration(DataMigration):
 /users/glader/posts/861 игра на XBOX 360 Snowboard
 /users/glader/posts/861 игра для pc авто симулятор с трамплинами
 /users/glader/posts/861 игра Сноуборд по PC
-/users/glader/posts/861 игра Amped Snowboarding на xbox 360 
+/users/glader/posts/861 игра Amped Snowboarding на xbox 360
 /users/glader/posts/861 играть в сноуборд
 /users/glader/posts/861 играть в сноуборд скачать
 /users/glader/posts/861 играть в сноуборд бесплатно
@@ -3088,9 +3089,9 @@ class Migration(DataMigration):
 /users/glader/posts/861 xbox 360 сноуборд
 /users/glader/posts/861 xbox 360 игры на сноубордах
 /users/glader/posts/881 доски choc snowboards
-/users/glader/posts/881 Кастомные доски 
+/users/glader/posts/881 Кастомные доски
 /users/glader/posts/899 рюкзак с колонками
-/users/glader/posts/899 рюкзак с колонками 
+/users/glader/posts/899 рюкзак с колонками
 /users/glader/posts/899 рюкзаки с колонками
 /users/glader/posts/899 рюкзаки с калонками
 /users/glader/posts/899 рюкзаки fi-hi
@@ -3137,7 +3138,7 @@ class Migration(DataMigration):
 /users/kloun/posts/1866 иБерезовские пескт
 /users/kloun/posts/1866 березовсккие пески
 /users/kloun/posts/1866 березовские пески
-/users/kloun/posts/1866 березовские белые пески 
+/users/kloun/posts/1866 березовские белые пески
 /users/kloun/posts/1866 Берёзовские пески
 /users/kloun/posts/1866 Березовские пески
 /users/kloun/posts/1866 Березовский белые пески
@@ -3160,7 +3161,7 @@ class Migration(DataMigration):
 /users/LAhmatyi/posts/1201 This is the end, beautiful friend
 /users/LAhmatyi/posts/1234 сноубордконтест при летней жаре
 /users/LAhmatyi/posts/1234 Летний арт-марафон
-/users/LAhmatyi/posts/1234 19 июня в Тюмени в рамках Летней Экстрим Сессии состоялся new school и сноуборд контест «Летний арт-марафон» в дисциплине фристайл. 
+/users/LAhmatyi/posts/1234 19 июня в Тюмени в рамках Летней Экстрим Сессии состоялся new school и сноуборд контест «Летний арт-марафон» в дисциплине фристайл.
 /users/LAhmatyi/posts/1234 rjyntcn n.vtym
 /users/LAhmatyi/posts/1235 В Биарритце, как и на всем европейском побережье, два раза в сутки происходят очень сильные приливы и отливы
 /users/LAhmatyi/posts/1236 перевязка руки порез ладони
@@ -3182,8 +3183,8 @@ class Migration(DataMigration):
 /users/LAhmatyi/posts/1356 серф лагерь на бали в сентябре
 /users/LAhmatyi/posts/1356 серф на бали
 /users/LAhmatyi/posts/1356 Серф-лагерь на Бали:
-/users/LAhmatyi/posts/1356 Серф трипы 
-/users/LAhmatyi/posts/1356 Серф лагерь на Бали 17-31 июля! 
+/users/LAhmatyi/posts/1356 Серф трипы
+/users/LAhmatyi/posts/1356 Серф лагерь на Бали 17-31 июля!
 /users/LAhmatyi/posts/1356 surf лагерь бали
 /users/lahmatyi/posts/1356?replyto=post easy СЕРФ школа
 /users/LAhmatyi/posts/1392 скейт скул
@@ -3211,7 +3212,7 @@ class Migration(DataMigration):
 /users/lahmatyi/posts/2017 минирамп рабочий стол
 /users/lahmatyi/posts/2017?replyto=post обои для рабочего стола isenseven
 /users/lahmatyi/posts/2211 Как нарисовать человека с сноубордом
-/users/lahmatyi/posts/2405 сантабординг  
+/users/lahmatyi/posts/2405 сантабординг
 /users/lahmatyi/posts/2442 agant велосипед
 /users/lahmatyi/posts/2622 доски artec 2011
 /users/lahmatyi/posts/2622 доски rome 2011
@@ -3244,7 +3245,7 @@ class Migration(DataMigration):
 /users/LAhmatyi/posts/979 доска nitro jon kooley
 /users/LAhmatyi/posts/979 jon kooley крепления
 /users/LAhmatyi/posts/991 Red Bull Illume
-/users/LAhmatyi/posts/991 Red Bull Illume 
+/users/LAhmatyi/posts/991 Red Bull Illume
 /users/LAhmatyi/posts/991 RedBull Illume 2010
 /users/lahmatyi/posts?&page=10 вэйк станция калуга фотоотчеты
 /users/liana/posts/520 не с кем кататься
@@ -3278,7 +3279,7 @@ class Migration(DataMigration):
 /users/prophoter/posts/2248 сноуборд тату
 /users/prophoter/posts/2248 сноубордические тату
 /users/prophoter/posts/2248 сноубордические татуировки
-/users/prophoter/posts/2248 сноубордические татуировки 
+/users/prophoter/posts/2248 сноубордические татуировки
 /users/prophoter/posts/2248 тату сноуборд
 /users/prophoter/posts/2248 тату сноуборда
 /users/prophoter/posts/2248 тату зноуборд
@@ -3288,7 +3289,7 @@ class Migration(DataMigration):
 /users/prophoter/posts/2248 tattoo snowboard
 /users/prophoter/posts/2512 павел воробьев pablo жж
 /users/prophoter/posts/3290 команда рокси
-/users/proridersha/posts/1379 История, основанная на реальных событиях... proridersha 
+/users/proridersha/posts/1379 История, основанная на реальных событиях... proridersha
 /users/Riqizeins_Mena одежда betty riders
 /users/romix Romix
 /users/santosdfc/posts/2198 девочки Red Bull
@@ -3319,7 +3320,7 @@ class Migration(DataMigration):
 /users/skyguy/posts/511 shaun white snowboard
 /users/skyguy/posts/511 Shaun White Snowboard
 /users/skyguy/posts/511 shaun white snowboard
-/users/skyguy/posts/511 Shaun White Snowboard 
+/users/skyguy/posts/511 Shaun White Snowboard
 /users/skyguy/posts/511 Shaun White Snowboard описание
 /users/skyguy/posts/511 shoun snowboard
 /users/skyguy/posts/511 snowboard игры
@@ -3339,13 +3340,13 @@ class Migration(DataMigration):
 /users/skyslayer/posts/1204 как весело провести лето?
 /users/skyslayer/posts/1204 как весело провести время
 /users/skyslayer/posts/1204 как весело провести время на даче
-/users/skyslayer/posts/1217 пешин в скейтпарке  
+/users/skyslayer/posts/1217 пешин в скейтпарке
 /users/skyslayer/posts/1250 Одежда Oakley продажа
 /users/skyslayer/posts/1250 oakley очки
 /users/skyslayer/posts/1250 oakley очки пляжный волейбол
 /users/skyslayer/posts/1250 Oakley Flak Jacket
 /users/skyslayer/posts/1250 oakley flak jacket
-/users/skyslayer/posts/1277 сток  burton 
+/users/skyslayer/posts/1277 сток  burton
 /users/skyslayer/posts/1277 Burton Fix обзор
 /users/skyslayer/posts/1277 easy livin flying v
 /users/skyslayer/posts/1303 коллекция обложки видео
@@ -3366,7 +3367,7 @@ class Migration(DataMigration):
 /users/skyslayer/posts/2170 protest куртки
 /users/skyslayer/posts/2170 protest коллекция 2010 одежда
 /users/skyslayer/posts/2170 protest одежда
-/users/skyslayer/posts/2170 protest одежда 
+/users/skyslayer/posts/2170 protest одежда
 /users/skyslayer/posts/2170 protest одежда сноуборд
 /users/skyslayer/posts/2170 protest одежда сайт
 /users/skyslayer/posts/2170 protest одежда Официальный сайт
@@ -3379,7 +3380,7 @@ class Migration(DataMigration):
 /users/skyslayer/posts/573 форум про крепления burton
 /users/skyslayer/posts/573 крепления EST С60
 /users/skyslayer/posts/573 борды фирмы Burton
-/users/skyslayer/posts/573 САМЫЕ ЛУЧШИЕ КРЕПЛЕНИЯ BURTON 
+/users/skyslayer/posts/573 САМЫЕ ЛУЧШИЕ КРЕПЛЕНИЯ BURTON
 /users/skyslayer/posts/573 Крепежи Burton
 /users/skyslayer/posts/573 Burton диск крепления
 /users/skyslayer/posts/759 как делать Backflip
@@ -3433,14 +3434,14 @@ class Migration(DataMigration):
 /users/tinki/posts/1289 ира бали серфинг
 /users/tinki/posts/1289 интервью с Ирой Кособукиной
 /users/tinki/posts/1358 сергей кирюшин  snowlinks
-/users/tinki/posts/1501 где в России можно кататься на сёрфинге 
+/users/tinki/posts/1501 где в России можно кататься на сёрфинге
 /users/tinki/posts/1536 артём шелдовицкий
 /users/tinki/posts/1536 артем шелдер
 /users/tinki/posts/1643 сергей некрасов скейт
 /users/tinki/posts/1643?replyto=post Рылеев Владислав
 /users/tinki/posts/1690 песни с контеста
 /users/tinki/posts/1754 как сделать грэб
-/users/tinki/posts/1849 доски  Jones 
+/users/tinki/posts/1849 доски  Jones
 /users/tinki/posts/1990 дмитрий кольцов копчик
 /users/tinki/posts/2586 "Райдер по жизни" Тодда Ричардса
 /users/tinki/posts/2991 porno tinki
@@ -3504,14 +3505,14 @@ class Migration(DataMigration):
 /users/zlobec/posts/482 с днём рождения любимый на майках
 /users/zlobec/posts/482 сноубордические поздравления с днем рождения
 /users/zlobec/posts/490 старые скейты"""
-        
+
         for line in queries.split("\n"):
             link, query = line.split(' ', 1)
             orm.SearchLink.objects.create(query=query.strip(), link=link.strip())
-    
+
     def backwards(self, orm):
         "Write your backwards methods here."
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -3929,5 +3930,5 @@ class Migration(DataMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

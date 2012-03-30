@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from models import Post, Comment, Tag
 
+
 class BestPosts(Feed):
     """ Лучшие сообщения в блоге """
     title = u"Glader.ru: лучшие сообщения"

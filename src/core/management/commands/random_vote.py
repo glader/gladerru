@@ -16,6 +16,7 @@ BAD_AUTHORS = ['traektoria.boardshop']
 
 log = logging.getLogger('django.cron')
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         curr = randint(2, 4)

@@ -23,16 +23,16 @@ from core.utils.common import cached, slug
 from core.utils.log import get_logger
 
 
-class GenericManager( models.Manager ):
+class GenericManager(models.Manager):
     """
     Filters query set with given selectors
     """
     def __init__(self, **kwargs):
-        super( GenericManager, self ).__init__()
+        super(GenericManager, self).__init__()
         self.selectors = kwargs
 
     def get_query_set(self):
-        return super( GenericManager, self ).get_query_set().filter( **self.selectors )
+        return super(GenericManager, self).get_query_set().filter(**self.selectors)
 
 
 class Tag(models.Model):
@@ -61,13 +61,14 @@ class Tag(models.Model):
     @staticmethod
     def process_tags(tags_str):
         """ Создает теги по строке """
-        if not tags_str: return []
-        tags = [ t.strip() for t in tags_str.split(',') ]
-        tag_slugs = [ slug(t.strip()) for t in tags_str.split(',') ]
+        if not tags_str:
+            return []
+        tags = [t.strip() for t in tags_str.split(',')]
+        tag_slugs = [slug(t.strip()) for t in tags_str.split(',')]
 
-        present_tags = dict( (t.title.lower(), t) for t in Tag.objects.filter(title__in=tags))
-        present_tags.update(dict( (t.name.lower(), t) for t in Tag.objects.filter(name__in=tags)))
-        present_tags.update(dict( (t.name.lower(), t) for t in Tag.objects.filter(name__in=tag_slugs)))
+        present_tags = dict((t.title.lower(), t) for t in Tag.objects.filter(title__in=tags))
+        present_tags.update(dict((t.name.lower(), t) for t in Tag.objects.filter(name__in=tags)))
+        present_tags.update(dict((t.name.lower(), t) for t in Tag.objects.filter(name__in=tag_slugs)))
 
         result = []
         for tag_title in tags:
@@ -86,9 +87,11 @@ class Tag(models.Model):
 
         return result
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
-    def get_absolute_url(self): return "/tags/%s" % self.name
+    def get_absolute_url(self):
+        return "/tags/%s" % self.name
 
     def save(self, *args, **kwargs):
         if not self.name:
@@ -98,7 +101,7 @@ class Tag(models.Model):
             self.size = len(self.posts.split(','))
 
         if self.new_synonim():
-            Queue.add_task('tag_synonim', {"tag_id":self.id})
+            Queue.add_task('tag_synonim', {"tag_id": self.id})
 
         super(Tag, self).save(*args, **kwargs)
 
@@ -145,7 +148,7 @@ class Tag(models.Model):
 
     def remove_post_from_cache(self, post):
         id = str(post.id)
-        self.posts = self.posts.replace(id+',', '').replace(id, '')
+        self.posts = self.posts.replace(id + ',', '').replace(id, '')
         self.save()
 
     @classmethod
@@ -154,9 +157,9 @@ class Tag(models.Model):
             cls.fetch_tags()
 
         tags = [t for t in cls.tags if query.lower() in t.title.lower() or query.lower() in t.name.lower()]
-        tags.sort(key=lambda t:(-t.size, t.title))
+        tags.sort(key=lambda t: (-t.size, t.title))
         tags = tags[:limit]
-        tags.sort(key=lambda t:t.title)
+        tags.sort(key=lambda t: t.title)
         return tags
 
     @classmethod
@@ -180,7 +183,7 @@ class TagsCloud(object):
 
         for tag in self.tags:
             if min == max:
-                tag.rel_size = ( max_rel_size + min_rel_size ) / 2
+                tag.rel_size = (max_rel_size + min_rel_size) / 2
 
             else:
                 tag.rel_size = min_rel_size + \
@@ -285,10 +288,12 @@ class Profile(models.Model):
         self.avatar = True
         self.save()
 
-    def __unicode__(self): return self.user.username
+    def __unicode__(self):
+        return self.user.username
 
     @cached(cache_key=lambda user: "/users/%s/url" % user.id, timeout_seconds=settings.CACHE_LONG_TIMEOUT)
-    def get_absolute_url(self): return self.user.get_absolute_url()
+    def get_absolute_url(self):
+        return self.user.get_absolute_url()
 
     class Meta:
         verbose_name = u"Профиль"
@@ -300,7 +305,8 @@ class Friend(models.Model):
     user_b = models.ForeignKey(User, verbose_name=u"С кем дружит", related_name='subject')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
 
-    def __unicode__(self): return u"%s дружит с %s" % (self.user_a.username, self.user_b.username)
+    def __unicode__(self):
+        return u"%s дружит с %s" % (self.user_a.username, self.user_b.username)
 
     class Meta:
         verbose_name = u"Дружба"
@@ -338,7 +344,8 @@ class News(models.Model):
                 'new_tracklist': u'Выложен саундтрек к фильму <a href="http://glader.ru%(movie_url)s">%(movie_title)s</a>',
                 }
 
-    def __unicode__(self): return u"%s - %s" % (self.type, self.content)
+    def __unicode__(self):
+        return u"%s - %s" % (self.type, self.content)
 
     class Meta:
         verbose_name = u"Новость"
@@ -350,7 +357,8 @@ class UserNews(models.Model):
     user = models.ForeignKey(User, verbose_name=u"Юзер")
     news = models.ForeignKey(News, verbose_name=u"Новость", null=True, default=None)
 
-    def __unicode__(self): return u"%s - %s" % (self.user.username, self.news)
+    def __unicode__(self):
+        return u"%s - %s" % (self.user.username, self.news)
 
     class Meta:
         verbose_name = u"Новость"
@@ -390,14 +398,18 @@ class VoteMixin(object):
         if user and user.is_authenticated():
             votes = ItemVote.objects.filter(content_type__pk=26, object_id=self.pk, user=user)
             if votes:
-                return reduce(lambda x, y: x+y, [v.vote for v in votes])
+                return reduce(lambda x, y: x + y, [v.vote for v in votes])
         return None
 
     def can_vote(self, user):
-        if not user: return False
-        if not user.is_authenticated(): return False
-        if user.get_profile().is_moderator: return True
-        if hasattr(self, 'author') and self.author == user: return False
+        if not user:
+            return False
+        if not user.is_authenticated():
+            return False
+        if user.get_profile().is_moderator:
+            return True
+        if hasattr(self, 'author') and self.author == user:
+            return False
         return self.get_vote(user) is None
 
 
@@ -413,9 +425,11 @@ class Skill(models.Model):
     description = models.TextField(verbose_name=u"Описание")
     image = YFField(verbose_name=u"Картинка", upload_to='gladerru', null=True, blank=True, default=None)
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
-    def get_absolute_url(self): return reverse('skill', args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('skill', args=[self.slug])
 
     class Meta:
         verbose_name = u"Умение"
@@ -445,13 +459,14 @@ class Comment(models.Model):
     item = generic.GenericForeignKey()
     ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
 
-    all = GenericManager( )
+    all = GenericManager()
     objects = GenericManager(hidden=False)
 
     def get_absolute_url(self):
         return self.local_url
 
-    def __unicode__(self): return u"%s: %s" % (self.author, self.item)
+    def __unicode__(self):
+        return u"%s: %s" % (self.author, self.item)
 
     def save(self, *args, **kwargs):
         if not self.pk:
@@ -509,6 +524,7 @@ TYPES = (
     ('soundtrack', u'Музыка к фильму'),
 )
 
+
 class Post(models.Model, VoteMixin, UIDMixin):
     name = models.CharField(max_length=250, null=True, blank=True, unique=True, verbose_name=u"Имя элемента")
     author = models.ForeignKey(User, null=True, blank=True, verbose_name=u"Автор")
@@ -556,9 +572,12 @@ class Post(models.Model, VoteMixin, UIDMixin):
         return self.local_url
 
     def can_edit(self, user):
-        if not user: return False
-        if not user.is_authenticated(): return False
-        if user.get_profile().is_moderator: return True
+        if not user:
+            return False
+        if not user.is_authenticated():
+            return False
+        if user.get_profile().is_moderator:
+            return True
         return self.author == user
 
     def tags_html(self):
@@ -569,7 +588,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     def rebuild_tags(self):
         tags = self.tags.all().order_by('type', '-size')
         t = loader.get_template('block_post_tags.html')
-        self.tags_str = unicode(t.render(Context({'tags':tags})))
+        self.tags_str = unicode(t.render(Context({'tags': tags})))
         self.save()
 
     def save(self, *args, **kwargs):
@@ -604,9 +623,11 @@ class Region(models.Model):
     title = models.CharField(max_length=250, verbose_name=u"Название")
     order = models.PositiveIntegerField(verbose_name=u"Порядок")
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
-    def get_absolute_url(self): return reverse("region", args=[self.id])
+    def get_absolute_url(self):
+        return reverse("region", args=[self.id])
 
     class Meta:
         verbose_name = u"Регион"
@@ -618,9 +639,11 @@ class District(models.Model):
     """ Область """
     title = models.CharField(max_length=250, verbose_name=u"Название")
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
-    def get_absolute_url(self): return reverse("district", args=[self.id])
+    def get_absolute_url(self):
+        return reverse("district", args=[self.id])
 
     class Meta:
         verbose_name = u"Область"
@@ -678,12 +701,14 @@ class Mountain(models.Model, VoteMixin, UIDMixin):
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
 
-    all = GenericManager( )
+    all = GenericManager()
     objects = GenericManager(hidden=False)
 
-    def get_absolute_url(self): return reverse("mountain", args=[self.name])
+    def get_absolute_url(self):
+        return reverse("mountain", args=[self.name])
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         verbose_name = u"Гора"
@@ -728,7 +753,7 @@ class Man(models.Model):
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним", null=True, blank=True)
 
-    objects = GenericManager( )
+    objects = GenericManager()
     interesting = GenericManager(hidden=False)
 
     def get_absolute_url(self):
@@ -737,7 +762,8 @@ class Man(models.Model):
         else:
             return reverse('man', args=[self.slug])
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     def save(self, *args, **kwargs):
         self.hidden = True
@@ -763,12 +789,14 @@ class Studio(models.Model):
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
 
-    all = GenericManager( )
+    all = GenericManager()
     objects = GenericManager(status='pub')
 
-    def get_absolute_url(self): return reverse('studio', args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('studio', args=[self.slug])
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         verbose_name = u"Студия"
@@ -796,12 +824,14 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     date_created = None
 
-    all = GenericManager( )
+    all = GenericManager()
     objects = GenericManager(hidden=False)
 
-    def get_absolute_url(self): return reverse('movie', args=[self.slug])
+    def get_absolute_url(self):
+        return reverse('movie', args=[self.slug])
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         verbose_name = u"Фильм"
@@ -816,7 +846,8 @@ class Man2Movie(models.Model):
              )
     role = models.CharField(choices=ROLES, default='actor', verbose_name=u"Роль", max_length=20)
 
-    def __unicode__(self): return u"%s - %s (%s)" % (self.movie, self.man, self.role)
+    def __unicode__(self):
+        return u"%s - %s (%s)" % (self.movie, self.man, self.role)
 
     class Meta:
         verbose_name = u"Райдер фильма"
@@ -849,10 +880,11 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
 
-    all = GenericManager( )
+    all = GenericManager()
     objects = GenericManager(status='pub')
 
-    def __unicode__(self): return self.title or unicode(self.id)
+    def __unicode__(self):
+        return self.title or unicode(self.id)
 
     @property
     def hidden(self):
@@ -862,9 +894,12 @@ class Photo(models.Model, VoteMixin, UIDMixin):
         return self.local_url
 
     def can_edit(self, user):
-        if not user: return False
-        if not user.is_authenticated(): return False
-        if user.get_profile().is_moderator: return True
+        if not user:
+            return False
+        if not user.is_authenticated():
+            return False
+        if user.get_profile().is_moderator:
+            return True
         return self.author == user
 
     def tags_html(self):
@@ -875,10 +910,11 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     def rebuild_tags(self):
         tags = self.tags.all().order_by('type', '-size')
         t = loader.get_template('block_post_tags.html')
-        self.tags_str = unicode(t.render(Context({'tags':tags})))
+        self.tags_str = unicode(t.render(Context({'tags': tags})))
         self.save()
 
-    def is_photo(self): return True
+    def is_photo(self):
+        return True
 
     def save(self, *args, **kwargs):
         super(Photo, self).save(*args, **kwargs)
@@ -932,7 +968,8 @@ class Song(models.Model):
     note = models.CharField(max_length=200, null=True, blank=True, verbose_name=u"Примечание")
     filename = models.CharField(max_length=200, null=True, blank=True, verbose_name=u"Имя файла")
 
-    def __unicode__(self): return "%s - %s" % (self.performer, self.title)
+    def __unicode__(self):
+        return "%s - %s" % (self.performer, self.title)
 
     def save(self, *args, **kwargs):
         super(Song, self).save(*args, **kwargs)
@@ -995,13 +1032,15 @@ class Word(models.Model, UIDMixin):
     def is_trick(self):
         return self.type not in ('common', 'jib')
 
-    def __unicode__(self): return self.title
+    def __unicode__(self):
+        return self.title
 
     class Meta:
         verbose_name = u"Словарное слово"
         verbose_name_plural = u"Словарные слова"
 
-    def has_content(self): return bool(self.content) and u"+" or ""
+    def has_content(self):
+        return bool(self.content) and u"+" or ""
     has_content.short_description = u"Есть содержание"
 
 
@@ -1014,7 +1053,8 @@ class Keyword(models.Model):
             )
     type = models.CharField(verbose_name=u"Тип", max_length=20, choices=TYPES, default='manual')
 
-    def __unicode__(self): return self.keyword
+    def __unicode__(self):
+        return self.keyword
 
     class Meta:
         verbose_name = u"Замена"
@@ -1029,7 +1069,8 @@ class Discount(models.Model):
     contacts = models.TextField(verbose_name=u"Контакты", null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
 
-    def __unicode__(self): return "%s %s" % (self.card, self.discount)
+    def __unicode__(self):
+        return "%s %s" % (self.card, self.discount)
 
     class Meta:
         verbose_name = u"Дисконтная карта"
@@ -1041,7 +1082,8 @@ class Redirect(models.Model):
     source = models.CharField(verbose_name=u"Откуда", max_length=200)
     destination = models.CharField(verbose_name=u"Откуда", max_length=200)
 
-    def __unicode__(self): return self.source
+    def __unicode__(self):
+        return self.source
 
     redirects = None
 
@@ -1066,7 +1108,8 @@ class UserVisitStat(models.Model):
     user = models.ForeignKey(User, verbose_name=u"Пользователь")
     day = models.DateField(verbose_name=u"Дата")
 
-    def __unicode__(self): return "%s - %s" % (self.user, self.day)
+    def __unicode__(self):
+        return "%s - %s" % (self.user, self.day)
 
     class Meta:
         verbose_name = u"Дата визита"
@@ -1074,4 +1117,4 @@ class UserVisitStat(models.Model):
 
 
 #User.profile = property(lambda u: Item.objects.get_or_create(user=u)[0])
-User.name = property(lambda u:u.first_name or u.username)
+User.name = property(lambda u: u.first_name or u.username)

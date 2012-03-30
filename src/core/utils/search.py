@@ -14,7 +14,7 @@ from core.models import Word, Movie, Man, Mountain, Tag, Post
 def base_search(query):
     result = []
     for model in (Word, Movie, Man, Mountain, Tag):
-        result.extend( model.objects.filter(title__icontains=query) )
+        result.extend(model.objects.filter(title__icontains=query))
     result.extend(Post.objects.filter(title__icontains=query, hidden=False).order_by('-date_created'))
     return result
 
@@ -46,7 +46,7 @@ def yandex_search(query):
                     'title': re.sub('<[^>]+>', '', ET.tostring(group.find('doc').find('title')).decode('utf8')),
                     }
             if group.find('doc').find('passages'):
-                page['snippet'] = "<br/>".join( [ re.sub('<[^>]+>', '', ET.tostring(passage).decode('utf8')).replace(u'&#1042;&#1099; &#1085;&#1077; &#1072;&#1074;&#1090;&#1086;&#1088;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1099;!&#1042;&#1086;&#1081;&#1090;&#1080; &#1074; Glader.ru&#1047;&#1072;&#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1089;&#1077;&#1081;&#1095;&#1072;&#1089;.', '')
+                page['snippet'] = "<br/>".join([re.sub('<[^>]+>', '', ET.tostring(passage).decode('utf8')).replace(u'&#1042;&#1099; &#1085;&#1077; &#1072;&#1074;&#1090;&#1086;&#1088;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1099;!&#1042;&#1086;&#1081;&#1090;&#1080; &#1074; Glader.ru&#1047;&#1072;&#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1089;&#1077;&#1081;&#1095;&#1072;&#1089;.', '')
                                                  for passage in group.find('doc').find('passages').findall('passage')]
                                                 )
 

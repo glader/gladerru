@@ -9,6 +9,7 @@ import logging
 
 log = logging.getLogger('django.cron')
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         count = 0

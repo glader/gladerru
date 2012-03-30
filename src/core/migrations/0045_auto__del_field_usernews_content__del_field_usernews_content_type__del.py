@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting field 'UserNews.content'
         db.delete_column('core_usernews', 'content')
 
@@ -23,9 +24,8 @@ class Migration(SchemaMigration):
         # Deleting field 'UserNews.object_id'
         db.delete_column('core_usernews', 'object_id')
 
-
     def backwards(self, orm):
-        
+
         # Adding field 'UserNews.content'
         db.add_column('core_usernews', 'content', self.gf('django.db.models.fields.TextField')(default=1), keep_default=False)
 
@@ -40,7 +40,6 @@ class Migration(SchemaMigration):
 
         # Adding field 'UserNews.object_id'
         db.add_column('core_usernews', 'object_id', self.gf('django.db.models.fields.PositiveIntegerField')(default=1), keep_default=False)
-
 
     models = {
         'auth.group': {

@@ -2,7 +2,8 @@
 
 import re
 from datetime import datetime
-import sys, os
+import sys
+import os
 sys.path.insert(0, os.path.abspath(os.path.join(os.getcwd(), os.path.dirname(__file__), '../../../')))
 
 import settings
@@ -14,6 +15,7 @@ cursor = connection.cursor()
 
 from core.models import Item, ItemType
 from core.forms import rus2translit
+
 
 def lat(title):
 	return re.sub("[^\w]|_", "", rus2translit(title).lower())
@@ -39,9 +41,8 @@ for l in open('geo').readlines():
 		if res:
 			data[3] = res.group(1)
 
-
 	i += 1
-	if i == 7: 
+	if i == 7:
 		title = data[2].decode('cp1251')
 		try:
 			m = Item.objects.get(title=title, type=ItemType.by_name['MOUNTAIN'])
@@ -57,5 +58,4 @@ for l in open('geo').readlines():
 		m.save()
 
 		#print data, ","
-		i = 0		
-		
+		i = 0

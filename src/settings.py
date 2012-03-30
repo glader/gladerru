@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Django settings for gladerru project.
-import os, platform, sys
+import os
+import platform
+import sys
 import logging
 
-APPEND_SLASH=False
+APPEND_SLASH = False
 
 ADMINS = (('Glader', 'glader.ru@gmail.com'),)
 MANAGERS = ADMINS
@@ -82,7 +84,7 @@ PROJECT_PATH = os.path.dirname(__file__)
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 MEDIA_URL = '/media/'
 
-THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails' # os.path.join(MEDIA_ROOT, 'data/thumbnails')
+THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'data/thumbnails')
 THUMBNAIL_URL = 'data/thumbnails/'
 THUMBNAIL_SIZE = 300, 150
 
@@ -99,7 +101,7 @@ ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
 CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
-CACHE_LONG_TIMEOUT = 60*60*24 # Долгий таймаут, для практически не изменяющихся данных
+CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для практически не изменяющихся данных
 
 DOMAIN = 'glader.ru'
 MEDIA_DOMAIN = DOMAIN
@@ -129,12 +131,12 @@ LOGGING = {
         },
         },
     'handlers': {
-        'console':{
+        'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
-            'formatter':'simple'
+            'formatter': 'simple'
         },
-        'file':{
+        'file': {
             'level': 'WARNING',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'traceback.log'),
@@ -144,25 +146,25 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             },
-        'cron':{
+        'cron': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'cron.log'),
             'formatter': 'verbose',
             },
-        'queue':{
+        'queue': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'queue.log'),
             'formatter': 'simple',
             },
-        'timing':{
+        'timing': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'timing.log'),
             'formatter': 'simple',
             },
-        'search':{
+        'search': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'search.log'),

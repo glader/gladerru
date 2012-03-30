@@ -14,6 +14,7 @@ settings.TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../templat
 
 log = logging.getLogger('django.cron')
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         cursor = connection.cursor()
@@ -35,19 +36,23 @@ class Command(NoArgsCommand):
 
             p.rebuild_tags()
             print i, chr(13),
-            i+= 1
-
+            i += 1
 
         print "movies"
         i = 0
         for m in Movie.objects.all():
             cursor.execute("SELECT SUM(vote) FROM core_itemvote WHERE object_id=%s and content_type_id=37", [m.id])
             m.rating = int(cursor.fetchone()[0] or 0)
-            if m.content: m.rating += 0.5
-            if m.teaser: m.rating += 1
-            if m.torrent: m.rating += 2
-            if m.full_movie: m.rating += 5
-            if Man2Movie.objects.filter(movie=m).count(): m.rating += 0.5
+            if m.content:
+                m.rating += 0.5
+            if m.teaser:
+                m.rating += 1
+            if m.torrent:
+                m.rating += 2
+            if m.full_movie:
+                m.rating += 5
+            if Man2Movie.objects.filter(movie=m).count():
+                m.rating += 0.5
 
             comments = m.comments.all()
             if len(comments) > 0:
@@ -60,7 +65,7 @@ class Command(NoArgsCommand):
             m.rating += 0.1 * len(comments)
             m.save()
             print i, chr(13),
-            i+= 1
+            i += 1
 
         print "tags"
         i = 0
@@ -69,7 +74,7 @@ class Command(NoArgsCommand):
             t.recalc_posts()
             t.save()
             print i, chr(13),
-            i+= 1
+            i += 1
 
         print "users"
         for u in User.objects.all():

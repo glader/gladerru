@@ -4,18 +4,18 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
-    
+
     def forwards(self, orm):
         "Write your forwards methods here."
-        
-        db.execute("""INSERT INTO core_friend (user_a_id, user_b_id, date_created) VALUES 
+
+        db.execute("""INSERT INTO core_friend (user_a_id, user_b_id, date_created) VALUES
                         (1, 11, NOW()), (1, 4, NOW()), (1, 2, NOW()), (4, 1, NOW()), (4, 2, NOW()), (2, 1, NOW()), (4, 19, NOW()), (1, 19, NOW()), (21, 1, NOW()), (4, 21, NOW()), (1, 21, NOW()), (1, 3, NOW()), (1, 42, NOW()), (8, 3, NOW()), (1, 35, NOW()), (35, 4, NOW()), (4, 35, NOW()), (35, 1, NOW()), (1, 8, NOW()), (96, 37, NOW()), (35, 37, NOW()), (35, 96, NOW()), (4, 37, NOW()), (96, 35, NOW()), (1, 96, NOW()), (96, 1, NOW()), (4, 104, NOW()), (96, 104, NOW()), (1, 104, NOW()), (35, 104, NOW()), (37, 96, NOW()), (37, 104, NOW()), (37, 35, NOW()), (37, 4, NOW()), (104, 4, NOW()), (104, 37, NOW()), (104, 96, NOW()), (104, 35, NOW()), (104, 1, NOW()), (104, 2, NOW()), (104, 21, NOW()), (11, 1, NOW()), (4, 9, NOW()), (138, 1, NOW()), (144, 138, NOW()), (144, 1, NOW()), (1, 138, NOW()), (138, 35, NOW()), (158, 1, NOW()), (191, 1, NOW()), (1, 137, NOW()), (11, 9, NOW()), (1, 245, NOW()), (4, 245, NOW()), (4, 277, NOW()), (277, 4, NOW()), (149, 308, NOW()), (317, 277, NOW()), (277, 309, NOW()), (309, 277, NOW()), (309, 188, NOW()), (309, 3, NOW()), (309, 37, NOW()), (37, 309, NOW()), (188, 309, NOW()), (277, 37, NOW()), (277, 317, NOW()), (37, 277, NOW()), (316, 354, NOW()), (434, 1, NOW()), (355, 354, NOW()), (4, 434, NOW()), (4, 354, NOW()), (316, 9, NOW()), (316, 1, NOW()), (425, 1, NOW()), (425, 8, NOW()), (425, 3, NOW()), (425, 2, NOW()), (560, 1, NOW()), (563, 1, NOW()), (556, 600, NOW()), (600, 1, NOW()), (600, 556, NOW()), (556, 1, NOW()), (563, 556, NOW()), (563, 351, NOW()), (556, 563, NOW()), (556, 560, NOW()), (614, 556, NOW()), (614, 1, NOW()), (556, 614, NOW()), (556, 277, NOW()), (556, 309, NOW()), (628, 21, NOW()), (628, 35, NOW()), (628, 1, NOW()), (636, 556, NOW()), (638, 556, NOW()), (563, 600, NOW()), (560, 556, NOW()), (560, 9, NOW()), (560, 354, NOW()), (556, 687, NOW()), (600, 563, NOW()), (600, 277, NOW()), (600, 614, NOW()), (2, 4, NOW()), (2, 425, NOW()), (837, 600, NOW()), (837, 1, NOW()), (837, 839, NOW()), (563, 837, NOW()), (837, 842, NOW()), (837, 563, NOW()), (600, 837, NOW()), (861, 860, NOW()), (860, 861, NOW()), (860, 1, NOW()), (847, 860, NOW()), (847, 1, NOW()), (860, 847, NOW()), (745, 860, NOW()), (847, 745, NOW()), (860, 745, NOW()), (745, 847, NOW()), (745, 1, NOW()), (874, 764, NOW()), (764, 874, NOW()), (900, 860, NOW()), (900, 600, NOW()), (860, 900, NOW()), (900, 1, NOW())""")
-    
-    
+
     def backwards(self, orm):
         "Write your backwards methods here."
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -391,5 +391,5 @@ class Migration(DataMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

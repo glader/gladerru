@@ -4,25 +4,24 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Rubric.parent'
         db.add_column('core_rubric', 'parent', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Rubric'], null=True, blank=True), keep_default=False)
 
         # Changing field 'Post.date_created'
         db.alter_column('core_post', 'date_created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True))
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'Rubric.parent'
         db.delete_column('core_rubric', 'parent_id')
 
         # Changing field 'Post.date_created'
         db.alter_column('core_post', 'date_created', self.gf('django.db.models.fields.DateTimeField')(blank=True))
-
 
     models = {
         'auth.group': {

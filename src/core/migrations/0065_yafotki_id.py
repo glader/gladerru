@@ -6,6 +6,7 @@ from django.db import models
 
 from core.templatetags.content import thumbnail
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
@@ -24,7 +25,6 @@ class Migration(DataMigration):
 
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

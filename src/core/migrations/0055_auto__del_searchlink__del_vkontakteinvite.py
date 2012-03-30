@@ -4,19 +4,19 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Deleting model 'SearchLink'
         db.delete_table('core_searchlink')
 
         # Deleting model 'VKontakteInvite'
         db.delete_table('core_vkontakteinvite')
 
-
     def backwards(self, orm):
-        
+
         # Adding model 'SearchLink'
         db.create_table('core_searchlink', (
             ('checked', self.gf('django.db.models.fields.BooleanField')(default=False)),
@@ -37,7 +37,6 @@ class Migration(SchemaMigration):
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
         ))
         db.send_create_signal('core', ['VKontakteInvite'])
-
 
     models = {
         'auth.group': {

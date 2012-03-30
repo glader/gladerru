@@ -4,20 +4,19 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
-    
+
     def forwards(self, orm):
-        
+
         # Adding field 'Song.filename'
         db.add_column('core_song', 'filename', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True), keep_default=False)
-    
-    
+
     def backwards(self, orm):
-        
+
         # Deleting field 'Song.filename'
         db.delete_column('core_song', 'filename')
-    
-    
+
     models = {
         'auth.group': {
             'Meta': {'object_name': 'Group'},
@@ -433,5 +432,5 @@ class Migration(SchemaMigration):
             'type': ('django.db.models.fields.CharField', [], {'default': "'common'", 'max_length': '20'})
         }
     }
-    
+
     complete_apps = ['core']

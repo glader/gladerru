@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding model 'Rubric'
         db.create_table('core_rubric', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -67,9 +68,8 @@ class Migration(SchemaMigration):
         ))
         db.create_unique('core_post_favorites', ['post_id', 'profile_id'])
 
-
     def backwards(self, orm):
-        
+
         # Deleting model 'Rubric'
         db.delete_table('core_rubric')
 
@@ -81,7 +81,6 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field favorites on 'Post'
         db.delete_table('core_post_favorites')
-
 
     models = {
         'auth.group': {

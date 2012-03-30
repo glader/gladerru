@@ -15,6 +15,7 @@ AUTHORS = ['LAhmatyi', 'tinki', 'skyslayer', 'akafist', 'prophoter']
 
 log = logging.getLogger('django.cron')
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         count = 0
@@ -34,7 +35,7 @@ class Command(NoArgsCommand):
             item.status = 'pub'
             item.save()
 
-            Queue.add_task('new_post', {"post_id":item.id})
+            Queue.add_task('new_post', {"post_id": item.id})
 
             count += 1
 

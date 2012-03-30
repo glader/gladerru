@@ -4,20 +4,19 @@ from south.db import db
 from south.v2 import DataMigration
 from django.db import models
 
+
 class Migration(DataMigration):
 
     def forwards(self, orm):
         "Write your forwards methods here."
-        
+
         for p in orm.Photo.objects.all():
             if p.post:
                 p.post_tmp = orm.Post.objects.get(name=p.post.name)
                 p.save()
 
-
     def backwards(self, orm):
         "Write your backwards methods here."
-
 
     models = {
         'auth.group': {

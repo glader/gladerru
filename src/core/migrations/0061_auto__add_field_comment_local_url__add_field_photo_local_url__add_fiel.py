@@ -4,10 +4,11 @@ from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
+
         # Adding field 'Comment.local_url'
         db.add_column('core_comment', 'local_url', self.gf('django.db.models.fields.CharField')(default='', max_length=100), keep_default=False)
 
@@ -17,9 +18,8 @@ class Migration(SchemaMigration):
         # Adding field 'Post.local_url'
         db.add_column('core_post', 'local_url', self.gf('django.db.models.fields.CharField')(default='', max_length=70), keep_default=False)
 
-
     def backwards(self, orm):
-        
+
         # Deleting field 'Comment.local_url'
         db.delete_column('core_comment', 'local_url')
 
@@ -28,7 +28,6 @@ class Migration(SchemaMigration):
 
         # Deleting field 'Post.local_url'
         db.delete_column('core_post', 'local_url')
-
 
     models = {
         'auth.group': {

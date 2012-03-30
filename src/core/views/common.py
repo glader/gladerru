@@ -3,6 +3,7 @@
 from django.template import RequestContext, loader
 from django.http import HttpResponse
 
+
 def render_to_response(request, template_name, context_dict={}, cookies={}):
     html = render_to_string(request, template_name, context_dict)
     response = HttpResponse(html)

@@ -6,6 +6,7 @@ import logging.handlers
 
 from django.conf import settings
 
+
 def get_logger(name):
     filename = os.path.join(settings.LOG_PATH, name.replace('.', '/') + '.log')
 
