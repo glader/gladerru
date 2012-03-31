@@ -37,10 +37,11 @@ def init():
         sudo('mkdir /home/%s/.ssh' % SSH_USER)
         sudo('echo "%s" >> /home/%s/.ssh/authorized_keys' % (env.www_ssh_key, SSH_USER))
 
-    append('/etc/sudoers', '%s  ALL=(ALL) NOPASSWD:/usr/bin/sv,/etc/init.d/lighttpd' % SSH_USER, use_sudo=True)
+    append('/etc/sudoers', '%s  ALL=(ALL) NOPASSWD:/usr/bin/sv' % SSH_USER, use_sudo=True)
 
     if not exists('/var/cache/gladerru/thumbnails'):
         sudo('mkdir -p /var/cache/gladerru/thumbnails')
+        sudo('touch /var/cache/gladerru/glader_ru.links.db')
         sudo('chown -R www:www /var/cache/gladerru')
 
     if not exists('/var/log/projects/gladerru'):
@@ -49,18 +50,18 @@ def init():
 
     if not exists('/etc/lighttpd/conf-available/10-modules.conf'):
         put('tools/lighttpd/10-modules.conf', '/etc/lighttpd/conf-available/10-modules.conf', use_sudo=True)
-        sudo('ln -s /etc/lighttpd/conf-available/10-modules.conf /etc/lighttpd/conf-enabled/10-modules.conf', shell=False)
+        sudo('ln -s /etc/lighttpd/conf-available/10-modules.conf /etc/lighttpd/conf-enabled/10-modules.conf')
 
     if not exists('/etc/lighttpd/conf-available/90-gladerru.conf'):
         sudo('touch /etc/lighttpd/conf-available/90-gladerru.conf')
     if not exists('/etc/lighttpd/conf-enabled/90-gladerru.conf'):
-        sudo('ln -s /etc/lighttpd/conf-available/90-gladerru.conf /etc/lighttpd/conf-enabled/90-gladerru.conf', shell=False)
+        sudo('ln -s /etc/lighttpd/conf-available/90-gladerru.conf /etc/lighttpd/conf-enabled/90-gladerru.conf')
 
     if not exists('/etc/sv/gladerru'):
         sudo('mkdir -p /etc/sv/gladerru/supervise')
         sudo('touch /etc/sv/gladerru/run')
         sudo('chmod 755 /etc/sv/gladerru/run')
-        sudo('ln -s /etc/sv/gladerru /etc/service/gladerru', shell=False)
+        sudo('ln -s /etc/sv/gladerru /etc/service/gladerru')
 
     if not exists('/etc/cron.d/gladerru'):
         sudo('touch /etc/cron.d/gladerru')
@@ -121,7 +122,7 @@ def local_settings():
 def lighttpd():
     env.user = 'ubuntu'
     sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
-    sudo('/etc/init.d/cron restart')
+    sudo('/etc/init.d/lighttpd restart')
 
 
 def runit():
@@ -132,7 +133,7 @@ def runit():
 def cron():
     env.user = 'ubuntu'
     sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
-    sudo('/etc/init.d/cron reload')
+    sudo('/etc/init.d/cron restart')
 
 
 def dump():
@@ -151,7 +152,6 @@ def migrate():
 
 def update_sape():
     env.user = SSH_USER
-    run('touch /var/cache/gladerru/glader_ru.links.db')
     manage_py('fetch_sape')
 
 
