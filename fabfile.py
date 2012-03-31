@@ -11,9 +11,10 @@ from fab_settings import *
 env.ami = 'ami-8f03ede6'
 env.directory = '/home/%s/projects/gladerru' % SSH_USER
 env.manage_dir = env.directory + '/src'
-env.deploy_user = env.user = SSH_USER
+env.user = SSH_USER
 env.activate = 'source %s/ENV/bin/activate' % env.directory
 env.www_ssh_key = 'ssh-dss AAAAB3NzaC1kc3MAAACAbN+8KDO1jkRluNqiqO2KjkaSn4Qs66zBcV+JaUFrnoVt5tBaEMGW56ihtd1zmPqSufpDKTMXKneZWLAx8evFobvU5S32OKtFpR6oylZwIWg0SQNtjBE7lFHC5VnN4BtjpLp6DBzUOt6mTXYyCjaYhorMWmyw5641KXOsW0V7et0AAAAVALlYgGve+sIVrw7MTQFD4Hvb1utVAAAAgAGktSDpYw1sEC9tA593z3Ymk9r4J939DsKiL3d+RK/RXfY9KgoFtMHmCzL8goYpyWdaE2XQzCrIfp3EFW41NUWUfxsaDzXSEg4Q/CYAfJm7nNDpwv1eAq3c0Mw7RMGEw3pxsAnQrq0snHI7cVhdZ12Z6wO147+ybAbOXW7XF04sAAAAgGzFeuezmdfyS0N4VE42/kgC4SusMTxYOj5nrb8VRvzQ08Msa5FChXIWv0Fj5hMpOVX/gc4uEkbt7knpjqouo+K+8jadQ4I+sRidqG13U6b2UGJy844THSqL3HIhuPmhvWPOFjJbsNFxcoakSqLxn3ewkDzco7CH/aYo9u9VrLwk dsa-key-20080514'
+env.forward_agent = True
 
 if not env.hosts:
     env.hosts = ['ec2-23-21-131-63.compute-1.amazonaws.com']
@@ -25,7 +26,7 @@ def virtualenv(command):
 
 
 def init():
-    env.deploy_user = env.user = 'ubuntu'
+    env.user = 'ubuntu'
 
     sudo('apt-get update')
     sudo('apt-get install -y mc lighttpd mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
@@ -69,8 +70,6 @@ def init():
 
 
 def production():
-    env.deploy_user = env.user = 'www'
-
     upload()
     static()
     environment()
@@ -80,12 +79,12 @@ def production():
     cron()
     dump()
     migrate()
+    update_sape()
     restart()
-
-    restart_services()
 
 
 def upload():
+    env.user = SSH_USER
     local('git archive -o archive.tar.gz HEAD')
     put('archive.tar.gz', env.directory + '/archive.tar.gz')
     with cd(env.directory):
@@ -95,11 +94,13 @@ def upload():
 
 
 def static():
+    env.user = SSH_USER
     with cd(env.directory + '/src/media/design/3/css'):
         run('python merge.py')
 
 
 def environment():
+    env.user = SSH_USER
     with cd(env.directory):
         with settings(warn_only=True):
             run('python virtualenv.py ENV')
@@ -107,6 +108,7 @@ def environment():
 
 
 def local_settings():
+    env.user = SSH_USER
     with cd(env.manage_dir):
         upload_template(
             'src/local_settings.py.sample',
@@ -117,17 +119,20 @@ def local_settings():
 
 
 def lighttpd():
-    run('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env, shell=False)
+    env.user = 'ubuntu'
+    sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
+    sudo('/etc/init.d/cron restart')
 
 
 def runit():
-    env.deploy_user = env.user = 'ubuntu'
+    env.user = 'ubuntu'
     sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
 
 
 def cron():
-    env.deploy_user = env.user = 'ubuntu'
+    env.user = 'ubuntu'
     sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
+    sudo('/etc/init.d/cron reload')
 
 
 def dump():
@@ -135,26 +140,35 @@ def dump():
 
 
 def manage_py(command):
-    env.deploy_user = env.user = SSH_USER
+    env.user = SSH_USER
     virtualenv('cd %s && python manage.py %s' % (env.manage_dir, command))
 
 
 def migrate():
+    env.user = SSH_USER
     manage_py('migrate')
 
 
+def update_sape():
+    env.user = SSH_USER
+    run('touch /var/cache/gladerru/glader_ru.links.db')
+    manage_py('fetch_sape')
+
+
 def restart():
-    env.deploy_user = env.user = SSH_USER
+    env.user = SSH_USER
     run('sudo sv restart gladerru')
-
-
-def restart_services():
-    env.deploy_user = env.user = 'ubuntu'
-    sudo('/etc/init.d/cron reload')
-    sudo('/etc/init.d/lighttpd restart')
 
 
 def local_env():
     with settings(warn_only=True):
         local('c:\\python\\python virtualenv.py ENV --system-site-packages')
     local('ENV\\Scripts\\pip install -r requirements.txt ')
+
+
+def update_local_db():
+    run("mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s > gladerru.sql" % globals())
+    get("gladerru.sql", "gladerru.sql")
+    run("rm gladerru.sql")
+    local("mysql -uroot %(DATABASE_DB)s < gladerru.sql" % globals())
+    local("del gladerru.sql")
