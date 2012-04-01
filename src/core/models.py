@@ -810,7 +810,7 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     content = models.TextField(verbose_name=u"Описание", null=True, blank=True)
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    cover = YFField(verbose_name=u"Обложка", upload_to='gladerru', null=True, blank=True)
+    cover = YFField(verbose_name=u"Обложка", upload_to='gladerru', null=True, blank=True, default=None)
     torrent = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"Ссылка на торрент")
     teaser = models.TextField(verbose_name=u"Тизер", null=True, blank=True)
     full_movie = models.TextField(verbose_name=u"Видео", null=True, blank=True)
