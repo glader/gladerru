@@ -122,7 +122,7 @@ def local_settings():
 def lighttpd():
     env.user = 'ubuntu'
     sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
-    sudo('/etc/init.d/lighttpd restart')
+    #sudo('/etc/init.d/lighttpd restart')
 
 
 def runit():
