@@ -3,7 +3,7 @@ from itertools import chain
 
 from django.core.management.base import NoArgsCommand
 
-from core.models import Photo, Man, Movie
+from core.models import Photo, Man, Movie, Mountain, MountainPhoto
 from core.utils.thumbnails import make_thumbnail
 import logging
 
@@ -19,6 +19,8 @@ class Command(NoArgsCommand):
             (photo.yandex_fotki_image_src for photo in Photo.objects.filter(yandex_fotki_image_src__isnull=False)),
             (man.image for man in Man.objects.filter(image__isnull=False)),
             (movie.cover for movie in Movie.objects.filter(cover__isnull=False)),
+            (mountain.image for mountain in Mountain.objects.filter(image__isnull=False)),
+            (mp.image for mp in MountainPhoto.objects.filter(image__isnull=False)),
         ]
 
         for image_url in chain(*images):
