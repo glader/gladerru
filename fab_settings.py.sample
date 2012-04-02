@@ -25,3 +25,5 @@ YAFOTKI_ACCOUNT_PASSWORD = ''
 
 SSH_USER = 'www'
 
+DUMP_ACCOUNT_NAME = 'glader.dump'
+DUMP_PASSWORD = ''
