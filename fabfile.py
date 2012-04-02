@@ -26,48 +26,47 @@ def virtualenv(command):
 
 
 def init():
-    env.user = 'ubuntu'
+    with settings(user='ubuntu'):
+        sudo('apt-get update')
+        sudo('apt-get install -y mc lighttpd mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
+        sudo('apt-get build-dep -y python-mysqldb')
 
-    sudo('apt-get update')
-    sudo('apt-get install -y mc lighttpd mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
-    sudo('apt-get build-dep -y python-mysqldb')
+        if not exists('/home/%s' % SSH_USER):
+            sudo('yes | adduser --disabled-password %s' % SSH_USER)
+            sudo('mkdir /home/%s/.ssh' % SSH_USER)
+            sudo('echo "%s" >> /home/%s/.ssh/authorized_keys' % (env.www_ssh_key, SSH_USER))
 
-    if not exists('/home/%s' % SSH_USER):
-        sudo('yes | adduser --disabled-password %s' % SSH_USER)
-        sudo('mkdir /home/%s/.ssh' % SSH_USER)
-        sudo('echo "%s" >> /home/%s/.ssh/authorized_keys' % (env.www_ssh_key, SSH_USER))
+        append('/etc/sudoers', '%s  ALL=(ALL) NOPASSWD:/usr/bin/sv' % SSH_USER, use_sudo=True)
 
-    append('/etc/sudoers', '%s  ALL=(ALL) NOPASSWD:/usr/bin/sv' % SSH_USER, use_sudo=True)
+        if not exists('/var/cache/gladerru/thumbnails'):
+            sudo('mkdir -p /var/cache/gladerru/thumbnails')
+            sudo('touch /var/cache/gladerru/glader_ru.links.db')
+            sudo('chown -R www:www /var/cache/gladerru')
 
-    if not exists('/var/cache/gladerru/thumbnails'):
-        sudo('mkdir -p /var/cache/gladerru/thumbnails')
-        sudo('touch /var/cache/gladerru/glader_ru.links.db')
-        sudo('chown -R www:www /var/cache/gladerru')
+        if not exists('/var/log/projects/gladerru'):
+            sudo('mkdir -p /var/log/projects/gladerru')
+            sudo('chmod 777 /var/log/projects/gladerru')
 
-    if not exists('/var/log/projects/gladerru'):
-        sudo('mkdir -p /var/log/projects/gladerru')
-        sudo('chmod 777 /var/log/projects/gladerru')
+        if not exists('/etc/lighttpd/conf-available/10-modules.conf'):
+            put('tools/lighttpd/10-modules.conf', '/etc/lighttpd/conf-available/10-modules.conf', use_sudo=True)
+            sudo('ln -s /etc/lighttpd/conf-available/10-modules.conf /etc/lighttpd/conf-enabled/10-modules.conf')
 
-    if not exists('/etc/lighttpd/conf-available/10-modules.conf'):
-        put('tools/lighttpd/10-modules.conf', '/etc/lighttpd/conf-available/10-modules.conf', use_sudo=True)
-        sudo('ln -s /etc/lighttpd/conf-available/10-modules.conf /etc/lighttpd/conf-enabled/10-modules.conf')
+        if not exists('/etc/lighttpd/conf-available/90-gladerru.conf'):
+            sudo('touch /etc/lighttpd/conf-available/90-gladerru.conf')
+        if not exists('/etc/lighttpd/conf-enabled/90-gladerru.conf'):
+            sudo('ln -s /etc/lighttpd/conf-available/90-gladerru.conf /etc/lighttpd/conf-enabled/90-gladerru.conf')
 
-    if not exists('/etc/lighttpd/conf-available/90-gladerru.conf'):
-        sudo('touch /etc/lighttpd/conf-available/90-gladerru.conf')
-    if not exists('/etc/lighttpd/conf-enabled/90-gladerru.conf'):
-        sudo('ln -s /etc/lighttpd/conf-available/90-gladerru.conf /etc/lighttpd/conf-enabled/90-gladerru.conf')
+        if not exists('/etc/sv/gladerru'):
+            sudo('mkdir -p /etc/sv/gladerru/supervise')
+            sudo('touch /etc/sv/gladerru/run')
+            sudo('chmod 755 /etc/sv/gladerru/run')
+            sudo('ln -s /etc/sv/gladerru /etc/service/gladerru')
 
-    if not exists('/etc/sv/gladerru'):
-        sudo('mkdir -p /etc/sv/gladerru/supervise')
-        sudo('touch /etc/sv/gladerru/run')
-        sudo('chmod 755 /etc/sv/gladerru/run')
-        sudo('ln -s /etc/sv/gladerru /etc/service/gladerru')
+        if not exists('/etc/cron.d/gladerru'):
+            sudo('touch /etc/cron.d/gladerru')
 
-    if not exists('/etc/cron.d/gladerru'):
-        sudo('touch /etc/cron.d/gladerru')
-
-    sudo('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
-    sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
+        sudo('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
+        sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
 
 
 def production():
@@ -85,55 +84,55 @@ def production():
 
 
 def upload():
-    env.user = SSH_USER
-    local('git archive -o archive.tar.gz HEAD')
-    put('archive.tar.gz', env.directory + '/archive.tar.gz')
-    with cd(env.directory):
-        run('tar -zxf archive.tar.gz')
-        run('rm archive.tar.gz')
-    local('del archive.tar.gz')
+    with settings(user=SSH_USER):
+        local('git archive -o archive.tar.gz HEAD')
+        put('archive.tar.gz', env.directory + '/archive.tar.gz')
+        with cd(env.directory):
+            run('tar -zxf archive.tar.gz')
+            run('rm archive.tar.gz')
+        local('del archive.tar.gz')
 
 
 def static():
-    env.user = SSH_USER
-    with cd(env.directory + '/src/media/design/3/css'):
-        run('python merge.py')
+    with settings(user=SSH_USER):
+        with cd(env.directory + '/src/media/design/3/css'):
+            run('python merge.py')
 
 
 def environment():
-    env.user = SSH_USER
-    with cd(env.directory):
-        with settings(warn_only=True):
-            run('python virtualenv.py ENV')
-        virtualenv('pip install -r requirements.txt')
+    with settings(user=SSH_USER):
+        with cd(env.directory):
+            with settings(warn_only=True):
+                run('python virtualenv.py ENV')
+            virtualenv('pip install -r requirements.txt')
 
 
 def local_settings():
-    env.user = SSH_USER
-    with cd(env.manage_dir):
-        upload_template(
-            'src/local_settings.py.sample',
-            'local_settings.py',
-            globals(),
-            backup=False
-        )
+    with settings(user=SSH_USER):
+        with cd(env.manage_dir):
+            upload_template(
+                'src/local_settings.py.sample',
+                'local_settings.py',
+                globals(),
+                backup=False
+            )
 
 
 def lighttpd():
-    env.user = 'ubuntu'
-    sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
-    #sudo('/etc/init.d/lighttpd restart')
+    with settings(user='ubuntu'):
+        sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
+        #sudo('/etc/init.d/lighttpd restart')
 
 
 def runit():
-    env.user = 'ubuntu'
-    sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
+    with settings(user='ubuntu'):
+        sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
 
 
 def cron():
-    env.user = 'ubuntu'
-    sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
-    sudo('/etc/init.d/cron restart')
+    with settings(user='ubuntu'):
+        sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
+        sudo('/etc/init.d/cron restart')
 
 
 def dump():
@@ -141,23 +140,22 @@ def dump():
 
 
 def manage_py(command):
-    env.user = SSH_USER
     virtualenv('cd %s && python manage.py %s' % (env.manage_dir, command))
 
 
 def migrate():
-    env.user = SSH_USER
-    manage_py('migrate')
+    with settings(user=SSH_USER):
+        manage_py('migrate')
 
 
 def update_sape():
-    env.user = SSH_USER
-    manage_py('fetch_sape')
+    with settings(user=SSH_USER):
+        manage_py('fetch_sape')
 
 
 def restart():
-    env.user = SSH_USER
-    run('sudo sv restart gladerru')
+    with settings(user=SSH_USER):
+        run('sudo sv restart gladerru')
 
 
 def local_env():
