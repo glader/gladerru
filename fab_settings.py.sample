@@ -27,3 +27,6 @@ SSH_USER = 'www'
 
 DUMP_ACCOUNT_NAME = 'glader.dump'
 DUMP_PASSWORD = ''
+
+EC2_KEY = ''
+EC2_SECRET = ''
