@@ -129,7 +129,7 @@ LOGGING = {
         'simple': {
             'format': '%(asctime)s %(levelname)s %(message)s'
         },
-        },
+    },
     'handlers': {
         'console': {
             'level': 'DEBUG',
