@@ -597,8 +597,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
             for t in self.tags.all():
                 if t.name == 'question':
                     self.is_question = True
-        else:
-            super(Post, self).save(*args, **kwargs)
 
         if self.status != 'pub':
             self.hidden = True
