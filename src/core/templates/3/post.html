@@ -14,7 +14,7 @@
 {% endblock %}
 
 {# FIXME: сделать внятные сообщения о статусах сообщений #}
-{% block page_title %}<img src="{% MEDIA_URL %}{{ post.author.get_profile|get_avatar_url:"32" }}" class="userpic" alt=""/> {{ post.author|link }}: {{ post|link }} {% if post.event_date_start %}&nbsp;<span style="font-size: 80%">(<a href="{% url schedule_month post.event_date_start.year, post.event_date_start.month %}">{{ post.event_date_start|human_date }}</a>)</span> {% endif %}{% post_edit_link post user %}
+{% block page_title %}<img src="{{ avatar }}" class="userpic" alt=""/> {{ post.author|link }}: {{ post|link }} {% if post.event_date_start %}&nbsp;<span style="font-size: 80%">(<a href="{% url schedule_month post.event_date_start.year, post.event_date_start.month %}">{{ post.event_date_start|human_date }}</a>)</span> {% endif %}{% post_edit_link post user %}
 {% post_status post %}
 {% endblock %}
 

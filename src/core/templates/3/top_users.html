@@ -13,14 +13,14 @@
     <table>
         {% for profile in profiles %}
             <tr>
-                <td><img src="{% MEDIA_URL %}{{ profile|get_avatar_url:"32" }}" class="userpic" alt=""/ width="32px">&nbsp;{{ profile.user|link }}&nbsp;</td>
+                <td><img src="{{ profile.avatar }}" class="userpic" alt="" width="32px" />&nbsp;{{ profile.user|link }}&nbsp;</td>
                 <td style="vertical-align:bottom">{{ profile.rating }}</td>
             </tr>
             <tr>
                 <td style="height: 7px;" colspan="2"></td>
             </tr>
         {% endfor %}
-    </table>    
+    </table>
 {% endblock content %}
 
 {% block sidebar %}

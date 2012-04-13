@@ -2,7 +2,7 @@
 {% load russian %}
 
 	<div class="comment_item" id="comment_{{ comment.id }}" style="margin-left: {{ comment.order|indent }}px;"><a name='c{{ comment.id }}'></a>
-		<img src='{% MEDIA_URL %}{{ comment.avatar }}' class='icon'>
+		<img src='{{ comment.avatar }}' class='icon'>
 		<b>{{ comment.profile_link }}</b> &nbsp;
 		<small style='color:#999'>{{ comment.date_created|human_date }} {{ comment.date_created|human_time }}</small>
 		&nbsp;&nbsp;&nbsp;

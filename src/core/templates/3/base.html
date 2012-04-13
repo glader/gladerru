@@ -70,7 +70,7 @@
                     {% if user %}
                         <i class="bg"></i>
                         <i class="userpic">
-                            <img src="{% MEDIA_URL %}{{ profile|get_avatar_url:"64" }}" alt="" />
+                            <img src="{{ profile.avatar }}" alt="" />
                             <span class="g-png"><img src="{% MEDIA_URL %}design/3/img/usertab/userpic_border.png" alt="" /></span>
                         </i>
 

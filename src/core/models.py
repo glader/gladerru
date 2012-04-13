@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import Image
-from hashlib import md5
 import os
 import uuid
 from utils.ID3 import *
 import random
+from StringIO import StringIO
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -13,7 +13,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template import Context, loader
-from south.modelsinspector import add_introspection_rules
 from django_queue.models import Queue
 from django.core.cache import cache
 
@@ -264,30 +263,6 @@ class Profile(models.Model):
         self.pic_count = Photo.objects.filter(author=self.user).count()
         self.save()
 
-    def save_avatar(self, avatar):
-        ext = avatar.name.rsplit('.', 1)[1]
-        if len(ext) > 4:
-            ext = 'jpg'
-
-        path = os.path.join(settings.USERPIC_ROOT, self.user.username)
-        if not os.path.exists(path):
-            os.mkdir(path)
-
-        for size in (128, 64, 32, 16):
-            avatar.seek(0)
-            im = Image.open(avatar)
-            im.thumbnail((size, size), Image.ANTIALIAS)
-            im.save(os.path.join(path, 'avatar%s.%s' % (size, ext)))
-            if ext != 'jpg':
-                try:
-                    os.remove(os.path.join(path, 'avatar%s.jpg' % size))
-                except OSError:
-                    pass
-                os.rename(os.path.join(path, 'avatar%s.%s' % (size, ext)), os.path.join(path, 'avatar%s.jpg' % size))
-
-        self.avatar = True
-        self.save()
-
     def __unicode__(self):
         return self.user.username
 
@@ -298,6 +273,69 @@ class Profile(models.Model):
     class Meta:
         verbose_name = u"Профиль"
         verbose_name_plural = u"Профили"
+
+
+class Avatar(models.Model):
+    user = models.ForeignKey(User, verbose_name=u"Юзер", db_index=True, unique=True)
+    avatar128 = YFField(upload_to='gladerru')
+    avatar64 = YFField(upload_to='gladerru')
+    avatar32 = YFField(upload_to='gladerru')
+    avatar16 = YFField(upload_to='gladerru')
+
+    def __unicode__(self):
+        return self.user.username
+
+    @classmethod
+    def add(cls, user, file):
+        try:
+            avatar = cls.objects.get(user=user)
+        except cls.DoesNotExist:
+            avatar = cls(user=user)
+
+        import imghdr
+        file.seek(0)
+        format = imghdr.what('', file.read(2048)) or 'jpeg'
+        file.seek(0)
+
+        for size in (128, 64, 32, 16):
+            file.seek(0)
+            im = Image.open(file)
+            im.thumbnail((size, size), Image.ANTIALIAS)
+            th = StringIO()
+
+            im.save(th, format)
+            th.seek(0)
+            image = th.read()
+
+            class F(StringIO):
+                pass
+
+            uploaded_file = F(image)
+            uploaded_file.name = 'avatar_%s' % size
+            uploaded_file.size = 1
+            uploaded_file.file = image
+
+            getattr(avatar, 'avatar%s' % size).save('avatar_%s' % size, uploaded_file)
+
+        avatar.save()
+
+        user.get_profile().avatar = True
+        user.get_profile().save()
+
+    @classmethod
+    def get(cls, users, size):
+        users = [user.id if isinstance(user, User) else user for user in users]
+        avatars = dict((a.user_id, a) for a in Avatar.objects.filter(user__in=users))
+        return dict((user_id, getattr(avatars[user_id], 'avatar%s' % size).src
+                                if user_id in avatars
+                                else "%sdesign/3/img/avatars/avatar%s.png" % (settings.MEDIA_URL, size)
+            )
+            for user_id in users
+        )
+
+    class Meta:
+        verbose_name = u"Аватар"
+        verbose_name_plural = u"Аватары"
 
 
 class Friend(models.Model):
@@ -414,6 +452,8 @@ class VoteMixin(object):
 
 
 class UIDMixin(object):
+    id = None
+
     @property
     def uid(self):
         return "%s_%s" % (self.__class__.__name__.lower(), self.id)

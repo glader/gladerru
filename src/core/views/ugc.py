@@ -21,10 +21,10 @@ from django_queue.models import Queue
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
     PhotoForm, PostCommentForm, PostVoteForm, CommentVoteForm, CommentForm, sanitizeHTML
 from core.models import Post, Friend, UserNews, ItemVote, Movie, Photo, Comment, Profile, Tag, News, \
-    Keyword, PictureBox, TagsCloud
+    Keyword, PictureBox, TagsCloud, Avatar
 from core.signals import new_comment_signal
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
-    make_pages, make_tag_pages, get_avatar_url, thumbnail
+    make_pages, make_tag_pages, thumbnail
 from core.utils.common import process_template, send_html_mail
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
@@ -162,6 +162,10 @@ def top_discussed(request):
 @time_slow
 def users_best(request):
     profiles = Profile.objects.all().order_by('-rating')[:20]
+    avatars = Avatar.get([profile.user_id for profile in profiles], 32)
+    for profile in profiles:
+        profile.avatar = avatars[profile.user_id]
+
     title = u"Лучшие посетители"
     menu = 'users_best'
     return render_to_response(request, 'top_users.html', locals())
@@ -170,6 +174,10 @@ def users_best(request):
 @time_slow
 def users_new(request):
     profiles = Profile.objects.all().order_by('-date_created')[:20]
+    avatars = Avatar.get([profile.user_id for profile in profiles], 32)
+    for profile in profiles:
+        profile.avatar = avatars[profile.user_id]
+
     title = u"Youngblood"
     menu = 'users_new'
     return render_to_response(request, 'top_users.html', locals())
@@ -274,6 +282,8 @@ def user_profile(request, username):
     page = 'profile'
     if request.user and request.user.is_authenticated() and not domain_user == request.user:
         my_friend = bool(Friend.objects.filter(user_a=request.user, user_b=domain_user).count())
+    avatar = Avatar.get([domain_user], 128)[domain_user.id]
+
     return render_to_response(request, 'profile.html', locals())
 
 
@@ -281,6 +291,10 @@ def user_friends(request, username):
     u""" Друзья юзера """
     domain_user = get_user(username)
     friends = Friend.objects.filter(user_a=domain_user).select_related('subject')
+    avatars = Avatar.get([friend.user_b_id for friend in friends], 32)
+    for friend in friends:
+        friend.avatar = avatars[friend.user_b_id]
+
     page = 'friends'
     return render_to_response(request, 'my/friends.html', locals())
 
@@ -294,10 +308,7 @@ def my_profile(request):
 @auth_only
 def my_friends(request):
     u""" Друзья юзера """
-    domain_user = request.user
-    friends = Friend.objects.filter(user_a=domain_user).select_related('subject')
-    page = 'friends'
-    return render_to_response(request, 'my/friends.html', locals())
+    return user_friends(request, request.user.username)
 
 
 def get_user_news(user):
@@ -404,7 +415,8 @@ def user_post(request, user, post_id):
     context = {'domain_user': user,
                'profile': profile,
                'post': post,
-               'can_edit': post.can_edit(request.user)
+               'can_edit': post.can_edit(request.user),
+               'avatar': Avatar.get([user], 32)[user.id]
                }
 
     return render_to_response(request, 'post.html', context)
@@ -655,7 +667,7 @@ def editavatar(request):
     else:
         form = AvatarForm(initial={})
 
-    return render_to_response(request, 'avatar_edit.html', {'form': form, 'domain_user': user})
+    return render_to_response(request, 'avatar_edit.html', {'form': form, 'domain_user': user, 'avatar': Avatar.get([user], 128)[user.id]})
 
 
 def editpassword(request):
@@ -734,7 +746,7 @@ def add_comment(request, user=None, hidden=False):
 
         comment.author = user
         comment.profile = profile
-        comment.avatar = get_avatar_url(profile, 32)
+        comment.avatar = Avatar.get([user], 32)[user.id]
         comment.profile_link = link(user)
 
         template = loader.get_template("blocks/b-comment.html")

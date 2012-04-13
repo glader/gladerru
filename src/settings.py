@@ -100,9 +100,6 @@ MAIN_PAGE_LEVEL = 1
 ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
-CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
-CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для практически не изменяющихся данных
-
 DOMAIN = 'glader.ru'
 MEDIA_DOMAIN = DOMAIN
 
@@ -111,7 +108,14 @@ SAPE_CHARSET = 'utf-8'
 SAPE_DOMAIN = DOMAIN
 SAPE_LOG = '/var/log/projects/gladerru/sape.log'
 
-CACHE_BACKEND = 'memcached://127.0.0.1:11211/'
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        }
+}
+CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
+CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для практически не изменяющихся данных
 
 ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 

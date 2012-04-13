@@ -14,6 +14,12 @@ class ProfileAdmin(admin.ModelAdmin):
     list_display = ('user', 'date_created', 'pub_post_count', 'comment_count')
 
 
+class AvatarAdmin(admin.ModelAdmin):
+    raw_id_fields = ('user',)
+    ordering = ('user__username',)
+    list_display = ('user',)
+
+
 class FriendAdmin(admin.ModelAdmin):
     raw_id_fields = ('user_a', 'user_b')
     ordering = ('-date_created',)
@@ -148,6 +154,7 @@ class PictureBoxAdmin(admin.ModelAdmin):
 
 
 #admin.site.register(Profile, ProfileAdmin)
+admin.site.register(Avatar, AvatarAdmin)
 admin.site.register(Friend, FriendAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(UserNews, UserNewsAdmin)

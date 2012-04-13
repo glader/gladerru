@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.forms import *
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain
+from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain, Avatar
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -190,7 +190,7 @@ class AvatarForm(CommonForm):
                                         'invalid': u'Файл поврежден или не является картинкой'})
 
     def save(self, user):
-        user.get_profile().save_avatar(self.cleaned_data['avatar'])
+        Avatar.add(user, self.cleaned_data['avatar'])
 
 
 class OpenMultipleChoiceField(MultipleChoiceField):

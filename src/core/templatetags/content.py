@@ -13,7 +13,8 @@ from django.core.paginator import QuerySetPaginator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Mountain, Region, PictureBox, Photo, Word, Man, Tag, Comment, Song, Movie, Studio, Profile
+from core.models import Post, Mountain, Region, PictureBox, Photo, Word, Man, Tag, \
+    Comment, Song, Movie, Studio, Profile, Avatar
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
@@ -57,6 +58,9 @@ def make_pages(querySet, items_at_page=20, current_page=None):
     page_number = validate_page_number(current_page, pages.num_pages)
     posts = pages.page(page_number).object_list
     context = {'items': posts}
+    avatars = Avatar.get([post.author_id for post in posts], 32)
+    for post in posts:
+        post.avatar = avatars[post.author_id]
     context.update(other_pages(page_number, pages.num_pages))
     return context
 
@@ -588,23 +592,13 @@ def post_status(post):
 
 
 @register.filter
-def get_avatar_url(profile, size):
-    if not profile:
-        return ""
-    if profile.avatar:
-        return '%s%s/avatar%s.jpg' % (settings.USERPIC_URL, profile.user.username, size)
-    else:
-        return '%savatar%s.png' % (settings.USERPIC_URL, size)
-
-
-@register.filter
 def add_referrer(html, referrer):
     return re.sub(r'href="(http://[^"]+)"', r'href="\1#referrer=%s"' % referrer, html)
 
 ################################################################################
 # Блоги
 
-
+# WTF?
 @register.simple_tag
 def cut_view(post, user, mode='normal'):
     if isinstance(post, Comment):
@@ -633,11 +627,12 @@ def get_comments(post, request):
     comments = post.comments.filter(status='pub', hidden=False).order_by('order')
     users = User.objects.in_bulk(set(comment.author_id for comment in comments))
     profiles = dict((profile.user_id, profile) for profile in Profile.objects.filter(user__in=users.keys()))
+    avatars = Avatar.get(users.keys(), 32)
 
     for comment in comments:
         comment.author = users[comment.author_id]
         comment.profile = profiles[comment.author_id]
-        comment.avatar = get_avatar_url(comment.profile, 32)
+        comment.avatar = avatars[comment.author_id]
         comment.profile_link = link(comment.author)
 
     context = {'post': post,

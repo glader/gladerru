@@ -5,7 +5,7 @@
 
 {% block page %}
 
-{% if profile.avatar %}<img src="{{ MEDIA_URL }}{{ profile|get_avatar_url:"128" }}"/><br><br>{% endif %}
+{% if avatar %}<img src="{{ avatar }}"/><br><br>{% endif %}
 
         <form action="" method="post" enctype="multipart/form-data" >
         {{ form.str_errors }}
@@ -15,5 +15,5 @@
         </form>
 
 </div></div>
-   
+
 {% endblock %}
