@@ -152,7 +152,7 @@ def lighttpd():
     with settings(user='ubuntu'):
         sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
 
-        sudo('kill `cat /var/run/lighttpd.pid` -INT')
+        #sudo('kill `cat /var/run/lighttpd.pid` -INT')
         #sudo('/etc/init.d/lighttpd restart')
 
 

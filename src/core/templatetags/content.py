@@ -74,6 +74,11 @@ def make_tag_pages(tag, items_at_page=20, current_page=None):
     posts = list(Post.objects.filter(hidden=False, id__in=page_ids))
     posts.sort(key=lambda p: p.date_created, reverse=True)
     context = {'items': posts}
+
+    avatars = Avatar.get([post.author_id for post in posts], 32)
+    for post in posts:
+        post.avatar = avatars[post.author_id]
+
     context.update(other_pages(page_number, num_pages))
     return context
 

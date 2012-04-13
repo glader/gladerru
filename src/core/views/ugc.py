@@ -62,36 +62,17 @@ def index(request):
 
 
 @time_slow
+@posts_feed(template="tag.html")
 def tag(request, name):
     tag = get_object_or_404(Tag, name=name)
     if tag.primary_synonim:
         return HttpResponsePermanentRedirect(tag.primary_synonim.get_absolute_url())
 
-    filter = request.GET.get('filter', '')
-    if filter not in ('best', 'userphoto'):
-        filter = ''
     context = {'page': request.GET.get('page', ""),
                'tag': tag,
-               'filter': filter,
-               'filters': [{'code':'best', 'title':u'Лучшие посты'},
-                           {'code':'', 'title':u'Все посты'},
-                           {'code':'userphoto', 'title':u'Фотографии'}, ]
                }
-
-    if filter == 'best':
-        item_ids = [int(id) for id in tag.posts.split(',')] if tag.posts else []
-        items = Post.objects.filter(pk__in=item_ids, hidden=False, best__isnull=False).order_by('-date_created')
-        context.update(make_pages(items, current_page=context.get('page')))
-
-    elif filter == 'userphoto':
-        items = tag.photo_set.filter(status='pub').order_by('-date_created')
-        context.update(make_pages(items, current_page=context.get('page')))
-
-    else:
-        context.update(make_tag_pages(tag, current_page=context.get('page')))
-
-    template = filter == 'userphoto' and 'tag_photos.html' or 'tag.html'
-    return render_to_response(request, template, context)
+    context.update(make_tag_pages(tag, current_page=context.get('page')))
+    return context
 
 
 def tags(request):
