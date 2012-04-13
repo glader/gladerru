@@ -19,7 +19,7 @@
 {% block content %}
 	<ul style="padding-left: 20px;">
 		{% for friend in friends %}
-			<li><img src="{{ friend.avatar }}" class="userpic" alt=""/>&nbsp;<a href="{{ friend.user_b.get_absolute_url }}">{{ friend.user_b.name }}</a></li>
+			<li><img src="{{ friend.avatar }}" class="userpic" alt="" width="32px" />&nbsp;<a href="{{ friend.user_b.get_absolute_url }}">{{ friend.user_b.name }}</a></li>
 		{% endfor %}
 	</ul>
 {% endblock %}
