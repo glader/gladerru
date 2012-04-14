@@ -44,6 +44,8 @@ def posts_feed(template="all.html"):
     def decorated(func):
         def wrapper(request, *args, **kwargs):
             context = func(request, *args, **kwargs)
+            if isinstance(context, HttpResponse):
+                return context
 
             render = render_post if request.user.is_authenticated() else render_post_cached
             context['posts'] = [render(post) for post in context['items']]
