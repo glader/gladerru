@@ -58,9 +58,12 @@ def make_pages(querySet, items_at_page=20, current_page=None):
     page_number = validate_page_number(current_page, pages.num_pages)
     posts = pages.page(page_number).object_list
     context = {'items': posts}
-    avatars = Avatar.get([post.author_id for post in posts], 32)
-    for post in posts:
-        post.avatar = avatars[post.author_id]
+
+    if posts and hasattr(posts[0], 'author_id'):
+        avatars = Avatar.get([post.author_id for post in posts], 32)
+        for post in posts:
+            post.avatar = avatars[post.author_id]
+    
     context.update(other_pages(page_number, pages.num_pages))
     return context
 
