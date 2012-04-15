@@ -154,13 +154,11 @@ def studio(request, studio_name):
 
 @time_slow
 def movies(request):
-    context = {'page': request.GET.get('page', "2011")}
+    context = {'page': request.GET.get('page', "2012")}
     year = context['page']
 
     movies = Movie.objects.all().order_by('-rating', 'title')
-    if year == '06-00':
-        movies = movies.filter(Q(year__lte='2006') | Q(year__isnull=True))
-    elif re.match('^\d+$', year):
+    if year.isdigit():
         movies = movies.filter(year=year)
 
     if not len(movies):

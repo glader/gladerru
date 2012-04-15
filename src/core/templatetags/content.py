@@ -169,9 +169,9 @@ def top_menu(level2='best', level1=None):
                         ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
                         ],
                 'movies': [
+                        ['2012', '/movies?page=2012', u'2012', u'Фильмы 2012 года'],
                         ['2011', '/movies?page=2011', u'2011', u'Фильмы 2011 года'],
                         ['2010', '/movies?page=2010', u'2010', u'Фильмы 2010 года'],
-                        ['2009', '/movies?page=2009', u'2009', u'Фильмы 2009 года'],
                         ['all', '/movies?page=all', u'все', u'Все фильмы'],
                         ['teasers', '/movies/teasers', u'тизеры', u'Тизеры к фильмам'],
                         ['soundtracks', '/movies/soundtracks', u'саундтреки', u'Музыкальные треки к фильмам'],
