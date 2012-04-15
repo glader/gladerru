@@ -62,7 +62,7 @@
         }
         
         play_link = $('#play'+track_id);
-        url = play_link.metadata().url;
+        url = '/media/' + play_link.metadata().url;
         play_link.hide();
         $('#stop'+track_id).show();
         createPlayer("player_place"+track_id, "player"+track_id, url, true);

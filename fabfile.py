@@ -18,7 +18,7 @@ env.www_ssh_key = 'ssh-dss AAAAB3NzaC1kc3MAAACAbN+8KDO1jkRluNqiqO2KjkaSn4Qs66zBc
 env.forward_agent = True
 
 if not env.hosts:
-    env.hosts = ['ec2-23-21-131-63.compute-1.amazonaws.com']
+    env.hosts = ['ec2-107-21-102-210.compute-1.amazonaws.com']
 
 
 def virtualenv(command):

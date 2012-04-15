@@ -63,7 +63,7 @@ def make_pages(querySet, items_at_page=20, current_page=None):
         avatars = Avatar.get([post.author_id for post in posts], 32)
         for post in posts:
             post.avatar = avatars[post.author_id]
-    
+
     context.update(other_pages(page_number, pages.num_pages))
     return context
 
