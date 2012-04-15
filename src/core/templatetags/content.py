@@ -389,7 +389,7 @@ def parser(text):
             except (Photo.DoesNotExist, ValueError):
                 return u""
 
-        return '<a href="%s"><img class="userphoto" src="%s%s"></a>&#32;' % \
+        return '<a href="%s"><img rel="image_src" class="userphoto" src="%s%s"></a>&#32;' % \
                (picture.get_absolute_url(), settings.MEDIA_URL, thumbnail(picture.yandex_fotki_image_src))
 
     def pageParser(result):
