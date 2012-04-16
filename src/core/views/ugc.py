@@ -849,16 +849,16 @@ def add_to_yaphoto(content):
     content = content.read()
 
     files = [('image', 'image', content), ]
-    status, reason, result = post_multipart(settings.YAPHOTO_HOST,
+    status, reason, result = post_multipart(settings.YAFOTKI_STORAGE_OPTIONS['host'],
                                             None,
-                                            settings.YAPHOTO_POST,
+                                            settings.YAFOTKI_STORAGE_OPTIONS['post'],
                                             {},
                                             files,
-                                            headers={'Authorization': 'OAuth %s' % settings.YAPHOTO_TOKEN}
+                                            headers={'Authorization': 'OAuth %s' % settings.YAFOTKI_STORAGE_OPTIONS['token']}
     )
 
     if status != 201:
-        raise ValueError("Cannot upload image: %s %s %s (host %s)" % (status, reason, result, settings.YAPHOTO_HOST))
+        raise ValueError("Cannot upload image: %s %s %s (host %s)" % (status, reason, result, settings.YAFOTKI_STORAGE_OPTIONS['host']))
 
     tree = ET.fromstring(result)
     try:

@@ -20,6 +20,7 @@ from yafotki.fields import YFField
 
 from core.utils.common import cached, slug
 from core.utils.log import get_logger
+from core.utils.thumbnails import make_thumbnail
 
 
 class GenericManager(models.Manager):
@@ -870,6 +871,12 @@ class Movie(models.Model, VoteMixin, UIDMixin):
 
     def __unicode__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        super(Movie, self).save(*args, **kwargs)
+
+        if self.cover:
+            make_thumbnail(str(self.cover.src()))
 
     class Meta:
         verbose_name = u"Фильм"

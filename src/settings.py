@@ -91,8 +91,6 @@ THUMBNAIL_SIZE = 300, 150
 USERPIC_ROOT = os.path.join(MEDIA_ROOT, 'data/userpics')
 USERPIC_URL = 'data/userpics/'
 
-YAPHOTO_HOST = 'api-fotki.yandex.ru'
-
 LOGIN_URL = '/auth/login'
 
 DESIGN_ID = 3
