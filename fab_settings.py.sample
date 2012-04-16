@@ -8,9 +8,6 @@ SES_SECRET_ACCESS_KEY = ''
 
 DJANGO_SECRET_KEY = ''
 
-YAPHOTO_TOKEN = ''
-YAPHOTO_POST = '/api/users/gladerru/photos/'
-
 SAPE_DOMAIN = 'example.com
 SAPE_USER = 'user_id'
 SAPE_LOG = '/var/log/projects/gladerru/sape.log'
@@ -21,7 +18,8 @@ SAPE_SITE_ID = 111
 YAMAPS_API_KEY = ''
 
 YAFOTKI_ACCOUNT_NAME = ''
-YAFOTKI_ACCOUNT_PASSWORD = ''
+YAFOTKI_TOKEN = ''
+YAFOTKI_POST = '/api/users/gladerru/photos/'
 
 SSH_USER = 'www'
 
