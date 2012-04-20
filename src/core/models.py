@@ -639,6 +639,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
                 if t.name == 'question':
                     self.is_question = True
 
+            self.drop_cache()
+
         if self.status != 'pub':
             self.hidden = True
         else:
@@ -651,6 +653,10 @@ class Post(models.Model, VoteMixin, UIDMixin):
         self.local_url = local_url
 
         super(Post, self).save(*args, **kwargs)
+
+    def drop_cache(self):
+        cache.delete("%srender/post/%s/%s" % (settings.CACHE_ROOT, self.id, 'cut'))
+        cache.delete("%srender/post/%s/%s" % (settings.CACHE_ROOT, self.id, 'full'))
 
     class Meta:
         verbose_name = u"Пост"
