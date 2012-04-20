@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 # Django settings for gladerru project.
 import os
-import platform
-import sys
 import logging
 
 APPEND_SLASH = False
