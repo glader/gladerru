@@ -129,3 +129,5 @@ do
 	fi
 	let "i+=1";
 done
+
+rm yandex_narod.cookie.txt
