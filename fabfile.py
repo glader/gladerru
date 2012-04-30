@@ -33,7 +33,7 @@ def _create_server():
     image = conn.get_all_images([env.ami])
 
     reservation = image[0].run(1, 1, 'ec2_django_micro', ['django_micro'],
-        instance_type='t1.micro')
+        instance_type='t1.micro', placement='us-east-1a')
 
     instance = reservation.instances[0]
     conn.create_tags([instance.id], {"Name":"glader.ru auto"})
