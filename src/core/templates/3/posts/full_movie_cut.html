@@ -9,6 +9,10 @@
                     <p><strong>Студия</strong>: {{ movie.studio|link }} {% if movie.year %}({{ movie.year }}){% endif %}</p>
                 {% endif %}
 
+                {% if movie.torrent %}
+                    <p><strong>Торрент</strong>: <a href="{{ movie.torrent }}">скачать</a></p>
+                {% endif %}
+
                 <table>
                     {% riders movie %}
                 </table>
