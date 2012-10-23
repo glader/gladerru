@@ -15,7 +15,7 @@
     <a href="" onclick="addPostVotes('{{ movie.slug }}', 1); return false;"
         ><img id="'{{ movie.slug }}'_rating_up" src="{% MEDIA_URL %}design/2/img/arrow_up.gif" alt="Нравится" class="icon"></a>
 {% else %}
-    <img src="{% MEDIA_URL %}design/2/img/arrow_up_dis.gif" alt="Нравится" class="icon">
+    <img src="{% MEDIA_URL %}design/3/img/b-bar/arrow_up_dis.gif" alt="Нравится" class="icon">
 {% endif %}
 {% endblock %}
 
@@ -37,8 +37,8 @@
 
 	        <tr><td valign="top"><strong>Торрент:</strong></td><td>
 	            {% if movie.torrent %}
-	                <a href="{{ movie.torrent }}">скачать</a>
-	            {% else %}
+	                <a href="{{ movie.torrent }}">скачать</a> <a href="/content/torrents.htm" target="_blank"><img src="{% MEDIA_URL %}design/3/img/icons/question.png"</a>
+                {% else %}
 	                <span title="Вы можете попросить или предложить ссылку на торрент в комментариях." style="border-bottom: 1px dashed #317CB4">пока нету</span>
 	            {% endif %}
 	        </td></tr>
