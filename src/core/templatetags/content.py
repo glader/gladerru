@@ -689,6 +689,11 @@ def human_month(monthNumber):
 def thumbnail(image_url):
     return get_thumbnail_url(image_url)
 
+
+@register.filter
+def is_extremebits(torrent):
+    return 'extremebits' in torrent
+
 ##########################################################################################
 # Admin site tags
 
