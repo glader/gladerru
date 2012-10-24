@@ -4,6 +4,7 @@ from datetime import date, datetime, timedelta
 
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db import connection
 
@@ -35,7 +36,7 @@ def moderator_required(func):
     return wrapper
 
 
-@moderator_required
+@permission_required('add_movie')
 def create_rider(request):
     rider_titles = request.POST['rider']
     object_id = request.POST['object_id']
@@ -57,7 +58,7 @@ def create_rider(request):
     return HttpResponseRedirect('/admind/core/movie/%d/' % movie.pk)
 
 
-@moderator_required
+@permission_required('add_movie')
 def create_teaser_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
@@ -78,7 +79,7 @@ def create_teaser_announce(request):
     return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
 
 
-@moderator_required
+@permission_required('add_movie')
 def create_fullmovie_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
@@ -99,7 +100,7 @@ def create_fullmovie_announce(request):
     return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
 
 
-@moderator_required
+@permission_required('add_movie')
 def create_tracklist_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
