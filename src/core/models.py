@@ -15,6 +15,7 @@ from django.db import models
 from django.template import Context, loader
 from django_queue.models import Queue
 from django.core.cache import cache
+from django.core.mail import send_mail
 
 from yafotki.fields import YFField
 
@@ -879,6 +880,31 @@ class Movie(models.Model, VoteMixin, UIDMixin):
         return self.title
 
     def save(self, *args, **kwargs):
+        report = ""
+        if self.pk:
+            prev = self.__class__.objects.get(pk=self.pk)
+            header = u"Измененные поля фильма %s (%s)" % (self.title, self.get_absolute_url())
+            for field in self._meta.fields:
+                if field.name in ('comment_count', 'last_comment_date'):
+                    continue
+
+                if getattr(self, field.name) != getattr(prev, field.name):
+                    report += u"%s: '%s' -> '%s'\n" % (field.verbose_name, getattr(prev, field.name) or '-', getattr(self, field.name) or '-')
+        else:
+            header = u"Новый фильм %s (%s)" % (self.title, self.get_absolute_url())
+            for field in self._meta.fields:
+                if field.name in ('comment_count', 'last_comment_date'):
+                    continue
+                report += u"%s: '%s'\n" % (field.verbose_name, getattr(self, field.name) or '-')
+
+        if report:
+            send_mail(
+                u"Glader.ru: %s" % header,
+                report,
+                None,
+                ['glader.ru@gmail.com']
+            )
+
         super(Movie, self).save(*args, **kwargs)
 
         if self.cover:
