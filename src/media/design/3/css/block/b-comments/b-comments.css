@@ -27,7 +27,7 @@
     .b-comments .userpic
     {
         position: absolute;
-        
+
         margin: -5px 0 0 -40px;
     }
 
@@ -40,7 +40,7 @@
     .b-comments .head .date
     {
         margin-left: 1em;
-        
+
         color: #999;
     }
 
@@ -73,4 +73,15 @@
 		font-size: 120%;
 		font-weight: bold;
 	}
+
+    .comment_item_answerlink
+    {
+        margin-top: 3px; font-size: 80%;
+        visibility: hidden;
+    }
+
+    .comment_item:hover .comment_item_answerlink
+    {
+        visibility: visible;
+    }
 /* Комментарии (end) */ /**/
