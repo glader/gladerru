@@ -4,6 +4,7 @@ from time import time
 import functools
 
 from django.http import HttpResponse, HttpResponseRedirect
+from django.conf import settings
 
 from core.utils.log import get_logger
 from core.templatetags.posts import render_post_cached, render_post
@@ -17,14 +18,17 @@ def time_slow(f=None, logger=None, threshold=0.01):
     def decorated(f):
         @functools.wraps(f)
         def wrapper(*args, **kw):
-            start = time()
-            try:
-                ret = f(*args, **kw)
-            finally:
-                duration = time() - start
-                if duration > threshold:
-                    logger.info('slow: %s %.9f seconds', f.__name__, duration)
-            return ret
+            if settings.DEBUG:
+                start = time()
+                try:
+                    ret = f(*args, **kw)
+                finally:
+                    duration = time() - start
+                    if duration > threshold:
+                        logger.info('slow: %s %.9f seconds', f.__name__, duration)
+                return ret
+            else:
+                return f(*args, **kw)
         return wrapper
     if f is not None:
         return decorated(f)
