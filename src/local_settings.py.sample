@@ -31,4 +31,6 @@ YANDEX_XML_KEY = '%(YANDEX_XML_KEY)s'
 YAFOTKI_STORAGE_OPTIONS = {
     'username': '%(YAFOTKI_ACCOUNT_NAME)s',
     'token': '%(YAFOTKI_TOKEN)s',
+    'post': '%(YAFOTKI_POST)s',
+    'host': '%(YAFOTKI_HOST)s',
 }

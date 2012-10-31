@@ -20,6 +20,7 @@ YAMAPS_API_KEY = ''
 YAFOTKI_ACCOUNT_NAME = ''
 YAFOTKI_TOKEN = ''
 YAFOTKI_POST = '/api/users/gladerru/photos/'
+YAFOTKI_HOST = 'api-fotki.yandex.ru'
 
 SSH_USER = 'www'
 
