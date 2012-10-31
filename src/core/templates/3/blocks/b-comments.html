@@ -12,7 +12,6 @@
 	klass = '{{ klass }}';
 	item_id = '{{ post.uid }}';
 
-    VK.init({apiId: {% VK_API_ID %}, onlyWidgets: true});
     VK.Widgets.Comments("vk_comments", {limit: 15, width: "600", attach: "*", onChange: addVKComment}, item_id);
 </script>
 <br>
