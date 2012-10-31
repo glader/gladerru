@@ -36,13 +36,13 @@
                                                     verb: 1,
                                                     pageTitle: "Glader.ru: {{ post.title }}",
                                                     pageUrl: "http://glader.ru{{ post.get_absolute_url }}",
-                                                    height: 18
+                                                    height: 18,
+                                                    width: 320
                                                 },
                                                 {{ post.id }}
                                             );
                                         </script>
                                     </td>
-                                    <td class="sep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
                                     <td>
                                         <a href="http://twitter.com/share?text={{ post.title|urlencode }}&url=http://glader.ru{{ post.get_absolute_url }}" class="twitter-share-button">Tweet</a>
                                     </td>
