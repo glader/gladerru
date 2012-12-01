@@ -380,7 +380,7 @@ def skills(request):
             dop_blocks.append(('text_%s.jpg' % code, block[1], block[2] + 90, skills[code]))
 
     return render_to_response(request, 'skills.html', {'blocks': blocks + dop_blocks,
-                                                       'rubrics': Rubric.objects.all().order_by('title')})
+                                                       'rubrics': sorted(Rubric.objects.all(), key=lambda r: r.title)})
 
 
 def skill(request, name):
