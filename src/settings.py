@@ -184,11 +184,6 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
             },
-        'django.timing': {
-            'handlers': ['timing'],
-            'level': 'INFO',
-            'propagate': True,
-            },
         'django.search': {
             'handlers': ['search'],
             'level': 'INFO',
