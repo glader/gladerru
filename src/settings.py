@@ -31,6 +31,7 @@ ADMIN_MEDIA_PREFIX = '/admind/media/'
 
 
 MIDDLEWARE_CLASSES = (
+    'timelog.middleware.TimeLogMiddleware',
     'django.middleware.gzip.GZipMiddleware',
     'core.middleware.Timing',
     'core.middleware.SpacelessMiddleware',
@@ -67,6 +68,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
+    'timelog',
     'core',
     'shop',
     'sape',
@@ -118,6 +120,7 @@ ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 VK_API_ID = 2009513
 
 LOG_PATH = '/var/log/projects/gladerru'
+TIMELOG_LOG = os.path.join(LOG_PATH, 'time.log')
 
 LOGGING = {
     'version': 1,
@@ -128,6 +131,9 @@ LOGGING = {
         },
         'simple': {
             'format': '%(asctime)s %(levelname)s %(message)s'
+        },
+        'plain': {
+            'format': '%(asctime)s %(message)s'
         },
     },
     'handlers': {
@@ -170,6 +176,14 @@ LOGGING = {
             'filename': os.path.join(LOG_PATH, 'search.log'),
             'formatter': 'simple',
             },
+        'timelog': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': TIMELOG_LOG,
+            'maxBytes': 1024 * 1024 * 5,  # 5 MB
+            'backupCount': 5,
+            'formatter': 'plain',
+            },
         },
     'loggers': {
         'django.cron': {
@@ -197,6 +211,11 @@ LOGGING = {
             'level': 'WARNING',
             'propagate': True,
             },
+        'timelog.middleware': {
+            'handlers': ['timelog'],
+            'level': 'DEBUG',
+            'propogate': False,
+            }
         },
     }
 

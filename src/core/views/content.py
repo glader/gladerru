@@ -3,11 +3,9 @@
 import re
 from itertools import groupby
 import logging
-import logging.handlers
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe

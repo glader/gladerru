@@ -16,3 +16,4 @@ django-debug-toolbar
 -e git+https://gladerru@bitbucket.org/gladerru/sape.git#egg=sape
 -e git+https://github.com/glader/django_queue.git#egg=django_queue
 -e git+https://github.com/glader/django_yafotki.git#egg=yafotki
+-e git+https://github.com/garethr/django-timelog.git#egg=timelog
