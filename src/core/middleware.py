@@ -8,19 +8,6 @@ import logging
 from time import time
 
 
-class Timing:
-    def process_request(self, request):
-        if settings.TIMING:
-            self.start = time()
-
-    def process_response(self, request, response):
-        if settings.TIMING:
-            log = logging.getLogger('django.timing')
-            log.info("%0.3f\t%s", time() - self.start, request.META['PATH_INFO'])
-
-        return response
-
-
 class UserReferer:
     def process_request(self, request):
         if request.META.get('HTTP_REFERER') and not request.user.is_authenticated() and not 'referer' in request.session:

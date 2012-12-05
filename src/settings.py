@@ -33,7 +33,6 @@ ADMIN_MEDIA_PREFIX = '/admind/media/'
 MIDDLEWARE_CLASSES = (
     'timelog.middleware.TimeLogMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'core.middleware.Timing',
     'core.middleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -162,12 +161,6 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'queue.log'),
-            'formatter': 'simple',
-            },
-        'timing': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_PATH, 'timing.log'),
             'formatter': 'simple',
             },
         'search': {
