@@ -16,6 +16,8 @@ MAILTO="glader.ru@gmail.com"
 
 55      23      *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py save_users_visits
 
+0       0       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py analyze_timelog --noreverse
+
 # Sape links
 15      *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py fetch_sape
 0       5,17    *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py check_sape_errors
