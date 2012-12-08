@@ -13,6 +13,7 @@ BeautifulSoup
 django_admin_tools
 python-memcached
 django-debug-toolbar
+-e git+https://github.com/glader/easywebdav.git#egg=easywebdav
 -e git+https://gladerru@bitbucket.org/gladerru/sape.git#egg=sape
 -e git+https://github.com/glader/django_queue.git#egg=django_queue
 -e git+https://github.com/glader/django_yafotki.git#egg=yafotki
