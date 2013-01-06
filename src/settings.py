@@ -36,6 +36,7 @@ MIDDLEWARE_CLASSES = (
     'core.middleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'core.middleware.LastLogin',
@@ -47,7 +48,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.media',
     'core.context.default',
-    'messages.context_processors.inbox',
+    'django_messages.context_processors.inbox',
+    'django.contrib.messages.context_processors.messages',
 )
 
 ROOT_URLCONF = 'urls'
@@ -67,12 +69,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.markup',
+    'django.contrib.messages',
     'timelog',
     'core',
     'shop',
     'sape',
     'south',
-    'messages',
+    'django_messages',
     'django_queue',
     'django_russian',
 )

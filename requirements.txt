@@ -8,7 +8,6 @@ flup
 logging
 wsgiref
 pytils
-django-messages
 BeautifulSoup
 django_admin_tools
 python-memcached
@@ -18,3 +17,4 @@ django-debug-toolbar
 -e git+https://github.com/garethr/django-timelog.git#egg=timelog
 -e git+https://github.com/glader/django_queue.git#egg=django_queue
 -e git+https://github.com/glader/django_yafotki.git#egg=yafotki
+-e git+https://github.com/arneb/django-messages.git#egg=messages

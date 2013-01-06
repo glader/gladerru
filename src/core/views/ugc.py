@@ -83,7 +83,7 @@ def tags(request):
 
 
 def messages_compose(request):
-    from messages.views import compose
+    from django_messages.views import compose
     recipient = None
     if request.method == 'GET' and request.GET.get('recipient'):
         recipient = request.GET.get('recipient')

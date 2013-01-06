@@ -2,7 +2,7 @@
 from django.contrib import admin
 from models import *
 from django.contrib.auth.models import User, Group, Permission
-from messages.models import Message
+from django_messages.models import Message
 from forms import ModelForm
 from django.forms.util import ValidationError, ErrorList
 from django.forms import model_to_dict, BaseModelForm

@@ -54,7 +54,7 @@ urlpatterns = patterns('',
     url(r'^reports$', reports, name='reports'),
 
     url(r'^messages/compose/$', messages_compose, name='messages_compose'),
-    (r'^messages/', include('messages.urls')),
+    (r'^messages/', include('django_messages.urls')),
 
     #UGC
     url(r'^all$', all, name='all'),
