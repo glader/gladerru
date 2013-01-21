@@ -46,6 +46,8 @@
 
 @import url(block/b-foot/b-foot.css);
 
+@import url(block/b-banner-top/b-banner-top.css);
+
 a:link
 {
     color: #317cb4;
