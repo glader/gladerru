@@ -280,12 +280,15 @@ def man_author_photos(request, slug):
 def search(request):
     query = request.POST.get('query', '')
 
-    log = logging.getLogger('django.search')
-    log.info(u"%s\t%s", request.META['REMOTE_ADDR'], query)
+    if query:
+        log = logging.getLogger('django.search')
+        log.info(u"%s\t%s", request.META['REMOTE_ADDR'], query)
+        context = {'result': search_provider(query), 'query': query}
 
-    return render_to_response(request, 'search.html', {'result': search_provider(query),
-                                                       'query': query
-                                                       })
+    else:
+        context = {'msg': u"Введите строку для поиска"}
+
+    return render_to_response(request, 'search.html', context)
 
 
 def feedback(request):

@@ -19,7 +19,11 @@
 	      </div>
 	    </form>
 	    <br/>
-                    
+
+        {% if msg %}
+            <p>{{ msg }}</p>
+        {% endif %}
+
 	   	{% if result.base %}
 			<h2>Возможно вы искали:</h2>
 			<ul>
@@ -31,12 +35,12 @@
 				{% endfor %}
 			</ul>
 		{% endif %}
-		
+
 		{% if result.yandex %}
 		    <br/>
 		    <br/>
 			<h2><img src="http://data.yandex.ru/i?ctype=4&path=h12810750_yandex_rb.png" alt="Яндекс"> {{ result.yandex.found_human }}:</h2>
-			
+
 			<ul>
 			{% for page in result.yandex.pages %}
 				<li><img src="{% MEDIA_URL %}design/3/img/icons/type-post.png" alt="Страница"/>&nbsp;<a href="{{ page.url }}">{{ page.title|safe }}</a>
@@ -44,10 +48,10 @@
 						{{ page.snippet|safe }}
 					</blockquote>
 				</li>
-				
+
 			{% endfor %}
-			</ul>			
-			
+			</ul>
+
 		{% endif %}
 	</div>
 {% endblock content %}
