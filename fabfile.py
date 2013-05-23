@@ -107,7 +107,7 @@ def production():
     lighttpd()
     runit()
     cron()
-    dump()
+#    dump()
     migrate()
     update_sape()
     restart()

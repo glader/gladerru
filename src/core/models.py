@@ -205,7 +205,7 @@ def get_image_path(instance, filename):
 
     if isinstance(instance, Photo):
         user = instance.author
-        user_dir = os.path.join(settings.MEDIA_ROOT, 'data', 'users', user.username)
+        user_dir = os.path.join(settings.STATIC_ROOT, 'data', 'users', user.username)
         if not os.path.exists(user_dir):
             os.mkdir(user_dir)
 
@@ -1053,7 +1053,7 @@ class Song(models.Model):
 
         if self.file and not (self.performer or self.title):
             try:
-                path = os.path.join(settings.MEDIA_ROOT, self.file.name)
+                path = os.path.join(settings.STATIC_ROOT, self.file.name)
                 os.chmod(path, 0644)
                 id3info = ID3(path)
                 self.performer = id3info['ARTIST'].decode('cp1251')

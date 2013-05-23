@@ -18,7 +18,7 @@ class Command(NoArgsCommand):
             try:
                 urlopen(photo.yandex_fotki_image_src).read()
                 if photo.image:
-                    path = os.path.join(settings.MEDIA_ROOT, photo.image.path)
+                    path = os.path.join(settings.STATIC_ROOT, photo.image.path)
                     if os.path.exists(path):
                         #sh = open('/home/www/projects/gladerru/drop.sh', 'a')
                         sh = open('drop.sh', 'a')
