@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load content %}
+{% load staticfiles %}
 
 {% block head %}
 <script type='text/javascript'>
@@ -23,7 +24,7 @@ function wshow(url) {
 
 {% block page_title %}
     {% if post %}{{ post|link }}{% if photo.title %}: {% endif %}{% endif %}{{ photo.title }}
-    {% if can_edit %}(<a href="{% url edit_photo photo.pk %}">ред</a>){% endif %}
+    {% if can_edit %}(<a href="{% url "edit_photo" photo.pk %}">ред</a>){% endif %}
     {% if user.get_profile.is_moderator %}<small>(<a href="/admind/core/photo/{{ photo.id }}/">админка</a>)</small>{% endif %}
 {% endblock %}
 
@@ -31,13 +32,13 @@ function wshow(url) {
 	<div style="position:relative">
 		{% if prev_photo %}
 			<div style="position:absolute; left: 1px; top: 1px;">
-	    	<a href="{{ prev_photo.get_absolute_url }}" title="Предыдущая фотография" style="outline: none;"><img src="{% MEDIA_URL %}design/3/img/b-photo/prev.png" alt="Предыдущая фотография" style="border: 1px solid #fff;"></a>
+	    	<a href="{{ prev_photo.get_absolute_url }}" title="Предыдущая фотография" style="outline: none;"><img src="{% static "design/3/img/b-photo/prev.png" %}" alt="Предыдущая фотография" style="border: 1px solid #fff;"></a>
 	    	</div>
 	    {% endif %}
 
 		{% if next_photo %}
 			<div style="position:absolute; right: 1px; top: 1px;">
-	    	<a href="{{ next_photo.get_absolute_url }}" title="Следующая фотография" style="outline: none;"><img src="{% MEDIA_URL %}design/3/img/b-photo/next.png" alt="Следующая фотография" style="border: 1px solid #fff;"></a>
+	    	<a href="{{ next_photo.get_absolute_url }}" title="Следующая фотография" style="outline: none;"><img src="{% static "design/3/img/b-photo/next.png" %}" alt="Следующая фотография" style="border: 1px solid #fff;"></a>
 	    	</div>
 	    {% endif %}
 

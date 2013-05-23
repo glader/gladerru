@@ -1,12 +1,13 @@
 {% extends "tab_movies.html" %}
 {% load content %}
 {% load russian %}
+{% load staticfiles %}
 
 {% block top_menu %}
     {% top_menu "people" %}
 {% endblock %}
 
-{% block breadcrumbs %}<a href="{% url movies %}">Сноубордические фильмы</a> / <a href="{% url people %}">Райдеры</a> / {{ item.title }}{% endblock %}
+{% block breadcrumbs %}<a href="{% url "movies" %}">Сноубордические фильмы</a> / <a href="{% url "people" %}">Райдеры</a> / {{ item.title }}{% endblock %}
 
 {% block title %}{{ item.title }} - райдеры - {{ block.super }}{% endblock %}
 
@@ -14,7 +15,7 @@
 
 {% block content %}
 	<div class="b-static-text">
-        {% if item.image %}<a href="{{ item.image.src }}" style="float: right;"><img src="{% MEDIA_URL %}{{ item.image.src|thumbnail }}" alt="{{ item.title }} - портрет" border="0"></a><br>{% endif %}
+        {% if item.image %}<a href="{{ item.image.src }}" style="float: right;"><img src="{% static "{{ item.image.src|thumbnail }}" %}" alt="{{ item.title }} - портрет" border="0"></a><br>{% endif %}
 
 		<table border="0" cellspacing="5"><tbody>
 
@@ -42,21 +43,21 @@
 
 		{% if photos %}<h3>Фотографии с {% ifequal item.gender 'm' %}его{% else %}её{% endifequal %} участием</h3>
 			{% for p in photos %}
-				<a href="{{ p.get_absolute_url }}"><img src="{% MEDIA_URL %}{{ p.yandex_fotki_image_src|thumbnail }}"></a>
+				<a href="{{ p.get_absolute_url }}"><img src="{% static "{{ p.yandex_fotki_image_src|thumbnail }}" %}"></a>
 			{% endfor %}
 			</ul>
             {% if more_photos %}
-                <div><a href="{% url man_photos item.slug %}">Все фотографии</a></div>
+                <div><a href="{% url "man_photos" item.slug %}">Все фотографии</a></div>
             {% endif %}
 		{% endif %}
 
 		{% if author_photos %}<h3>Сделанные {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</h3>
 			{% for p in author_photos %}
-				<a href="{{ p.get_absolute_url }}"><img src="{% MEDIA_URL %}{{ p.yandex_fotki_image_src|thumbnail }}"></a>
+				<a href="{{ p.get_absolute_url }}"><img src="{% static "{{ p.yandex_fotki_image_src|thumbnail }}" %}"></a>
 			{% endfor %}
 			</ul>
             {% if more_author_photos %}
-                <div><a href="{% url man_author_photos item.slug %}">Все снятые {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</a></div>
+                <div><a href="{% url "man_author_photos" item.slug %}">Все снятые {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</a></div>
             {% endif %}
 		{% endif %}
 

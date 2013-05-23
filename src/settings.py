@@ -27,8 +27,6 @@ IS_DEVEL = False
 TIMING = True
 LOG_LEVEL = logging.WARNING
 
-ADMIN_MEDIA_PREFIX = '/admind/media/'
-
 
 MIDDLEWARE_CLASSES = (
     'timelog.middleware.TimeLogMiddleware',
@@ -50,6 +48,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'core.context.default',
     'django_messages.context_processors.inbox',
     'django.contrib.messages.context_processors.messages',
+    'django.core.context_processors.static',
 )
 
 ROOT_URLCONF = 'urls'
@@ -68,6 +67,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
     'django.contrib.markup',
     'django.contrib.messages',
     'timelog',
@@ -85,6 +85,13 @@ PROJECT_PATH = os.path.dirname(__file__)
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
 MEDIA_URL = '/media/'
+
+ALLOWED_HOSTS = ('glader.ru', 'glader_local.ru')
+STATIC_URL = '/media/'
+
+STATICFILES_DIRS = (
+    os.path.join(PROJECT_PATH, "media"),
+)
 
 THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'data/thumbnails')
 THUMBNAIL_URL = 'data/thumbnails/'
@@ -150,7 +157,7 @@ LOGGING = {
             'filename': os.path.join(LOG_PATH, 'traceback.log'),
             'formatter': 'verbose',
             },
-        'mail_admins': {
+        'mail_admin': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
             },
@@ -198,7 +205,7 @@ LOGGING = {
             'propagate': True,
             },
         'django': {
-            'handlers': ['mail_admins', 'file'],
+            'handlers': ['mail_admin', 'file'],
             'level': 'WARNING',
             'propagate': True,
             },

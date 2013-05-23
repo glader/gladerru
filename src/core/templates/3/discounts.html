@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load content %}
+{% load staticfiles %}
 
 {% block page_title %}Дисконтные карты{% endblock %}
 
@@ -14,31 +15,31 @@
 			<table>
 				{% for discount in discounts_list %}
 					<tr>
-						<td>{{ discount.card }}</td> 
-						<td>{{ discount.discount }}</td> 
-						<td>{{ discount.user|link }}</td> 
+						<td>{{ discount.card }}</td>
+						<td>{{ discount.discount }}</td>
+						<td>{{ discount.user|link }}</td>
 						<td>{{ discount.contacts }}</td>
 						<td>
 							{% ifequal user discount.user %}
-								<a href="{% url discount_edit discount.id %}" title="Редактировать"><img src="{% MEDIA_URL %}design/3/img/b-discount/pencil.png" alt="Редактировать карту"></a>
-								<a href="{% url discount_delete discount.id %}" title="Удалить"><img src="{% MEDIA_URL %}design/3/img/b-discount/cross.png" alt="Удалить карту"></a>
+								<a href="{% url "discount_edit" discount.id %}" title="Редактировать"><img src="{% static "design/3/img/b-discount/pencil.png" %}" alt="Редактировать карту"></a>
+								<a href="{% url "discount_delete" discount.id %}" title="Удалить"><img src="{% static "design/3/img/b-discount/cross.png" %}" alt="Удалить карту"></a>
 							{% endifequal %}
 						</td>
 						<td>
 							{% ifnotequal user discount.user %}
-								<a href="{% url messages_compose %}?recipient={{ discount.user.username }}" title="Личное сообщение"
-								><img src="{% MEDIA_URL %}design/3/img/b-messages/email.png" alt="Личное сообщение"></a>
+								<a href="{% url "messages_compose" %}?recipient={{ discount.user.username }}" title="Личное сообщение"
+								><img src="{% static "design/3/img/b-messages/email.png" %}" alt="Личное сообщение"></a>
 							{% endifnotequal %}
 						</td>
 					</tr>
 				{% endfor %}
 			</table>
-		{% endfor %} 
+		{% endfor %}
 	</div>
 
-	<br />	
+	<br />
 	<p>
-		<a href="{% url discount_new %}" title="Добавить карту" class="js-login_required {retpath:'/discounts/new'}"><img src="{% MEDIA_URL %}design/3/img/b-discount/discount_add_button.jpg" alt="Добавить карту"></a>
+		<a href="{% url "discount_new" %}" title="Добавить карту" class="js-login_required {retpath:'/discounts/new'}"><img src="{% static "design/3/img/b-discount/discount_add_button.jpg" %}" alt="Добавить карту"></a>
 	</p>
 {% endblock %}
 

@@ -14,7 +14,7 @@
     {% if message %}
         <div>{{ message }}</div>
     {% else %}
-        <form action="{% url feedback %}" method="POST">
+        <form action="{% url "feedback" %}" method="POST">
         <table border="0">
             {{ form }}
         <tr><td></td><td>

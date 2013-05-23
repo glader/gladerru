@@ -14,14 +14,14 @@
 
 {% block content %}
     <strong>Изменить имя</strong><br>
-    <form id="set_name_form" action="{% url set_name %}" method="GET">
+    <form id="set_name_form" action="{% url "set_name" %}" method="GET">
         <input type="text" id="id_name" value="{{ domain_user.first_name }}">&nbsp;
         <input type="submit" value="Сохранить">&nbsp;
         <span class="js-result"></span>
     </form>
     <br><br>
     <strong>Изменить пароль</strong><br>
-    <form id="set_password_form" action="{% url settings %}" method="POST">
+    <form id="set_password_form" action="{% url "settings" %}" method="POST">
         <div>{{ password_error }}</div>
         <input type="hidden" name="action" value="change_password">
         <input type="password" name="old_password" value=""><br/>
@@ -31,7 +31,7 @@
     </form>
     <br><br>
     <strong>Рассылка новостей</strong><br>
-    <form id="set_news_form" action="{% url set_news %}" method="GET">
+    <form id="set_news_form" action="{% url "set_news" %}" method="GET">
         <input type="checkbox" id="id_news" {% if profile.send_news %}checked="checked"{% endif %} value="1">&nbsp;Отправлять мне подборку новостей за неделю<br/><br/>
         <input type="submit" value="Сохранить">&nbsp;
         <span class="js-result"></span>

@@ -10,14 +10,15 @@
 {% block content %}
 	<div class="b-dictionary">
 		{% include "block_alphabet_local.html" %}
-		
+
 		<div style="text-align:center;">
-			<a href="#" onclick="filter_people(''); return false;">Все</a> | 
-			<a href="#" onclick="filter_people('rider'); return false;">Райдеры</a> | 
-			<a href="#" onclick="filter_people('photographer'); return false;">Фотографы</a><!-- | 
-			<a href="#" onclick="filter_people('director'); return false;">Режиссеры</a>-->
-		</div> 
-		
+			<a href="#" onclick="filter_people(''); return false;">Все</a> |
+			<a href="#" onclick="filter_people('rider'); return false;">Райдеры</a> |
+			<a href="#" onclick="filter_people('photographer'); return false;">Фотографы</a><!-- |
+			<a href="#" onclick="filter_people('director'); return false;">Режиссеры</a>
+-->
+		</div>
+
 		<ul id="people_list">
 		{% for letters_list in alphabet_letters %}
 		    {% for l in letters_list %}
@@ -30,8 +31,8 @@
 		        {% endif %}
 		    {% endfor %}
 		{% endfor %}
-		</ul>			
+		</ul>
 
-	    <div style="margin-top:20px"><a href="{% url offer_rider %}" rel="nofollow">Добавить райдера</a></div>
-	</div> 
+	    <div style="margin-top:20px"><a href="{% url "offer_rider" %}" rel="nofollow">Добавить райдера</a></div>
+	</div>
 {% endblock %}

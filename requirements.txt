@@ -1,4 +1,4 @@
-Django==1.4.3
+Django==1.5.1
 MySQL-python
 PIL
 South
@@ -9,7 +9,7 @@ logging
 wsgiref
 pytils
 BeautifulSoup
-django_admin_tools
+django_admin_tools==0.5.1
 python-memcached
 django-debug-toolbar
 -e git+https://github.com/glader/easywebdav.git#egg=easywebdav

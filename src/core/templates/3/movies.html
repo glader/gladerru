@@ -1,8 +1,9 @@
 {% extends "tab_movies.html" %}
 {% load content %}
+{% load staticfiles %}
 
 {% block head %}
-    <script type="text/javascript" src="{% MEDIA_URL %}js/sorttable.js"></script>
+    <script type="text/javascript" src="{% static "js/sorttable.js" %}"></script>
 {% endblock %}
 
 {% block top_menu %}
@@ -34,12 +35,12 @@
             <td>{{ movie.year|default:"" }}</td>
             <td class="center">{% if movie.teaser %}есть{% endif %}</td>
             <td class="center">{% if movie.full_movie %}есть{% endif %}</td>
-            <td class="center">{% if movie.torrent %}<a href="{{ movie.torrent }}"><img src="{% MEDIA_URL %}design/3/img/b-movie-list/disk.png" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
-            <td class="center">{% if movie.has_songs %}<img src="{% MEDIA_URL %}design/3/img/b-movie-list/music.png" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{% if movie.torrent %}<a href="{{ movie.torrent }}"><img src="{% static "design/3/img/b-movie-list/disk.png" %}" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{% if movie.has_songs %}<img src="{% static "design/3/img/b-movie-list/music.png" %}" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
             <td class="center">{{ movie.rating|decimal_cut }}</td>
 		</tr>
 	{% endfor %}
 	</table>
 
-    <div style="margin-top:20px;"><a href="{% url offer_movie %}" rel="nofollow" title="Не нашли любимый фильм? Расскажите нам о нем!">добавить фильм</a></div>
+    <div style="margin-top:20px;"><a href="{% url "offer_movie" %}" rel="nofollow" title="Не нашли любимый фильм? Расскажите нам о нем!">добавить фильм</a></div>
 {% endblock %}

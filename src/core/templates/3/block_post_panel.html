@@ -1,5 +1,7 @@
 {% load content %}
 {% load russian %}
+{% load staticfiles %}
+
                     <div class="b-bar">
                         <i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
                         <table>
@@ -7,9 +9,9 @@
                             <td class="points">
                                 <span id="{{ post.pk }}_rating">{{ post.rating|signed_number }}</span>&nbsp;
                                 {% if already_voted %}
-                                    <img src="{% MEDIA_URL %}design/3/img/b-bar/plus_disabled.png" alt="Нравится" class="icon">
+                                    <img src="{% static "design/3/img/b-bar/plus_disabled.png" %}" alt="Нравится" class="icon">
                                 {% else %}
-                                    <a href="" class="js-vote {post:'{{ post.pk }}', klass:'{{ klass }}'}" id="{{ post.pk }}_vote"><img id="{{ post.pk }}_rating_up" src="{% MEDIA_URL %}design/3/img/b-bar/plus.png" alt="Нравится" class="icon"></a>
+                                    <a href="" class="js-vote {post:'{{ post.pk }}', klass:'{{ klass }}'}" id="{{ post.pk }}_vote"><img id="{{ post.pk }}_rating_up" src="{% static "design/3/img/b-bar/plus.png" %}" alt="Нравится" class="icon"></a>
                                 {% endif %}
                                 {% if user.is_moderator %}
                                     &nbsp;&nbsp;

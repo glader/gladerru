@@ -1,9 +1,10 @@
 {% extends "tab_movies.html" %}
 {% load content %}
+{% load staticfiles %}
 
 {% block head %}
-    <script type='text/javascript' src='{% MEDIA_URL %}js/swfobject.js'></script>
-    <script type='text/javascript' src='{% MEDIA_URL %}js/player_utils.js'></script>
+    <script type='text/javascript' src='{% static "js/swfobject.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
 {% endblock head %}
 
 {% block top_menu %}

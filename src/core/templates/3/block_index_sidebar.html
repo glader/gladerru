@@ -1,14 +1,16 @@
 {% load content %}
+{% load staticfiles %}
+
     <h2 class="b-block-title">Прямой эфир</h2>
     {% last_conversations %}
 
     <h2 class="b-block-title">Мы на других сайтах</h2>
     	<br/>
-    	<a href="http://www.facebook.com/pages/Gladerru-%D0%B2%D1%81%D0%B5-%D0%BE-%D0%BC%D0%B8%D1%80%D0%B5-%D1%81%D0%BD%D0%BE%D1%83%D0%B1%D0%BE%D1%80%D0%B4%D0%B0/146465652083096" target="_blank" title="Мы на FaceBook"><img src="{% MEDIA_URL %}design/3/img/contrib/facebook.png" alt="Мы на FaceBook"></a>&nbsp;
-    	<a href="http://vkontakte.ru/club10510322" target="_blank" title="Наша группа ВКонтакте"><img src="{% MEDIA_URL %}design/3/img/contrib/vkontakte.png" alt="Наша группа ВКонтакте"></a>&nbsp;
-    	<a href="http://syndicated.livejournal.com/gladerru_news/" target="_blank" title="Новости сноуборда в ЖЖ"><img src="{% MEDIA_URL %}design/3/img/contrib/livejournal.png" alt="Новости сноуборда в ЖЖ"></a>&nbsp;
-		<a href="http://twitter.com/glader_ru" target="_blank" title="Новости сноуборда в твиттере"><img src="{% MEDIA_URL %}design/3/img/contrib/twitter.png" alt="Новости сноуборда в твиттере" /></a>&nbsp;
-		<a href="http://glader.ru/feeds/best" target="_blank" title="Новости сноуборда через RSS"><img src="{% MEDIA_URL %}design/3/img/contrib/rss.png" alt="Новости сноуборда через RSS" /></a>
+    	<a href="http://www.facebook.com/pages/Gladerru-%D0%B2%D1%81%D0%B5-%D0%BE-%D0%BC%D0%B8%D1%80%D0%B5-%D1%81%D0%BD%D0%BE%D1%83%D0%B1%D0%BE%D1%80%D0%B4%D0%B0/146465652083096" target="_blank" title="Мы на FaceBook"><img src="{% static "design/3/img/contrib/facebook.png" %}" alt="Мы на FaceBook"></a>&nbsp;
+    	<a href="http://vkontakte.ru/club10510322" target="_blank" title="Наша группа ВКонтакте"><img src="{% static "design/3/img/contrib/vkontakte.png" %}" alt="Наша группа ВКонтакте"></a>&nbsp;
+    	<a href="http://syndicated.livejournal.com/gladerru_news/" target="_blank" title="Новости сноуборда в ЖЖ"><img src="{% static "design/3/img/contrib/livejournal.png" %}" alt="Новости сноуборда в ЖЖ"></a>&nbsp;
+		<a href="http://twitter.com/glader_ru" target="_blank" title="Новости сноуборда в твиттере"><img src="{% static "design/3/img/contrib/twitter.png" %}" alt="Новости сноуборда в твиттере" /></a>&nbsp;
+		<a href="http://glader.ru/feeds/best" target="_blank" title="Новости сноуборда через RSS"><img src="{% static "design/3/img/contrib/rss.png" %}" alt="Новости сноуборда через RSS" /></a>
 
 <br><br>
 

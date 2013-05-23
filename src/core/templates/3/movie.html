@@ -1,9 +1,10 @@
 {% extends "tab_movies.html" %}
 {% load content %}
+{% load staticfiles %}
 
 {% block head %}
-    <script type='text/javascript' src='{% MEDIA_URL %}js/swfobject.js'></script>
-    <script type='text/javascript' src='{% MEDIA_URL %}js/player_utils.js'></script>
+    <script type='text/javascript' src='{% static "js/swfobject.js" %}'></script>
+    <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
 {% endblock head %}
 
 {% block title %}{{ movie.title }} - сноубордические фильмы - {{ block.super }}{% endblock %}
@@ -13,9 +14,9 @@
     <span id="{{ movie.slug }}_rating">{{ movie.rating|decimal_cut:1 }}</span>
 {% if can_vote %}
     <a href="" onclick="addPostVotes('{{ movie.slug }}', 1); return false;"
-        ><img id="'{{ movie.slug }}'_rating_up" src="{% MEDIA_URL %}design/2/img/arrow_up.gif" alt="Нравится" class="icon"></a>
+        ><img id="'{{ movie.slug }}'_rating_up" src="{% static "design/2/img/arrow_up.gif" %}" alt="Нравится" class="icon"></a>
 {% else %}
-    <img src="{% MEDIA_URL %}design/3/img/b-bar/arrow_up_dis.gif" alt="Нравится" class="icon">
+    <img src="{% static "design/3/img/b-bar/arrow_up_dis.gif" %}" alt="Нравится" class="icon">
 {% endif %}
 {% endblock %}
 
@@ -23,7 +24,7 @@
 {% block content %}
 	<div class="b-movie">
 		{% if movie.cover %}
-			<a href="{{ movie.cover.src }}" class="float_right"><img src="{% MEDIA_URL %}{{ movie.cover.src|thumbnail }}" alt="{{ movie.title }} - обложка" border="0"></a>
+			<a href="{{ movie.cover.src }}" class="float_right"><img src="{% static "{{ movie.cover.src|thumbnail }}" %}" alt="{{ movie.title }} - обложка" border="0"></a>
 		{% endif %}
 
 	    <table class="b-movie_info"><tbody>
@@ -37,7 +38,7 @@
 
 	        <tr><td valign="top"><strong>Торрент:</strong></td><td>
 	            {% if movie.torrent %}
-	                <a href="{{ movie.torrent }}">скачать</a> <!-- <a href="/content/torrents.htm" target="_blank"><img src="{% MEDIA_URL %}design/3/img/icons/question.png"></a>-->
+	                <a href="{{ movie.torrent }}">скачать</a> <!-- <a href="/content/torrents.htm" target="_blank"><img src="{% static "design/3/img/icons/question.png" %}"></a>-->
                     {% if movie.torrent|is_extremebits %}<span title="Этот торрент устарел. Дайте в комментариях ссылку на свежий." style="border-bottom: 1px dashed #317CB4" onclick="alert('Этот торрент устарел. Дайте в комментариях ссылку на свежий.')">помочь сайту</span>{% endif %}
                 {% else %}
 	                <span title="Вы можете попросить или предложить ссылку на торрент в комментариях." onclick="alert('Вы можете попросить или предложить ссылку на торрент в комментариях.')" style="border-bottom: 1px dashed #317CB4">пока нету</span>

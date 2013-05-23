@@ -1,4 +1,5 @@
 {% load content %}
+{% load staticfiles %}
 
     <ul class="b-pager">
         {% for y in years %}
@@ -14,9 +15,9 @@
         <li><a href="/content/teasers.htm" title="Все тизеры сноуфильмов">Тизеры</a></li>
         <li><a href="/content/soundtracks.htm" title="Все саундтреки сноуфильмов">Саундтреки</a></li>
     </ul>
-    
+
     <br />
-    
+
 	<table class="sortable b-movie-list">
 		<tr>
             <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Наименование</span></span></td>
@@ -34,8 +35,8 @@
 			<td>{% if movie.makers %}{% items_list movie.makers %}{% endif %}</td>
             <td>{{ movie.year|default:"" }}</td>
             <td class="center">{% if movie.youtube %}есть{% endif %}</td>
-            <td class="center">{% if movie.torrent %}<a href="{{ movie.torrent }}"><img src="{% MEDIA_URL %}design/3/img/b-movie-list/disk.png" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
-            <td class="center">{% if movie.tracklist %}<img src="{% MEDIA_URL %}design/3/img/b-movie-list/music.png" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{% if movie.torrent %}<a href="{{ movie.torrent }}"><img src="{% static "design/3/img/b-movie-list/disk.png" %}" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
+            <td class="center">{% if movie.tracklist %}<img src="{% static "design/3/img/b-movie-list/music.png" %}" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
             <td class="center">{{ movie.rating|decimal_cut }}</td>
 		</tr>
 	{% endfor %}

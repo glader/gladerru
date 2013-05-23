@@ -2,7 +2,7 @@
 {% load content %}
 
 {% if article.skill %}
-	{% block page_title %}<a href="{% url skills %}">Статьи</a> {% if article.skill %}» {{ article.skill|link }} {% endif %}» {{ article.title }}{% endblock %}
+	{% block page_title %}<a href="{% url "skills" %}">Статьи</a> {% if article.skill %}» {{ article.skill|link }} {% endif %}» {{ article.title }}{% endblock %}
 {% endif %}
 
 {% block title %}{{ article.title }} {{ block.super }}{% endblock %}

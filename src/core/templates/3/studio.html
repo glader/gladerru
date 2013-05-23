@@ -1,11 +1,12 @@
 {% extends "tab_movies.html" %}
-{% load content %}	
+{% load content %}
+{% load staticfiles %}
 
 {% block top_menu %}
     {% top_menu 'studies' %}
 {% endblock %}
 
-{% block breadcrumbs %}<a href="{% url movies %}">Сноубордические фильмы</a> / <a href="{% url studies %}">Студии</a> / {{ studio.title }}{% endblock %}
+{% block breadcrumbs %}<a href="{% url "movies" %}">Сноубордические фильмы</a> / <a href="{% url "studies" %}">Студии</a> / {{ studio.title }}{% endblock %}
 
 {% block title %}Студия {{ studio.title }} - {{ block.super }}{% endblock %}
 
@@ -13,12 +14,12 @@
 
 {% block content %}
 	<div class="b-studio">
-        {% if studio.image %}<a href="{{ studio.image.url }}" class="float_right"><img src="{% MEDIA_URL %}{{ studio.image.get_thumbnail_url }}" alt="{{ studio.title }} - логотип" border="0"></a><br>{% endif %}
-       	
+        {% if studio.image %}<a href="{{ studio.image.url }}" class="float_right"><img src="{% static "{{ studio.image.get_thumbnail_url }}" %}" alt="{{ studio.title }} - логотип" border="0"></a><br>{% endif %}
+
 		{% if studio.url %}<strong>Адрес:</strong> <a href="{{ studio.url }}" title="Официальный сайт">{{ studio.url }}</a><br/><br/>{% endif %}
-	
+
        	{{ studio.content|parser }}
-		
+
 		{% if movies %}<h3>Фильмы</h3>
 			<ul class="b-studio_movies">{% for m in movies %}
 				<li>{{ m|link }}{% if m.year %} ({{ m.year }}){% endif %}</li>

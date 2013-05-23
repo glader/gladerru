@@ -9,9 +9,9 @@
 		<br />
 		<form action="" method="POST">
 			<input type="hidden" name="action" value="delete">
-			<input type="submit" value="Удалить"> или <a href="{% url discounts %}">вернуться</a>
+			<input type="submit" value="Удалить"> или <a href="{% url "discounts" %}">вернуться</a>
 		</form>
 	</div>
 {% endblock %}
-	
+
 {% block title %}Удаление дисконтной карты {{ block.super }}{% endblock %}

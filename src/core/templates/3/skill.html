@@ -1,7 +1,7 @@
 {% extends "tab_articles.html" %}
 {% load content %}
 
-{% block page_title %}<a href="{% url skills %}">Статьи</a> » {{ skill.title }}{% endblock %}
+{% block page_title %}<a href="{% url "skills" %}">Статьи</a> » {{ skill.title }}{% endblock %}
 
 {% block title %}{{ skill.title }} - {{ block.super }}{% endblock %}
 

@@ -1,6 +1,7 @@
 {% extends "my/base.html" %}
 {% load content %}
 {% load russian %}
+{% load staticfiles %}
 
 {% block top_menu %}
     {% top_menu 'news' %}
@@ -16,7 +17,7 @@
 			<h2 style="font-size:120%; font-weight: bold; padding-bottom:5px;">{{ date.date|human_date }}</h2>
 			<ul style="padding-left: 20px; padding-bottom: 10px;">
 				{% for announce in date.news %}
-					<li><img src="{% MEDIA_URL %}design/3/img/b-announce/{{ announce.type }}.png" alt="{{ announce.type.title }}"/> {{ announce.content|add_referrer:"news"|safe }}</li>
+					<li><img src="{% static "design/3/img/b-announce/{{ announce.type }}.png" %}" alt="{{ announce.type.title }}"/> {{ announce.content|add_referrer:"news"|safe }}</li>
 				{% endfor %}
 			</ul>
 		{% endfor %}

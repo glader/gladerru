@@ -11,7 +11,7 @@
 			{% if block.3 %}
 				<a href="{{ block.3.get_absolute_url }}">
 			{% endif %}
-			<img style="position: absolute; left: {{ block.1 }}px; top: {{ block.2 }}px" src="{% MEDIA_URL %}design/3/img/b-skills/{{ block.0 }}" alt="">
+			<img style="position: absolute; left: {{ block.1 }}px; top: {{ block.2 }}px" src="{{ STATIC_URL }}design/3/img/b-skills/{{ block.0 }}" alt="">
 			{% if block.3 %}
 				</a>
 			{% endif %}

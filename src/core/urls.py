@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls.defaults import *
+from django.conf.urls import *
 from views.admin import *
 from views.content import *
 from views.redirects import *
 from views.ugc import *
 from feeds import *
 from django.contrib.auth.views import password_reset
-from django.views.generic.simple import redirect_to
+from django.views.generic.base import RedirectView
 
 
 urlpatterns = patterns('',
@@ -130,8 +130,8 @@ urlpatterns = patterns('',
     url(r'^cat/([\w\d_-]+)$', old_post_category),
     url(r'^blog/[^/]+/(\d+)$', old_blog_post),
     url(r'^forum/profile', old_forum_profile),
-    url(r'^forum', redirect_to, {'url': 'http://glader.ru/users/glader/posts/410'}, name='forum'),
-    url(r'^index.pl-item=(?P<name>.+)\.htm$', redirect_to, {'url': '/content/%(name)s.htm'}),
-    url(r'^studio/(?P<name>[^/]+)', redirect_to, {'url': '/studies/%(name)s'}),
+    url(r'^forum', RedirectView.as_view(url="http://glader.ru/users/glader/posts/410"), name='forum'),
+    url(r'^index.pl-item=(?P<name>.+)\.htm$', RedirectView.as_view(get_redirect_url=lambda name: "/content/%s.htm" % name)),
+    url(r'^studio/(?P<name>[^/]+)', RedirectView.as_view(get_redirect_url=lambda name: "/studies/%s" % name)),
     url(r'^best', old_best),
 )
