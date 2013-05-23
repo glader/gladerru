@@ -733,7 +733,7 @@ def add_comment(request, user=None, hidden=False):
         template = loader.get_template("blocks/b-comment.html")
         html = template.render(Context({'comment': comment,
                                         'post': form.cleaned_data['post'],
-                                        'MEDIA_URL': settings.MEDIA_URL,
+                                        'MEDIA_URL': settings.STATIC_URL,
                                         'klass': form.cleaned_data['post'].__class__.__name__.lower()
                                         }))
 
@@ -840,7 +840,7 @@ def add_photo(request):
     return HttpResponse(simplejson.dumps({'success': True,
                                            'picture_id': image.pk,
                                            'absolute_url': image.get_absolute_url(),
-                                           'thumbnail_url': settings.MEDIA_URL + thumbnail_url
+                                           'thumbnail_url': settings.STATIC_URL + thumbnail_url
                                            }))
 
 

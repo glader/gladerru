@@ -30,11 +30,6 @@ def DOMAIN():
 
 
 @register.simple_tag
-def MEDIA_URL():
-    return settings.MEDIA_URL
-
-
-@register.simple_tag
 def VK_API_ID():
     return settings.VK_API_ID
 
@@ -360,7 +355,7 @@ def parser(text):
             return "</pre>"
         if tag == 'ImageLink':
             return '<a href="%s" style="%s"><img class="userphoto" src="%s%s"></a>' \
-                    % (item.get_absolute_url(), params.get('style', ""), settings.MEDIA_URL, thumbnail(item.yandex_fotki_image_src))
+                    % (item.get_absolute_url(), params.get('style', ""), settings.STATIC_URL, thumbnail(item.yandex_fotki_image_src))
         if tag == 'ItemLink':
             return '<a href="%s" style="%s">%s</a>' \
                     % (item and item.get_absolute_url() or "", params.get('style', ""), params.get('title', item and item.title or ""))
@@ -390,7 +385,7 @@ def parser(text):
                 return u""
 
         return '<a href="%s"><img rel="image_src" class="userphoto" src="%s%s"></a>&#32;' % \
-               (picture.get_absolute_url(), settings.MEDIA_URL, thumbnail(picture.yandex_fotki_image_src))
+               (picture.get_absolute_url(), settings.STATIC_URL, thumbnail(picture.yandex_fotki_image_src))
 
     def pageParser(result):
         try:
@@ -576,7 +571,7 @@ def link(item):
 
     if isinstance(item, Photo):
         return mark_safe(u'<a href="http://%s%s"><img class="userphoto" src="%s" alt="%s"></a>'
-                         % (settings.DOMAIN, item.get_absolute_url(), settings.MEDIA_URL + thumbnail(item.yandex_fotki_image_src), item.title))
+                         % (settings.DOMAIN, item.get_absolute_url(), settings.STATIC_URL + thumbnail(item.yandex_fotki_image_src), item.title))
 
     return mark_safe(u'<a href="http://%s%s">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.title))
 

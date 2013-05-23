@@ -9,7 +9,7 @@ function addPostVotes(postId, klass, vote){
                       .addClass(json.vote_class)
                       .attr("innerHTML",json.rating);
                  $('#'+postId+'_rating_up')
-                      .attr('src', MEDIA_URL + 'design/3/img/b-bar/plus_disabled.png');
+                      .attr('src', STATIC_URL + 'design/3/img/b-bar/plus_disabled.png');
               }
               if(json.error){
                  alert(json.error)

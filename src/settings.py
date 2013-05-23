@@ -83,9 +83,6 @@ INSTALLED_APPS = (
 # Absolute path to the directory that holds media.
 PROJECT_PATH = os.path.dirname(__file__)
 
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
-MEDIA_URL = '/media/'
-
 ALLOWED_HOSTS = ('glader.ru', 'glader_local.ru')
 STATIC_URL = '/media/'
 

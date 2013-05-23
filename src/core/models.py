@@ -330,7 +330,7 @@ class Avatar(models.Model):
         avatars = dict((a.user_id, a) for a in Avatar.objects.filter(user__in=users))
         return dict((user_id, getattr(avatars[user_id], 'avatar%s' % size).src
                                 if user_id in avatars
-                                else "%sdesign/3/img/avatars/avatar%s.png" % (settings.MEDIA_URL, size)
+                                else "%sdesign/3/img/avatars/avatar%s.png" % (settings.STATIC_URL, size)
             )
             for user_id in users
         )
