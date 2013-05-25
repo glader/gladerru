@@ -134,4 +134,7 @@ urlpatterns = patterns('',
     url(r'^index.pl-item=(?P<name>.+)\.htm$', RedirectView.as_view(get_redirect_url=lambda name: "/content/%s.htm" % name)),
     url(r'^studio/(?P<name>[^/]+)', RedirectView.as_view(get_redirect_url=lambda name: "/studies/%s" % name)),
     url(r'^best', old_best),
+
+    url(r'^feeds/posts', gone),
+    url(r'^wp/', gone),
 )

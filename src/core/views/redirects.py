@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import re
-from django.http import HttpResponsePermanentRedirect
+from django.http import HttpResponsePermanentRedirect, HttpResponseGone
 from django.shortcuts import get_object_or_404
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -62,3 +62,7 @@ def old_forum_profile(request):
 
 def old_best(request):
     return HttpResponsePermanentRedirect("/" + (request.META['QUERY_STRING'] and "?%s" % request.META['QUERY_STRING'] or ""))
+
+
+def gone(request):
+    return HttpResponseGone('Gone')
