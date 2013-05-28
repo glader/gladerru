@@ -18,7 +18,8 @@ env.www_ssh_key = 'ssh-dss AAAAB3NzaC1kc3MAAACAbN+8KDO1jkRluNqiqO2KjkaSn4Qs66zBc
 env.forward_agent = True
 
 if not env.hosts:
-    env.hosts = ['ec2-54-243-154-90.compute-1.amazonaws.com']
+    #env.hosts = ['ec2-54-243-154-90.compute-1.amazonaws.com']
+    env.hosts = ['ec2-54-224-215-111.compute-1.amazonaws.com']
 
 
 def virtualenv(command):
@@ -58,7 +59,8 @@ def create():
 def init():
     with settings(user='ubuntu'):
         sudo('apt-get update')
-        sudo('apt-get install -y mc lighttpd mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
+        sudo('apt-get upgrade')
+        sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
         sudo('apt-get build-dep -y python-mysqldb')
 
         if not exists('/home/%s' % SSH_USER):
@@ -77,14 +79,19 @@ def init():
             sudo('mkdir -p /var/log/projects/gladerru')
             sudo('chmod 777 /var/log/projects/gladerru')
 
-        if not exists('/etc/lighttpd/conf-available/10-modules.conf'):
-            put('tools/lighttpd/10-modules.conf', '/etc/lighttpd/conf-available/10-modules.conf', use_sudo=True)
-            sudo('ln -s /etc/lighttpd/conf-available/10-modules.conf /etc/lighttpd/conf-enabled/10-modules.conf')
+        if exists('/etc/nginx/sites-enabled/default'):
+            sudo('rm /etc/nginx/sites-enabled/default')
 
-        if not exists('/etc/lighttpd/conf-available/90-gladerru.conf'):
-            sudo('touch /etc/lighttpd/conf-available/90-gladerru.conf')
-        if not exists('/etc/lighttpd/conf-enabled/90-gladerru.conf'):
-            sudo('ln -s /etc/lighttpd/conf-available/90-gladerru.conf /etc/lighttpd/conf-enabled/90-gladerru.conf')
+        if not exists('/etc/nginx/listen'):
+            put('tools/nginx/listen', '/etc/nginx/listen', use_sudo=True)
+        if not exists('/etc/nginx/fastcgi_params_extended'):
+            put('tools/nginx/fastcgi_params_extended', '/etc/nginx/fastcgi_params_extended', use_sudo=True)
+
+        if not exists('/etc/nginx/sites-available/90-gladerru.conf'):
+            sudo('touch /etc/nginx/sites-available/90-gladerru.conf')
+            sudo('chown %s /etc/nginx/sites-available/90-gladerru.conf' % SSH_USER)
+        if not exists('/etc/nginx/sites-enabled/90-gladerru.conf'):
+            sudo('ln -s /etc/nginx/sites-available/90-gladerru.conf /etc/nginx/sites-enabled/90-gladerru.conf', shell=False)
 
         if not exists('/etc/sv/gladerru'):
             sudo('mkdir -p /etc/sv/gladerru/supervise')
@@ -104,10 +111,9 @@ def production():
     static()
     environment()
     local_settings()
-    lighttpd()
     runit()
     cron()
-#    dump()
+    dump()
     migrate()
     update_sape()
     restart()
@@ -148,12 +154,9 @@ def local_settings():
             )
 
 
-def lighttpd():
-    with settings(user='ubuntu'):
-        sudo('cp %(directory)s/tools/lighttpd/90-gladerru.conf /etc/lighttpd/conf-available/90-gladerru.conf' % env)
-
-        #sudo('kill `cat /var/run/lighttpd.pid` -INT')
-        #sudo('/etc/init.d/lighttpd restart')
+def nginx():
+    run('cp %(directory)s/tools/nginx/90-gladerru.conf /etc/nginx/sites-available/90-gladerru.conf' % env, shell=False)
+#    sudo('/etc/init.d/nginx reload', shell=False)
 
 
 def runit():

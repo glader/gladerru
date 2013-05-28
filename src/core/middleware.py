@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
-import re
-import os
 from datetime import datetime
+
 from django.conf import settings
 from django.utils.html import strip_spaces_between_tags as short
-import logging
-from time import time
 
 
 class UserReferer:
