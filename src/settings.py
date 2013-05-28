@@ -17,10 +17,14 @@ LANGUAGE_CODE = 'ru-ru'
 SITE_ID = 1
 USE_I18N = True
 SECRET_KEY = '12345'
+
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+    ('django.template.loaders.cached.Loader', (
+        'django.template.loaders.filesystem.Loader',
+        'django.template.loaders.app_directories.Loader',
+        )),
+    )
+
 DEBUG = False
 TEMPLATE_DEBUG = False
 IS_DEVEL = False
