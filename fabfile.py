@@ -9,7 +9,7 @@ from fabric.contrib.files import exists, append, upload_template
 
 from fab_settings import *
 
-env.ami = 'ami-8f03ede6'
+env.ami = 'ami-d0f89fb9'  # Ubuntu precise
 env.directory = '/home/%s/projects/gladerru' % SSH_USER
 env.manage_dir = env.directory + '/src'
 env.user = SSH_USER
@@ -19,7 +19,7 @@ env.forward_agent = True
 
 if not env.hosts:
     #env.hosts = ['ec2-54-243-154-90.compute-1.amazonaws.com']
-    env.hosts = ['ec2-54-224-215-111.compute-1.amazonaws.com']
+    env.hosts = ['ec2-174-129-213-96.compute-1.amazonaws.com']
 
 
 def virtualenv(command):
@@ -33,11 +33,15 @@ def _create_server():
     conn = boto.connect_ec2(EC2_KEY, EC2_SECRET)
     image = conn.get_all_images([env.ami])
 
-    reservation = image[0].run(1, 1, 'ec2_django_micro', ['django_micro'],
-        instance_type='m1.small', placement='us-east-1a')
+    reservation = image[0].run(1, 1,
+        'ec2_django_micro',
+        ['django_micro'],
+        instance_type='t1.micro',#'m1.small',
+        placement='us-east-1a',
+    )
 
     instance = reservation.instances[0]
-    conn.create_tags([instance.id], {"Name":"glader.ru auto"})
+    conn.create_tags([instance.id], {"Name":"glader.ru auto precise"})
 
     while instance.state == u'pending':
         print "Instance state: %s" % instance.state
@@ -59,7 +63,7 @@ def create():
 def init():
     with settings(user='ubuntu'):
         sudo('apt-get update')
-        sudo('apt-get upgrade')
+        sudo('apt-get upgrade -y')
         sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
         sudo('apt-get build-dep -y python-mysqldb')
 
@@ -106,15 +110,16 @@ def init():
         sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
 
 
-def production():
+def production(mode=""):
     upload()
     static()
     environment()
     local_settings()
     runit()
     cron()
-    dump()
-    migrate()
+    if mode != 'no_dump':
+        dump()
+        migrate()
     update_sape()
     restart()
 
@@ -203,6 +208,7 @@ def update_sape():
 def restart():
     with settings(user=SSH_USER):
         run('sudo sv restart gladerru')
+        run('chmod 777 /home/www/projects/gladerru/fcgi.sock')
 
 
 def local_env():
