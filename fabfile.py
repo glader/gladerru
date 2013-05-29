@@ -18,8 +18,8 @@ env.www_ssh_key = 'ssh-dss AAAAB3NzaC1kc3MAAACAbN+8KDO1jkRluNqiqO2KjkaSn4Qs66zBc
 env.forward_agent = True
 
 if not env.hosts:
-    #env.hosts = ['ec2-54-243-154-90.compute-1.amazonaws.com']
-    env.hosts = ['ec2-174-129-213-96.compute-1.amazonaws.com']
+    env.hosts = ['ec2-54-243-154-90.compute-1.amazonaws.com']
+    #env.hosts = ['ec2-174-129-213-96.compute-1.amazonaws.com']
 
 
 def virtualenv(command):
@@ -36,7 +36,7 @@ def _create_server():
     reservation = image[0].run(1, 1,
         'ec2_django_micro',
         ['django_micro'],
-        instance_type='t1.micro',#'m1.small',
+        instance_type='m1.small',
         placement='us-east-1a',
     )
 
@@ -64,8 +64,11 @@ def init():
     with settings(user='ubuntu'):
         sudo('apt-get update')
         sudo('apt-get upgrade -y')
-        sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg62-dev')
+        sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg8-dev')
         sudo('apt-get build-dep -y python-mysqldb')
+        sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/')
+        sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/')
+        sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/')
 
         if not exists('/home/%s' % SSH_USER):
             sudo('yes | adduser --disabled-password %s' % SSH_USER)
@@ -115,6 +118,7 @@ def production(mode=""):
     static()
     environment()
     local_settings()
+    nginx()
     runit()
     cron()
     if mode != 'no_dump':
