@@ -53,16 +53,3 @@ def old_post_category(request, category_name):
 def old_blog_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return HttpResponsePermanentRedirect(post.get_absolute_url())
-
-
-def old_forum_profile(request):
-    user = get_object_or_404(User, pk=request.GET.get('u'))
-    return HttpResponsePermanentRedirect(user.get_absolute_url())
-
-
-def old_best(request):
-    return HttpResponsePermanentRedirect("/" + (request.META['QUERY_STRING'] and "?%s" % request.META['QUERY_STRING'] or ""))
-
-
-def gone(request):
-    return HttpResponseGone('Gone')

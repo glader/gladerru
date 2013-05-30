@@ -4,6 +4,10 @@ Disallow: /auth
 Disallow: /top
 Disallow: /feeds/posts
 Disallow: /wp
+Disallow: /best
+Disallow: /studio
+Disallow: /index.pl
+Disallow: /forum
 Host: glader.ru
 
 User-agent: *
@@ -12,4 +16,8 @@ Disallow: /auth
 Disallow: /top
 Disallow: /feeds/posts
 Disallow: /wp
+Disallow: /best
+Disallow: /studio
+Disallow: /index.pl
+Disallow: /forum
 

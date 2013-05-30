@@ -129,12 +129,4 @@ urlpatterns = patterns('',
     url(r'^pic/(\d+)$', old_pic),
     url(r'^cat/([\w\d_-]+)$', old_post_category),
     url(r'^blog/[^/]+/(\d+)$', old_blog_post),
-    url(r'^forum/profile', old_forum_profile),
-    url(r'^forum', RedirectView.as_view(url="http://glader.ru/users/glader/posts/410"), name='forum'),
-    url(r'^index.pl-item=(?P<name>.+)\.htm$', RedirectView.as_view(get_redirect_url=lambda name: "/content/%s.htm" % name)),
-    url(r'^studio/(?P<name>[^/]+)', RedirectView.as_view(get_redirect_url=lambda name: "/studies/%s" % name)),
-    url(r'^best', old_best),
-
-    url(r'^feeds/posts', gone),
-    url(r'^wp/', gone),
 )
