@@ -165,7 +165,7 @@ def local_settings():
 
 def nginx():
     run('cp %(directory)s/tools/nginx/90-gladerru.conf /etc/nginx/sites-available/90-gladerru.conf' % env, shell=False)
-#    sudo('/etc/init.d/nginx reload', shell=False)
+    run('/etc/init.d/nginx reload')
 
 
 def runit():
