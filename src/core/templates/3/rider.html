@@ -29,7 +29,7 @@
 			{% if sponsors %}<tr><td valign="top"><b>Спонсоры:</b></td><td valign="top">{% items_list sponsors %}</td></tr>{% endif %}
 		</tbody></table>
 
-       	{{ item.content|parser }}
+       	{{ item.content|safe }}
 
 		{% if movies %}<h3>Фильмы</h3>
 			<ul>

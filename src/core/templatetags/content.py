@@ -360,14 +360,6 @@ def parser(text):
             return '<a href="%s" style="%s">%s</a>' \
                     % (item and item.get_absolute_url() or "", params.get('style', ""), params.get('title', item and item.title or ""))
 
-    def usernameParser(result):
-        username = result.group(1)
-        try:
-            user = User.objects.get(username=username)
-            return "<a href='http://%s.glader.ru/' class='profile_link_default'>%s</a>" % (username, user.name)
-        except User.DoesNotExist:
-            return u"[неизвестный пользователь]"
-
     def smiles(result):
         return '<span class="smile">%s</span>' % result.group(1)
 
@@ -392,14 +384,7 @@ def parser(text):
             page = Post.objects.get(name=result.group(1))
             return link(page)
         except Post.DoesNotExist:
-            return u"[Страница с таким кодом не найдена]"
-
-    def userParser(result):
-        try:
-            user = User.objects.get(username=result.group(1))
-            return link(user)
-        except User.DoesNotExist:
-            return u"[Юзер с таким кодом не найден]"
+            return u"[Страница с кодом '%s' не найдена]" % result.group(1)
 
     def rutubeId(result):
         return """<script>
@@ -443,10 +428,8 @@ def parser(text):
 
     text = re.sub('(?<!</(td|tr|le|li|ol|ul))\r?\n', '<br/>\n', text)
     text = re.sub('<:(.+?):>', tagsParser, text)
-    text = re.sub('<~(\w+)>', usernameParser, text)
     text = re.sub('''<glader\s+pic=['"](\d+)["']>''', pictureParser, text)
     text = re.sub('''<glader\s+page=['"]([^"']+)['"]>''', pageParser, text)
-    text = re.sub('''<glader\s+user=['"]([^"']+)['"]>''', userParser, text)
     text = re.sub('(^|\n)(=+)([^\r\n]+)[\r\n]+', headers, text)
 
     text = re.sub('([\w\d\._-]+@[\w\d\._-]+)', emailHider, text)

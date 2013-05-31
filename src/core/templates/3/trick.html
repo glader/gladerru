@@ -8,9 +8,9 @@
 {% block title %}{{ item.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
-    {{ item.abstract|parser }}
+    {{ item.abstract|safe }}
 
-    {{ item.content|parser }}
+    {{ item.content|safe }}
 
     {% comments item request %}
 

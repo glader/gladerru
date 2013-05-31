@@ -11,8 +11,8 @@
 
     <div class="dict_entry" itemprop="definition">
         <div class="g-hidden">{{ item.title }}:</div>
-        {{ item.abstract|parser }}
-        {{ item.content|parser }}
+        {{ item.abstract|safe }}
+        {{ item.content|safe }}
     </div>
-    
+
 {% endblock page %}

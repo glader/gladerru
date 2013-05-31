@@ -9,7 +9,7 @@
 		&nbsp;&nbsp;&nbsp;
 		<a href='{{ comment.get_absolute_url }}' style='text-decoration:none; color:gray'>#</a>
 
-	    <div class="content">{{ comment.content|parser }}</div>
+	    <div class="content">{{ comment.content|safe }}</div>
 
         <div class="comment_item_answerlink"><a id="commentlink{{ comment.id }}" class="js-commentlink {comment:'{{ comment.id }}'}"
                 href='#c{{ comment.id }}'>ответить</a></div>

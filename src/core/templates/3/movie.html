@@ -67,7 +67,7 @@
 
             {% if movie.content %}
                 <tr><td valign="top"><strong>Описание:</strong></td>
-                    <td>{{ movie.content|parser }}</td>
+                    <td>{{ movie.content|safe }}</td>
                    </tr>
             {% endif %}
 	    </tbody></table>

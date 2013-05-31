@@ -8,7 +8,7 @@
 {% block page_title %}{{ item.title }}{% endblock %}
 
 {% block content %}
-    {{ item.content|parser }}
+    {{ item.content|safe }}
 
     {{ post.tags_html|safe }}
 

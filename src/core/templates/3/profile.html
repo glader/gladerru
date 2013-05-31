@@ -76,7 +76,7 @@
 	       Последние комментарии:<br />
 	       {% for c in last_comments %}
 	            Тема: <a href="{{ c.get_absolute_url }}" style="color: #1c4d75">{{ c.item.title }}</a><br />
-	            Написал: {{ c.content|parser }} <br /><br />
+	            Написал: {{ c.content|safe }} <br /><br />
 	       {% endfor %}
 	{% endif %}
 </div>

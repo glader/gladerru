@@ -109,7 +109,7 @@ $(function(){
         <td class="l-page-g"><i></i></td>
         <td>
             {% if post and post.preview %}
-                {{ post.content|parser }}<br><br>
+                {{ post.content|safe }}<br><br>
             {% endif %}
 
             {% ifequal post.status "save" %}

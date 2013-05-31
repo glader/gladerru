@@ -1,8 +1,8 @@
 {% extends "item_common_world.html" %}
 {% load content %}
 
-{% block content %}		
-			<div>{{ item.content|parser }}</div>
+{% block content %}
+			<div>{{ item.content|safe }}</div>
 
 			{% for c in item.get_children %}
 				<h3>{{ c.title }}</h3>

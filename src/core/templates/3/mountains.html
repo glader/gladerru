@@ -32,7 +32,7 @@
 {% endblock head %}
 
 {% block content %}
-    <div>{{ item.content|parser }}</div>
+    <div>{{ item.content|safe }}</div>
 
 	<div id="YMapsID" style="width:800px;height:400px"></div>
 

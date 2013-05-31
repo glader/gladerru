@@ -18,7 +18,7 @@
                 </table>
 
 				{% if movie.content %}
-					<p>{{ movie.content|parser }}</p>
+					<p>{{ movie.content|safe }}</p>
 				{% endif %}
 
                 <p>

@@ -18,7 +18,7 @@
 
 		{% if studio.url %}<strong>Адрес:</strong> <a href="{{ studio.url }}" title="Официальный сайт">{{ studio.url }}</a><br/><br/>{% endif %}
 
-       	{{ studio.content|parser }}
+       	{{ studio.content|safe }}
 
 		{% if movies %}<h3>Фильмы</h3>
 			<ul class="b-studio_movies">{% for m in movies %}

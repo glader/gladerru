@@ -6,7 +6,7 @@
 {% block content %}
     <a name="{{ item.name }}"></a>
 
-    {{ item.content|parser }}
+    {{ item.content|safe }}
 
     {{ post.tags_html|safe }}
 
