@@ -31,6 +31,7 @@ IS_DEVEL = False
 TIMING = True
 LOG_LEVEL = logging.WARNING
 
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
 MIDDLEWARE_CLASSES = (
     'timelog.middleware.TimeLogMiddleware',

@@ -5,6 +5,7 @@ South
 boto
 django-ses
 flup
+gunicorn
 logging
 wsgiref
 pytils
