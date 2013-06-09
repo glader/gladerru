@@ -1,4 +1,14 @@
 #!/bin/sh
 
+GUNICORN=/home/www/projects/gladerru/ENV/bin/gunicorn
+ROOT=/home/www/projects/gladerru/src
+PID=/home/www/projects/gladerru/pid
+
+APP=main:application
+
+if [ -f $PID ]; then rm $PID; fi
+
 echo $(date) restarted >> /var/log/projects/gladerru/restart.log
-exec chpst -u www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py run_gunicorn errlog=/var/log/projects/gladerru/fcgi-error.log method=prefork socket=/home/www/projects/gladerru/fcgi.sock pidfile=/home/www/projects/gladerru/pid daemonize=false stdout=/var/log/projects/gladerru/stdout.log
+
+cd $ROOT
+exec $GUNICORN -b unix:/home/www/projects/gladerru/fcgi.sock --pid=$PID $APP
