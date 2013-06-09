@@ -23,7 +23,7 @@
         </ul>
     {% endif %}
 
-    {{ content|default:""|save }}
+    {{ content|default:""|safe }}
 
     {% if previous %}
         <a href="{{ article.get_absolute_url }}?page={{ previous.0 }}" style="float:left"><- {{ previous.1 }}</a>
