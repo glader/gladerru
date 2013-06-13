@@ -8,6 +8,8 @@ Disallow: /best
 Disallow: /studio
 Disallow: /index.pl
 Disallow: /forum
+Disallow: /messages
+Disallow: /editavatar
 Host: glader.ru
 
 User-agent: *
@@ -20,4 +22,5 @@ Disallow: /best
 Disallow: /studio
 Disallow: /index.pl
 Disallow: /forum
-
+Disallow: /messages
+Disallow: /editavatar
