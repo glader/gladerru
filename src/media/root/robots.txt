@@ -10,6 +10,7 @@ Disallow: /index.pl
 Disallow: /forum
 Disallow: /messages
 Disallow: /editavatar
+Disallow: /files
 Host: glader.ru
 
 User-agent: *
@@ -24,3 +25,4 @@ Disallow: /index.pl
 Disallow: /forum
 Disallow: /messages
 Disallow: /editavatar
+Disallow: /files
