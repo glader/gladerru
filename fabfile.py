@@ -5,7 +5,7 @@ import time
 from datetime import date
 
 from fabric.api import *
-from fabric.contrib.files import exists, append, upload_template
+from fabric.contrib.files import exists, append, upload_template, sed
 
 from fab_settings import *
 
@@ -18,8 +18,7 @@ env.www_ssh_key = 'ssh-dss AAAAB3NzaC1kc3MAAACAbN+8KDO1jkRluNqiqO2KjkaSn4Qs66zBc
 env.forward_agent = True
 
 if not env.hosts:
-    env.hosts = ['ec2-54-243-154-90.compute-1.amazonaws.com']
-    #env.hosts = ['ec2-174-129-213-96.compute-1.amazonaws.com']
+    env.hosts = ['82.196.9.202']
 
 
 def virtualenv(command):
@@ -61,10 +60,13 @@ def create():
 
 
 def init():
-    with settings(user='ubuntu'):
+    with settings(user='root'):
+        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise main', use_sudo=True)
+        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise-updates main', use_sudo=True)
+
         sudo('apt-get update')
         sudo('apt-get upgrade -y')
-        sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg8-dev')
+        sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg8-dev fail2ban')
         sudo('apt-get build-dep -y python-mysqldb')
         sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/')
         sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/')
@@ -111,6 +113,18 @@ def init():
 
         sudo('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
         sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
+
+
+def init_mysql():
+    with settings(host_string='82.196.15.15', user='root'):
+        run('apt-get update')
+        run('apt-get upgrade -y')
+        run('apt-get install -y fail2ban mc')
+        run('DEBIAN_FRONTEND=noninteractive apt-get -q -y install mysql-server')
+        run('mysqladmin -u root password mysecretpasswordgoeshere')
+
+        sed('/etc/mysql/my.cnf', 'bind-address.+$', 'bind-address = ::')
+        run('/etc/init.d/mysql restart')
 
 
 def production(mode=""):
@@ -169,12 +183,12 @@ def nginx():
 
 
 def runit():
-    with settings(user='ubuntu'):
+    with settings(user='root'):
         sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
 
 
 def cron():
-    with settings(user='ubuntu'):
+    with settings(user='root'):
         sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
         sudo('/etc/init.d/cron restart')
 
