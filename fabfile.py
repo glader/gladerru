@@ -9,7 +9,6 @@ from fabric.contrib.files import exists, append, upload_template, sed
 
 from fab_settings import *
 
-env.ami = 'ami-d0f89fb9'  # Ubuntu precise
 env.directory = '/home/%s/projects/gladerru' % SSH_USER
 env.manage_dir = env.directory + '/src'
 env.user = SSH_USER
@@ -24,39 +23,6 @@ if not env.hosts:
 def virtualenv(command):
     with cd(env.directory):
         run(env.activate + ' && ' + command)
-
-
-def _create_server():
-    """Creates EC2 Instance"""
-    print "Creating instance"
-    conn = boto.connect_ec2(EC2_KEY, EC2_SECRET)
-    image = conn.get_all_images([env.ami])
-
-    reservation = image[0].run(1, 1,
-        'ec2_django_micro',
-        ['django_micro'],
-        instance_type='m1.small',
-        placement='us-east-1a',
-    )
-
-    instance = reservation.instances[0]
-    conn.create_tags([instance.id], {"Name":"glader.ru auto precise"})
-
-    while instance.state == u'pending':
-        print "Instance state: %s" % instance.state
-        time.sleep(10)
-        instance.update()
-
-    print "Instance state: %s" % instance.state
-    print "Public dns: %s" % instance.public_dns_name
-
-    return instance.public_dns_name
-
-
-def create():
-    env.host_string = _create_server()
-    init()
-    production()
 
 
 def init():
