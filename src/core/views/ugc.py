@@ -55,10 +55,34 @@ def best_posts(page=None):
 
 ###############################################################################
 
+def parse_timestamp(ts):
+    try:
+        return datetime.fromtimestamp(int(ts))
+    except Exception:
+        return None
+
+
+def timestamp(dt):
+    return int((dt - datetime(1970, 1, 1)).total_seconds())
+
+
 @time_slow
 @posts_feed(template="index.html")
 def index(request):
-    return best_posts(request.GET.get('page'))
+    start = parse_timestamp(request.GET.get('start'))
+    posts = Post.objects.filter(status='pub').order_by('-best')
+    if start:
+        posts = posts.filter(best__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+    }
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].best)
+        context['posts'] = context['posts'][:10]
+
+    return context
 
 
 @time_slow
@@ -68,10 +92,20 @@ def tag(request, name):
     if tag.primary_synonim:
         return HttpResponsePermanentRedirect(tag.primary_synonim.get_absolute_url())
 
-    context = {'page': request.GET.get('page', ""),
-               'tag': tag,
-               }
-    context.update(make_tag_pages(tag, current_page=context.get('page')))
+    item_ids = [int(id) for id in tag.posts.split(',')] if tag.posts else []
+    start = parse_timestamp(request.GET.get('start'))
+    posts = Post.objects.filter(hidden=False, id__in=item_ids).order_by('-date_created')
+    if start:
+        posts = posts.filter(best__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+        'tag': tag,
+        }
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].best)
+        context['posts'] = context['posts'][:10]
     return context
 
 
@@ -98,11 +132,21 @@ def messages_compose(request):
 @posts_feed()
 def all(request):
     """ Свежие записи во всех блогах """
-    context = {'page': request.GET.get('page', ""),
-               'title': u'Все сообщения',
-               'menu_item': 'all_posts',
-               }
-    context.update(make_pages(Post.objects.filter(status='pub').order_by('-date_created'), current_page=context.get('page')))
+    start = parse_timestamp(request.GET.get('start'))
+    posts = Post.objects.filter(status='pub').order_by('-date_created')
+    if start:
+        posts = posts.filter(date_created__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+        'title': u'Все сообщения',
+        'menu_item': 'all_posts',
+    }
+
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].date_created)
+        context['posts'] = context['posts'][:10]
     return context
 
 
@@ -110,13 +154,25 @@ def all(request):
 @posts_feed()
 def hidden(request):
     """ Вообще все посты, для модераторов """
-    if not request.user.get_profile().is_moderator:
+    if not request.user.is_superuser():
         raise Http404
-    context = {'page': request.GET.get('page', ""),
-               'title': u'Все сообщения',
-               'menu_item': 'all_posts',
-               }
-    context.update(make_pages(Post.objects.all().order_by('-date_created'), 30, context.get('page')))
+
+    start = parse_timestamp(request.GET.get('start'))
+    posts = Post.objects.all().order_by('-date_created')
+    if start:
+        posts = posts.filter(date_created__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+        'title': u'Все сообщения',
+        'menu_item': 'all_posts',
+    }
+
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].date_created)
+        context['posts'] = context['posts'][:10]
+
     return context
 
 
@@ -167,8 +223,21 @@ def users_new(request):
 @posts_feed(template="faq.html")
 def faq(request):
     u""" Посты с пометкой 'Вопрос' """
-    context = {'page': request.GET.get('page', ""), }
-    context.update(make_pages(Post.objects.filter(tags__name='question').order_by('-date_created'), current_page=context.get('page')))
+    start = parse_timestamp(request.GET.get('start'))
+    posts = Post.objects.filter(tags__name='question').order_by('-date_created')
+    if start:
+        posts = posts.filter(date_created__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+        'title': u'Все сообщения',
+        'menu_item': 'all_posts',
+        }
+
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].date_created)
+        context['posts'] = context['posts'][:10]
     return context
 
 
@@ -242,9 +311,6 @@ def get_section_objects(user, section):
         objects = Post.all.filter(author=user, status__in=('save', 'deferred')) \
                     .order_by('-date_created')
 
-    elif section == 'comments':
-        objects = Comment.objects.filter(author=user).order_by('-date_created')
-
     elif section == 'photos':
         objects = Photo.objects.filter(author=user).order_by('-date_created')
 
@@ -316,9 +382,21 @@ def my_news(request):
 @auth_only
 def drafts(request):
     """ Неопубликованные посты """
-    context = {'title': u"Неопубликованное"}
-    objects = get_section_objects(request.user, 'draft')
-    context.update(make_pages(objects, current_page=context.get('page')))
+    start = parse_timestamp(request.GET.get('start'))
+    posts = get_section_objects(request.user, 'draft')
+    if start:
+        posts = posts.filter(date_created__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+        'title': u"Неопубликованное",
+        }
+
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].date_created)
+        context['posts'] = context['posts'][:10]
+
     return render_to_response(request, 'my/drafts.html', context)
 
 
@@ -349,14 +427,24 @@ def my_settings(request):
 @posts_feed(template="my/posts.html")
 def user_posts(request, username):
     user = get_user(username)
-    context = {'domain_user': user,
-               'domain_profile': user.get_profile(),
-               'page': request.GET.get('page', ""),
-               'title': u"%s: Сообщения" % user.name,
-               }
 
-    objects = get_section_objects(user, 'posts')
-    context.update(make_pages(objects, current_page=context.get('page')))
+    start = parse_timestamp(request.GET.get('start'))
+    posts = get_section_objects(user, 'posts')
+    if start:
+        posts = posts.filter(date_created__lt=start)
+
+    context = {
+        'start': None,
+        'posts': posts[:11],
+        'title': u"%s: Сообщения" % user.name,
+        'domain_user': user,
+        'domain_profile': user.get_profile(),
+    }
+
+    if len(context['posts']) == 11:
+        context['start'] = timestamp(context['posts'][10].date_created)
+        context['posts'] = context['posts'][:10]
+
     return context
 
 
@@ -366,6 +454,7 @@ def user_staff(request, username, section):
     context = {'domain_user': user, 'domain_profile': user.get_profile(), 'page': request.GET.get('page', "")}
 
     objects = get_section_objects(user, section)
+
     context.update(make_pages(objects, current_page=context.get('page')))
     context['title'] = user.name + ": " + \
                         {'comments': u"Комментарии",

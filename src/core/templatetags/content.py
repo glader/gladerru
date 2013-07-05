@@ -285,7 +285,13 @@ def type_name(item):
 def pagination(context, url=""):
     if not url:
         url = context['request'].get_full_path()
-    context['url'] = re.sub('&?page=[^&]+', '', url)
+
+    # TODO: сделать с разбором query_string
+    if 'start=' in url:
+        url = re.sub('start=\d+&?', '', url)
+        if url.endswith('?'):
+            url = url[:-1]
+    context['url'] = url
     return context
 
 

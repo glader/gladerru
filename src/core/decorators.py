@@ -44,7 +44,7 @@ def auth_only(func):
 
 
 def posts_feed(template="all.html"):
-    u"""Оформление ленты постов. Оборачиваемая функция должна возвращать словарь с элементом 'items', сожержашем список постов"""
+    u"""Оформление ленты постов. Оборачиваемая функция должна возвращать словарь с элементом 'items', содержашем список постов"""
     def decorated(func):
         def wrapper(request, *args, **kwargs):
             context = func(request, *args, **kwargs)
@@ -52,7 +52,8 @@ def posts_feed(template="all.html"):
                 return context
 
             render = render_post if request.user.is_authenticated() else render_post_cached
-            context['posts'] = [render(post) for post in context['items']]
+            context['posts'] = [render(post) for post in context['posts']]
+
             return render_to_response(request, template, context)
 
         return wrapper

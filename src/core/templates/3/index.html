@@ -6,7 +6,7 @@
     {% top_menu 'best' %}
 {% endblock %}
 
-{% block title %}{% ifequal page_number 1 %}Лучший сноубордический сайт {% else %}Лучшие сообщения, стр. {{ page_number }} - {% endifequal %}{{ block.super }}{% endblock %}
+{% block title %}{% if start %}Лучшие сообщения{% else %}Лучший сноубордический сайт{% endif %} {{ block.super }}{% endblock %}
 
 {% block page %}
     <div class="b-page-title"><h1>Самое <b>интересное</b></h1></div>

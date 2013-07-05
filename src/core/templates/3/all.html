@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load content %}
 
-{% block title %}{{ title }}{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}{{ title }} - {{ block.super }}{% endblock %}
 
 {% block rss_link %}
    <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/all" title="Glader.ru: свежие сообщения">

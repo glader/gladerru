@@ -19,10 +19,8 @@ USE_I18N = True
 SECRET_KEY = '12345'
 
 TEMPLATE_LOADERS = (
-    ('django.template.loaders.cached.Loader', (
         'django.template.loaders.filesystem.Loader',
         'django.template.loaders.app_directories.Loader',
-        )),
     )
 
 DEBUG = False
