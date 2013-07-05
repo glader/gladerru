@@ -104,7 +104,7 @@ def tag(request, name):
         'tag': tag,
         }
     if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].best)
+        context['start'] = timestamp(context['posts'][10].date_created)
         context['posts'] = context['posts'][:10]
     return context
 
