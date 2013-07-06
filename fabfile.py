@@ -74,6 +74,12 @@ def init():
             sudo('chmod 755 /etc/sv/gladerru/run')
             sudo('ln -s /etc/sv/gladerru /etc/service/gladerru')
 
+        if not exists('/etc/sv/gladerru_celery'):
+            sudo('mkdir -p /etc/sv/gladerru_celery/supervise')
+            sudo('touch /etc/sv/gladerru_celery/run')
+            sudo('chmod 755 /etc/sv/gladerru_celery/run')
+            sudo('ln -s /etc/sv/gladerru_celery /etc/service/gladerru_celery')
+
         if not exists('/etc/cron.d/gladerru'):
             sudo('touch /etc/cron.d/gladerru')
 
@@ -151,6 +157,7 @@ def nginx():
 def runit():
     with settings(user='root'):
         sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
+        sudo('cp %(directory)s/tools/runit/run_celery /etc/sv/gladerru_celery/run' % env)
 
 
 def cron():
