@@ -20,6 +20,12 @@ def log_task(func):
     return wrapper
 
 
+@task()
+@log_task
+def check_celery(*args):
+    log.info('Celery ok %r', args)
+
+
 def post_announce(post, announce_type, tag=None):
     params = {
         'user_url': post.author.get_absolute_url(),

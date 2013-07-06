@@ -29,7 +29,7 @@ from core.utils.common import process_template, send_html_mail
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
-from core.tasks import new_post_announces, best_post_announces
+from core.tasks import new_post_announces, best_post_announces, check_celery
 
 
 class JsonResponse(HttpResponse):
@@ -83,6 +83,7 @@ def index(request):
         context['start'] = timestamp(context['posts'][10].best)
         context['posts'] = context['posts'][:10]
 
+    check_celery.delay(start)
     return context
 
 
