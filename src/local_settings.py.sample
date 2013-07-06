@@ -36,12 +36,12 @@ YAFOTKI_STORAGE_OPTIONS = {
 }
 
 CELERY_MONGODB_BACKEND_SETTINGS = {
-    "host": "%(CELERY_HOST)",
-    "port": %(CELERY_PORT),
+    "host": "%(CELERY_HOST)s",
+    "port": %(CELERY_PORT)d,
     "database": "gladerru",
     "taskmeta_collection": "my_taskmeta_collection",
-    "user": "%(CELERY_USER)",
-    "password": "%(CELERY_PASSWORD)",
+    "user": "%(CELERY_USER)s",
+    "password": "%(CELERY_PASSWORD)s",
 }
 
-BROKER_URL = "%(CELERY_BROKER)"
+BROKER_URL = "%(CELERY_BROKER)s"
