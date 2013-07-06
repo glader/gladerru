@@ -10,7 +10,6 @@ MAILTO="glader.ru@gmail.com"
 30      4       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py recalc > /dev/null
 45      5       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py maintenance > /dev/null
 
-*/5     *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py process_queue
 */5     *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py publish_deferred
 10,40   *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py random_vote
 

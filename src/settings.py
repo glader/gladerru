@@ -81,6 +81,7 @@ INSTALLED_APPS = (
     'django_messages',
     'django_queue',
     'django_russian',
+    'djcelery',
 )
 
 # Absolute path to the directory that holds media.
@@ -127,6 +128,9 @@ CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для пра�
 ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 
 VK_API_ID = 2009513
+
+import djcelery
+djcelery.setup_loader()
 
 LOG_PATH = '/var/log/projects/gladerru'
 TIMELOG_LOG = os.path.join(LOG_PATH, 'time.log')
@@ -199,10 +203,10 @@ LOGGING = {
             'level': 'INFO',
             'propagate': True,
             },
-        'django.queue': {
+        'queue': {
             'handlers': ['queue'],
             'level': 'INFO',
-            'propagate': True,
+            'propagate': False,
             },
         'django': {
             'handlers': ['mail_admin', 'file'],

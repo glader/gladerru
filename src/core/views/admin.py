@@ -13,6 +13,7 @@ from django_queue.models import Queue
 from core.models import Movie, Man, Tag, Man2Movie, Post
 from core.views.common import render_to_response
 from core.utils.common import slug
+from core.tasks import new_teaser, new_fullmovie, new_tracklist
 
 
 def change_user(request):
@@ -74,7 +75,7 @@ def create_teaser_announce(request):
     post.best = post.date_created
     post.save()
 
-    Queue.add_task('new_teaser', {"movie_id": movie.id})
+    new_teaser.delay(movie.id)
 
     return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
 
@@ -95,7 +96,7 @@ def create_fullmovie_announce(request):
     post.best = post.date_created
     post.save()
 
-    Queue.add_task('new_fullmovie', {"movie_id": movie.id})
+    new_fullmovie.delay(movie.id)
 
     return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
 
@@ -116,7 +117,7 @@ def create_tracklist_announce(request):
     post.best = post.date_created
     post.save()
 
-    Queue.add_task('new_tracklist', {"movie_id": movie.id})
+    new_tracklist.delay(movie.id)
     return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
 
 

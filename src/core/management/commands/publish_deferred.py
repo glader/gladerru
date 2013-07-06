@@ -6,9 +6,9 @@ from django.core.management.base import NoArgsCommand
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from django_queue.models import Queue
-
 from core.models import Post, Photo
+from core.tasks import new_post_announces
+
 import logging
 
 AUTHORS = ['LAhmatyi', 'tinki', 'skyslayer', 'akafist', 'prophoter']
@@ -35,7 +35,7 @@ class Command(NoArgsCommand):
             item.status = 'pub'
             item.save()
 
-            Queue.add_task('new_post', {"post_id": item.id})
+            new_post_announces.delay(item.id)
 
             count += 1
 

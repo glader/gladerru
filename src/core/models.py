@@ -22,6 +22,7 @@ from yafotki.fields import YFField
 from core.utils.common import cached, slug
 from core.utils.log import get_logger
 from core.utils.thumbnails import make_thumbnail
+from core.tasks import tag_synonim
 
 
 class GenericManager(models.Manager):
@@ -102,7 +103,7 @@ class Tag(models.Model):
             self.size = len(self.posts.split(','))
 
         if self.new_synonim():
-            Queue.add_task('tag_synonim', {"tag_id": self.id})
+            tag_synonim.delay(self.id)
 
         super(Tag, self).save(*args, **kwargs)
 

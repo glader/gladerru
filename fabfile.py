@@ -207,3 +207,6 @@ def update_local_db():
     run("rm gladerru.sql")
     local("mysql -uroot %(DATABASE_DB)s < gladerru.sql" % globals())
     local("del gladerru.sql")
+
+def local_celery():
+    local('cd src && ..\\ENV\\scripts\\python manage.py celeryd --settings=settings')

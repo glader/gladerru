@@ -29,6 +29,7 @@ from core.utils.common import process_template, send_html_mail
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
+from core.tasks import new_post_announces, best_post_announces
 
 
 class JsonResponse(HttpResponse):
@@ -652,7 +653,7 @@ def edit_post(request, post_id):
                         p.tags.add(*form.cleaned_data['tags'])
 
                     if post.status == 'pub':
-                        Queue.add_task('new_post', {"post_id": post.id})
+                        new_post_announces.delay(post.id)
                     return HttpResponseRedirect(post.get_absolute_url())
 
                 elif request.POST['action'] == u'Удалить':
@@ -892,7 +893,8 @@ def add_vote(post, user, ip):
 
     if hasattr(post, 'best') and not post.best and post.rating >= settings.MAIN_PAGE_LEVEL:
         post.best = datetime.now()
-        Queue.add_task('best_post', {"post_id": post.id, "klass": post.__class__.__name__})
+        if isinstance(post, Post):
+            best_post_announces(post.id)
 
     post.save()
 
