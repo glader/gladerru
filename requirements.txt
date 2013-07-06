@@ -16,6 +16,7 @@ django-debug-toolbar
 celery
 django-celery
 django-kombu
+pymongo
 -e git+https://github.com/glader/easywebdav.git#egg=easywebdav
 -e git+https://github.com/Dimmma/sape.git#egg=sape
 -e git+https://github.com/garethr/django-timelog.git#egg=timelog
