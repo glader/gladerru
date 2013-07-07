@@ -70,6 +70,9 @@ def timestamp(dt):
 @time_slow
 @posts_feed(template="index.html")
 def index(request):
+    if request.GET.get('celery'):
+        check_celery.delay(request.GET.get('celery'))
+
     start = parse_timestamp(request.GET.get('start'))
     posts = Post.objects.filter(status='pub').order_by('-best')
     if start:
@@ -82,8 +85,6 @@ def index(request):
     if len(context['posts']) == 11:
         context['start'] = timestamp(context['posts'][10].best)
         context['posts'] = context['posts'][:10]
-
-    check_celery.delay(start)
     return context
 
 
