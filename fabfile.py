@@ -200,6 +200,7 @@ def restart():
     with settings(user=SSH_USER):
         run('sudo sv restart gladerru')
         run('chmod 777 /home/www/projects/gladerru/fcgi.sock')
+        run('sudo sv restart gladerru_celery')
 
 
 def local_env():
