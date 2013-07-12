@@ -35,12 +35,7 @@
 	</br>
 	Цифры: {{ domain_user.name }} присоединил{% ifequal domain_profile.gender "f" %}ась{% else %}{% ifequal domain_profile.gender "m" %}ся{% else %}ось{% endifequal %}{% endifequal %} к нам {{ domain_profile.date_created|human_date:"year" }}</br>
 	Последний визит {{ domain_profile.last_visit|human_date:"year"|default:"еще не случился" }} </br>
-	Написал{% ifequal domain_profile.gender "f" %}а{% else %}{% ifequal domain_profile.gender "m" %}{% else %}о{% endifequal %}{% endifequal %}:
-		{% if domain_profile.comment_count %}
-			<a href="{% url "user_staff" domain_user.username "comments" %}" style="color: #1c4d75">{{ domain_profile.comment_count }} {{ domain_profile.comment_count|human_number:"комментарий" }}</a>,
-		{% else %}
-			0 комментариев,
-		{% endif %}
+	Написал{% ifequal domain_profile.gender "f" %}а{% else %}{% ifequal domain_profile.gender "m" %}{% else %}о{% endifequal %}{% endifequal %}
 
 		{% if domain_profile.pub_post_count %}
 			 <a href="{% url "user_staff" domain_user.username "posts" %}" style="color: #1c4d75">{{ domain_profile.pub_post_count }} {{ domain_profile.pub_post_count|human_number:"пост" }}</a>,
