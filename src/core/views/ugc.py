@@ -186,7 +186,7 @@ def top_rating(request):
     items = Post.objects \
                 .filter(date_created__gte=date.today() - timedelta(days=30)) \
                 .order_by('-rating')[:10]
-    return {'items': items, 'title': u'Лучшие за месяц', 'menu_item': 'rating'}
+    return {'posts': items, 'title': u'Лучшие за месяц', 'menu_item': 'rating'}
 
 
 @time_slow
@@ -196,7 +196,7 @@ def top_discussed(request):
     items = Post.objects \
                 .filter(date_created__gte=date.today() - timedelta(days=30), comment_count__gt=0) \
                 .order_by('-comment_count')[:10]
-    return {'items': items, 'title': u'Самые обсуждаемые за месяц', 'menu_item': 'discussed'}
+    return {'posts': items, 'title': u'Самые обсуждаемые за месяц', 'menu_item': 'discussed'}
 
 
 @time_slow
