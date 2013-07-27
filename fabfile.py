@@ -115,6 +115,10 @@ def production(mode=""):
     restart()
 
 
+def update():
+    production(mode='no_dump')
+
+
 def upload():
     with settings(user=SSH_USER):
         local('git archive -o archive.tar.gz HEAD')
@@ -199,6 +203,7 @@ def update_sape():
 
 def collect_static():
     with settings(user=SSH_USER):
+        run('mkdir -p /home/www/projects/gladerru/static')
         manage_py('collectstatic -c --noinput')
 
 
