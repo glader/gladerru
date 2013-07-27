@@ -111,6 +111,7 @@ def production(mode=""):
         dump()
         migrate()
     update_sape()
+    collect_static()
     restart()
 
 
@@ -194,6 +195,11 @@ def migrate():
 def update_sape():
     with settings(user=SSH_USER):
         manage_py('fetch_sape')
+
+
+def collect_static():
+    with settings(user=SSH_USER):
+        manage_py('collectstatic -c --noinput')
 
 
 def restart():

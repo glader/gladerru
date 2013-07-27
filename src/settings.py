@@ -47,7 +47,6 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
-    'django.core.context_processors.media',
     'core.context.default',
     'django_messages.context_processors.inbox',
     'django.contrib.messages.context_processors.messages',
@@ -88,7 +87,9 @@ INSTALLED_APPS = (
 PROJECT_PATH = os.path.dirname(__file__)
 
 ALLOWED_HOSTS = ('glader.ru', 'glader_local.ru')
-STATIC_URL = '/media/'
+
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_PATH, '..', 'static')
 
 STATICFILES_DIRS = (
     os.path.join(PROJECT_PATH, "media"),
