@@ -210,7 +210,10 @@ def collect_static():
 def restart():
     with settings(user=SSH_USER):
         run('sudo sv restart gladerru')
+        time.sleep(1)
         run('chmod 777 /home/www/projects/gladerru/fcgi.sock')
+        run('ls -l /home/www/projects/gladerru/fcgi.sock')
+        
         run('sudo sv restart gladerru_celery')
 
 
