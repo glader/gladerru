@@ -13,7 +13,7 @@
     .b-pager .current
     {
         color: #fff;
-        
-        background: #ffcc43 url(/media/design/3/img/b-pager/bg.png) repeat-x;
+
+        background: #ffcc43 url(/static/design/3/img/b-pager/bg.png) repeat-x;
     }
 /* Пагинатор (end) */ /**/

@@ -11,7 +11,7 @@
     -webkit-border-radius: 6px 6px 0 0;
     -khtml-border-radius: 6px 6px 0 0;
     border-radius: 6px 6px 0 0;
-    background: #104d7a url(/media/design/3/img/b-menu/b-menu__level1.png) 100% 0 no-repeat;
+    background: #104d7a url(/static/design/3/img/b-menu/b-menu__level1.png) 100% 0 no-repeat;
 }
 
 .b-menu__level2
@@ -97,7 +97,7 @@
     -webkit-border-radius: 3px 3px 0 0;
     -khtml-border-radius: 3px 3px 0 0;
     border-radius: 3px 3px 0 0;
-    background: #febe29 url(/media/design/3/img/b-menu/b-menu__item_state_current.png) repeat-x;
+    background: #febe29 url(/static/design/3/img/b-menu/b-menu__item_state_current.png) repeat-x;
 }
 
 .b-menu__item_state_current a:link,

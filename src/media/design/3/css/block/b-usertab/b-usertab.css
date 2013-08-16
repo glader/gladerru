@@ -20,7 +20,7 @@
         width: 341px;
         height: 187px;
 
-        background: url(/media/design/3/img/usertab/bg.png) no-repeat;
+        background: url(/static/design/3/img/usertab/bg.png) no-repeat;
     }
 
     .b-usertab .bg_unreg
@@ -30,7 +30,7 @@
         width: 341px;
         height: 187px;
 
-        background: url(/media/design/3/img/usertab/bg_unreg.png) no-repeat;
+        background: url(/static/design/3/img/usertab/bg_unreg.png) no-repeat;
     }
 
     .b-usertab .userpic
@@ -47,7 +47,7 @@
     {
         position: absolute;
         top: 0;
-        left: 0;        
+        left: 0;
     }
 
     .b-usertab .username
@@ -64,11 +64,11 @@
     }
 
     .username a:link, .username a:hover,
-    .username a:active, .username a:visited   
+    .username a:active, .username a:visited
     {
         color: #febf2d;
     }
-    
+
     .b-usertab .logout
     {
         position: absolute;
@@ -90,7 +90,7 @@
     .b-usertab .zoom img
     {
         margin-right: 5px;
-        
+
         vertical-align: middle;
     }
 
@@ -101,7 +101,7 @@
         display: block;
 
         white-space: nowrap;
-        
+
         color: #7daacb;
     }
 
@@ -162,7 +162,7 @@
     {
         top: 89px;
     }
-    
+
     .b-usertab .text-not-reg,
     .b-usertab .text-login,
     .b-usertab .text-reg
@@ -172,7 +172,7 @@
 
         left: 97px;
         width: 200px;
-        
+
         text-align: center;
         color: #7daacb;
     }
@@ -191,7 +191,7 @@
     {
         top: 93px;
     }
-    
+
     .text-pm a:link, .text-pm a:visited,
     .text-post a:link, .text-post a:visited
     {
@@ -204,9 +204,9 @@
     }
 
     .text-login a:link, .text-login a:hover,
-    .text-login a:active, .text-login a:visited,   
+    .text-login a:active, .text-login a:visited,
     .text-reg a:link, .text-reg a:hover,
-    .text-regn a:active, .text-reg a:visited   
+    .text-regn a:active, .text-reg a:visited
     {
         color: white;
     }

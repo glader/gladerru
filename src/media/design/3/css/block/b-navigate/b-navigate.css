@@ -2,9 +2,9 @@
     .b-navigate
     {
         position: relative;
-        
+
         float: left;
-        
+
         margin: 40px 0 0 0;
     }
 
@@ -15,18 +15,18 @@
         overflow: hidden;
 
         padding: 6px 10px;
-        
+
         text-transform: uppercase;
 
         white-space: nowrap;
-        
+
         background: #0f4c79;
     }
 
     .b-navigate .navigate .current
     {
         padding: 0;
-        
+
         background: #febe29;
     }
 
@@ -34,14 +34,14 @@
     {
         display: block;
 
-        background: url(/media/design/3/img/navigate/current_left.png) 0 0 no-repeat;
+        background: url(/static/design/3/img/navigate/current_left.png) 0 0 no-repeat;
     }
 
     .b-navigate .navigate .current i i
     {
         padding: 6px 20px;
 
-        background: url(/media/design/3/img/navigate/current_right.png) 100% 0 no-repeat;
+        background: url(/static/design/3/img/navigate/current_right.png) 100% 0 no-repeat;
     }
 
     .b-navigate .navigate a:link,
@@ -57,11 +57,11 @@
     .b-navigate .description
     {
         font-size: 80%;
-        
+
         padding: 5px 10px;
 
         color: #0f4c79;
-        
+
         background: #febe29;
     }
 
@@ -75,13 +75,13 @@
         position: absolute;
         top: 0;
         right: 0;
-        
+
         display: block;
         width: 109px;
         height: 28px;
         margin-right: -109px;
 
-        background: url(/media/design/3/img/navigate/dec1.png) 0 0 no-repeat;
+        background: url(/static/design/3/img/navigate/dec1.png) 0 0 no-repeat;
     }
 
     .b-navigate .navigate .dec2
@@ -95,7 +95,7 @@
         height: 25px;
         margin: -25px 0 0 0;
 
-        background: url(/media/design/3/img/navigate/dec3.gif) 0 0 no-repeat;
+        background: url(/static/design/3/img/navigate/dec3.gif) 0 0 no-repeat;
     }
 
     .b-navigate .dec2
@@ -108,7 +108,7 @@
         width: 30px;
         height: 33px;
         margin: 0 -16px -15px 0;
-        
-        background: url(/media/design/3/img/navigate/dec2.gif) 0 0 no-repeat;
+
+        background: url(/static/design/3/img/navigate/dec2.gif) 0 0 no-repeat;
     }
 /* Навигация (end) */ /**/

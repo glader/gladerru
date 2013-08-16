@@ -1,7 +1,7 @@
 .b-tag
 {
     padding-left: 17px;
-    background: url(/media/design/3/img/b-post/tags.png) no-repeat;  
+    background: url(/static/design/3/img/b-post/tags.png) no-repeat;
 }
 
 .b-tag, .b-tag li

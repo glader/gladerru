@@ -23,7 +23,7 @@
     .b-auth-form .item input
     {
         font-size: 140%;
-        
+
         box-sizing: border-box;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
@@ -42,7 +42,7 @@
     .b-auth-form .l50 .col
     {
         width: 50%;
-        
+
         vertical-align: middle;
     }
 
@@ -52,7 +52,7 @@
 
         width: 20px;
     }
-    
+
     .b-auth-form .submit
     {
     	margin: 1em 0 0;
@@ -68,7 +68,7 @@
 	{
 		width: 40%;
 	}
-	
+
     .b-auth-form .control .reg
     {
         width: 60%;
@@ -79,121 +79,121 @@
     {
         text-decoration: none;
     }
-    
+
 	.b-auth-form .control .control-g i
 	{
 		display: block;
-		
+
 		width: 10px;
 	}
-	
+
 	.b-auth-form .auth-i,
 	.b-auth-form .reg-i
 	{
 		position: relative;
-		
+
 		color: #fff;
-		
+
 		text-decoration: none;
 	}
-    
+
     .b-auth-form .auth-i
     {
     	display: block;
-    	
+
     	padding: 7px 10px;
-    	
+
     	text-align: center;
-    	
-    	background: #8ed56d url(/media/design/3/img/b-auth-form/auth-bg.png) 0 0 repeat-x;
+
+    	background: #8ed56d url(/static/design/3/img/b-auth-form/auth-bg.png) 0 0 repeat-x;
     }
-    
+
     .b-auth-form .reg-i
     {
     	display: block;
-    	
+
     	padding: 7px 0;
-    	
+
     	text-align: center;
-    	
-    	background: #4ec2ec url(/media/design/3/img/b-auth-form/reg-bg.png) 0 0 repeat-x;
+
+    	background: #4ec2ec url(/static/design/3/img/b-auth-form/reg-bg.png) 0 0 repeat-x;
     }
-    
+
     .b-auth-form .control .arrow
     {
     	position: absolute;
     	overflow: hidden;
-    	
+
     	display: block;
-    	
+
     	width: 11px;
     	height: 11px;
     }
-    
+
     .b-auth-form .control .arrow i
     {
     	position: absolute;
-    	
+
     	display: block;
-    	
+
     	width: 11px;
     	height: 44px;
-    	
-      	background: url(/media/design/3/img/b-auth-form/arrow.png) no-repeat;
+
+      	background: url(/static/design/3/img/b-auth-form/arrow.png) no-repeat;
     }
-    
+
     .b-auth-form_auth .auth-i .arrow
     {
     	left: 50%;
     	bottom: 0px;
-    	
+
     	margin: 0 0 -11px -6px;
     }
-    
+
     .b-auth-form_auth .auth-i .arrow i
     {
     	top: -11px;
     }
-    
+
     .b-auth-form_auth .reg-i .arrow
     {
     	right: 0;
     	top: 50%;
-    	
+
     	margin: -6px -11px 0 0;
     }
-    
+
     .b-auth-form_auth .reg-i .arrow i
     {
     	top: -22px;
     }
-    
+
     .b-auth-form_reg .reg-i .arrow
     {
     	left: 50%;
     	bottom: 0px;
-    	
+
     	margin: 0 0 -11px -6px;
     }
-    
+
     .b-auth-form_reg .reg-i .arrow i
     {
     	top: -33px;
     }
-    
+
     .b-auth-form_reg .auth-i .arrow
     {
     	left: 0;
     	top: 50%;
-    	
+
     	margin: -6px 0 0 -11px;
     }
-    
+
     .b-auth-form_reg .auth-i .arrow i
     {
     	top: 0;
     }
-    
+
     .b-auth-form .lost
     {
     	padding-top: 20px;

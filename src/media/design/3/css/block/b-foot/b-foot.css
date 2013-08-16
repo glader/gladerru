@@ -4,8 +4,8 @@
         font-size: 80%;
 
         padding: 8px 10px;
-        
-        background: #0f4c79 url(/media/design/3/img/b-foot/bg.png) 100% 0 no-repeat;
+
+        background: #0f4c79 url(/static/design/3/img/b-foot/bg.png) 100% 0 no-repeat;
 
         color: #fff;
     }
@@ -23,11 +23,11 @@
     {
         color: #fff;
     }
-    
+
     .b-copyright
     {
         font-size: 80%;
-        
+
         margin-left: 10px;
     }
 /* Footer (end) */ /**/
