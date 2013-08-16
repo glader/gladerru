@@ -1,7 +1,6 @@
 User-agent: Yandex
 Disallow: /search
 Disallow: /auth
-Disallow: /top
 Disallow: /feeds/posts
 Disallow: /wp
 Disallow: /best
@@ -16,7 +15,6 @@ Host: glader.ru
 User-agent: *
 Disallow: /search
 Disallow: /auth
-Disallow: /top
 Disallow: /feeds/posts
 Disallow: /wp
 Disallow: /best
