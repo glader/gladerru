@@ -32,8 +32,8 @@ def sanitizeHTML(value, mode='none'):
     for tag in soup.recursiveChildGenerator():
         if isinstance(tag, element.Tag):
             if tag.name in valid_tags:
-                tag.attrs = [(attr, val) for attr, val in tag.attrs
-                             if attr in valid_attrs]
+                tag.attrs = dict((attr, val) for attr, val in tag.attrs.items()
+                             if attr in valid_attrs)
             else:
                 tag.hidden = True
 

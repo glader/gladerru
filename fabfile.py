@@ -213,7 +213,7 @@ def restart():
         time.sleep(1)
         run('chmod 777 /home/www/projects/gladerru/fcgi.sock')
         run('ls -l /home/www/projects/gladerru/fcgi.sock')
-        
+
         run('sudo sv restart gladerru_celery')
 
 
@@ -232,3 +232,6 @@ def update_local_db():
 
 def local_celery():
     local('cd src && ..\\ENV\\scripts\\python manage.py celeryd --settings=settings')
+
+def local_static():
+    local('cd src && ..\\ENV\\scripts\\python manage.py collectstatic -c --noinput')
