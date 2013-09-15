@@ -8,8 +8,6 @@ from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db import connection
 
-from django_queue.models import Queue
-
 from core.models import Movie, Man, Tag, Man2Movie, Post
 from core.views.common import render_to_response
 from core.utils.common import slug

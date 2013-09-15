@@ -16,8 +16,6 @@ from django.shortcuts import get_object_or_404
 from django.template import Context, loader
 from django.utils import simplejson
 
-from django_queue.models import Queue
-
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
     PhotoForm, PostCommentForm, PostVoteForm, CommentVoteForm, CommentForm, sanitizeHTML
 from core.models import Post, Friend, UserNews, ItemVote, Movie, Photo, Comment, Profile, Tag, News, \
@@ -1004,7 +1002,6 @@ def add_friend(request):
         return JsonErrorResponse(u"Вы уже дружите с этим пользователем")
 
     Friend.objects.create(user_a=user, user_b=new_friend)
-    Queue.add_task('new_friend', {"user": user.id, "new_friend": new_friend.id})
     return JsonResponse({'success': True})
 
 

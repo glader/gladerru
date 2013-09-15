@@ -78,7 +78,6 @@ INSTALLED_APPS = (
     'sape',
     'south',
     'django_messages',
-    'django_queue',
     'django_russian',
     'djcelery',
 )

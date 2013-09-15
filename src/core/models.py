@@ -13,7 +13,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.template import Context, loader
-from django_queue.models import Queue
 from django.core.cache import cache
 from django.core.mail import send_mail
 

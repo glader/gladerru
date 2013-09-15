@@ -21,5 +21,3 @@ MAILTO="glader.ru@gmail.com"
 15      *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py fetch_sape
 0       5,17    *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py check_sape_errors
 
-0       10       *       *       *      www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py process_queue
-
