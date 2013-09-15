@@ -93,7 +93,7 @@ def init_mysql():
         run('apt-get upgrade -y')
         run('apt-get install -y fail2ban mc')
         run('DEBIAN_FRONTEND=noninteractive apt-get -q -y install mysql-server')
-        run('mysqladmin -u root password mysecretpasswordgoeshere')
+        run('mysqladmin -u root password mysecretpasswordgoeshere111')
 
         sed('/etc/mysql/my.cnf', 'bind-address.+$', 'bind-address = ::')
         run('/etc/init.d/mysql restart')
