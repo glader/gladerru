@@ -152,7 +152,7 @@ def studio(request, studio_name):
 
 @time_slow
 def movies(request):
-    context = {'page': request.GET.get('page', "2012")}
+    context = {'page': request.GET.get('page', "2013")}
     year = context['page']
 
     movies = Movie.objects.all().order_by('-rating', 'title')
