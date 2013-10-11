@@ -28,7 +28,7 @@ def sanitizeHTML(value, mode='none'):
     # параметры видеороликов
     valid_attrs += 'width height classid codebase id name value flashvars allowfullscreen allowscriptaccess quality src type bgcolor base seamlesstabbing swLiveConnect pluginspage data frameborder'.split()
 
-    soup = BeautifulSoup(value)
+    soup = BeautifulSoup(value.encode('utf8'), from_encoding='utf8')
     for tag in soup.recursiveChildGenerator():
         if isinstance(tag, element.Tag):
             if tag.name in valid_tags:
