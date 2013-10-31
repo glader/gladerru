@@ -17,7 +17,7 @@ def get_thumbnail_path(image_url):
 
 
 def get_thumbnail_url(image_url):
-    return settings.THUMBNAIL_URL + get_thumbnail_path(image_url)
+    return settings.STATIC_URL + settings.THUMBNAIL_URL + get_thumbnail_path(image_url)
 
 
 def make_thumbnail(image_url, force=False):

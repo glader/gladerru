@@ -24,7 +24,7 @@
 {% block content %}
 	<div class="b-movie">
 		{% if movie.cover %}
-			<a href="{{ movie.cover.src }}" class="float_right"><img src="{% static "{{ movie.cover.src|thumbnail }}" %}" alt="{{ movie.title }} - обложка" border="0"></a>
+			<a href="{{ movie.cover.src }}" class="float_right"><img src="{{ movie.cover.src|thumbnail }}" alt="{{ movie.title }} - обложка" border="0"></a>
 		{% endif %}
 
 	    <table class="b-movie_info"><tbody>
