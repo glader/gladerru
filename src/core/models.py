@@ -874,7 +874,7 @@ class Movie(models.Model, VoteMixin, UIDMixin):
     objects = GenericManager(hidden=False)
 
     def get_absolute_url(self):
-        return reverse('movie', args=[self.slug])
+        return reverse('movie', kwargs={'year': self.year or '-', 'name': self.slug})
 
     def __unicode__(self):
         return self.title

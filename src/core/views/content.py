@@ -155,7 +155,7 @@ def studio(request, studio_name):
 
 @time_slow
 def movies(request):
-    context = {'page': request.GET.get('page', "2013")}
+    context = {'page': "2013"}
     year = context['page']
 
     movies = Movie.objects.all().order_by('-rating', 'title')
@@ -169,8 +169,23 @@ def movies(request):
 
 
 @time_slow
-def movie(request, movie_name):
-    movie = get_object_or_404(Movie, slug=movie_name)
+def movies_by_year(request, year):
+    context = {'page': year}
+    year = context['page']
+
+    movies = Movie.objects.all().order_by('-rating', 'title')
+    if year.isdigit():
+        movies = movies.filter(year=year)
+
+    if not len(movies):
+        movies = Movie.objects.all().order_by('-rating', 'title')
+
+    return render_to_response(request, 'movies.html', {'movies': movies, 'year': year})
+
+
+@time_slow
+def movie(request, year, name):
+    movie = get_object_or_404(Movie, slug=name)
     songs = Song.objects.filter(movie=movie)
     return render_to_response(request, 'movie.html', {'movie': movie, 'songs': songs, 'item': movie, 'page_identifier': 'movie_%s' % movie.id})
 

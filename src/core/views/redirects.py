@@ -7,7 +7,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-from core.models import Post, Photo, Tag
+from core.models import Post, Photo, Tag, Movie
 
 ###############################################################################
 # Редиректы для старых урлов
@@ -53,3 +53,7 @@ def old_post_category(request, category_name):
 def old_blog_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return HttpResponsePermanentRedirect(post.get_absolute_url())
+
+def old_movie(request, movie_name):
+    movie = get_object_or_404(Movie, slug=movie_name)
+    return HttpResponsePermanentRedirect(movie.get_absolute_url())

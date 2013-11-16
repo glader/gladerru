@@ -2,16 +2,15 @@
 <div class="b-menu">
         <div class="b-menu__level1">
             <div class="b-menu__item {% ifequal level1 'posts' %}b-menu__item_state_current{% endifequal %}"><a href="/" title="Посты наших райдеров"><span class="b-menu__item__fade">посты</span><span>посты</span></a></div>
-            <div class="b-menu__item {% ifequal level1 'users' %}b-menu__item_state_current{% endifequal %}"><a href="/rating/users/best" title="Наши люди"><span class="b-menu__item__fade">наши люди</span><span>наши люди</span></a></div>
-            <div class="b-menu__item {% ifequal level1 'articles' %}b-menu__item_state_current{% endifequal %}"><a href="/skills" title="Информационный бункер"><span class="b-menu__item__fade">статьи</span><span>статьи</span></a></div>
-            <div class="b-menu__item {% ifequal level1 'movies' %}b-menu__item_state_current{% endifequal %}"><a href="/movies" title="Фильмы, тизеры, саундтреки"><span class="b-menu__item__fade">фильмы</span><span>фильмы</span></a></div>
-            <div class="b-menu__item {% ifequal level1 'mountains' %}b-menu__item_state_current{% endifequal %}"><a href="/mountains" title="Горки, места, отзывы"><span class="b-menu__item__fade">места катания</span><span>места катания</span></a></div>
+            <div class="b-menu__item {% ifequal level1 'articles' %}b-menu__item_state_current{% endifequal %}"><a href="/skills/" title="Информационный бункер"><span class="b-menu__item__fade">статьи</span><span>статьи</span></a></div>
+            <div class="b-menu__item {% ifequal level1 'movies' %}b-menu__item_state_current{% endifequal %}"><a href="/movies/2013/" title="Фильмы, тизеры, саундтреки"><span class="b-menu__item__fade">фильмы</span><span>фильмы</span></a></div>
+            <div class="b-menu__item {% ifequal level1 'mountains' %}b-menu__item_state_current{% endifequal %}"><a href="/mountains/" title="Горки, места, отзывы"><span class="b-menu__item__fade">места катания</span><span>места катания</span></a></div>
 {#            <div class="b-menu__item {% ifequal level1 'equipment' %}b-menu__item_state_current{% endifequal %}"><a href="/equipment"><span class="b-menu__item__fade">снаряга</span><span>снаряга</span></a></div> #}
             <div class="b-menu__item {% ifequal level1 'reference' %}b-menu__item_state_current{% endifequal %}"><a href="/rubric/snowboard" title="Справочник"><span class="b-menu__item__fade">справочник</span><span>справочник</span></a></div>
-            
+
             {% ifequal level1 'profile' %}
 	            | <div class="b-menu__item {% ifequal level1 'profile' %}b-menu__item_state_current{% endifequal %}"><a href="/my" title="Профиль"><span class="b-menu__item__fade">профиль</span><span>профиль</span></a></div>
-			{% endifequal %}            
+			{% endifequal %}
         </div>
 
         <div class="b-menu__level2">

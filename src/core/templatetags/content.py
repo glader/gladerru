@@ -151,10 +151,6 @@ def top_menu(level2='best', level1=None):
                         ['rating', '/top/best', u'рейтинг', u'Самые лучшие за месяц'],
                         ['discussed', '/top/comments', u'обсуждаемые', u'Самые обсуждаемые за месяц'],
                         ],
-                'users': [
-                        ['users_best', '/rating/users/best', u'лучшие', u'доска почета'],
-                        ['users_new', '/rating/users/new', u'новые', u'youngblood'],
-                        ],
                 'articles': [
                         ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
                         ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],
@@ -164,13 +160,13 @@ def top_menu(level2='best', level1=None):
                         ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
                         ],
                 'movies': [
-                        ['2013', '/movies?page=2013', u'2013', u'Фильмы 2013 года'],
-                        ['2012', '/movies?page=2012', u'2012', u'Фильмы 2012 года'],
-                        ['2011', '/movies?page=2011', u'2011', u'Фильмы 2011 года'],
-                        ['all', '/movies?page=all', u'все', u'Все фильмы'],
-                        ['teasers', '/movies/teasers', u'тизеры', u'Тизеры к фильмам'],
-                        ['soundtracks', '/movies/soundtracks', u'саундтреки', u'Музыкальные треки к фильмам'],
-                        ['studies', '/studies', u'студии', u'Авторы фильмов'],
+                        ['2013', '/movies/2013/', u'2013', u'Фильмы 2013 года'],
+                        ['2012', '/movies/2012/', u'2012', u'Фильмы 2012 года'],
+                        ['2011', '/movies/2011/', u'2011', u'Фильмы 2011 года'],
+                        ['all', '/movies/all/', u'все', u'Все фильмы'],
+                        ['teasers', '/movies/teasers/', u'тизеры', u'Тизеры к фильмам'],
+                        ['soundtracks', '/movies/soundtracks/', u'саундтреки', u'Музыкальные треки к фильмам'],
+                        ['studies', '/studies/', u'студии', u'Авторы фильмов'],
                         ],
                 'mountains': [
                         ['map', '/mountains', u'карта', u'Горки: информация, фотографии, цены, отзывы.'],

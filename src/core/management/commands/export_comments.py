@@ -15,7 +15,7 @@ class Command(NoArgsCommand):
 >
   <channel>"""
 
-        comments = list(Comment.objects.filter(hidden=False))
+        comments = Comment.all.all()
 
         for comment in comments:
             item = comment.item
