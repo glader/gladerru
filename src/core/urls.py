@@ -87,6 +87,7 @@ urlpatterns = patterns('',
     url(r'^crossdomain.xml$', crossdomain, name='crossdomain'),
     url(r'^ajax/tags_suggest', tags_suggest),
     url(r'^ajax/picturebox', picturebox),
+    url(r'^ajax/upload_photo$', 'core.views.admin.upload_photos', name='upload_photos'),
 
     #Feeds
     (r'^feeds/best$', BestPosts()),

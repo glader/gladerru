@@ -5,6 +5,7 @@ import uuid
 from utils.ID3 import *
 import random
 from StringIO import StringIO
+from datetime import datetime
 
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -1119,6 +1120,53 @@ class Redirect(models.Model):
     class Meta:
         verbose_name = u"Редирект"
         verbose_name_plural = u"Редиректы"
+
+
+class NewsCategory(models.Model):
+    u"""Категории новостей"""
+    title = models.CharField(verbose_name=u"Название", max_length=255)
+    slug = models.SlugField(verbose_name=u"Урл", max_length=255)
+    order = models.PositiveIntegerField(verbose_name=u"Порядок", default=100)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = u"Категория новостей"
+        verbose_name_plural = u"Категории новостей"
+
+
+class News(models.Model):
+    u"""Новости"""
+    category = models.ForeignKey(NewsCategory, verbose_name=u"Категория")
+    title = models.CharField(verbose_name=u"Название", max_length=255)
+    slug = models.SlugField(verbose_name=u"Урл", max_length=255)
+    dt_created = models.DateTimeField(verbose_name=u"Дата-время добавления", null=True, blank=True, default=None)
+    abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
+    content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
+
+    def save(self, *args, **kwargs):
+        if not self.dt_created:
+            self.dt_created = datetime.now()
+
+        super(News, self).save(*args, **kwargs)
+
+        send_mail(
+            u"Glader.ru: новость",
+            str(self.pk),
+            None,
+            ['glader.ru@gmail.com']
+        )
+
+
+    class Meta:
+        verbose_name = u"Новость"
+        verbose_name_plural = u"Новости"
+
+
+class Image(models.Model):
+    u"""Картинки"""
+    upload = YFField(upload_to="gladerru")
 
 
 User.name = property(lambda u: u.first_name or u.username)

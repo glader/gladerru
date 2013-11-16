@@ -209,3 +209,18 @@ class MessageAdmin(admin.ModelAdmin):
     raw_id_fields = ('sender', 'recipient', 'parent_msg')
 
 admin.site.register(Message, MessageAdmin)
+
+
+class NewsCategoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'order')
+    prepopulated_fields = {"slug": ("title",)}
+    ordering = ('order',)
+
+class NewsAdmin(admin.ModelAdmin):
+    list_display = ('title', 'slug', 'category', 'dt_created')
+    list_filter = ('category',)
+    prepopulated_fields = {"slug": ("title",)}
+    ordering = ('-dt_created',)
+
+admin.site.register(NewsCategory, NewsCategoryAdmin)
+admin.site.register(News, NewsAdmin)

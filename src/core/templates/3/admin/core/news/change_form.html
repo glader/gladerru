@@ -1,0 +1,22 @@
+{% extends "admin/change_form.html" %}
+{% load staticfiles %}
+
+{% block extrahead %}
+    {% url 'admin:jsi18n' as jsi18nurl %}
+    <script src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+    {{ media }}
+
+    <script>
+        window.$ = window.jQuery = django.jQuery;
+    </script>
+    <script src="{% static "redactor/redactor.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "redactor/css/redactor.css" %}" />
+    <script>
+        $(document).ready(
+                function()
+                {
+                    $('textarea').redactor({ imageUpload: '{% url "upload_photos" %}', focus: false });
+                }
+        );
+    </script>
+{% endblock %}

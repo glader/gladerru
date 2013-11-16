@@ -1,16 +1,20 @@
 # -*- coding: utf-8 -*-
 import re
 from datetime import date, datetime, timedelta
+from simplejson import dumps
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db import connection
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 from core.models import Movie, Man, Tag, Man2Movie, Post
 from core.views.common import render_to_response
 from core.utils.common import slug
+from core.models import Image
 
 
 def change_user(request):
@@ -308,3 +312,13 @@ def timing_report(request):
     measures.sort(key=lambda r: r['average'], reverse=True)
 
     return render_to_response(request, 'admin/timing_report.html', {'links': measures[: 60]})
+
+
+@csrf_exempt
+@require_POST
+def upload_photos(request):
+    images = []
+    for f in request.FILES.getlist("file"):
+        obj = Image.objects.create(upload=f)
+        images.append({"filelink": obj.upload.src()})
+    return HttpResponse(dumps(images[0]), mimetype="application/json")
