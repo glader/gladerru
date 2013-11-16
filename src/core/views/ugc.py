@@ -487,7 +487,8 @@ def user_post(request, user, post_id):
                'profile': profile,
                'post': post,
                'can_edit': post.can_edit(request.user),
-               'avatar': Avatar.get([user], 32)[user.id]
+               'avatar': Avatar.get([user], 32)[user.id],
+               'page_identifier': 'post_%s' % post.id,
                }
 
     return render_to_response(request, 'post.html', context)
@@ -517,7 +518,8 @@ def user_photo(request, user, pic_id):
                                                       'next_photo': next_photo,
                                                       'prev_photo': prev_photo,
                                                       'can_edit': photo.can_edit(request.user),
-                                                      'user': user})
+                                                      'user': user,
+                                                      'page_identifier': 'photo_%s' % photo.id})
 
 
 @auth_only

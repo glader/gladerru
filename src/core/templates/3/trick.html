@@ -12,6 +12,5 @@
 
     {{ item.content|safe }}
 
-    {% comments item request %}
-
+    {% include "blocks/disqus_comments.html" %}
 {% endblock %}

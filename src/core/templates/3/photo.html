@@ -61,6 +61,5 @@ function wshow(url) {
 
     {% post_panel photo user %}
 
-    {% comments photo request %}
-
+    {% include "blocks/disqus_comments.html" %}
 {% endblock %}

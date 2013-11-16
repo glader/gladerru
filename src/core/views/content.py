@@ -34,7 +34,10 @@ def article(request, item_name):
 
     article = get_object_or_404(Post, name=item_name)
 
-    context = {'article': article}
+    context = {
+        'article': article,
+        'page_identifier': 'post_%s' % article.id,
+    }
     context.update(get_article_content(request, article))
     return render_to_response(request, 'article.html', context)
 
@@ -94,7 +97,7 @@ def mountains(request):
 @time_slow
 def mountain(request, name):
     mountain = get_object_or_404(Mountain, name=name)
-    return render_to_response(request, 'mountain.html', {'mountain': mountain})
+    return render_to_response(request, 'mountain.html', {'mountain': mountain, 'page_identifier': 'mountain_%s' % mountain.id})
 
 
 def region(request, region_id):
@@ -136,7 +139,7 @@ def tricks(request):
 
 def trick(request, name):
     item = get_object_or_404(Word, slug=name)
-    return render_to_response(request, 'trick.html', {'item': item})
+    return render_to_response(request, 'trick.html', {'item': item, 'page_identifier': 'word_%s' % item.id})
 
 
 def studies(request):
@@ -169,7 +172,7 @@ def movies(request):
 def movie(request, movie_name):
     movie = get_object_or_404(Movie, slug=movie_name)
     songs = Song.objects.filter(movie=movie)
-    return render_to_response(request, 'movie.html', {'movie': movie, 'songs': songs, 'item': movie})
+    return render_to_response(request, 'movie.html', {'movie': movie, 'songs': songs, 'item': movie, 'page_identifier': 'movie_%s' % movie.id})
 
 
 def teasers(request):
