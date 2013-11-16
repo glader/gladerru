@@ -11,9 +11,6 @@ MAILTO="glader.ru@gmail.com"
 45      5       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py maintenance > /dev/null
 
 */5     *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py publish_deferred
-10,40   *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py random_vote
-
-#0       0       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py analyze_timelog --noreverse
 
 # Sape links
 15      *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py fetch_sape
