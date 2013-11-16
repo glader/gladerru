@@ -3,9 +3,6 @@ from django.contrib import admin
 from models import *
 from django.contrib.auth.models import User, Group, Permission
 from django_messages.models import Message
-from forms import ModelForm
-from django.forms.util import ValidationError, ErrorList
-from django.forms import model_to_dict, BaseModelForm
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -30,10 +27,6 @@ class FriendAdmin(admin.ModelAdmin):
 class NewsAdmin(admin.ModelAdmin):
     ordering = ('-date_created',)
     list_display = ('type', 'date_created')
-
-
-class UserNewsAdmin(admin.ModelAdmin):
-    raw_id_fields = ('user', 'news')
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -157,8 +150,6 @@ class PictureBoxAdmin(admin.ModelAdmin):
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Avatar, AvatarAdmin)
 admin.site.register(Friend, FriendAdmin)
-admin.site.register(News, NewsAdmin)
-admin.site.register(UserNews, UserNewsAdmin)
 admin.site.register(Song, SongAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)

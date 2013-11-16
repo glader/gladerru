@@ -10,9 +10,6 @@ class Command(NoArgsCommand):
         cursor = connection.cursor()
         two_weeks = (datetime.now() - timedelta(14)).date().strftime("%Y-%m-%d")
 
-        cursor.execute("DELETE FROM core_news WHERE date_created <='%s'" % two_weeks)
-        cursor.execute("DELETE un FROM core_usernews un LEFT JOIN core_news n ON un.news_id=n.id WHERE n.id IS NULL")
-
         cursor.execute("DELETE FROM django_session WHERE expire_date <='%s'" % two_weeks)
 
         cursor.execute("SHOW TABLES")

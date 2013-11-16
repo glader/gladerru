@@ -354,65 +354,6 @@ class Friend(models.Model):
         unique_together = (("user_a", "user_b"),)
 
 
-class News(models.Model):
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
-    TYPE_CHOICES = (
-        ('new_post', u'Ваш друг добавил пост'),
-        ('new_friend', u'Ваш друг добавил друга'),
-        ('new_comment', u'Ваш друг добавил комментарий'),
-        ('new_trip', u'Друг добавил новую поездку'),
-        ('good_post', u'Новый пост на главной'),
-        ('tagged_post', u'Новый пост в теге'),
-        ('new_movie', u'Описание нового фильма'),
-        ('new_teaser', u'Выложен новый тизер'),
-        ('new_tracklist', u'Выложен треклист фильма'),
-        ('new_fullmovie', u'Выложен полноформатный фильм'),
-    )
-    type = models.CharField(choices=TYPE_CHOICES, default='', max_length=20, verbose_name=u"Тип")
-    content = models.TextField(verbose_name=u"Содержание")
-
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    item = generic.GenericForeignKey()
-
-    messages = {'new_post': u'<a href="http://glader.ru%(user_url)s">%(username)s</a> написал новый пост: <a href="http://glader.ru%(post_url)s">%(post_title)s</a>',
-                'tagged_post': u'В теге <a href="http://glader.ru%(tag_url)s">%(tag_title)s</a> появился новый пост: <a href="http://glader.ru%(post_url)s">%(post_title)s</a>',
-                'good_post': u'Новый пост в лучших: <a href="http://glader.ru%(post_url)s">%(post_title)s</a>',
-                'new_friend': u'<a href="http://glader.ru%(user_url)s">%(username)s</a> добавил в друзья <a href="http://glader.ru%(friend_url)s">%(friend_title)s</a>',
-                'new_teaser': u'Выложен тизер фильма <a href="http://glader.ru%(movie_url)s">%(movie_title)s</a>',
-                'new_fullmovie': u'Выложено полноформатное видео <a href="http://glader.ru%(movie_url)s">%(movie_title)s</a>',
-                'new_tracklist': u'Выложен саундтрек к фильму <a href="http://glader.ru%(movie_url)s">%(movie_title)s</a>',
-                }
-
-    def __unicode__(self):
-        return u"%s - %s" % (self.type, self.content)
-
-    class Meta:
-        verbose_name = u"Новость"
-        verbose_name_plural = u"Новости"
-
-
-class UserNews(models.Model):
-    u""" Новости юзеров """
-    user = models.ForeignKey(User, verbose_name=u"Юзер")
-    news = models.ForeignKey(News, verbose_name=u"Новость", null=True, default=None)
-
-    def __unicode__(self):
-        return u"%s - %s" % (self.user.username, self.news)
-
-    class Meta:
-        verbose_name = u"Новость"
-        verbose_name_plural = u"Новости"
-
-    def save(self, *args, **kwargs):
-        if not self.pk:
-            profile = self.user.get_profile()
-            profile.unread_news_count += 1
-            profile.save()
-
-        return super(UserNews, self).save(*args, **kwargs)
-
-
 class ItemVote(models.Model):
     user = models.ForeignKey(User, verbose_name=u"Пользователь")
     vote = models.IntegerField(verbose_name=u"Оценка")

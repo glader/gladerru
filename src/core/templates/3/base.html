@@ -84,13 +84,12 @@
                         <span class="logout"><a href="{% url "logout" %}"><img src="{% static "design/3/img/usertab/logout.gif" %}" alt="Выход" /></a></span>
 
                         <span class="text {% if messages_inbox_count %}text_active {% endif %} num-pm"><img src="{% static "design/3/img/usertab/pm.gif" %}" alt="" />&times;&nbsp;{{ messages_inbox_count }}</span>
-                        <span class="text {% if profile.unread_news_count %}text_active {% endif %}num-post"><img src="{% static "design/3/img/usertab/post.gif" %}" alt="" />=&nbsp;{{ profile.unread_news_count|default:"0" }}</span>
-                        <span class="text {% if profile.unread_comment_count %}text_active {% endif %}num-comment"><img src="{% static "design/3/img/usertab/comment.gif" %}" alt="" />=&nbsp;{{ profile.unread_comment_count|default:"0" }}</span>
+                        <span class="text num-post"><img src="{% static "design/3/img/usertab/post.gif" %}" alt="" />=&nbsp;0</span>
+                        <span class="text num-comment"><img src="{% static "design/3/img/usertab/comment.gif" %}" alt="" />=&nbsp;0</span>
 
                         <span class="text {% if messages_inbox_count %}text_active {% endif %} text-pm"><a href="{% url "messages_inbox" %}" title="входящие">личных сообщений</a></span>
-                        <span class="text {% if profile.unread_news_count %}text_active {% endif %}text-post"><a href="{% url "news" %}">{{ profile.unread_news_count|human_number:"новый" }} {{ profile.unread_news_count|human_number:"анонс" }}</a></span>
-                        <span class="text {% if profile.unread_comment_count %}text_active {% endif %}text-comment">{% if profile.unread_comment_count %}<a href="{% url "commented" %}">{{ profile.unread_comment_count|human_number:"новый" }} {{ profile.unread_comment_count|human_number:"комментарий" }}</a>
-                                                    {% else %}новых комментариев{% endif %}</span>
+                        <span class="text text-post">новых анонсов</a></span>
+                        <span class="text text-comment">новых комментариев</span>
 
                         <span class="zoom"><img src="{% static "design/3/img/usertab/zoom.gif" %}" alt="+" /><a class="text_active" href="{{ profile.get_absolute_url }}">zoom</a></span>
 

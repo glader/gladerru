@@ -6,7 +6,6 @@ from views.redirects import *
 from views.ugc import *
 from feeds import *
 from django.contrib.auth.views import password_reset
-from django.views.generic.base import RedirectView
 
 
 urlpatterns = patterns('',
@@ -74,13 +73,10 @@ urlpatterns = patterns('',
 
     url(r'^my$', my_profile, name='my_profile'),
     url(r'^my/friends$', my_friends, name='friends'),
-    url(r'^my/news$', my_news, name='news'),
     url(r'^my/drafts$', drafts, name='drafts'),
     url(r'^my/settings$', my_settings, name='settings'),
-    url(r'^my/commented$', commented, name='commented'),
 
     #Ajax
-    url(r'^ajax/add_comment$', add_comment, name='add_comment'),
     url(r'^ajax/add_post_vote$', add_post_vote, name='add_post_vote'),
     url(r'^ajax/add_photo$', add_photo, name='add_photo'),
     url(r'^ajax/best_answer$', best_answer, name='best_answer'),
@@ -90,7 +86,6 @@ urlpatterns = patterns('',
     url(r'^ajax/set_news$', set_news, name='set_news'),
     url(r'^crossdomain.xml$', crossdomain, name='crossdomain'),
     url(r'^ajax/tags_suggest', tags_suggest),
-    url(r'^ajax/add_vk_comment', vk_comment),
     url(r'^ajax/picturebox', picturebox),
 
     #Feeds

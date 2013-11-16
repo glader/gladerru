@@ -179,8 +179,6 @@ def top_menu(level2='best', level1=None):
                 'profile': [
                         ['messages', '/messages/inbox/', u'сообщения', u'Личные сообщения'],
                         ['friends', '/my/friends', u'друзья', u'Список моих друзей'],
-                        ['news', '/my/news', u'новости', u'Анонсы событий, интересных мне'],
-                        ['commented', '/my/commented', u'комментарии', u'Новые комментарии к постам, за которыми вы следите'],
                         ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
                         ['settings', '/my/settings', u'настройки', u''],
                         ]

@@ -14,20 +14,20 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.template import Context, loader
-from django.utils import simplejson
+import simplejson
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
-    PhotoForm, PostCommentForm, PostVoteForm, CommentVoteForm, CommentForm, sanitizeHTML
-from core.models import Post, Friend, UserNews, ItemVote, Movie, Photo, Comment, Profile, Tag, News, \
+    PhotoForm, PostCommentForm, PostVoteForm, CommentForm, sanitizeHTML
+from core.models import Post, Friend, ItemVote, Movie, Photo, Comment, Profile, Tag, \
     Keyword, PictureBox, TagsCloud, Avatar
 from core.signals import new_comment_signal
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
-    make_pages, make_tag_pages, thumbnail
+    make_pages
 from core.utils.common import process_template, send_html_mail
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
-from core.tasks import new_post_announces, best_post_announces, check_celery
+from core.tasks import new_post_announces, check_celery
 
 
 class JsonResponse(HttpResponse):
@@ -359,27 +359,6 @@ def my_friends(request):
     return user_friends(request, request.user.username)
 
 
-def get_user_news(user):
-    usernews = UserNews.objects.filter(user=user)
-    news = list(News.objects.filter(pk__in=[n.news_id for n in usernews]))
-    news.sort(key=lambda n: n.date_created, reverse=True)
-    news = [{'date': k, 'news': list(v)} for k, v in groupby(news, key=lambda n:n.date_created.date())]
-    return news
-
-
-@auth_only
-def my_news(request):
-    u""" Новости юзера """
-    domain_user = request.user
-    page = 'news'
-    news = get_user_news(domain_user)
-
-    profile = domain_user.get_profile()
-    profile.unread_news_count = 0
-    profile.save()
-    return render_to_response(request, 'my/news.html', locals())
-
-
 @auth_only
 def drafts(request):
     """ Неопубликованные посты """
@@ -520,12 +499,6 @@ def user_photo(request, user, pic_id):
                                                       'can_edit': photo.can_edit(request.user),
                                                       'user': user,
                                                       'page_identifier': 'photo_%s' % photo.id})
-
-
-@auth_only
-def commented(request):
-    # TODO: складывать новые комментарии в новости отдельного типа
-    return render_to_response(request, 'my/commented.html', {'items': []})
 
 
 @login_required
@@ -749,116 +722,6 @@ def editpassword(request):
 ###############################################################################
 # AJAX
 
-
-def add_comment(request, user=None, hidden=False):
-    if not user:
-        user = request.user
-
-    if isinstance(user, AnonymousUser):
-        # TODO: log this
-        raise Http404
-
-    form = PostCommentForm(request.GET, user=user)
-    if form.is_valid():
-        if form.cleaned_data['comment']:
-            comment = form.cleaned_data['comment']
-            last_answers = form.cleaned_data['post'].comments.\
-                                extra(where=['LENGTH(`order`) = %s' % (len(comment.order) + 3),
-                                             '`order` LIKE "%s%%%%"' % comment.order]).\
-                                order_by('-order')
-
-        elif form.cleaned_data['post']:
-            last_answers = form.cleaned_data['post'].comments.\
-                                extra(where=['LENGTH(`order`) = 3']).order_by('-order')
-
-        else:
-            raise IndexError()
-
-        answer_on = form.cleaned_data['comment'] or form.cleaned_data['post']
-        if last_answers:
-            def get_next_number(order, digits=3):
-                next = str(int(order) + 1)
-                return '0' * (digits - len(next)) + next
-
-            curr_order = last_answers[0].order
-            curr_order = re.sub('(\d{3})$', lambda res: get_next_number(res.group(1)), curr_order)
-        else:
-            curr_order = form.cleaned_data['comment'] and (form.cleaned_data['comment'].order + '001') or '001'
-
-        # place
-        try:
-            last_inherit = form.cleaned_data['post'].comments\
-                            .filter(order__startswith=(form.cleaned_data['comment'] and form.cleaned_data['comment'].order or ''))\
-                            .order_by('-order')[0]
-            comment_place = last_inherit.pk
-        except IndexError:
-            if form.cleaned_data['comment']:
-                comment_place = form.cleaned_data['comment'].pk
-            else:
-                comment_place = ''
-
-        comment = Comment(item=form.cleaned_data['post'],
-                          content=form.cleaned_data['content'],
-                          order=curr_order,
-                          author=user,
-                          status='pub',
-                          hidden=hidden,
-                          ip=request.META['REMOTE_ADDR'],
-                          )
-        comment.save()
-
-        form.cleaned_data['post'].comment_count = (form.cleaned_data['post'].comment_count or 0) + 1
-        form.cleaned_data['post'].last_comment_date = comment.date_created
-        form.cleaned_data['post'].save()
-
-        profile = user.get_profile()
-        profile.comment_count += 1
-        profile.save()
-
-        new_comment_signal.send(sender=comment, post=form.cleaned_data['post'], answer_on=answer_on, author=user)
-
-        comment.author = user
-        comment.profile = profile
-        comment.avatar = Avatar.get([user], 32)[user.id]
-        comment.profile_link = link(user)
-
-        template = loader.get_template("blocks/b-comment.html")
-        html = template.render(Context({'comment': comment,
-                                        'post': form.cleaned_data['post'],
-                                        'MEDIA_URL': settings.STATIC_URL,
-                                        'klass': form.cleaned_data['post'].__class__.__name__.lower()
-                                        }))
-
-        result = {'success': True,
-                  'html': html,
-                  'afterComment': comment_place
-                  }
-
-    else:
-        if 'retpath' in request.GET:
-            return HttpResponseRedirect(request.GET['retpath'])
-        else:
-            return JsonErrorResponse(form.str_errors())
-
-    if 'retpath' in request.GET:
-        return HttpResponseRedirect(request.GET['retpath'])
-
-    return HttpResponse(simplejson.dumps(result))
-
-
-def vk_comment(request):
-    user = User.objects.get(username='vkontakte')
-    send_html_mail(
-        'Glader.ru: new vk comment',
-        u"New comment: '%s' on item '%s_%s'" % (request.GET.get('content'),
-                                                 request.GET.get('klass'),
-                                                 request.GET.get('post')),
-        'glader.ru@gmail.com'
-    )
-
-    return add_comment(request, user=user, hidden=True)
-
-
 @auth_only
 def add_post_vote(request):
     user = request.user
@@ -895,8 +758,6 @@ def add_vote(post, user, ip):
 
     if hasattr(post, 'best') and not post.best and post.rating >= settings.MAIN_PAGE_LEVEL:
         post.best = datetime.now()
-        if isinstance(post, Post):
-            best_post_announces(post.id)
 
     post.save()
 
