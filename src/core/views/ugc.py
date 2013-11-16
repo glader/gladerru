@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime, date, timedelta
-from itertools import groupby
 import calendar
 import re
 from xml.etree import ElementTree as ET
@@ -9,21 +8,19 @@ from xml.etree import ElementTree as ET
 from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User, AnonymousUser
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.template import Context, loader
 import simplejson
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
-    PhotoForm, PostCommentForm, PostVoteForm, CommentForm, sanitizeHTML
+    PhotoForm, PostVoteForm, CommentForm, sanitizeHTML
 from core.models import Post, Friend, ItemVote, Movie, Photo, Comment, Profile, Tag, \
     Keyword, PictureBox, TagsCloud, Avatar
-from core.signals import new_comment_signal
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
     make_pages
-from core.utils.common import process_template, send_html_mail
+from core.utils.common import process_template
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
