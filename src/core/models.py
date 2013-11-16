@@ -1121,18 +1121,4 @@ class Redirect(models.Model):
         verbose_name_plural = u"Редиректы"
 
 
-class UserVisitStat(models.Model):
-    u"""Дни заходов юзеров на сайт"""
-    user = models.ForeignKey(User, verbose_name=u"Пользователь")
-    day = models.DateField(verbose_name=u"Дата")
-
-    def __unicode__(self):
-        return "%s - %s" % (self.user, self.day)
-
-    class Meta:
-        verbose_name = u"Дата визита"
-        verbose_name_plural = u"Даты визитов"
-
-
-#User.profile = property(lambda u: Item.objects.get_or_create(user=u)[0])
 User.name = property(lambda u: u.first_name or u.username)

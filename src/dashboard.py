@@ -42,19 +42,6 @@ class UGCStat(modules.DashboardModule):
                             'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
                             })
 
-        cursor.execute("""SELECT d.date, COUNT(p.id)
-                            from d
-                            left join core_uservisitstat p ON d.date=p.day
-                            WHERE d.date <= '%s' and d.date >= '%s'
-                            group by d.date""" % (date.today(), date.today() - self.interval))
-        visits = cursor.fetchall()
-        if visits:
-            self.blocks.append({'title': u'Залогиненные',
-                            'max': max(row[1] for row in visits),
-                            'data': ','.join(str(row[1]) for row in visits),
-                            'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
-                            })
-
     def is_empty(self):
         return False
 

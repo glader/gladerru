@@ -193,14 +193,6 @@ class KeywordAdmin(admin.ModelAdmin):
 admin.site.register(Keyword, KeywordAdmin)
 
 
-class UserVisitStatAdmin(admin.ModelAdmin):
-    list_display = ('user', 'day')
-    list_filter = ('day',)
-    search_fields = ('user',)
-
-admin.site.register(UserVisitStat, UserVisitStatAdmin)
-
-
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'first_name', 'email', 'date_joined')
     ordering = ('-date_joined',)
