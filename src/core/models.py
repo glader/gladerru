@@ -1142,6 +1142,7 @@ class News(models.Model):
     title = models.CharField(verbose_name=u"Название", max_length=255)
     slug = models.SlugField(verbose_name=u"Урл", max_length=255)
     dt_created = models.DateTimeField(verbose_name=u"Дата-время добавления", null=True, blank=True, default=None)
+    description = models.TextField(null=True, blank=True, verbose_name=u"Description")
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
     content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
 
