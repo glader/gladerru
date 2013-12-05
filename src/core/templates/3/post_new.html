@@ -5,83 +5,90 @@
 {% block title %}Новое сообщение - {{ block.super }}{% endblock %}
 
 {% block head %}
+    <script type="text/javascript" src="http://yandex.st/jquery/2.0.3/jquery.min.js"></script>
+
     <script type="text/javascript" src="{% static "js/jquery.datepick.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.datepick-ru.js" %}"></script>
     <script type="text/javascript" src="{% static "js/swfupload.js" %}"></script>
     <script type="text/javascript" src="{% static "js/jquery.swfupload.js" %}"></script>
-    <script type="text/javascript" src="{% static "js/json2.min.js" %}"></script>
     <script type="text/javascript" src="{% static "js/md5.js" %}"></script>
     <link rel="stylesheet" href="{% static "design/3/css/contrib/datepicker/jquery.datepick.css" %}"/>
 
     <script type="text/javascript" src="{% static "js/jquery.fcbkcomplete.min.js" %}"></script>
     <link rel="stylesheet" href="{% static "design/3/css/contrib/fcbkstyle.css" %}"/>
 
-<script type="text/javascript">
-   $(function(){
-     $("#id_tags").fcbkcomplete({
-        json_url:'/ajax/tags_suggest',
-        first_selected:false,
-        filter_hide : true,
-        filter_case:false,
-        complete_text:"Введите теги поста",
-        maxitems: 100
-        });
-   });
+    <script src="{% static "redactor/redactor.min.js" %}"></script>
+    <link rel="stylesheet" href="{% static "redactor/css/redactor.css" %}" />
 
-$(function(){
-    $('#swfupload-control').swfupload({
-        upload_url: "http://{% DOMAIN %}/ajax/add_photo?sessionid={{ request.COOKIES.sessionid }}&post={{ post.id }}",
-        file_size_limit : "10240",
-        file_types : "*.*",
-        file_types_description : "All Files",
-        file_upload_limit : "0",
-        flash_url : "{% static "swf/swfupload.swf" %}",
-        button_image_url : '{% static "design/3/img/b-post-new/upload_button.png" %}',
-        button_width : 138,
-        button_height : 22,
-        button_placeholder : $('#button')[0],
-        debug: false,
-        custom_settings : {something : "here"}
-    })
-        .bind('fileQueued', function(event, file){
-            $('#log').append('<li id="file_'+hex_md5(file.name)+'">'+file.name+'</li>');
-            // start the upload since it's queued
-            $(this).swfupload('startUpload');
-        })
-        .bind('uploadStart', function(event, file){
-        	$('#file_'+hex_md5(file.name)).html(file.name + '&nbsp;<img src="{% static "design/3/img/b-ajax/ajax-loader.gif" %}">');
-        })
-        .bind('uploadSuccess', function(event, file, serverData){
-            myData = JSON.parse(serverData);
-            $('#file_'+hex_md5(file.name)).remove();
-            $('#id_content').val( $('#id_content').val() + ' <glader pic="' + myData.picture_id + '">');
-            $('#thumbnails').append(
-                        '<div id="picture_' + myData.picture_id + '" class="b-picture {picture:\'' + myData.picture_id + '\'}">' +
-                        '    <a href="' + myData.absolute_url + '" target="_blank"><img src="' + myData.thumbnail_url + '"></a>' +
-                        '    <div class="content-btn">' +
-                        '        <img src="{% static "design/3/img/b-post-new/pic_normal.png" %}" title="Вставить эту картинку в пост"' +
-                        '            class="js-post-picture-prepare {picture:\'' + myData.picture_id + '\', method:\'normal\'}" alt=""/>' +
-                        '        <img src="{% static "design/3/img/b-post-new/pic_left.png" %}" title="Вставить эту картинку с выравниванием влево"' +
-                        '            class="js-post-picture-prepare {picture:\'' + myData.picture_id + '\', method:\'float_left\'}" alt=""/>' +
-                        '        <img src="{% static "design/3/img/b-post-new/pic_right.png" %}" title="Вставить эту картинку с выравниванием влево"' +
-                        '            class="js-post-picture-prepare {picture:\'' + myData.picture_id + '\', method:\'float_right\'}" alt=""/>' +
-                        '    </div>' +
-                        '</div>'
-            );
-            initPostPictures();
-        })
-        .bind('uploadComplete', function(event, file){
-            // upload has completed, lets try the next one in the queue
-            $(this).swfupload('startUpload');
-        })
-        .bind('uploadError', function(event, file, errorCode, message){
-            $('#log').append('<li>Upload error - '+message+'</li>');
+<script type="text/javascript">
+    $(function(){
+        $('textarea').redactor({ imageUpload: '{% url "upload_photos" %}', focus: false });
+    });
+
+    $(function(){
+        $("#id_tags").fcbkcomplete({
+            json_url:'/ajax/tags_suggest',
+            first_selected:false,
+            filter_hide : true,
+            filter_case:false,
+            complete_text:"Введите теги поста",
+            maxitems: 100
         });
+    });
+
+    $(function(){
+        $('#swfupload-control').swfupload({
+            upload_url: "http://{% DOMAIN %}/ajax/add_photo?sessionid={{ request.COOKIES.sessionid }}&post={{ post.id }}",
+            file_size_limit : "10240",
+            file_types : "*.*",
+            file_types_description : "All Files",
+            file_upload_limit : "0",
+            flash_url : "{% static "swf/swfupload.swf" %}",
+            button_image_url : '{% static "design/3/img/b-post-new/upload_button.png" %}',
+            button_width : 138,
+            button_height : 22,
+            button_placeholder : $('#button')[0],
+            debug: false,
+            custom_settings : {something : "here"}
+        })
+            .bind('fileQueued', function(event, file){
+                $('#log').append('<li id="file_'+hex_md5(file.name)+'">'+file.name+'</li>');
+                // start the upload since it's queued
+                $(this).swfupload('startUpload');
+            })
+            .bind('uploadStart', function(event, file){
+                $('#file_'+hex_md5(file.name)).html(file.name + '&nbsp;<img src="{% static "design/3/img/b-ajax/ajax-loader.gif" %}">');
+            })
+            .bind('uploadSuccess', function(event, file, serverData){
+                myData = JSON.parse(serverData);
+                $('#file_'+hex_md5(file.name)).remove();
+                $('#id_content').val( $('#id_content').val() + ' <glader pic="' + myData.picture_id + '">');
+                $('#thumbnails').append(
+                            '<div id="picture_' + myData.picture_id + '" class="b-picture {picture:\'' + myData.picture_id + '\'}">' +
+                            '    <a href="' + myData.absolute_url + '" target="_blank"><img src="' + myData.thumbnail_url + '"></a>' +
+                            '    <div class="content-btn">' +
+                            '        <img src="{% static "design/3/img/b-post-new/pic_normal.png" %}" title="Вставить эту картинку в пост"' +
+                            '            class="js-post-picture-prepare {picture:\'' + myData.picture_id + '\', method:\'normal\'}" alt=""/>' +
+                            '        <img src="{% static "design/3/img/b-post-new/pic_left.png" %}" title="Вставить эту картинку с выравниванием влево"' +
+                            '            class="js-post-picture-prepare {picture:\'' + myData.picture_id + '\', method:\'float_left\'}" alt=""/>' +
+                            '        <img src="{% static "design/3/img/b-post-new/pic_right.png" %}" title="Вставить эту картинку с выравниванием влево"' +
+                            '            class="js-post-picture-prepare {picture:\'' + myData.picture_id + '\', method:\'float_right\'}" alt=""/>' +
+                            '    </div>' +
+                            '</div>'
+                );
+                initPostPictures();
+            })
+            .bind('uploadComplete', function(event, file){
+                // upload has completed, lets try the next one in the queue
+                $(this).swfupload('startUpload');
+            })
+            .bind('uploadError', function(event, file, errorCode, message){
+                $('#log').append('<li>Upload error - '+message+'</li>');
+            });
 
         initPostButtons();
         initPostPictures();
-});
-
+    });
 </script>
 
 
@@ -117,6 +124,15 @@ $(function(){
                         <div style="border: 1px solid red; padding: 3px;">{{ form.str_errors }}</div>
                     {% endif %}
 
+                    <div>Категория<br />
+                        {{ form.category }}
+                        <br />
+                        {% if form.errors.category %}
+                            <div class="red">{% for e in form.errors.category %}{{ e }} {% endfor %}</div>
+                        {% endif %}
+                        <br />
+                    </div>
+
                     <div>Название сообщения <br />
                         {{ form.title }}
                         <br />
@@ -127,17 +143,7 @@ $(function(){
                     </div>
 
                     <div>
-                        <div class="content-btn">Текст сообщения
-                            <img id="btn-strong" src="{% static "design/3/img/b-post-new/bt_strong.png" %}" title="Сделать выделенный шрифт жирным" alt="">
-                            <img id="btn-em" src="{% static "design/3/img/b-post-new/bt_em.png" %}" title="Сделать выделенный текст курсивом" alt="">
-                            <img id="btn-ins" src="{% static "design/3/img/b-post-new/bt_ins.png" %}" title="Сделать выделенный текст подчеркнутым" alt="">
-                            <img id="btn-h1" src="{% static "design/3/img/b-post-new/bt_h1.png" %}" title="Добавить заголовок" alt="">
-                            <img id="btn-h2" src="{% static "design/3/img/b-post-new/bt_h2.png" %}" title="Добавить заголовок второго уровня" alt="">
-                            <img id="btn-link" src="{% static "design/3/img/b-post-new/bt_link.png" %}" title="Вставить ссылку" alt="">
-                            <img id="btn-img" src="{% static "design/3/img/b-post-new/bt_img.png" %}" title="Вставить картинку" alt="">
-                            <img id="btn-youtube" src="{% static "design/3/img/b-post-new/bt_youtube.png" %}" title="Вставить видеоролик" alt="">
-                            <img id="btn-cut" src="{% static "design/3/img/b-post-new/bt_cut.png" %}" title="Вставить разрыв страницы (для длинных текстов)" alt="">
-                        </div>
+                        <div class="content-btn">Текст сообщения</div>
 
                         {{ form.content }}
 
@@ -189,35 +195,6 @@ $(function(){
 
                 </td><td valign="top">
 
-                    <div id="swfupload-control">
-                        <input type="button" id="button" />
-                        <ol id="log"></ol>
-                    </div>
-
-                    <noscript>
-                        <div>Приложить картинку (при желании)<br/ >
-                            {{ form.picture }}
-                        </div>
-                        <input name="action" value="Залить" type="submit">
-                    </noscript>
-
-                    <br /><br />
-
-                    <div id="thumbnails">
-                    {% for pic in pictures %}
-                        <div id="picture_{{ pic.id }}" class="g-line b-picture {picture:'{{ pic.display_id }}'}">
-                            <a href="{{ pic.get_absolute_url }}" class="float_left" target="_blank"><img src="{% static "{{ pic.yandex_fotki_image_src|thumbnail }}" %}"></a>
-                            <div class="content-btn">
-                                <img src="{% static "design/3/img/b-post-new/pic_normal.png" %}" title="Вставить эту картинку в пост"
-                                    class="js-post-picture-prepare {picture:'{{ pic.id }}', method:'normal'}" alt=""/>
-                                <img src="{% static "design/3/img/b-post-new/pic_left.png" %}" title="Вставить эту картинку с выравниванием влево"
-                                    class="js-post-picture-prepare {picture:'{{ pic.id }}', method:'float_left'}" alt=""/>
-                                <img src="{% static "design/3/img/b-post-new/pic_right.png" %}" title="Вставить эту картинку с выравниванием влево"
-                                    class="js-post-picture-prepare {picture:'{{ pic.id }}', method:'float_right'}" alt=""/>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    </div>
                 </td>
             </tr></table>
             </form>

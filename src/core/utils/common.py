@@ -14,7 +14,7 @@ translit = {u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g', u'д': u'd', u'�
             u'ж': u'zh', u'з': u'z', u'и': u'i', u'й': u'j', u'к': u'k', u'л': u'l',
             u'м': u'm', u'н': u'n', u'о': u'o', u'п': u'p', u'р': u'r', u'с': u's',
             u'т': u't', u'у': u'u', u'ф': u'f', u'х': u'x', u'ц': u'cz', u'ч': u'ch',
-            u'ш': u'sh', u'щ': u'shh', u'ъ': u'_d', u'ы': u'_i', u'ь': u'_', u'э': u'ye',
+            u'ш': u'sh', u'щ': u'shh', u'ъ': u'_d', u'ы': u'yi', u'ь': u'y', u'э': u'ye',
             u'ю': u'yu', u'я': u'ya', u'ё': u'yo',
             u'æ': u'e',
             u'á': u'a', u'é': u'e', u'ć': u'c',
@@ -38,7 +38,7 @@ def rus2translit(text):
 
 
 def slug(title):
-    return re.sub("\s", "", rus2translit(title.strip())).lower().replace('-', '')
+    return re.sub("\s+", "-", rus2translit(title.strip())).lower()
 
 
 def send_html_mail(subject, message, recipient_list):

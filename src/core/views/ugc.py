@@ -4,6 +4,7 @@ from datetime import datetime, date, timedelta
 import calendar
 import re
 from xml.etree import ElementTree as ET
+import simplejson
 
 from django.conf import settings
 from django.contrib import auth
@@ -12,7 +13,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
-import simplejson
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
     PhotoForm, PostVoteForm, CommentForm, sanitizeHTML
@@ -20,7 +20,7 @@ from core.models import Post, Friend, ItemVote, Movie, Photo, Comment, Profile, 
     Keyword, PictureBox, TagsCloud, Avatar
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
     make_pages
-from core.utils.common import process_template
+from core.utils.common import process_template, slug
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
@@ -577,12 +577,15 @@ def edit_post(request, post_id):
     if 'action' in request.POST:
         form = PostForm(request.POST, request.FILES, user=user, post=post)
         if form.is_valid():
+            print "EDIT"
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
+            post.category = form.cleaned_data['category']
             post.geography = form.cleaned_data['geography']
             post.event_date_start = form.cleaned_data['event_date_start']
             post.event_date_finish = form.cleaned_data['event_date_start']
 
+            post.slug = slug(post.title)
             process_keywords(post)
 
             # Теги

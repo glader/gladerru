@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.forms import *
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain, Avatar
+from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain, Avatar, NewsCategory
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -206,6 +206,7 @@ class PostForm(CommonForm):
     post = IntegerField(label=u'Пост', required=False, widget=HiddenInput, help_text=u'Пост')
     title = CharField(label=u'Заголовок', error_messages={'required': u'Введите заголовок поста'},
                       widget=TextInput(attrs={'class': 'input'}))
+    category = IntegerField(label=u'Категория', widget=Select, help_text=u'Категория')
     content = CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
                         widget=Textarea(attrs={'class': 'content'}))
     geography = BooleanField(label=u'Относится к моему городу', required=False)
@@ -229,6 +230,8 @@ class PostForm(CommonForm):
 
         super(PostForm, self).__init__(*args, **kwargs)
 
+        self.fields['category'].widget.choices = [(c.id, c.title) for c in NewsCategory.objects.all()]
+
         if 'initial' in kwargs:
             self.fields['tags'].choices = [(t, t) for t in kwargs['initial']['tags']]
 
@@ -249,6 +252,12 @@ class PostForm(CommonForm):
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
+
+    def clean_category(self):
+        try:
+            return NewsCategory.objects.get(pk=self.cleaned_data['category'])
+        except NewsCategory.DoesNotExist:
+            raise ValidationError(u"Неизвестная категория")
 
     def clean_content(self):
         if self.user.get_profile().is_moderator:

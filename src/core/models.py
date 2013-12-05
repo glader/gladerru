@@ -514,6 +514,9 @@ class Post(models.Model, VoteMixin, UIDMixin):
     author = models.ForeignKey(User, null=True, blank=True, verbose_name=u"Автор")
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
+    slug = models.SlugField(verbose_name=u"Урл", max_length=255, null=True, blank=True, default=None)
+
+    category = models.ForeignKey('NewsCategory', verbose_name=u"Категория", null=True, blank=True, default=None)
     content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name=u"Тип поста")
