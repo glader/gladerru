@@ -1,4 +1,4 @@
-Django==1.5.4
+Django==1.5.6
 MySQL-python
 PIL
 South
