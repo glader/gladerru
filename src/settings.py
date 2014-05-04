@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'timelog',
     'core',
-    'shop',
     'sape',
     'south',
     'django_messages',
