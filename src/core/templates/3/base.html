@@ -70,40 +70,7 @@
         </td>
         <td class="l-head-r-g"><i></i></td>
         <td class="l-head-r">
-            <div class="b-usertab">
-            	<noindex>
-                <div class="b-usertab-i">
-                    {% if user %}
-                        <i class="bg"></i>
-                        <i class="userpic">
-                            <img src="{{ profile.avatar }}" alt="" />
-                            <span class="g-png"><img src="{% static "design/3/img/usertab/userpic_border.png" %}" alt="" /></span>
-                        </i>
-
-                        <span class="username">{% if user %}{{ user|link }} {% if profile.is_moderator and item %}<small>(<a href="{% get_admin_url item %}">ред.</a>)</small>{% endif %}{% else %}<a href="http://{% DOMAIN %}/auth/login" class="reg">вход / регистрация</a>{% endif %}</span>
-                        <span class="logout"><a href="{% url "logout" %}"><img src="{% static "design/3/img/usertab/logout.gif" %}" alt="Выход" /></a></span>
-
-                        <span class="text {% if messages_inbox_count %}text_active {% endif %} num-pm"><img src="{% static "design/3/img/usertab/pm.gif" %}" alt="" />&times;&nbsp;{{ messages_inbox_count }}</span>
-                        <span class="text num-post"><img src="{% static "design/3/img/usertab/post.gif" %}" alt="" />=&nbsp;0</span>
-                        <span class="text num-comment"><img src="{% static "design/3/img/usertab/comment.gif" %}" alt="" />=&nbsp;0</span>
-
-                        <span class="text {% if messages_inbox_count %}text_active {% endif %} text-pm"><a href="{% url "messages_inbox" %}" title="входящие">личных сообщений</a></span>
-                        <span class="text text-post">новых анонсов</a></span>
-                        <span class="text text-comment">новых комментариев</span>
-
-                        <span class="zoom"><img src="{% static "design/3/img/usertab/zoom.gif" %}" alt="+" /><a class="text_active" href="{{ profile.get_absolute_url }}">zoom</a></span>
-
-                    {% else %}
-                        <i class="bg_unreg"></i>
-
-                        <span class="text text-not-reg">Вы не авторизованы!</span>
-                        <span class="text text-login"><a href="{% url "login" %}" id="login-link">Войти</a> в Glader.ru</span>
-                        <span class="text text-reg"><a href="{% url "login" %}" id="registration-link">Зарегистрироваться</a> сейчас</span>
-
-                    {% endif %}
-                </div>
-                </noindex>
-            </div>
+            &nbsp;
         </td>
         <td class="l-head-g"><i></i></td>
     </tr>
@@ -168,7 +135,7 @@
             <div class="b-copyright" style="float:right">Размещение рекламы: <a href="mailto:{{ "sale@glader.ru"|parser }}">{{ "sale@glader.ru"|parser }}</a>
                 {% block ampseo %}{% endblock %}
                 </div>
-            <div class="b-copyright">&copy;2007-2013 <a href="/">Glader.ru</a></div>
+            <div class="b-copyright">&copy;2007-2014 <a href="/">Glader.ru</a></div>
         </td>
         <td class="l-page-g"><i></i></td>
     </tr>
