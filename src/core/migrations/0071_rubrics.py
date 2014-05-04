@@ -10,18 +10,18 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
 
-        s = """5	http://img-fotki.yandex.ru/get/6000/19044756.ff/0_8373f_77a13da0_orig
-10	http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83747_89e531d4_orig
-11	http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83740_a1815008_orig
-12	http://img-fotki.yandex.ru/get/6105/19044756.ff/0_83748_6c6a0f76_orig
-23	http://img-fotki.yandex.ru/get/6000/19044756.ff/0_83741_62fdd9e7_orig
-24	http://img-fotki.yandex.ru/get/6204/19044756.ff/0_83749_7f02f1a4_orig
-25	http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83742_87435efb_orig
-26	http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83743_23ba802a_orig
-27	http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83744_cf47b34a_orig
-28	http://img-fotki.yandex.ru/get/6204/19044756.ff/0_8374a_768a4e3e_orig
-32	http://img-fotki.yandex.ru/get/6204/19044756.ff/0_83745_897e2c4b_orig
-35	http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83746_30b4bca_orig"""
+        s = """5    http://img-fotki.yandex.ru/get/6000/19044756.ff/0_8373f_77a13da0_orig
+10    http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83747_89e531d4_orig
+11    http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83740_a1815008_orig
+12    http://img-fotki.yandex.ru/get/6105/19044756.ff/0_83748_6c6a0f76_orig
+23    http://img-fotki.yandex.ru/get/6000/19044756.ff/0_83741_62fdd9e7_orig
+24    http://img-fotki.yandex.ru/get/6204/19044756.ff/0_83749_7f02f1a4_orig
+25    http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83742_87435efb_orig
+26    http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83743_23ba802a_orig
+27    http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83744_cf47b34a_orig
+28    http://img-fotki.yandex.ru/get/6204/19044756.ff/0_8374a_768a4e3e_orig
+32    http://img-fotki.yandex.ru/get/6204/19044756.ff/0_83745_897e2c4b_orig
+35    http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83746_30b4bca_orig"""
 
         orm.Rubric.objects.all().update(image=None)
 

@@ -25,6 +25,7 @@ for post in Post.objects.filter(name__isnull=False):
 
 av_log = open('av_log').read().split('\n')
 
+
 class F(StringIO):
     pass
 
@@ -57,7 +58,6 @@ for p in Profile.objects.filter(avatar=True):
         avatar.save()
 
         open('av_log', 'a').write("%s\n" % p.user_id)
-
 
     except Exception, e:
         print e

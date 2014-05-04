@@ -18,44 +18,44 @@ from core.forms import rus2translit
 
 
 def lat(title):
-	return re.sub("[^\w]|_", "", rus2translit(title).lower())
+    return re.sub("[^\w]|_", "", rus2translit(title).lower())
 
 
 i = 0
 for l in open('geo').readlines():
-	if i == 0:
-		data = [0, 0, 0, None]
-		if l[:3] != 'var':
-			raise Exception(l)
+    if i == 0:
+        data = [0, 0, 0, None]
+        if l[:3] != 'var':
+            raise Exception(l)
 
-		res = re.search("GLatLng\(([\d\.]+), ([\d\.]+)\)", l)
-		data[0] = res.group(1)
-		data[1] = res.group(2)
+        res = re.search("GLatLng\(([\d\.]+), ([\d\.]+)\)", l)
+        data[0] = res.group(1)
+        data[1] = res.group(2)
 
-	if i == 1:
-		res = re.search('title:"([^"]+)"', l)
-		data[2] = res.group(1)
+    if i == 1:
+        res = re.search('title:"([^"]+)"', l)
+        data[2] = res.group(1)
 
-	if i == 3:
-		res = re.search('<a href=([^>]+)>Сайт курорта</a>', l)
-		if res:
-			data[3] = res.group(1)
+    if i == 3:
+        res = re.search('<a href=([^>]+)>Сайт курорта</a>', l)
+        if res:
+            data[3] = res.group(1)
 
-	i += 1
-	if i == 7:
-		title = data[2].decode('cp1251')
-		try:
-			m = Item.objects.get(title=title, type=ItemType.by_name['MOUNTAIN'])
-			print "exist"
-		except Item.DoesNotExist:
-			name = lat(title)
-			m = Item(name=name, type=ItemType.by_name['MOUNTAIN'], title=title)
-			print "new"
+    i += 1
+    if i == 7:
+        title = data[2].decode('cp1251')
+        try:
+            m = Item.objects.get(title=title, type=ItemType.by_name['MOUNTAIN'])
+            print "exist"
+        except Item.DoesNotExist:
+            name = lat(title)
+            m = Item(name=name, type=ItemType.by_name['MOUNTAIN'], title=title)
+            print "new"
 
-		m.latitude = data[0]
-		m.longitude = data[1]
-		m.url = m.url or data[3]
-		m.save()
+        m.latitude = data[0]
+        m.longitude = data[1]
+        m.url = m.url or data[3]
+        m.save()
 
-		#print data, ","
-		i = 0
+        # print data, ","
+        i = 0

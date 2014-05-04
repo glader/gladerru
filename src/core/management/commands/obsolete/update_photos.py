@@ -29,7 +29,7 @@ class Command(NoArgsCommand):
                 result = urlopen(request)
 
                 entry = result.read()
-                #print entry
+                # print entry
 
                 if photo.rider:
                     title = photo.rider.title
@@ -55,7 +55,7 @@ class Command(NoArgsCommand):
                 all_headers = {
                     'Content-Type': 'application/atom+xml; type=entry',
                     'Authorization': 'OAuth %s' % settings.YAPHOTO_TOKEN
-                    }
+                }
                 h.request('PUT', url, entry, all_headers)
                 res = h.getresponse()
                 print res.status, res.reason

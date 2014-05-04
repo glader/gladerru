@@ -112,19 +112,19 @@ def validate_page_number(page, total):
 
 def other_pages(page, total):
     return {
-               'pages': range(1, total + 1),
-               'showed_pages': [p for p in range(1, total + 1) if abs(p - page) <= 4],
-               'page_number': page,
-               'first_page': page != 1 and 1 or None,
-               'prev_page': page != 1 and page - 1 or None,
-               'next_page': page != total and page + 1 or None,
-               'last_page': page != total and total or None,
-               }
+        'pages': range(1, total + 1),
+        'showed_pages': [p for p in range(1, total + 1) if abs(p - page) <= 4],
+        'page_number': page,
+        'first_page': page != 1 and 1 or None,
+        'prev_page': page != 1 and page - 1 or None,
+        'next_page': page != total and page + 1 or None,
+        'last_page': page != total and total or None,
+    }
 
 
 @register.inclusion_tag("block_hierarchy.html")
 def hierarchy(item):
-    parents = [{'title':item.title}]
+    parents = [{'title': item.title}]
     i = 0
     while i < 100:
         p = item.get_parent()
@@ -143,46 +143,45 @@ def hierarchy(item):
 
 @register.inclusion_tag("block_top_menu.html")
 def top_menu(level2='best', level1=None):
-    submenu = {'posts': [
-                        ['new', '/post/new', u'написать', u'Все ждут от тебя новый пост'],
-                        ['best', '/', u'лучшие', u'Сообщения, выбранные читателями'],
-                        ['all_posts', '/all', u'новые', u'Голосуй за лучшее'],
-                        #['schedule', '/schedule', u'календарь', u'События по датам'],
-                        ['rating', '/top/best', u'рейтинг', u'Самые лучшие за месяц'],
-                        ['discussed', '/top/comments', u'обсуждаемые', u'Самые обсуждаемые за месяц'],
-                        ],
-                'articles': [
-                        ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
-                        ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],
-                        ['freestyle', '/skills/freestyle', u'фристайл', u'те, кто хочет прыгать с трамплинов'],
-                        ['freeride', '/skills/freeride', u'фрирайд', u'тем, кто хочет катать в больших горах'],
-                        ['jibbing', '/skills/jibbing', u'джиббинг', u'тем, кто хочет слайдить по перилам'],
-                        ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
-                        ],
-                'movies': [
-                        ['2013', '/movies/2013/', u'2013', u'Фильмы 2013 года'],
-                        ['2012', '/movies/2012/', u'2012', u'Фильмы 2012 года'],
-                        ['2011', '/movies/2011/', u'2011', u'Фильмы 2011 года'],
-                        ['all', '/movies/all/', u'все', u'Все фильмы'],
-                        ['teasers', '/movies/teasers/', u'тизеры', u'Тизеры к фильмам'],
-                        ['soundtracks', '/movies/soundtracks/', u'саундтреки', u'Музыкальные треки к фильмам'],
-                        ['studies', '/studies/', u'студии', u'Авторы фильмов'],
-                        ],
-                'mountains': [
-                        ['map', '/mountains', u'карта', u'Горки: информация, фотографии, цены, отзывы.'],
-                        ],
-                'reference': [
-                        ['people', '/people', u'люди', u'Райдеры, фотографы и прочие'],
-                        ['dictionary', '/terms', u'словарь', u'Словарь всяких терминов'],
-                        #['companies', '/content/companies.htm', u'фирмы', u'производители оборудования'],
-                        ],
-                'profile': [
-                        ['messages', '/messages/inbox/', u'сообщения', u'Личные сообщения'],
-                        ['friends', '/my/friends', u'друзья', u'Список моих друзей'],
-                        ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
-                        ['settings', '/my/settings', u'настройки', u''],
-                        ]
-               }
+    submenu = {
+        'posts': [
+            ['new', '/post/new', u'написать', u'Все ждут от тебя новый пост'],
+            ['best', '/', u'лучшие', u'Сообщения, выбранные читателями'],
+            ['all_posts', '/all', u'новые', u'Голосуй за лучшее'],
+            ['rating', '/top/best', u'рейтинг', u'Самые лучшие за месяц'],
+            ['discussed', '/top/comments', u'обсуждаемые', u'Самые обсуждаемые за месяц'],
+        ],
+        'articles': [
+            ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
+            ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],
+            ['freestyle', '/skills/freestyle', u'фристайл', u'те, кто хочет прыгать с трамплинов'],
+            ['freeride', '/skills/freeride', u'фрирайд', u'тем, кто хочет катать в больших горах'],
+            ['jibbing', '/skills/jibbing', u'джиббинг', u'тем, кто хочет слайдить по перилам'],
+            ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
+        ],
+        'movies': [
+            ['2013', '/movies/2013/', u'2013', u'Фильмы 2013 года'],
+            ['2012', '/movies/2012/', u'2012', u'Фильмы 2012 года'],
+            ['2011', '/movies/2011/', u'2011', u'Фильмы 2011 года'],
+            ['all', '/movies/all/', u'все', u'Все фильмы'],
+            ['teasers', '/movies/teasers/', u'тизеры', u'Тизеры к фильмам'],
+            ['soundtracks', '/movies/soundtracks/', u'саундтреки', u'Музыкальные треки к фильмам'],
+            ['studies', '/studies/', u'студии', u'Авторы фильмов'],
+        ],
+        'mountains': [
+            ['map', '/mountains', u'карта', u'Горки: информация, фотографии, цены, отзывы.'],
+        ],
+        'reference': [
+            ['people', '/people', u'люди', u'Райдеры, фотографы и прочие'],
+            ['dictionary', '/terms', u'словарь', u'Словарь всяких терминов'],
+        ],
+        'profile': [
+            ['messages', '/messages/inbox/', u'сообщения', u'Личные сообщения'],
+            ['friends', '/my/friends', u'друзья', u'Список моих друзей'],
+            ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
+            ['settings', '/my/settings', u'настройки', u''],
+        ]
+    }
 
     def find_levels(level1, level2):
         if level1:
@@ -221,7 +220,7 @@ def picturebox(user):
 def post_cut(post):
     if not post.content:
         return ""
-    #FIXME: заменить на парсинг через BeatifulSoap
+    # FIXME: заменить на парсинг через BeatifulSoap
     result = re.search(u"<cut(?:\s+text=['\"]([^'\"]+)['\"])?>", post.content)
 
     if result:
@@ -355,10 +354,10 @@ def parser(text):
             return "</pre>"
         if tag == 'ImageLink':
             return '<a href="%s" style="%s"><img class="userphoto" src="%s%s"></a>' \
-                    % (item.get_absolute_url(), params.get('style', ""), settings.STATIC_URL, thumbnail(item.yandex_fotki_image_src))
+                % (item.get_absolute_url(), params.get('style', ""), settings.STATIC_URL, thumbnail(item.yandex_fotki_image_src))
         if tag == 'ItemLink':
             return '<a href="%s" style="%s">%s</a>' \
-                    % (item and item.get_absolute_url() or "", params.get('style', ""), params.get('title', item and item.title or ""))
+                % (item and item.get_absolute_url() or "", params.get('style', ""), params.get('title', item and item.title or ""))
 
     def smiles(result):
         return '<span class="smile">%s</span>' % result.group(1)
@@ -421,9 +420,9 @@ def parser(text):
     def emailHider(result):
         email = result.group(1)
         message = "<script>\n" \
-                + "".join("document.write('%s');\n" % email[i:i + 4] for i in xrange(0, len(email), 4)) \
-                + "</script>\n" \
-                + u"<noscript>[Email скрыт от роботов. Включите javascript, чтобы увидеть его.]</noscript>"
+            + "".join("document.write('%s');\n" % email[i:i + 4] for i in xrange(0, len(email), 4)) \
+            + "</script>\n" \
+            + u"<noscript>[Email скрыт от роботов. Включите javascript, чтобы увидеть его.]</noscript>"
         return message
 
     text = re.sub('(?<!</(td|tr|le|li|ol|ul))\r?\n', '<br/>\n', text)
@@ -434,8 +433,8 @@ def parser(text):
 
     text = re.sub('([\w\d\._-]+@[\w\d\._-]+)', emailHider, text)
 
-    #FIXME: заменить на один тег movie
-    #FIXME: добавить vimeo
+    # FIXME: заменить на один тег movie
+    # FIXME: добавить vimeo
     text = re.sub('<youtube>http://(?:www\.)?youtube.com/watch\?v=([\w-]+)[^<]*</youtube>', youtubeLink, text)
     text = re.sub('<youtube>http://(?:www\.)?youtube.com/watch\?([\w-]+)=(.+?)</youtube>', youtubeLink, text)
     text = re.sub('<youtube>http://(?:www\.)?youtube.com/v/([\w-]+)</youtube>', youtubeLink, text)
@@ -478,10 +477,10 @@ def items_table_list(items):
 @cached(cache_key='last_conversations', timeout_seconds=settings.CACHE_LONG_TIMEOUT)
 def get_last_coversations():
     items = list(Post.objects.all().order_by('-last_comment_date')[:15]) + \
-            list(Photo.objects.all().order_by('-last_comment_date')[:15]) + \
-            list(Man.objects.all().order_by('-last_comment_date')[:15]) + \
-            list(Mountain.objects.all().order_by('-last_comment_date')[:15]) + \
-            list(Movie.objects.all().order_by('-last_comment_date')[:15])
+        list(Photo.objects.all().order_by('-last_comment_date')[:15]) + \
+        list(Man.objects.all().order_by('-last_comment_date')[:15]) + \
+        list(Mountain.objects.all().order_by('-last_comment_date')[:15]) + \
+        list(Movie.objects.all().order_by('-last_comment_date')[:15])
     anno = datetime(1900, 1, 1)
     items.sort(key=lambda i: i.last_comment_date or anno, reverse=True)
     items = items[:20]
@@ -584,8 +583,8 @@ def add_referrer(html, referrer):
 ################################################################################
 # Блоги
 
-# WTF?
-@register.simple_tag
+
+@register.simple_tag  # WTF?
 def cut_view(post, user, mode='normal'):
     if isinstance(post, Comment):
         template = "block_cut_comment.html"
@@ -600,11 +599,12 @@ def cut_view(post, user, mode='normal'):
 
 @register.inclusion_tag('block_post_panel.html')
 def post_panel(post, user, mode='normal'):
-    return {'post': post,
-            'user': user,
-            'already_voted': post.get_vote(user) is not None,
-            'mode': mode,
-            'klass': post.__class__.__name__.lower(),
+    return {
+        'post': post,
+        'user': user,
+        'already_voted': post.get_vote(user) is not None,
+        'mode': mode,
+        'klass': post.__class__.__name__.lower(),
     }
 
 
@@ -621,9 +621,10 @@ def get_comments(post, request):
         comment.avatar = avatars[comment.author_id]
         comment.profile_link = link(comment.author)
 
-    context = {'post': post,
-               'klass': post.__class__.__name__.lower(),
-               'comments': comments,
+    context = {
+        'post': post,
+        'klass': post.__class__.__name__.lower(),
+        'comments': comments,
     }
     result = render_to_string(request, 'blocks/b-comments.html', context)
     return result

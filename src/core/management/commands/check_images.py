@@ -7,6 +7,7 @@ from django.core.management.base import NoArgsCommand
 from core.models import Photo, Man, Movie, Mountain, MountainPhoto, Post
 from core.utils.thumbnails import make_thumbnail
 
+
 def sanitizeHTML(value, mode='none'):
     """ Удаляет из value html-теги.
         Если mode==none - все теги
@@ -24,7 +25,7 @@ def sanitizeHTML(value, mode='none'):
     print value
 
     soup = BeautifulSoup(value)
-    #for comment in soup.findAll(
+    # for comment in soup.findAll(
     #    text=lambda text: isinstance(text, HtmlComment)):
     #    comment.extract()
 
@@ -41,10 +42,9 @@ def sanitizeHTML(value, mode='none'):
     result = soup.renderContents().decode('utf8')
     return result
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
-
-
         print sanitizeHTML('<asd>asd asd</asd> middle <b>bbb</b> <!-- comment -->', mode='strict')
         return
 
@@ -54,7 +54,7 @@ class Command(NoArgsCommand):
 
                 for tag in tree.find_all('img'):
                     image = tag.get('src')
-                    if not 'thumb' in image:
+                    if 'thumb' not in image:
                         if not image.startswith('http') or 'glader.ru' in image:
                             print post.id, '\t', tag.get('src')
             except Exception, e:

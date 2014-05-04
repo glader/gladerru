@@ -2,6 +2,7 @@
 from django.conf import settings
 from core.models import Avatar
 
+
 def default(request):
     context = {'user': None,
                'request': request,

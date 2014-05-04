@@ -5,23 +5,21 @@ from datetime import datetime
 import MySQLdb
 from MySQLdb.cursors import DictCursor, SSDictCursor
 
-conn = MySQLdb.connect(host='localhost', user='root', \
-                       passwd='', db='gladerru')
+conn = MySQLdb.connect(host='localhost', user='root', passwd='', db='gladerru')
 
-conn2 = MySQLdb.connect(host='localhost', user='root', \
-                       passwd='', db='u70497_glader')
+conn2 = MySQLdb.connect(host='localhost', user='root', passwd='', db='u70497_glader')
 
 cursor = conn.cursor(DictCursor)
 cursor.execute("SET NAMES 'cp1251'")
-#cursor.execute("SET CHARACTER SET 'utf8'")
-#cursor.execute("SET character_set_client=utf8;")
-#cursor.execute("SET character_set_connection=utf8;")
+# cursor.execute("SET CHARACTER SET 'utf8'")
+# cursor.execute("SET character_set_client=utf8;")
+# cursor.execute("SET character_set_connection=utf8;")
 
 source = conn2.cursor()
 source.execute("SET NAMES 'cp1251'")
-#cursor2.execute("SET CHARACTER SET 'utf8'")
-#cursor2.execute("SET character_set_client=utf8;")
-#cursor2.execute("SET character_set_connection=utf8;")
+# cursor2.execute("SET CHARACTER SET 'utf8'")
+# cursor2.execute("SET character_set_client=utf8;")
+# cursor2.execute("SET character_set_connection=utf8;")
 
 """
 import sys,settings
@@ -81,10 +79,12 @@ for u in source.fetchall():
     cursor.execute("""INSERT INTO core_item (user_id, name, title, type_id, item_type, date_created, date_changed, filename, icq, url, interests, board, bindings,
                     boots, riding_style, mountains, clothes, equip, country, city, content, gender,
                     draftPostCount, pubPostCount, commentCount, picCount, clipCount)
-        VALUES (%s, %s, %s, %s, 'USER', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)""",
-                       (i, name, u[1], types['USER'], date_joined, date_joined, u[8], icq, u[11], u[14], u[15], u[16],
-                        u[17], u[18], u[19], u[20], u[21], u[22], u[23], u[24], u[28],
-                        u[32], u[33], u[34], picCount, u[36]))
+        VALUES (%s, %s, %s, %s, 'USER', %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s,
+        %s, %s, %s, %s, %s)""", (
+        i, name, u[1], types['USER'], date_joined, date_joined, u[8], icq, u[11], u[14], u[15], u[16],
+        u[17], u[18], u[19], u[20], u[21], u[22], u[23], u[24], u[28],
+        u[32], u[33], u[34], picCount, u[36])
+    )
 
     i += 1
 
@@ -115,7 +115,7 @@ for attr in source.fetchall():
         cursor.execute("UPDATE core_item SET `%s`=%s WHERE name=%s" % (attr[1], "%s", "%s"), (value, attr[0]))
     except (MySQLdb.OperationalError, MySQLdb.DataError), e:
         print "=" * 60
-        #print attr, value
+        # print attr, value
         print e
 
     i += 1
@@ -158,7 +158,7 @@ for item in source.fetchall():
     except (MySQLdb.OperationalError, MySQLdb.DataError), e:
         print "=" * 60
         print item[4]
-        #print attr, value
+        # print attr, value
         print e
 
     i += 1
@@ -172,10 +172,11 @@ print "votes ..",
 cursor.execute("TRUNCATE TABLE core_itemvote")
 source.execute("SELECT * FROM cms_items_votes order by recid")
 for v in source.fetchall():
-    if not (items.has_key(v[2]) and items.has_key(v[3])):
+    if not (v[2] in items and v[3] in items):
         continue
-    cursor.execute("INSERT INTO core_itemvote (item_id, profile_id, vote, date_created)  VALUES (%s, %s, %s, %s)",
-                       (items[v[2]], items[v[3]], v[4], v[1]))
+    cursor.execute("INSERT INTO core_itemvote (item_id, profile_id, vote, date_created)  VALUES (%s, %s, %s, %s)", (
+        items[v[2]], items[v[3]], v[4], v[1])
+    )
 
 print "done"
 
@@ -235,4 +236,3 @@ cursor.execute("UPDATE core_item SET template='news.html' WHERE name='news'")
 cursor.execute("UPDATE core_item SET template='films.html' WHERE name='films_list'")
 
 print "done"
-#

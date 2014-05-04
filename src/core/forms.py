@@ -143,10 +143,13 @@ class RegistrationForm(CommonForm):
 
         self.user = authenticate(username=new_user.username, password=self.cleaned_data['password'])
 
-        subject, content = process_template('email/registration.html', {
-                                                        'user': new_user,
-                                                        'form': self
-                                                    })
+        subject, content = process_template(
+            'email/registration.html',
+            {
+                'user': new_user,
+                'form': self
+            }
+        )
         send_html_mail(subject, content, [self.cleaned_data['email']])
 
 
@@ -210,11 +213,11 @@ class PostForm(CommonForm):
     content = CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
                         widget=Textarea(attrs={'class': 'content'}))
     geography = BooleanField(label=u'Относится к моему городу', required=False)
-    #tags = CharField(label=u'Теги', required=False,
+    # tags = CharField(label=u'Теги', required=False,
     #                  widget=TextInput(attrs={'class':'tags'}))
     tags = OpenMultipleChoiceField(choices=[], required=False, initial=[])
 
-    #Картинка
+    # Картинка
     picture = ImageField(label=u'Картинка', required=False,
                          widget=FileInput(attrs={'class': 'picture'}))
 

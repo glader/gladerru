@@ -25,8 +25,8 @@ for p in Item.objects.all():
     for f in Item._meta.fields:
         if f.name not in skip_list and getattr(p, f.name) is not None \
             and getattr(p, f.name) != '' \
-            and getattr(p, f.name) != 0:
-            fields[type][f.name] = True
+                and getattr(p, f.name) != 0:
+                fields[type][f.name] = True
 
 
 types = fields.keys()

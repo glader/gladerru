@@ -43,7 +43,7 @@ urlpatterns = patterns('',
     url(r'^auth/login$', login, name='login'),
     url(r'^auth/registration$', registration, name='registration'),
     url(r'^auth/logout$', 'django.contrib.auth.views.logout', name='logout'),
-    url(r'^auth/reset$', password_reset,         name='password_reset'),
+    url(r'^auth/reset$', password_reset, name='password_reset'),
     url(r'^auth/password_reset/done/$', 'django.contrib.auth.views.password_reset_done'),
     url(r'^auth/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', name='password_reset_confirm'),
     url(r'^auth/reset/done/$', 'django.contrib.auth.views.password_reset_complete'),
@@ -56,7 +56,7 @@ urlpatterns = patterns('',
     url(r'^messages/compose/$', messages_compose, name='messages_compose'),
     (r'^messages/', include('django_messages.urls')),
 
-    #UGC
+    # UGC
     url(r'^all$', all, name='all'),
     url(r'^top/comments$', top_discussed, name='top_discussed'),
     url(r'^top/best$', top_rating, name='top_rating'),
@@ -76,7 +76,7 @@ urlpatterns = patterns('',
     url(r'^my/drafts$', drafts, name='drafts'),
     url(r'^my/settings$', my_settings, name='settings'),
 
-    #Ajax
+    # Ajax
     url(r'^ajax/add_post_vote$', add_post_vote, name='add_post_vote'),
     url(r'^ajax/add_photo$', add_photo, name='add_photo'),
     url(r'^ajax/best_answer$', best_answer, name='best_answer'),
@@ -89,13 +89,13 @@ urlpatterns = patterns('',
     url(r'^ajax/picturebox', picturebox),
     url(r'^ajax/upload_photo$', 'core.views.admin.upload_photos', name='upload_photos'),
 
-    #Feeds
+    # Feeds
     (r'^feeds/best$', BestPosts()),
     (r'^feeds/all', AllPosts()),
     (r'^feeds/comments', NewComments()),
     (r'^feeds/tags/(?P<tag_name>.+)$', Tags()),
 
-    #Editing
+    # Editing
     url(r'^post/new$', new_post, name='new_post'),
     url(r'^post/edit/(\d+)$', edit_post, name='edit_post'),
     url(r'^photo/edit/(\d+)$', edit_photo, name='edit_photo'),
@@ -108,7 +108,7 @@ urlpatterns = patterns('',
 
     url(r'^$', index, name='index'),
 
-    #Create new elements
+    # Create new elements
     url(r'^create/rider$', create_rider, name='create_rider'),
     url(r'^create/tag_replace$', tag_replace, name='tag_replace'),
     url(r'^create/teaser_announce$', create_teaser_announce, name='create_teaser_announce'),
@@ -117,10 +117,10 @@ urlpatterns = patterns('',
 
     url(r'^hidden$', hidden, name='hidden'),
 
-    #DEBUG
+    # DEBUG
     url(r'^change_user', change_user),
 
-    #Old urls
+    # Old urls
     url(r'^my/posts$', old_my_posts),
     url(r'^posts/(\d+)$', old_user_post),
     url(r'^pic/(\d+)$', old_pic),

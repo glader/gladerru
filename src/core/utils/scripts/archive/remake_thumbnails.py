@@ -17,7 +17,7 @@ from core.models import Item, ItemType
 
 def thumbnail(result):
     url = result.group(1)
-    if not 'thumbnails' in url:
+    if 'thumbnails' not in url:
         return url
 
     print "found thumbnail", url,

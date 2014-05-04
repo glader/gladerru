@@ -19,7 +19,7 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         cursor = connection.cursor()
 
-        #FIXME: переписать это дело на один запрос
+        # FIXME: переписать это дело на один запрос
         print "posts"
         i = 0
         for p in Post.objects.all():

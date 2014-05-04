@@ -100,7 +100,7 @@ def tag(request, name):
         'start': None,
         'posts': posts[:11],
         'tag': tag,
-        }
+    }
     if len(context['posts']) == 11:
         context['start'] = timestamp(context['posts'][10].date_created)
         context['posts'] = context['posts'][:10]
@@ -231,7 +231,7 @@ def faq(request):
         'posts': posts[:11],
         'title': u'Все сообщения',
         'menu_item': 'all_posts',
-        }
+    }
 
     if len(context['posts']) == 11:
         context['start'] = timestamp(context['posts'][10].date_created)
@@ -306,8 +306,7 @@ def get_section_objects(user, section):
         objects = Post.objects.filter(author=user).order_by('-date_created')
 
     elif section == 'draft':
-        objects = Post.all.filter(author=user, status__in=('save', 'deferred')) \
-                    .order_by('-date_created')
+        objects = Post.all.filter(author=user, status__in=('save', 'deferred')).order_by('-date_created')
 
     elif section == 'photos':
         objects = Photo.objects.filter(author=user).order_by('-date_created')
@@ -368,7 +367,7 @@ def drafts(request):
         'start': None,
         'posts': posts[:11],
         'title': u"Неопубликованное",
-        }
+    }
 
     if len(context['posts']) == 11:
         context['start'] = timestamp(context['posts'][10].date_created)
@@ -433,9 +432,11 @@ def user_staff(request, username, section):
     objects = get_section_objects(user, section)
 
     context.update(make_pages(objects, current_page=context.get('page')))
-    context['title'] = user.name + ": " + \
-                        {'comments': u"Комментарии",
-                        'photos': u"Картинки"}.get(section)
+    context['title'] = user.name + ": " + {
+        'comments': u"Комментарии",
+        'photos': u"Картинки"
+    }.get(section)
+
     return render_to_response(request, 'my/%s.html' % section, context)
 
 
@@ -549,13 +550,17 @@ def process_keywords(post):
     for word in words:
         if word.keyword in post.content:
             content = re.sub(u'(<[^>]+)%s' % word.keyword, lambda res: res.group(1) + u'ЪЪЪЪЪ', post.content, re.I)
-            content = re.sub(u'(?<!>)%s(?!<)' % word.keyword,
-                                  u'<a href="%s" title="ЪЪЪЪЪ">%s</a>' % (word.url, word.keyword),
-                                  content,
-                                  1)
-            content = re.sub(u'(?<!>)%s(?!<)' % word.keyword,
-                                  u'<span>%s</span>' % word.keyword,
-                                  content)
+            content = re.sub(
+                u'(?<!>)%s(?!<)' % word.keyword,
+                u'<a href="%s" title="ЪЪЪЪЪ">%s</a>' % (word.url, word.keyword),
+                content,
+                1,
+            )
+            content = re.sub(
+                u'(?<!>)%s(?!<)' % word.keyword,
+                u'<span>%s</span>' % word.keyword,
+                content,
+            )
             post.content = re.sub(u'ЪЪЪЪЪ', word.keyword, content)
 
 
@@ -594,12 +599,11 @@ def edit_post(request, post_id):
 
             video_tag = Tag.objects.get(name='video')
             if ('<youtube' in post.content or '<embed' in post.content) and \
-                not video_tag in form.cleaned_data['tags']:
-                    post.tags.add(video_tag)
+                    video_tag not in form.cleaned_data['tags']:
+                        post.tags.add(video_tag)
 
             # Статус
-            status = {u'Удалить': 'del', u'Опубликовать': 'pub', u'В черновики': 'save'} \
-                    .get(request.POST['action'])
+            status = {u'Удалить': 'del', u'Опубликовать': 'pub', u'В черновики': 'save'}.get(request.POST['action'])
             if status:
                 post.status = status
 
@@ -722,6 +726,7 @@ def editpassword(request):
 ###############################################################################
 # AJAX
 
+
 @auth_only
 def add_post_vote(request):
     user = request.user
@@ -730,9 +735,10 @@ def add_post_vote(request):
         post = form.cleaned_data['post']
         add_vote(post, user, request.META['REMOTE_ADDR'])
         template_filter = isinstance(post, Movie) and decimal_cut or signed_number
-        result = {'success': True,
-                  'vote_class': 'rating_' + good_or_bad(post.rating),
-                  'rating': str(template_filter(post.rating))
+        result = {
+            'success': True,
+            'vote_class': 'rating_' + good_or_bad(post.rating),
+            'rating': str(template_filter(post.rating))
         }
 
     else:
@@ -791,11 +797,12 @@ def add_photo(request):
     post.content += ' <glader pic="%s">' % image.pk
     post.save()
 
-    return HttpResponse(simplejson.dumps({'success': True,
-                                           'picture_id': image.pk,
-                                           'absolute_url': image.get_absolute_url(),
-                                           'thumbnail_url': settings.STATIC_URL + thumbnail_url
-                                           }))
+    return HttpResponse(simplejson.dumps({
+        'success': True,
+        'picture_id': image.pk,
+        'absolute_url': image.get_absolute_url(),
+        'thumbnail_url': settings.STATIC_URL + thumbnail_url
+    }))
 
 
 def add_to_yaphoto(content):
@@ -803,12 +810,13 @@ def add_to_yaphoto(content):
     content = content.read()
 
     files = [('image', 'image', content), ]
-    status, reason, result = post_multipart(settings.YAFOTKI_STORAGE_OPTIONS['host'],
-                                            None,
-                                            settings.YAFOTKI_STORAGE_OPTIONS['post'],
-                                            {},
-                                            files,
-                                            headers={'Authorization': 'OAuth %s' % settings.YAFOTKI_STORAGE_OPTIONS['token']}
+    status, reason, result = post_multipart(
+        settings.YAFOTKI_STORAGE_OPTIONS['host'],
+        None,
+        settings.YAFOTKI_STORAGE_OPTIONS['post'],
+        {},
+        files,
+        headers={'Authorization': 'OAuth %s' % settings.YAFOTKI_STORAGE_OPTIONS['token']}
     )
 
     if status != 201:
@@ -926,7 +934,7 @@ def crossdomain(request):
 
 def tags_suggest(request):
     query = request.GET.get('tag', '')
-    tags = [{'caption':t.title, 'value':t.title} for t in Tag.get_by_query(query)]
+    tags = [{'caption': t.title, 'value': t.title} for t in Tag.get_by_query(query)]
     if len(query) >= 3 and not {'caption': query, 'value': query} in tags:
         tags.append({'caption': u'+' + query, 'value': query})
     return variants_to_response(tags)

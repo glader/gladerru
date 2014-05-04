@@ -4,6 +4,7 @@ from django.core.management.base import NoArgsCommand
 
 from core.models import Comment
 
+
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         print """<?xml version="1.0" encoding="UTF-8"?>
@@ -19,8 +20,10 @@ class Command(NoArgsCommand):
 
         for comment in comments:
             item = comment.item
-            if not item: continue
-            if not comment.content or len(comment.content) < 5: continue
+            if not item:
+                continue
+            if not comment.content or len(comment.content) < 5:
+                continue
 
             print "<item><title><![CDATA[%s]]></title>" % item.title.encode('utf8')
             print "<link>http://glader.ru%s</link>" % item.get_absolute_url()

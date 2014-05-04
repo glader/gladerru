@@ -20,7 +20,7 @@ class Command(NoArgsCommand):
                 if photo.image:
                     path = os.path.join(settings.STATIC_ROOT, photo.image.path)
                     if os.path.exists(path):
-                        #sh = open('/home/www/projects/gladerru/drop.sh', 'a')
+                        # sh = open('/home/www/projects/gladerru/drop.sh', 'a')
                         sh = open('drop.sh', 'a')
                         sh.write('rm %s\n' % path)
                         sh.close()

@@ -216,6 +216,7 @@ class NewsCategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('order',)
 
+
 class NewsAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'category', 'dt_created')
     list_filter = ('category',)

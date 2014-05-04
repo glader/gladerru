@@ -10,20 +10,20 @@ class Migration(DataMigration):
     def forwards(self, orm):
         "Write your forwards methods here."
 
-        s = """1	http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83730_f7c9bc52_orig
-2	http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83731_57d9a4e3_orig
-3	http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83732_6fcff189_orig
-4	http://img-fotki.yandex.ru/get/6105/19044756.ff/0_8373d_f5a21665_orig
-5	http://img-fotki.yandex.ru/get/6204/19044756.ff/0_8373c_ed1298fe_orig
-6	http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83739_f082f303_orig
-7	http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83733_e2b5e69c_orig
-8	http://img-fotki.yandex.ru/get/6000/19044756.ff/0_8373a_337b0725_orig
-9	http://img-fotki.yandex.ru/get/6000/19044756.ff/0_83734_aa6ecda4_orig
-10	http://img-fotki.yandex.ru/get/6105/19044756.ff/0_8373b_206ea992_orig
-11	http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83735_6b2ba097_orig
-12	http://img-fotki.yandex.ru/get/6000/19044756.ff/0_83736_e625a7d5_orig
-13	http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83737_4706ad93_orig
-14	http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83738_25e29b98_orig"""
+        s = """1    http://img-fotki.yandex.ru/get/6205/19044756.ff/0_83730_f7c9bc52_orig
+2    http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83731_57d9a4e3_orig
+3    http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83732_6fcff189_orig
+4    http://img-fotki.yandex.ru/get/6105/19044756.ff/0_8373d_f5a21665_orig
+5    http://img-fotki.yandex.ru/get/6204/19044756.ff/0_8373c_ed1298fe_orig
+6    http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83739_f082f303_orig
+7    http://img-fotki.yandex.ru/get/6104/19044756.ff/0_83733_e2b5e69c_orig
+8    http://img-fotki.yandex.ru/get/6000/19044756.ff/0_8373a_337b0725_orig
+9    http://img-fotki.yandex.ru/get/6000/19044756.ff/0_83734_aa6ecda4_orig
+10    http://img-fotki.yandex.ru/get/6105/19044756.ff/0_8373b_206ea992_orig
+11    http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83735_6b2ba097_orig
+12    http://img-fotki.yandex.ru/get/6000/19044756.ff/0_83736_e625a7d5_orig
+13    http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83737_4706ad93_orig
+14    http://img-fotki.yandex.ru/get/6001/19044756.ff/0_83738_25e29b98_orig"""
 
         orm.Skill.objects.all().update(image=None)
 

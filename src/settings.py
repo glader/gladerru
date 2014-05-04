@@ -19,9 +19,9 @@ USE_I18N = True
 SECRET_KEY = '12345'
 
 TEMPLATE_LOADERS = (
-        'django.template.loaders.filesystem.Loader',
-        'django.template.loaders.app_directories.Loader',
-    )
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
 
 DEBUG = False
 TEMPLATE_DEBUG = False
@@ -119,7 +119,7 @@ CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
-        }
+    }
 }
 CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
 CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для практически не изменяющихся данных
@@ -163,29 +163,29 @@ LOGGING = {
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'traceback.log'),
             'formatter': 'verbose',
-            },
+        },
         'mail_admin': {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
-            },
+        },
         'cron': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'cron.log'),
             'formatter': 'verbose',
-            },
+        },
         'queue': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'queue.log'),
             'formatter': 'simple',
-            },
+        },
         'search': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
             'filename': os.path.join(LOG_PATH, 'search.log'),
             'formatter': 'simple',
-            },
+        },
         'timelog': {
             'level': 'DEBUG',
             'class': 'logging.handlers.RotatingFileHandler',
@@ -193,36 +193,36 @@ LOGGING = {
             'maxBytes': 1024 * 1024 * 5,  # 5 MB
             'backupCount': 5,
             'formatter': 'plain',
-            },
         },
+    },
     'loggers': {
         'django.cron': {
             'handlers': ['cron'],
             'level': 'INFO',
             'propagate': True,
-            },
+        },
         'django.search': {
             'handlers': ['search'],
             'level': 'INFO',
             'propagate': True,
-            },
+        },
         'queue': {
             'handlers': ['queue'],
             'level': 'INFO',
             'propagate': False,
-            },
+        },
         'django': {
             'handlers': ['mail_admin', 'file'],
             'level': 'WARNING',
             'propagate': True,
-            },
+        },
         'timelog.middleware': {
             'handlers': ['timelog'],
             'level': 'DEBUG',
             'propogate': False,
-            }
-        },
-    }
+        }
+    },
+}
 
 try:
     from local_settings import *

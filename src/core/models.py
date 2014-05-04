@@ -188,8 +188,7 @@ class TagsCloud(object):
                 tag.rel_size = (max_rel_size + min_rel_size) / 2
 
             else:
-                tag.rel_size = min_rel_size + \
-                            (tag.size - min) * (max_rel_size - min_rel_size) / (max - min)
+                tag.rel_size = min_rel_size + (tag.size - min) * (max_rel_size - min_rel_size) / (max - min)
 
 
 def get_image_path(instance, filename):
@@ -329,9 +328,11 @@ class Avatar(models.Model):
     def get(cls, users, size):
         users = [user.id if isinstance(user, User) else user for user in users]
         avatars = dict((a.user_id, a) for a in Avatar.objects.filter(user__in=users))
-        return dict((user_id, getattr(avatars[user_id], 'avatar%s' % size).src
-                                if user_id in avatars
-                                else "%sdesign/3/img/avatars/avatar%s.png" % (settings.STATIC_URL, size)
+        return dict(
+            (
+                user_id,
+                getattr(avatars[user_id], 'avatar%s' % size).src if user_id in avatars
+                else "%sdesign/3/img/avatars/avatar%s.png" % (settings.STATIC_URL, size)
             )
             for user_id in users
         )
@@ -376,7 +377,7 @@ class VoteMixin(object):
 
     def get_vote(self, user):
         """ Возвращает оценку, выставленную элементу юзером. None, если не голосовал """
-        #FIXME: добавить votes = generic.GenericRelation(ItemVote)
+        # FIXME: добавить votes = generic.GenericRelation(ItemVote)
         if user and user.is_authenticated():
             votes = ItemVote.objects.filter(content_type__pk=26, object_id=self.pk, user=user)
             if votes:
@@ -1070,9 +1071,10 @@ class Keyword(models.Model):
     u""" Автогенерируемая таблица всех характерных слов типа имен райдеров и названий фильмов """
     keyword = models.CharField(verbose_name=u"Слово", max_length=200)
     url = models.URLField(verbose_name=u"Ссылка")
-    TYPES = (('auto', u'Из другой таблицы'),
-            ('manual', u'Руками'),
-            )
+    TYPES = (
+        ('auto', u'Из другой таблицы'),
+        ('manual', u'Руками'),
+    )
     type = models.CharField(verbose_name=u"Тип", max_length=20, choices=TYPES, default='manual')
 
     def __unicode__(self):
@@ -1161,7 +1163,6 @@ class News(models.Model):
             None,
             ['glader.ru@gmail.com']
         )
-
 
     class Meta:
         verbose_name = u"Новость"

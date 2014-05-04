@@ -1149,8 +1149,8 @@ class Migration(DataMigration):
 /movies сноубордические фильмы
 /movies гладер
 /movies самый сноубордический сайт
-/movies/aesthetica   	 Army Of The Pharaohs - Dump The Clip
-/movies/aesthetica  	Army Of The Pharaohs   -   Dump The Clip crfxfnm
+/movies/aesthetica        Army Of The Pharaohs - Dump The Clip
+/movies/aesthetica      Army Of The Pharaohs   -   Dump The Clip crfxfnm
 /movies/aesthetica скачать мр3 Army Of The Pharaohs - Dump The Clip
 /movies/aesthetica скачать бесплатно фильм Aesthetica
 /movies/aesthetica скачать army of the pharaohs dump the clip
@@ -1396,7 +1396,7 @@ class Migration(DataMigration):
 /movies/patchworkpatterns Think Thank - Patchwork Patterns
 /movies/pauza рекламная пауза Артем Теймуров, Виктор Теймуров, Александр Брагин
 /movies/pauza вижу как встает с колен моя родина   рекламная пауза
-/movies/picturethis   	 Awol One and Daddy Kev - rhythm  скачать
+/movies/picturethis        Awol One and Daddy Kev - rhythm  скачать
 /movies/picturethis  Shawn Lee's Ping Pong Orchestra - Kiss The Skyскачать
 /movies/picturethis скачать Awol One & Daddy Kev - Rhythm
 /movies/picturethis скачать mp3  Awol One & Daddy Kev - Rhythm
@@ -1473,9 +1473,9 @@ class Migration(DataMigration):
 /movies/soundtracks?&page=3 The Sunshine Underground Commercial Breakdown
 /movies/soundtracks?&page=3 this house - jasper james
 /movies/soundtracks?&page=3 You Say Party! We Say Die!   -   Cold Hands! Hot Bodies!
-/movies/soundtracks?&page=4   	 Nina Simone - Sinnerman
+/movies/soundtracks?&page=4        Nina Simone - Sinnerman
 /movies/soundtracks?&page=4   Nina Simone - Sinnerman
-/movies/soundtracks?&page=4  	Nina Simone   -   Sinnerman
+/movies/soundtracks?&page=4      Nina Simone   -   Sinnerman
 /movies/soundtracks?&page=4 /movies/soundtracks?&page=4  Nina Simone - Sinnerman   mp3 мелодии
 /movies/soundtracks?&page=4 скачать песню World Hustle
 /movies/soundtracks?&page=4 скачать бесплатно nina simone sinnerman
@@ -1510,7 +1510,7 @@ class Migration(DataMigration):
 /movies/teenagelovegraffiti Cansei de Ser Sexy - Beautiful Song  скачать бесплатно
 /movies/teenagelovegraffiti Friska Viljor   -   Puppet Cabaret
 /movies/teenagelovegraffiti teenage love graffiti скачать
-/movies/thanksbrain  	The Finches   -   Step Outside скачать бесплатно
+/movies/thanksbrain      The Finches   -   Step Outside скачать бесплатно
 /movies/thanksbrain  3oh!3 - Dont Dance    скачать
 /movies/thanksbrain скачать 3oh!3 - Dont Dance
 /movies/thanksbrain 3OH!3 — Hornz
@@ -1554,7 +1554,7 @@ class Migration(DataMigration):
 /movies/thatsitthatsall Will   -   Won't Be So Down
 /movies/thatsitthatsall Will   -   Won't Be So Down скачать
 /movies/thatsitthatsall will won't be so down
-/movies/theb  	The Chesterfield Kings   -   Up And Down скачать
+/movies/theb      The Chesterfield Kings   -   Up And Down скачать
 /movies/theb metalika b
 /movies/theb The Jackson Sisters - I Believe in Miracles
 /movies/theb The Jackson Sisters - I Believe In Miracles
@@ -1891,7 +1891,7 @@ class Migration(DataMigration):
 /tags/botinki ботинки est
 /tags/bozwreck Bozwreck 2
 /tags/builttoshred built to shred
-/tags/bungee  	   Banshee Bungee
+/tags/bungee         Banshee Bungee
 /tags/bungee Banshee Bungee
 /tags/burton BURTON КАТАЛОГ 09
 /tags/burton?page=2 обои от burton
@@ -1987,7 +1987,7 @@ class Migration(DataMigration):
 /tags/dreampark Фотографии фигур из дерева для парка
 /tags/dreampark dream park
 /tags/dreampark dream park как добраться сноуборд
-/tags/ducksjen  	 The Ducksjen Movie саундтрек
+/tags/ducksjen       The Ducksjen Movie саундтрек
 /tags/ducksjen Ducksjen The Movie саундтреки
 /tags/dvs кеды Woodward фотографии
 /tags/dvs видео mail.ru двс
@@ -2589,7 +2589,7 @@ class Migration(DataMigration):
 /tags/torrent?page=3 где можно скачать фильмы torrents
 /tags/torrent?page=3 torrents.ru скачать бесплатно фильмы без регистрации
 /tags/torrent?page=3 www.torrent.ru скачать фильмы
-/tags/torsteinhorgmo  	Torstein Horgmo
+/tags/torsteinhorgmo      Torstein Horgmo
 /tags/travis%20rice сноубордист Rice, Travis
 /tags/travis%20rice фильм трэвиса райса
 /tags/travis%20rice Обои Travis Rice

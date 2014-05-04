@@ -7,7 +7,7 @@ from django.utils.html import strip_spaces_between_tags as short
 
 class UserReferer:
     def process_request(self, request):
-        if request.META.get('HTTP_REFERER') and not request.user.is_authenticated() and not 'referer' in request.session:
+        if request.META.get('HTTP_REFERER') and not request.user.is_authenticated() and 'referer' not in request.session:
             request.session['referer'] = request.META['HTTP_REFERER']
 
 

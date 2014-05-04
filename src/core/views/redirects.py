@@ -14,8 +14,8 @@ from core.models import Post, Photo, Tag, Movie
 
 
 def get_username(request):
-        if not 'HTTP_HOST' in request.META:
-                return
+        if 'HTTP_HOST' not in request.META:
+            return
         result = re.match('([\w\d_-]+)\.%s' % settings.DOMAIN, request.META['HTTP_HOST'])
         if result and result.group(1) != 'www':
             return result.group(1)
@@ -53,6 +53,7 @@ def old_post_category(request, category_name):
 def old_blog_post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     return HttpResponsePermanentRedirect(post.get_absolute_url())
+
 
 def old_movie(request, movie_name):
     movie = get_object_or_404(Movie, slug=movie_name)

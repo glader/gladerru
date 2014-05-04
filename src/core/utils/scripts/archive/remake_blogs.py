@@ -17,16 +17,17 @@ from pprint import pprint
 os.system("mysql -uroot --database=gladerru < gladerru.sql")
 
 # Новые категории
-cats = ([u'Фристайл', 'freestyle'],
-        [u'Фрирайд',  'freeride'],
-        [u'Джибинг',  'jibbing'],
-        [u'Карвинг',  'carving'],
-        [u'Снаряга',  'equipment'],
-        [u'События',  'events'],
-        [u'Фильмы',  'movies'],
-        [u'Я новичок',  'newbie'],
-        [u'Разное', 'other'],
-        )
+cats = (
+    [u'Фристайл', 'freestyle'],
+    [u'Фрирайд', 'freeride'],
+    [u'Джибинг', 'jibbing'],
+    [u'Карвинг', 'carving'],
+    [u'Снаряга', 'equipment'],
+    [u'События', 'events'],
+    [u'Фильмы', 'movies'],
+    [u'Я новичок', 'newbie'],
+    [u'Разное', 'other'],
+)
 cat_items = {}
 
 type = ItemType(name='POST_CATEGORY', description=u"Категория постов")

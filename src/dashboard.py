@@ -23,11 +23,12 @@ class UGCStat(modules.DashboardModule):
                             group by d.date""" % (date.today(), date.today() - self.interval))
         registrations = cursor.fetchall()
         if registrations:
-            self.blocks.append({'title': u'Регистрации',
-                            'max': max(row[1] for row in registrations),
-                            'data': ','.join(str(row[1]) for row in registrations),
-                            'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
-                            })
+            self.blocks.append({
+                'title': u'Регистрации',
+                'max': max(row[1] for row in registrations),
+                'data': ','.join(str(row[1]) for row in registrations),
+                'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
+            })
 
         cursor.execute("""SELECT d.date, COUNT(p.id)
                             from d
@@ -36,11 +37,12 @@ class UGCStat(modules.DashboardModule):
                             group by d.date""" % (date.today(), date.today() - self.interval))
         comments = cursor.fetchall()
         if comments:
-            self.blocks.append({'title': u'Комментарии',
-                            'max': max(row[1] for row in comments),
-                            'data': ','.join(str(row[1]) for row in comments),
-                            'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
-                            })
+            self.blocks.append({
+                'title': u'Комментарии',
+                'max': max(row[1] for row in comments),
+                'data': ','.join(str(row[1]) for row in comments),
+                'days': '|%s|' % '|'.join(str(row[0].day) for row in registrations)
+            })
 
     def is_empty(self):
         return False
@@ -58,26 +60,28 @@ class CustomIndexDashboard(Dashboard):
             title=u"Приложения",
             display="tabs",
             children=[
-                      modules.ModelList(
-                            title='Best',
-                            include_list=('core.models.mountain',
-                                          'core.models.man',
-                                          'core.models.profile',
-                                          'core.models.tag',
-                                          'core.models.movie',
-                                          ),
-                            exclude_list=('core.models.tag2skill',)
-                        ),
-                      modules.ModelList(
-                            title='Other',
-                            exclude_list=('core.models.mountain',
-                                          'core.models.movie',
-                                          'core.models.man',
-                                          'core.models.tag',
-                                          'core.models.profile',
-                                          'django'
-                                          )
-                        ),
+                modules.ModelList(
+                    title='Best',
+                    include_list=(
+                        'core.models.mountain',
+                        'core.models.man',
+                        'core.models.profile',
+                        'core.models.tag',
+                        'core.models.movie',
+                    ),
+                    exclude_list=('core.models.tag2skill',)
+                ),
+                modules.ModelList(
+                    title='Other',
+                    exclude_list=(
+                        'core.models.mountain',
+                        'core.models.movie',
+                        'core.models.man',
+                        'core.models.tag',
+                        'core.models.profile',
+                        'django'
+                    )
+                ),
             ]
         ))
 

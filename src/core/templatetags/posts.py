@@ -11,8 +11,9 @@ def render_to_string(template_name, context_dict={}):
     return t.render(Context(context_dict))
 
 
-@cached(lambda post, mode='cut', user=None: "%srender/post/%s/%s" % (settings.CACHE_ROOT, post.id, mode or 'cut'),
-        timeout_seconds=settings.CACHE_LONG_TIMEOUT
+@cached(
+    lambda post, mode='cut', user=None: "%srender/post/%s/%s" % (settings.CACHE_ROOT, post.id, mode or 'cut'),
+    timeout_seconds=settings.CACHE_LONG_TIMEOUT,
 )
 def render_post_cached(post, mode='cut', user=None):
     """Формирование html кода поста. cut - вариант для ленты, full - для страницы поста"""

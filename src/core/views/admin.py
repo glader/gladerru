@@ -64,12 +64,13 @@ def create_rider(request):
 def create_teaser_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
-    post = Post.objects.create(title=u'Тизер к фильму "%s"' % movie.title, content='',
-                               comment_count=0,
-                               status='pub',
-                               author=request.user,
-                               ip=request.META['REMOTE_ADDR'],
-                               type='teaser',
+    post = Post.objects.create(
+        title=u'Тизер к фильму "%s"' % movie.title, content='',
+        comment_count=0,
+        status='pub',
+        author=request.user,
+        ip=request.META['REMOTE_ADDR'],
+        type='teaser',
     )
 
     post.item = movie
@@ -83,12 +84,13 @@ def create_teaser_announce(request):
 def create_fullmovie_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
-    post = Post.objects.create(title=u'Выложен фильм "%s"' % movie.title, content='',
-                               comment_count=0,
-                               status='pub',
-                               author=request.user,
-                               ip=request.META['REMOTE_ADDR'],
-                               type='full_movie',
+    post = Post.objects.create(
+        title=u'Выложен фильм "%s"' % movie.title, content='',
+        comment_count=0,
+        status='pub',
+        author=request.user,
+        ip=request.META['REMOTE_ADDR'],
+        type='full_movie',
     )
 
     post.item = movie
@@ -102,12 +104,13 @@ def create_fullmovie_announce(request):
 def create_tracklist_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
-    post = Post.objects.create(title=u'Выложена музыка к фильму "%s"' % movie.title, content='',
-                               comment_count=0,
-                               status='pub',
-                               author=request.user,
-                               ip=request.META['REMOTE_ADDR'],
-                               type='soundtrack',
+    post = Post.objects.create(
+        title=u'Выложена музыка к фильму "%s"' % movie.title, content='',
+        comment_count=0,
+        status='pub',
+        author=request.user,
+        ip=request.META['REMOTE_ADDR'],
+        type='soundtrack',
     )
 
     post.item = movie
@@ -300,14 +303,15 @@ def timing_report(request):
     for i, url in enumerate(links):
         links[url].sort(reverse=True)
 
-        measures.append({'id': i,
-                          'url': url,
-                          'amount': len(links[url]),
-                          'average': human_timedelta(sum(links[url]) / len(links[url])),
-                          'min': human_timedelta(links[url][-1]),
-                          'max': human_timedelta(links[url][0]),
-                          'all': [human_timedelta(t) for t in links[url]],
-})
+        measures.append({
+            'id': i,
+            'url': url,
+            'amount': len(links[url]),
+            'average': human_timedelta(sum(links[url]) / len(links[url])),
+            'min': human_timedelta(links[url][-1]),
+            'max': human_timedelta(links[url][0]),
+            'all': [human_timedelta(t) for t in links[url]],
+        })
 
     measures.sort(key=lambda r: r['average'], reverse=True)
 
