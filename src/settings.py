@@ -60,17 +60,12 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = (
-    'admin_tools',
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
     'django.contrib.auth',
     'django.contrib.admin',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'django.contrib.markup',
     'django.contrib.messages',
     'timelog',
     'core',
@@ -105,7 +100,6 @@ LOGIN_URL = '/auth/login'
 
 DESIGN_ID = 3
 MAIN_PAGE_LEVEL = 1
-ADMIN_TOOLS_INDEX_DASHBOARD = 'dashboard.CustomIndexDashboard'
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
 DOMAIN = 'glader.ru'

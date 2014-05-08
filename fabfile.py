@@ -203,6 +203,12 @@ def restart():
     run('sudo restart gladerru_celery')
 
 
+# -----------------------------------------------------------------------
+
+def run_local():
+    local('cd src && ..\\ENV\\Scripts\\python manage.py runserver 0.0.0.0:8000')
+
+
 def local_env():
     with settings(warn_only=True):
         local('c:\\python\\python virtualenv.py ENV --system-site-packages')
@@ -213,6 +219,7 @@ def local_migrate():
     with settings(warn_only=True):
         local('cd src && ..\\ENV\\Scripts\\python manage.py schemamigration core --auto')
     local('cd src && ..\\ENV\\Scripts\\python manage.py migrate')
+
 
 def update_local_db():
     run("mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s > gladerru.sql" % globals())
