@@ -67,14 +67,15 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.messages',
-    'timelog',
-    'core',
-    'sape',
     'south',
     'gunicorn',
     'django_messages',
     'django_russian',
     'djcelery',
+
+    'timelog',
+    'core',
+    'sape',
 )
 
 # Absolute path to the directory that holds media.

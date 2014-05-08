@@ -198,8 +198,9 @@ class UserAdmin(admin.ModelAdmin):
     ordering = ('-date_joined',)
     search_fields = ('username', 'first_name', 'email')
 
+
+admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
-admin.site.register(Group)
 admin.site.register(Permission)
 
 
@@ -208,6 +209,7 @@ class MessageAdmin(admin.ModelAdmin):
     ordering = ('-sent_at',)
     raw_id_fields = ('sender', 'recipient', 'parent_msg')
 
+admin.site.unregister(Message)
 admin.site.register(Message, MessageAdmin)
 
 
