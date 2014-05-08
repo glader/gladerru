@@ -76,6 +76,7 @@ INSTALLED_APPS = (
     'core',
     'sape',
     'south',
+    'gunicorn',
     'django_messages',
     'django_russian',
     'djcelery',

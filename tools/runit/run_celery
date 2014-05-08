@@ -1,4 +1,0 @@
-#!/bin/sh
-
-echo $(date) restarted >> /var/log/projects/gladerru/restart-celery.log
-exec chpst -u www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py celeryd --settings=settings >> /var/log/projects/gladerru/celery.log

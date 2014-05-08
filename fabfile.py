@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import boto
-import time
 from datetime import date
 
 from fabric.api import *
@@ -43,8 +41,6 @@ def init():
             sudo('mkdir /home/%s/.ssh' % SSH_USER)
             sudo('echo "%s" >> /home/%s/.ssh/authorized_keys' % (env.www_ssh_key, SSH_USER))
 
-        append('/etc/sudoers', '%s  ALL=(ALL) NOPASSWD:/usr/bin/sv' % SSH_USER, use_sudo=True)
-
         if not exists('/var/cache/gladerru/thumbnails'):
             sudo('mkdir -p /var/cache/gladerru/thumbnails')
             sudo('touch /var/cache/gladerru/glader_ru.links.db')
@@ -59,8 +55,6 @@ def init():
 
         if not exists('/etc/nginx/listen'):
             put('tools/nginx/listen', '/etc/nginx/listen', use_sudo=True)
-        if not exists('/etc/nginx/fastcgi_params_extended'):
-            put('tools/nginx/fastcgi_params_extended', '/etc/nginx/fastcgi_params_extended', use_sudo=True)
 
         if not exists('/etc/nginx/sites-available/90-gladerru.conf'):
             sudo('touch /etc/nginx/sites-available/90-gladerru.conf')
@@ -68,17 +62,15 @@ def init():
         if not exists('/etc/nginx/sites-enabled/90-gladerru.conf'):
             sudo('ln -s /etc/nginx/sites-available/90-gladerru.conf /etc/nginx/sites-enabled/90-gladerru.conf', shell=False)
 
-        if not exists('/etc/sv/gladerru'):
-            sudo('mkdir -p /etc/sv/gladerru/supervise')
-            sudo('touch /etc/sv/gladerru/run')
-            sudo('chmod 755 /etc/sv/gladerru/run')
-            sudo('ln -s /etc/sv/gladerru /etc/service/gladerru')
+        if not exists('/etc/init/gladerru.conf'):
+            run('touch /etc/init/gladerru.conf')
+            run('chown %s /etc/init/gladerru.conf' % SSH_USER)
 
-        if not exists('/etc/sv/gladerru_celery'):
-            sudo('mkdir -p /etc/sv/gladerru_celery/supervise')
-            sudo('touch /etc/sv/gladerru_celery/run')
-            sudo('chmod 755 /etc/sv/gladerru_celery/run')
-            sudo('ln -s /etc/sv/gladerru_celery /etc/service/gladerru_celery')
+        if not exists('/etc/init/gladerru_celery.conf'):
+            run('touch /etc/init/gladerru_celery.conf')
+            run('chown %s /etc/init/gladerru_celery.conf' % SSH_USER)
+
+        append('/etc/sudoers', '%s ALL=(ALL) NOPASSWD:/sbin/restart gladerru;/sbin/restart gladerru_celery' % SSH_USER)
 
         if not exists('/etc/cron.d/gladerru'):
             sudo('touch /etc/cron.d/gladerru')
@@ -105,7 +97,7 @@ def production(mode=""):
     environment()
     local_settings()
     nginx()
-    runit()
+    upstart()
     cron()
     if mode != 'no_dump':
         dump()
@@ -159,10 +151,9 @@ def nginx():
     #sudo('/etc/init.d/nginx reload', shell=False)
 
 
-def runit():
-    with settings(user='root'):
-        sudo('cp %(directory)s/tools/runit/run /etc/sv/gladerru/run' % env)
-        sudo('cp %(directory)s/tools/runit/run_celery /etc/sv/gladerru_celery/run' % env)
+def upstart():
+    run('cp %(directory)s/tools/upstart/gladerru.conf /etc/init/gladerru.conf' % env, shell=False)
+    run('cp %(directory)s/tools/upstart/gladerru_celery.conf /etc/init/gladerru_celery.conf' % env, shell=False)
 
 
 def cron():
@@ -208,19 +199,15 @@ def collect_static():
 
 
 def restart():
-    with settings(user=SSH_USER):
-        run('sudo sv restart gladerru')
-        time.sleep(1)
-        run('chmod 777 /home/www/projects/gladerru/fcgi.sock')
-        run('ls -l /home/www/projects/gladerru/fcgi.sock')
-
-        run('sudo sv restart gladerru_celery')
+    run('sudo restart gladerru')
+    run('sudo restart gladerru_celery')
 
 
 def local_env():
     with settings(warn_only=True):
         local('c:\\python\\python virtualenv.py ENV --system-site-packages')
     local('ENV\\Scripts\\pip install -r requirements.txt ')
+
 
 def local_migrate():
     with settings(warn_only=True):
@@ -234,8 +221,10 @@ def update_local_db():
     local("mysql -uroot %(DATABASE_DB)s < gladerru.sql" % globals())
     local("del gladerru.sql")
 
+
 def local_celery():
     local('cd src && ..\\ENV\\scripts\\python manage.py celeryd --settings=settings')
+
 
 def local_static():
     local('cd src && ..\\ENV\\scripts\\python manage.py collectstatic -c --noinput')
