@@ -70,7 +70,7 @@ def init():
             run('touch /etc/init/gladerru_celery.conf')
             run('chown %s /etc/init/gladerru_celery.conf' % SSH_USER)
 
-        append('/etc/sudoers', '%s ALL=(ALL) NOPASSWD:/sbin/restart gladerru;/sbin/restart gladerru_celery' % SSH_USER)
+        append('/etc/sudoers', '%s ALL=(ALL) NOPASSWD:/sbin/restart gladerru,/sbin/restart gladerru_celery' % SSH_USER)
 
         if not exists('/etc/cron.d/gladerru'):
             sudo('touch /etc/cron.d/gladerru')
