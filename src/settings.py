@@ -25,7 +25,6 @@ TEMPLATE_LOADERS = (
 
 DEBUG = False
 TEMPLATE_DEBUG = False
-IS_DEVEL = False
 TIMING = True
 LOG_LEVEL = logging.WARNING
 
@@ -47,10 +46,12 @@ MIDDLEWARE_CLASSES = (
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
-    'core.context.default',
+    'django.core.context_processors.static',
+    'django.core.context_processors.request',
+
+    'core.context.profile',
     'django_messages.context_processors.inbox',
     'django.contrib.messages.context_processors.messages',
-    'django.core.context_processors.static',
 )
 
 ROOT_URLCONF = 'urls'

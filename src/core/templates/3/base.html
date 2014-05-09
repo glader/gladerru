@@ -146,7 +146,7 @@
     {% include "block_reg_popup.html" %}
 {% endif %}
 
-{% if not is_devel %}
+{% if not debug %}
 <!-- Yandex.Metrika counter -->
 <script src="//mc.yandex.ru/metrika/watch_visor.js" type="text/javascript"></script>
 <div style="display:none;"><script type="text/javascript">
@@ -156,16 +156,6 @@ catch(e) { }
 </script></div>
 <noscript><div><img src="//mc.yandex.ru/watch/8400?cnt-class=1" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
-
-<!--LiveInternet counter--><script type="text/javascript"><!--
-document.write("<a href='http://www.liveinternet.ru/click' "+
-"target=_blank><img src='http://counter.yadro.ru/hit?t44.1;r"+
-escape(document.referrer)+((typeof(screen)=="undefined")?"":
-";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
-screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
-";"+Math.random()+
-"' alt='' title='LiveInternet' "+
-"border=0 width=31 height=31><\/a>")//--></script><!--/LiveInternet-->
 {% endif %}
 
 </body>

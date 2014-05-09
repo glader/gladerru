@@ -2,16 +2,8 @@
 from django.conf import settings
 
 
-def default(request):
-    context = {
-        'user': None,
-        'request': request,
-        'debug': settings.DEBUG,
-        'is_devel': settings.IS_DEVEL,
-    }
-
+def profile(request):
     if request.user.is_authenticated():
-        context['user'] = request.user
-        context['profile'] = request.user.get_profile()
-
-    return context
+        return {'profile': request.user.get_profile()}
+    else:
+        return {}
