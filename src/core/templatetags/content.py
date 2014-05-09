@@ -610,13 +610,6 @@ def yadirect(block_name):
 
 
 @register.filter
-def human_month(monthNumber):
-    months = (u'январь', u'февраль', u'март', u'апрель', u'май', u'июнь', u'июль', u'август',
-              u'сентябрь', u'октябрь', u'ноябрь', u'декабрь')
-    return months[monthNumber - 1]
-
-
-@register.filter
 def thumbnail(image_url):
     return get_thumbnail_url(image_url)
 
