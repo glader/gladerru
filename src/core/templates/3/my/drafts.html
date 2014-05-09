@@ -4,7 +4,7 @@
 {% block title %}{% if title %}{{ title }}{% else %}Все сообщения{% endif %} - {{ block.super }}{% endblock %}
 
 {% block rss_link %}
-    <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/all" title="Glader.ru: свежие сообщения">
+    <link rel="alternate" type="application/rss+xml" href="/feeds/all" title="Glader.ru: свежие сообщения">
 {% endblock %}
 
 {% block top_menu %}

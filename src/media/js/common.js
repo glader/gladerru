@@ -27,7 +27,7 @@ $(document).ready(function(){
          $('#opaco').height($(document).height()).toggleClass('g-hidden').fadeTo('slow', 0.7)
                     .click(function(){$(this).togglePopup();});
        }
- 
+
        $('#popup_iframe').alignCenter().toggleClass('g-hidden');
 
         popup = $('#popup');
@@ -70,9 +70,9 @@ function submitLoginForm(event){
         alert("Введите пароль");
         return false;
     }
-    
+
     $.post( "/auth/login",
-            {     login: login, 
+            {     login: login,
                   passwd: passwd,
                   retpath: $('#login_form #id_retpath').val() || ''
              },
@@ -84,16 +84,16 @@ function submitLoginForm(event){
                         $('#login_popup').togglePopup();
                     }else{
                         window.location = json.retpath;
-                    } 
+                    }
                   }
                   if(json.error){
                      alert(json.error)
                   }
                   return false;
                },
-             "json" 
+             "json"
     );
-    
+
     return false;
 }
 
@@ -105,9 +105,9 @@ function submitRegForm(event){
         alert("Пароли отличаются");
         return false;
     }
-    
+
     $.post( "/auth/registration",
-            { name: login, 
+            { name: login,
                   email: $('#registration_form #id_email').val() || '',
                   password1: password1, password2: password2,
                   retpath: $('#registration_form #id_retpath').val() || ''
@@ -120,31 +120,31 @@ function submitRegForm(event){
                         $('#login_popup').togglePopup();
                     }else{
                         window.location = json.retpath;
-                    } 
+                    }
                   }
                   if(json.error){
                      alert(json.error)
                   }
                   return false;
                },
-             "json" 
+             "json"
     );
-    
-    return false; 
-} 
+
+    return false;
+}
 
 function cut_anchor(url){
     // Отрезает # и все что за ней
     url = String(url);
-    pos = url.indexOf('#'); 
+    pos = url.indexOf('#');
     if( pos >= 0){
         return url.substr(0, pos);
     }else{
         return url;
-    }    
+    }
 }
 
-function init(){  
+function init(){
 	commentform = $('#commentform');
 	if (commentform.length){
 	    $("#commentform_link")
@@ -169,8 +169,8 @@ function init(){
 	            }else{
 	                showLoginForm(null, '', function(){
 	                    addComment(post, klass, "");
-	                    window.location = window.location; 
-	                });            
+	                    window.location = window.location;
+	                });
 	            }
 	            return false;
 	        });
@@ -180,34 +180,34 @@ function init(){
         $('#login-link').bind("click", {retpath: '/', form: 'login'}, showLoginForm);
         $('#registration-link').bind("click", {retpath: '/'}, showLoginForm);
         $('#top_menu_new').bind("click", {retpath: '/post/new'}, showLoginForm);
-        
+
         $('.js-login_required').each(function(){
         	retpath = $(this).metadata().retpath;
         	$(this).bind("click", {retpath: retpath}, showLoginForm);
         });
     }
-    
+
     $('.js-vote').click( function(){
         post = $(this).metadata().post;
         klass = $(this).metadata().klass;
         if( logged_in ){
             addPostVotes(post, klass, 1);
         }else{
-            retpath = "http://" + domain + "/ajax/add_post_vote?post=" + post + "&klass=" + klass
-                        + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#" + post)  
+            retpath = "/ajax/add_post_vote?post=" + post + "&klass=" + klass
+                        + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#" + post)
             showLoginForm(null, retpath);
         }
-        return false; 
+        return false;
     });
-    
+
     $('.js-commentlink').click( function(){
         $('.js-commentform').hide();
         $('.js-commentlink').show();
         $(this).hide();
         $('#commentform' + $(this).metadata().comment).show();
-        return false;   
+        return false;
     });
-    
+
     $('.js-commentform').bind("submit", function(){
         data = $(this).metadata();
         if( logged_in ){
@@ -215,10 +215,10 @@ function init(){
         }else{
             showLoginForm(null, '', function(){
                 addComment(data.post, data.klass, data.comment);
-                window.location = window.location; 
-            });            
+                window.location = window.location;
+            });
         }
-        return false;    
+        return false;
     });
 
     $('.js-comment-vote').click( function(){
@@ -226,25 +226,25 @@ function init(){
         if( logged_in ){
             addCommentVote(comment, 1);
         }else{
-            retpath = "http://" + domain + "/ajax/add_comment_vote?comment=" + comment  
-                        + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#c" + comment)  
+            retpath = "/ajax/add_comment_vote?comment=" + comment
+                        + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#c" + comment)
             showLoginForm(null, retpath);
         }
-        return false; 
+        return false;
     });
-    
+
     $('.js-best_answer').click(function(){
         data = $(this).metadata();
         setBestAnswer(data.comment)
-        return false;    
+        return false;
     });
 
     $('.js-del_best_answer').click(function(){
         data = $(this).metadata();
         delBestAnswer(data.comment)
-        return false;    
+        return false;
     });
-    
+
     $('#set_name_form').submit(function(){ return set_name(); });
     $('#set_news_form').submit(function(){ return set_news(); });
 
@@ -258,10 +258,10 @@ function showLoginForm(event, retpath, callback){
     }else{
         form = 'registration';
     }
-        
+
     $('#login_form #id_retpath').val(retpath);
     $('#registration_form #id_retpath').val(retpath);
-    
+
     if( form == 'login' ){
         $('#login_form_block').removeClass('g-hidden');
         $('#registration_form_block').addClass('g-hidden');
@@ -271,10 +271,10 @@ function showLoginForm(event, retpath, callback){
     }
 
     $('#login_popup').togglePopup();
-    
-    $('#login_form').bind("submit", {'callback':callback}, submitLoginForm); 
+
+    $('#login_form').bind("submit", {'callback':callback}, submitLoginForm);
     $('#registration_form').bind("submit", {'callback':callback}, submitRegForm);
-    
+
     return false;
 }
 
@@ -331,7 +331,7 @@ function getSlices(elem){
     var end = text.slice(end);
     return [begin, middle, end];
 }
-                    
+
 function initPostPictures(){
     textarea = $('#id_content').get(0);
     $(".js-post-picture-prepare").each( function(){
@@ -355,60 +355,60 @@ function initPostPictures(){
             });
     });
 }
- 
+
 function initPostButtons(){
 // Навешивает действия на кнопки у редактирования поста
-    textarea = $('#id_content').get(0); 
+    textarea = $('#id_content').get(0);
     $('#btn-strong').click( function(){
         slices = getSlices(textarea);
-        textarea.value = slices[0] + '<strong>' + slices[1] + '</strong>' + slices[2];        
+        textarea.value = slices[0] + '<strong>' + slices[1] + '</strong>' + slices[2];
     });
 
     $('#btn-em').click( function(){
         slices = getSlices(textarea);
-        textarea.value = slices[0] + '<em>' + slices[1] + '</em>' + slices[2];        
+        textarea.value = slices[0] + '<em>' + slices[1] + '</em>' + slices[2];
     });
 
     $('#btn-ins').click( function(){
         slices = getSlices(textarea);
-        textarea.value = slices[0] + '<u>' + slices[1] + '</u>' + slices[2];        
+        textarea.value = slices[0] + '<u>' + slices[1] + '</u>' + slices[2];
     });
 
     $('#btn-h1').click( function(){
         slices = getSlices(textarea);
-        textarea.value = slices[0] + '\n=' + slices[1] + '\n' + slices[2];        
+        textarea.value = slices[0] + '\n=' + slices[1] + '\n' + slices[2];
     });
 
     $('#btn-h2').click( function(){
         slices = getSlices(textarea);
-        textarea.value = slices[0] + '\n==' + slices[1] + '\n' + slices[2];        
+        textarea.value = slices[0] + '\n==' + slices[1] + '\n' + slices[2];
     });
 
     $('#btn-link').click( function(){
         slices = getSlices(textarea);
         var url = prompt('Url страницы');
-        textarea.value = slices[0] + '<a href="' + url + '">' + slices[1] + '</a>' + slices[2];        
+        textarea.value = slices[0] + '<a href="' + url + '">' + slices[1] + '</a>' + slices[2];
     });
 
     $('#btn-img').click( function(){
         slices = getSlices(textarea);
         var url = prompt('Url картинки');
-        textarea.value = slices[0] + '<img src="' + url + '" alt="" />' + slices[1] + slices[2];        
+        textarea.value = slices[0] + '<img src="' + url + '" alt="" />' + slices[1] + slices[2];
     });
 
     $('#btn-youtube').click( function(){
         slices = getSlices(textarea);
         var url = prompt('Url страницы с видеороликом');
-        textarea.value = slices[0] + '<youtube>' + url + '</youtube>' + slices[1] + slices[2];        
+        textarea.value = slices[0] + '<youtube>' + url + '</youtube>' + slices[1] + slices[2];
     });
 
     $('#btn-cut').click( function(){
         slices = getSlices(textarea);
-        textarea.value = slices[0] + '<cut>' + slices[1] + slices[2];        
+        textarea.value = slices[0] + '<cut>' + slices[1] + slices[2];
     });
 
-    $('#id_deferred_date').datepick({dateFormat: 'yy-mm-dd'});                
-    $('.categories').bind("click", checkCategories); 
+    $('#id_deferred_date').datepick({dateFormat: 'yy-mm-dd'});
+    $('.categories').bind("click", checkCategories);
 }
 
 // Навешивает на все ссылки, требующие регистрации, попап с формой регистрации

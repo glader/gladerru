@@ -4,7 +4,7 @@
 {% block title %}Свежие комментарии - {{ block.super }}{% endblock %}
 
 {% block rss_link %}
-   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/all" title="Glader.ru: свежие сообщения">
+   <link rel="alternate" type="application/rss+xml" href="/feeds/all" title="Glader.ru: свежие сообщения">
 {% endblock %}
 
 {% block top_menu %}
@@ -19,7 +19,7 @@
             {% for item in items %}
                 {% cut_view item user 'new_comments' %}
             {% endfor %}
-        </div>    
+        </div>
     {% else %}
         <div>Новых комментариев пока нет. Вы можете пока почитать <a href="/all">ленту новых сообщений</a>.</div>
     {% endif %}

@@ -4,7 +4,7 @@
 {% block title %}Картинки с тегом "{{ tag.title }}"{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
 
 {% block rss_link %}
-   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/tags/{{ tag.name }}" title="Glader.ru: {{ tag.title }}">
+   <link rel="alternate" type="application/rss+xml" href="/feeds/tags/{{ tag.name }}" title="Glader.ru: {{ tag.title }}">
 {% endblock %}
 
 {% block top_menu %}

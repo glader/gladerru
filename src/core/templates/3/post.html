@@ -6,7 +6,7 @@
 {% block title %}{{ post.title }} - {{ parent.title }}{{ block.super }}{% endblock %}
 
 {% block rss_link %}
-   <link rel="alternate" type="application/rss+xml" href="http://{% DOMAIN %}/feeds/posts/{{ post.id }}" title="Glader.ru: комментарии поста '{{ post.title }}'">
+   <link rel="alternate" type="application/rss+xml" href="/feeds/posts/{{ post.id }}" title="Glader.ru: комментарии поста '{{ post.title }}'">
 {% endblock %}
 
 {% block top_menu %}

@@ -8,7 +8,7 @@
                     <span class="g-png"><img src="{% static "design/3/img/usertab/userpic_border.png" %}" alt="" /></span>
                 </i>
 
-                <span class="username">{% if user %}{{ user|link }} {% if profile.is_moderator and item %}<small>(<a href="{% get_admin_url item %}">ред.</a>)</small>{% endif %}{% else %}<a href="http://{% DOMAIN %}/auth/login" class="reg">вход / регистрация</a>{% endif %}</span>
+                <span class="username">{% if user %}{{ user|link }} {% if profile.is_moderator and item %}<small>(<a href="{% get_admin_url item %}">ред.</a>)</small>{% endif %}{% else %}<a href="/auth/login" class="reg">вход / регистрация</a>{% endif %}</span>
                 <span class="logout"><a href="{% url "logout" %}"><img src="{% static "design/3/img/usertab/logout.gif" %}" alt="Выход" /></a></span>
 
                 <span class="text {% if messages_inbox_count %}text_active {% endif %} num-pm"><img src="{% static "design/3/img/usertab/pm.gif" %}" alt="" />&times;&nbsp;{{ messages_inbox_count }}</span>

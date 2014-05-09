@@ -25,11 +25,6 @@ register = template.Library()
 
 
 @register.simple_tag
-def DOMAIN():
-    return settings.DOMAIN
-
-
-@register.simple_tag
 def VK_API_ID():
     return settings.VK_API_ID
 
@@ -546,16 +541,16 @@ def link(item):
         return u"[Отсутствует объект]"
 
     if isinstance(item, Tag):
-        return mark_safe(u'<a href="http://%s%s" rel="tag">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.title))
+        return mark_safe(u'<a href="%s" rel="tag">%s</a>' % (item.get_absolute_url(), item.title))
 
     if isinstance(item, User):
-        return mark_safe(u'<a href="http://%s%s">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.name))
+        return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.name))
 
     if isinstance(item, Photo):
-        return mark_safe(u'<a href="http://%s%s"><img class="userphoto" src="%s" alt="%s"></a>'
-                         % (settings.DOMAIN, item.get_absolute_url(), settings.STATIC_URL + thumbnail(item.yandex_fotki_image_src), item.title))
+        return mark_safe(u'<a href="%s"><img class="userphoto" src="%s" alt="%s"></a>'
+                         % (item.get_absolute_url(), settings.STATIC_URL + thumbnail(item.yandex_fotki_image_src), item.title))
 
-    return mark_safe(u'<a href="http://%s%s">%s</a>' % (settings.DOMAIN, item.get_absolute_url(), item.title))
+    return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
 
 
 @register.simple_tag
@@ -680,8 +675,7 @@ def is_extremebits(torrent):
 @register.simple_tag
 def get_admin_url(object):
     u"""Ссылка на редактирование эелмента"""
-    return u"http://%(domain)s/admind/%(app_label)s/%(module_name)s/%(object_id)s/" % {
-        'domain': settings.DOMAIN,
+    return u"/admind/%(app_label)s/%(module_name)s/%(object_id)s/" % {
         'app_label': object._meta.app_label,
         'module_name': object._meta.module_name,
         'object_id': quote(unicode(object.pk).encode('utf8'))

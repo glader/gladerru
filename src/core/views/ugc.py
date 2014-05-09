@@ -929,7 +929,7 @@ def crossdomain(request):
         <cross-domain-policy>
         <allow-access-from domain="%s" />
         </cross-domain-policy>
-    """ % settings.MEDIA_DOMAIN)
+    """ % settings.DOMAIN)
 
 
 def tags_suggest(request):

@@ -38,7 +38,7 @@
 
     $(function(){
         $('#swfupload-control').swfupload({
-            upload_url: "http://{% DOMAIN %}/ajax/add_photo?sessionid={{ request.COOKIES.sessionid }}&post={{ post.id }}",
+            upload_url: "/ajax/add_photo?sessionid={{ request.COOKIES.sessionid }}&post={{ post.id }}",
             file_size_limit : "10240",
             file_types : "*.*",
             file_types_description : "All Files",

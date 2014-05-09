@@ -104,7 +104,6 @@ MAIN_PAGE_LEVEL = 1
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
 DOMAIN = 'glader.ru'
-MEDIA_DOMAIN = DOMAIN
 
 SAPE_DIR = '/var/cache/gladerru'
 SAPE_CHARSET = 'utf-8'
