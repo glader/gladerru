@@ -2,7 +2,6 @@
 from django.conf.urls import *
 from views.admin import *
 from views.content import *
-from views.redirects import *
 from views.ugc import *
 from feeds import *
 from django.contrib.auth.views import password_reset
@@ -113,14 +112,6 @@ urlpatterns = patterns('',
 
     url(r'^hidden$', hidden, name='hidden'),
 
-    # DEBUG
-    url(r'^change_user', change_user),
-
     # Old urls
-    url(r'^my/posts$', old_my_posts),
-    url(r'^posts/(\d+)$', old_user_post),
-    url(r'^pic/(\d+)$', old_pic),
-    url(r'^cat/([\w\d_-]+)$', old_post_category),
-    url(r'^blog/[^/]+/(\d+)$', old_blog_post),
     url(r'^movies/([^/]+)$', old_movie),
 )

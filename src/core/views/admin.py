@@ -17,18 +17,6 @@ from core.utils.common import slug
 from core.models import Image
 
 
-def change_user(request):
-    if not request.user.username == 'glader':
-        raise Http404()
-    username = request.GET.get('user')
-    user = User.objects.get(username=username)
-    request.session['_auth_user_id'] = user.id
-    return HttpResponseRedirect('/')
-
-###############################################################################
-# Админка
-
-
 def moderator_required(func):
     def wrapper(request, *args, **kwargs):
         if request.user.is_authenticated() and request.user.get_profile().is_moderator:

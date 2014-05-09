@@ -409,3 +409,8 @@ def skill(request, name):
                'tags': Tag.objects.filter(tag2skill__skill=skill).order_by('size')
                }
     return render_to_response(request, 'skill.html', context)
+
+
+def old_movie(request, movie_name):
+    movie = get_object_or_404(Movie, slug=movie_name)
+    return HttpResponsePermanentRedirect(movie.get_absolute_url())
