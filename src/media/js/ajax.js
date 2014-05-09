@@ -85,39 +85,6 @@ function delBestAnswer(commentId){
   return false;
 }
 
-function add_friend(friend_name){
- $.getJSON("/ajax/add_friend",
-            { user: friend_name },
-           function(json){
-              if(json.success){
-              	$('#add_friend').hide();
-              	$('#cancel_friend').show();
-              }
-              if(json.error){
-                 alert(json.error)
-              }
-              return false;
-           });
-  return false;
-}
-
-function cancel_friend(friend_name){
- if( confirm("Вы уверены, что хотите убрать его из друзей?")){
-	 $.getJSON("/ajax/cancel_friend",
-	            { user: friend_name },
-	           function(json){
-	              if(json.success){
-	              	$('#cancel_friend').hide();
-	              	$('#add_friend').show();
-	              }
-	              if(json.error){
-	                 alert(json.error)
-	              }
-	              return false;
-	           });
-	  }
-  return false;
-}
 
 function set_name(){
   $.getJSON("/ajax/set_name", { name: $('#set_name_form #id_name').attr('value') },

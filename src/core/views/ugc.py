@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
     PhotoForm, PostVoteForm, CommentForm, sanitizeHTML
-from core.models import Post, Friend, ItemVote, Movie, Photo, Comment, Profile, Tag, \
+from core.models import Post, ItemVote, Movie, Photo, Comment, Profile, Tag, \
     Keyword, PictureBox, TagsCloud, Avatar
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
     make_pages
@@ -324,35 +324,15 @@ def user_profile(request, username):
     last_comments = Comment.objects.filter(author=domain_user).order_by('-date_created')[:3]
     last_photos = Photo.objects.filter(author=domain_user).order_by('-date_created')[:3]
     page = 'profile'
-    if request.user and request.user.is_authenticated() and not domain_user == request.user:
-        my_friend = bool(Friend.objects.filter(user_a=request.user, user_b=domain_user).count())
     avatar = Avatar.get([domain_user], 128)[domain_user.id]
 
     return render_to_response(request, 'profile.html', locals())
-
-
-def user_friends(request, username):
-    u""" Друзья юзера """
-    domain_user = get_user(username)
-    friends = Friend.objects.filter(user_a=domain_user).select_related('subject')
-    avatars = Avatar.get([friend.user_b_id for friend in friends], 32)
-    for friend in friends:
-        friend.avatar = avatars[friend.user_b_id]
-
-    page = 'friends'
-    return render_to_response(request, 'my/friends.html', locals())
 
 
 @auth_only
 def my_profile(request):
     """ Профиль пользователя """
     return user_profile(request, request.user)
-
-
-@auth_only
-def my_friends(request):
-    u""" Друзья юзера """
-    return user_friends(request, request.user.username)
 
 
 @auth_only
@@ -859,36 +839,6 @@ def best_answer(request):
         return HttpResponseRedirect(request.GET['retpath'])
     else:
         return JsonResponse(result)
-
-
-@auth_only
-def add_friend(request):
-    user = request.user
-    try:
-        new_friend = User.objects.get(username=request.GET.get('user'))
-    except User.DoesNotExist:
-        return JsonErrorResponse(u"Вы пытаетесь подружиться с несуществующим пользователем")
-
-    if Friend.objects.filter(user_a=user, user_b=new_friend).count():
-        return JsonErrorResponse(u"Вы уже дружите с этим пользователем")
-
-    Friend.objects.create(user_a=user, user_b=new_friend)
-    return JsonResponse({'success': True})
-
-
-@auth_only
-def cancel_friend(request):
-    user = request.user
-    try:
-        new_friend = User.objects.get(username=request.GET.get('user'))
-    except User.DoesNotExist:
-        return JsonErrorResponse(u"Вы прекратить дружбу с несуществующим пользователем")
-
-    if not Friend.objects.filter(user_a=user, user_b=new_friend).count():
-        return JsonErrorResponse(u"Вы и так не дружите с этим пользователем")
-
-    Friend.objects.filter(user_a=user, user_b=new_friend).delete()
-    return JsonResponse({'success': True})
 
 
 @auth_only

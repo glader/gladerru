@@ -18,12 +18,6 @@ class AvatarAdmin(admin.ModelAdmin):
     list_display = ('user',)
 
 
-class FriendAdmin(admin.ModelAdmin):
-    raw_id_fields = ('user_a', 'user_b')
-    ordering = ('-date_created',)
-    list_display = ('user_a', 'user_b', 'date_created')
-
-
 class NewsAdmin(admin.ModelAdmin):
     ordering = ('-date_created',)
     list_display = ('type', 'date_created')
@@ -149,7 +143,6 @@ class PictureBoxAdmin(admin.ModelAdmin):
 
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Avatar, AvatarAdmin)
-admin.site.register(Friend, FriendAdmin)
 admin.site.register(Song, SongAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)

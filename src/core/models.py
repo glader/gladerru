@@ -342,20 +342,6 @@ class Avatar(models.Model):
         verbose_name_plural = u"Аватары"
 
 
-class Friend(models.Model):
-    user_a = models.ForeignKey(User, verbose_name=u"Кто дружит", related_name='object')
-    user_b = models.ForeignKey(User, verbose_name=u"С кем дружит", related_name='subject')
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
-
-    def __unicode__(self):
-        return u"%s дружит с %s" % (self.user_a.username, self.user_b.username)
-
-    class Meta:
-        verbose_name = u"Дружба"
-        verbose_name_plural = u"Друзья"
-        unique_together = (("user_a", "user_b"),)
-
-
 class ItemVote(models.Model):
     user = models.ForeignKey(User, verbose_name=u"Пользователь")
     vote = models.IntegerField(verbose_name=u"Оценка")
