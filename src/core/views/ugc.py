@@ -14,10 +14,10 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
 
-from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, AvatarForm, PictureForm, \
+from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
     PhotoForm, PostVoteForm, CommentForm, sanitizeHTML
 from core.models import Post, ItemVote, Movie, Photo, Comment, Profile, Tag, \
-    Keyword, PictureBox, TagsCloud, Avatar
+    Keyword, PictureBox, TagsCloud
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
     make_pages
 from core.utils.common import process_template, slug
@@ -197,10 +197,6 @@ def top_discussed(request):
 @time_slow
 def users_best(request):
     profiles = Profile.objects.all().order_by('-rating')[:20]
-    avatars = Avatar.get([profile.user_id for profile in profiles], 32)
-    for profile in profiles:
-        profile.avatar = avatars[profile.user_id]
-
     title = u"Лучшие посетители"
     menu = 'users_best'
     return render_to_response(request, 'top_users.html', locals())
@@ -209,10 +205,6 @@ def users_best(request):
 @time_slow
 def users_new(request):
     profiles = Profile.objects.all().order_by('-date_created')[:20]
-    avatars = Avatar.get([profile.user_id for profile in profiles], 32)
-    for profile in profiles:
-        profile.avatar = avatars[profile.user_id]
-
     title = u"Youngblood"
     menu = 'users_new'
     return render_to_response(request, 'top_users.html', locals())
@@ -324,7 +316,6 @@ def user_profile(request, username):
     last_comments = Comment.objects.filter(author=domain_user).order_by('-date_created')[:3]
     last_photos = Photo.objects.filter(author=domain_user).order_by('-date_created')[:3]
     page = 'profile'
-    avatar = Avatar.get([domain_user], 128)[domain_user.id]
 
     return render_to_response(request, 'profile.html', locals())
 
@@ -444,7 +435,6 @@ def user_post(request, user, post_id):
                'profile': profile,
                'post': post,
                'can_edit': post.can_edit(request.user),
-               'avatar': Avatar.get([user], 32)[user.id],
                'page_identifier': 'post_%s' % post.id,
                }
 
@@ -684,20 +674,6 @@ def editprofile(request):
         form = ProfileForm(instance=profile)
 
     return render_to_response(request, 'profile_edit.html', {'form': form, 'domain_user': user})
-
-
-@login_required
-def editavatar(request):
-    user = request.user
-    if request.POST or request.FILES:
-        form = AvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save(user)
-            return HttpResponseRedirect(user.get_absolute_url())
-    else:
-        form = AvatarForm(initial={})
-
-    return render_to_response(request, 'avatar_edit.html', {'form': form, 'domain_user': user, 'avatar': Avatar.get([user], 128)[user.id]})
 
 
 def editpassword(request):

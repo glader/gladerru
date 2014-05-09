@@ -14,7 +14,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from core.models import Post, Mountain, Region, PictureBox, Photo, Word, Man, Tag, \
-    Comment, Song, Movie, Studio, Profile, Avatar
+    Comment, Song, Movie, Studio, Profile
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
@@ -49,11 +49,6 @@ def make_pages(querySet, items_at_page=20, current_page=None):
     posts = pages.page(page_number).object_list
     context = {'items': posts}
 
-    if posts and hasattr(posts[0], 'author_id'):
-        avatars = Avatar.get([post.author_id for post in posts], 32)
-        for post in posts:
-            post.avatar = avatars[post.author_id]
-
     context.update(other_pages(page_number, pages.num_pages))
     return context
 
@@ -67,10 +62,6 @@ def make_tag_pages(tag, items_at_page=20, current_page=None):
     posts = list(Post.objects.filter(hidden=False, id__in=page_ids))
     posts.sort(key=lambda p: p.date_created, reverse=True)
     context = {'items': posts}
-
-    avatars = Avatar.get([post.author_id for post in posts], 32)
-    for post in posts:
-        post.avatar = avatars[post.author_id]
 
     context.update(other_pages(page_number, num_pages))
     return context
@@ -607,12 +598,10 @@ def get_comments(post, request):
     comments = post.comments.filter(status='pub', hidden=False).order_by('order')
     users = User.objects.in_bulk(set(comment.author_id for comment in comments))
     profiles = dict((profile.user_id, profile) for profile in Profile.objects.filter(user__in=users.keys()))
-    avatars = Avatar.get(users.keys(), 32)
 
     for comment in comments:
         comment.author = users[comment.author_id]
         comment.profile = profiles[comment.author_id]
-        comment.avatar = avatars[comment.author_id]
         comment.profile_link = link(comment.author)
 
     context = {

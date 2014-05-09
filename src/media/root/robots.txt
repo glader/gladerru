@@ -8,7 +8,6 @@ Disallow: /studio
 Disallow: /index.pl
 Disallow: /forum
 Disallow: /messages
-Disallow: /editavatar
 Disallow: /files
 Host: glader.ru
 
@@ -22,5 +21,4 @@ Disallow: /studio
 Disallow: /index.pl
 Disallow: /forum
 Disallow: /messages
-Disallow: /editavatar
 Disallow: /files

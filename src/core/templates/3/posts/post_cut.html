@@ -1,7 +1,7 @@
 {% load content %}
     <div class="item">
         <a name="{{ post.name }}"></a>
-        <div class="title"><h2><img src="{{ post.avatar }}" class="userpic" alt=""/> {{ post.author|link }}: {{ post|link }}
+        <div class="title"><h2>{{ post.author|link }}: {{ post|link }}
             {% post_edit_link post user %}
             {% post_status post %}
         </h2></div>

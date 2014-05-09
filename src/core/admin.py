@@ -12,12 +12,6 @@ class ProfileAdmin(admin.ModelAdmin):
     search_fields = ('user__username',)
 
 
-class AvatarAdmin(admin.ModelAdmin):
-    raw_id_fields = ('user',)
-    ordering = ('user__username',)
-    list_display = ('user',)
-
-
 class NewsAdmin(admin.ModelAdmin):
     ordering = ('-date_created',)
     list_display = ('type', 'date_created')
@@ -142,7 +136,6 @@ class PictureBoxAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(Avatar, AvatarAdmin)
 admin.site.register(Song, SongAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)

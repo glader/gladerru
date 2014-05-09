@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.forms import *
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain, Avatar, NewsCategory
+from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain, NewsCategory
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -190,14 +190,6 @@ class ProfileForm(ModelForm):
             if f in self.cleaned_data and self.cleaned_data[f]:
                 self.cleaned_data[f] = sanitizeHTML(self.cleaned_data[f])
         return self.cleaned_data
-
-
-class AvatarForm(CommonForm):
-    avatar = ImageField(error_messages={'required': u'Укажите файл с аватаром',
-                                        'invalid': u'Файл поврежден или не является картинкой'})
-
-    def save(self, user):
-        Avatar.add(user, self.cleaned_data['avatar'])
 
 
 class OpenMultipleChoiceField(MultipleChoiceField):
