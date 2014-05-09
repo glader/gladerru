@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-import re
 from bs4 import BeautifulSoup, element
 import urllib
 import random

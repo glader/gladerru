@@ -162,7 +162,6 @@ def top_menu(level2='best', level1=None):
             ['dictionary', '/terms', u'словарь', u'Словарь всяких терминов'],
         ],
         'profile': [
-            ['messages', '/messages/inbox/', u'сообщения', u'Личные сообщения'],
             ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
             ['settings', '/my/settings', u'настройки', u''],
         ]

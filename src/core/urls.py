@@ -52,9 +52,6 @@ urlpatterns = patterns('',
     url(r'^reports/timing', timing_report, name='reports_timing'),
     url(r'^reports$', reports, name='reports'),
 
-    url(r'^messages/compose/$', messages_compose, name='messages_compose'),
-    (r'^messages/', include('django_messages.urls')),
-
     # UGC
     url(r'^all$', all, name='all'),
     url(r'^top/comments$', top_discussed, name='top_discussed'),

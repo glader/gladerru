@@ -25,12 +25,6 @@
 								<a href="{% url "discount_delete" discount.id %}" title="Удалить"><img src="{% static "design/3/img/b-discount/cross.png" %}" alt="Удалить карту"></a>
 							{% endifequal %}
 						</td>
-						<td>
-							{% ifnotequal user discount.user %}
-								<a href="{% url "messages_compose" %}?recipient={{ discount.user.username }}" title="Личное сообщение"
-								><img src="{% static "design/3/img/b-messages/email.png" %}" alt="Личное сообщение"></a>
-							{% endifnotequal %}
-						</td>
 					</tr>
 				{% endfor %}
 			</table>

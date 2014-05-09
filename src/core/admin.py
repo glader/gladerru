@@ -2,7 +2,6 @@
 from django.contrib import admin
 from models import *
 from django.contrib.auth.models import User, Group, Permission
-from django_messages.models import Message
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -188,15 +187,6 @@ class UserAdmin(admin.ModelAdmin):
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)
 admin.site.register(Permission)
-
-
-class MessageAdmin(admin.ModelAdmin):
-    list_display = ('sender', 'recipient', 'subject', 'sent_at')
-    ordering = ('-sent_at',)
-    raw_id_fields = ('sender', 'recipient', 'parent_msg')
-
-admin.site.unregister(Message)
-admin.site.register(Message, MessageAdmin)
 
 
 class NewsCategoryAdmin(admin.ModelAdmin):

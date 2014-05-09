@@ -36,7 +36,6 @@ MIDDLEWARE_CLASSES = (
     'core.middleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
     'core.middleware.LastLogin',
@@ -50,8 +49,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 
     'core.context.profile',
-    'django_messages.context_processors.inbox',
-    'django.contrib.messages.context_processors.messages',
 )
 
 ROOT_URLCONF = 'urls'
@@ -67,10 +64,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
-    'django.contrib.messages',
     'south',
     'gunicorn',
-    'django_messages',
     'django_russian',
     'djcelery',
 

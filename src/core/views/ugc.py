@@ -113,14 +113,6 @@ def tags(request):
     tags_cloud.set_rel_sizes(12, 30)
     return render_to_response(request, 'tags_all.html', {'tags': tags})
 
-
-def messages_compose(request):
-    from django_messages.views import compose
-    recipient = None
-    if request.method == 'GET' and request.GET.get('recipient'):
-        recipient = request.GET.get('recipient')
-    return compose(request, recipient=recipient)
-
 ###############################################################################
 # UGC
 ###############################################################################
