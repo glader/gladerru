@@ -194,22 +194,6 @@ def top_discussed(request):
     return {'posts': items, 'title': u'Самые обсуждаемые за месяц', 'menu_item': 'discussed'}
 
 
-@time_slow
-def users_best(request):
-    profiles = Profile.objects.all().order_by('-rating')[:20]
-    title = u"Лучшие посетители"
-    menu = 'users_best'
-    return render_to_response(request, 'top_users.html', locals())
-
-
-@time_slow
-def users_new(request):
-    profiles = Profile.objects.all().order_by('-date_created')[:20]
-    title = u"Youngblood"
-    menu = 'users_new'
-    return render_to_response(request, 'top_users.html', locals())
-
-
 @posts_feed(template="faq.html")
 def faq(request):
     u""" Посты с пометкой 'Вопрос' """
