@@ -79,22 +79,22 @@ INSTALLED_APPS = (
 )
 
 # Absolute path to the directory that holds media.
-PROJECT_PATH = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(__file__)
 
 ALLOWED_HOSTS = ('glader.ru', 'glader_local.ru')
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(PROJECT_PATH, '..', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, "media"),
+    os.path.join(BASE_DIR, "media"),
 )
 
 THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'data/thumbnails')
 THUMBNAIL_URL = 'data/thumbnails/'
 THUMBNAIL_SIZE = 300, 150
 
-USERPIC_ROOT = os.path.join(os.path.join(PROJECT_PATH, "media"), 'data/userpics')
+USERPIC_ROOT = os.path.join(os.path.join(BASE_DIR, "media"), 'data/userpics')
 USERPIC_URL = 'data/userpics/'
 
 LOGIN_URL = '/auth/login'
