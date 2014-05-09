@@ -592,36 +592,6 @@ def post_panel(post, user, mode='normal'):
     }
 
 
-@cached(cache_key=lambda post, r: '/%s/comments' % post.uid, timeout_seconds=settings.CACHE_LONG_TIMEOUT)
-def get_comments(post, request):
-    comments = post.comments.filter(status='pub', hidden=False).order_by('order')
-    users = User.objects.in_bulk(set(comment.author_id for comment in comments))
-    profiles = dict((profile.user_id, profile) for profile in Profile.objects.filter(user__in=users.keys()))
-
-    for comment in comments:
-        comment.author = users[comment.author_id]
-        comment.profile = profiles[comment.author_id]
-        comment.profile_link = link(comment.author)
-
-    context = {
-        'post': post,
-        'klass': post.__class__.__name__.lower(),
-        'comments': comments,
-    }
-    result = render_to_string(request, 'blocks/b-comments.html', context)
-    return result
-
-
-@register.simple_tag
-def comments(post, request):
-    return get_comments(post, request)
-
-
-@register.filter
-def indent(order, add=0):
-    return (len(order) + add * 3) * 10
-
-
 @register.inclusion_tag('block_post_vote.html')
 def post_vote_arrows(user, post):
     return {'user': user, 'post': post,

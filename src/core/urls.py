@@ -82,7 +82,6 @@ urlpatterns = patterns('',
     # Feeds
     (r'^feeds/best$', BestPosts()),
     (r'^feeds/all', AllPosts()),
-    (r'^feeds/comments', NewComments()),
     (r'^feeds/tags/(?P<tag_name>.+)$', Tags()),
 
     # Editing

@@ -7,7 +7,7 @@ from django.contrib.auth.models import User, Group, Permission
 class ProfileAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
     ordering = ('-date_created',)
-    list_display = ('user', 'date_created', 'pub_post_count', 'comment_count')
+    list_display = ('user', 'date_created', 'pub_post_count')
     search_fields = ('user__username',)
 
 

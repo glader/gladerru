@@ -1,10 +1,8 @@
 # -*- coding:utf-8 -*-
 from django.contrib.syndication.views import Feed
 from django.shortcuts import get_object_or_404
-from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
-from django.contrib.auth.models import User
-from models import Post, Comment, Tag
+from models import Post, Tag
 
 
 class BestPosts(Feed):
@@ -55,25 +53,6 @@ class AllPosts(Feed):
             return item.get_absolute_url()
         else:
             return item.item.get_absolute_url()
-
-
-class NewComments(Feed):
-    """ Свежие комментарии в блоге """
-    title = u"Glader.ru: последние комментарии"
-    link = "http://%s" % settings.DOMAIN
-    description = "Свежие комментарии на сайте сноуборд-энциклопедии Glader.ru"
-    title_template = 'feeds/comments_title.html'
-    description_template = 'feeds/comments_description.html'
-
-    def items(self):
-        return Comment.objects.all().order_by('-date_created')[:50]
-
-    def item_pubdate(self, item):
-        return item.date_created
-
-    def item_author_name(self, item):
-        author = item.author
-        return author and author.first_name or ""
 
 
 class Tags(Feed):

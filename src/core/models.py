@@ -248,16 +248,13 @@ class Profile(models.Model):
     stance = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Стойка")
     referer = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Откуда пришел")
 
-    comment_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество комментариев")
     pic_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество картинок")
     pub_post_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество постов")
-    unread_comment_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество непрочитанных комментариев")
 
     unread_news_count = models.PositiveIntegerField(default=0, verbose_name=u"Количество непрочитанных анонсов")
     send_news = models.BooleanField(default=True, verbose_name=u"Отсылать новости сайта")
 
     def calculate(self):
-        self.comment_count = Comment.objects.filter(author=self.user).count()
         self.pub_post_count = Post.objects.filter(author=self.user, status='pub').count()
         self.pic_count = Photo.objects.filter(author=self.user).count()
         self.save()
@@ -571,7 +568,6 @@ class Mountain(models.Model, VoteMixin, UIDMixin):
     has_ratrack = models.BooleanField(default=False, verbose_name=u"Есть ратрак")
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
     image = YFField(upload_to="gladerru", null=True, blank=True, verbose_name=u"Схема трасс", default=None)
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     lifts = models.TextField(null=True, blank=True, verbose_name=u"Подъемники")
     latitude = models.CharField(max_length=20, null=True, blank=True, verbose_name=u"Широта")
     longitude = models.CharField(max_length=20, null=True, blank=True, verbose_name=u"Долгота")

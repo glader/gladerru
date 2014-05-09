@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.forms import *
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Photo, Movie, Discount, Comment, Mountain, NewsCategory
+from core.models import Profile, Post, Tag, Photo, Movie, Discount, Mountain, NewsCategory
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -281,45 +281,6 @@ class PictureForm(CommonForm):
     Filedata = ImageField(label=u'Картинка')
 
 
-class PostCommentForm(CommonForm):
-    post = CharField(label=u'Пост', error_messages={'required': u'Отсутствует код поста'})
-    klass = CharField(label=u'Тип элемента', error_messages={'required': u'Отсутствует тип элемента'})
-    comment = IntegerField(label=u'Родительский комментарий', required=False)
-    content = CharField(label=u'Сообщение')
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super(PostCommentForm, self).__init__(*args, **kwargs)
-
-    def clean_content(self):
-        content = urllib.unquote(self.cleaned_data['content'])
-        if self.user.get_profile().is_moderator:
-            return content
-        else:
-            return sanitizeHTML(content, mode='strict')
-
-    def clean_comment(self):
-        if not self.cleaned_data['comment']:
-            return None
-        try:
-            return Comment.objects.get(pk=self.cleaned_data['comment'])
-        except Comment.DoesNotExist:
-            raise ValidationError(u'Неизвестный комментарий')
-
-    def clean(self):
-        klass = {'photo': Photo,
-                 'movie': Movie,
-                 'mountain': Mountain,
-                 'item': Post}.get(self.cleaned_data['klass'], Post)
-        try:
-            post = klass.objects.get(pk=self.cleaned_data['post'])
-        except klass.DoesNotExist:
-            raise ValidationError(u'Неизвестное сообщение')
-
-        self.cleaned_data['post'] = post
-        return self.cleaned_data
-
-
 class PostVoteForm(CommonForm):
     """ Голосование за пост """
     post = CharField(label=u'Сообщение', error_messages={'required': u'Отсутствует код поста'})
@@ -348,38 +309,6 @@ class PostVoteForm(CommonForm):
             raise ValidationError(u'Вы не можете голосовать за этот пост')
 
         self.cleaned_data['post'] = post
-        return self.cleaned_data
-
-
-class CommentForm(CommonForm):
-    comment = IntegerField(label=u'Комментарий', error_messages={'required': u'Отсутствует код комментария'})
-
-    def clean_comment(self):
-        try:
-            return Comment.objects.get(pk=self.cleaned_data['comment'])
-        except Comment.DoesNotExist:
-            raise ValidationError(u'Неизвестный комменатрий')
-
-
-class CommentVoteForm(CommentForm):
-    """ Голосование за комментарий """
-    vote = IntegerField(label=u'Оценка', error_messages={'required': u'Отсутствует оценка комментария'})
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super(CommentVoteForm, self).__init__(*args, **kwargs)
-
-    def clean_vote(self):
-        vote = self.cleaned_data['vote']
-        if not (self.user.get_profile().is_moderator or (vote == 1)):
-            raise ValidationError(u'Неправильная оценка')
-
-        return vote
-
-    def clean(self):
-        if not self.cleaned_data['comment'].can_vote(self.user):
-            raise ValidationError(u'Вы не можете голосовать за этот комменатрий')
-
         return self.cleaned_data
 
 

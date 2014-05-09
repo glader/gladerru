@@ -15,7 +15,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import get_object_or_404
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
-    PhotoForm, PostVoteForm, CommentForm, sanitizeHTML
+    PhotoForm, PostVoteForm, sanitizeHTML
 from core.models import Post, ItemVote, Movie, Photo, Comment, Profile, Tag, \
     Keyword, PictureBox, TagsCloud
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
