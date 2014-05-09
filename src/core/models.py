@@ -449,10 +449,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
     tags_str = models.TextField(null=True, blank=True, verbose_name=u"Теги")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    is_question = models.BooleanField(verbose_name=u"Вопрос", default=False)
-    best_answer = models.ForeignKey(Comment, verbose_name=u"Лучший ответ", null=True, blank=True, related_name="post_best_answer")
-    ask_for_answer_amount = models.PositiveSmallIntegerField(verbose_name=u"Количество напоминаний", default=0,
-                                                             help_text=u"Сколько раз напомнили о необходимости выбира лучшего ответа")
     ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
     icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
     local_url = models.CharField(verbose_name=u"Адрес", max_length=70, default="")

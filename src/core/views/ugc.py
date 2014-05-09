@@ -765,35 +765,6 @@ def add_to_yaphoto(content):
 
 
 @auth_only
-def best_answer(request):
-    user = request.user
-    form = CommentForm(request.GET)
-    if form.is_valid():
-        comment = form.cleaned_data['comment']
-        post = comment.item
-        if not post.can_edit(user):
-            raise Http404
-
-        if request.GET.get('del'):
-            post.best_answer = None
-        else:
-            post.best_answer = comment
-        post.save()
-
-        result = {'success': True}
-    else:
-        if 'retpath' in request.GET:
-            return HttpResponseRedirect(request.GET['retpath'])
-        else:
-            return JsonErrorResponse(form.str_errors())
-
-    if 'retpath' in request.GET:
-        return HttpResponseRedirect(request.GET['retpath'])
-    else:
-        return JsonResponse(result)
-
-
-@auth_only
 def set_name(request):
     user = request.user
     name = sanitizeHTML(request.GET.get('name', ''))

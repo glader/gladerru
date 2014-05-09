@@ -60,20 +60,6 @@
         margin-top: 0.8em;
     }
 
-	.b-comments-best_answer .content
-	{
-		background-color: #cfc;
-		width: 100%;
-		padding: 3px 3px 3px 7px;
-	}
-
-	.b-comments-best_answer h2
-	{
-		margin-top: 20px;
-		font-size: 120%;
-		font-weight: bold;
-	}
-
     .comment_item_answerlink
     {
         margin-top: 3px; font-size: 80%;
