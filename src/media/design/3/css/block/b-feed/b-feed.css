@@ -1,7 +1,7 @@
 /* Лента сообщений (begin) */ /**/
     .b-feed
     {
-        
+
     }
 
     .b-feed .item
@@ -16,19 +16,10 @@
         display: inline;
     }
 
-    .b-feed .item .title .userpic
-    {
-        position: relative;
-
-        margin: -10px 10px -5px 0;
-        
-        vertical-align: middle;
-    }
-
     .b-feed .item .text p
     {
         margin: 1em 0;
-        
+
         line-height: 1.3em;
     }
 
@@ -47,6 +38,6 @@
     {
         border: 1px solid black;
     }
-    
-    
+
+
 /* Лента сообщений (end) */ /**/

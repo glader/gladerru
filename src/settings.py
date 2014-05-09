@@ -94,9 +94,6 @@ THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'd
 THUMBNAIL_URL = 'data/thumbnails/'
 THUMBNAIL_SIZE = 300, 150
 
-USERPIC_ROOT = os.path.join(os.path.join(BASE_DIR, "media"), 'data/userpics')
-USERPIC_URL = 'data/userpics/'
-
 LOGIN_URL = '/auth/login'
 
 DESIGN_ID = 3

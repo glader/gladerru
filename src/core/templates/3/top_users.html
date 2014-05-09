@@ -13,7 +13,7 @@
     <table>
         {% for profile in profiles %}
             <tr>
-                <td><img src="{{ profile.avatar }}" class="userpic" alt="" width="32px" />&nbsp;{{ profile.user|link }}&nbsp;</td>
+                <td>{{ profile.user|link }}&nbsp;</td>
                 <td style="vertical-align:bottom">{{ profile.rating }}</td>
             </tr>
             <tr>

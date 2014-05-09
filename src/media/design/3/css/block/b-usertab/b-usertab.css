@@ -33,23 +33,6 @@
         background: url(/static/design/3/img/usertab/bg_unreg.png) no-repeat;
     }
 
-    .b-usertab .userpic
-    {
-        position: absolute;
-        top: 45px;
-        left: 77px;
-
-        width: 64px;
-        height: 64px;
-    }
-
-    .b-usertab .userpic .g-png
-    {
-        position: absolute;
-        top: 0;
-        left: 0;
-    }
-
     .b-usertab .username
     {
         font-size: 10px;
