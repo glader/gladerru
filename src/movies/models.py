@@ -11,7 +11,7 @@ from yafotki.fields import YFField
 from votes.models import VoteMixin
 
 from core.utils.thumbnails import make_thumbnail
-from .utils.ID3 import *
+from .utils import ID3
 
 
 class GenericManager(models.Manager):
@@ -171,13 +171,13 @@ class Song(models.Model):
             try:
                 path = os.path.join(settings.STATIC_ROOT, self.file.name)
                 os.chmod(path, 0644)
-                id3info = ID3(path)
+                id3info = ID3.ID3(path)
                 self.performer = id3info['ARTIST'].decode('cp1251')
                 self.title = id3info['TITLE'].decode('cp1251')
                 if not self.movie.has_songs:
                     self.movie.has_songs = True
                     self.movie.save()
-            except InvalidTagError, message:
+            except ID3.InvalidTagError, message:
                 print "Invalid ID3 tag:", message
 
         if not self.order:

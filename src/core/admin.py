@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import *
+from . import models
 from django.contrib.auth.models import User, Permission
 
 
@@ -63,16 +63,15 @@ class PhotoAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title')
 
 
-admin.site.register(Profile, ProfileAdmin)
-admin.site.register(Skill, SkillAdmin)
-admin.site.register(Tag2Skill, Tag2SkillAdmin)
-admin.site.register(Comment, CommentAdmin)
-admin.site.register(Tag, TagAdmin)
-admin.site.register(Post, PostAdmin)
-admin.site.register(Rubric, RubricAdmin)
-
-admin.site.register(Word, WordAdmin)
-admin.site.register(Photo, PhotoAdmin)
+admin.site.register(models.Profile, ProfileAdmin)
+admin.site.register(models.Skill, SkillAdmin)
+admin.site.register(models.Tag2Skill, Tag2SkillAdmin)
+admin.site.register(models.Comment, CommentAdmin)
+admin.site.register(models.Tag, TagAdmin)
+admin.site.register(models.Post, PostAdmin)
+admin.site.register(models.Rubric, RubricAdmin)
+admin.site.register(models.Word, WordAdmin)
+admin.site.register(models.Photo, PhotoAdmin)
 
 
 class KeywordAdmin(admin.ModelAdmin):
@@ -81,7 +80,7 @@ class KeywordAdmin(admin.ModelAdmin):
     list_filter = ('type',)
     search_fields = ('keyword', 'url')
 
-admin.site.register(Keyword, KeywordAdmin)
+admin.site.register(models.Keyword, KeywordAdmin)
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -107,5 +106,5 @@ class NewsAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     ordering = ('-dt_created',)
 
-admin.site.register(NewsCategory, NewsCategoryAdmin)
-admin.site.register(News, NewsAdmin)
+admin.site.register(models.NewsCategory, NewsCategoryAdmin)
+admin.site.register(models.News, NewsAdmin)

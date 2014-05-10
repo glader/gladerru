@@ -1,15 +1,13 @@
 # -*- coding: utf-8 -*-
-from django.forms import *
+from django import forms
 from django.db import models
 
-from .models import ItemVote
 
-
-class PostVoteForm(Form):
+class PostVoteForm(forms.Form):
     """ Голосование за пост """
-    post = CharField(label=u'Сообщение', error_messages={'required': u'Отсутствует код поста'})
-    klass = CharField(label=u'Тип элемента', error_messages={'required': u'Отсутствует тип элемента'})
-    vote = IntegerField(label=u'Оценка', error_messages={'required': u'Отсутствует оценка поста'})
+    post = forms.CharField(label=u'Сообщение', error_messages={'required': u'Отсутствует код поста'})
+    klass = forms.CharField(label=u'Тип элемента', error_messages={'required': u'Отсутствует тип элемента'})
+    vote = forms.IntegerField(label=u'Оценка', error_messages={'required': u'Отсутствует оценка поста'})
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -18,7 +16,7 @@ class PostVoteForm(Form):
     def clean_vote(self):
         vote = self.cleaned_data['vote']
         if not (self.user.get_profile().is_moderator or (vote == 1)):
-            raise ValidationError(u'Неправильная оценка')
+            raise forms.ValidationError(u'Неправильная оценка')
 
         return vote
 
@@ -31,15 +29,15 @@ class PostVoteForm(Form):
                 break
 
         if not current_model:
-            raise ValidationError(u'Голосование за неизвестный тип контента')
+            raise forms.ValidationError(u'Голосование за неизвестный тип контента')
 
         try:
             item = current_model.objects.get(pk=self.cleaned_data['post'])
         except current_model.DoesNotExist:
-            raise ValidationError(u'Голосование за неизвестный пост')
+            raise forms.ValidationError(u'Голосование за неизвестный пост')
 
         if not item.can_vote(self.user):
-            raise ValidationError(u'Вы не можете голосовать за этот пост')
+            raise forms.ValidationError(u'Вы не можете голосовать за этот пост')
 
         self.cleaned_data['post'] = item
         return self.cleaned_data

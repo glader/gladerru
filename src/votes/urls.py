@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import *
-from .views import *
+from django.conf.urls import patterns, url
+from . import views
 
 
 urlpatterns = patterns('',
-    url(r'^add_post_vote$', add_post_vote, name='add_post_vote'),
+    url(r'^add_post_vote$', views.add_post_vote, name='add_post_vote'),
 )

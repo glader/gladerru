@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import *
+from . import models
 
 
 class SongAdmin(admin.ModelAdmin):
@@ -24,13 +24,13 @@ class StudioAdmin(admin.ModelAdmin):
 
 
 class Man2MovieInline(admin.TabularInline):
-    model = Man2Movie
+    model = models.Man2Movie
     raw_id_fields = ('man',)
     extra = 0
 
 
 class SongInline(admin.TabularInline):
-    model = Song
+    model = models.Song
     extra = 0
 
 
@@ -56,8 +56,8 @@ class PictureBoxAdmin(admin.ModelAdmin):
     ordering = ('-dt',)
 
 
-admin.site.register(Song, SongAdmin)
-admin.site.register(Movie, MovieAdmin)
-admin.site.register(Man, ManAdmin)
-admin.site.register(Studio, StudioAdmin)
-admin.site.register(PictureBox, PictureBoxAdmin)
+admin.site.register(models.Song, SongAdmin)
+admin.site.register(models.Movie, MovieAdmin)
+admin.site.register(models.Man, ManAdmin)
+admin.site.register(models.Studio, StudioAdmin)
+admin.site.register(models.PictureBox, PictureBoxAdmin)

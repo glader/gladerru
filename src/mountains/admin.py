@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from .models import *
+from . import models
 
 
 class MountainPhotoInline(admin.TabularInline):
-    model = MountainPhoto
+    model = models.MountainPhoto
 
 
 class MountainAdmin(admin.ModelAdmin):
@@ -14,6 +14,6 @@ class MountainAdmin(admin.ModelAdmin):
     search_fields = ('name', 'title')
     inlines = (MountainPhotoInline,)
 
-admin.site.register(Mountain, MountainAdmin)
-admin.site.register(Region)
-admin.site.register(District)
+admin.site.register(models.Mountain, MountainAdmin)
+admin.site.register(models.Region)
+admin.site.register(models.District)

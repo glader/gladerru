@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import *
+from django.conf.urls import patterns, url
 from views.admin import *
 from views.content import *
 from views.ugc import *
