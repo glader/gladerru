@@ -17,7 +17,7 @@ from django.shortcuts import get_object_or_404
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
     PhotoForm, sanitizeHTML
 from core.models import Post, Photo, Comment, Tag, Keyword, TagsCloud
-from core.templatetags.content import link, make_pages
+from core.templatetags.content import make_pages
 from core.utils.common import process_template, slug
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
@@ -142,7 +142,7 @@ def all(request):
 @posts_feed()
 def hidden(request):
     """ Вообще все посты, для модераторов """
-    if not request.user.is_superuser():
+    if not request.user.is_superuser:
         raise Http404
 
     start = parse_timestamp(request.GET.get('start'))
