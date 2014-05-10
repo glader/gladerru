@@ -69,9 +69,6 @@ urlpatterns = patterns('',
     url(r'^photo/edit/(\d+)$', edit_photo, name='edit_photo'),
     url(r'^editprofile$', editprofile, name='editprofile'),
     url(r'^editpassword$', editpassword, name='editpassword'),
-    url(r'^post/offer_movie$', offer_movie, name='offer_movie'),
-    url(r'^post/offer_moviemaker$', offer_moviemaker, name='offer_moviemaker'),
-    url(r'^post/offer_rider$', offer_rider, name='offer_rider'),
 
     url(r'^$', index, name='index'),
 

@@ -443,50 +443,6 @@ def user_photo(request, user, pic_id):
                                                       'page_identifier': 'photo_%s' % photo.id})
 
 
-@login_required
-def offer_movie(request):
-    """ Формирование поста с новым фильмом """
-    post = template_post("offer_movie.html",
-                         {},
-                         u"Фильмы",
-                         request.user,
-                         request.META['REMOTE_ADDR'])
-    return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
-
-
-@login_required
-def offer_rider(request):
-    """ Формирование поста с новым райдером """
-    post = template_post("offer_rider.html",
-                         {},
-                         u"Разное, Райдеры",
-                         request.user,
-                         request.META['REMOTE_ADDR'])
-    return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
-
-
-@login_required
-def offer_moviemaker(request):
-    """ Формирование поста с новой студией """
-    post = template_post("offer_moviemaker.html",
-                         {},
-                         u"Фильмы, Студии",
-                         request.user,
-                         request.META['REMOTE_ADDR'])
-    return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
-
-
-def template_post(template, context, tags, author, ip):
-    title, content = process_template('posts/%s' % template, context)
-    post = Post(title=title, content=content, comment_count=0, status='save', author=author, ip=ip)
-    post.save()
-
-    for tag in Tag.process_tags(tags):
-        post.tags.add(tag)
-    post.rebuild_tags()
-    return post
-
-
 def process_keywords(post):
     u"""Заменяет слова на ссылки по таблице Keywords"""
     words = list(Keyword.objects.all())
