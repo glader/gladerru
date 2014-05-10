@@ -14,7 +14,7 @@
 
     {% post_panel item user %}
 
-    {% comments item request %}
+    {% include "blocks/disqus_comments.html" %}
 {% endblock %}
 
 {% block sidebar %}
