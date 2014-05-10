@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
 from .models import *
-from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.models import User, Permission
 
 
 class ProfileAdmin(admin.ModelAdmin):
@@ -9,11 +9,6 @@ class ProfileAdmin(admin.ModelAdmin):
     ordering = ('-date_created',)
     list_display = ('user', 'date_created', 'pub_post_count')
     search_fields = ('user__username',)
-
-
-class NewsAdmin(admin.ModelAdmin):
-    ordering = ('-date_created',)
-    list_display = ('type', 'date_created')
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -68,12 +63,6 @@ class PhotoAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title')
 
 
-class DiscountAdmin(admin.ModelAdmin):
-    list_display = ('user', 'city', 'card', 'discount', 'contacts', 'date_created')
-    ordering = ('-date_created',)
-    raw_id_fields = ('user',)
-
-
 admin.site.register(Profile, ProfileAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)
@@ -84,7 +73,6 @@ admin.site.register(Rubric, RubricAdmin)
 
 admin.site.register(Word, WordAdmin)
 admin.site.register(Photo, PhotoAdmin)
-admin.site.register(Discount, DiscountAdmin)
 
 
 class KeywordAdmin(admin.ModelAdmin):

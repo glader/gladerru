@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import re
-from itertools import groupby
 import logging
 
 from django.conf import settings
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
+from django.http import HttpResponsePermanentRedirect
 from django.shortcuts import get_object_or_404
 
-from core.forms import DiscountForm, FeedbackForm
-from core.models import Redirect, Rubric, Post, Word, Discount, Skill, Tag
+from core.forms import FeedbackForm
+from core.models import Redirect, Rubric, Post, Word, Skill, Tag
 from core.utils.common import clean_choice
 from core.utils.search import search as search_provider
 from core.views.common import render_to_response
@@ -120,62 +118,6 @@ def tricks(request):
 def trick(request, name):
     item = get_object_or_404(Word, slug=name)
     return render_to_response(request, 'trick.html', {'item': item, 'page_identifier': 'word_%s' % item.id})
-
-
-def discounts(request):
-    discounts = [(k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'), lambda d: d.city)]
-    return render_to_response(request, 'discounts.html', {'discounts': discounts})
-
-
-def discount_new(request):
-    if not request.user.is_authenticated():
-        raise Http404
-
-    if request.method == 'POST':
-        form = DiscountForm(request.POST)
-        if form.is_valid():
-            discount = form.save(commit=False)
-            discount.user = request.user
-            discount.save()
-            return HttpResponseRedirect(reverse('discounts'))
-    else:
-        form = DiscountForm()
-
-    return render_to_response(request, 'discount_form.html', {'form': form})
-
-
-def discount_edit(request, discount_id):
-    if not request.user.is_authenticated():
-        raise Http404
-
-    discount = get_object_or_404(Discount, pk=discount_id)
-    if not (request.user == discount.user or request.user.get_profile().is_moderator):
-        raise Http404
-
-    if request.method == 'POST':
-        form = DiscountForm(request.POST, instance=discount)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('discounts'))
-    else:
-        form = DiscountForm(instance=discount)
-
-    return render_to_response(request, 'discount_form.html', {'form': form})
-
-
-def discount_delete(request, discount_id):
-    if not request.user.is_authenticated():
-        raise Http404
-
-    discount = get_object_or_404(Discount, pk=discount_id)
-    if not (request.user == discount.user or request.user.get_profile().is_moderator):
-        raise Http404
-
-    if request.method == 'POST' and request.POST.get('action') == 'delete':
-        discount.delete()
-        return HttpResponseRedirect(reverse('discounts'))
-
-    return render_to_response(request, 'discount_delete.html', {'discount': discount})
 
 
 def search(request):

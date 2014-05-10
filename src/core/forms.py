@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Discount, NewsCategory
+from core.models import Profile, Post, Tag, NewsCategory
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -326,14 +326,3 @@ class PhotoForm(CommonForm):
         self.photo.tags.clear()
         self.photo.tags.add(*self.cleaned_data['tags'])
         self.photo.rebuild_tags()
-
-
-class DiscountForm(forms.ModelForm):
-    class Meta:
-        model = Discount
-        exclude = ('user', 'date_created')
-
-    def __init__(self, *args, **kwargs):
-        super(DiscountForm, self).__init__(*args, **kwargs)
-        for f in self.base_fields.values():
-            f.error_messages['required'] = u"Это поле обязательно для заполнения"

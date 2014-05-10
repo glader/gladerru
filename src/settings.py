@@ -69,6 +69,7 @@ INSTALLED_APPS = (
     'django_russian',
     'djcelery',
 
+    'discounts',
     'timelog',
     'core',
     'sape',
