@@ -184,7 +184,7 @@ def manage_py(command):
 
 def migrate():
     with settings(user=SSH_USER):
-        manage_py('migrate --fake')
+        manage_py('migrate')
 
 
 def update_sape():
