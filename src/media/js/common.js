@@ -193,7 +193,7 @@ function init(){
         if( logged_in ){
             addPostVotes(post, klass, 1);
         }else{
-            retpath = "/ajax/add_post_vote?post=" + post + "&klass=" + klass
+            retpath = "/votes/add_post_vote?post=" + post + "&klass=" + klass
                         + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#" + post)
             showLoginForm(null, retpath);
         }

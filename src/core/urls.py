@@ -69,7 +69,6 @@ urlpatterns = patterns('',
     url(r'^my/settings$', my_settings, name='settings'),
 
     # Ajax
-    url(r'^ajax/add_post_vote$', add_post_vote, name='add_post_vote'),
     url(r'^ajax/add_photo$', add_photo, name='add_photo'),
     url(r'^ajax/set_name$', set_name, name='set_name'),
     url(r'^ajax/set_news$', set_news, name='set_news'),

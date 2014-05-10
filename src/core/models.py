@@ -16,6 +16,7 @@ from django.core.cache import cache
 from django.core.mail import send_mail
 
 from yafotki.fields import YFField
+from votes.models import VoteMixin
 
 from core.utils.common import cached, slug
 from core.utils.log import get_logger
@@ -269,46 +270,6 @@ class Profile(models.Model):
     class Meta:
         verbose_name = u"Профиль"
         verbose_name_plural = u"Профили"
-
-
-class ItemVote(models.Model):
-    user = models.ForeignKey(User, verbose_name=u"Пользователь")
-    vote = models.IntegerField(verbose_name=u"Оценка")
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
-    ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
-
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField()
-    item = generic.GenericForeignKey()
-
-    class Meta:
-        verbose_name = u"Оценка"
-        verbose_name_plural = u"Оценки"
-
-
-class VoteMixin(object):
-    pk = None
-    author = None
-
-    def get_vote(self, user):
-        """ Возвращает оценку, выставленную элементу юзером. None, если не голосовал """
-        # FIXME: добавить votes = generic.GenericRelation(ItemVote)
-        if user and user.is_authenticated():
-            votes = ItemVote.objects.filter(content_type__pk=26, object_id=self.pk, user=user)
-            if votes:
-                return reduce(lambda x, y: x + y, [v.vote for v in votes])
-        return None
-
-    def can_vote(self, user):
-        if not user:
-            return False
-        if not user.is_authenticated():
-            return False
-        if user.get_profile().is_moderator:
-            return True
-        if hasattr(self, 'author') and self.author == user:
-            return False
-        return self.get_vote(user) is None
 
 
 class UIDMixin(object):

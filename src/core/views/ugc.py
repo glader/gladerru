@@ -15,8 +15,8 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanen
 from django.shortcuts import get_object_or_404
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
-    PhotoForm, PostVoteForm, sanitizeHTML
-from core.models import Post, ItemVote, Movie, Photo, Comment, Profile, Tag, \
+    PhotoForm, sanitizeHTML
+from core.models import Post, Movie, Photo, Comment, Tag, \
     Keyword, PictureBox, TagsCloud
 from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
     make_pages
@@ -657,47 +657,6 @@ def editpassword(request):
 
 ###############################################################################
 # AJAX
-
-
-@auth_only
-def add_post_vote(request):
-    user = request.user
-    form = PostVoteForm(request.GET, user=user)
-    if form.is_valid():
-        post = form.cleaned_data['post']
-        add_vote(post, user, request.META['REMOTE_ADDR'])
-        template_filter = isinstance(post, Movie) and decimal_cut or signed_number
-        result = {
-            'success': True,
-            'vote_class': 'rating_' + good_or_bad(post.rating),
-            'rating': str(template_filter(post.rating))
-        }
-
-    else:
-        if 'retpath' in request.GET:
-            return HttpResponseRedirect(request.GET['retpath'])
-        else:
-            return JsonErrorResponse(form.str_errors())
-
-    if 'retpath' in request.GET:
-        return HttpResponseRedirect(request.GET['retpath'])
-    else:
-        return HttpResponse(simplejson.dumps(result))
-
-
-def add_vote(post, user, ip):
-    vote = ItemVote(item=post, user=user, vote=1, ip=ip)
-    vote.save()
-
-    if post.rating:
-        post.rating += 1
-    else:
-        post.rating = 1
-
-    if hasattr(post, 'best') and not post.best and post.rating >= settings.MAIN_PAGE_LEVEL:
-        post.best = datetime.now()
-
-    post.save()
 
 
 def add_photo(request):

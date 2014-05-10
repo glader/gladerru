@@ -1,6 +1,6 @@
 function addPostVotes(postId, klass, vote){
   $('#'+postId+'_vote').unbind('click').click(function(){return false;});
-  $.getJSON("/ajax/add_post_vote",
+  $.getJSON("/votes/add_post_vote",
             { post: postId, klass: klass, vote: vote },
            function(json){
               if(json.success){

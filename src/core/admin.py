@@ -53,12 +53,6 @@ class CommentAdmin(admin.ModelAdmin):
     raw_id_fields = ('author',)
 
 
-class ItemVoteAdmin(admin.ModelAdmin):
-    list_display = ('user', 'vote', 'date_created')
-    ordering = ('-date_created',)
-    raw_id_fields = ('user',)
-
-
 class TagAdmin(admin.ModelAdmin):
     list_display = ('title', 'name', 'type', 'checked', 'size')
     list_filter = ('type', 'checked')
@@ -139,7 +133,6 @@ admin.site.register(Song, SongAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)
 admin.site.register(Comment, CommentAdmin)
-admin.site.register(ItemVote, ItemVoteAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Region)
 admin.site.register(District)

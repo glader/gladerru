@@ -281,37 +281,6 @@ class PictureForm(CommonForm):
     Filedata = ImageField(label=u'Картинка')
 
 
-class PostVoteForm(CommonForm):
-    """ Голосование за пост """
-    post = CharField(label=u'Сообщение', error_messages={'required': u'Отсутствует код поста'})
-    klass = CharField(label=u'Тип элемента', error_messages={'required': u'Отсутствует тип элемента'})
-    vote = IntegerField(label=u'Оценка', error_messages={'required': u'Отсутствует оценка поста'})
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        super(PostVoteForm, self).__init__(*args, **kwargs)
-
-    def clean_vote(self):
-        vote = self.cleaned_data['vote']
-        if not (self.user.get_profile().is_moderator or (vote == 1)):
-            raise ValidationError(u'Неправильная оценка')
-
-        return vote
-
-    def clean(self):
-        klass = {'post': Post, 'photo': Photo, 'mountain': Mountain, 'movie': Movie}.get(self.cleaned_data['klass'], None)
-        try:
-            post = klass.objects.get(pk=self.cleaned_data['post'])
-        except klass.DoesNotExist:
-            raise ValidationError(u'Голосование за неизвестный пост')
-
-        if not post.can_vote(self.user):
-            raise ValidationError(u'Вы не можете голосовать за этот пост')
-
-        self.cleaned_data['post'] = post
-        return self.cleaned_data
-
-
 class FeedbackForm(CommonForm):
     name = CharField(label=u'Имя', required=False)
     email = EmailField(label=u'Email', required=False, error_messages={'invalid': u'Введенный email некорректен'})

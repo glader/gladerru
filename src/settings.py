@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'timelog',
     'core',
     'sape',
+    'votes',
 )
 
 # Absolute path to the directory that holds media.
