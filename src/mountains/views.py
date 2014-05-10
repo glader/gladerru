@@ -20,18 +20,17 @@ def get_mountains(region=None):
             regions_dict[m.region_id].mountains = []
         regions_dict[m.region_id].mountains.append(m)
 
-    return {'regions': regions, 'mountains': mountains}
+    return {'regions': regions, 'mountains': mountains, 'YAMAPS_API_KEY': settings.YAMAPS_API_KEY}
 
 
 def mountains(request):
     context = get_mountains()
-    context['YAMAPS_API_KEY'] = settings.YAMAPS_API_KEY
     return render_to_response(request, 'mountains.html', context)
 
 
 def mountain(request, name):
     mountain = get_object_or_404(Mountain, name=name)
-    return render_to_response(request, 'mountain.html', {'mountain': mountain, 'page_identifier': 'mountain_%s' % mountain.id})
+    return render_to_response(request, 'mountain.html', {'mountain': mountain, 'page_identifier': 'mountain_%s' % mountain.id, 'YAMAPS_API_KEY': settings.YAMAPS_API_KEY})
 
 
 def region(request, region_id):
