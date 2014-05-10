@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 from django import template
-from core.models import Movie, Post
+from core.models import Post
 
 register = template.Library()
 

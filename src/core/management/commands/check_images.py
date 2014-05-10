@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
-from itertools import chain
 from bs4 import BeautifulSoup, Tag, Comment
 
 from django.core.management.base import NoArgsCommand
 
-from core.models import Photo, Man, Movie, Mountain, MountainPhoto, Post
-from core.utils.thumbnails import make_thumbnail
+from core.models import Post
 
 
 def sanitizeHTML(value, mode='none'):
@@ -46,7 +44,6 @@ def sanitizeHTML(value, mode='none'):
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         print sanitizeHTML('<asd>asd asd</asd> middle <b>bbb</b> <!-- comment -->', mode='strict')
-        return
 
         for post in Post.objects.all():
             try:

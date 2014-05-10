@@ -6,9 +6,9 @@ from django.template import Context, loader
 from core.utils.common import cached
 
 
-def render_to_string(template_name, context_dict={}):
+def render_to_string(template_name, context_dict=None):
     t = loader.get_template(template_name)
-    return t.render(Context(context_dict))
+    return t.render(Context(context_dict or {}))
 
 
 @cached(

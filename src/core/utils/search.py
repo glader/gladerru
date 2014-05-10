@@ -9,12 +9,14 @@ import logging.handlers
 from django.conf import settings
 from django.db import models
 
+from core.models import Post
+
 
 def base_search(query):
     result = []
     for model in models.get_models():
         result.extend(model.objects.filter(title__icontains=query))
-    Post = object()
+
     result.extend(Post.objects.filter(title__icontains=query, hidden=False).order_by('-date_created'))
     return result
 

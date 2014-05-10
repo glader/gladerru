@@ -4,16 +4,13 @@ from datetime import date, datetime, timedelta
 from simplejson import dumps
 
 from django.conf import settings
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from core.models import Tag, Post
+from core.models import Tag
 from core.views.common import render_to_response
-from core.utils.common import slug
 from core.models import Image
 
 
