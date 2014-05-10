@@ -3,7 +3,9 @@ from itertools import chain
 
 from django.core.management.base import NoArgsCommand
 
-from core.models import Photo, Man, Movie, Mountain, MountainPhoto
+from core.models import Photo
+from movies.models import Man, Movie
+from mountains.models import Mountain, MountainPhoto
 from core.utils.thumbnails import make_thumbnail
 import logging
 

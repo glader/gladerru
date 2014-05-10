@@ -481,7 +481,7 @@ def link(item):
 
     if isinstance(item, Photo):
         return mark_safe(u'<a href="%s"><img class="userphoto" src="%s" alt="%s"></a>'
-                         % (item.get_absolute_url(), settings.STATIC_URL + thumbnail(item.yandex_fotki_image_src), item.title))
+                         % (item.get_absolute_url(), thumbnail(item.yandex_fotki_image_src), item.title))
 
     return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
 
