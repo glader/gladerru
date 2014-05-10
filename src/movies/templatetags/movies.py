@@ -3,7 +3,7 @@ from django import template
 from django.utils.safestring import mark_safe
 from django.core.paginator import QuerySetPaginator
 
-from ..models import Man, PictureBox
+from ..models import Man, PictureBox, Song
 
 register = template.Library()
 
@@ -55,6 +55,16 @@ def link(item):
 def riders(movie):
     riders = Man.objects.filter(man2movie__movie=movie, man2movie__role='actor').order_by('title')
     return {'riders': riders}
+
+
+@register.inclusion_tag('block_soundtrack_list.html')
+def soundtrack(movie):
+    return {'songs': Song.objects.filter(movie=movie)}
+
+
+@register.inclusion_tag('block_soundtrack_list.html')
+def soundtrack_list(songs):
+    return {'songs': songs}
 
 
 @register.inclusion_tag("blocks/b-picturebox.html")

@@ -79,25 +79,9 @@ admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Tag, TagAdmin)
-admin.site.register(Region)
-admin.site.register(District)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Rubric, RubricAdmin)
 
-
-class MountainPhotoInline(admin.TabularInline):
-    model = MountainPhoto
-
-
-class MountainAdmin(admin.ModelAdmin):
-    ordering = ('title',)
-    list_filter = ('region', 'check_date')
-    list_display = ('title', 'check_date')
-    raw_id_fields = ('root_tag',)
-    search_fields = ('name', 'title')
-    inlines = (MountainPhotoInline,)
-
-admin.site.register(Mountain, MountainAdmin)
 admin.site.register(Word, WordAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Discount, DiscountAdmin)

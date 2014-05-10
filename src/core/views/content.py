@@ -8,11 +8,9 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.utils.safestring import mark_safe
 
 from core.forms import DiscountForm, FeedbackForm
-from core.models import Redirect, Rubric, Post, Word, Photo, Discount, Mountain, Region, Skill, Tag
-from core.templatetags.content import make_pages, link, get_mountains
+from core.models import Redirect, Rubric, Post, Word, Discount, Skill, Tag
 from core.utils.common import clean_choice
 from core.utils.search import search as search_provider
 from core.views.common import render_to_response
@@ -85,24 +83,6 @@ def rubric(request, name):
         template = 'rubric.html'
 
     return render_to_response(request, template, context)
-
-
-@time_slow
-def mountains(request):
-    context = get_mountains()
-    context['YAMAPS_API_KEY'] = settings.YAMAPS_API_KEY
-    return render_to_response(request, 'mountains.html', context)
-
-
-@time_slow
-def mountain(request, name):
-    mountain = get_object_or_404(Mountain, name=name)
-    return render_to_response(request, 'mountain.html', {'mountain': mountain, 'page_identifier': 'mountain_%s' % mountain.id})
-
-
-def region(request, region_id):
-    region = get_object_or_404(Region, pk=region_id)
-    return render_to_response(request, 'mountains.html', get_mountains(region))
 
 alphabet_letters = [[u'A', u'B', u'C', u'D', u'E', u'F', u'G', u'H', u'I', u'J', u'K', u'L', u'M', u'N', u'O', u'P', u'Q', u'R', u'S', u'T', u'U', u'V', u'W', u'X', u'Y', u'Z'],
                     [u'А', u'Б', u'В', u'Г', u'Д', u'Е', u'Ж', u'З', u'И', u'Й', u'К', u'Л', u'М', u'Н', u'О', u'П', u'Р', u'С', u'Т', u'У', u'Ф', u'Х', u'Ц', u'Ч', u'Ш', u'Щ', u'Ъ', u'Ы', u'Ь', u'Э', u'Ю', u'Я']]

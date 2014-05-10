@@ -13,7 +13,7 @@ from django.core.paginator import QuerySetPaginator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Mountain, Region, Photo, Word, Tag, Comment
+from core.models import Post, Photo, Word, Tag, Comment
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
@@ -63,23 +63,6 @@ def make_tag_pages(tag, items_at_page=20, current_page=None):
 
     context.update(other_pages(page_number, num_pages))
     return context
-
-
-def get_mountains(region=None):
-    if region:
-        regions = [region]
-        mountains = Mountain.objects.filter(region=region)
-    else:
-        regions = Region.objects.all()
-        mountains = Mountain.objects.all()
-
-    regions_dict = dict((r.id, r) for r in regions)
-    for m in mountains:
-        if not hasattr(regions_dict[m.region_id], 'mountains'):
-            regions_dict[m.region_id].mountains = []
-        regions_dict[m.region_id].mountains.append(m)
-
-    return {'regions': regions, 'mountains': mountains}
 
 
 def validate_page_number(page, total):
@@ -447,8 +430,7 @@ def items_table_list(items):
 @cached(cache_key='last_conversations', timeout_seconds=settings.CACHE_LONG_TIMEOUT)
 def get_last_coversations():
     items = list(Post.objects.all().order_by('-last_comment_date')[:15]) + \
-        list(Photo.objects.all().order_by('-last_comment_date')[:15]) + \
-        list(Mountain.objects.all().order_by('-last_comment_date')[:15])
+        list(Photo.objects.all().order_by('-last_comment_date')[:15])
     anno = datetime(1900, 1, 1)
     items.sort(key=lambda i: i.last_comment_date or anno, reverse=True)
     items = items[:20]
@@ -490,21 +472,6 @@ def main_tags_list(amount=10):
 @register.filter
 def el(dic, key):
     return dic.get(key)
-
-
-@register.inclusion_tag('block_items_ul_list.html')
-def mountains_list(region):
-    return {'items': get_mountains(region)['mountains'][:20]}
-
-
-@register.inclusion_tag('block_soundtrack_list.html')
-def soundtrack_list(songs):
-    return {'songs': songs}
-
-
-@register.inclusion_tag('block_soundtrack_list.html')
-def soundtrack(movie):
-    return {'songs': Song.objects.filter(movie=movie)}
 
 
 @time_slow(threshold=0)
