@@ -13,12 +13,10 @@ from django.core.paginator import QuerySetPaginator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Mountain, Region, PictureBox, Photo, Word, Man, Tag, \
-    Comment, Song, Movie, Studio, Profile
+from core.models import Post, Mountain, Region, Photo, Word, Tag, Comment
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
-from core.views.common import render_to_string
 from core.utils.thumbnails import get_thumbnail_url
 
 register = template.Library()
@@ -194,12 +192,6 @@ def dop_menu(type):
     return {'items': Post.objects.filter(rubric__name=type), 'title': title}
 
 
-@register.inclusion_tag("blocks/b-picturebox.html")
-def picturebox(user):
-    u"""Случайная картинка для оценки"""
-    return {'picture': PictureBox.get_next_picture(user)}
-
-
 @register.filter
 def post_cut(post):
     if not post.content:
@@ -282,12 +274,6 @@ def add_page(url, page):
         return url + 'page=%s' % page
     else:
         return url
-
-
-@register.inclusion_tag('block_riders.html')
-def riders(movie):
-    riders = Man.objects.filter(man2movie__movie=movie, man2movie__role='actor').order_by('title')
-    return {'riders': riders}
 
 ##########################################################
 
@@ -462,9 +448,7 @@ def items_table_list(items):
 def get_last_coversations():
     items = list(Post.objects.all().order_by('-last_comment_date')[:15]) + \
         list(Photo.objects.all().order_by('-last_comment_date')[:15]) + \
-        list(Man.objects.all().order_by('-last_comment_date')[:15]) + \
-        list(Mountain.objects.all().order_by('-last_comment_date')[:15]) + \
-        list(Movie.objects.all().order_by('-last_comment_date')[:15])
+        list(Mountain.objects.all().order_by('-last_comment_date')[:15])
     anno = datetime(1900, 1, 1)
     items.sort(key=lambda i: i.last_comment_date or anno, reverse=True)
     items = items[:20]

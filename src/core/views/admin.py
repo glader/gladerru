@@ -11,7 +11,7 @@ from django.db import connection
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 
-from core.models import Movie, Man, Tag, Man2Movie, Post
+from core.models import Tag, Post
 from core.views.common import render_to_response
 from core.utils.common import slug
 from core.models import Image
@@ -24,88 +24,6 @@ def moderator_required(func):
         else:
             raise Http404()
     return wrapper
-
-
-@permission_required('add_movie')
-def create_rider(request):
-    rider_titles = request.POST['rider']
-    object_id = request.POST['object_id']
-    movie = Movie.objects.get(pk=object_id)
-
-    for rider_title in rider_titles.split(","):
-        rider_name = slug(rider_title)
-        try:
-            rider = Man.objects.get(slug=rider_name)
-            if rider.primary_synonim:
-                rider = rider.primary_synonim
-
-        except Man.DoesNotExist:
-            rider = Man(slug=rider_name, title=rider_title, is_rider=True, hidden=True)
-            rider.save()
-
-        Man2Movie.objects.create(man=rider, movie=movie, role='actor')
-
-    return HttpResponseRedirect('/admind/core/movie/%d/' % movie.pk)
-
-
-@permission_required('add_movie')
-def create_teaser_announce(request):
-    movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
-
-    post = Post.objects.create(
-        title=u'Тизер к фильму "%s"' % movie.title, content='',
-        comment_count=0,
-        status='pub',
-        author=request.user,
-        ip=request.META['REMOTE_ADDR'],
-        type='teaser',
-    )
-
-    post.item = movie
-    post.best = post.date_created
-    post.save()
-
-    return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
-
-
-@permission_required('add_movie')
-def create_fullmovie_announce(request):
-    movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
-
-    post = Post.objects.create(
-        title=u'Выложен фильм "%s"' % movie.title, content='',
-        comment_count=0,
-        status='pub',
-        author=request.user,
-        ip=request.META['REMOTE_ADDR'],
-        type='full_movie',
-    )
-
-    post.item = movie
-    post.best = post.date_created
-    post.save()
-
-    return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
-
-
-@permission_required('add_movie')
-def create_tracklist_announce(request):
-    movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
-
-    post = Post.objects.create(
-        title=u'Выложена музыка к фильму "%s"' % movie.title, content='',
-        comment_count=0,
-        status='pub',
-        author=request.user,
-        ip=request.META['REMOTE_ADDR'],
-        type='soundtrack',
-    )
-
-    post.item = movie
-    post.best = post.date_created
-    post.save()
-
-    return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
 
 
 @moderator_required

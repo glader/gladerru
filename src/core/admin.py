@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from models import *
+from .models import *
 from django.contrib.auth.models import User, Group, Permission
 
 
@@ -31,12 +31,6 @@ class RubricAdmin(admin.ModelAdmin):
     search_fields = ('name', 'title')
 
 
-class SongAdmin(admin.ModelAdmin):
-    list_display = ('movie', 'performer', 'title', 'note', 'order')
-    search_fields = ('movie', 'performer', 'title')
-    raw_id_fields = ('movie',)
-
-
 class SkillAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
     search_fields = ('title', 'slug')
@@ -60,21 +54,6 @@ class TagAdmin(admin.ModelAdmin):
     raw_id_fields = ('primary_synonim', 'parent')
 
 
-class ManAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'hidden')
-    ordering = ('title',)
-    search_fields = ('slug', 'title', 'content')
-    list_filter = ('hidden',)
-    raw_id_fields = ('primary_synonim', 'tag')
-
-
-class StudioAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'status')
-    ordering = ('title',)
-    list_filter = ('status',)
-    search_fields = ('slug', 'title')
-
-
 class WordAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'type', 'abstract', 'has_content')
     ordering = ('title',)
@@ -95,51 +74,15 @@ class DiscountAdmin(admin.ModelAdmin):
     raw_id_fields = ('user',)
 
 
-class Man2MovieInline(admin.TabularInline):
-    model = Man2Movie
-    raw_id_fields = ('man',)
-    extra = 0
-
-
-class SongInline(admin.TabularInline):
-    model = Song
-    extra = 0
-
-
-class MovieAdmin(admin.ModelAdmin):
-    fieldsets = (
-        ('Profile field', {
-            'fields': ('title', 'slug', 'studio', 'year', 'content', 'teaser', 'full_movie',
-                       'torrent', 'url', 'cover',
-                       )
-        }),
-        ('Additional', {'fields': ('has_songs', 'rating', 'tag', 'hidden', 'status'), 'classes': ('collapse',)})
-    )
-
-    list_display = ('title', 'studio', 'year', 'status')
-    ordering = ('-year', 'title')
-    raw_id_fields = ('studio', 'tag')
-    search_fields = ('slug', 'title')
-    inlines = (Man2MovieInline, SongInline)
-
-
-class PictureBoxAdmin(admin.ModelAdmin):
-    list_display = ('picture', 'user', 'action', 'dt')
-    ordering = ('-dt',)
-
-
 admin.site.register(Profile, ProfileAdmin)
-admin.site.register(Song, SongAdmin)
 admin.site.register(Skill, SkillAdmin)
 admin.site.register(Tag2Skill, Tag2SkillAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Region)
 admin.site.register(District)
-admin.site.register(Movie, MovieAdmin)
 admin.site.register(Post, PostAdmin)
 admin.site.register(Rubric, RubricAdmin)
-admin.site.register(PictureBox, PictureBoxAdmin)
 
 
 class MountainPhotoInline(admin.TabularInline):
@@ -155,8 +98,6 @@ class MountainAdmin(admin.ModelAdmin):
     inlines = (MountainPhotoInline,)
 
 admin.site.register(Mountain, MountainAdmin)
-admin.site.register(Man, ManAdmin)
-admin.site.register(Studio, StudioAdmin)
 admin.site.register(Word, WordAdmin)
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(Discount, DiscountAdmin)

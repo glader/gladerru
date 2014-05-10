@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     'core',
     'sape',
     'votes',
+    'movies',
 )
 
 # Absolute path to the directory that holds media.

@@ -16,10 +16,8 @@ from django.shortcuts import get_object_or_404
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
     PhotoForm, sanitizeHTML
-from core.models import Post, Movie, Photo, Comment, Tag, \
-    Keyword, PictureBox, TagsCloud
-from core.templatetags.content import link, good_or_bad, signed_number, decimal_cut, \
-    make_pages
+from core.models import Post, Photo, Comment, Tag, Keyword, TagsCloud
+from core.templatetags.content import link, make_pages
 from core.utils.common import process_template, slug
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
@@ -774,19 +772,6 @@ def tags_suggest(request):
 
 def variants_to_response(variants):
     return HttpResponse(simplejson.dumps(variants, ensure_ascii=False), content_type="application/json; charset=utf-8")
-
-
-def picturebox(request):
-    picture = get_object_or_404(Photo, pk=request.GET.get('picture_id'))
-    user = request.user.is_authenticated() and request.user or None
-    record = PictureBox(user=user, picture=picture, action=request.GET.get('action'))
-    record.save()
-    if request.GET.get('action') == 'good':
-        result = {}
-    else:
-        next_picture = PictureBox.get_next_picture(user)
-        result = {'success': True, 'picture_id': next_picture.pk, 'preview': link(next_picture)}
-    return JsonResponse(result)
 
 
 ###############################################################################

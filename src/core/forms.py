@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup, element
-import urllib
 import random
+import re
 from datetime import datetime
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django.forms import *
+from django import forms
 from django.db.models import Q
 
-from core.models import Profile, Post, Tag, Photo, Movie, Discount, Mountain, NewsCategory
+from core.models import Profile, Post, Tag, Discount, NewsCategory
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -43,7 +43,7 @@ def sanitizeHTML(value, mode='none'):
     return re.sub('</(glader|cut)>', '', result)
 
 
-class CommonForm(Form):
+class CommonForm(forms.Form):
     def errors_list(self):
         return [unicode(message) for k, l in self.errors.items() for message in l]
 
@@ -52,13 +52,13 @@ class CommonForm(Form):
 
 
 class RegistrationForm(CommonForm):
-    email = EmailField(max_length=100, error_messages={'required': u'Укажите свой email'})
-    name = CharField(label=u'Имя пользователя', required=False)
-    login = CharField(label=u'Логин', required=False, help_text=u'Поле для отсечения автоматических регистраторов',
-                      widget=TextInput(attrs={'class': 'g-hidden'}))
-    password1 = CharField(max_length=100, required=False, widget=PasswordInput)
-    password2 = CharField(max_length=100, required=False, widget=PasswordInput)
-    retpath = CharField(max_length=2000, required=False, widget=HiddenInput)
+    email = forms.EmailField(max_length=100, error_messages={'required': u'Укажите свой email'})
+    name = forms.CharField(label=u'Имя пользователя', required=False)
+    login = forms.CharField(label=u'Логин', required=False, help_text=u'Поле для отсечения автоматических регистраторов',
+                      widget=forms.TextInput(attrs={'class': 'g-hidden'}))
+    password1 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
+    password2 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
+    retpath = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
 
     def free_credentials(self, s):
         u""" Проверяет строку на емейл, логин или имя пользователя """
@@ -87,17 +87,17 @@ class RegistrationForm(CommonForm):
             if self.free_credentials(self.cleaned_data['name']):
                 return self.cleaned_data['name']
             else:
-                raise ValidationError(u'Это имя уже занято :(')
+                raise forms.ValidationError(u'Это имя уже занято :(')
 
     def clean_email(self):
         if self.free_credentials(self.cleaned_data['email']):
             return self.cleaned_data['email']
         else:
-            raise ValidationError(u'В базе уже есть пользователь с введенным email')
+            raise forms.ValidationError(u'В базе уже есть пользователь с введенным email')
 
     def clean_login(self):
         if len(self.cleaned_data['login']) > 0:
-            raise ValidationError(u'Извините, роботов не регистрируем')
+            raise forms.ValidationError(u'Извините, роботов не регистрируем')
 
     def generate_password(self):
         vowels = 'euioa'
@@ -122,7 +122,7 @@ class RegistrationForm(CommonForm):
             p1 = self.cleaned_data['password1']
             p2 = self.cleaned_data['password2']
             if not p1 == p2:
-                raise ValidationError(u'Введенные пароли не одинаковые')
+                raise forms.ValidationError(u'Введенные пароли не одинаковые')
             password = p1
         else:
             password = self.generate_password()
@@ -153,9 +153,9 @@ class RegistrationForm(CommonForm):
 
 
 class LoginForm(CommonForm):
-    login = CharField(label=u'Логин', max_length=100)
-    passwd = CharField(label=u'Пароль', max_length=100, widget=PasswordInput)
-    retpath = CharField(max_length=2000, required=False, widget=HiddenInput)
+    login = forms.CharField(label=u'Логин', max_length=100)
+    passwd = forms.CharField(label=u'Пароль', max_length=100, widget=forms.TextInput)
+    retpath = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
 
     def get_user(self, s):
         u""" Проверяет строку на емейл, логин или имя пользователя """
@@ -168,17 +168,17 @@ class LoginForm(CommonForm):
         try:
             user = self.get_user(login)
         except User.DoesNotExist:
-            raise ValidationError(u'Логин или пароль не верен')
+            raise forms.ValidationError(u'Логин или пароль не верен')
 
         auth_user = authenticate(username=user.username, password=passwd)
         if auth_user:
             self.user = auth_user
             return self.cleaned_data
         else:
-            raise ValidationError(u'Логин или пароль не верен')
+            raise forms.ValidationError(u'Логин или пароль не верен')
 
 
-class ProfileForm(ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('board', 'bindings', 'boots', 'riding_style', 'mountains', 'clothes',
@@ -191,32 +191,32 @@ class ProfileForm(ModelForm):
         return self.cleaned_data
 
 
-class OpenMultipleChoiceField(MultipleChoiceField):
+class OpenMultipleChoiceField(forms.MultipleChoiceField):
     def validate(self, *args, **kwargs):
         pass
 
 
 class PostForm(CommonForm):
-    post = IntegerField(label=u'Пост', required=False, widget=HiddenInput, help_text=u'Пост')
-    title = CharField(label=u'Заголовок', error_messages={'required': u'Введите заголовок поста'},
-                      widget=TextInput(attrs={'class': 'input'}))
-    category = IntegerField(label=u'Категория', widget=Select, help_text=u'Категория')
-    content = CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
-                        widget=Textarea(attrs={'class': 'content'}))
-    geography = BooleanField(label=u'Относится к моему городу', required=False)
-    # tags = CharField(label=u'Теги', required=False,
-    #                  widget=TextInput(attrs={'class':'tags'}))
+    post = forms.IntegerField(label=u'Пост', required=False, widget=forms.HiddenInput, help_text=u'Пост')
+    title = forms.CharField(label=u'Заголовок', error_messages={'required': u'Введите заголовок поста'},
+                      widget=forms.TextInput(attrs={'class': 'input'}))
+    category = forms.IntegerField(label=u'Категория', widget=forms.Select, help_text=u'Категория')
+    content = forms.CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
+                        widget=forms.Textarea(attrs={'class': 'content'}))
+    geography = forms.BooleanField(label=u'Относится к моему городу', required=False)
+    # tags = forms.CharField(label=u'Теги', required=False,
+    #                  widget= forms.TextInput(attrs={'class':'tags'}))
     tags = OpenMultipleChoiceField(choices=[], required=False, initial=[])
 
     # Картинка
-    picture = ImageField(label=u'Картинка', required=False,
-                         widget=FileInput(attrs={'class': 'picture'}))
+    picture = forms.ImageField(label=u'Картинка', required=False,
+                         widget=forms.FileInput(attrs={'class': 'picture'}))
 
-    deferred_date = DateField(label=u"Дата публикации", required=False, initial=datetime.now().date)
-    deferred_time = TimeField(label=u"Время публикации", required=False, initial=datetime.now().time)
+    deferred_date = forms.DateField(label=u"Дата публикации", required=False, initial=datetime.now().date)
+    deferred_time = forms.TimeField(label=u"Время публикации", required=False, initial=datetime.now().time)
 
-    event_date_start = DateField(label=u"Дата события", required=False, widget=DateInput(attrs={'class': 'vDateField'}))
-    event_date_finish = DateField(label=u"Дата окончания события", required=False)
+    event_date_start = forms.DateField(label=u"Дата события", required=False, widget=forms.DateInput(attrs={'class': 'vforms.DateField'}))
+    event_date_finish = forms.DateField(label=u"Дата окончания события", required=False)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
@@ -237,12 +237,12 @@ class PostForm(CommonForm):
             author = post.author
             if author == self.user or self.user.get_profile().is_moderator:
                 return post
-            raise ValidationError(u'Вы не можете редактировать чужие сообщения.')
+            raise forms.ValidationError(u'Вы не можете редактировать чужие сообщения.')
 
         except Post.DoesNotExist:
-            raise ValidationError(u'Редактирование неизвестного поста.')
+            raise forms.ValidationError(u'Редактирование неизвестного поста.')
         except IndexError:
-            raise ValidationError(u'Ошибка в посте, сообщите администрации.')
+            raise forms.ValidationError(u'Ошибка в посте, сообщите администрации.')
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
@@ -251,7 +251,7 @@ class PostForm(CommonForm):
         try:
             return NewsCategory.objects.get(pk=self.cleaned_data['category'])
         except NewsCategory.DoesNotExist:
-            raise ValidationError(u"Неизвестная категория")
+            raise forms.ValidationError(u"Неизвестная категория")
 
     def clean_content(self):
         if self.user.get_profile().is_moderator:
@@ -278,20 +278,20 @@ class PostForm(CommonForm):
 
 class PictureForm(CommonForm):
     """ Форма для заливки картинок через swfupload """
-    Filedata = ImageField(label=u'Картинка')
+    Filedata = forms.ImageField(label=u'Картинка')
 
 
 class FeedbackForm(CommonForm):
-    name = CharField(label=u'Имя', required=False)
-    email = EmailField(label=u'Email', required=False, error_messages={'invalid': u'Введенный email некорректен'})
-    message = CharField(label=u'Сообщение*',
+    name = forms.CharField(label=u'Имя', required=False)
+    email = forms.EmailField(label=u'Email', required=False, error_messages={'invalid': u'Введенный email некорректен'})
+    message = forms.CharField(label=u'Сообщение*',
                         error_messages={'required': u'Введите текст сообщения'},
-                        widget=Textarea())
-    code = CharField(label="Код", required=False, widget=HiddenInput)
+                        widget=forms.Textarea())
+    code = forms.CharField(label="Код", required=False, widget=forms.HiddenInput)
 
     def clean_message(self):
         if '[url=' in self.cleaned_data.get('message', ''):
-            raise ValidationError('Spammer detected')
+            raise forms.ValidationError('Spammer detected')
         else:
             return self.cleaned_data.get('message')
 
@@ -306,8 +306,8 @@ class FeedbackForm(CommonForm):
 
 
 class PhotoForm(CommonForm):
-    title = CharField(label=u'Название', required=False, widget=TextInput(attrs={'size': '60'}))
-    tags = CharField(label=u'Теги', required=False, widget=TextInput(attrs={'size': '70'}))
+    title = forms.CharField(label=u'Название', required=False, widget=forms.TextInput(attrs={'size': '60'}))
+    tags = forms.CharField(label=u'Теги', required=False, widget=forms.TextInput(attrs={'size': '70'}))
 
     def __init__(self, *args, **kwargs):
         self.photo = kwargs.pop('photo')
@@ -328,7 +328,7 @@ class PhotoForm(CommonForm):
         self.photo.rebuild_tags()
 
 
-class DiscountForm(ModelForm):
+class DiscountForm(forms.ModelForm):
     class Meta:
         model = Discount
         exclude = ('user', 'date_created')

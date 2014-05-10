@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 
 from core.forms import DiscountForm, FeedbackForm
-from core.models import Redirect, Movie, Song, Rubric, Post, Word, Photo, Discount, Man, Mountain, Region, Studio, Skill, Tag
+from core.models import Redirect, Rubric, Post, Word, Photo, Discount, Mountain, Region, Skill, Tag
 from core.templatetags.content import make_pages, link, get_mountains
 from core.utils.common import clean_choice
 from core.utils.search import search as search_provider
@@ -142,64 +142,6 @@ def trick(request, name):
     return render_to_response(request, 'trick.html', {'item': item, 'page_identifier': 'word_%s' % item.id})
 
 
-def studies(request):
-    studies = Studio.objects.all().order_by('title')
-    return render_to_response(request, 'studies.html', {'studies': studies})
-
-
-def studio(request, studio_name):
-    studio = get_object_or_404(Studio, slug=studio_name)
-    movies = Movie.objects.filter(studio=studio).order_by('-year', 'title')
-    return render_to_response(request, 'studio.html', {'studio': studio, 'movies': movies})
-
-
-@time_slow
-def movies(request):
-    context = {'page': "2013"}
-    year = context['page']
-
-    movies = Movie.objects.all().order_by('-rating', 'title')
-    if year.isdigit():
-        movies = movies.filter(year=year)
-
-    if not len(movies):
-        movies = Movie.objects.all().order_by('-rating', 'title')
-
-    return render_to_response(request, 'movies.html', {'movies': movies, 'year': year})
-
-
-@time_slow
-def movies_by_year(request, year):
-    context = {'page': year}
-    year = context['page']
-
-    movies = Movie.objects.all().order_by('-rating', 'title')
-    if year.isdigit():
-        movies = movies.filter(year=year)
-
-    if not len(movies):
-        movies = Movie.objects.all().order_by('-rating', 'title')
-
-    return render_to_response(request, 'movies.html', {'movies': movies, 'year': year})
-
-
-@time_slow
-def movie(request, year, name):
-    movie = get_object_or_404(Movie, slug=name)
-    songs = Song.objects.filter(movie=movie)
-    return render_to_response(request, 'movie.html', {'movie': movie, 'songs': songs, 'item': movie, 'page_identifier': 'movie_%s' % movie.id})
-
-
-def teasers(request):
-    movies = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-year', '-rating')
-    return render_to_response(request, 'teasers.html', make_pages(movies, 10, request.GET.get('page', "")))
-
-
-def soundtracks(request):
-    movies = Movie.objects.filter(has_songs=True).order_by('-year', 'title')
-    return render_to_response(request, 'soundtracks.html', make_pages(movies, 10, request.GET.get('page', "")))
-
-
 def discounts(request):
     discounts = [(k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'), lambda d: d.city)]
     return render_to_response(request, 'discounts.html', {'discounts': discounts})
@@ -254,45 +196,6 @@ def discount_delete(request, discount_id):
         return HttpResponseRedirect(reverse('discounts'))
 
     return render_to_response(request, 'discount_delete.html', {'discount': discount})
-
-
-def people(request):
-    riders = Man.interesting.all().order_by('title')
-    present_letters = {}
-    for r in riders:
-        present_letters.setdefault(r.title[0], []).append(r)
-    content = {'alphabet_letters': alphabet_letters, 'present_letters': present_letters}
-    return render_to_response(request, 'people.html', content)
-
-
-def man(request, man_name):
-    item = get_object_or_404(Man, slug=man_name)
-    if item.primary_synonim:
-        return HttpResponsePermanentRedirect(item.primary_synonim.get_absolute_url())
-    movies = Movie.objects.filter(man2movie__man=item, man2movie__role='actor').order_by('-year')
-    photos = Photo.objects.filter(rider=item).order_by('-date_created')[:4]
-    author_photos = Photo.objects.filter(photographer=item).order_by('-date_created')[:4]
-    return render_to_response(request, 'rider.html', {'item': item,
-                                                      'movies': movies,
-                                                      'photos': photos[:3],
-                                                      'more_photos': len(photos) > 3,
-                                                      'author_photos': author_photos[:3],
-                                                      'more_author_photos': len(author_photos) > 3,
-                                                      })
-
-
-def man_photos(request, slug):
-    item = get_object_or_404(Man, slug=slug)
-    context = make_pages(Photo.objects.filter(rider=item).order_by('-date_created'), current_page=request.GET.get('page', ""))
-    context['title'] = mark_safe(u'%s - фотографии с %s участием' % (link(item), item.gender == 'm' and u'его' or u'её'))
-    return render_to_response(request, 'rider_photos.html', context)
-
-
-def man_author_photos(request, slug):
-    item = get_object_or_404(Man, slug=slug)
-    context = make_pages(Photo.objects.filter(photographer=item).order_by('-date_created'), current_page=request.GET.get('page', ""))
-    context['title'] = mark_safe(u'%s - фотографии %s авторства' % (link(item), item.gender == 'm' and u'его' or u'её'))
-    return render_to_response(request, 'rider_photos.html', context)
 
 
 def search(request):
@@ -409,8 +312,3 @@ def skill(request, name):
                'tags': Tag.objects.filter(tag2skill__skill=skill).order_by('size')
                }
     return render_to_response(request, 'skill.html', context)
-
-
-def old_movie(request, movie_name):
-    movie = get_object_or_404(Movie, slug=movie_name)
-    return HttpResponsePermanentRedirect(movie.get_absolute_url())

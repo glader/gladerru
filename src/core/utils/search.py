@@ -7,13 +7,12 @@ import logging
 import logging.handlers
 
 from django.conf import settings
-
-from core.models import Word, Movie, Man, Mountain, Tag, Post
+from django.db import models
 
 
 def base_search(query):
     result = []
-    for model in (Word, Movie, Man, Mountain, Tag):
+    for model in models.get_models():
         result.extend(model.objects.filter(title__icontains=query))
     result.extend(Post.objects.filter(title__icontains=query, hidden=False).order_by('-date_created'))
     return result
