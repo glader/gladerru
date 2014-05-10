@@ -25,7 +25,11 @@ class Command(NoArgsCommand):
             (mp.image for mp in MountainPhoto.objects.filter(image__isnull=False)),
         ]
 
-        for image_url in chain(*images):
+        for image in chain(*images):
+            image_url = str(image)
+            if not image_url:
+                continue
+
             try:
                 count += make_thumbnail(str(image_url))
                 total += 1
