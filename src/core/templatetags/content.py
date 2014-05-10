@@ -13,7 +13,7 @@ from django.core.paginator import QuerySetPaginator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Photo, Word, Tag, Comment
+from core.models import Post, Photo, Tag, Comment
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
@@ -288,12 +288,6 @@ def parser(text):
                     open('/var/log/projects/gladerru/miss', 'a').write((u"[неизвестная картинка %s in fragment '%s']\n" % (params['item'], result.group(1))).encode('utf8'))
                     return ""
             else:
-                for model, field in ((Post, 'name'), (Movie, 'slug'), (Word, 'slug'), (Man, 'slug'), (Mountain, 'name'), (Studio, 'slug')):
-                    try:
-                        item = model.objects.get(**{field: params['item']})
-                    except model.DoesNotExist:
-                        pass
-
                 if not item:
                     log = get_logger('miss')
                     log.error(u"Неизвестная страница %s in fragment '%s'", params['item'], result.group(1))
@@ -541,13 +535,6 @@ def post_panel(post, user, mode='normal'):
         'mode': mode,
         'klass': post.__class__.__name__.lower(),
     }
-
-
-@register.inclusion_tag('block_post_vote.html')
-def post_vote_arrows(user, post):
-    return {'user': user, 'post': post,
-            'can_vote': post.can_vote(user),
-            }
 
 
 @register.simple_tag

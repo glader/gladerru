@@ -14,6 +14,7 @@ def base_search(query):
     result = []
     for model in models.get_models():
         result.extend(model.objects.filter(title__icontains=query))
+    Post = object()
     result.extend(Post.objects.filter(title__icontains=query, hidden=False).order_by('-date_created'))
     return result
 

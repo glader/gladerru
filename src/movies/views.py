@@ -9,6 +9,7 @@ from django.template import RequestContext, loader
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo, PictureBox
 from .templatetags.movies import make_pages, link
+from .utils.common import slug
 
 
 alphabet_letters = [[u'A', u'B', u'C', u'D', u'E', u'F', u'G', u'H', u'I', u'J', u'K', u'L', u'M', u'N', u'O', u'P', u'Q', u'R', u'S', u'T', u'U', u'V', u'W', u'X', u'Y', u'Z'],
@@ -170,6 +171,7 @@ def create_rider(request):
 def create_teaser_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
+    Post = object()
     post = Post.objects.create(
         title=u'Тизер к фильму "%s"' % movie.title, content='',
         comment_count=0,
@@ -190,6 +192,7 @@ def create_teaser_announce(request):
 def create_fullmovie_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
+    Post = object()
     post = Post.objects.create(
         title=u'Выложен фильм "%s"' % movie.title, content='',
         comment_count=0,
@@ -210,6 +213,7 @@ def create_fullmovie_announce(request):
 def create_tracklist_announce(request):
     movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
 
+    Post = object()
     post = Post.objects.create(
         title=u'Выложена музыка к фильму "%s"' % movie.title, content='',
         comment_count=0,
