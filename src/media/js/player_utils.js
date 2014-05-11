@@ -9,15 +9,15 @@
         var flashvars = {
                 file:theFile,
                 autostart:theAutostart
-        }
+        };
         var params = {
                 allowfullscreen:"true",
                 allowscriptaccess:"always"
-        }
+        };
         var attributes = {
                 id:thePlayerId,
                 name:thePlayerId
-        }
+        };
         swfobject.embedSWF(STATIC_URL + "swf/player.swf", thePlaceholder, "320", "22", "9.0.115", false, flashvars, params, attributes);
     }
 
@@ -62,7 +62,7 @@
         }
 
         play_link = $('#play'+track_id);
-        url = '/media/' + play_link.metadata().url;
+        url = play_link.metadata().prefix + play_link.metadata().filename;
         play_link.hide();
         $('#stop'+track_id).show();
         createPlayer("player_place"+track_id, "player"+track_id, url, true);

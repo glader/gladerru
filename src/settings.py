@@ -48,7 +48,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.core.context_processors.request',
 
-    'core.context.profile',
+    'core.context.core',
 )
 
 ROOT_URLCONF = 'urls'
@@ -93,6 +93,8 @@ STATICFILES_DIRS = (
 THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'data/thumbnails')
 THUMBNAIL_URL = 'data/thumbnails/'
 THUMBNAIL_SIZE = 300, 150
+
+SOUNDTRACKS_PREFIX = 'http://glader-ru.s3.amazonaws.com/soundtracks/'
 
 LOGIN_URL = '/auth/login'
 

@@ -202,7 +202,6 @@ def restart():
     run('sudo restart gladerru')
     run('sudo restart gladerru_celery')
 
-
 # -----------------------------------------------------------------------
 
 def run_local():
@@ -234,4 +233,4 @@ def local_celery():
 
 
 def local_static():
-    local('cd src && ..\\ENV\\scripts\\python manage.py collectstatic -c --noinput')
+    local('cd src && ..\\ENV\\scripts\\python manage.py collectstatic -c --noinput --verbosity=0')

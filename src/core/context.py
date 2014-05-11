@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 
 
-def profile(request):
+def core(request):
+    context = {
+        'STATIC_URL': settings.STATIC_URL,
+    }
+
     if request.user.is_authenticated():
-        return {'profile': request.user.get_profile()}
-    else:
-        return {}
+        context['profile'] = request.user.get_profile()
+
+    return context

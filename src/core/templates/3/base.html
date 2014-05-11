@@ -28,8 +28,8 @@
     <link rel="shortcut icon" href="http://glader.ru/favicon.png">
 
     <script type="text/javascript">
-        STATIC_URL = '/static/';
-        logged_in = {% if user %}true{% else %}false{% endif %};
+        var STATIC_URL = '{{ STATIC_URL }}';
+        var logged_in = {% if user %}true{% else %}false{% endif %};
     </script>
     <script type="text/javascript" src="{% static "js/ba-debug.min.js" %}"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>

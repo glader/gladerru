@@ -1,0 +1,36 @@
+{% extends "item_common_world.html" %}
+{% load content %}
+
+{% block top_menu %}
+    {% top_menu 'people' %}
+{% endblock %}
+
+{% block title %}Райдеры, фотографы - {{ block.super }}{% endblock %}
+
+{% block content %}
+	<div class="b-dictionary">
+		{% include "block_alphabet_local.html" %}
+
+		<div style="text-align:center;">
+			<a href="#" onclick="filter_people(''); return false;">Все</a> |
+			<a href="#" onclick="filter_people('rider'); return false;">Райдеры</a> |
+			<a href="#" onclick="filter_people('photographer'); return false;">Фотографы</a><!-- |
+			<a href="#" onclick="filter_people('director'); return false;">Режиссеры</a>
+-->
+		</div>
+
+		<ul id="people_list">
+		{% for letters_list in alphabet_letters %}
+		    {% for l in letters_list %}
+		        {% if present_letters|el:l  %}
+		            <li><a name="{{ l }}"><h2>{{ l }}</h2></a></li>
+		            {% for rider in present_letters|el:l %}
+		                <li class='js-people-li {rider:"{{ rider.is_rider }}", photographer:"{{ rider.is_photographer }}", director:"{{ rider.is_director }}"}'
+		                	>{{ rider|link }}</li>
+		            {% endfor %}
+		        {% endif %}
+		    {% endfor %}
+		{% endfor %}
+		</ul>
+	</div>
+{% endblock %}

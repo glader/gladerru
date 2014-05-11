@@ -1,11 +1,11 @@
 {% load content %}
 {% load staticfiles %}
 
-        <div class="b-track-list">
+    <div class="b-track-list">
         {% for song in songs %}
             <div class="track">
                 {% if song.file %}
-                    <a href="#" id="play{{ song.id }}" class="play {song:'{{ song.id }}', url:'{{ song.file }}'}" title="Проиграть трек"><img src="{% static "design/3/img/b-track-list/play.png" %}" alt="Проиграть трек"></a>
+                    <a href="#" id="play{{ song.id }}" class="play {song:'{{ song.id }}', prefix:'{{ SOUNDTRACKS_PREFIX }}', filename:'{{ song.filename }}'}" title="Проиграть трек"><img src="{% static "design/3/img/b-track-list/play.png" %}" alt="Проиграть трек"></a>
                     <a href="#" id="stop{{ song.id }}" class="stop {song:'{{ song.id }}'} g-hidden" title="Остановить трек"><img src="{% static "design/3/img/b-track-list/pause.png" %}" alt="Остановить трек"></a>
                     <span>
                 {% else %}
@@ -23,4 +23,4 @@
             <div id="song{{ song.id }}"><div id="player_place{{ song.id }}"></div></div>
             <div style="margin-bottom: 5px;"></div>
         {% endfor %}
-        </div>
+    </div>

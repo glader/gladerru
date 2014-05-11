@@ -2,6 +2,7 @@
 from django import template
 from django.utils.safestring import mark_safe
 from django.core.paginator import QuerySetPaginator
+from django.conf import settings
 
 from ..models import Man, PictureBox, Song
 
@@ -64,7 +65,7 @@ def soundtrack(movie):
 
 @register.inclusion_tag('block_soundtrack_list.html')
 def soundtrack_list(songs):
-    return {'songs': songs}
+    return {'songs': songs, 'SOUNDTRACKS_PREFIX': settings.SOUNDTRACKS_PREFIX}
 
 
 @register.inclusion_tag("blocks/b-picturebox.html")
