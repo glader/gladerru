@@ -202,6 +202,22 @@ def restart():
     run('sudo restart gladerru')
     run('sudo restart gladerru_celery')
 
+
+# -----------------------------------------------------------------------
+# https://yandextank.readthedocs.org/en/latest/install.html
+
+def tank_init():
+    with settings(user='root', host='146.185.136.227'):
+        run('apt-get install python-software-properties')
+        run('add-apt-repository ppa:yandex-load/main')
+        run('sudo apt-get update && sudo apt-get install yandex-load-tank-base')
+
+
+def tank_start():
+    with settings(user='root', host='146.185.136.227'):
+        run('yandex-tank ammo.txt')
+
+
 # -----------------------------------------------------------------------
 
 def run_local():

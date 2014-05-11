@@ -1,0 +1,11 @@
+[Connection: close]
+[Host: glader.ru]
+[Cookies: None]
+[User-Agent: yandextank]
+/
+/
+/
+/
+/
+/
+/
