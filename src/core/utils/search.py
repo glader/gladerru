@@ -10,11 +10,13 @@ from django.conf import settings
 from django.db import models
 
 from core.models import Post
+from mountains.models import Mountain
+from movies.models import Movie, Studio, Man
 
 
 def base_search(query):
     result = []
-    for model in models.get_models():
+    for model in [Mountain, Movie, Studio, Man]:
         result.extend(model.objects.filter(title__icontains=query))
 
     result.extend(Post.objects.filter(title__icontains=query, hidden=False).order_by('-date_created'))
