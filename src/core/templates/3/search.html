@@ -29,7 +29,7 @@
 			<h2>Возможно вы искали:</h2>
 			<ul>
 				{% for res in result.base %}
-					<li><img src="{% static "design/3/img/icons/type-{{ res|type_name }}.png" %}" alt="{{ res|type_name }}"/>&nbsp;
+					<li><img src="{% static "design/3/img/icons/type-" %}{{ res|type_name }}.png" alt="{{ res|type_name }}"/>&nbsp;
                         {{ res|link }}
                         {% ifequal res|type_name 'post' %}&nbsp;<span class="b-search-postdate">({{ res.date_created|human_date }})</span>{% endifequal %}
                     </li>
