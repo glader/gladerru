@@ -8,6 +8,8 @@ from django.conf import settings
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
+        settings.ALLOWED_HOSTS = ['*']
+
         c = Client()
         response = c.get('/dynamic_sitemap.xml')
 
