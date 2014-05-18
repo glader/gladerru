@@ -58,8 +58,10 @@ class Man(models.Model):
     def get_absolute_url(self):
         if self.primary_synonim:
             return reverse('man', args=[self.primary_synonim.slug])
-        else:
+        elif self.slug:
             return reverse('man', args=[self.slug])
+        else:
+            return reverse('man', args=[self.id])
 
     def __unicode__(self):
         return self.title
