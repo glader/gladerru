@@ -37,16 +37,6 @@ class JsonErrorResponse(JsonResponse):
         super(JsonErrorResponse, self).__init__({'error': data})
 
 
-def best_posts(page=None):
-    context = {'page': page,
-               }
-    context.update(make_pages(Post.objects.filter(status='pub').order_by('-best'),
-                              10,
-                              context.get('page')
-                              ))
-    return context
-
-
 ###############################################################################
 
 def parse_timestamp(ts):
@@ -67,16 +57,16 @@ def index(request):
         check_celery.delay(request.GET.get('celery'))
 
     start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(status='pub').order_by('-best')
+    posts = Post.objects.filter(status='pub').order_by('-date_created')
     if start:
-        posts = posts.filter(best__lt=start)
+        posts = posts.filter(date_created__lt=start)
 
     context = {
         'start': None,
         'posts': posts[:11],
     }
     if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].best)
+        context['start'] = timestamp(context['posts'][10].date_created)
         context['posts'] = context['posts'][:10]
     return context
 
@@ -92,7 +82,7 @@ def tag(request, name):
     start = parse_timestamp(request.GET.get('start'))
     posts = Post.objects.filter(hidden=False, id__in=item_ids).order_by('-date_created')
     if start:
-        posts = posts.filter(best__lt=start)
+        posts = posts.filter(date_created__lt=start)
 
     context = {
         'start': None,
@@ -161,47 +151,6 @@ def hidden(request):
         context['start'] = timestamp(context['posts'][10].date_created)
         context['posts'] = context['posts'][:10]
 
-    return context
-
-
-@time_slow
-@posts_feed()
-def top_rating(request):
-    u""" Лучшие за месяц """
-    items = Post.objects \
-                .filter(date_created__gte=date.today() - timedelta(days=30)) \
-                .order_by('-rating')[:10]
-    return {'posts': items, 'title': u'Лучшие за месяц', 'menu_item': 'rating'}
-
-
-@time_slow
-@posts_feed()
-def top_discussed(request):
-    u""" Самые обсуждаемые за месяц """
-    items = Post.objects \
-                .filter(date_created__gte=date.today() - timedelta(days=30), comment_count__gt=0) \
-                .order_by('-comment_count')[:10]
-    return {'posts': items, 'title': u'Самые обсуждаемые за месяц', 'menu_item': 'discussed'}
-
-
-@posts_feed(template="faq.html")
-def faq(request):
-    u""" Посты с пометкой 'Вопрос' """
-    start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(tags__name='question').order_by('-date_created')
-    if start:
-        posts = posts.filter(date_created__lt=start)
-
-    context = {
-        'start': None,
-        'posts': posts[:11],
-        'title': u'Все сообщения',
-        'menu_item': 'all_posts',
-    }
-
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
     return context
 
 

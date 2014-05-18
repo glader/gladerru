@@ -7,6 +7,7 @@
                         <table>
                         <tr>
                             <td class="points">
+                            <!--
                                 <span id="{{ post.pk }}_rating">{{ post.rating|signed_number }}</span>&nbsp;
                                 {% if already_voted %}
                                     <img src="{% static "design/3/img/b-bar/plus_disabled.png" %}" alt="Нравится" class="icon">
@@ -24,6 +25,7 @@
                                     </script>
                                     <small>[<a href="" onclick="return moderateRating('{{ post.pk }}')">рейтинг</a>]</small>
                                 {% endif %}
+                            -->
                             </td>
                             <td>
                                 <table class="b-bar-social"><tr>

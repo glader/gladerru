@@ -109,14 +109,11 @@ def hierarchy(item):
 
 
 @register.inclusion_tag("block_top_menu.html")
-def top_menu(level2='best', level1=None):
+def top_menu(level2='all_posts', level1=None):
     submenu = {
         'posts': [
+            ['all_posts', '/', u'новые', u'Все новости'],
             ['new', '/post/new', u'написать', u'Все ждут от тебя новый пост'],
-            ['best', '/', u'лучшие', u'Сообщения, выбранные читателями'],
-            ['all_posts', '/all', u'новые', u'Голосуй за лучшее'],
-            ['rating', '/top/best', u'рейтинг', u'Самые лучшие за месяц'],
-            ['discussed', '/top/comments', u'обсуждаемые', u'Самые обсуждаемые за месяц'],
         ],
         'articles': [
             ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],

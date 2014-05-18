@@ -3,7 +3,7 @@
 {% load cache %}
 
 {% block top_menu %}
-    {% top_menu 'best' %}
+    {% top_menu 'all_posts' %}
 {% endblock %}
 
 {% block title %}{% if start %}Лучшие сообщения{% else %}Лучший сноубордический сайт{% endif %} {{ block.super }}{% endblock %}

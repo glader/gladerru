@@ -35,10 +35,6 @@ urlpatterns = patterns('',
     url(r'^reports$', reports, name='reports'),
 
     # UGC
-    url(r'^all$', all, name='all'),
-    url(r'^top/comments$', top_discussed, name='top_discussed'),
-    url(r'^top/best$', top_rating, name='top_rating'),
-    url(r'^faq$', faq, name='faq'),
     url(r'^users/(?P<username>[\w\.-]+)/?$', user_profile, name='profile'),
     url(r'^users/(?P<username>[\w\.-]+)/posts/?$', user_posts, name='user_posts'),
     url(r'^users/(?P<username>[\w\.-]+)/(?P<section>[\w]+)/?$', user_staff, name='user_staff'),
@@ -57,9 +53,7 @@ urlpatterns = patterns('',
     url(r'^ajax/upload_photo$', 'core.views.admin.upload_photos', name='upload_photos'),
 
     # Feeds
-    (r'^feeds/best$', BestPosts()),
     (r'^feeds/all', AllPosts()),
-    (r'^feeds/tags/(?P<tag_name>.+)$', Tags()),
 
     # Editing
     url(r'^post/new$', new_post, name='new_post'),
