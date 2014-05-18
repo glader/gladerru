@@ -11,7 +11,7 @@
             <table class="b-rubric-icon">
             <tr>
             {% for child in children %}
-                <td><div class="img"><a href="{{ child.get_absolute_url }}"><img src="{% if child.image %}{{ child.image.url }}{% else %}{% static "data/images/icons/default.png" %}{% endif %}"></a></div></td>
+                <td><div class="img"><a href="{{ child.get_absolute_url }}"><img src="{% if child.image %}{{ child.image.url }}{% else %}{% static "design/3/img/icons/default.png" %}{% endif %}"></a></div></td>
                 <td><strong>{{ child|link }}</strong><br />{{ child.abstract|default:"" }}</td>
                 {% cycle "<td class='g'><i></i></td>" "</tr><tr>" %}
             {% endfor %}
@@ -23,7 +23,7 @@
             <table class="b-rubric-icon">
             <tr>
             {% for child in articles %}
-                <td><div class="img"><a href="{{ child.get_absolute_url }}"><img src="{% if child.icon %}{{ child.icon.url }}{% else %}{% static "data/images/icons/default.png" %}{% endif %}"></a></div></td>
+                <td><div class="img"><a href="{{ child.get_absolute_url }}"><img src="{% if child.icon %}{{ child.icon.url }}{% else %}{% static "design/3/img/icons/default.png" %}{% endif %}"></a></div></td>
                 <td><strong>{{ child|link }}</strong><br />{{ child.abstract|default:"" }}</td>
                 {% cycle "<td class='g'><i></i></td>" "</tr><tr>" %}
             {% endfor %}

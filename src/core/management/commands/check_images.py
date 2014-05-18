@@ -43,8 +43,6 @@ def sanitizeHTML(value, mode='none'):
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
-        print sanitizeHTML('<asd>asd asd</asd> middle <b>bbb</b> <!-- comment -->', mode='strict')
-
         for post in Post.objects.all():
             try:
                 tree = BeautifulSoup(post.content, "html5lib")
