@@ -98,16 +98,3 @@ body
 h4 {
     font-weight: bold;
 }
-
-.schedule {width: 100%; border-collapse:collapse;}
-.schedule th {border: 1px solid gray; }
-.schedule td {border: 1px solid gray; vertical-align: top; padding: 3px; width:14%; height: 90px;}
-.schedule .no_day {border: 1px solid gray; background-color: #ddd; width:14%; height: 90px;}
-.schedule td .header {text-align: right; white-space:nowrap; margin-bottom: 5px; color: #333}
-.schedule td .today { border-bottom: 1px solid gray; background-color:#eee; }
-.schedule .month {border: 0px; height: auto; padding-top:10px;}
-.schedule .time {font-size:80%; font-weight:bold; color:#999;}
-.schedule .training {padding:0px 0px 10px 0px;}
-.schedule .presentation {color:#a00; font-weight:bold;}
-.schedule a.event:link, .schedule a.event:visited { color: #315D6E; text-decoration: none;}
-.schedule a.event:hover, .schedule a.event:active { color: #22414D; text-decoration: underline;}

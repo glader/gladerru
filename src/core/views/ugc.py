@@ -205,64 +205,6 @@ def faq(request):
     return context
 
 
-def schedule(request, year=None, month=None):
-    u"""Календарь событий"""
-    months_count = 2
-    schedule = []
-    today = date.today()
-
-    if year and month:
-        try:
-            request_date = date(int(year), int(month), 1)
-        except ValueError:
-            request_date = date.today()
-    else:
-        request_date = date.today()
-
-    request_date = request_date.replace(day=1)
-    startMonth = request_date.month
-
-    eventdays = {}
-    for day in Post.objects.filter(event_date_start__gte=request_date, event_date_start__lte=request_date + timedelta(60)):
-        eventdays.setdefault(day.event_date_start.date(), []).append(day)
-
-    for m in xrange(startMonth, startMonth + months_count):
-        if m > 12:
-            month = m - 12
-            year = request_date.year + 1
-        else:
-            month = m
-            year = request_date.year
-
-        month_days = calendar.monthcalendar(year, month)
-
-        # FIXME: сделать предзагрузку дней тренингов
-        for week in month_days:
-            for i in xrange(0, len(week)):
-                week[i] = {'day': week[i]}
-                try:
-                    week[i]['date'] = date(year, month, int(week[i]['day']))
-                    if today == week[i]['date']:
-                        week[i]['today'] = True
-                    week[i]['events'] = {'days': eventdays.get(week[i]['date'], []),
-                                         }
-                except ValueError:
-                    week[i]['date'] = ''
-
-        schedule.append({'month': month_days,
-                         'number': month,
-                         })
-
-    prev_date = (request_date - timedelta(days=15)).replace(day=1)
-    next_date = (request_date + timedelta(days=45)).replace(day=1)
-    return render_to_response(request, 'schedule.html', {'schedule': schedule,
-                                                         'prev_date': prev_date > today - timedelta(days=90) and prev_date or None,
-                                                         'prev_link': reverse('schedule_month', args=[prev_date.year, prev_date.month]),
-                                                         'next_date': next_date < today + timedelta(days=365) and next_date or None,
-                                                         'next_link': reverse('schedule_month', args=[next_date.year, next_date.month]),
-                                                         })
-
-
 def get_user(username):
     return get_object_or_404(User, username=username)
 
@@ -482,13 +424,10 @@ def edit_post(request, post_id):
     if 'action' in request.POST:
         form = PostForm(request.POST, request.FILES, user=user, post=post)
         if form.is_valid():
-            print "EDIT"
             post.title = form.cleaned_data['title']
             post.content = form.cleaned_data['content']
             post.category = form.cleaned_data['category']
             post.geography = form.cleaned_data['geography']
-            post.event_date_start = form.cleaned_data['event_date_start']
-            post.event_date_finish = form.cleaned_data['event_date_start']
 
             post.slug = slug(post.title)
             process_keywords(post)

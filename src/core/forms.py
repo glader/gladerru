@@ -215,9 +215,6 @@ class PostForm(CommonForm):
     deferred_date = forms.DateField(label=u"Дата публикации", required=False, initial=datetime.now().date)
     deferred_time = forms.TimeField(label=u"Время публикации", required=False, initial=datetime.now().time)
 
-    event_date_start = forms.DateField(label=u"Дата события", required=False, widget=forms.DateInput(attrs={'class': 'vforms.DateField'}))
-    event_date_finish = forms.DateField(label=u"Дата окончания события", required=False)
-
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         self.post = kwargs.pop('post')

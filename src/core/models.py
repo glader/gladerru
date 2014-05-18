@@ -397,8 +397,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
     best = models.DateTimeField(null=True, blank=True, verbose_name=u"На главной")
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
-    event_date_start = models.DateTimeField(null=True, blank=True, default=None, verbose_name=u"Дата начала события")
-    event_date_finish = models.DateTimeField(null=True, blank=True, default=None, verbose_name=u"Дата окончания события")
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     rating = models.FloatField(default=0.0, verbose_name=u"Рейтинг")

@@ -43,8 +43,6 @@ urlpatterns = patterns('',
     url(r'^users/(?P<username>[\w\.-]+)/posts/?$', user_posts, name='user_posts'),
     url(r'^users/(?P<username>[\w\.-]+)/(?P<section>[\w]+)/?$', user_staff, name='user_staff'),
     url(r'^users/(?P<username>[\w\.-]+)/(?P<section>[\w]+)/(?P<item_id>[\d]+)/?$', user_item, name='user_item'),
-    url(r'^schedule/(?P<year>\d+)/(?P<month>\d+)$', schedule, name='schedule_month'),
-    url(r'^schedule', schedule, name='schedule'),
 
     url(r'^my$', my_profile, name='my_profile'),
     url(r'^my/drafts$', drafts, name='drafts'),

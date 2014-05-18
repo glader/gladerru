@@ -158,12 +158,6 @@
                     <table style="width: 100%">
                         <tr>
                             <td>
-                                <a href="#" onclick="$('#js-event-block').show(); $(this).hide(); return false;">Указать дату события</a>
-                                <div id="js-event-block" class="g-hidden">Если пост относится к какой-то дате, укажите ее<br />
-                                  Дата: {{ form.event_date_start }}
-                                </div>
-                            </td>
-                            <td>
 			                    <a href="#" onclick="$('#js-deferred-block').show(); $(this).hide(); return false;">Выбрать дату публикации</a>
 			                    <div id="js-deferred-block" class="g-hidden">Отложенная публикация<br />
 			                      Дата: {{ form.deferred_date }} <br />
