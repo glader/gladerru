@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     (r'^admind/', include(admin.site.urls)),
     (r'^votes/', include('votes.urls')),
-    (r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemap.sitemaps}),
+    (r'^dynamic_sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemap.sitemaps}),
     (r'^', include('discounts.urls')),
     (r'^', include('mountains.urls')),
     (r'^', include('movies.urls')),

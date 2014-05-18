@@ -9,6 +9,7 @@ MAILTO="glader.ru@gmail.com"
 #|      |       |       |       |       commands
 30      4       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py recalc > /dev/null
 45      5       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py maintenance > /dev/null
+0       6       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py generate_sitemap > /dev/null
 
 */5     *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py publish_deferred
 
