@@ -72,6 +72,7 @@ admin.site.register(models.Post, PostAdmin)
 admin.site.register(models.Rubric, RubricAdmin)
 admin.site.register(models.Word, WordAdmin)
 admin.site.register(models.Photo, PhotoAdmin)
+admin.site.register(models.Redirect)
 
 
 class KeywordAdmin(admin.ModelAdmin):

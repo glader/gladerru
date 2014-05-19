@@ -186,32 +186,6 @@ class TagsCloud(object):
                 tag.rel_size = min_rel_size + (tag.size - min) * (max_rel_size - min_rel_size) / (max - min)
 
 
-def get_image_path(instance, filename):
-    paths = {'MOVIE': 'images/covers/%s',
-             'RIDER': 'portraits/%s',
-             'PHOTOGRAPHER': 'portraits/%s',
-             'MEN_OTHER': 'portraits/%s',
-             'FIRM': 'images/logo/%s',
-             'SHOP': 'images/logo/%s',
-             'MAGAZINE': 'images/logo/%s',
-             'MOVIE_MAKER': 'images/logo/%s',
-             'TEAM': 'images/logo/%s',
-             }
-
-    if isinstance(instance, Photo):
-        user = instance.author
-        user_dir = os.path.join(settings.STATIC_ROOT, 'data', 'users', user.username)
-        if not os.path.exists(user_dir):
-            os.mkdir(user_dir)
-
-        return 'data/users/%s/%s.jpg' % (user.username, uuid.uuid4().hex)
-
-    elif instance.type.name in paths:
-        return paths[instance.type.name] % filename
-
-    return 'data/other/%s' % filename
-
-
 class Profile(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, verbose_name=u"Пользователь")
 
