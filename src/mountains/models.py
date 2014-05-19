@@ -68,6 +68,7 @@ class Mountain(models.Model, VoteMixin):
     webcam = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"Web камера")
     work_time = models.TextField(max_length=50, null=True, blank=True, verbose_name=u"Время работы")
     email = models.EmailField(null=True, blank=True, verbose_name=u"Email")
+    interactive_map = models.TextField(verbose_name=u"Интеракт. карта", null=True, blank=True, default=None)
 
     newbie = models.BooleanField(default=False, verbose_name=u"Есть учебный склон")
     parking = models.BooleanField(default=False, verbose_name=u"Есть платная стоянка")

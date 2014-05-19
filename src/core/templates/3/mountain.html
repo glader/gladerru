@@ -27,6 +27,13 @@
                     {% if mountain.tel %}<tr><td valign="top"><b>Телефоны:</b></td><td>{{ mountain.tel }}</td></tr>{% endif %}
 
 				</tbody></table>
+                <br>
+
+                {% if mountain.interactive_map %}
+                    {{  mountain.interactive_map|safe }}
+                    <small>Видеокарта POVmap</small>
+                    <br><br>
+                {% endif %}
 
 				<p>{{ mountain.content|safe }}</p>
 
