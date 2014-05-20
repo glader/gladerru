@@ -119,7 +119,7 @@ class Movie(models.Model, VoteMixin):
     date_created = None
 
     def get_absolute_url(self):
-        return reverse('movie', kwargs={'year': self.year or '-', 'name': self.slug})
+        return reverse('movie', kwargs={'year': self.year or '-', 'slug': self.slug})
 
     def __unicode__(self):
         return self.title

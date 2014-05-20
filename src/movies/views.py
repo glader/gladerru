@@ -6,6 +6,7 @@ from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect, Htt
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 from django.template import RequestContext, loader
+from django.views.generic import DetailView, ListView
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo, PictureBox
 from .templatetags.movies import make_pages, link
@@ -30,49 +31,47 @@ def render_to_response(request, template_name, context_dict={}, cookies={}):
     return response
 
 
-def studies(request):
-    studies = Studio.objects.all().order_by('title')
-    return render_to_response(request, 'movies/studies.html', {'studies': studies})
+class StudioView(DetailView):
+    model = Studio
+    template_name = 'movies/studio.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StudioView, self).get_context_data(**kwargs)
+        context['movies'] = Movie.objects.filter(studio=context['object']).order_by('-year', 'title')
+        return context
 
 
-def studio(request, studio_name):
-    studio = get_object_or_404(Studio, slug=studio_name)
-    movies = Movie.objects.filter(studio=studio).order_by('-year', 'title')
-    return render_to_response(request, 'movies/studio.html', {'studio': studio, 'movies': movies})
+class MoviesViews(ListView):
+    template_name = 'movies/movies.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(MoviesViews, self).get_context_data(**kwargs)
+        context['year'] = self.kwargs['year']  # for submenu
+        return context
 
-def movies(request):
-    context = {'page': "2013"}
-    year = context['page']
+    def get_queryset(self):
+        year = self.kwargs['year']
 
-    movies = Movie.objects.all().order_by('-rating', 'title')
-    if year.isdigit():
-        movies = movies.filter(year=year)
-
-    if not len(movies):
         movies = Movie.objects.all().order_by('-rating', 'title')
+        if year.isdigit():
+            movies = movies.filter(year=year)
 
-    return render_to_response(request, 'movies/movies.html', {'movies': movies, 'year': year})
+        if not len(movies):
+            movies = Movie.objects.all().order_by('-rating', 'title')
 
-
-def movies_by_year(request, year):
-    context = {'page': year}
-    year = context['page']
-
-    movies = Movie.objects.all().order_by('-rating', 'title')
-    if year.isdigit():
-        movies = movies.filter(year=year)
-
-    if not len(movies):
-        movies = Movie.objects.all().order_by('-rating', 'title')
-
-    return render_to_response(request, 'movies/movies.html', {'movies': movies, 'year': year})
+        return movies
 
 
-def movie(request, year, name):
-    movie = get_object_or_404(Movie, slug=name)
-    songs = Song.objects.filter(movie=movie)
-    return render_to_response(request, 'movies/movie.html', {'movie': movie, 'songs': songs, 'item': movie, 'page_identifier': 'movie_%s' % movie.id})
+class MovieView(DetailView):
+    model = Movie
+    template_name = 'movies/movie.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MovieView, self).get_context_data(**kwargs)
+        context['songs'] = Song.objects.filter(movie=context['object'])
+        context['item'] = context['object']
+        context['page_identifier'] = context['object'].uid
+        return context
 
 
 def teasers(request):

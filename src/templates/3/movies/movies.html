@@ -18,17 +18,17 @@
 
 	<table class="sortable b-movie-list">
 		<tr>
-            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Наименование</span></span></td>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Студия</span></span></td>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Год</span></span></td>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Тизер</span></span></td>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Фильм</span></span></td>
-            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Торрент</span></span></td>
-            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Треки</span></span></td>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Рейтинг</span></span></td>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Наименование</span></span></th>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Студия</span></span></th>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Год</span></span></th>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Тизер</span></span></th>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Фильм</span></span></th>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Торрент</span></span></th>
+            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Треки</span></span></th>
+            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Рейтинг</span></span></th>
 		</tr>
 
-	{% for movie in movies %}
+	{% for movie in object_list %}
 		<tr>
 			<td>{{ movie|link }}</td>
 			<td>{% if movie.studio %}{{ movie.studio|link }}{% endif %}</td>

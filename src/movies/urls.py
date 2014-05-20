@@ -1,16 +1,23 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
+from django.views.generic import ListView, RedirectView
+
 from . import views
+from .models import Studio
 
 
 urlpatterns = patterns('',
-    url(r'^studies/([^/]+)$', views.studio, name='studio'),
-    url(r'^studies/$', views.studies, name='studies'),
+    url(r'^studies/(?P<slug>[^/]+)$', views.StudioView.as_view(), name='studio'),
+    url(
+        r'^studies/$',
+        ListView.as_view(queryset=Studio.objects.all().order_by('title'), template_name='movies/studies.html'),
+        name='studies',
+    ),
+    url(r'^movies/$', RedirectView.as_view(permanent=False, url='/movies/2013/'), name='movies'),
+    url(r'^movies/(?P<year>[^/]+)/$', views.MoviesViews.as_view(), name='movies_by_year'),
+    url(r'^movies/(?P<year>[^/]+)/(?P<slug>[^/]+)$', views.MovieView.as_view(), name='movie'),
     url(r'^movies/teasers/$', views.teasers, name='teasers'),
     url(r'^movies/soundtracks/$', views.soundtracks, name='soundtracks'),
-    url(r'^movies/(?P<year>[^/]+)/$', views.movies_by_year, name='movies_by_year'),
-    url(r'^movies/(?P<year>[^/]+)/(?P<name>[^/]+)$', views.movie, name='movie'),
-    url(r'^movies/$', views.movies, name='movies'),
     url(r'^people/([^/]+)/photos$', views.man_photos, name='man_photos'),
     url(r'^people/([^/]+)/author_photos$', views.man_author_photos, name='man_author_photos'),
     url(r'^people/([^/]+)$', views.man, name='man'),
