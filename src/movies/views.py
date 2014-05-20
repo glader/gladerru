@@ -6,7 +6,7 @@ from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect, Htt
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 from django.template import RequestContext, loader
-from django.views.generic import DetailView, ListView
+from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo, PictureBox
 from .templatetags.movies import make_pages, link
@@ -74,54 +74,89 @@ class MovieView(DetailView):
         return context
 
 
-def teasers(request):
-    movies = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-year', '-rating')
-    return render_to_response(request, 'movies/teasers.html', make_pages(movies, 10, request.GET.get('page', "")))
+class TeasersView(ListView):
+    paginate_by = 10
+    queryset = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-year', '-rating')
+    template_name = 'movies/teasers.html'
 
 
-def soundtracks(request):
-    movies = Movie.objects.filter(has_songs=True).order_by('-year', 'title')
-    return render_to_response(request, 'movies/soundtracks.html', make_pages(movies, 10, request.GET.get('page', "")))
+class SoundtracksView(ListView):
+    paginate_by = 10
+    queryset = Movie.objects.filter(has_songs=True).order_by('-year', 'title')
+    template_name = 'movies/soundtracks.html'
 
 
-def people(request):
-    riders = Man.interesting.all().order_by('title')
-    present_letters = {}
-    for r in riders:
-        present_letters.setdefault(r.title[0], []).append(r)
-    content = {'alphabet_letters': alphabet_letters, 'present_letters': present_letters}
-    return render_to_response(request, 'movies/people.html', content)
+class PeopleView(TemplateView):
+    template_name = 'movies/people.html'
+
+    def get_context_data(self, **kwargs):
+        riders = Man.interesting.all().order_by('title')
+        present_letters = {}
+
+        for r in riders:
+            present_letters.setdefault(r.title[0], []).append(r)
+
+        return {'alphabet_letters': alphabet_letters, 'present_letters': present_letters}
 
 
-def man(request, man_name):
-    item = get_object_or_404(Man, slug=man_name)
-    if item.primary_synonim:
-        return HttpResponsePermanentRedirect(item.primary_synonim.get_absolute_url())
-    movies = Movie.objects.filter(man2movie__man=item, man2movie__role='actor').order_by('-year')
-    photos = Photo.objects.filter(rider=item).order_by('-date_created')[:4]
-    author_photos = Photo.objects.filter(photographer=item).order_by('-date_created')[:4]
-    return render_to_response(request, 'movies/rider.html', {
-        'item': item,
-        'movies': movies,
-        'photos': photos[:3],
-        'more_photos': len(photos) > 3,
-        'author_photos': author_photos[:3],
-        'more_author_photos': len(author_photos) > 3,
-    })
+class ManView(DetailView):
+    model = Man
+    template_name = 'movies/rider.html'
+
+    def render_to_response(self, context, **response_kwargs):
+        if self.object.primary_synonim:
+            return HttpResponsePermanentRedirect(self.object.primary_synonim.get_absolute_url())
+
+        return super(ManView, self).render_to_response(context)
+
+    def get_context_data(self, **kwargs):
+        movies = Movie.objects.filter(man2movie__man=self.object, man2movie__role='actor').order_by('-year')
+        photos = Photo.objects.filter(rider=self.object).order_by('-date_created')[:4]
+        author_photos = Photo.objects.filter(photographer=self.object).order_by('-date_created')[:4]
+        return {
+            'item': self.object,
+            'movies': movies,
+            'photos': photos[:3],
+            'more_photos': len(photos) > 3,
+            'author_photos': author_photos[:3],
+            'more_author_photos': len(author_photos) > 3,
+        }
 
 
-def man_photos(request, slug):
-    item = get_object_or_404(Man, slug=slug)
-    context = make_pages(Photo.objects.filter(rider=item).order_by('-date_created'), current_page=request.GET.get('page', ""))
-    context['title'] = mark_safe(u'%s - фотографии с %s участием' % (link(item), item.gender == 'm' and u'его' or u'её'))
-    return render_to_response(request, 'movies/rider_photos.html', context)
+class ManPhotosView(ListView):
+    man = None
+    paginate_by = 20
+    template_name = 'movies/rider_photos.html'
+
+    def get_queryset(self):
+        self.man = get_object_or_404(Man, slug=self.kwargs['slug'])
+        return Photo.objects.filter(rider=self.man).order_by('-date_created')
+
+    def get_context_data(self, **kwargs):
+        context = super(ManPhotosView, self).get_context_data(**kwargs)
+        context['title'] = mark_safe(
+            u'%s - фотографии с %s участием' %
+            (link(self.man), self.man.gender == 'm' and u'его' or u'её')
+        )
+        return context
 
 
-def man_author_photos(request, slug):
-    item = get_object_or_404(Man, slug=slug)
-    context = make_pages(Photo.objects.filter(photographer=item).order_by('-date_created'), current_page=request.GET.get('page', ""))
-    context['title'] = mark_safe(u'%s - фотографии %s авторства' % (link(item), item.gender == 'm' and u'его' or u'её'))
-    return render_to_response(request, 'movies/rider_photos.html', context)
+class AuthorPhotosView(ListView):
+    man = None
+    paginate_by = 20
+    template_name = 'movies/rider_photos.html'
+
+    def get_queryset(self):
+        self.man = get_object_or_404(Man, slug=self.kwargs['slug'])
+        return Photo.objects.filter(photographer=self.man).order_by('-date_created')
+
+    def get_context_data(self, **kwargs):
+        context = super(AuthorPhotosView, self).get_context_data(**kwargs)
+        context['title'] = mark_safe(
+            u'%s - фотографии %s авторства' %
+            (link(self.man), self.man.gender == 'm' and u'его' or u'её')
+        )
+        return context
 
 
 class JsonResponse(HttpResponse):

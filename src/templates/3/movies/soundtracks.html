@@ -12,13 +12,13 @@
     {% top_menu 'soundtracks' %}
 {% endblock %}
 
-{% block title %}Саундтреки сноубордических фильмов{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}Саундтреки сноубордических фильмов{% ifnotequal page_obj.number 1 %}, стр. {{ page_obj.number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
 
 {% block page_title %}Саундтреки сноубордических фильмов{% endblock %}
 
 {% block content %}
 	<div class="b-feed">
-	    {% for m in items %}
+	    {% for m in object_list %}
 	        <div class="item">
 	            <div class="title"><h2>{{ m|link }} ({{ m.year|default:"" }}{% if m.year %}, {% endif %}{{ m.rating|default:"0" }})</h2></div><br />
 	            <div style="margin-left: 20px;">
@@ -28,5 +28,5 @@
 	    {% endfor %}
 	</div>
 
-	{% pagination %}
+		{% include "block_django_pagination.html" %}
 {% endblock %}

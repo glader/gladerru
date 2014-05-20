@@ -19,6 +19,8 @@ from core.utils.log import get_logger
 from core.decorators import time_slow
 from core.utils.thumbnails import get_thumbnail_url
 
+from movies.models import Photo as ManPhoto
+
 register = template.Library()
 
 
@@ -122,6 +124,7 @@ def top_menu(level2='all_posts', level1=None):
             ['freeride', '/skills/freeride', u'фрирайд', u'тем, кто хочет катать в больших горах'],
             ['jibbing', '/skills/jibbing', u'джиббинг', u'тем, кто хочет слайдить по перилам'],
             ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
+            ['dictionary', '/terms/', u'словарь', u'Словарь всяких терминов'],
         ],
         'movies': [
             ['2013', '/movies/2013/', u'2013', u'Фильмы 2013 года'],
@@ -130,13 +133,10 @@ def top_menu(level2='all_posts', level1=None):
             ['teasers', '/movies/teasers/', u'тизеры', u'Тизеры к фильмам'],
             ['soundtracks', '/movies/soundtracks/', u'саундтреки', u'Музыкальные треки к фильмам'],
             ['studies', '/studies/', u'студии', u'Авторы фильмов'],
+            ['people', '/people/', u'райдеры', u'Участники съемок'],
         ],
         'mountains': [
             ['map', '/mountains', u'карта', u'Горки: информация, фотографии, цены, отзывы.'],
-        ],
-        'reference': [
-            ['people', '/people', u'люди', u'Райдеры, фотографы и прочие'],
-            ['dictionary', '/terms', u'словарь', u'Словарь всяких терминов'],
         ],
         'profile': [
             ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
@@ -476,7 +476,7 @@ def link(item):
     if isinstance(item, User):
         return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.name))
 
-    if isinstance(item, Photo):
+    if isinstance(item, Photo) or isinstance(item, ManPhoto):
         return mark_safe(u'<a href="%s"><img class="userphoto" src="%s" alt="%s"></a>'
                          % (item.get_absolute_url(), thumbnail(item.yandex_fotki_image_src), item.title))
 

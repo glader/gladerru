@@ -1,7 +1,7 @@
 {% extends "tab_movies.html" %}
 {% load content %}
 
-{% block title %}{{ title|striptags }}{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}{{ title|striptags }}{% ifnotequal page_obj.number 1 %}, стр. {{ page_obj.number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
 
 {% block top_menu %}
     {% top_menu 'people' %}
@@ -11,10 +11,10 @@
 
 {% block content %}
     <div class="b-feed b-static-text">
-        {% for item in items %}
+        {% for item in object_list %}
             {{ item|link }}
         {% endfor %}
     </div>
 
-    {% pagination %}
+    {% include "block_django_pagination.html" %}
 {% endblock content %}
