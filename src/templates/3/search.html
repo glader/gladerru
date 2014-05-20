@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load content %}
+{% load russian %}
+{% load staticfiles %}
+
+{% block title %}Поиск - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu '' %}
+{% endblock %}
+
+{% block page_title %}Поиск{% endblock %}
+
+{% block content %}
+	<div class="b-search">
+		<form action="/search" id="cse-search-box" method="post">
+	      <div>
+	        <input type="text" name="query" size="60" value="{{ query }}"/>
+	        <input type="submit" value="Поиск" />
+	      </div>
+	    </form>
+	    <br/>
+
+        {% if msg %}
+            <p>{{ msg }}</p>
+        {% endif %}
+
+	   	{% if result.base %}
+			<h2>Возможно вы искали:</h2>
+			<ul>
+				{% for res in result.base %}
+					<li><img src="{% static "design/3/img/icons/type-" %}{{ res|type_name }}.png" alt="{{ res|type_name }}"/>&nbsp;
+                        {{ res|link }}
+                        {% ifequal res|type_name 'post' %}&nbsp;<span class="b-search-postdate">({{ res.date_created|human_date }})</span>{% endifequal %}
+                    </li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+
+		{% if result.yandex %}
+		    <br/>
+		    <br/>
+			<h2><img src="http://data.yandex.ru/i?ctype=4&path=h12810750_yandex_rb.png" alt="Яндекс"> {{ result.yandex.found_human }}:</h2>
+
+			<ul>
+			{% for page in result.yandex.pages %}
+				<li><img src="{% static "design/3/img/icons/type-post.png" %}" alt="Страница"/>&nbsp;<a href="{{ page.url }}">{{ page.title|safe }}</a>
+					<blockquote style="margin: 3px 0px 10px 30px;">
+						{{ page.snippet|safe }}
+					</blockquote>
+				</li>
+
+			{% endfor %}
+			</ul>
+
+		{% endif %}
+	</div>
+{% endblock content %}
+
+{% block sidebar %}
+    {% include "block_index_sidebar.html" %}
+{% endblock sidebar %}
+
