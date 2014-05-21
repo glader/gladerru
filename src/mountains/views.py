@@ -1,9 +1,40 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.shortcuts import get_object_or_404
+from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import Mountain, Region
-from core.views.common import render_to_response
+
+
+class MountainsView(TemplateView):
+    template_name = 'mountains/mountains.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MountainsView, self).get_context_data(**kwargs)
+        context.update(get_mountains())
+        return context
+
+
+class RegionView(DetailView):
+    model = Region
+    template_name = 'mountains/mountains.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RegionView, self).get_context_data(**kwargs)
+        context.update(get_mountains(region=context['object']))
+        return context
+
+
+class MountainView(DetailView):
+    model = Mountain
+    template_name = 'mountains/mountain.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MountainView, self).get_context_data(**kwargs)
+        context.update({
+            'page_identifier': 'mountain_%s' % context['object'].id,
+            'YAMAPS_API_KEY': settings.YAMAPS_API_KEY
+        })
+        return context
 
 
 def get_mountains(region=None):
@@ -21,18 +52,3 @@ def get_mountains(region=None):
         regions_dict[m.region_id].mountains.append(m)
 
     return {'regions': regions, 'mountains': mountains, 'YAMAPS_API_KEY': settings.YAMAPS_API_KEY}
-
-
-def mountains(request):
-    context = get_mountains()
-    return render_to_response(request, 'mountains.html', context)
-
-
-def mountain(request, name):
-    mountain = get_object_or_404(Mountain, name=name)
-    return render_to_response(request, 'mountain.html', {'mountain': mountain, 'page_identifier': 'mountain_%s' % mountain.id, 'YAMAPS_API_KEY': settings.YAMAPS_API_KEY})
-
-
-def region(request, region_id):
-    region = get_object_or_404(Region, pk=region_id)
-    return render_to_response(request, 'mountains.html', get_mountains(region))

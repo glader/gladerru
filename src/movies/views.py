@@ -9,7 +9,7 @@ from django.template import RequestContext, loader
 from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo, PictureBox
-from .templatetags.movies import make_pages, link
+from .templatetags.movies import link
 from .utils.common import slug
 
 

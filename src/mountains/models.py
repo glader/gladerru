@@ -39,8 +39,8 @@ class District(models.Model):
 
 
 class Mountain(models.Model, VoteMixin):
-    name = models.CharField(max_length=250, null=True, blank=True, unique=True, verbose_name=u"Имя элемента")
-    title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
+    slug = models.CharField(max_length=250, null=True, blank=True, unique=True, verbose_name=u"Код горы")
+    title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Название")
     content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
     status = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Статус")
 
@@ -85,7 +85,7 @@ class Mountain(models.Model, VoteMixin):
     proof_url = models.TextField(null=True, blank=True, verbose_name=u"Источник данных")
 
     def get_absolute_url(self):
-        return reverse("mountain", args=[self.name])
+        return reverse("mountain", args=[self.slug])
 
     def __unicode__(self):
         return self.title

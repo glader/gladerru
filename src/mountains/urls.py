@@ -4,7 +4,7 @@ from . import views
 
 
 urlpatterns = patterns('',
-    url(r'^mountains/([^/]+)$', views.mountain, name='mountain'),
-    url(r'^mountains/$', views.mountains, name='mountains'),
-    url(r'^regions/(\d+)$', views.region, name='region'),
+    url(r'^mountains/(?P<slug>[^/]+)$', views.MountainView.as_view(), name='mountain'),
+    url(r'^mountains$', views.MountainsView.as_view(), name='mountains'),
+    url(r'^regions/(?P<pk>\d+)$', views.RegionView.as_view(), name='region'),
 )
