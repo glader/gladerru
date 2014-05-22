@@ -4,10 +4,6 @@
 
 {% block title %}{{ tag.title }} - {{ block.super }}{% endblock %}
 
-{% block rss_link %}
-   <link rel="alternate" type="application/rss+xml" href="/feeds/tags/{{ tag.name }}" title="Glader.ru: {{ tag.title }}">
-{% endblock %}
-
 {% block top_menu %}
     {% top_menu "posts" %}
 {% endblock %}

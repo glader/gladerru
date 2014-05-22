@@ -3,10 +3,6 @@
 
 {% block title %}Свежие комментарии - {{ block.super }}{% endblock %}
 
-{% block rss_link %}
-   <link rel="alternate" type="application/rss+xml" href="/feeds/all" title="Glader.ru: свежие сообщения">
-{% endblock %}
-
 {% block top_menu %}
     {% top_menu 'commented' %}
 {% endblock %}
