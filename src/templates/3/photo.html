@@ -3,21 +3,9 @@
 {% load staticfiles %}
 
 {% block head %}
-<script type='text/javascript'>
-function wshow(url) {
-  winName = 'new'+parseInt(Math.random()*100000);
-  width = 600;
-  height = 680;
-  window.open(url, winName,
-    'toolbar=no,location=no,directories=no,status=no,'+
-    'menubar=no,scrollbars=yes,resizable=yes,'+
-    'width=' + width + ',' +
-    'height=' + height + ',' +
-    'left=' + ((screen.width - width) / 2) + ',' +
-    'top=' + ((screen.height - height) / 2));
-  return false;
-}
-</script>
+    {% if photo.post %}
+        <link rel="canonical" href="http://glader.ru{{ photo.post.get_absolute_url }}" />
+    {% endif %}
 {% endblock %}
 
 {% block title %}{% if photo.title %}{{ photo.title }}{% else %}{% if photo.post %}{{ photo.post.title }}{% else %}Фото{% endif %}{% endif %} - {{ block.super }}{% endblock %}
