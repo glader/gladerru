@@ -56,8 +56,13 @@ class PictureBoxAdmin(admin.ModelAdmin):
     ordering = ('-dt',)
 
 
+class PhotoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'post', 'rider', 'photographer')
+
+
 admin.site.register(models.Song, SongAdmin)
 admin.site.register(models.Movie, MovieAdmin)
 admin.site.register(models.Man, ManAdmin)
 admin.site.register(models.Studio, StudioAdmin)
 admin.site.register(models.PictureBox, PictureBoxAdmin)
+admin.site.register(models.Photo, PhotoAdmin)

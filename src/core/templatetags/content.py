@@ -419,8 +419,7 @@ def items_table_list(items):
 
 @cached(cache_key='last_conversations', timeout_seconds=settings.CACHE_LONG_TIMEOUT)
 def get_last_coversations():
-    items = list(Post.objects.all().order_by('-last_comment_date')[:15]) + \
-        list(Photo.objects.all().order_by('-last_comment_date')[:15])
+    items = list(Post.objects.all().order_by('-last_comment_date')[:15])
     anno = datetime(1900, 1, 1)
     items.sort(key=lambda i: i.last_comment_date or anno, reverse=True)
     items = items[:20]
