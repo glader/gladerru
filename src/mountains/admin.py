@@ -11,7 +11,7 @@ class MountainAdmin(admin.ModelAdmin):
     ordering = ('title',)
     list_filter = ('region', 'check_date')
     list_display = ('title', 'check_date')
-    search_fields = ('name', 'title')
+    search_fields = ('slug', 'title')
     inlines = (MountainPhotoInline,)
 
 admin.site.register(models.Mountain, MountainAdmin)
