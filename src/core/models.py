@@ -363,7 +363,7 @@ TYPES = (
 
 
 class Post(models.Model, VoteMixin, UIDMixin):
-    name = models.CharField(max_length=250, null=True, blank=True, default=None, unique=True, verbose_name=u"Имя элемента")
+    name = models.CharField(max_length=250, null=True, blank=True, default=None, verbose_name=u"Имя элемента")
     author = models.ForeignKey(User, null=True, blank=True, verbose_name=u"Автор")
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
