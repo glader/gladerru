@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
 import os
+from itertools import chain
 
 from django.core.management.base import NoArgsCommand
 
-from core.models import Post, Photo
+from core.models import Post, Photo, Word
 from core.utils.thumbnails import make_thumbnail, get_thumbnail_url
 
 
@@ -15,7 +16,7 @@ class Command(NoArgsCommand):
             for line in open(os.path.join(os.path.dirname(__file__), '..', '..', 'migrations', 'images.dat')).readlines()
         )
 
-        for post in Post.objects.all():
+        for post in chain(Post.objects.all(), Word.objects.all()):
             changed = False
             try:
                 tree = BeautifulSoup(post.content, "html5lib")
