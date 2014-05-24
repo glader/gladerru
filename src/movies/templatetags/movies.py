@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 from django.core.paginator import QuerySetPaginator
 from django.conf import settings
 
-from ..models import Man, PictureBox, Song
+from ..models import Man, Song
 
 register = template.Library()
 
@@ -66,9 +66,3 @@ def soundtrack(movie):
 @register.inclusion_tag('block_soundtrack_list.html')
 def soundtrack_list(songs):
     return {'songs': songs, 'SOUNDTRACKS_PREFIX': settings.SOUNDTRACKS_PREFIX}
-
-
-@register.inclusion_tag("blocks/b-picturebox.html")
-def picturebox(user):
-    u"""Случайная картинка для оценки"""
-    return {'picture': PictureBox.get_next_picture(user)}

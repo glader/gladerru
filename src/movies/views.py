@@ -8,7 +8,7 @@ from django.utils.safestring import mark_safe
 from django.template import RequestContext, loader
 from django.views.generic import TemplateView, DetailView, ListView
 
-from .models import Movie, Song, Man, Studio, Man2Movie, Photo, PictureBox
+from .models import Movie, Song, Man, Studio, Man2Movie, Photo
 from .templatetags.movies import link
 from .utils.common import slug
 
@@ -163,19 +163,6 @@ class JsonResponse(HttpResponse):
     """ HttpResponse descendant, which return response with ``application/json`` mimetype. """
     def __init__(self, data):
         super(JsonResponse, self).__init__(content=simplejson.dumps(data), mimetype='application/json')
-
-
-def picturebox(request):
-    picture = get_object_or_404(Photo, pk=request.GET.get('picture_id'))
-    user = request.user.is_authenticated() and request.user or None
-    record = PictureBox(user=user, picture=picture, action=request.GET.get('action'))
-    record.save()
-    if request.GET.get('action') == 'good':
-        result = {}
-    else:
-        next_picture = PictureBox.get_next_picture(user)
-        result = {'success': True, 'picture_id': next_picture.pk, 'preview': link(next_picture)}
-    return JsonResponse(result)
 
 
 # Admin

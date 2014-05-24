@@ -198,22 +198,13 @@ class Song(models.Model):
 
 
 class Photo(models.Model, VoteMixin):
-    slug = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Код картинки")
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
-    content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
-
-    author = models.ForeignKey(User, verbose_name=u"Автор", null=True, blank=True)
-    post = models.ForeignKey('core.Post', verbose_name=u"Пост", null=True, blank=True)
     rider = models.ForeignKey(Man, verbose_name=u"Райдер", null=True, blank=True, related_name="rider")
     photographer = models.ForeignKey(Man, verbose_name=u"Фотограф", null=True, blank=True, related_name="photographer")
-    place = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Место")
-
     yandex_fotki_image_src = models.CharField(null=True, blank=True, verbose_name=u"Путь к картинке", max_length=255)
 
-    rating = models.FloatField(default=0.0, verbose_name=u"Рейтинг")
-    best = models.DateTimeField(null=True, blank=True, verbose_name=u"На главной")
-    local_url = models.CharField(verbose_name=u"Адрес", max_length=70, default="")
+    rating = models.IntegerField(verbose_name=u"Рейтинг", default=0, help_text=u"Был составлен по переходам при случайном показе")
 
     def __unicode__(self):
         return self.title or unicode(self.id)
@@ -222,50 +213,12 @@ class Photo(models.Model, VoteMixin):
     def uid(self):
         return "%s_%s" % (self.__class__.__name__.lower(), self.id)
 
-    def get_absolute_url(self):
-        return self.local_url
-
-    def can_edit(self, user):
-        if not user:
-            return False
-        if not user.is_authenticated():
-            return False
-        if user.get_profile().is_moderator:
-            return True
-        return self.author == user
-
     def is_photo(self):
         return True
 
     def save(self, *args, **kwargs):
         super(Photo, self).save(*args, **kwargs)
 
-        self.local_url = "/users/%s/photos/%s" % (self.author.username.lower(), self.id)
-        super(Photo, self).save(*args, **kwargs)
-
     class Meta:
         verbose_name = u"Фотография"
         verbose_name_plural = u"Фотографии"
-
-
-class PictureBox(models.Model):
-    user = models.ForeignKey(User, verbose_name=u"Посетитель", null=True, blank=True)
-    picture = models.ForeignKey(Photo, verbose_name=u"Картинка")
-    TYPE_CHOICES = (
-        ('good', u'Переход'),
-        ('next', u'Следующая'),
-        ('bad', u'Фигня'),
-    )
-    action = models.CharField(choices=TYPE_CHOICES, default='', max_length=20, verbose_name=u"Тип")
-    dt = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата-время")
-
-    @classmethod
-    def get_next_picture(cls, user=None):
-        pic_count = Photo.objects.filter(best__isnull=False).count()
-        number = random.randrange(pic_count)
-        picture = Photo.objects.filter(best__isnull=False)[number]
-        return picture
-
-    class Meta:
-        verbose_name = u"Оценка фотографии"
-        verbose_name_plural = u"Оценки фотографий"

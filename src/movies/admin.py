@@ -51,18 +51,12 @@ class MovieAdmin(admin.ModelAdmin):
     inlines = (Man2MovieInline, SongInline)
 
 
-class PictureBoxAdmin(admin.ModelAdmin):
-    list_display = ('picture', 'user', 'action', 'dt')
-    ordering = ('-dt',)
-
-
 class PhotoAdmin(admin.ModelAdmin):
-    list_display = ('id', 'post', 'rider', 'photographer')
+    list_display = ('id', 'rider', 'photographer', 'rating')
 
 
 admin.site.register(models.Song, SongAdmin)
 admin.site.register(models.Movie, MovieAdmin)
 admin.site.register(models.Man, ManAdmin)
 admin.site.register(models.Studio, StudioAdmin)
-admin.site.register(models.PictureBox, PictureBoxAdmin)
 admin.site.register(models.Photo, PhotoAdmin)

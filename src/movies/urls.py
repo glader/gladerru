@@ -22,7 +22,6 @@ urlpatterns = patterns('',
     url(r'^people/(?P<slug>[^/]+)/author_photos$', views.AuthorPhotosView.as_view(), name='man_author_photos'),
     url(r'^people/(?P<slug>[^/]+)$', views.ManView.as_view(), name='man'),
     url(r'^people/$', views.PeopleView.as_view(), name='people'),
-    url(r'^ajax/picturebox', views.picturebox),
 
     # Create new elements
     url(r'^create/rider$', views.create_rider, name='create_rider'),

@@ -1,5 +1,6 @@
 {% extends "tab_movies.html" %}
 {% load content %}
+{% load staticfiles %}
 
 {% block title %}{{ title|striptags }}{% ifnotequal page_obj.number 1 %}, стр. {{ page_obj.number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
 
@@ -11,8 +12,8 @@
 
 {% block content %}
     <div class="b-feed b-static-text">
-        {% for item in object_list %}
-            {{ item|link }}
+        {% for photo in object_list %}
+            <a href="{{ photo.yandex_fotki_image_src }}" target="_blank"><img src="{% static "{{ photo.yandex_fotki_image_src|thumbnail }}" %}"></a>
         {% endfor %}
     </div>
 

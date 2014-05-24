@@ -21,71 +21,6 @@ function addPostVotes(postId, klass, vote){
 }
 
 
-function addComment(postId, klass, commentId){
-  comment = $('#content'+commentId).attr('value');
-  if( !comment ){ return false; }
-
-  $.getJSON("/ajax/add_comment",
-            { comment: commentId, klass: klass, post: postId, content: comment},
-           function(json){
-              if(json.success){
-                 $('#aftercomment'+json.afterComment)
-                     .after(json.html);
-                 init();
-              }
-              if(json.error){
-                 alert(json.error)
-              }
-              return false;
-           });
-
-  $('#commentform'+commentId).hide();
-  $('#content'+commentId).attr('value', '');
-  $('#commentlink'+commentId).show();
-  return false;
-}
-
-function addPicLink(insertMode, fieldId, picId){
-    // Вставляет в поле редактирования ссылку <glader pic="...">
-    field = $('#'+fieldId);
-    field.text( field.text() + '<glader pic="' + picId + '">' );
-}
-
-function setBestAnswer(commentId){
- $.getJSON("/ajax/best_answer",
-            { comment: commentId},
-           function(json){
-              if(json.success){
-                 window.location = window.location;
-              }
-              if(json.error){
-                 alert(json.error)
-              }
-              return false;
-           });
-
-  $('#best_answer_mark_'+commentId).hide();
-  return false;
-}
-
-function delBestAnswer(commentId){
- $.getJSON("/ajax/best_answer",
-            { comment: commentId, del:1 },
-           function(json){
-              if(json.success){
-                 window.location = window.location;
-              }
-              if(json.error){
-                 alert(json.error)
-              }
-              return false;
-           });
-
-  $('.js-del_best_answer').hide();
-  return false;
-}
-
-
 function set_name(){
   $.getJSON("/ajax/set_name", { name: $('#set_name_form #id_name').attr('value') },
            function(json){
@@ -109,40 +44,6 @@ function set_news(){
               }
               if(json.error){
                  $('#set_news_form .js-result').text('Ошибка: ' + json.error);
-              }
-              return false;
-           });
-  return false;
-}
-
-function addVKComment(num, last_comment, date, sign){
-  $.getJSON("/ajax/add_vk_comment",
-            {klass: klass, post: post_id, content: last_comment});
-}
-
-function pictureBox(picture_id, action){
-  $.getJSON("/ajax/picturebox", {picture_id: picture_id, action: action},
-           function(json){
-              if(action == 'good'){
-                 window.location = $('#picturebox_picture a').attr('href');
-              };
-              if(json.success){
-                  $('#picturebox_picture').html(json.preview);
-                  $('#picturebox_link_bad').unbind('click').click(function(event){
-                      event.preventDefault();
-                      pictureBox(json.picture_id, 'bad')
-                  })
-                  $('#picturebox_link_next').unbind('click').click(function(event){
-                      event.preventDefault();
-                      pictureBox(json.picture_id, 'next')
-                  })
-                  $('#picturebox_picture a').unbind('click').click(function(event){
-                      event.preventDefault();
-                      pictureBox(json.picture_id, 'good');
-                  })
-               }
-              if(json.error){
-                 alert(json.error);
               }
               return false;
            });
