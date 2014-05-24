@@ -44,9 +44,6 @@
    	{% if photo.photographer %}<div><strong>Автор:</strong> {{ photo.photographer|link }}</div>{% endif %}
 	{% if photo.rider %}<div><strong>В кадре:</strong> {{ photo.rider|link }}</div>{% endif %}
 
-	<br />
-	<p>{{ photo.tags_html|safe }}</p>
-
     {% post_panel photo user %}
 
     {% include "blocks/disqus_comments.html" %}

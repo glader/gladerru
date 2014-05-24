@@ -477,13 +477,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     best = models.DateTimeField(null=True, blank=True, verbose_name=u"На главной")
     local_url = models.CharField(verbose_name=u"Адрес", max_length=70, default="")
 
-    tags_str = models.TextField(null=True, blank=True, verbose_name=u"Теги")
-    tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
-
-    comments = generic.GenericRelation(Comment)
-    comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
-
     all = GenericManager()
     objects = GenericManager(status='pub')
 
@@ -505,17 +498,6 @@ class Photo(models.Model, VoteMixin, UIDMixin):
         if user.get_profile().is_moderator:
             return True
         return self.author == user
-
-    def tags_html(self):
-        if self.tags_str is None:
-            self.rebuild_tags()
-        return self.tags_str
-
-    def rebuild_tags(self):
-        tags = self.tags.all().order_by('type', '-size')
-        t = loader.get_template('block_post_tags.html')
-        self.tags_str = unicode(t.render(Context({'tags': tags})))
-        self.save()
 
     def is_photo(self):
         return True
