@@ -25,7 +25,7 @@ class Command(NoArgsCommand):
                     if not href:
                         continue
 
-                    if '/photos/' in href and '/users/' in href:
+                    if ('/photos/' in href and '/users/' in href) or ('/pic/' in href and '.glader.ru' in href):
                         changed = True
                         print tag
                         photo = Photo.objects.get(pk=href.split('/')[-1])
@@ -39,7 +39,6 @@ class Command(NoArgsCommand):
                             tag.img.replace_with(img)
 
                         print tag
-                        print
 
                 for tag in tree.find_all('img'):
                     image = tag.get('src')
