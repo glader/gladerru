@@ -6,6 +6,12 @@
     {% top_menu 'studies' %}
 {% endblock %}
 
+{% block description %}
+    {% if studio.meta_description %}
+        <meta name="description" content="{{ studio.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}<a href="{% url "movies" %}">Сноубордические фильмы</a> / <a href="{% url "studies" %}">Студии</a> / {{ studio.title }}{% endblock %}
 
 {% block title %}Студия {{ studio.title }} - {{ block.super }}{% endblock %}

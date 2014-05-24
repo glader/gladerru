@@ -5,6 +5,12 @@
     {% top_menu 'dictionary' %}
 {% endblock %}
 
+{% block description %}
+    {% if item.meta_description %}
+        <meta name="description" content="{{ item.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block title %}{{ item.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}

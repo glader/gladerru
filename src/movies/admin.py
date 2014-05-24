@@ -35,15 +35,6 @@ class SongInline(admin.TabularInline):
 
 
 class MovieAdmin(admin.ModelAdmin):
-    fieldsets = (
-        ('Profile field', {
-            'fields': ('title', 'slug', 'studio', 'year', 'content', 'teaser', 'full_movie',
-                       'torrent', 'url', 'cover',
-                       )
-        }),
-        ('Additional', {'fields': ('has_songs', 'rating', 'tag', 'hidden'), 'classes': ('collapse',)})
-    )
-
     list_display = ('title', 'studio', 'year')
     ordering = ('-year', 'title')
     raw_id_fields = ('studio',)

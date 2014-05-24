@@ -5,6 +5,12 @@
 
 {% block title %}{{ post.title }} - {{ parent.title }}{{ block.super }}{% endblock %}
 
+{% block description %}
+    {% if post.meta_description %}
+        <meta name="description" content="{{ post.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block top_menu %}
     {% top_menu 'posts' %}
 {% endblock %}

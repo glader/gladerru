@@ -51,6 +51,8 @@ class Man(models.Model):
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним", null=True, blank=True)
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     objects = GenericManager()
     interesting = GenericManager(hidden=False)
@@ -88,6 +90,8 @@ class Studio(models.Model):
     slug = models.CharField(verbose_name=u"Код", max_length=100, unique=True)
     content = models.TextField(verbose_name=u"Описание", null=True, blank=True)
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def get_absolute_url(self):
         return reverse('studio', args=[self.slug])
@@ -117,6 +121,8 @@ class Movie(models.Model, VoteMixin):
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
     date_created = None
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def get_absolute_url(self):
         return reverse('movie', kwargs={'year': self.year or '-', 'slug': self.slug})
@@ -131,6 +137,7 @@ class Movie(models.Model, VoteMixin):
     def save(self, *args, **kwargs):
         if self.cover:
             make_thumbnail(str(self.cover.src()))
+        return super(Movie, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = u"Фильм"

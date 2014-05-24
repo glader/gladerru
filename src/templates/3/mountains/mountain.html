@@ -5,6 +5,11 @@
 
 {% block page_title %}<a href="{% url "mountains" %}">Все горы</a> » {{ mountain.title }}{% endblock %}
 
+{% block description %}
+    {% if mountain.meta_description %}
+        <meta name="description" content="{{ mountain.meta_description }}">
+    {% endif %}
+{% endblock %}
 
 {% block content %}
        	<table border="0" cellpadding="0" cellspacing="10" width="100%"><tbody>

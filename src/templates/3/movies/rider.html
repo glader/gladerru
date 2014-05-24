@@ -6,6 +6,13 @@
     {% top_menu "people" %}
 {% endblock %}
 
+
+{% block description %}
+    {% if item.meta_description %}
+        <meta name="description" content="{{ item.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block breadcrumbs %}<a href="{% url "movies" %}">Сноубордические фильмы</a> / <a href="{% url "people" %}">Райдеры</a> / {{ item.title }}{% endblock %}
 
 {% block title %}{{ item.title }} - райдеры - {{ block.super }}{% endblock %}

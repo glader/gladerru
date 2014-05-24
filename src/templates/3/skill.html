@@ -5,6 +5,12 @@
 
 {% block title %}{{ skill.title }} - {{ block.super }}{% endblock %}
 
+{% block description %}
+    {% if skill.meta_description %}
+        <meta name="description" content="{{ skill.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block top_menu %}
     {% top_menu skill.slug 'articles' %}
 {% endblock %}

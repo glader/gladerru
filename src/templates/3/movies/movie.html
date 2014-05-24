@@ -8,17 +8,23 @@
     <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
 {% endblock head %}
 
+{% block description %}
+    {% if movie.meta_description %}
+        <meta name="description" content="{{ movie.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block title %}{{ movie.title }} - сноубордические фильмы - {{ block.super }}{% endblock %}
 
 {% block page_title %}<b>Фильм</b> {{ movie.title }}
-	&nbsp;&nbsp;
-    <span id="{{ movie.slug }}_rating">{{ movie.rating|decimal_cut:1 }}</span>
-{% if can_vote %}
-    <a href="" onclick="addPostVotes('{{ movie.slug }}', 1); return false;"
-        ><img id="'{{ movie.slug }}'_rating_up" src="{% static "design/2/img/arrow_up.gif" %}" alt="Нравится" class="icon"></a>
-{% else %}
-    <img src="{% static "design/3/img/b-bar/arrow_up_dis.gif" %}" alt="Нравится" class="icon">
-{% endif %}
+        &nbsp;&nbsp;
+        <span id="{{ movie.slug }}_rating">{{ movie.rating|decimal_cut:1 }}</span>
+    {% if can_vote %}
+        <a href="" onclick="addPostVotes('{{ movie.slug }}', 1); return false;"
+            ><img id="'{{ movie.slug }}'_rating_up" src="{% static "design/2/img/arrow_up.gif" %}" alt="Нравится" class="icon"></a>
+    {% else %}
+        <img src="{% static "design/3/img/b-bar/arrow_up_dis.gif" %}" alt="Нравится" class="icon">
+    {% endif %}
 {% endblock %}
 
 

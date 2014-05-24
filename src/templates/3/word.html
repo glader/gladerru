@@ -5,6 +5,12 @@
     {% top_menu 'dictionary' %}
 {% endblock %}
 
+{% block description %}
+    {% if item.meta_description %}
+        <meta name="description" content="{{ item.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block page %}
     <div itemscope itemtype="http://webmaster.yandex.ru/vocabularies/term-def.xml">
     <div class="b-page-title"><h1 itemprop="term">{{ item.title }}</h1></div>

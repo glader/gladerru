@@ -3,6 +3,12 @@
 
 {% block title %}{{ rubric.title }} {{ block.super }}{% endblock %}
 
+{% block description %}
+    {% if rubric.meta_description %}
+        <meta name="description" content="{{ rubric.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% block page_title %}<a href="{% url "skills" %}">Статьи</a> » {{ rubric.title }}{% endblock %}
 
 {% block content %}

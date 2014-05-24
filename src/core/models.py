@@ -46,6 +46,8 @@ class Tag(models.Model):
     size = models.PositiveIntegerField(default=0, verbose_name=u"Размер")
     posts = models.TextField(verbose_name=u"Посты", default="")
     need_recalc = models.BooleanField(verbose_name=u"Требует пересчета", default=False)
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     tags = None
 
@@ -255,6 +257,8 @@ class Skill(models.Model):
     slug = models.CharField(verbose_name=u"Код", max_length=200)
     description = models.TextField(verbose_name=u"Описание")
     image = YFField(verbose_name=u"Картинка", upload_to='gladerru', null=True, blank=True, default=None)
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def __unicode__(self):
         return self.title
@@ -327,6 +331,8 @@ class Rubric(models.Model):
     order = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Порядок")
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def __unicode__(self):
         return self.title
@@ -381,6 +387,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
     ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
     icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
     local_url = models.CharField(verbose_name=u"Адрес", max_length=70, default="")
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
     comments = generic.GenericRelation(Comment)
@@ -528,6 +536,8 @@ class Word(models.Model, UIDMixin):
     slug = models.CharField(verbose_name=u"Код", max_length=100)
     abstract = models.TextField(verbose_name=u"Вкратце", null=True, blank=True)
     content = models.TextField(verbose_name=u"Описание", null=True, blank=True)
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     DICTIONARIES = (('common', u'Общий словарь'),
                     ('jib', u'Джиббинг'),
@@ -632,6 +642,8 @@ class News(models.Model):
     description = models.TextField(null=True, blank=True, verbose_name=u"Description")
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
     content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def save(self, *args, **kwargs):
         if not self.dt_created:

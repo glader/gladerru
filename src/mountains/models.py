@@ -10,6 +10,8 @@ class Region(models.Model):
     """ Регион """
     title = models.CharField(max_length=250, verbose_name=u"Название")
     order = models.PositiveIntegerField(verbose_name=u"Порядок")
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def __unicode__(self):
         return self.title
@@ -83,6 +85,8 @@ class Mountain(models.Model, VoteMixin):
 
     check_date = models.DateField(null=True, blank=True, verbose_name=u"Дата обработки")
     proof_url = models.TextField(null=True, blank=True, verbose_name=u"Источник данных")
+    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
+                                        null=True, blank=True, default=None)
 
     def get_absolute_url(self):
         return reverse("mountain", args=[self.slug])

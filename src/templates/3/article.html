@@ -1,6 +1,12 @@
 {% extends "item_common_article.html" %}
 {% load content %}
 
+{% block description %}
+    {% if article.meta_description %}
+        <meta name="description" content="{{ article.meta_description }}">
+    {% endif %}
+{% endblock %}
+
 {% if article.skill %}
 	{% block page_title %}<a href="{% url "skills" %}">Статьи</a> {% if article.skill %}» {{ article.skill|link }} {% endif %}» {{ article.title }}{% endblock %}
 {% endif %}
