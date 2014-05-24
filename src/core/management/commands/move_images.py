@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from bs4 import BeautifulSoup
+import os
 
 from django.core.management.base import NoArgsCommand
 
@@ -9,6 +10,11 @@ from core.utils.thumbnails import make_thumbnail, get_thumbnail_url
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
+        replaces = dict(
+            line.strip().split('\t')
+            for line in open(os.path.join(os.path.dirname(__file__), '..', '..', 'migrations', 'images.dat')).readlines()
+        )
+
         for post in Post.objects.all():
             changed = False
             try:
@@ -16,7 +22,10 @@ class Command(NoArgsCommand):
 
                 for tag in tree.find_all('a'):
                     href = tag.get('href')
-                    if '/photos/' in href:
+                    if not href:
+                        continue
+
+                    if '/photos/' in href and '/users/' in href:
                         changed = True
                         print tag
                         photo = Photo.objects.get(pk=href.split('/')[-1])
@@ -26,14 +35,24 @@ class Command(NoArgsCommand):
 
                         make_thumbnail(photo.yandex_fotki_image_src)
                         img = tree.new_tag("img", src=get_thumbnail_url(photo.yandex_fotki_image_src))
-                        tag.img.replace_with(img)
+                        if tag.img:
+                            tag.img.replace_with(img)
 
                         print tag
                         print
 
+                for tag in tree.find_all('img'):
+                    image = tag.get('src')
+                    for replace in replaces.keys():
+                        if image and replace in image:
+                            print tag['src'], '->', replaces[replace]
+                            tag['src'] = replaces[replace]
+                            changed = True
+
                 if changed:
-                    post.content = tree.prettify()
+                    post.content = unicode(tree)
                     post.save()
 
             except Exception, e:
+                raise
                 print e
