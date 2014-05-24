@@ -1,6 +1,5 @@
 {% extends "item_common_mountain.html" %}
 {% load content %}
-{% load staticfiles %}
 
 {% block title %}{{ mountain.title }} {{ block.super }}{% endblock %}
 
@@ -38,10 +37,10 @@
 				<p>{{ mountain.content|safe }}</p>
 
 			</td><td valign="top" width="1">
-                {% if mountain.image %}<a href="{{ mountain.image.src }}" style="float: right;"><img src="{% static "{{ mountain.image.src|thumbnail }}" %}" alt="{{ mountain.title }} - основное фото" border="0"></a><br><br>{% endif %}
+                {% if mountain.image %}<a href="{{ mountain.image.src }}" style="float: right;"><img src="{{ mountain.image.src|thumbnail }}" alt="{{ mountain.title }} - основное фото" border="0"></a><br><br>{% endif %}
 
 				{% for p in photos %}
-					<a href="{{ p.get_absolute_url }}"><img src="{% static "{{ p.yandex_fotki_image_src|thumbnail }}" %}"></a><br><br>
+					<a href="{{ p.get_absolute_url }}"><img src="{{ p.yandex_fotki_image_src|thumbnail }}"></a><br><br>
 				{% endfor %}
 			</td></tr>
 		</tbody></table>

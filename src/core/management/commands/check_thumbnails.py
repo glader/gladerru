@@ -19,7 +19,6 @@ class Command(NoArgsCommand):
 
         images = [
             (photo.yandex_fotki_image_src for photo in CorePhoto.objects.filter(yandex_fotki_image_src__isnull=False)),
-            (photo.yandex_fotki_image_src for photo in Photo.objects.filter(yandex_fotki_image_src__isnull=False)),
             (man.image for man in Man.objects.filter(image__isnull=False)),
             (movie.cover for movie in Movie.objects.filter(cover__isnull=False)),
             (photo.yandex_fotki_image_src for photo in Photo.objects.filter(yandex_fotki_image_src__isnull=False)),

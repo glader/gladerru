@@ -54,7 +54,7 @@
 	{% if last_photos %} <br>
 		Последние фотографии:<br />
 	       {% for p in last_photos %}
-	            <a href="{{ p.get_absolute_url }}" style="border: 0"><img src="{% static "{{ p.yandex_fotki_image_src|thumbnail }}" %}" style="border: 0"></a>&nbsp;
+	            <a href="{{ p.get_absolute_url }}" style="border: 0"><img src="{{ p.yandex_fotki_image_src|thumbnail }}" style="border: 0"></a>&nbsp;
 	       {% endfor %}
 	<br><a href="{% url "user_staff" domain_user.username "photos" %}" style="color: #1c4d75">Смотреть все фотографии размещённые пользователем {{ domain_user.name }}</a>
 	{% endif %}
