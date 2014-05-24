@@ -17,7 +17,7 @@ django-celery
 django-kombu
 pymongo
 simplejson
-easywebdav
+git+https://github.com/amnong/easywebdav.git#egg=easywebdav
 -e git+https://github.com/Dimmma/sape.git#egg=sape
 -e git+https://github.com/garethr/django-timelog.git#egg=timelog
 -e git+https://github.com/glader/django_yafotki.git#egg=yafotki

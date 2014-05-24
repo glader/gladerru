@@ -132,7 +132,7 @@ def environment():
         with cd(env.directory):
             with settings(warn_only=True):
                 run('python virtualenv.py ENV')
-            virtualenv('pip install -r requirements.txt')
+            virtualenv('pip install -r requirements.txt --allow-all-external --allow-unverified PIL')
 
 
 def local_settings():
