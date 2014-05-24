@@ -18,7 +18,7 @@
 		{% endfor %}
 	</div>
 
-	<div class="b-page-title"><h1>Статьи по рубрикам</h1></div>
+	<div class="b-page-title"><h2>Статьи по рубрикам</h2></div>
 	<ul>
 	   {% for r in rubrics %}
 	       <li><a href="{{ r.get_absolute_url }}">{{ r.title }}</a></li>
