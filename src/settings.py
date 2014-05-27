@@ -129,7 +129,7 @@ djcelery.setup_loader()
 
 CELERY_SEND_TASK_ERROR_EMAILS = True
 CELERY_RESULT_BACKEND = "mongodb"
-CELERYD_CONCURRENCY = 3
+CELERYD_CONCURRENCY = 1
 
 LOG_PATH = '/var/log/projects/gladerru'
 TIMELOG_LOG = os.path.join(LOG_PATH, 'time.log')
