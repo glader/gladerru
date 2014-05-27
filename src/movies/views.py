@@ -186,7 +186,7 @@ def create_rider(request):
 
         Man2Movie.objects.create(man=rider, movie=movie, role='actor')
 
-    return HttpResponseRedirect('/admind/core/movie/%d/' % movie.pk)
+    return HttpResponseRedirect('/admind/movies/movie/%d/' % movie.pk)
 
 
 @permission_required('add_movie')
@@ -207,7 +207,7 @@ def create_teaser_announce(request):
     post.best = post.date_created
     post.save()
 
-    return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
+    return HttpResponseRedirect('/admind/movies/movie/%s/' % request.GET.get('movie_pk'))
 
 
 @permission_required('add_movie')
@@ -228,7 +228,7 @@ def create_fullmovie_announce(request):
     post.best = post.date_created
     post.save()
 
-    return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
+    return HttpResponseRedirect('/admind/movies/movie/%s/' % request.GET.get('movie_pk'))
 
 
 @permission_required('add_movie')
@@ -249,7 +249,7 @@ def create_tracklist_announce(request):
     post.best = post.date_created
     post.save()
 
-    return HttpResponseRedirect('/admind/core/movie/%s/' % request.GET.get('movie_pk'))
+    return HttpResponseRedirect('/admind/movies/movie/%s/' % request.GET.get('movie_pk'))
 
 
 # Redirects
