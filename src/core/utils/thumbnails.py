@@ -4,7 +4,6 @@ from StringIO import StringIO
 from hashlib import md5
 import os
 import urllib
-import Image
 import imghdr
 
 from django.conf import settings
@@ -21,6 +20,8 @@ def get_thumbnail_url(image_url):
 
 
 def make_thumbnail(image_url, force=False):
+    import Image
+
     thumbnail_path = get_thumbnail_path(image_url)
     full_path = os.path.join(settings.THUMBNAIL_ROOT, thumbnail_path)
 
