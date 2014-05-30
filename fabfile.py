@@ -30,11 +30,9 @@ def init():
 
         sudo('apt-get update')
         sudo('apt-get upgrade -y')
-        sudo('apt-get install -y mc nginx mysql-client git-core python-setuptools python-dev runit rrdtool sendmail memcached libjpeg8-dev fail2ban')
+        sudo('apt-get install -y mc nginx mysql-client python-setuptools python-dev rrdtool sendmail memcached fail2ban')
         sudo('apt-get build-dep -y python-mysqldb')
-        sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/')
-        sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/')
-        sudo('ln -sf /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/')
+        run('apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev')  # Pillow dependencies
 
         if not exists('/home/%s' % SSH_USER):
             sudo('yes | adduser --disabled-password %s' % SSH_USER)
@@ -132,7 +130,7 @@ def environment():
         with cd(env.directory):
             with settings(warn_only=True):
                 run('python virtualenv.py ENV')
-            virtualenv('pip install -r requirements.txt --allow-all-external --allow-unverified PIL')
+            virtualenv('pip install -r requirements.txt')
 
 
 def local_settings():
