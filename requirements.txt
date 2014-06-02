@@ -1,10 +1,10 @@
 beautifulsoup4==4.3.2
-boto==2.29.1
 celery==3.1.11
 django-celery==3.1.10
 django-debug-toolbar==1.2.1
 django-kombu==0.9.4
 django-ses==0.6.0
+django_yafotki==0.7.3
 Django==1.6.5
 easywebdav==1.2.0
 gunicorn==18.0
@@ -19,5 +19,4 @@ simplejson==3.5.2
 South==0.8.4
 -e git+https://github.com/Dimmma/sape.git#egg=sape==0.2
 git+https://github.com/garethr/django-timelog.git#egg=timelog==0.4
-git+https://github.com/glader/django_yafotki.git#egg=yafotki==0.6
 git+https://github.com/glader/django_russian.git#egg=django_russian==0.1
