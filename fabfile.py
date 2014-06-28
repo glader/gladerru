@@ -111,7 +111,7 @@ def update():
 
 def upload():
     with settings(user=SSH_USER):
-        local('git archive -o archive.tar.gz HEAD')
+        local('git archive HEAD | gzip > archive.tar.gz')
         put('archive.tar.gz', env.directory + '/archive.tar.gz')
         with cd(env.directory):
             run('tar -zxf archive.tar.gz')

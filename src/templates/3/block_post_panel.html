@@ -28,6 +28,7 @@
                             -->
                             </td>
                             <td>
+                                {% ifnotequal mode "empty" %}
                                 <table class="b-bar-social"><tr>
                                     <td><fb:like href="http://glader.ru{{ post.get_absolute_url }}" layout="button_count" show_faces="true" width="150"></fb:like></td>
                                     <td class="sep">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
@@ -50,6 +51,7 @@
                                         <a href="http://twitter.com/share?text={{ post.title|urlencode }}&url=http://glader.ru{{ post.get_absolute_url }}" class="twitter-share-button">Tweet</a>
                                     </td>
                                 </tr></table>
+                                {% endifnotequal %}
 
 							</td>
                             <td class="date">{% if post.date_created %}{{ post.date_created|human_date }}{% endif %}</td>
