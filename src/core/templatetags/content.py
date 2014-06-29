@@ -13,7 +13,7 @@ from django.core.paginator import QuerySetPaginator
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Photo, Tag, Comment
+from core.models import Post, Photo, Tag, Comment, NewsCategory
 from core.utils.common import cached
 from core.utils.log import get_logger
 from core.decorators import time_slow
@@ -112,11 +112,12 @@ def hierarchy(item):
 
 @register.inclusion_tag("block_top_menu.html")
 def top_menu(level2='all_posts', level1=None):
+    categories = [
+        [category.slug, category.get_absolute_url(), category.title, u""]
+        for category in NewsCategory.objects.all()
+    ]
     submenu = {
-        'posts': [
-            ['all_posts', '/', u'новые', u'Все новости'],
-            ['new', '/post/new', u'написать', u'Все ждут от тебя новый пост'],
-        ],
+        'posts': categories + [['new', '/post/new', u'написать', u'Все ждут от тебя новый пост']],
         'articles': [
             ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
             ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],

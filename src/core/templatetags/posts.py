@@ -21,4 +21,5 @@ def render_post_cached(post, mode='cut', user=None):
 
 
 def render_post(post, mode='cut', user=None):
+    print mode
     return render_to_string('posts/%s_%s.html' % (post.type, mode), {'post': post, 'user': user, 'mode': 'normal'})

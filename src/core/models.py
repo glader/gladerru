@@ -48,6 +48,7 @@ class Tag(models.Model):
     need_recalc = models.BooleanField(verbose_name=u"Требует пересчета", default=False)
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
+    category = models.ForeignKey('NewsCategory', verbose_name=u"Категория", null=True, blank=True, default=None)
 
     tags = None
 
@@ -405,7 +406,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
         return self.title
 
     def get_absolute_url(self):
-        return self.local_url
+        return reverse('post', args=[self.category.slug, self.id])
 
     def can_edit(self, user):
         if not user:
@@ -609,6 +610,9 @@ class NewsCategory(models.Model):
 
     def __unicode__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('category', args=[self.slug])
 
     class Meta:
         verbose_name = u"Категория новостей"

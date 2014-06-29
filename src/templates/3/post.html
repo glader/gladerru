@@ -17,6 +17,7 @@
 
 {# FIXME: сделать внятные сообщения о статусах сообщений #}
 {% block page_title %}
+    {{ post.category.title }} &gt;&gt;
     {{ post|link }} {% post_edit_link post user %}
     {% post_status post %}
 {% endblock %}
@@ -30,8 +31,6 @@
                     {{ post.content|safe }}
                 </p>
             </div>
-
-            {{ post.tags_html|safe }}
 
             {% post_panel post user %}
 

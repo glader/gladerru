@@ -16,7 +16,7 @@ from django.shortcuts import get_object_or_404
 
 from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
     PhotoForm, sanitizeHTML
-from core.models import Post, Photo, Comment, Tag, Keyword, TagsCloud
+from core.models import Post, Photo, Comment, Tag, Keyword, NewsCategory
 from core.templatetags.content import make_pages
 from core.utils.common import process_template, slug
 from core.views.common import render_to_response
@@ -72,22 +72,19 @@ def index(request):
 
 
 @time_slow
-@posts_feed(template="tag.html")
-def tag(request, name):
-    tag = get_object_or_404(Tag, name=name)
-    if tag.primary_synonim:
-        return HttpResponsePermanentRedirect(tag.primary_synonim.get_absolute_url())
+@posts_feed(template="category.html")
+def category_view(request, slug):
+    category = get_object_or_404(NewsCategory, slug=slug)
 
-    item_ids = [int(id) for id in tag.posts.split(',')] if tag.posts else []
     start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(hidden=False, id__in=item_ids).order_by('-date_created')
+    posts = Post.objects.filter(hidden=False, category=category).order_by('-date_created')
     if start:
         posts = posts.filter(date_created__lt=start)
 
     context = {
         'start': None,
         'posts': posts[:11],
-        'tag': tag,
+        'category': category,
     }
     if len(context['posts']) == 11:
         context['start'] = timestamp(context['posts'][10].date_created)
@@ -95,11 +92,19 @@ def tag(request, name):
     return context
 
 
-def tags(request):
-    tags = Tag.objects.filter(size__gt=1, type__gt=10).order_by('title')
-    tags_cloud = TagsCloud(tags)
-    tags_cloud.set_rel_sizes(12, 30)
-    return render_to_response(request, 'tags_all.html', {'tags': tags})
+@time_slow
+def post_view(request, slug, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
+        raise Http404
+
+    context = {'post': post,
+               'can_edit': post.can_edit(request.user),
+               'page_identifier': 'post_%s' % post.id,
+               }
+
+    return render_to_response(request, 'post.html', context)
+
 
 ###############################################################################
 # UGC
@@ -292,6 +297,9 @@ def user_item(request, username, section, item_id):
 @time_slow
 def user_post(request, user, post_id):
     post = get_object_or_404(Post, pk=post_id)
+
+    return HttpResponseRedirect(post.get_absolute_url())
+
     if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
         raise Http404
 

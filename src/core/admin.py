@@ -12,7 +12,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'title', 'author', 'status', 'date_created')
+    list_display = ('id', 'name', 'title', 'category', 'author', 'status', 'date_created')
     ordering = ('-date_created',)
     list_filter = ('status',)
     search_fields = ('name', 'title', 'slug', 'url')
@@ -43,10 +43,11 @@ class CommentAdmin(admin.ModelAdmin):
 
 
 class TagAdmin(admin.ModelAdmin):
-    list_display = ('title', 'name', 'type', 'checked', 'size')
-    list_filter = ('type', 'checked')
+    list_display = ('title', 'name', 'category', 'type', 'checked', 'size')
+    list_filter = ('type', 'checked', 'category')
     search_fields = ('name', 'title')
     raw_id_fields = ('primary_synonim', 'parent')
+    list_editable = ('category',)
 
 
 class WordAdmin(admin.ModelAdmin):

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load content %}
+{% load cache %}
+
+{% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu category.slug %}
+{% endblock %}
+
+{% block page_title %}{{ category.title }}{% endblock %}
+
+{% block content %}
+    <div class="b-feed">
+        {% for post in posts %}
+            {{ post }}
+        {% endfor %}
+    </div>
+
+    {% pagination %}
+{% endblock content %}
+
+{% block sidebar %}
+    <h2 class="b-block-title">Прямой эфир</h2>
+    {% last_conversations %}
+{% endblock %}
