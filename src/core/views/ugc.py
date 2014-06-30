@@ -133,32 +133,6 @@ def all(request):
     return context
 
 
-@auth_only
-@posts_feed()
-def hidden(request):
-    """ Вообще все посты, для модераторов """
-    if not request.user.is_superuser:
-        raise Http404
-
-    start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.all().order_by('-date_created')
-    if start:
-        posts = posts.filter(date_created__lt=start)
-
-    context = {
-        'start': None,
-        'posts': posts[:11],
-        'title': u'Все сообщения',
-        'menu_item': 'all_posts',
-    }
-
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
-
-    return context
-
-
 def get_user(username):
     return get_object_or_404(User, username=username)
 
@@ -179,167 +153,11 @@ def get_section_objects(user, section):
     return objects
 
 
-def user_profile(request, username):
-    """ Профиль пользователя """
-    domain_user = get_user(username)
-    domain_profile = domain_user.get_profile()
-    last_comments = Comment.objects.filter(author=domain_user).order_by('-date_created')[:3]
-    last_photos = Photo.objects.filter(author=domain_user).order_by('-date_created')[:3]
-    page = 'profile'
-
-    return render_to_response(request, 'profile.html', locals())
-
-
-@auth_only
-def my_profile(request):
-    """ Профиль пользователя """
-    return user_profile(request, request.user)
-
-
-@auth_only
-def drafts(request):
-    """ Неопубликованные посты """
-    start = parse_timestamp(request.GET.get('start'))
-    posts = get_section_objects(request.user, 'draft')
-    if start:
-        posts = posts.filter(date_created__lt=start)
-
-    context = {
-        'start': None,
-        'posts': posts[:11],
-        'title': u"Неопубликованное",
-    }
-
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
-
-    return render_to_response(request, 'my/drafts.html', context)
-
-
-@auth_only
-def my_settings(request):
-    u""" Настройки юзера """
-    domain_user = request.user
-    profile = domain_user.get_profile()
-    page = 'settings'
-    password_error = ''
-
-    if request.POST.get('action') == 'change_password':
-        user = auth.authenticate(username=request.user.username, password=request.POST.get('old_password'))
-        if not user:
-            password_error = u"Старый пароль неверен"
-
-        if request.POST.get('new_password1') != request.POST.get('new_password2'):
-            password_error = u"Новые пароли не совпадают"
-
-        if not password_error:
-            user.set_password(request.POST.get('new_password1'))
-            user.save()
-            password_error = u"Пароль изменен"
-
-    return render_to_response(request, 'my/settings.html', locals())
-
-
-@posts_feed(template="my/posts.html")
-def user_posts(request, username):
-    user = get_user(username)
-
-    start = parse_timestamp(request.GET.get('start'))
-    posts = get_section_objects(user, 'posts')
-    if start:
-        posts = posts.filter(date_created__lt=start)
-
-    context = {
-        'start': None,
-        'posts': posts[:11],
-        'title': u"%s: Сообщения" % user.name,
-        'domain_user': user,
-        'domain_profile': user.get_profile(),
-    }
-
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
-
-    return context
-
-
-def user_staff(request, username, section):
-    """ Посты, комментарии, картинки, избранное отдельного юзера """
-    user = get_user(username)
-    context = {'domain_user': user, 'domain_profile': user.get_profile(), 'page': request.GET.get('page', "")}
-
-    objects = get_section_objects(user, section)
-
-    context.update(make_pages(objects, current_page=context.get('page')))
-    context['title'] = user.name + ": " + {
-        'comments': u"Комментарии",
-        'photos': u"Картинки"
-    }.get(section)
-
-    return render_to_response(request, 'my/%s.html' % section, context)
-
-
-def user_item(request, username, section, item_id):
-    """ Пост, картинка юзера """
-    user = get_user(username)
-
-    if section == 'posts':
-        return user_post(request, user, item_id)
-    if section == 'photos':
-        return user_photo(request, user, item_id)
-
-    # Остальное пока не реализовано
-    raise Http404()
-
-
 @time_slow
 def user_post(request, user, post_id):
     post = get_object_or_404(Post, pk=post_id)
 
     return HttpResponseRedirect(post.get_absolute_url())
-
-    if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
-        raise Http404
-
-    profile = user.get_profile()
-    context = {'domain_user': user,
-               'profile': profile,
-               'post': post,
-               'can_edit': post.can_edit(request.user),
-               'page_identifier': 'post_%s' % post.id,
-               }
-
-    return render_to_response(request, 'post.html', context)
-
-
-@time_slow
-def user_photo(request, user, pic_id):
-    photo = get_object_or_404(Photo, pk=pic_id, status='pub')
-    prev_photo = None
-    next_photo = None
-
-    if photo.post:
-        try:
-            prev_photo = Photo.objects.filter(post=photo.post, pk__lt=photo.pk).order_by('-pk')[0]
-        except IndexError:
-            prev_photo = None
-        try:
-            next_photo = Photo.objects.filter(post=photo.post, pk__gt=photo.pk).order_by('pk')[0]
-        except IndexError:
-            try:
-                next_photo = Photo.objects.filter(post=photo.post).exclude(pk=photo.pk).order_by('pk')[0]
-            except IndexError:
-                pass
-
-    return render_to_response(request, 'photo.html', {'photo': photo,
-                                                      'post': photo.post,
-                                                      'next_photo': next_photo,
-                                                      'prev_photo': prev_photo,
-                                                      'can_edit': photo.can_edit(request.user),
-                                                      'user': user,
-                                                      'page_identifier': 'photo_%s' % photo.id})
 
 
 def process_keywords(post):
@@ -453,58 +271,6 @@ def edit_post(request, post_id):
                               {'post': post, 'form': form, 'pictures': pictures}
                               )
 
-
-def edit_photo(request, photo_id):
-    photo = get_object_or_404(Photo, pk=photo_id)
-    user = request.user
-    if not user:
-        raise Http404
-    if not photo.can_edit(user):
-        raise Http404
-
-    form = None
-
-    if request.POST:
-        if request.POST['action'] == u"Сохранить":
-            form = PhotoForm(request.POST, photo=photo)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect(photo.get_absolute_url())
-
-        elif request.POST['action'] == u"Удалить":
-            photo.status = 'del'
-            photo.save()
-
-            if photo.post:
-                photo.post.content = photo.post.content.replace('<glader pic="%s">' % photo.pk, '')
-                photo.post.save()
-            return HttpResponseRedirect(user.get_absolute_url())
-
-    else:
-        form = PhotoForm(photo=photo)
-
-    return render_to_response(request, 'photo_edit.html', {'form': form, 'photo': photo})
-
-
-@login_required
-def editprofile(request):
-    user = request.user
-    profile = user.get_profile()
-    if request.POST:
-        form = ProfileForm(request.POST, instance=profile)
-        if form.is_valid():
-            form.save()
-            return HttpResponseRedirect(reverse('profile', args=[user.username]))
-
-    else:
-        form = ProfileForm(instance=profile)
-
-    return render_to_response(request, 'profile_edit.html', {'form': form, 'domain_user': user})
-
-
-def editpassword(request):
-    pass
-
 ###############################################################################
 # AJAX
 
@@ -571,38 +337,6 @@ def add_to_yaphoto(content):
 
     except TypeError:
         raise ValueError('Bad info answer: %s' % result)
-
-
-@auth_only
-def set_name(request):
-    user = request.user
-    name = sanitizeHTML(request.GET.get('name', ''))
-    if not name:
-        return JsonErrorResponse(u"Введите желаемое имя")
-
-    reg_form = RegistrationForm()
-    if not reg_form.free_credentials(name):
-        return JsonErrorResponse(u"Это имя уже занято")
-
-    if len(name) > 30:
-        return JsonErrorResponse(u"Слишком длинное имя. Ограничьтесь 30 символами")
-
-    user.first_name = name
-    user.save()
-    return JsonResponse({'success': True})
-
-
-@auth_only
-def set_news(request):
-    user = request.user
-    profile = user.get_profile()
-    if request.GET.get('news') and request.GET.get('news') != 'false':
-        profile.send_news = True
-    else:
-        profile.send_news = False
-
-    profile.save()
-    return JsonResponse({'success': True})
 
 
 def crossdomain(request):
