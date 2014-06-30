@@ -45,4 +45,7 @@ urlpatterns = patterns('',
     url(r'^post/edit/(\d+)$', edit_post, name='edit_post'),
 
     url(r'^$', index, name='index'),
+
+    # Old urls
+    url(r'^users/([^/]+)/posts/(\d+)$', user_post),
 )
