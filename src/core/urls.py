@@ -10,8 +10,10 @@ from django.contrib.auth.views import password_reset
 urlpatterns = patterns('',
     url(r'^content/([^/]+)\.htm$', article, name='article'),
     url(r'^rubric/([^/]+)$', rubric, name='rubric'),
-    url(r'^category/([^/]+)$', category_view, name='category'),
-    url(r'^category/([^/]+)/(\d+)$', post_view, name='post'),
+
+    url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$', category_view, name='category'),
+    url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_view, name='post'),
+
     url(r'^terms/([^/]+)$', dictionary_word, name='dictionary_word'),
     url(r'^terms/', dictionary, name='dictionary'),
     url(r'^skills/([^/]+)$', skill, name='skill'),

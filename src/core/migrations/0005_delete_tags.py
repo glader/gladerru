@@ -16,7 +16,6 @@ class Migration(DataMigration):
             for post in orm.Post.objects.filter(tags__in=[tag]):
                 post.tags.remove(tag)
 
-            print "Drop tag", tag.name.encode('utf8')
             tag.delete()
 
         other = orm.Tag.objects.create(name='other', title=u"Разное", need_recalc=True)

@@ -29,7 +29,6 @@ class Migration(DataMigration):
                     if replace in post.icon.src():
                         post.icon = replaces[replace]
                         post.save()
-                        print post.id, "icon"
 
             # Content
             tree = BeautifulSoup(post.content, "html5lib")
@@ -42,7 +41,6 @@ class Migration(DataMigration):
                         changed = True
 
             if changed:
-                print post.id, "content"
                 post.content = unicode(tree)
                 post.save()
 
