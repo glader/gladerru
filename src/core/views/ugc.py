@@ -155,7 +155,7 @@ def get_section_objects(user, section):
 
 @time_slow
 def user_post(request, user, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+    post = get_object_or_404(Post, pk=post_id, hidden=False)
 
     return HttpResponseRedirect(post.get_absolute_url())
 
