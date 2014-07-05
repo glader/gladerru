@@ -56,15 +56,7 @@
 							</td>
                             <td class="date">{% if post.date_created %}{{ post.date_created|human_date }}{% endif %}</td>
                             <td class="comments">
-                                <noindex>
-                                    {% if post.comment_count %}<a href="{{ post.get_absolute_url }}#comments">{{ post.comment_count }} {{ post.comment_count|human_number:"комментарий" }}</a>
-                                        {% ifequal mode 'new_comments' %}
-                                            / <a href="{{ post.get_absolute_url }}#new" rel="nofollow">{{ post.new_comments }} {{ post.new_comments|human_number:"новый" }}</a>
-                                        {% endifequal %}
-                                    {% else %}
-                                        <a href="{{ post.get_absolute_url }}#comments" rel="nofollow">прокомментировать</a>
-                                    {% endif %}
-                                </noindex>
+
                             </td>
                         </tr>
                         </table>
