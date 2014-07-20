@@ -115,13 +115,14 @@
         </table>
     {% endblock full_page %}
 
+    <noindex>
     <table class="l-page">
     <tr>
         <td class="l-page-g"><i></i></td>
         <td>
             <i class="b-round b-round_6"><i class="l t"><i></i></i></i>
             <div class="b-foot">
-                <a href="{% url "feedback" %}">Обратная связь</a>
+                <a href="{% url "feedback" %}" rel="nofollow">Обратная связь</a>
             </div>
             <i class="b-round b-round_6"><i class="l b"><i></i></i></i>
             <br />
@@ -133,6 +134,7 @@
         <td class="l-page-g"><i></i></td>
     </tr>
     </table>
+    </noindex>
 
     </div></div>
 
