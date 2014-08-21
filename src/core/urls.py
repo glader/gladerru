@@ -27,9 +27,9 @@ urlpatterns = patterns('',
     url(r'^auth/registration$', registration, name='registration'),
     url(r'^auth/logout$', 'django.contrib.auth.views.logout', name='logout'),
     url(r'^auth/reset$', password_reset, name='password_reset'),
-    url(r'^auth/password_reset/done/$', 'django.contrib.auth.views.password_reset_done'),
+    url(r'^auth/password_reset/done/$', 'django.contrib.auth.views.password_reset_done', name='password_reset_done'),
     url(r'^auth/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm', name='password_reset_confirm'),
-    url(r'^auth/reset/done/$', 'django.contrib.auth.views.password_reset_complete'),
+    url(r'^auth/reset/done/$', 'django.contrib.auth.views.password_reset_complete', name='password_reset_complete'),
 
     # Ajax
     url(r'^ajax/add_photo$', add_photo, name='add_photo'),
