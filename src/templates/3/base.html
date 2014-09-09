@@ -1,4 +1,4 @@
-{% load sape_extras %}{% load content %}{% load russian %}{% load movies %}{% load staticfiles %}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+{% load content %}{% load russian %}{% load movies %}{% load staticfiles %}<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ru" lang="ru">
 
 <head>
@@ -103,11 +103,8 @@
                 {% block sidebar %}
                 {% endblock %}
 
-                {% block sape %}
-                    <h2 class="b-block-title">Реклама</h2>
+                {% block advert %}
                     {% yadirect 'right_vertical' %}
-
-                    <div style="margin-top:20px;">{% sape_links request %}</div>
                 {% endblock %}
             </td>
             <td class="l-page-g"><i></i></td>

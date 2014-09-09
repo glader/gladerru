@@ -74,7 +74,6 @@ INSTALLED_APPS = (
     'discounts',
     'timelog',
     'core',
-    'sape',
     'votes',
     'movies',
     'mountains',
@@ -105,11 +104,6 @@ MAIN_PAGE_LEVEL = 1
 SMILES = (':-?\)+', ':-?\(+', '\s:D+')
 
 DOMAIN = 'glader.ru'
-
-SAPE_DIR = '/var/cache/gladerru'
-SAPE_CHARSET = 'utf-8'
-SAPE_DOMAIN = DOMAIN
-SAPE_LOG = '/var/log/projects/gladerru/sape.log'
 
 CACHES = {
     'default': {

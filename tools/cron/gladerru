@@ -13,7 +13,3 @@ MAILTO="glader.ru@gmail.com"
 
 */5     *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py publish_deferred
 
-# Sape links
-15      *       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py fetch_sape
-#0       5,17    *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py check_sape_errors
-
