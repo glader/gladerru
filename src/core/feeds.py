@@ -14,7 +14,7 @@ class AllPosts(Feed):
     description_template = 'feeds/all_description.html'
 
     def items(self):
-        return Post.objects.filter(status='pub').order_by('-date_created')[:20]
+        return Post.objects.filter(status='pub', type='post').order_by('-date_created')[:20]
 
     def item_pubdate(self, item):
         return item.date_created
@@ -24,7 +24,4 @@ class AllPosts(Feed):
         return author and author.first_name or ""
 
     def item_link(self, item):
-        if item.type == 'post':
-            return item.get_absolute_url()
-        else:
-            return item.item.get_absolute_url()
+        return item.get_absolute_url()

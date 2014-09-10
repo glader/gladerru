@@ -100,7 +100,6 @@ def production(mode=""):
     if mode != 'no_dump':
         dump()
         migrate()
-    update_sape()
     collect_static()
     restart()
 
@@ -183,11 +182,6 @@ def manage_py(command):
 def migrate():
     with settings(user=SSH_USER):
         manage_py('migrate')
-
-
-def update_sape():
-    with settings(user=SSH_USER):
-        manage_py('fetch_sape')
 
 
 def collect_static():
