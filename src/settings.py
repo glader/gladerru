@@ -70,6 +70,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'django_russian',
     'djcelery',
+    'redactor',
 
     'discounts',
     'timelog',

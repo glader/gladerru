@@ -123,9 +123,10 @@
             </div>
             <i class="b-round b-round_6"><i class="l b"><i></i></i></i>
             <br />
-            <div class="b-copyright" style="float:right">Размещение рекламы: <a href="mailto:{{ "sale@glader.ru"|parser }}">{{ "sale@glader.ru"|parser }}</a>
+            <div class="b-copyright" style="float:right">
+                <a href="{% url "article" "advert" %}">Размещение рекламы</a>
                 {% block ampseo %}{% endblock %}
-                </div>
+            </div>
             <div class="b-copyright">&copy;2007-2014 <a href="/">Glader.ru</a></div>
         </td>
         <td class="l-page-g"><i></i></td>

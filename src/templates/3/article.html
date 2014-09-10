@@ -40,9 +40,12 @@
     {% endif %}
 
     </div>
-    {{ post.tags_html|safe }}
 
-    {% post_panel article user %}
+    {% if post.type == 'post' %}
+        {{ post.tags_html|safe }}
 
-    {% include "blocks/disqus_comments.html" %}
+        {% post_panel article user %}
+
+        {% include "blocks/disqus_comments.html" %}
+    {% endif %}
 {% endblock %}

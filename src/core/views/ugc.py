@@ -57,7 +57,7 @@ def index(request):
         check_celery.delay(request.GET.get('celery'))
 
     start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(status='pub').order_by('-date_created')
+    posts = Post.objects.filter(status='pub', type='post').order_by('-date_created')
     if start:
         posts = posts.filter(date_created__lt=start)
 
@@ -77,7 +77,7 @@ def category_view(request, slug):
     category = get_object_or_404(NewsCategory, slug=slug)
 
     start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(hidden=False, category=category).order_by('-date_created')
+    posts = Post.objects.filter(hidden=False, category=category, type='post').order_by('-date_created')
     if start:
         posts = posts.filter(date_created__lt=start)
 
@@ -116,7 +116,7 @@ def post_view(request, slug, post_id):
 def all(request):
     """ Свежие записи во всех блогах """
     start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(status='pub').order_by('-date_created')
+    posts = Post.objects.filter(status='pub', type='post').order_by('-date_created')
     if start:
         posts = posts.filter(date_created__lt=start)
 
