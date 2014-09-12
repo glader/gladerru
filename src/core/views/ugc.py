@@ -22,7 +22,6 @@ from core.utils.common import process_template, slug
 from core.views.common import render_to_response
 from core.decorators import time_slow, auth_only, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
-from core.tasks import new_post_announces, check_celery
 
 
 class JsonResponse(HttpResponse):
@@ -53,9 +52,6 @@ def timestamp(dt):
 @time_slow
 @posts_feed(template="index.html")
 def index(request):
-    if request.GET.get('celery'):
-        check_celery.delay(request.GET.get('celery'))
-
     start = parse_timestamp(request.GET.get('start'))
     posts = Post.objects.filter(status='pub', type='post').order_by('-date_created')
     if start:
@@ -244,9 +240,6 @@ def edit_post(request, post_id):
                     for p in Photo.objects.filter(post=post):
                         p.tags.clear()
                         p.tags.add(*form.cleaned_data['tags'])
-
-                    if post.status == 'pub':
-                        new_post_announces.delay(post.id)
                     return HttpResponseRedirect(post.get_absolute_url())
 
                 elif request.POST['action'] == u'Удалить':

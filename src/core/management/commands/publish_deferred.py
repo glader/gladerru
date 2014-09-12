@@ -7,7 +7,6 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 from core.models import Post, Photo
-from core.tasks import new_post_announces
 
 import logging
 
@@ -34,8 +33,6 @@ class Command(NoArgsCommand):
 
             item.status = 'pub'
             item.save()
-
-            new_post_announces.delay(item.id)
 
             count += 1
 

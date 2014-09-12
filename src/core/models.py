@@ -99,10 +99,6 @@ class Tag(models.Model):
         if self.posts:
             self.size = len(self.posts.split(','))
 
-        if self.new_synonim():
-            from core.tasks import tag_synonim
-            tag_synonim.delay(self.id)
-
         super(Tag, self).save(*args, **kwargs)
 
     def new_synonim(self):

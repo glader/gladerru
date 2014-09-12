@@ -150,7 +150,6 @@ def nginx():
 
 def upstart():
     run('cp %(directory)s/tools/upstart/gladerru.conf /etc/init/gladerru.conf' % env, shell=False)
-    run('cp %(directory)s/tools/upstart/gladerru_celery.conf /etc/init/gladerru_celery.conf' % env, shell=False)
 
 
 def cron():
@@ -192,7 +191,6 @@ def collect_static():
 
 def restart():
     run('sudo restart gladerru')
-    run('sudo restart gladerru_celery')
 
 
 # -----------------------------------------------------------------------
