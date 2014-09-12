@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import os
-import uuid
 from datetime import datetime
 
 from django.conf import settings
@@ -36,7 +34,8 @@ class Tag(models.Model):
     name = models.CharField(max_length=200, verbose_name=u"Код")
     title = models.CharField(max_length=200, verbose_name=u"Название")
     checked = models.BooleanField(default=False, verbose_name=u"Проверен")
-    primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним", null=True, blank=True)
+    primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним",
+                                        null=True, blank=True)
     parent = models.ForeignKey('self', related_name='parent_tag', verbose_name=u"Родитель", null=True, blank=True)
     TYPES = ((10, u'Вид спорта'),
              (20, u'Категория'),
@@ -207,7 +206,8 @@ class Profile(models.Model):
         ('f', u'Девочка'),
         ('', u'Не определилось'),
     )
-    gender = models.CharField(choices=GENDER_CHOICES, default='', max_length=1, null=True, blank=True, verbose_name=u"Пол")
+    gender = models.CharField(choices=GENDER_CHOICES, default='', max_length=1, null=True, blank=True,
+                              verbose_name=u"Пол")
     icq = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"ICQ")
     interests = models.TextField(null=True, blank=True, verbose_name=u"Интересы")
     is_moderator = models.BooleanField(default=False, verbose_name=u"Является модератором")
@@ -376,7 +376,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
     best = models.DateTimeField(null=True, blank=True, verbose_name=u"На главной")
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
+    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
+                                             editable=False)
     rating = models.FloatField(default=0.0, verbose_name=u"Рейтинг")
     rubric = models.ForeignKey(Rubric, null=True, blank=True, verbose_name=u"Рубрика")
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
@@ -469,7 +470,8 @@ class Photo(models.Model, VoteMixin, UIDMixin):
     author = models.ForeignKey(User, verbose_name=u"Автор", null=True, blank=True, related_name="core_user")
     post = models.ForeignKey(Post, verbose_name=u"Пост", null=True, blank=True, related_name="core_post")
     rider = models.ForeignKey('movies.Man', verbose_name=u"Райдер", null=True, blank=True, related_name="core_rider")
-    photographer = models.ForeignKey('movies.Man', verbose_name=u"Фотограф", null=True, blank=True, related_name="core_photographer")
+    photographer = models.ForeignKey('movies.Man', verbose_name=u"Фотограф", null=True, blank=True,
+                                     related_name="core_photographer")
     place = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Место")
 
     yandex_fotki_image_src = models.CharField(null=True, blank=True, verbose_name=u"Путь к картинке", max_length=255)

@@ -25,7 +25,8 @@ def render_to_string(request, template_name, context_dict={}):
 
 
 def discounts(request):
-    discounts = [(k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'), lambda d: d.city)]
+    discounts = [(k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'),
+                                                  lambda d: d.city)]
     return render_to_response(request, 'discounts.html', {'discounts': discounts})
 
 

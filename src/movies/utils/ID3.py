@@ -439,7 +439,10 @@ class ID3:
             else:
                 track = 'Unknown'
 
-            return "File   : %s\nTitle  : %-30.30s  Artist: %-30.30s\nAlbum  : %-30.30s  Track : %s  Year: %-4.4s\nComment: %-30.30s  Genre : %s (%i)" % (self.filename, self.title, self.artist, self.album, track, self.year, self.comment, genre, self.genre)
+            return "File   : %s\nTitle  : %-30.30s  Artist: %-30.30s\nAlbum  : %-30.30s  Track : %s  Year: " \
+                   "%-4.4s\nComment: %-30.30s  Genre : %s (%i)" % (self.filename, self.title, self.artist,
+                                                                   self.album, track, self.year, self.comment,
+                                                                   genre, self.genre)
         else:
             return "%s: No ID3 tag." % self.filename
 

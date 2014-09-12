@@ -181,7 +181,7 @@ def post_cut(post):
 
     if result:
         content = post.content[:result.start()] + u'<a href="%s">%s</a>' % (post.get_absolute_url(),
-                                                                        result.group(1) or u"Читать далее »")
+                                                                            result.group(1) or u"Читать далее »")
     else:
         content = post.content
 
@@ -282,7 +282,10 @@ def parser(text):
                 try:
                     item = Photo.objects.get(slug=params['item'])
                 except Photo.DoesNotExist:
-                    open('/var/log/projects/gladerru/miss', 'a').write((u"[неизвестная картинка %s in fragment '%s']\n" % (params['item'], result.group(1))).encode('utf8'))
+                    open('/var/log/projects/gladerru/miss', 'a').write(
+                        (
+                            u"[неизвестная картинка %s in fragment '%s']\n" % (params['item'], result.group(1))
+                        ).encode('utf8'))
                     return ""
             else:
                 if not item:
@@ -298,10 +301,12 @@ def parser(text):
             return "</pre>"
         if tag == 'ImageLink':
             return '<a href="%s" style="%s"><img class="userphoto" src="%s%s"></a>' \
-                % (item.get_absolute_url(), params.get('style', ""), settings.STATIC_URL, thumbnail(item.yandex_fotki_image_src))
+                % (item.get_absolute_url(), params.get('style', ""), settings.STATIC_URL,
+                   thumbnail(item.yandex_fotki_image_src))
         if tag == 'ItemLink':
             return '<a href="%s" style="%s">%s</a>' \
-                % (item and item.get_absolute_url() or "", params.get('style', ""), params.get('title', item and item.title or ""))
+                % (item and item.get_absolute_url() or "", params.get('style', ""),
+                   params.get('title', item and item.title or ""))
 
     def smiles(result):
         return '<span class="smile">%s</span>' % result.group(1)

@@ -18,7 +18,8 @@ def sanitizeHTML(value, mode='none'):
 
     valid_attrs = 'href src pic user page class text title alt'.split()
     # параметры видеороликов
-    valid_attrs += 'width height classid codebase id name value flashvars allowfullscreen allowscriptaccess quality src type bgcolor base seamlesstabbing swLiveConnect pluginspage data frameborder'.split()
+    valid_attrs += 'width height classid codebase id name value flashvars allowfullscreen allowscriptaccess quality ' \
+                   'src type bgcolor base seamlesstabbing swLiveConnect pluginspage data frameborder'.split()
     print "SANITIZE"
     print value
 

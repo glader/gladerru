@@ -47,8 +47,10 @@ class Man(models.Model):
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
     hidden = models.BooleanField(verbose_name=u"Скрыт", default=False)
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
-    primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним", null=True, blank=True)
+    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
+                                             editable=False)
+    primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним",
+                                        null=True, blank=True)
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
 
@@ -68,7 +70,8 @@ class Man(models.Model):
 
     def save(self, *args, **kwargs):
         self.hidden = True
-        for f in ['content', 'angles', 'birthday', 'footsize', 'ridingsince', 'sponsors', 'stance', 'url', 'width', 'image']:
+        for f in ['content', 'angles', 'birthday', 'footsize', 'ridingsince', 'sponsors', 'stance',
+                  'url', 'width', 'image']:
             if getattr(self, f):
                 self.hidden = False
                 break
@@ -117,7 +120,8 @@ class Movie(models.Model, VoteMixin):
     rating = models.FloatField(verbose_name=u"Рейтинг", default=0)
     hidden = models.BooleanField(verbose_name=u"Скрыт", default=False)
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария", editable=False)
+    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
+                                             editable=False)
     date_created = None
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
@@ -209,7 +213,8 @@ class Photo(models.Model, VoteMixin):
     photographer = models.ForeignKey(Man, verbose_name=u"Фотограф", null=True, blank=True, related_name="photographer")
     yandex_fotki_image_src = models.CharField(null=True, blank=True, verbose_name=u"Путь к картинке", max_length=255)
 
-    rating = models.IntegerField(verbose_name=u"Рейтинг", default=0, help_text=u"Был составлен по переходам при случайном показе")
+    rating = models.IntegerField(verbose_name=u"Рейтинг", default=0,
+                                 help_text=u"Был составлен по переходам при случайном показе")
 
     def __unicode__(self):
         return self.title or unicode(self.id)

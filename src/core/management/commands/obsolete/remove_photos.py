@@ -4,11 +4,7 @@ from django.conf import settings
 from django.core.management.base import NoArgsCommand
 
 from core.models import Photo
-from core.views.ugc import add_to_yaphoto
-from urllib2 import Request, urlopen
-from xml.etree import ElementTree as ET
-import httplib
-import re
+from urllib2 import urlopen
 
 
 class Command(NoArgsCommand):

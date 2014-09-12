@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 import os
-from datetime import datetime
 
 from django.core.management.base import NoArgsCommand
 from django.conf import settings
 from django.db import connection
 from django.contrib.auth.models import User
 
-from core.models import Post, Movie, Tag, Man2Movie, Comment, ItemVote
+from core.models import Post, Movie, Tag, Man2Movie, ItemVote
 import logging
 
 settings.TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../templates/3'), )

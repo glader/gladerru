@@ -25,14 +25,14 @@ def sanitizeHTML(value, mode='none'):
 
     valid_attrs = 'href src pic user page class text title alt'.split()
     # параметры видеороликов
-    valid_attrs += 'width height classid codebase id name value flashvars allowfullscreen allowscriptaccess quality src type bgcolor base seamlesstabbing swLiveConnect pluginspage data frameborder'.split()
+    valid_attrs += 'width height classid codebase id name value flashvars allowfullscreen allowscriptaccess ' \
+                   'quality src type bgcolor base seamlesstabbing swLiveConnect pluginspage data frameborder'.split()
 
     soup = BeautifulSoup(value.encode('utf8'), from_encoding='utf8')
     for tag in soup.recursiveChildGenerator():
         if isinstance(tag, element.Tag):
             if tag.name in valid_tags:
-                tag.attrs = dict((attr, val) for attr, val in tag.attrs.items()
-                             if attr in valid_attrs)
+                tag.attrs = dict((attr, val) for attr, val in tag.attrs.items() if attr in valid_attrs)
             else:
                 tag.hidden = True
 
@@ -54,8 +54,9 @@ class CommonForm(forms.Form):
 class RegistrationForm(CommonForm):
     email = forms.EmailField(max_length=100, error_messages={'required': u'Укажите свой email'})
     name = forms.CharField(label=u'Имя пользователя', required=False)
-    login = forms.CharField(label=u'Логин', required=False, help_text=u'Поле для отсечения автоматических регистраторов',
-                      widget=forms.TextInput(attrs={'class': 'g-hidden'}))
+    login = forms.CharField(label=u'Логин', required=False,
+                            help_text=u'Поле для отсечения автоматических регистраторов',
+                            widget=forms.TextInput(attrs={'class': 'g-hidden'}))
     password1 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
     password2 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
     retpath = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
@@ -199,18 +200,16 @@ class OpenMultipleChoiceField(forms.MultipleChoiceField):
 class PostForm(CommonForm):
     post = forms.IntegerField(label=u'Пост', required=False, widget=forms.HiddenInput, help_text=u'Пост')
     title = forms.CharField(label=u'Заголовок', error_messages={'required': u'Введите заголовок поста'},
-                      widget=forms.TextInput(attrs={'class': 'input'}))
+                            widget=forms.TextInput(attrs={'class': 'input'}))
     category = forms.IntegerField(label=u'Категория', widget=forms.Select, help_text=u'Категория')
     content = forms.CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
-                        widget=forms.Textarea(attrs={'class': 'content'}))
+                              widget=forms.Textarea(attrs={'class': 'content'}))
     geography = forms.BooleanField(label=u'Относится к моему городу', required=False)
-    # tags = forms.CharField(label=u'Теги', required=False,
-    #                  widget= forms.TextInput(attrs={'class':'tags'}))
     tags = OpenMultipleChoiceField(choices=[], required=False, initial=[])
 
     # Картинка
     picture = forms.ImageField(label=u'Картинка', required=False,
-                         widget=forms.FileInput(attrs={'class': 'picture'}))
+                               widget=forms.FileInput(attrs={'class': 'picture'}))
 
     deferred_date = forms.DateField(label=u"Дата публикации", required=False, initial=datetime.now().date)
     deferred_time = forms.TimeField(label=u"Время публикации", required=False, initial=datetime.now().time)
@@ -282,8 +281,8 @@ class FeedbackForm(CommonForm):
     name = forms.CharField(label=u'Имя', required=False)
     email = forms.EmailField(label=u'Email', required=False, error_messages={'invalid': u'Введенный email некорректен'})
     message = forms.CharField(label=u'Сообщение*',
-                        error_messages={'required': u'Введите текст сообщения'},
-                        widget=forms.Textarea())
+                              error_messages={'required': u'Введите текст сообщения'},
+                              widget=forms.Textarea())
     code = forms.CharField(label="Код", required=False, widget=forms.HiddenInput)
 
     def clean_message(self):

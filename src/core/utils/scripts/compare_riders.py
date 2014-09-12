@@ -40,7 +40,8 @@ for i, man in enumerate(people):
         if man.pk >= man2.pk:
             continue
 
-        checks.append((man, man2, levenshtein_distance(man.title, man2.title), levenshtein_distance(man.slug, man2.slug)))
+        checks.append((man, man2, levenshtein_distance(man.title, man2.title),
+                       levenshtein_distance(man.slug, man2.slug)))
         print chr(13), i,
 
 checks.sort(key=lambda x: x[2])

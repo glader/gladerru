@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from itertools import groupby
 from django.core.management.base import NoArgsCommand
 
 from core.models import Comment

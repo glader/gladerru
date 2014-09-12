@@ -12,6 +12,11 @@ from core.models import Post
 from mountains.models import Mountain
 from movies.models import Movie, Studio, Man
 
+CUTTED_TEXT = u'&#1042;&#1099; &#1085;&#1077; &#1072;&#1074;&#1090;&#1086;&#1088;&#1080;&#1079;&#1086;&#1074;&#1072;' \
+              u'&#1085;&#1099;!&#1042;&#1086;&#1081;&#1090;&#1080; &#1074; Glader.ru&#1047;&#1072;&#1088;&#1077;&#1075;' \
+              u'&#1080;&#1089;&#1090;&#1088;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; ' \
+              u'&#1089;&#1077;&#1081;&#1095;&#1072;&#1089;.'
+
 
 def base_search(query):
     result = []
@@ -29,11 +34,13 @@ def yandex_search(query):
         <page>0</page>
     </request>""" % escape(query.encode('utf8'))
 
-    answer = urllib2.urlopen("http://xmlsearch.yandex.ru/xmlsearch?user=%s&key=%s" % (settings.YANDEX_XML_LOGIN, settings.YANDEX_XML_KEY), xml).read()
+    answer = urllib2.urlopen("http://xmlsearch.yandex.ru/xmlsearch?user=%s&key=%s" %
+                             (settings.YANDEX_XML_LOGIN, settings.YANDEX_XML_KEY), xml).read()
 
     log = logging.getLogger('search_raw')
     log.setLevel(logging.INFO)
-    handler = logging.handlers.RotatingFileHandler(settings.LOGGING['handlers']['search']['filename'] + '_raw', maxBytes=1000000)
+    handler = logging.handlers.RotatingFileHandler(settings.LOGGING['handlers']['search']['filename'] + '_raw',
+                                                   maxBytes=1000000)
     log.addHandler(handler)
     log.info(answer)
 
@@ -51,7 +58,7 @@ def yandex_search(query):
             if group.find('doc').find('passages'):
                 page['snippet'] = "<br/>".join(
                     [
-                        re.sub('<[^>]+>', '', ET.tostring(passage).decode('utf8')).replace(u'&#1042;&#1099; &#1085;&#1077; &#1072;&#1074;&#1090;&#1086;&#1088;&#1080;&#1079;&#1086;&#1074;&#1072;&#1085;&#1099;!&#1042;&#1086;&#1081;&#1090;&#1080; &#1074; Glader.ru&#1047;&#1072;&#1088;&#1077;&#1075;&#1080;&#1089;&#1090;&#1088;&#1080;&#1088;&#1086;&#1074;&#1072;&#1090;&#1100;&#1089;&#1103; &#1089;&#1077;&#1081;&#1095;&#1072;&#1089;.', '')
+                        re.sub('<[^>]+>', '', ET.tostring(passage).decode('utf8')).replace(CUTTED_TEXT, '')
                         for passage in group.find('doc').find('passages').findall('passage')
                     ]
                 )

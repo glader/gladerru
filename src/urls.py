@@ -1,4 +1,4 @@
-from django.conf.urls import patterns, url, include, handler404, handler500
+from django.conf.urls import patterns, include
 from django.contrib import admin
 from django.conf import settings
 
@@ -6,7 +6,8 @@ import sitemap
 
 admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     (r'^admind/', include(admin.site.urls)),
     (r'^redactor/', include('redactor.urls')),
     (r'^votes/', include('votes.urls')),

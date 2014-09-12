@@ -1,8 +1,7 @@
 # -*- coding:utf-8 -*-
 from django.contrib.syndication.views import Feed
-from django.shortcuts import get_object_or_404
 from django.conf import settings
-from models import Post, Tag
+from models import Post
 
 
 class AllPosts(Feed):

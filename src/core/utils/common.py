@@ -8,7 +8,7 @@ import re
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Context, loader
-from django.core.mail import send_mail, mail_admins, EmailMessage
+from django.core.mail import mail_admins, EmailMessage
 
 translit = {u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g', u'д': u'd', u'е': u'e',
             u'ж': u'zh', u'з': u'z', u'и': u'i', u'й': u'j', u'к': u'k', u'л': u'l',

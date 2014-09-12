@@ -6,7 +6,8 @@ from . import views
 from .models import Studio
 
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     url(r'^studies/(?P<slug>[^/]+)$', views.StudioView.as_view(), name='studio'),
     url(
         r'^studies/$',

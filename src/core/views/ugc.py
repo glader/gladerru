@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from datetime import datetime, date, timedelta
-import calendar
+from datetime import datetime
 import re
 from xml.etree import ElementTree as ET
 import simplejson
@@ -11,16 +10,14 @@ from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
-from core.forms import PostForm, LoginForm, RegistrationForm, ProfileForm, PictureForm, \
-    PhotoForm, sanitizeHTML
-from core.models import Post, Photo, Comment, Tag, Keyword, NewsCategory
-from core.templatetags.content import make_pages
-from core.utils.common import process_template, slug
+from core.forms import PostForm, LoginForm, RegistrationForm, PictureForm
+from core.models import Post, Photo, Tag, Keyword, NewsCategory
+from core.utils.common import slug
 from core.views.common import render_to_response
-from core.decorators import time_slow, auth_only, posts_feed
+from core.decorators import time_slow, posts_feed
 from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
 
 
@@ -320,7 +317,8 @@ def add_to_yaphoto(content):
     )
 
     if status != 201:
-        raise ValueError("Cannot upload image: %s %s %s (host %s)" % (status, reason, result, settings.YAFOTKI_STORAGE_OPTIONS['host']))
+        raise ValueError("Cannot upload image: %s %s %s (host %s)" %
+                         (status, reason, result, settings.YAFOTKI_STORAGE_OPTIONS['host']))
 
     tree = ET.fromstring(result)
     try:

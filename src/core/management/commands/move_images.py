@@ -13,7 +13,8 @@ class Command(NoArgsCommand):
     def handle_noargs(self, **options):
         replaces = dict(
             line.strip().split('\t')
-            for line in open(os.path.join(os.path.dirname(__file__), '..', '..', 'migrations', 'images.dat')).readlines()
+            for line in open(os.path.join(os.path.dirname(__file__), '..', '..', 'migrations', 'images.dat'))
+            .readlines()
         )
 
         for post in chain(Post.objects.all(), Word.objects.all()):
