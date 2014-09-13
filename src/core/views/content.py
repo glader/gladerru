@@ -83,8 +83,7 @@ def rubric(request, name):
 
     return render_to_response(request, template, context)
 
-alphabet_letters = [[u'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split()],
-                    [u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'.split()]]
+alphabet_letters = [u'ABCDEFGHIJKLMNOPQRSTUVWXYZ', u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ']
 
 
 def dictionary(request):

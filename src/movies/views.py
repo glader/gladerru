@@ -13,8 +13,7 @@ from .templatetags.movies import link
 from .utils.common import slug
 
 
-alphabet_letters = [[u'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split()],
-                    [u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ'.split()]]
+alphabet_letters = [u'ABCDEFGHIJKLMNOPQRSTUVWXYZ' u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ']
 
 
 def render_to_string(request, template_name, context_dict={}):
