@@ -71,6 +71,7 @@ INSTALLED_APPS = (
     'django_russian',
     'redactor',
 
+    'bookkeeping',
     'discounts',
     'timelog',
     'core',

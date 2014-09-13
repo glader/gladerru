@@ -11,6 +11,7 @@ urlpatterns = patterns(
     (r'^admind/', include(admin.site.urls)),
     (r'^redactor/', include('redactor.urls')),
     (r'^votes/', include('votes.urls')),
+    (r'^bookkeeping/', include('bookkeeping.urls')),
     (r'^dynamic_sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemap.sitemaps}),
     (r'^', include('discounts.urls')),
     (r'^', include('mountains.urls')),

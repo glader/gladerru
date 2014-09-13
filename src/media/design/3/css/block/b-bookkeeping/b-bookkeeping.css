@@ -1,0 +1,25 @@
+.b-bookkeeping h2
+{
+    margin: 20px 0 5px 0;
+    font-size: 120%;
+}
+
+.b-bookkeeping-table
+{
+    margin: 20px 30px 0 30px;
+}
+
+.b-bookkeeping-table td
+{
+    padding: 5px 5px 5px 15px;
+}
+
+.b-bookkeeping-table .tr_even
+{
+    background: #FFFFFF;
+}
+
+.b-bookkeeping-table .tr_odd
+{
+    background: #ECECEC;
+}

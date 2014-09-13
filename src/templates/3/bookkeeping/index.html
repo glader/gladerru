@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block title %}Бухгалтерия{% endblock %}
+
+{% block content %}
+    <div class="b-bookkeeping">
+        <h2>Итог</h2>
+        <div>
+            {% if total.glader == total.skyslayer %}
+                Все ровно.
+            {% else %}
+                Долг <strong>{% if total.glader > total.skyslayer %}glader{% else %}skyslayer{% endif %}</strong> -
+                <strong>{{ difference }}</strong> руб.
+            {% endif %}
+        </div>
+
+        <h2>Свежие записи</h2>
+        <table class="b-bookkeeping-table">
+            {% for record in records %}
+                <tr class="{% cycle 'tr_odd' 'tr_even' %}">
+                    <td>{{ record.created|date:"Y-m-d H:i" }}</td>
+                    <td>{{ record.get_account_display }}</td>
+                    <td>{{ record.amount }}</td>
+                    <td>{{ record.comment }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Новая запись</h2>
+        <table><form action="" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <tr><td colspan="2"><input type="submit" value="Добавить платеж"></td></tr>
+        </form></table>
+    </div>
+{% endblock content %}
+
+
+{% block sidebar %}{% endblock sidebar %}
