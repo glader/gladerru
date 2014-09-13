@@ -5,9 +5,9 @@ import functools
 
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+from django.template import Context, loader
 
 from core.utils.log import get_logger
-from core.templatetags.posts import render_post_cached, render_post
 from core.views.common import render_to_response
 
 
@@ -53,10 +53,14 @@ def posts_feed(template="all.html"):
             if isinstance(context, HttpResponse):
                 return context
 
-            render = render_post if request.user.is_authenticated() else render_post_cached
-            context['posts'] = [render(post) for post in context['posts']]
-
+            context['posts'] = [render_to_string('post_cut.html', {'post': post, 'user': None, 'mode': 'normal'})
+                                for post in context['posts']]
+            print [len(p) for p in context['posts']]
             return render_to_response(request, template, context)
-
         return wrapper
     return decorated
+
+
+def render_to_string(template_name, context_dict=None):
+    t = loader.get_template(template_name)
+    return t.render(Context(context_dict or {}))

@@ -7,7 +7,6 @@ from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.template import Context, loader
 from django.core.cache import cache
 from django.core.mail import send_mail
 
@@ -354,9 +353,6 @@ STATUSES = (
 TYPES = (
     ('post', u'Пост'),
     ('page', u'Статическая страница'),
-    ('teaser', u'Тизер фильма'),
-    ('full_movie', u'Полноформатный фильм'),
-    ('soundtrack', u'Музыка к фильму'),
 )
 
 
@@ -373,29 +369,18 @@ class Post(models.Model, VoteMixin, UIDMixin):
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name=u"Тип поста")
 
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
-    best = models.DateTimeField(null=True, blank=True, verbose_name=u"На главной")
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
                                              editable=False)
-    rating = models.FloatField(default=0.0, verbose_name=u"Рейтинг")
     rubric = models.ForeignKey(Rubric, null=True, blank=True, verbose_name=u"Рубрика")
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
-    tags_str = models.TextField(null=True, blank=True, verbose_name=u"Теги")
-    url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
     icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
-    local_url = models.CharField(verbose_name=u"Адрес", max_length=70, default="")
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
 
     tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
     comments = generic.GenericRelation(Comment)
-
-    # привязка анонсов к фильмам
-    item_type = models.ForeignKey(ContentType, null=True, blank=True)
-    item_id = models.PositiveIntegerField(null=True, blank=True)
-    item = generic.GenericForeignKey('item_type', 'item_id')
 
     all = GenericManager()
     objects = GenericManager(hidden=False)
@@ -418,42 +403,9 @@ class Post(models.Model, VoteMixin, UIDMixin):
             return True
         return self.author == user
 
-    def tags_html(self):
-        if self.tags_str is None:
-            self.rebuild_tags()
-        return self.tags_str
-
-    def rebuild_tags(self):
-        tags = self.tags.all().order_by('type', '-size')
-        t = loader.get_template('block_post_tags.html')
-        self.tags_str = unicode(t.render(Context({'tags': tags})))
-        self.save()
-
     def save(self, *args, **kwargs):
-        self.is_question = False
-        if self.pk:
-            for t in self.tags.all():
-                if t.name == 'question':
-                    self.is_question = True
-
-            self.drop_cache()
-
-        if self.status != 'pub':
-            self.hidden = True
-        else:
-            self.hidden = False
-
-        if self.name and not self.name.startswith('post'):
-            local_url = "/content/%s.htm" % self.name
-        else:
-            local_url = "/users/%s/posts/%s" % (self.author.username.lower(), self.id)
-        self.local_url = local_url
-
+        self.hidden = self.status != 'pub'
         super(Post, self).save(*args, **kwargs)
-
-    def drop_cache(self):
-        cache.delete("%srender/post/%s/%s" % (settings.CACHE_ROOT, self.id, 'cut'))
-        cache.delete("%srender/post/%s/%s" % (settings.CACHE_ROOT, self.id, 'full'))
 
     class Meta:
         verbose_name = u"Пост"

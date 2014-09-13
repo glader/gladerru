@@ -27,7 +27,7 @@ def render_to_string(request, template_name, context_dict={}):
 def discounts(request):
     discounts = [(k, list(v)) for k, v in groupby(Discount.objects.all().order_by('city', 'card', 'discount'),
                                                   lambda d: d.city)]
-    return render_to_response(request, 'discounts.html', {'discounts': discounts})
+    return render_to_response(request, 'discounts/discounts.html', {'discounts': discounts})
 
 
 def discount_new(request):
@@ -44,7 +44,7 @@ def discount_new(request):
     else:
         form = DiscountForm()
 
-    return render_to_response(request, 'discount_form.html', {'form': form})
+    return render_to_response(request, 'discounts/discount_form.html', {'form': form})
 
 
 def discount_edit(request, discount_id):
@@ -63,7 +63,7 @@ def discount_edit(request, discount_id):
     else:
         form = DiscountForm(instance=discount)
 
-    return render_to_response(request, 'discount_form.html', {'form': form})
+    return render_to_response(request, 'discounts/discount_form.html', {'form': form})
 
 
 def discount_delete(request, discount_id):
@@ -78,4 +78,4 @@ def discount_delete(request, discount_id):
         discount.delete()
         return HttpResponseRedirect(reverse('discounts'))
 
-    return render_to_response(request, 'discount_delete.html', {'discount': discount})
+    return render_to_response(request, 'discounts/discount_delete.html', {'discount': discount})

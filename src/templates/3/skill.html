@@ -29,14 +29,5 @@
 				{% endfor %}
 			</ul>
 		{% endif %}
-
-		{% if tags %}
-			<h2>Еще почитать по этому поводу</h2>
-			<div>
-				{% for tag in tags %}
-					{{ tag|link }}{% if not forloop.last %}, {% endif %}
-				{% endfor %}
-			</div>
-		{% endif %}
 	</div>
 {% endblock %}

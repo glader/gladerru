@@ -14,34 +14,6 @@
     <div class="b-feed">
         {% for post in posts %}
             {{ post }}
-
-			{% ifequal forloop.counter 1 %}
-				{% ifequal page_number 1 %}
-					{% cache 86400 tags_list_index %}
-						<div class="item">
-							{% tags_list 50 %}
-							<div class="b-bar">
-								<i class="b-round b-round_6"><i class="l t"><i></i></i><i class="r t"><i></i></i></i>
-								<table>
-								<tr>
-									<td class="points">&nbsp;</td>
-									<td></td>
-									<td class="date"></td>
-									<td class="user"></td>
-                                    <td></td>
-									<td class="comments"></td>
-								</tr>
-								</table>
-								<i class="b-round b-round_6"><i class="l b"><i></i></i><i class="r b"><i></i></i></i>
-								<div class="dec">
-									<i class="lg"></i>
-									<i class="rg"></i>
-								</div>
-							</div>
-						</div>
-					{% endcache %}
-				{% endifequal %}
-			{% endifequal %}
         {% endfor %}
     </div>
 

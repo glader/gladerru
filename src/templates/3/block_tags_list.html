@@ -1,6 +1,0 @@
-{% load content %}
-<div class="tags_list">
-    {% for tag in tags %}
-        <span style="font-size:{{ tag.font_size }}px;">{{ tag|link }}</span>{% if not forloop.last %}, {% endif %}
-    {% endfor %}
-</div>

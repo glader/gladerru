@@ -7,10 +7,6 @@
     {{ block.super }}
 
     {% if object_id %}
-		{% movie_announces object_id %}
-
-        <br />
-        <br />
         <form action="{% url "create_rider" %}" method="post">
         	<input type="hidden" name="object_id" value="{{ object_id }}">
         	Райдеры: <input type="text" name="rider" style="width: 300px">&nbsp;<input type="submit" value="Добавить">
