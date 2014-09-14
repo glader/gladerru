@@ -2,10 +2,8 @@
 
 from datetime import datetime
 import re
-from xml.etree import ElementTree as ET
 import simplejson
 
-from django.conf import settings
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -13,12 +11,11 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 
-from core.forms import PostForm, LoginForm, RegistrationForm, PictureForm
+from core.forms import PostForm, LoginForm, RegistrationForm
 from core.models import Post, Photo, Tag, Keyword, NewsCategory
 from core.utils.common import slug
 from core.views.common import render_to_response
 from core.decorators import time_slow, posts_feed
-from core.utils.thumbnails import get_thumbnail_url, make_thumbnail
 
 
 class JsonResponse(HttpResponse):
@@ -260,95 +257,6 @@ def edit_post(request, post_id):
                               'post_new.html',
                               {'post': post, 'form': form, 'pictures': pictures}
                               )
-
-###############################################################################
-# AJAX
-
-
-def add_photo(request):
-    from django.contrib.sessions.models import Session
-    try:
-        s = Session.objects.get(pk=request.GET.get('sessionid'))
-        user_id = s.get_decoded().get('_auth_user_id')
-        user = User.objects.get(pk=user_id)
-        post = Post.all.get(pk=request.GET.get('post'))
-
-    except (Session.DoesNotExist, User.DoesNotExist, Post.DoesNotExist):
-        raise Http404()
-
-    if not post.can_edit(user):
-        raise Http404()
-
-    form = PictureForm(request.POST, request.FILES)
-    if not form.is_valid():
-        raise Http404()
-
-    yafotki_id, url = add_to_yaphoto(form.cleaned_data['Filedata'])
-    id = yafotki_id.split(':')[-1]
-    image = Photo(author=user, post=post, title='', yandex_fotki_image_src="%s#%s" % (url, id))
-    image.save()
-
-    make_thumbnail(image.yandex_fotki_image_src)
-    thumbnail_url = get_thumbnail_url(image.yandex_fotki_image_src)
-
-    post.content += ' <glader pic="%s">' % image.pk
-    post.save()
-
-    return HttpResponse(simplejson.dumps({
-        'success': True,
-        'picture_id': image.pk,
-        'absolute_url': image.get_absolute_url(),
-        'thumbnail_url': settings.STATIC_URL + thumbnail_url
-    }))
-
-
-def add_to_yaphoto(content):
-    from core.utils.post_multipart import post_multipart
-    content = content.read()
-
-    files = [('image', 'image', content), ]
-    status, reason, result = post_multipart(
-        settings.YAFOTKI_STORAGE_OPTIONS['host'],
-        None,
-        settings.YAFOTKI_STORAGE_OPTIONS['post'],
-        {},
-        files,
-        headers={'Authorization': 'OAuth %s' % settings.YAFOTKI_STORAGE_OPTIONS['token']}
-    )
-
-    if status != 201:
-        raise ValueError("Cannot upload image: %s %s %s (host %s)" %
-                         (status, reason, result, settings.YAFOTKI_STORAGE_OPTIONS['host']))
-
-    tree = ET.fromstring(result)
-    try:
-        id = tree.find('.//{http://www.w3.org/2005/Atom}id').text
-        url = tree.find('.//{http://www.w3.org/2005/Atom}content').attrib['src']
-        return id, url
-
-    except TypeError:
-        raise ValueError('Bad info answer: %s' % result)
-
-
-def crossdomain(request):
-    return HttpResponse("""<?xml version="1.0"?>
-        <!-- http://glader.ru/crossdomain.xml -->
-        <cross-domain-policy>
-        <allow-access-from domain="%s" />
-        </cross-domain-policy>
-    """ % settings.DOMAIN)
-
-
-def tags_suggest(request):
-    query = request.GET.get('tag', '')
-    tags = [{'caption': t.title, 'value': t.title} for t in Tag.get_by_query(query)]
-    if len(query) >= 3 and not {'caption': query, 'value': query} in tags:
-        tags.append({'caption': u'+' + query, 'value': query})
-    return variants_to_response(tags)
-
-
-def variants_to_response(variants):
-    return HttpResponse(simplejson.dumps(variants, ensure_ascii=False), content_type="application/json; charset=utf-8")
 
 
 ###############################################################################

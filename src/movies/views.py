@@ -1,19 +1,17 @@
 # -*- coding: utf-8 -*-
 import simplejson
 
+from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404
-from django.utils.safestring import mark_safe
 from django.template import RequestContext, loader
+from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView, DetailView, ListView
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo
 from .templatetags.movies import link
 from .utils.common import slug
-
-
-alphabet_letters = [u'ABCDEFGHIJKLMNOPQRSTUVWXYZ' u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ']
 
 
 def render_to_string(request, template_name, context_dict={}):
@@ -95,7 +93,7 @@ class PeopleView(TemplateView):
         for r in riders:
             present_letters.setdefault(r.title[0], []).append(r)
 
-        return {'alphabet_letters': alphabet_letters, 'present_letters': present_letters}
+        return {'alphabet_letters': settings.ALPHABET_LETTERS, 'present_letters': present_letters}
 
 
 class ManView(DetailView):

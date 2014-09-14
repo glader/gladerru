@@ -55,7 +55,6 @@ def posts_feed(template="all.html"):
 
             context['posts'] = [render_to_string('post_cut.html', {'post': post, 'user': None, 'mode': 'normal'})
                                 for post in context['posts']]
-            print [len(p) for p in context['posts']]
             return render_to_response(request, template, context)
         return wrapper
     return decorated

@@ -15,7 +15,7 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'title', 'category', 'author', 'status', 'date_created')
     ordering = ('-date_created',)
     list_filter = ('status',)
-    search_fields = ('name', 'title', 'slug', 'url')
+    search_fields = ('name', 'title', 'slug')
     raw_id_fields = ('author',)
     exclude = ('tags',)
 

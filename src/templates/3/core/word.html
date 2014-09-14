@@ -6,19 +6,19 @@
 {% endblock %}
 
 {% block description %}
-    {% if item.meta_description %}
-        <meta name="description" content="{{ item.meta_description }}">
+    {% if object.meta_description %}
+        <meta name="description" content="{{ object.meta_description }}">
     {% endif %}
 {% endblock %}
 
 {% block page %}
     <div itemscope itemtype="http://webmaster.yandex.ru/vocabularies/term-def.xml">
-    <div class="b-page-title"><h1 itemprop="term">{{ item.title }}</h1></div>
+    <div class="b-page-title"><h1 itemprop="term">{{ object.title }}</h1></div>
 
     <div class="dict_entry" itemprop="definition">
-        <div class="g-hidden">{{ item.title }}:</div>
-        {{ item.abstract|safe }}
-        {{ item.content|safe }}
+        <div class="g-hidden">{{ object.title }}:</div>
+        {{ object.abstract|safe }}
+        {{ object.content|safe }}
     </div>
 
 {% endblock page %}

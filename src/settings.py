@@ -96,6 +96,8 @@ THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'd
 THUMBNAIL_URL = 'data/thumbnails/'
 THUMBNAIL_SIZE = 300, 150
 
+ALPHABET_LETTERS = [u'ABCDEFGHIJKLMNOPQRSTUVWXYZ', u'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ']
+
 SOUNDTRACKS_PREFIX = 'http://glader-ru.s3.amazonaws.com/sound/'
 
 LOGIN_URL = '/auth/login'
