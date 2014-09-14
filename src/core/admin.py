@@ -31,11 +31,6 @@ class SkillAdmin(admin.ModelAdmin):
     search_fields = ('title', 'slug')
 
 
-class Tag2SkillAdmin(admin.ModelAdmin):
-    list_display = ('skill', 'tag')
-    raw_id_fields = ('skill', 'tag')
-
-
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('author', 'item', 'date_created')
     ordering = ('-date_created',)
@@ -66,7 +61,6 @@ class PhotoAdmin(admin.ModelAdmin):
 
 admin.site.register(models.Profile, ProfileAdmin)
 admin.site.register(models.Skill, SkillAdmin)
-admin.site.register(models.Tag2Skill, Tag2SkillAdmin)
 admin.site.register(models.Comment, CommentAdmin)
 admin.site.register(models.Tag, TagAdmin)
 admin.site.register(models.Post, PostAdmin)
@@ -102,11 +96,4 @@ class NewsCategoryAdmin(admin.ModelAdmin):
     ordering = ('order',)
 
 
-class NewsAdmin(admin.ModelAdmin):
-    list_display = ('title', 'slug', 'category', 'dt_created')
-    list_filter = ('category',)
-    prepopulated_fields = {"slug": ("title",)}
-    ordering = ('-dt_created',)
-
 admin.site.register(models.NewsCategory, NewsCategoryAdmin)
-admin.site.register(models.News, NewsAdmin)

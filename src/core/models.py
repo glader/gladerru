@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-from datetime import datetime
-
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
@@ -8,7 +6,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.cache import cache
-from django.core.mail import send_mail
 
 from yafotki.fields import YFField
 from votes.models import VoteMixin
@@ -161,28 +158,6 @@ class Tag(models.Model):
         cls.tags = list(cls.objects.filter(primary_synonim__isnull=True))
 
 
-class TagsCloud(object):
-    def __init__(self, tags):
-        self.tags = tags
-
-    def set_rel_sizes(self, min_rel_size=1, max_rel_size=1):
-        min = None
-        max = 1
-        for tag in self.tags:
-            tag.size = int(tag.size)
-            if min is None or min > tag.size:
-                min = tag.size
-            if max < tag.size:
-                max = tag.size
-
-        for tag in self.tags:
-            if min == max:
-                tag.rel_size = (max_rel_size + min_rel_size) / 2
-
-            else:
-                tag.rel_size = min_rel_size + (tag.size - min) * (max_rel_size - min_rel_size) / (max - min)
-
-
 class Profile(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, verbose_name=u"Пользователь")
 
@@ -265,15 +240,6 @@ class Skill(models.Model):
     class Meta:
         verbose_name = u"Умение"
         verbose_name_plural = u"Умения"
-
-
-class Tag2Skill(models.Model):
-    skill = models.ForeignKey(Skill, verbose_name=u"Умение")
-    tag = models.ForeignKey(Tag, verbose_name=u"Тег")
-
-    class Meta:
-        verbose_name = u"Тег умения"
-        verbose_name_plural = u"Теги умений"
 
 
 class Comment(models.Model):
@@ -571,36 +537,6 @@ class NewsCategory(models.Model):
     class Meta:
         verbose_name = u"Категория новостей"
         verbose_name_plural = u"Категории новостей"
-
-
-class News(models.Model):
-    u"""Новости"""
-    category = models.ForeignKey(NewsCategory, verbose_name=u"Категория")
-    title = models.CharField(verbose_name=u"Название", max_length=255)
-    slug = models.SlugField(verbose_name=u"Урл", max_length=255)
-    dt_created = models.DateTimeField(verbose_name=u"Дата-время добавления", null=True, blank=True, default=None)
-    description = models.TextField(null=True, blank=True, verbose_name=u"Description")
-    abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
-    content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
-    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
-                                        null=True, blank=True, default=None)
-
-    def save(self, *args, **kwargs):
-        if not self.dt_created:
-            self.dt_created = datetime.now()
-
-        super(News, self).save(*args, **kwargs)
-
-        send_mail(
-            u"Glader.ru: новость",
-            str(self.pk),
-            None,
-            ['glader.ru@gmail.com']
-        )
-
-    class Meta:
-        verbose_name = u"Новость"
-        verbose_name_plural = u"Новости"
 
 
 class Image(models.Model):
