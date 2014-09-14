@@ -123,8 +123,8 @@ def all(request):
 
 
 @time_slow
-def user_post(request, user, post_id):
-    post = get_object_or_404(Post, pk=post_id, hidden=False)
+def user_post(request, user, pk):
+    post = get_object_or_404(Post, pk=pk, hidden=False)
     return HttpResponseRedirect(post.get_absolute_url())
 
 
