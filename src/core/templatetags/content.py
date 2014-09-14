@@ -33,7 +33,7 @@ def top_menu(level2='all_posts', level1=None):
         for category in NewsCategory.objects.all()
     ]
     submenu = {
-        'posts': categories,  # + [['new', '/post/new', u'написать', u'Все ждут от тебя новый пост']],
+        'posts': categories + [['new', '/post/new', u'написать', u'Предложить новость']],
         'articles': [
             ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
             ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],

@@ -1,0 +1,14 @@
+table.b-form
+{
+    margin-top: 15px;
+}
+
+table.b-form td
+{
+    padding: 5px;
+}
+
+table.b-form .errorlist
+{
+    color: red;
+}

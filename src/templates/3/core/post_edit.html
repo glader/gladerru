@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Редактирование новости - {{ block.super }}{% endblock %}
+
+{% block page_title %}Редактирование новости{% endblock %}
+
+{% block head %}
+    <link href="{% static "redactor/css/redactor.css" %}" type="text/css" media="all" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "redactor/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "redactor/jquery-migrate.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "redactor/redactor.min.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <form method="POST" id="editform" enctype="multipart/form-data">
+        <table class="b-form">
+            {% csrf_token %}
+            {{ form }}
+
+            <tr><td colspan="2">
+                <input type="submit" value="Сохранить">
+            </td></tr>
+        </table>
+    </form>
+{% endblock %}
+
+
+{% block sidebar %}
+{% endblock sidebar %}
+

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Предложение новости - {{ block.super }}{% endblock %}
+
+{% block page_title %}Предложение новости{% endblock %}
+
+{% block head %}
+    <link href="{% static "redactor/css/redactor.css" %}" type="text/css" media="all" rel="stylesheet" />
+    <script type="text/javascript" src="{% static "redactor/jquery.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "redactor/jquery-migrate.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "redactor/redactor.min.js" %}"></script>
+{% endblock %}
+
+{% block content %}
+    <p>Вы можете предложить новость для публикации на нашем сайте. Если модератор сочтет ее интересной для наших читателей,
+        новость будет опубликована. Обратите внимание, рекламные новости требуют согласования, условия описаны на
+        <a href="/content/advert.htm">специальной странице</a>.</p>
+
+    <form method="POST" id="editform" enctype="multipart/form-data">
+        <table class="b-form">
+            {% csrf_token %}
+            {{ form }}
+
+            <tr><td colspan="2">
+                <input type="submit" value="Предложить">
+            </td></tr>
+        </table>
+    </form>
+{% endblock %}
+
+
+{% block sidebar %}
+{% endblock sidebar %}
+

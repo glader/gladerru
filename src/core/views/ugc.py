@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 
 from datetime import datetime
-import re
 import simplejson
 
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
+from django.views.generic import CreateView, UpdateView
 
 from core.forms import PostForm, LoginForm, RegistrationForm
-from core.models import Post, Photo, Tag, Keyword, NewsCategory
+from core.models import Post, NewsCategory
 from core.utils.common import slug
 from core.views.common import render_to_response
-from core.decorators import time_slow, posts_feed
+from core.decorators import time_slow, posts_feed, class_view_decorator
 
 
 class JsonResponse(HttpResponse):
@@ -93,7 +92,7 @@ def post_view(request, slug, post_id):
                'page_identifier': 'post_%s' % post.id,
                }
 
-    return render_to_response(request, 'post.html', context)
+    return render_to_response(request, 'core/post.html', context)
 
 
 ###############################################################################
@@ -123,140 +122,48 @@ def all(request):
     return context
 
 
-def get_user(username):
-    return get_object_or_404(User, username=username)
-
-
-def get_section_objects(user, section):
-    if section == 'posts':
-        objects = Post.objects.filter(author=user).order_by('-date_created')
-
-    elif section == 'draft':
-        objects = Post.all.filter(author=user, status__in=('save', 'deferred')).order_by('-date_created')
-
-    elif section == 'photos':
-        objects = Photo.objects.filter(author=user).order_by('-date_created')
-
-    else:
-        raise Http404()
-
-    return objects
-
-
 @time_slow
 def user_post(request, user, post_id):
     post = get_object_or_404(Post, pk=post_id, hidden=False)
-
     return HttpResponseRedirect(post.get_absolute_url())
 
 
-def process_keywords(post):
-    u"""Заменяет слова на ссылки по таблице Keywords"""
-    words = list(Keyword.objects.all())
-    words.sort(key=lambda word: len(word.keyword), reverse=True)
-    for word in words:
-        if word.keyword in post.content:
-            content = re.sub(u'(<[^>]+)%s' % word.keyword, lambda res: res.group(1) + u'ЪЪЪЪЪ', post.content, re.I)
-            content = re.sub(
-                u'(?<!>)%s(?!<)' % word.keyword,
-                u'<a href="%s" title="ЪЪЪЪЪ">%s</a>' % (word.url, word.keyword),
-                content,
-                1,
-            )
-            content = re.sub(
-                u'(?<!>)%s(?!<)' % word.keyword,
-                u'<span>%s</span>' % word.keyword,
-                content,
-            )
-            post.content = re.sub(u'ЪЪЪЪЪ', word.keyword, content)
+@class_view_decorator(login_required)
+class AddPostView(CreateView):
+    template_name = 'core/post_new.html'
+    form_class = PostForm
+
+    def form_valid(self, form):
+        post = form.save(commit=False)
+        post.author = self.request.user
+        post.slug = slug(post.title)
+        if self.request.user.is_superuser:
+            post.status = 'pub'
+            post.save()
+            self.success_url = reverse('post', args=[post.category.slug, post.id])
+        else:
+            post.status = 'save'
+            post.save()
+            self.success_url = reverse('edit_post', args=[post.id])
+
+        return super(AddPostView, self).form_valid(form)
 
 
-@login_required
-def new_post(request):
-    post = Post(title='', content='', comment_count=0,
-                status='save', author=request.user, ip=request.META['REMOTE_ADDR'])
-    post.save()
-    return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
+class EditPostView(UpdateView):
+    template_name = 'core/post_edit.html'
+    queryset = Post.objects.all()
+    form_class = PostForm
 
-
-@login_required
-def edit_post(request, post_id):
-    user = request.user
-    post = get_object_or_404(Post, pk=post_id)
-    if not post.can_edit(user):
+    def dispatch(self, request, *args, **kwargs):
+        """ Making sure that only authors can update posts """
+        obj = self.get_object()
+        if obj.author == self.request.user or self.request.user.is_superuser:
+            return super(EditPostView, self).dispatch(request, *args, **kwargs)
         raise Http404
 
-    if 'action' in request.POST:
-        form = PostForm(request.POST, request.FILES, user=user, post=post)
-        if form.is_valid():
-            post.title = form.cleaned_data['title']
-            post.content = form.cleaned_data['content']
-            post.category = form.cleaned_data['category']
-            post.geography = form.cleaned_data['geography']
-
-            post.slug = slug(post.title)
-            process_keywords(post)
-
-            # Теги
-            post.tags.clear()
-            post.tags.add(*form.cleaned_data['tags'])
-
-            video_tag = Tag.objects.get(name='video')
-            if ('<youtube' in post.content or '<embed' in post.content) and \
-                    video_tag not in form.cleaned_data['tags']:
-                        post.tags.add(video_tag)
-
-            # Статус
-            status = {u'Удалить': 'del', u'Опубликовать': 'pub', u'В черновики': 'save'}.get(request.POST['action'])
-            if status:
-                post.status = status
-
-            # Отложенная публикация
-            if status == 'pub' and form.cleaned_data['deferred_datetime']:
-                post.status = 'deferred'
-                post.date_created = form.cleaned_data['deferred_datetime']
-
-            # Картинка
-            if 'picture' in form.cleaned_data and form.cleaned_data['picture']:
-                image = Photo(title=form.cleaned_data['pic_title'], author=user, post=post)
-                image.save()
-
-                image.image.save('', form.cleaned_data['picture'])
-
-                post.content += ' <glader pic="%s">' % image.id
-
-            post.rebuild_tags()
-
-            if request.POST['action'] == u'Просмотр':
-                post.preview = True
-            else:
-                if request.POST['action'] == u'Опубликовать':
-                    for p in Photo.objects.filter(post=post):
-                        p.tags.clear()
-                        p.tags.add(*form.cleaned_data['tags'])
-                    return HttpResponseRedirect(post.get_absolute_url())
-
-                elif request.POST['action'] == u'Удалить':
-                    return HttpResponseRedirect(user.get_absolute_url())
-                else:
-                    return HttpResponseRedirect(reverse('edit_post', args=[post.id]))
-        else:
-            pass
-    else:
-        tags = post.tags.all().order_by('type', '-size')
-        initial = {'post': post.id,
-                   'title': post.title,
-                   'content': post.content,
-                   'tags': [t.title for t in tags],
-                   }
-        form = PostForm(user=user, initial=initial, post=post)
-
-    pictures = Photo.objects.filter(post=post)
-
-    return render_to_response(request,
-                              'post_new.html',
-                              {'post': post, 'form': form, 'pictures': pictures}
-                              )
+    def get_success_url(self):
+        obj = self.get_object()
+        return reverse('post', args=[obj.category.slug, obj.id])
 
 
 ###############################################################################

@@ -53,7 +53,7 @@ def posts_feed(template="all.html"):
             if isinstance(context, HttpResponse):
                 return context
 
-            context['posts'] = [render_to_string('post_cut.html', {'post': post, 'user': None, 'mode': 'normal'})
+            context['posts'] = [render_to_string('core/post_cut.html', {'post': post, 'user': None, 'mode': 'normal'})
                                 for post in context['posts']]
             return render_to_response(request, template, context)
         return wrapper
@@ -63,3 +63,21 @@ def posts_feed(template="all.html"):
 def render_to_string(template_name, context_dict=None):
     t = loader.get_template(template_name)
     return t.render(Context(context_dict or {}))
+
+
+from django.utils.decorators import method_decorator
+
+
+def class_view_decorator(function_decorator):
+    """Convert a function based decorator into a class based decorator usable
+    on class based Views.
+
+    Can't subclass the `View` as it breaks inheritance (super in particular),
+    so we monkey-patch instead.
+    """
+
+    def simple_decorator(View):
+        View.dispatch = method_decorator(function_decorator)(View.dispatch)
+        return View
+
+    return simple_decorator

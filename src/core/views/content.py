@@ -5,6 +5,7 @@ import logging
 
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, DetailView, FormView
+from django.conf import settings
 
 from core.forms import FeedbackForm
 from core.models import Rubric, Post, Word, Skill
@@ -73,9 +74,10 @@ class DictionaryView(TemplateView):
         context = super(DictionaryView, self).get_context_data(**kwargs)
         context['filter'] = clean_choice(self.request.GET.get('filter'), [''] + [d[0] for d in Word.DICTIONARIES])
         words = Word.objects.all().order_by('title')
-        if filter:
-            words = words.filter(type=filter)
+        if context['filter']:
+            words = words.filter(type=context['filter'])
 
+        context['alphabet_letters'] = settings.ALPHABET_LETTERS
         context['present_letters'] = {}
         for word in words:
             context['present_letters'].setdefault(word.title[0], []).append(word)

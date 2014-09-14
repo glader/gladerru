@@ -5,6 +5,7 @@ Disallow: /feeds/posts
 Disallow: /files
 Disallow: /forum
 Disallow: /index.pl
+Disallow: /post/new
 Disallow: /search
 Disallow: /studio
 Disallow: /tags
@@ -18,6 +19,7 @@ Disallow: /feeds/posts
 Disallow: /files
 Disallow: /forum
 Disallow: /index.pl
+Disallow: /post/new
 Disallow: /search
 Disallow: /studio
 Disallow: /tags

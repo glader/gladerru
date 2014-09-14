@@ -2,14 +2,14 @@
 from bs4 import BeautifulSoup, element
 import random
 import re
-from datetime import datetime
 
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
 from django import forms
 from django.db.models import Q
+from django.forms.models import ModelForm
 
-from core.models import Profile, Post, Tag, NewsCategory
+from core.models import Profile, Post
 from core.utils.common import notice_admin, process_template, send_html_mail
 
 
@@ -23,7 +23,7 @@ def sanitizeHTML(value, mode='none'):
     else:
         valid_tags = []
 
-    valid_attrs = 'href src pic user page class text title alt'.split()
+    valid_attrs = 'href src pic user page class text title alt style'.split()
     # параметры видеороликов
     valid_attrs += 'width height classid codebase id name value flashvars allowfullscreen allowscriptaccess ' \
                    'quality src type bgcolor base seamlesstabbing swLiveConnect pluginspage data frameborder'.split()
@@ -155,7 +155,7 @@ class RegistrationForm(CommonForm):
 
 class LoginForm(CommonForm):
     login = forms.CharField(label=u'Логин', max_length=100)
-    passwd = forms.CharField(label=u'Пароль', max_length=100, widget=forms.TextInput)
+    passwd = forms.CharField(label=u'Пароль', max_length=100, widget=forms.PasswordInput)
     retpath = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
 
     def get_user(self, s):
@@ -192,89 +192,26 @@ class ProfileForm(forms.ModelForm):
         return self.cleaned_data
 
 
-class OpenMultipleChoiceField(forms.MultipleChoiceField):
-    def validate(self, *args, **kwargs):
-        pass
-
-
-class PostForm(CommonForm):
-    post = forms.IntegerField(label=u'Пост', required=False, widget=forms.HiddenInput, help_text=u'Пост')
-    title = forms.CharField(label=u'Заголовок', error_messages={'required': u'Введите заголовок поста'},
-                            widget=forms.TextInput(attrs={'class': 'input'}))
-    category = forms.IntegerField(label=u'Категория', widget=forms.Select, help_text=u'Категория')
-    content = forms.CharField(label=u'Сообщение', error_messages={'required': u'Введите текст поста'},
-                              widget=forms.Textarea(attrs={'class': 'content'}))
-    geography = forms.BooleanField(label=u'Относится к моему городу', required=False)
-    tags = OpenMultipleChoiceField(choices=[], required=False, initial=[])
-
-    # Картинка
-    picture = forms.ImageField(label=u'Картинка', required=False,
-                               widget=forms.FileInput(attrs={'class': 'picture'}))
-
-    deferred_date = forms.DateField(label=u"Дата публикации", required=False, initial=datetime.now().date)
-    deferred_time = forms.TimeField(label=u"Время публикации", required=False, initial=datetime.now().time)
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
-        self.post = kwargs.pop('post')
-
-        super(PostForm, self).__init__(*args, **kwargs)
-
-        self.fields['category'].widget.choices = [(c.id, c.title) for c in NewsCategory.objects.all()]
-
-        if 'initial' in kwargs:
-            self.fields['tags'].choices = [(t, t) for t in kwargs['initial']['tags']]
-
-    def clean_post(self):
-        if not self.cleaned_data['post']:
-            return None
-        try:
-            post = Post.all.get(id=self.cleaned_data['post'])
-            author = post.author
-            if author == self.user or self.user.get_profile().is_moderator:
-                return post
-            raise forms.ValidationError(u'Вы не можете редактировать чужие сообщения.')
-
-        except Post.DoesNotExist:
-            raise forms.ValidationError(u'Редактирование неизвестного поста.')
-        except IndexError:
-            raise forms.ValidationError(u'Ошибка в посте, сообщите администрации.')
+class PostForm(ModelForm):
+    title = forms.CharField(label=u'Заголовок', widget=forms.TextInput(attrs={'size': '100'}))
+    abstract = forms.CharField(label=u'Анонс', widget=forms.Textarea(attrs={'cols': 100, 'rows': 5}))
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
 
-    def clean_category(self):
-        try:
-            return NewsCategory.objects.get(pk=self.cleaned_data['category'])
-        except NewsCategory.DoesNotExist:
-            raise forms.ValidationError(u"Неизвестная категория")
-
     def clean_content(self):
-        if self.user.get_profile().is_moderator:
-            return self.cleaned_data['content']
-        else:
-            return sanitizeHTML(self.cleaned_data['content'], mode='strict')
-
-    def clean_tags(self):
-        tags_str = u",".join(self.cleaned_data['tags'])
-        return Tag.process_tags(sanitizeHTML(tags_str))
+        if not self.cleaned_data['content']:
+            raise forms.ValidationError(u'Введите текст новости.')
+        return sanitizeHTML(self.cleaned_data['content'], mode='strict')
 
     def clean(self):
-        self.cleaned_data['deferred_datetime'] = None
+        if not self.cleaned_data['category']:
+            raise forms.ValidationError(u'Укажите желаемую категорию новости')
+        return super(PostForm, self).clean()
 
-        if self.cleaned_data.get('deferred_date') and \
-           self.cleaned_data.get('deferred_time'):
-                deferred_datetime = datetime.combine(self.cleaned_data['deferred_date'],
-                                                     self.cleaned_data['deferred_time'])
-                if deferred_datetime >= datetime.now():
-                    self.cleaned_data['deferred_datetime'] = deferred_datetime
-
-        return self.cleaned_data
-
-
-class PictureForm(CommonForm):
-    """ Форма для заливки картинок через swfupload """
-    Filedata = forms.ImageField(label=u'Картинка')
+    class Meta:
+        model = Post
+        fields = ('title', 'category', 'abstract', 'content')
 
 
 class FeedbackForm(CommonForm):
@@ -299,26 +236,3 @@ class FeedbackForm(CommonForm):
             text += u"Обратный адрес: '%s'<br>" % self.cleaned_data['email']
         text += self.cleaned_data['message']
         notice_admin(text, subject=u"Обратная связь")
-
-
-class PhotoForm(CommonForm):
-    title = forms.CharField(label=u'Название', required=False, widget=forms.TextInput(attrs={'size': '60'}))
-    tags = forms.CharField(label=u'Теги', required=False, widget=forms.TextInput(attrs={'size': '70'}))
-
-    def __init__(self, *args, **kwargs):
-        self.photo = kwargs.pop('photo')
-        super(PhotoForm, self).__init__(*args, **kwargs)
-        self.fields['title'].initial = self.photo.title
-        self.fields['tags'].initial = ", ".join(t.title for t in self.photo.tags.all())
-
-    def clean_title(self):
-        return sanitizeHTML(self.cleaned_data['title'])
-
-    def clean_tags(self):
-        return Tag.process_tags(sanitizeHTML(self.cleaned_data['tags']))
-
-    def save(self):
-        self.photo.title = self.cleaned_data['title']
-        self.photo.tags.clear()
-        self.photo.tags.add(*self.cleaned_data['tags'])
-        self.photo.rebuild_tags()

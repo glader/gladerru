@@ -5,7 +5,6 @@ from views.ugc import *
 from feeds import *
 from django.contrib.auth.views import password_reset
 
-
 urlpatterns = patterns(
     '',
     url(r'^content/(?P<pk>[^/]+)\.htm$', ArticleView.as_view(), name='article'),
@@ -36,11 +35,11 @@ urlpatterns = patterns(
     (r'^feeds/all', AllPosts()),
 
     # Editing
-    url(r'^post/new$', new_post, name='new_post'),
-    url(r'^post/edit/(\d+)$', edit_post, name='edit_post'),
+    url(r'^post/new$', AddPostView.as_view(), name='new_post'),
+    url(r'^post/edit/(?P<pk>\d+)$', EditPostView.as_view(), name='edit_post'),
 
     url(r'^$', index, name='index'),
 
     # Old urls
-    url(r'^users/([^/]+)/posts/(\d+)$', user_post),
+    url(r'^users/([^/]+)/posts/(?P<pk>\d+)$', user_post),
 )

@@ -7,6 +7,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.core.cache import cache
 
+from redactor.fields import RedactorField
 from yafotki.fields import YFField
 from votes.models import VoteMixin
 
@@ -330,7 +331,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     slug = models.SlugField(verbose_name=u"Урл", max_length=255, null=True, blank=True, default=None)
 
     category = models.ForeignKey('NewsCategory', verbose_name=u"Категория", null=True, blank=True, default=None)
-    content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
+    content = RedactorField(null=True, blank=True, verbose_name=u"Содержание")
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name=u"Тип поста")
 
