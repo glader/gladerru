@@ -6,17 +6,19 @@
 {% endblock %}
 
 {% block description %}
-    {% if item.meta_description %}
-        <meta name="description" content="{{ item.meta_description }}">
+    {% if object.meta_description %}
+        <meta name="description" content="{{ object.meta_description }}">
     {% endif %}
 {% endblock %}
 
-{% block title %}{{ item.title }} - {{ block.super }}{% endblock %}
+{% block title %}{{ object.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
-    {{ item.abstract|safe }}
+    {{ object.abstract|safe }}
 
-    {{ item.content|safe }}
+    {{ object.content|safe }}
 
-    {% include "blocks/disqus_comments.html" %}
+    {% with object.uid as page_identifier %}
+        {% include "blocks/disqus_comments.html" %}
+    {% endwith %}
 {% endblock %}

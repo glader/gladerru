@@ -221,6 +221,6 @@ class SkillView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SkillView, self).get_context_data(**kwargs)
-        context['skill'] = get_object_or_404(Skill, slug=kwargs['name'])
+        context['skill'] = get_object_or_404(Skill, slug=kwargs['slug'])
         context['articles'] = Post.objects.filter(skill=context['skill']).order_by('-date_created')
         return context

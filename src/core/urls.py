@@ -16,9 +16,9 @@ urlpatterns = patterns(
 
     url(r'^terms/(?P<slug>[^/]+)$', DictionaryWordView.as_view(), name='dictionary_word'),
     url(r'^terms/', DictionaryView.as_view(), name='dictionary'),
-    url(r'^skills/(?P<name>[^/]+)$', SkillView.as_view(), name='skill'),
+    url(r'^skills/(?P<slug>[^/]+)$', SkillView.as_view(), name='skill'),
     url(r'^skills/$', SkillsView.as_view(), name='skills'),
-    url(r'^tricks/([^/]+)$', TrickView.as_view(), name='trick'),
+    url(r'^tricks/(?P<slug>[^/]+)$', TrickView.as_view(), name='trick'),
     url(r'^tricks/$', TricksView.as_view(), name='tricks'),
     url(r'^search', SearchView.as_view(), name='search'),
     url(r'^feedback', FeedbackView.as_view(), name='feedback'),
