@@ -41,5 +41,5 @@ urlpatterns = patterns(
     url(r'^$', index, name='index'),
 
     # Old urls
-    url(r'^users/([^/]+)/posts/(?P<pk>\d+)$', user_post),
+    url(r'^users/([^/]+)/posts/(\d+)$', user_post),
 )
