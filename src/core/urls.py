@@ -39,7 +39,7 @@ urlpatterns = patterns(
     url(r'^post/edit/(?P<pk>\d+)$', EditPostView.as_view(), name='edit_post'),
     url(r'^post/temp$', TempPostView.as_view(), name='temp_post'),
 
-    url(r'^$', index, name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
 
     # Old urls
     url(r'^users/([^/]+)/posts/(\d+)$', user_post),

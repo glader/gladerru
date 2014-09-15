@@ -8,7 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import TemplateView, CreateView, UpdateView
 from django.core.mail import mail_admins
 
 from core.forms import PostForm, LoginForm, RegistrationForm
@@ -43,22 +43,17 @@ def timestamp(dt):
     return int((dt - datetime(1970, 1, 1)).total_seconds())
 
 
-@time_slow
-@posts_feed(template="index.html")
-def index(request):
-    start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(status='pub', type='post').order_by('-date_created')
-    if start:
-        posts = posts.filter(date_created__lt=start)
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
-    context = {
-        'start': None,
-        'posts': posts[:11],
-    }
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
-    return context
+    def get_context_data(self, **kwargs):
+        context = super(IndexView, self).get_context_data(**kwargs)
+        context['categories'] = list(NewsCategory.objects.all().order_by('order'))
+        print len(context['categories'])
+        for category in context['categories']:
+            category.posts = Post.objects.filter(status='pub', type='post', category=category) \
+                .order_by('-date_created')[:4]
+        return context
 
 
 @time_slow

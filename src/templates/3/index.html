@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load content %}
-{% load cache %}
 
 {% block top_menu %}
     {% top_menu 'posts' %}
@@ -11,18 +10,33 @@
 {% block page %}
     <div class="b-page-title"><h1>Самое <b>интересное</b></h1></div>
 
-    <div class="b-feed">
-        {% for post in posts %}
-            {{ post }}
-        {% endfor %}
-    </div>
+    {% for category in categories %}
+        <div class="b-category">
+            <div class="b-category_title">{{ category.title }}</div>
+            <div class="b-category_body">
+                <table><tr>
+                {% for post in category.posts %}
+                    {% if forloop.first %}
+                        <td class="b-category_post_first">
+                            <a href="{{ post.get_absolute_url }}">
+                                <div class="b-category_post_first_img"><img src="{{ post.icon.src_500 }}" alt="{{ post.title }}"></div>
+                    {% else %}
+                        <td class="b-category_post">
+                            <a href="{{ post.get_absolute_url }}">
+                            <div class="b-category_post_img"><img src="{{ post.icon.src_150 }}" alt="{{ post.title }}"></div>
+                        {% endif %}
+                            <div class="b-category_post_title">{{ post.title }}</div>
+                            <div class="b-category_post_abstract">{{ post.abstract }}</div>
+                        </a>
+                    </td>
+                {% endfor %}
+                </tr></table>
+            </div>
+            <noindex><div class="b-category_next"><a href="{% url "category" category.slug %}">еще &raquo;</a></div></noindex>
+        </div>
+    {% endfor %}
 
-    {% pagination "/" %}
 {% endblock page %}
-
-{% block sidebar %}
-    {% include "block_index_sidebar.html" %}
-{% endblock sidebar %}
 
 {% block ampseo %}
     <br><a href="http://ampseo.ru">Продвижение сайта</a>

@@ -9,6 +9,7 @@
 @import url(block/b-pager/b-pager.css);
 @import url(block/b-usertab/b-usertab.css);
 @import url(block/b-menu/b-menu.css);
+@import url(block/b-category/b-category.css);
 
 @import url(block/b-page-title/b-page-title.css);
 @import url(block/b-head-ill/b-head-ill.css);
@@ -73,7 +74,7 @@ body
 .b-container
 {
     margin: auto;
-    width: 1000px;
+    width: 1200px;
     background-color: white;
 }
 
