@@ -49,7 +49,6 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['categories'] = list(NewsCategory.objects.all().order_by('order'))
-        print len(context['categories'])
         for category in context['categories']:
             category.posts = Post.objects.filter(status='pub', type='post', category=category) \
                 .order_by('-date_created')[:4]
@@ -167,10 +166,8 @@ class EditPostView(UpdateView):
 class TempPostView(EditPostView):
     def get_object(self):
         posts = Post.objects.filter(status='pub', type='post', icon='').order_by('-date_created')
-        print self.request.GET.get('category')
         if self.request.GET.get('category'):
             posts = posts.filter(category__slug=self.request.GET.get('category'))
-        print len(posts)
         return posts[0]
 
     def get_success_url(self):
