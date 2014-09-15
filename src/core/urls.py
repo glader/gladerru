@@ -37,6 +37,7 @@ urlpatterns = patterns(
     # Editing
     url(r'^post/new$', AddPostView.as_view(), name='new_post'),
     url(r'^post/edit/(?P<pk>\d+)$', EditPostView.as_view(), name='edit_post'),
+    url(r'^post/temp$', TempPostView.as_view(), name='temp_post'),
 
     url(r'^$', index, name='index'),
 

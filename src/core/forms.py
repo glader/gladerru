@@ -195,6 +195,7 @@ class ProfileForm(forms.ModelForm):
 class PostForm(ModelForm):
     title = forms.CharField(label=u'Заголовок', widget=forms.TextInput(attrs={'size': '100'}))
     abstract = forms.CharField(label=u'Анонс', widget=forms.Textarea(attrs={'cols': 100, 'rows': 5}))
+    icon = forms.ImageField(label=u'Картинка')
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
@@ -211,7 +212,7 @@ class PostForm(ModelForm):
 
     class Meta:
         model = Post
-        fields = ('title', 'category', 'abstract', 'content')
+        fields = ('title', 'icon', 'category', 'abstract', 'content')
 
 
 class FeedbackForm(CommonForm):

@@ -9,6 +9,7 @@ from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, UpdateView
+from django.core.mail import mail_admins
 
 from core.forms import PostForm, LoginForm, RegistrationForm
 from core.models import Post, NewsCategory
@@ -146,6 +147,8 @@ class AddPostView(CreateView):
             post.save()
             self.success_url = reverse('edit_post', args=[post.id])
 
+        mail_admins('New post', self.success_url)
+
         return super(AddPostView, self).form_valid(form)
 
 
@@ -157,13 +160,21 @@ class EditPostView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         """ Making sure that only authors can update posts """
         obj = self.get_object()
-        if obj.author == self.request.user or self.request.user.is_superuser:
+        if (obj.author == self.request.user and obj.status == 'save') or self.request.user.is_superuser:
             return super(EditPostView, self).dispatch(request, *args, **kwargs)
         raise Http404
 
     def get_success_url(self):
         obj = self.get_object()
         return reverse('post', args=[obj.category.slug, obj.id])
+
+
+class TempPostView(EditPostView):
+    def get_object(self):
+        return Post.objects.filter(status='pub', icon='').order_by('-date_created')[0]
+
+    def get_success_url(self):
+        return reverse('temp_post')
 
 
 ###############################################################################
