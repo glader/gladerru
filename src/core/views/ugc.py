@@ -166,10 +166,15 @@ class EditPostView(UpdateView):
 
 class TempPostView(EditPostView):
     def get_object(self):
-        return Post.objects.filter(status='pub', type='post', icon='').order_by('-date_created')[0]
+        posts = Post.objects.filter(status='pub', type='post', icon='').order_by('-date_created')
+        print self.request.GET.get('category')
+        if self.request.GET.get('category'):
+            posts = posts.filter(category__slug=self.request.GET.get('category'))
+        print len(posts)
+        return posts[0]
 
     def get_success_url(self):
-        return reverse('temp_post')
+        return reverse('temp_post') + '?category=' + self.request.GET.get('category', '')
 
 
 ###############################################################################
