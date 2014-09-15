@@ -171,7 +171,7 @@ class EditPostView(UpdateView):
 
 class TempPostView(EditPostView):
     def get_object(self):
-        return Post.objects.filter(status='pub', icon='').order_by('-date_created')[0]
+        return Post.objects.filter(status='pub', type='post', icon='').order_by('-date_created')[0]
 
     def get_success_url(self):
         return reverse('temp_post')
