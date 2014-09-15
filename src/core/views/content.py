@@ -122,6 +122,7 @@ class SearchView(TemplateView):
 
 
 class FeedbackView(FormView):
+    template_name = 'core/feedback.html'
     form_class = FeedbackForm
     success_url = '/feedback/?save=ok'
 
