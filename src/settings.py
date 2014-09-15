@@ -27,6 +27,7 @@ DEBUG = False
 TEMPLATE_DEBUG = False
 TIMING = True
 LOG_LEVEL = logging.WARNING
+INTERNAL_IPS = ('127.0.0.1',)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 

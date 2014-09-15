@@ -58,11 +58,11 @@ def riders(movie):
     return {'riders': riders}
 
 
-@register.inclusion_tag('block_soundtrack_list.html')
+@register.inclusion_tag('movies/block_soundtrack_list.html')
 def soundtrack(movie):
     return {'songs': Song.objects.filter(movie=movie)}
 
 
-@register.inclusion_tag('block_soundtrack_list.html')
+@register.inclusion_tag('movies/block_soundtrack_list.html')
 def soundtrack_list(songs):
     return {'songs': songs, 'SOUNDTRACKS_PREFIX': settings.SOUNDTRACKS_PREFIX}

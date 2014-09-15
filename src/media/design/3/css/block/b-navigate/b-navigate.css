@@ -111,4 +111,18 @@
 
         background: url(/static/design/3/img/navigate/dec2.gif) 0 0 no-repeat;
     }
+
+.sticky-navigation-container
+{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.sticky-navigation.stuck
+{
+    position: fixed;
+    top: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+}
+
 /* Навигация (end) */ /**/

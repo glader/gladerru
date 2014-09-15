@@ -238,7 +238,7 @@ def yadirect(block_name):
     template = "yadirect/%s.html" % block_name
     try:
         t = loader.get_template(template)
-        return t.render(Context())
+        return t.render(Context({'debug': settings.DEBUG}))
     except TemplateDoesNotExist:
         return "Шаблон не найден"
 

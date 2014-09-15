@@ -62,7 +62,7 @@ def index(request):
 
 
 @time_slow
-@posts_feed(template="category.html")
+@posts_feed(template="core/category.html")
 def category_view(request, slug):
     category = get_object_or_404(NewsCategory, slug=slug)
 
