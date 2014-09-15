@@ -7,10 +7,11 @@
             <div class="b-menu__item {% ifequal level1 'mountains' %}b-menu__item_state_current{% endifequal %}"><a href="/mountains" title="Горки, места, отзывы"><span class="b-menu__item__fade">места катания</span><span>места катания</span></a></div>
 {#            <div class="b-menu__item {% ifequal level1 'equipment' %}b-menu__item_state_current{% endifequal %}"><a href="/equipment"><span class="b-menu__item__fade">снаряга</span><span>снаряга</span></a></div> #}
 {#            <div class="b-menu__item {% ifequal level1 'reference' %}b-menu__item_state_current{% endifequal %}"><a href="/rubric/snowboard" title="Справочник"><span class="b-menu__item__fade">справочник</span><span>справочник</span></a></div>  #}
-
-            {% ifequal level1 'profile' %}
-	            | <div class="b-menu__item {% ifequal level1 'profile' %}b-menu__item_state_current{% endifequal %}"><a href="/my" title="Профиль"><span class="b-menu__item__fade">профиль</span><span>профиль</span></a></div>
-			{% endifequal %}
+            <div class="b-menu__item {% ifequal level1 'search' %}b-menu__item_state_current{% endifequal %}">
+                <a href="{% url "search" %}" title="поиск по сайту">
+                    <span class="b-menu__item__fade b-search-icon">поиск</span><span>поиск</span>
+                </a>
+            </div>
         </div>
 
         <div class="b-menu__level2">

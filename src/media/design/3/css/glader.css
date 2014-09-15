@@ -65,9 +65,16 @@ a:active
 
 body
 {
-    min-width: 980px;
-
+    text-align: center;
     color: #403f3f;
+    background-color: #f9f9f9;
+}
+
+.b-container
+{
+    margin: auto;
+    width: 1000px;
+    background-color: white;
 }
 
 .float_right {

@@ -51,90 +51,69 @@
 
 </head>
 <body>
-    <div class="b-head-ill_left"><div class="b-head-ill_right">
-    <table class="l-head">
-    <tr>
-        <td class="l-head-g"><i></i></td>
-        <td class="l-head-l">
+    <div class="b-container">
+    <div class="b-head-ill_left">
+        <div class="b-head-ill_right">
+            <table class="l-head">
+            <tr>
+                <td class="l-head-g"><i></i></td>
+                <td class="l-head-l">
 
-            <div class="b-logo"><a href="/" rel="nofollow"><img src="{% static "design/3/img/logo.gif" %}" alt="Glader.ru" /></a></div>
-            <div class="sticky-navigation-container">
-                <div class="sticky-navigation">
-                    {% block top_menu %}
-                        {% top_menu '' %}
-                    {% endblock %}
-                </div>
-            </div>
-        </td>
-        <td class="l-head-r-g"><i></i></td>
-        <td class="l-head-r">
-            &nbsp;
-        </td>
-        <td class="l-head-g"><i></i></td>
-    </tr>
-    </table>
+                    <div class="b-logo"><a href="/" rel="nofollow"><img src="{% static "design/3/img/logo.gif" %}" alt="Glader.ru" /></a></div>
+                    <div class="sticky-navigation-container">
+                        <div class="sticky-navigation">
+                            {% block top_menu %}
+                                {% top_menu '' %}
+                            {% endblock %}
+                        </div>
+                    </div>
+                </td>
+                <td class="l-head-g"><i></i></td>
+            </tr>
+            </table>
 
-    {% block full_page %}
-        <table class="l-page">
-        <tr>
-            <td class="l-page-g"><i></i></td>
-            <td class="l-page-l">
-                {% block page %}
-                	{% block breadcrumbs %}{% endblock %}</div>
-                    <div class="b-page-title"><h1>{% block page_title %}{% endblock %}</h1></div>
+            {% block full_page %}
+                <table class="l-page">
+                <tr>
+                    <td class="l-page-g"><i></i></td>
+                    <td class="l-page-l">
+                        {% block page %}
+                            {% block breadcrumbs %}{% endblock %}</div>
+                            <div class="b-page-title"><h1>{% block page_title %}{% endblock %}</h1></div>
 
-                    {% block content %}{% endblock %}
+                            {% block content %}{% endblock %}
 
-                {% endblock page %}
-            </td>
-            <td class="l-page-r-g"><i></i></td>
-            <td class="l-page-r">
+                        {% endblock page %}
+                    </td>
+                    <td class="l-page-g"><i></i></td>
+                </tr>
+                </table>
+            {% endblock full_page %}
 
-                {% block search_form %}
-                    <h2 class="b-block-title b-block-title__first">Поиск по сайту</h2>
-                    <form action="/search" id="cse-search-box" method="post">
-                      <div>
-                        <input type="text" name="query" size="31" />
-                        <input type="submit" value="Искать" />
-                      </div>
-                    </form>
-                {% endblock %}
-
-                {% block sidebar %}
-                {% endblock %}
-
-                {% block advert %}
-                    {% yadirect 'right_vertical' %}
-                {% endblock %}
-            </td>
-            <td class="l-page-g"><i></i></td>
-        </tr>
-        </table>
-    {% endblock full_page %}
-
-    <noindex>
-    <table class="l-page">
-    <tr>
-        <td class="l-page-g"><i></i></td>
-        <td>
-            <i class="b-round b-round_6"><i class="l t"><i></i></i></i>
-            <div class="b-foot">
-                <a href="{% url "feedback" %}" rel="nofollow">Обратная связь</a>
-            </div>
-            <i class="b-round b-round_6"><i class="l b"><i></i></i></i>
-            <br />
-            <div class="b-copyright" style="float:right">
-                <a href="{% url "article" "advert" %}">Размещение рекламы</a>
-                {% block ampseo %}{% endblock %}
-            </div>
-            <div class="b-copyright">&copy;2007-2014 <a href="/">Glader.ru</a></div>
-        </td>
-        <td class="l-page-g"><i></i></td>
-    </tr>
-    </table>
-    </noindex>
-
-    </div></div>
+            <noindex>
+            <table class="l-page">
+            <tr>
+                <td class="l-page-g"><i></i></td>
+                <td>
+                    <i class="b-round b-round_6"><i class="l t"><i></i></i></i>
+                    <div class="b-foot">
+                        <a href="{% url "feedback" %}" rel="nofollow">Обратная связь</a>
+                    </div>
+                    <i class="b-round b-round_6"><i class="l b"><i></i></i></i>
+                    <br />
+                    <div class="b-copyright" style="float:right">
+                        <a href="{% url "article" "advert" %}">Размещение рекламы</a>
+                        {% block ampseo %}{% endblock %}
+                    </div>
+                    <div class="b-copyright">&copy;2007-2014 <a href="/">Glader.ru</a></div>
+                </td>
+                <td class="l-page-g"><i></i></td>
+            </tr>
+            </table>
+            </noindex>
+        </div>
+    </div>
+    </div>
 
 {% if not user %}
     {% include "block_reg_popup.html" %}
