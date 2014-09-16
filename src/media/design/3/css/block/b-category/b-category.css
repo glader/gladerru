@@ -110,10 +110,26 @@
     text-align: center;
 }
 
+.b-category_pagination
+{
+    margin: auto;
+    margin-top: 5px;
+    background-color: #ffeecc;
+    padding: 5px;
+    width: 150px;
+    text-align: center;
+}
+
 .b-category_next a:link, .b-category_next a:hover,
 .b-category_next a:active, .b-category_next a:visited
 {
     color: #333;
     font-size: 120%;
     text-decoration: none;
+}
+
+.b-category_post_inlist
+{
+    padding: 20px 0;
+    border-bottom: 1px grey dotted;
 }

@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load content %}
-{% load cache %}
 
 {% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
 
@@ -8,19 +7,26 @@
     {% top_menu category.slug %}
 {% endblock %}
 
-{% block page_title %}{{ category.title }}{% endblock %}
-
-{% block content %}
-    <div class="b-feed">
+{% block page %}
+    <div class="b-category_body">
+        <table><tr>
         {% for post in posts %}
-            {{ post }}
+            <td class="b-category_post_first b-category_post_inlist">
+                <a href="{{ post.get_absolute_url }}">
+                    <div class="b-category_post_first_img"><img src="{{ post.icon.src_500 }}" alt="{{ post.title }}"></div>
+                    <div class="b-category_post_title">{{ post.title }}</div>
+                    <div class="b-category_post_abstract">{{ post.abstract }}</div>
+                </a>
+            </td>
+
+            {% cycle '' '</tr><tr>' %}
         {% endfor %}
+
+        <tr><td colspan="2"><noindex>
+            <div class="b-category_pagination">{% pagination %}</div>
+        </noindex></td>
+        </tr></table>
     </div>
 
-    {% pagination %}
-{% endblock content %}
-
-{% block sidebar %}
-    <h2 class="b-block-title">Прямой эфир</h2>
-    {% last_conversations %}
-{% endblock %}
+    {# {% pagination %} #}
+{% endblock page %}

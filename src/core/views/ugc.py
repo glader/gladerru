@@ -15,7 +15,7 @@ from core.forms import PostForm, LoginForm, RegistrationForm
 from core.models import Post, NewsCategory
 from core.utils.common import slug
 from core.views.common import render_to_response
-from core.decorators import time_slow, posts_feed, class_view_decorator
+from core.decorators import class_view_decorator
 
 
 class JsonResponse(HttpResponse):
@@ -55,28 +55,27 @@ class IndexView(TemplateView):
         return context
 
 
-@time_slow
-@posts_feed(template="core/category.html")
-def category_view(request, slug):
-    category = get_object_or_404(NewsCategory, slug=slug)
+class CategoryView(TemplateView):
+    template_name = "core/category.html"
+    POSTS_PER_CATEGORY = 20
 
-    start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(hidden=False, category=category, type='post').order_by('-date_created')
-    if start:
-        posts = posts.filter(date_created__lt=start)
+    def get_context_data(self, **kwargs):
+        context = super(CategoryView, self).get_context_data(**kwargs)
+        context['category'] = get_object_or_404(NewsCategory, slug=kwargs['slug'])
 
-    context = {
-        'start': None,
-        'posts': posts[:11],
-        'category': category,
-    }
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
-    return context
+        start = parse_timestamp(self.request.GET.get('start'))
+        context['posts'] = Post.objects.filter(hidden=False, category=context['category'], type='post')\
+            .order_by('-date_created')
+        if start:
+            context['posts'] = context['posts'].filter(date_created__lt=start)
+
+        context['posts'] = context['posts'][:self.POSTS_PER_CATEGORY + 1]
+        if len(context['posts']) == self.POSTS_PER_CATEGORY + 1:
+            context['start'] = timestamp(context['posts'][self.POSTS_PER_CATEGORY].date_created)
+            context['posts'] = context['posts'][:self.POSTS_PER_CATEGORY]
+        return context
 
 
-@time_slow
 def post_view(request, slug, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
@@ -90,34 +89,6 @@ def post_view(request, slug, post_id):
     return render_to_response(request, 'core/post.html', context)
 
 
-###############################################################################
-# UGC
-###############################################################################
-
-
-@time_slow
-@posts_feed()
-def all(request):
-    """ Свежие записи во всех блогах """
-    start = parse_timestamp(request.GET.get('start'))
-    posts = Post.objects.filter(status='pub', type='post').order_by('-date_created')
-    if start:
-        posts = posts.filter(date_created__lt=start)
-
-    context = {
-        'start': None,
-        'posts': posts[:11],
-        'title': u'Все сообщения',
-        'menu_item': 'all_posts',
-    }
-
-    if len(context['posts']) == 11:
-        context['start'] = timestamp(context['posts'][10].date_created)
-        context['posts'] = context['posts'][:10]
-    return context
-
-
-@time_slow
 def user_post(request, user, post_id):
     post = get_object_or_404(Post, pk=post_id, hidden=False)
     return HttpResponseRedirect(post.get_absolute_url())

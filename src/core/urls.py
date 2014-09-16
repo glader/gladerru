@@ -10,7 +10,8 @@ urlpatterns = patterns(
     url(r'^content/(?P<pk>[^/]+)\.htm$', ArticleView.as_view(), name='article'),
     url(r'^rubric/(?P<name>[^/]+)$', RubricView.as_view(), name='rubric'),
 
-    url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$', category_view, name='category'),
+    url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$', CategoryView.as_view(),
+        name='category'),
     url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_view, name='post'),
 
     url(r'^terms/(?P<slug>[^/]+)$', DictionaryWordView.as_view(), name='dictionary_word'),

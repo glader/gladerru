@@ -13,7 +13,6 @@ from django.conf import settings
 
 from core.models import Post, Photo, Tag, NewsCategory
 from core.utils.common import cached
-from core.decorators import time_slow
 from core.utils.thumbnails import get_thumbnail_url
 
 from movies.models import Photo as ManPhoto
@@ -177,7 +176,6 @@ def el(dic, key):
     return dic.get(key)
 
 
-@time_slow(threshold=0)
 @register.filter
 def link(item):
     if not item:
