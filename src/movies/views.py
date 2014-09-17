@@ -162,6 +162,7 @@ def create_rider(request):
     movie = Movie.objects.get(pk=object_id)
 
     for rider_title in rider_titles.split(","):
+        rider_title = rider_title.strip()
         rider_name = slug(rider_title)
         try:
             rider = Man.objects.get(slug=rider_name)
