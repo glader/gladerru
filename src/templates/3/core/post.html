@@ -14,7 +14,10 @@
     {% top_menu post.category.slug 'posts' %}
 {% endblock %}
 
-{# FIXME: сделать внятные сообщения о статусах сообщений #}
+{% block head %}
+    {% include "block_social_scripts.html" %}
+{% endblock %}
+
 {% block page_title %}
     <h1>{{ post.title }} {% post_edit_link post user %} {% post_status post %}</h1>
 {% endblock %}

@@ -7,6 +7,10 @@
     {% endif %}
 {% endblock %}
 
+{% block head %}
+    {% include "block_social_scripts.html" %}
+{% endblock %}
+
 {% if article.skill %}
 	{% block page_title %}<a href="{% url "skills" %}">Статьи</a> {% if article.skill %}» {{ article.skill|link }} {% endif %}» {{ article.title }}{% endblock %}
 {% endif %}
@@ -42,8 +46,6 @@
     </div>
 
     {% if post.type == 'post' %}
-        {{ post.tags_html|safe }}
-
         {% post_panel article user %}
 
         {% include "blocks/disqus_comments.html" %}
