@@ -231,6 +231,13 @@ def post_panel(post, user, mode='normal'):
     }
 
 
+@register.inclusion_tag('block_relative_posts.html')
+def relative_posts(post):
+    return {
+        'relative_posts': Post.objects.filter(category=post.category).exclude(pk=post.pk).order_by('-date_created')[:5]
+    }
+
+
 @register.simple_tag
 def yadirect(block_name):
     template = "yadirect/%s.html" % block_name

@@ -1,0 +1,8 @@
+<div class="b-relative-posts">
+    <div class="b-relative-posts_title">Еще почитать:</div>
+    <ul class="b-relative-posts_header">
+        {% for post in relative_posts %}
+            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</li>
+        {% endfor %}
+    </ul>
+</div>
