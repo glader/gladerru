@@ -50,6 +50,8 @@
 @import url(block/b-banner-top/b-banner-top.css);
 @import url(block/b-bookkeeping/b-bookkeeping.css);
 
+@import url(block/b-recent-teasers/b-recent-teasers.css);
+
 a:link
 {
     color: #317cb4;

@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-import simplejson
-
 from django.conf import settings
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect, HttpResponse
@@ -156,14 +154,7 @@ class AuthorPhotosView(ListView):
         return context
 
 
-class JsonResponse(HttpResponse):
-    """ HttpResponse descendant, which return response with ``application/json`` mimetype. """
-    def __init__(self, data):
-        super(JsonResponse, self).__init__(content=simplejson.dumps(data), mimetype='application/json')
-
-
 # Admin
-
 @permission_required('add_movie')
 def create_rider(request):
     rider_titles = request.POST['rider']
@@ -184,69 +175,6 @@ def create_rider(request):
         Man2Movie.objects.create(man=rider, movie=movie, role='actor')
 
     return HttpResponseRedirect('/admind/movies/movie/%d/' % movie.pk)
-
-
-@permission_required('add_movie')
-def create_teaser_announce(request):
-    movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
-
-    Post = object()
-    post = Post.objects.create(
-        title=u'Тизер к фильму "%s"' % movie.title, content='',
-        comment_count=0,
-        status='pub',
-        author=request.user,
-        ip=request.META['REMOTE_ADDR'],
-        type='teaser',
-    )
-
-    post.item = movie
-    post.best = post.date_created
-    post.save()
-
-    return HttpResponseRedirect('/admind/movies/movie/%s/' % request.GET.get('movie_pk'))
-
-
-@permission_required('add_movie')
-def create_fullmovie_announce(request):
-    movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
-
-    Post = object()
-    post = Post.objects.create(
-        title=u'Выложен фильм "%s"' % movie.title, content='',
-        comment_count=0,
-        status='pub',
-        author=request.user,
-        ip=request.META['REMOTE_ADDR'],
-        type='full_movie',
-    )
-
-    post.item = movie
-    post.best = post.date_created
-    post.save()
-
-    return HttpResponseRedirect('/admind/movies/movie/%s/' % request.GET.get('movie_pk'))
-
-
-@permission_required('add_movie')
-def create_tracklist_announce(request):
-    movie = Movie.objects.get(pk=request.GET.get('movie_pk'))
-
-    Post = object()
-    post = Post.objects.create(
-        title=u'Выложена музыка к фильму "%s"' % movie.title, content='',
-        comment_count=0,
-        status='pub',
-        author=request.user,
-        ip=request.META['REMOTE_ADDR'],
-        type='soundtrack',
-    )
-
-    post.item = movie
-    post.best = post.date_created
-    post.save()
-
-    return HttpResponseRedirect('/admind/movies/movie/%s/' % request.GET.get('movie_pk'))
 
 
 # Redirects

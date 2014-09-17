@@ -1,10 +1,12 @@
 # encoding: utf-8
+import re
+
 from django import template
 from django.utils.safestring import mark_safe
 from django.core.paginator import QuerySetPaginator
 from django.conf import settings
 
-from ..models import Man, Song
+from ..models import Movie, Man, Song
 
 register = template.Library()
 
@@ -66,3 +68,23 @@ def soundtrack(movie):
 @register.inclusion_tag('movies/block_soundtrack_list.html')
 def soundtrack_list(songs):
     return {'songs': songs, 'SOUNDTRACKS_PREFIX': settings.SOUNDTRACKS_PREFIX}
+
+
+@register.inclusion_tag('movies/block_recent_teasers.html')
+def recent_teasers():
+    return {'movies': Movie.objects.filter(dt_teaser_added__isnull=False).order_by('-dt_teaser_added')[:2]}
+
+
+@register.filter
+def set_video_width(teaser, new_width=500):
+    try:
+        width = re.search('width="(\d+)"', teaser).group(1)
+        height = re.search('height="(\d+)"', teaser).group(1)
+
+        new_height = int(float(new_width) * int(height) / int(width))
+        teaser = re.sub('width="(\d+)"', 'width="%s"' % new_width, teaser)
+        teaser = re.sub('height="(\d+)"', 'height="%s"' % new_height, teaser)
+    except Exception:
+        pass
+
+    return teaser

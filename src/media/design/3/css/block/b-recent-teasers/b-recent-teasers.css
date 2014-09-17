@@ -1,0 +1,65 @@
+.b-recent-teasers
+{
+    margin-top: 20px;
+    border: 1px solid #d3d3d3;
+    position: relative;
+    padding: 20px 5px 40px 20px;
+}
+
+.b-recent-teasers_title
+{
+    position: absolute;
+    top: -7;
+    left: -15;
+    font-size: 150%;
+    color: #104d7a;
+    background-color: #febe29;
+    padding: 5px;
+}
+
+.b-recent-teasers_body table
+{
+    width: 100%;
+}
+
+.b-recent-teasers_body td
+{
+    width: 50%;
+}
+
+.b-recent-teasers_movie
+{
+    margin: 10px 0;
+    font-size: 140%;
+}
+
+.b-recent-teasers_movie a:link, .b-recent-teasers_movie a:visited
+{
+    text-decoration: none;
+    color: black;
+}
+
+.b-recent-teasers_movie a:hover, .b-recent-teasers_movie a:active
+{
+    text-decoration: none;
+    color: #999;
+}
+
+.b-recent-teasers_next
+{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: #ffeecc;
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+}
+
+.b-recent-teasers_next a:link, .b-recent-teasers_next a:hover,
+.b-recent-teasers_next a:active, .b-recent-teasers_next a:visited
+{
+    color: #333;
+    font-size: 120%;
+    text-decoration: none;
+}

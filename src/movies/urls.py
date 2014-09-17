@@ -26,9 +26,6 @@ urlpatterns = patterns(
 
     # Create new elements
     url(r'^create/rider$', views.create_rider, name='create_rider'),
-    url(r'^create/teaser_announce$', views.create_teaser_announce, name='create_teaser_announce'),
-    url(r'^create/fullmovie_announce$', views.create_fullmovie_announce, name='create_fullmovie_announce'),
-    url(r'^create/tracklist_announce$', views.create_tracklist_announce, name='create_tracklist_announce'),
 
     # Old urls
     url(r'^movies/([^/]+)$', views.old_movie),

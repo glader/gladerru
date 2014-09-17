@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+from datetime import datetime
 
 from django.conf import settings
 from django.core.urlresolvers import reverse
@@ -118,13 +119,15 @@ class Movie(models.Model, VoteMixin):
     has_songs = models.BooleanField(verbose_name=u"Есть треклист", default=False)
     year = models.PositiveIntegerField(verbose_name=u"Год выпуска", null=True, blank=True)
     rating = models.FloatField(verbose_name=u"Рейтинг", default=0)
-    hidden = models.BooleanField(verbose_name=u"Скрыт", default=False)
-    comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
-                                             editable=False)
     date_created = None
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
+    dt_teaser_added = models.DateTimeField(verbose_name=u'Дата добавления тизера', null=True,
+                                           blank=True, default=None)
+    dt_fullmovie_added = models.DateTimeField(verbose_name=u'Дата добавления полноформатного ролика', null=True,
+                                              blank=True, default=None)
+    dt_soundtrack_added = models.DateTimeField(verbose_name=u'Дата добавления саундтрека', null=True,
+                                               blank=True, default=None)
 
     def get_absolute_url(self):
         return reverse('movie', kwargs={'year': self.year or '-', 'slug': self.slug})
@@ -137,6 +140,12 @@ class Movie(models.Model, VoteMixin):
         return "%s_%s" % (self.__class__.__name__.lower(), self.id)
 
     def save(self, *args, **kwargs):
+        if self.pk:
+            movie = Movie.objects.get(pk=self.pk)
+            if self.teaser and not movie.teaser:
+                self.dt_teaser_added = datetime.now()
+            if self.full_movie and not movie.full_movie:
+                self.dt_fullmovie_added = datetime.now()
         if self.cover:
             make_thumbnail(str(self.cover.src()))
         return super(Movie, self).save(*args, **kwargs)
@@ -187,6 +196,7 @@ class Song(models.Model):
                 self.title = id3info['TITLE'].decode('cp1251')
                 if not self.movie.has_songs:
                     self.movie.has_songs = True
+                    self.movie.dt_soundtrack_added = datetime.now()
                     self.movie.save()
             except ID3.InvalidTagError, message:
                 print "Invalid ID3 tag:", message

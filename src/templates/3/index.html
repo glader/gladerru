@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load content %}
+{% load movies %}
 
 {% block top_menu %}
     {% top_menu 'posts' %}
@@ -35,6 +36,8 @@
             <noindex><div class="b-category_next"><a href="{% url "category" category.slug %}">еще &raquo;</a></div></noindex>
         </div>
     {% endfor %}
+
+    {% recent_teasers %}
 {% endblock page %}
 
 {% block ampseo %}
