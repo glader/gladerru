@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from django.conf.urls import patterns, url
 from django.views.generic import ListView, RedirectView
+from django.contrib.auth.decorators import permission_required
 
 from . import views
 from .models import Studio
-
 
 urlpatterns = patterns(
     '',
@@ -14,7 +14,7 @@ urlpatterns = patterns(
         ListView.as_view(queryset=Studio.objects.all().order_by('title'), template_name='movies/studies.html'),
         name='studies',
     ),
-    url(r'^movies/$', RedirectView.as_view(permanent=False, url='/movies/2013/'), name='movies'),
+    url(r'^movies/$', RedirectView.as_view(permanent=False, url='/movies/2014/'), name='movies'),
     url(r'^movies/teasers/$', views.TeasersView.as_view(), name='teasers'),
     url(r'^movies/soundtracks/$', views.SoundtracksView.as_view(), name='soundtracks'),
     url(r'^movies/(?P<year>[^/]+)/$', views.MoviesViews.as_view(), name='movies_by_year'),
@@ -25,8 +25,8 @@ urlpatterns = patterns(
     url(r'^people/$', views.PeopleView.as_view(), name='people'),
 
     # Create new elements
-    url(r'^create/rider$', views.create_rider, name='create_rider'),
+    url(r'^create/rider$', permission_required('add_movie')(views.AddRidersView.as_view()), name='create_rider'),
 
     # Old urls
-    url(r'^movies/([^/]+)$', views.old_movie),
+    url(r'^movies/(?P<slug>[^/]+)$', views.OldMovieRedirect.as_view()),
 )

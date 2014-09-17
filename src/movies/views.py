@@ -1,29 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.contrib.auth.decorators import permission_required
-from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect, HttpResponse
+from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
-from django.template import RequestContext, loader
 from django.utils.safestring import mark_safe
-from django.views.generic import TemplateView, DetailView, ListView
+from django.views.generic import View, TemplateView, DetailView, ListView
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo
 from .templatetags.movies import link
 from .utils.common import slug
-
-
-def render_to_string(request, template_name, context_dict={}):
-    context = RequestContext(request, context_dict)
-    t = loader.get_template(template_name)
-    return t.render(context)
-
-
-def render_to_response(request, template_name, context_dict={}, cookies={}):
-    html = render_to_string(request, template_name, context_dict)
-    response = HttpResponse(html)
-    for k, v in cookies.items():
-        response.set_cookie(k, v)
-    return response
 
 
 class StudioView(DetailView):
@@ -47,12 +31,12 @@ class MoviesViews(ListView):
     def get_queryset(self):
         year = self.kwargs['year']
 
-        movies = Movie.objects.all().order_by('-rating', 'title')
+        movies = Movie.objects.all().order_by('title')
         if year.isdigit():
             movies = movies.filter(year=year)
 
         if not len(movies):
-            movies = Movie.objects.all().order_by('-rating', 'title')
+            movies = Movie.objects.all().order_by('title')
 
         return movies
 
@@ -154,32 +138,29 @@ class AuthorPhotosView(ListView):
         return context
 
 
-# Admin
-@permission_required('add_movie')
-def create_rider(request):
-    rider_titles = request.POST['rider']
-    object_id = request.POST['object_id']
-    movie = Movie.objects.get(pk=object_id)
+class AddRidersView(View):
+    def post(self, request, *args, **kwargs):
+        rider_titles = request.POST['rider']
+        object_id = request.POST['object_id']
+        movie = Movie.objects.get(pk=object_id)
 
-    for rider_title in rider_titles.split(","):
-        rider_title = rider_title.strip()
-        rider_name = slug(rider_title)
-        try:
-            rider = Man.objects.get(slug=rider_name)
-            if rider.primary_synonim:
-                rider = rider.primary_synonim
+        for rider_title in rider_titles.split(","):
+            rider_title = rider_title.strip()
+            rider_name = slug(rider_title)
+            try:
+                rider = Man.objects.get(slug=rider_name)
+                if rider.primary_synonim:
+                    rider = rider.primary_synonim
 
-        except Man.DoesNotExist:
-            rider = Man(slug=rider_name, title=rider_title, is_rider=True, hidden=True)
-            rider.save()
+            except Man.DoesNotExist:
+                rider = Man.objects.create(slug=rider_name, title=rider_title, is_rider=True, hidden=True)
 
-        Man2Movie.objects.create(man=rider, movie=movie, role='actor')
+            Man2Movie.objects.create(man=rider, movie=movie, role='actor')
 
-    return HttpResponseRedirect('/admind/movies/movie/%d/' % movie.pk)
+        return HttpResponseRedirect('/admind/movies/movie/%d/' % movie.pk)
 
 
-# Redirects
-
-def old_movie(request, movie_name):
-    movie = get_object_or_404(Movie, slug=movie_name)
-    return HttpResponsePermanentRedirect(movie.get_absolute_url())
+class OldMovieRedirect(View):
+    def dispatch(self, request, *args, **kwargs):
+        movie = get_object_or_404(Movie, slug=kwargs['slug'])
+        return HttpResponsePermanentRedirect(movie.get_absolute_url())

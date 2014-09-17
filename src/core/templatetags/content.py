@@ -43,8 +43,8 @@ def top_menu(level2='all_posts', level1=None):
             ['dictionary', '/terms/', u'словарь', u'Словарь всяких терминов'],
         ],
         'movies': [
+            ['2014', '/movies/2014/', u'2014', u'Фильмы 2014 года'],
             ['2013', '/movies/2013/', u'2013', u'Фильмы 2013 года'],
-            ['2012', '/movies/2012/', u'2012', u'Фильмы 2012 года'],
             ['all', '/movies/all/', u'все', u'Все фильмы'],
             ['teasers', '/movies/teasers/', u'тизеры', u'Тизеры к фильмам'],
             ['soundtracks', '/movies/soundtracks/', u'саундтреки', u'Музыкальные треки к фильмам'],
