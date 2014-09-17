@@ -238,6 +238,14 @@ def relative_posts(post):
     }
 
 
+@register.inclusion_tag('block_relative_posts.html')
+def relative_articles(article):
+    return {
+        'relative_posts': Post.objects.filter(rubric=article.rubric).exclude(pk=article.pk)
+                              .order_by('-date_created')[:10]
+    }
+
+
 @register.simple_tag
 def yadirect(block_name):
     template = "yadirect/%s.html" % block_name

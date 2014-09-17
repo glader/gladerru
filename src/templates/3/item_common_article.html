@@ -7,10 +7,3 @@
 {% endblock %}
 
 {% block page_title %}{{ item.title }}{% endblock %}
-
-{% block sidebar %}
-    <h2>СТАТЬИ</h2>
-    {% cache 86400 dop_menu_articles %}
-	   {% dop_menu 'articles_menu' %}
-	{% endcache %}
-{% endblock %}

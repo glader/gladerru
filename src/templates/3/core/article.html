@@ -11,19 +11,17 @@
     {% include "block_social_scripts.html" %}
 {% endblock %}
 
-{% if article.skill %}
-	{% block page_title %}<a href="{% url "skills" %}">Статьи</a> {% if article.skill %}» {{ article.skill|link }} {% endif %}» {{ article.title }}{% endblock %}
-{% endif %}
+{% block page_title %}{{ article.title }}{% endblock %}
 
 {% block title %}{{ article.title }} {{ block.super }}{% endblock %}
+
+{% block top_menu %}
+    {% top_menu article.skill.slug 'articles' %}
+{% endblock %}
 
 {% block content %}
     <div class="b-static-text">
     <a name="{{ article.name }}"></a>
-<!--    {% if article.skill %}
-        <div><a href="/skills">Дерево умений</a> >> <a href="{{ article.skill.get_absolute_url }}">{{ article.skill.title }}</a> >> {{ article.title }}
-    {% endif %}
--->
 
     {% if menu %}
         <ul>
@@ -45,8 +43,10 @@
 
     </div>
 
-    {% if post.type == 'post' %}
+    {% if article.type == 'post' %}
         {% post_panel article user %}
+
+        {% relative_articles article %}
 
         {% include "blocks/disqus_comments.html" %}
     {% endif %}
