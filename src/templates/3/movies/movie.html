@@ -3,10 +3,13 @@
 {% load staticfiles %}
 {% load movies %}
 
+{% block top_menu %}
+    {% top_menu movie.year 'movies' %}
+{% endblock %}
+
 {% block head %}
-    <script type='text/javascript' src='{% static "js/swfobject.js" %}'></script>
-    <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
-{% endblock head %}
+    {% include "block_social_scripts.html" %}
+{% endblock %}
 
 {% block description %}
     {% if movie.meta_description %}
@@ -19,12 +22,6 @@
 {% block page_title %}<b>Фильм</b> {{ movie.title }}
         &nbsp;&nbsp;
         <span id="{{ movie.slug }}_rating">{{ movie.rating|decimal_cut:1 }}</span>
-    {% if can_vote %}
-        <a href="" onclick="addPostVotes('{{ movie.slug }}', 1); return false;"
-            ><img id="'{{ movie.slug }}'_rating_up" src="{% static "design/2/img/arrow_up.gif" %}" alt="Нравится" class="icon"></a>
-    {% else %}
-        <img src="{% static "design/3/img/b-bar/arrow_up_dis.gif" %}" alt="Нравится" class="icon">
-    {% endif %}
 {% endblock %}
 
 

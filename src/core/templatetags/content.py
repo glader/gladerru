@@ -27,6 +27,7 @@ def VK_API_ID():
 
 @register.inclusion_tag("block_top_menu.html")
 def top_menu(level2='all_posts', level1=None):
+    level2 = str(level2)
     categories = [
         [category.slug, category.get_absolute_url(), category.title, u""]
         for category in NewsCategory.objects.all()
@@ -75,7 +76,6 @@ def top_menu(level2='all_posts', level1=None):
         return None, None
 
     level1, level2 = find_levels(level1, level2)
-
     return {'level1': level1, 'level2': level2, 'submenu': level1 and submenu[level1] or []}
 
 
