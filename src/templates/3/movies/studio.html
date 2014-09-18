@@ -1,6 +1,7 @@
 {% extends "tab_movies.html" %}
 {% load content %}
 {% load staticfiles %}
+{% load movies %}
 
 {% block top_menu %}
     {% top_menu 'studies' %}
@@ -11,8 +12,6 @@
         <meta name="description" content="{{ studio.meta_description }}">
     {% endif %}
 {% endblock %}
-
-{% block breadcrumbs %}<a href="{% url "movies" %}">Сноубордические фильмы</a> / <a href="{% url "studies" %}">Студии</a> / {{ studio.title }}{% endblock %}
 
 {% block title %}Студия {{ studio.title }} - {{ block.super }}{% endblock %}
 
@@ -26,10 +25,25 @@
 
        	{{ studio.content|safe }}
 
-		{% if movies %}<h3>Фильмы</h3>
-			<ul class="b-studio_movies">{% for m in movies %}
-				<li>{{ m|link }}{% if m.year %} ({{ m.year }}){% endif %}</li>
-			{% endfor %}</ul>
-		{% endif %}
+		{% if movies %}
+            <div class="b-recent-teasers">
+                <div class="b-recent-teasers_title">Фильмы</div>
+                    <div class="b-recent-teasers_body">
+                        <table><tr>
+                            {% for movie in movies %}
+                                <td>
+                                    <div class="b-recent-teasers_movie">
+                                        <a href="{{ movie.get_absolute_url }}">{{ movie.title }}</a>
+                                        ({{ movie.year }})
+                                    </div>
+                                    <div>{{ movie.teaser|set_video_width:"500"|safe }}</div>
+                                </td>
+                                {% cycle '' '</tr><tr>' %}
+                            {% endfor %}
+                        </tr></table>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
 	</div>
 {% endblock %}
