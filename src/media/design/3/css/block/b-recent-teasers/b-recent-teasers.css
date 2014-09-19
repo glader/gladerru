@@ -25,6 +25,7 @@
 .b-recent-teasers_body td
 {
     width: 50%;
+    padding-bottom: 20px;
 }
 
 .b-recent-teasers_movie
