@@ -64,10 +64,13 @@ class CategoryView(TemplateView):
         context['category'] = get_object_or_404(NewsCategory, slug=kwargs['slug'])
 
         start = parse_timestamp(self.request.GET.get('start'))
-        context['posts'] = Post.objects.filter(hidden=False, category=context['category'], type='post')\
+        context['posts'] = Post.objects\
+            .filter(hidden=False, category=context['category'], type='post', icon__isnull=False) \
             .order_by('-date_created')
         if start:
             context['posts'] = context['posts'].filter(date_created__lt=start)
+        else:
+            context['posts'] = context['posts'][4:self.POSTS_PER_CATEGORY + 5]
 
         context['posts'] = context['posts'][:self.POSTS_PER_CATEGORY + 1]
         if len(context['posts']) == self.POSTS_PER_CATEGORY + 1:
