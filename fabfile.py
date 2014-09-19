@@ -25,8 +25,8 @@ def virtualenv(command):
 
 def init():
     with settings(user='root'):
-        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise main', use_sudo=True)
-        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise-updates main', use_sudo=True)
+        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise main')
+        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise-updates main')
 
         sudo('apt-get update')
         sudo('apt-get upgrade -y')

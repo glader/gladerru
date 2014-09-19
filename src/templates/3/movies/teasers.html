@@ -1,23 +1,33 @@
 {% extends "tab_movies.html" %}
 {% load content %}
+{% load movies %}
 
 {% block top_menu %}
     {% top_menu 'teasers' %}
 {% endblock %}
 
-{% block title %}Тизеры сноубордических фильмов{% ifnotequal page_obj.number 1 %}, стр. {{ page_obj.number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}Тизеры сноубордических фильмов - {{ block.super }}{% endblock %}
 
 {% block page_title %}Тизеры сноубордических фильмов{% endblock %}
 
 {% block content %}
-	<div class="b-feed">
-	    {% for m in object_list %}
-	        <div class="item">
-	            <div class="title"><h2>{{ m|link }} ({{ m.year|default:"" }}{% if m.year %}, {% endif %}{{ m.rating|default:"0" }})</h2></div><br />
-	            <p>{{ m.teaser|safe }}</p>
-	        </div>
-	    {% endfor %}
-	</div>
-
-	{% include "block_django_pagination.html" %}
+    <div class="b-recent-teasers">
+        <div class="b-recent-teasers_body">
+            <table><tr>
+                {% for movie in object_list %}
+                    <td>
+                        <div class="b-recent-teasers_movie">
+                            <a href="{{ movie.get_absolute_url }}">{{ movie.title }}</a>
+                            ({{ movie.year }})
+                        </div>
+                        <div>{{ movie.teaser|set_video_width:"500"|safe }}</div>
+                    </td>
+                    {% cycle '' '</tr><tr>' %}
+                {% endfor %}
+            </tr></table>
+    	</div>
+        {% if page_obj.has_next %}
+            <noindex><div class="b-recent-teasers_next"><a href="?page={{ page_obj.next_page_number }}">Еще &raquo;</a></div></noindex>
+        {% endif %}
+    </div>
 {% endblock %}

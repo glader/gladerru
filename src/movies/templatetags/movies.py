@@ -75,6 +75,11 @@ def recent_teasers():
     return {'movies': Movie.objects.filter(dt_teaser_added__isnull=False).order_by('-dt_teaser_added')[:2]}
 
 
+@register.inclusion_tag('movies/block_recent_movies.html')
+def recent_movies():
+    return {'movies': Movie.objects.filter(dt_fullmovie_added__isnull=False).order_by('-dt_fullmovie_added')[:2]}
+
+
 @register.filter
 def set_video_width(teaser, new_width=500):
     try:

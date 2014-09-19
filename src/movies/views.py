@@ -55,7 +55,7 @@ class MovieView(DetailView):
 
 class TeasersView(ListView):
     paginate_by = 10
-    queryset = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-year', '-rating')
+    queryset = Movie.objects.filter(teaser__isnull=False).exclude(teaser='').order_by('-dt_teaser_added', '-year')
     template_name = 'movies/teasers.html'
 
 

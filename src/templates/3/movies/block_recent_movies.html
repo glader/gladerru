@@ -1,6 +1,6 @@
 {% load movies %}
 <div class="b-recent-teasers">
-    <div class="b-recent-teasers_title">Тизеры</div>
+    <div class="b-recent-teasers_title">Фильмы</div>
     <div class="b-recent-teasers_body">
         <table><tr>
             {% for movie in movies %}
@@ -9,10 +9,10 @@
                         <a href="{{ movie.get_absolute_url }}">{{ movie.title }}</a>
                         ({{ movie.year }})
                     </div>
-                    <div>{{ movie.teaser|set_video_width:"500"|safe }}</div>
+                    <div>{{ movie.full_movie|set_video_width:"500"|safe }}</div>
                 </td>
             {% endfor %}
         </tr></table>
     </div>
-    <noindex><div class="b-recent-teasers_next"><a href="{% url "teasers" %}">еще &raquo;</a></div></noindex>
+    <noindex><div class="b-recent-teasers_next"><a href="{% url "movies" %}">еще &raquo;</a></div></noindex>
 </div>
