@@ -138,7 +138,7 @@ class EditPostView(UpdateView):
 
 
 class TempPostView(EditPostView):
-    def get_object(self):
+    def get_object(self, **kwargs):
         posts = Post.objects.filter(status='pub', type='post', icon='').order_by('-date_created')
         if self.request.GET.get('category'):
             posts = posts.filter(category__slug=self.request.GET.get('category'))

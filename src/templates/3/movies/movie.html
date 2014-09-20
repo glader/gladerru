@@ -19,10 +19,7 @@
 
 {% block title %}{{ movie.title }} - сноубордические фильмы - {{ block.super }}{% endblock %}
 
-{% block page_title %}<b>Фильм</b> {{ movie.title }}
-        &nbsp;&nbsp;
-        <span id="{{ movie.slug }}_rating">{{ movie.rating|decimal_cut:1 }}</span>
-{% endblock %}
+{% block page_title %}<b>Фильм</b> {{ movie.title }}{% endblock %}
 
 
 {% block content %}
@@ -83,7 +80,7 @@
         <div class="b-relative-movies_title">Еще посмотреть:</div>
         <ul class="b-relative-movies_header">
             {% for movie in movies %}
-                <li><a href="{{ movie.get_absolute_url }}">{{ movie.studio.title }} - {{ movie.title }}</a></li>
+                <li><a href="{{ movie.get_absolute_url }}">{% if movie.studio %}{{ movie.studio.title }} - {% endif %}{{ movie.title }}</a></li>
             {% endfor %}
         </ul>
     </div>

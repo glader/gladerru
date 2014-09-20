@@ -43,9 +43,10 @@ class MovieAdmin(admin.ModelAdmin):
     inlines = (Man2MovieInline, SongInline)
     fieldsets = (
         (None, {'fields': ('title', 'slug', 'studio', 'year', 'teaser')}),
-        (None, {'classes': ('collapse',),
-                'fields': ('full_movie', 'content', 'url', 'torrent', 'has_songs', 'cover', 'rating',
-                           'dt_teaser_added', 'dt_fullmovie_added', 'dt_soundtrack_added', 'meta_description')}),
+        ('Other', {
+            'classes': ('collapse',),
+            'fields': ('full_movie', 'content', 'url', 'torrent', 'has_songs', 'cover', 'rating',
+                       'dt_teaser_added', 'dt_fullmovie_added', 'dt_soundtrack_added', 'meta_description')}),
     )
 
 

@@ -33,7 +33,7 @@ class Command(NoArgsCommand):
                         photo = Photo.objects.get(pk=href.split('/')[-1])
                         tag['href'] = photo.yandex_fotki_image_src
                         tag['data-id'] = photo.id
-                        tag['tagret'] = '_blank'
+                        tag['target'] = '_blank'
 
                         make_thumbnail(photo.yandex_fotki_image_src)
                         img = tree.new_tag("img", src=get_thumbnail_url(photo.yandex_fotki_image_src))
