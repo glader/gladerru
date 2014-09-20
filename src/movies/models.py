@@ -68,7 +68,7 @@ class Man(models.Model):
     def save(self, *args, **kwargs):
         self.hidden = Man2Movie.objects.filter(man=self).count() <= 1
 
-        for f in ['content', 'angles', 'birthday', 'footsize', 'ridingsince', 'sponsors', 'stance',
+        for f in ['content', 'angles', 'birthday', 'footsize', 'ridingsince', 'stance',
                   'url', 'width', 'image']:
             if getattr(self, f):
                 self.hidden = False
