@@ -42,14 +42,10 @@ class Man(models.Model):
     gender = models.CharField(choices=GENDER_CHOICES, default='m', max_length=1, verbose_name=u"Пол")
     image = YFField(verbose_name=u"Портрет", upload_to='gladerru', null=True, blank=True, default=None)
     ridingsince = models.PositiveIntegerField(null=True, blank=True, verbose_name=u"Катается с года")
-    sponsors = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Спонсоры")
     stance = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Стойка")
     width = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Ширина")
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
     hidden = models.BooleanField(verbose_name=u"Скрыт", default=False)
-    comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
-                                             editable=False)
     primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name=u"Основной синоним",
                                         null=True, blank=True)
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
@@ -70,15 +66,13 @@ class Man(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        self.hidden = True
+        self.hidden = Man2Movie.objects.filter(man=self).count() <= 1
+
         for f in ['content', 'angles', 'birthday', 'footsize', 'ridingsince', 'sponsors', 'stance',
                   'url', 'width', 'image']:
             if getattr(self, f):
                 self.hidden = False
                 break
-
-        if Man2Movie.objects.filter(man=self).count() > 1:
-            self.hidden = False
 
         super(Man, self).save(*args, **kwargs)
 
@@ -119,7 +113,6 @@ class Movie(models.Model, VoteMixin):
     has_songs = models.BooleanField(verbose_name=u"Есть треклист", default=False)
     year = models.PositiveIntegerField(verbose_name=u"Год выпуска", null=True, blank=True)
     rating = models.FloatField(verbose_name=u"Рейтинг", default=0)
-    date_created = None
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
     dt_teaser_added = models.DateTimeField(verbose_name=u'Дата добавления тизера', null=True,
@@ -145,6 +138,11 @@ class Movie(models.Model, VoteMixin):
             if self.teaser and not movie.teaser:
                 self.dt_teaser_added = datetime.now()
             if self.full_movie and not movie.full_movie:
+                self.dt_fullmovie_added = datetime.now()
+        else:
+            if self.teaser:
+                self.dt_teaser_added = datetime.now()
+            if self.full_movie:
                 self.dt_fullmovie_added = datetime.now()
         if self.cover:
             make_thumbnail(str(self.cover.src()))
