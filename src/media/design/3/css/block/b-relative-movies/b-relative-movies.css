@@ -1,0 +1,34 @@
+.b-relative-movies
+{
+    margin-top: 30px;
+    background-color: #eee;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+.b-relative-movies_title
+{
+    color: #666;
+    font-size: 150%;
+}
+
+.b-relative-movies ul {
+    margin: 10px 0 0 10px;
+}
+
+.b-relative-movies li
+{
+    padding-bottom: 5px;
+    list-style: none;
+}
+
+.b-relative-movies li a:link, .b-relative-movies li a:active,
+.b-relative-movies li a:hover, .b-relative-movies li a:visited
+{
+    color: #333;
+}
+
+.b-relative-movies li a:active, .b-relative-movies li a:hover
+{
+    color: #999;
+}

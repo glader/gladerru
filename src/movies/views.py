@@ -50,6 +50,8 @@ class MovieView(DetailView):
         context['songs'] = Song.objects.filter(movie=context['object'])
         context['item'] = context['object']
         context['page_identifier'] = context['object'].uid
+        context['movies'] = Movie.objects.filter(year=context['object'].year) \
+            .exclude(pk=context['object'].pk).order_by('-pk')[:5]
         return context
 
 
