@@ -17,7 +17,7 @@
 
     <div class="dict_entry" itemprop="definition">
         <div class="g-hidden">{{ object.title }}:</div>
-        {{ object.abstract|safe }}
+        {{ object.abstract|default:""|safe }}
         {{ object.content|safe }}
     </div>
 

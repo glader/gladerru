@@ -27,7 +27,7 @@
                             <div class="b-category_post_img"><img src="{{ post.icon.src_150 }}" alt="{{ post.title }}"></div>
                         {% endif %}
                             <div class="b-category_post_title">{{ post.title }}</div>
-                            <div class="b-category_post_abstract">{{ post.abstract }}</div>
+                            <div class="b-category_post_abstract">{{ post.abstract|default:"" }}</div>
                         </a>
                     </td>
                 {% endfor %}

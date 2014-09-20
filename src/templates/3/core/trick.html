@@ -14,7 +14,7 @@
 {% block title %}{{ object.title }} - {{ block.super }}{% endblock %}
 
 {% block content %}
-    {{ object.abstract|safe }}
+    {{ object.abstract|default:""|safe }}
 
     {{ object.content|safe }}
 
