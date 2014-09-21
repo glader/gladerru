@@ -2,6 +2,7 @@ User-agent: *
 Disallow: /auth
 Disallow: /best
 Disallow: /feeds/posts
+Disallow: /feeds/best
 Disallow: /files
 Disallow: /forum
 Disallow: /index.pl
