@@ -1,3 +1,27 @@
+.b-post_content h2
+{
+    font-size: 130%;
+    font-weight: bold;
+}
+
+.b-post_content h2
+{
+    font-size: 110%;
+    font-weight: bold;
+}
+
+.b-post_content table
+{
+    border-collapse: collapse;
+}
+
+.b-post_content table td
+{
+    border: 1px solid #000000;
+    padding: 3px;
+}
+
+
 .b-relative-posts
 {
     margin-top: 30px;
