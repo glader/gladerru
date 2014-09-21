@@ -17,6 +17,7 @@
 {% block head %}
     {% include "block_social_scripts.html" %}
     <meta property="og:image" content="{{ post.icon }}"/>
+    <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
 {% endblock %}
 
 {% block page_title %}

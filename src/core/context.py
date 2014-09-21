@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from django.conf import settings
 
 
 def profile(request):
@@ -6,3 +7,7 @@ def profile(request):
         return {'profile': request.user.get_profile()}
     else:
         return {}
+
+
+def domain(request):
+    return {'DOMAIN': settings.DOMAIN}

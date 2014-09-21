@@ -51,6 +51,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
 
     'core.context.profile',
+    'core.context.domain',
 )
 
 ROOT_URLCONF = 'urls'

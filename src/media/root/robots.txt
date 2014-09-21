@@ -1,17 +1,3 @@
-User-agent: Yandex
-Disallow: /auth
-Disallow: /best
-Disallow: /feeds/posts
-Disallow: /files
-Disallow: /forum
-Disallow: /index.pl
-Disallow: /post/new
-Disallow: /search
-Disallow: /studio
-Disallow: /tags
-Disallow: /wp
-Host: glader.ru
-
 User-agent: *
 Disallow: /auth
 Disallow: /best
@@ -24,3 +10,6 @@ Disallow: /search
 Disallow: /studio
 Disallow: /tags
 Disallow: /wp
+Host: glader.ru
+Clean-param: utm_source
+Clean-param: utm_medium
