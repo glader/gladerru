@@ -9,7 +9,7 @@
     {% endif %}
 {% endblock %}
 
-{% block page_title %}<a href="{% url "skills" %}">Статьи</a> » {{ rubric.title }}{% endblock %}
+{% block page_title %}{{ rubric.title }}{% endblock %}
 
 {% block content %}
 		{% if children %}

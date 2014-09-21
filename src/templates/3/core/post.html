@@ -20,9 +20,7 @@
     <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
 {% endblock %}
 
-{% block page_title %}
-    <h1>{{ post.title }} {% post_edit_link post user %} {% post_status post %}</h1>
-{% endblock %}
+{% block page_title %}{{ post.title }} {% post_edit_link post user %} {% post_status post %}{% endblock %}
 
 {% block content %}
     <div style="clear:both">

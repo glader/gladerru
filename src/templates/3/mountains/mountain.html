@@ -3,7 +3,7 @@
 
 {% block title %}{{ mountain.title }} {{ block.super }}{% endblock %}
 
-{% block page_title %}<a href="{% url "mountains" %}">Все горы</a> » {{ mountain.title }}{% endblock %}
+{% block page_title %}{{ mountain.title }}{% endblock %}
 
 {% block description %}
     {% if mountain.meta_description %}
