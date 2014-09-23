@@ -122,7 +122,7 @@ class AddPostView(CreateView):
 
 class EditPostView(UpdateView):
     template_name = 'core/post_edit.html'
-    queryset = Post.objects.all()
+    queryset = Post.all.all()
     form_class = PostForm
 
     def dispatch(self, request, *args, **kwargs):
