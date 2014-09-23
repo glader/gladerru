@@ -128,7 +128,7 @@ class EditPostView(UpdateView):
     def dispatch(self, request, *args, **kwargs):
         """ Making sure that only authors can update posts """
         obj = self.get_object()
-        if (obj.author == self.request.user and obj.status == 'save') or self.request.user.is_superuser:
+        if obj.author == self.request.user or self.request.user.is_superuser:
             return super(EditPostView, self).dispatch(request, *args, **kwargs)
         raise Http404
 
