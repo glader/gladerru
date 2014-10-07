@@ -2,7 +2,7 @@
 {% load content %}
 {% load staticfiles %}
 
-{% block head %}<script type="text/javascript" src="{% static "js/highcharts.js" %}"></script>{% endblock %}
+{% block scripts %}<script type="text/javascript" src="{% static "js/highcharts.js" %}"></script>{% endblock %}
 
 {% block content %}
 <div><a href="/reports">за год</a> | <a href="/reports?full=1">за все время</a> | <a href="/reports/memcache">memcached</a>

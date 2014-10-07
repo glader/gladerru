@@ -5,8 +5,11 @@
 
 {% block page_title %}Предложение новости{% endblock %}
 
-{% block head %}
+{% block extrahead %}
     <link href="{% static "redactor/css/redactor.css" %}" type="text/css" media="all" rel="stylesheet" />
+{% endblock %}
+
+{% block scripts %}
     <script type="text/javascript" src="{% static "redactor/jquery.min.js" %}"></script>
     <script type="text/javascript" src="{% static "redactor/jquery-migrate.min.js" %}"></script>
     <script type="text/javascript" src="{% static "redactor/redactor.min.js" %}"></script>

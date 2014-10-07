@@ -7,7 +7,7 @@
     {% top_menu 'map' %}
 {% endblock %}
 
-{% block head %}
+{% block scripts %}
 	<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YAMAPS_API_KEY }}" type="text/javascript"></script>
     <script type="text/javascript">
         window.onload = function () {
@@ -28,8 +28,7 @@
 			{% endfor %}
         }
     </script>
-  </head>
-{% endblock head %}
+{% endblock %}
 
 {% block content %}
     <div>{{ item.content|safe }}</div>

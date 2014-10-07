@@ -14,10 +14,13 @@
     {% top_menu post.category.slug 'posts' %}
 {% endblock %}
 
-{% block head %}
-    {% include "block_social_scripts.html" %}
+{% block extrahead %}
     <meta property="og:image" content="{{ post.icon }}"/>
     <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
+{% endblock %}
+
+{% block scripts %}
+    {% include "block_social_scripts.html" %}
 {% endblock %}
 
 {% block page_title %}{{ post.title }} {% post_edit_link post user %} {% post_status post %}{% endblock %}

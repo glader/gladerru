@@ -7,7 +7,11 @@
     {% endif %}
 {% endblock %}
 
-{% block head %}
+{% block extrahead %}
+    <meta property="og:image" content="{{ article.icon }}"/>
+{% endblock %}
+
+{% block scripts %}
     {% include "block_social_scripts.html" %}
 {% endblock %}
 

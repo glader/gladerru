@@ -3,10 +3,10 @@
 {% load staticfiles %}
 {% load movies %}
 
-{% block head %}
+{% block scripts %}
     <script type='text/javascript' src='{% static "js/swfobject.js" %}'></script>
     <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
-{% endblock head %}
+{% endblock scripts %}
 
 {% block top_menu %}
     {% top_menu 'soundtracks' %}
