@@ -49,13 +49,13 @@
 
 	        {% if movie.teaser %}
 	            <tr><td valign="top"><strong>Тизер:</strong></td>
-	            	<td>{{ movie.teaser|safe }}</td>
+	            	<td>{{ movie.teaser|set_video_width:"800"|safe }}</td>
 	           	</tr>
 	        {% endif %}
 
 	        {% if movie.full_movie %}
 	            <tr><td valign="top"><strong>Видео</strong></td>
-	            	<td>{{ movie.full_movie|safe }}</td>
+	            	<td>{{ movie.full_movie|set_video_width:"800"|safe }}</td>
 	           	</tr>
 	        {% endif %}
 
