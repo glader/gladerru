@@ -1,16 +1,16 @@
 beautifulsoup4==4.3.2
-celery==3.1.13
+celery==3.1.16
 django-debug-toolbar==1.2.1
 django-ses==0.6.0
-django-wysiwyg-redactor==0.3.9.1
-Django==1.6.7   # rq.filter: <1.7
+django-wysiwyg-redactor==0.4.1
+Django==1.6.8   # rq.filter: <1.7
 django_yafotki==0.7.3
 easywebdav==1.2.0
 gunicorn==19.1.1
 html5lib==0.999
 logging==0.4.9.6
 MySQL-python==1.2.5
-Pillow==2.5.3
+Pillow==2.6.1
 pymongo==2.7.2
 python-memcached==1.53
 pytils==0.3

@@ -4,6 +4,8 @@
 {% load movies %}
 
 {% block scripts %}
+    {{ block.super }}
+
     <script type='text/javascript' src='{% static "js/swfobject.js" %}'></script>
     <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
 {% endblock scripts %}

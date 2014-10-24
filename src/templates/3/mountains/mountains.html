@@ -8,6 +8,8 @@
 {% endblock %}
 
 {% block scripts %}
+    {{ block.super }}
+
 	<script src="http://api-maps.yandex.ru/1.1/index.xml?key={{ YAMAPS_API_KEY }}" type="text/javascript"></script>
     <script type="text/javascript">
         window.onload = function () {

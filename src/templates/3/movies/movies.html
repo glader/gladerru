@@ -3,6 +3,8 @@
 {% load staticfiles %}
 
 {% block scripts %}
+    {{ block.super }}
+
     <script type="text/javascript" src="{% static "js/sorttable.js" %}"></script>
 {% endblock %}
 
