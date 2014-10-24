@@ -9,13 +9,11 @@
     <link href="{% static "redactor/css/redactor.css" %}" type="text/css" media="all" rel="stylesheet" />
 {% endblock %}
 
-{% block scripts %}
+{% block content %}
     <script type="text/javascript" src="{% static "redactor/jquery.min.js" %}"></script>
     <script type="text/javascript" src="{% static "redactor/jquery-migrate.min.js" %}"></script>
     <script type="text/javascript" src="{% static "redactor/redactor.min.js" %}"></script>
-{% endblock %}
 
-{% block content %}
     <form method="POST" id="editform" enctype="multipart/form-data">
         <table class="b-form">
             {% csrf_token %}
@@ -27,8 +25,3 @@
         </table>
     </form>
 {% endblock %}
-
-
-{% block sidebar %}
-{% endblock sidebar %}
-
