@@ -1,8 +1,4 @@
-# -*- coding: utf-8 -*-
 from datetime import datetime
-
-from django.conf import settings
-from django.utils.html import strip_spaces_between_tags as short
 
 
 class UserReferer:
@@ -18,10 +14,3 @@ class LastLogin:
             user = request.user.get_profile()
             user.last_visit = datetime.now()
             user.save()
-
-
-class SpacelessMiddleware(object):
-    def process_response(self, request, response):
-        if not settings.DEBUG and 'text/html' in response['Content-Type']:
-            response.content = short(response.content)
-        return response

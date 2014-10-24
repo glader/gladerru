@@ -34,7 +34,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 MIDDLEWARE_CLASSES = (
     'timelog.middleware.TimeLogMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'core.middleware.SpacelessMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
