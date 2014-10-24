@@ -2,4 +2,4 @@
 
 django_nose==1.2
 django_webtest==1.7.7
-webtest==2.0.15
+webtest==2.0.16
