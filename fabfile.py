@@ -28,37 +28,37 @@ def init():
         append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise main')
         append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise-updates main')
 
-        sudo('apt-get update')
-        sudo('apt-get upgrade -y')
-        sudo('apt-get install -y mc nginx mysql-client python-setuptools python-dev rrdtool sendmail memcached fail2ban')
-        sudo('apt-get build-dep -y python-mysqldb')
+        run('apt-get update')
+        run('apt-get upgrade -y')
+        run('apt-get install -y mc nginx mysql-client python-setuptools python-dev rrdtool sendmail memcached fail2ban')
+        run('apt-get build-dep -y python-mysqldb')
         run('apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev')  # Pillow dependencies
 
         if not exists('/home/%s' % SSH_USER):
-            sudo('yes | adduser --disabled-password %s' % SSH_USER)
-            sudo('mkdir /home/%s/.ssh' % SSH_USER)
-            sudo('echo "%s" >> /home/%s/.ssh/authorized_keys' % (env.www_ssh_key, SSH_USER))
+            run('yes | adduser --disabled-password %s' % SSH_USER)
+            run('mkdir /home/%s/.ssh' % SSH_USER)
+            run('echo "%s" >> /home/%s/.ssh/authorized_keys' % (env.www_ssh_key, SSH_USER))
 
         if not exists('/var/cache/gladerru/thumbnails'):
-            sudo('mkdir -p /var/cache/gladerru/thumbnails')
-            sudo('touch /var/cache/gladerru/glader_ru.links.db')
-            sudo('chown -R www:www /var/cache/gladerru')
+            run('mkdir -p /var/cache/gladerru/thumbnails')
+            run('touch /var/cache/gladerru/glader_ru.links.db')
+            run('chown -R www:www /var/cache/gladerru')
 
         if not exists('/var/log/projects/gladerru'):
-            sudo('mkdir -p /var/log/projects/gladerru')
-            sudo('chmod 777 /var/log/projects/gladerru')
+            run('mkdir -p /var/log/projects/gladerru')
+            run('chmod 777 /var/log/projects/gladerru')
 
         if exists('/etc/nginx/sites-enabled/default'):
-            sudo('rm /etc/nginx/sites-enabled/default')
+            run('rm /etc/nginx/sites-enabled/default')
 
         if not exists('/etc/nginx/listen'):
             put('tools/nginx/listen', '/etc/nginx/listen', use_sudo=True)
 
         if not exists('/etc/nginx/sites-available/90-gladerru.conf'):
-            sudo('touch /etc/nginx/sites-available/90-gladerru.conf')
-            sudo('chown %s /etc/nginx/sites-available/90-gladerru.conf' % SSH_USER)
+            run('touch /etc/nginx/sites-available/90-gladerru.conf')
+            run('chown %s /etc/nginx/sites-available/90-gladerru.conf' % SSH_USER)
         if not exists('/etc/nginx/sites-enabled/90-gladerru.conf'):
-            sudo('ln -s /etc/nginx/sites-available/90-gladerru.conf /etc/nginx/sites-enabled/90-gladerru.conf', shell=False)
+            run('ln -s /etc/nginx/sites-available/90-gladerru.conf /etc/nginx/sites-enabled/90-gladerru.conf', shell=False)
 
         if not exists('/etc/init/gladerru.conf'):
             run('touch /etc/init/gladerru.conf')
@@ -71,10 +71,10 @@ def init():
         append('/etc/sudoers', '%s ALL=(ALL) NOPASSWD:/sbin/restart gladerru,/sbin/restart gladerru_celery' % SSH_USER)
 
         if not exists('/etc/cron.d/gladerru'):
-            sudo('touch /etc/cron.d/gladerru')
+            run('touch /etc/cron.d/gladerru')
 
-        sudo('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
-        sudo('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
+        run('mkdir -p /home/%s/projects/gladerru' % SSH_USER)
+        run('chown -R %(user)s:%(user)s /home/%(user)s' % {'user': SSH_USER})
 
 
 def init_mysql():
@@ -200,7 +200,7 @@ def tank_init():
     with settings(user='root', host='146.185.136.227'):
         run('apt-get install python-software-properties')
         run('add-apt-repository ppa:yandex-load/main')
-        run('sudo apt-get update && sudo apt-get install yandex-load-tank-base')
+        run('run apt-get update && sudo apt-get install yandex-load-tank-base')
 
 
 def tank_start():
