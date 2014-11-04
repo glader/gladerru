@@ -126,6 +126,7 @@ VK_API_ID = 2009513
 REDACTOR_OPTIONS = {
     'lang': 'ru',
     'buttonSource': True,
+    'linkNofollow': True,
 }
 REDACTOR_UPLOAD_HANDLER = 'yafotki.handlers.FotkiUploader'
 
