@@ -6,7 +6,7 @@
 {% block page_title %}Предложение новости{% endblock %}
 
 {% block extrahead %}
-    <link href="{% static "redactor/css/redactor.css" %}" type="text/css" media="all" rel="stylesheet" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -14,9 +14,7 @@
         новость будет опубликована. Обратите внимание, рекламные новости требуют согласования, условия описаны на
         <a href="/content/advert.htm">специальной странице</a>.</p>
 
-    <script type="text/javascript" src="{% static "redactor/jquery.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "redactor/jquery-migrate.min.js" %}"></script>
-    <script type="text/javascript" src="{% static "redactor/redactor.min.js" %}"></script>
+    {{ form.media }}
 
     <form method="POST" id="editform" enctype="multipart/form-data">
         <table class="b-form">

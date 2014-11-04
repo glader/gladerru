@@ -122,6 +122,13 @@ ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 
 VK_API_ID = 2009513
 
+# Redactor
+REDACTOR_OPTIONS = {
+    'lang': 'ru',
+    'buttonSource': True,
+}
+REDACTOR_UPLOAD_HANDLER = 'yafotki.handlers.FotkiUploader'
+
 LOG_PATH = '/var/log/projects/gladerru'
 TIMELOG_LOG = os.path.join(LOG_PATH, 'time.log')
 
