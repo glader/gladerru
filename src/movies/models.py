@@ -144,9 +144,12 @@ class Movie(models.Model, VoteMixin):
                 self.dt_teaser_added = datetime.now()
             if self.full_movie:
                 self.dt_fullmovie_added = datetime.now()
+
+        obj = super(Movie, self).save(*args, **kwargs)
+
         if self.cover:
             make_thumbnail(str(self.cover.src()))
-        return super(Movie, self).save(*args, **kwargs)
+        return obj
 
     class Meta:
         verbose_name = u"Фильм"
