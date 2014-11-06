@@ -3,6 +3,10 @@
 
 {% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
 
+{% block extrahead %}
+    <link rel="canonical" href="http://{{ DOMAIN }}{{ category.get_absolute_url }}" />
+{% endblock %}
+
 {% block top_menu %}
     {% top_menu category.slug %}
 {% endblock %}
