@@ -49,9 +49,19 @@ class IndexView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['categories'] = list(NewsCategory.objects.all().order_by('order'))
+        fresh = {
+            'title': u'Свежее',
+            'posts': list(Post.objects.filter(status='pub', type='post').order_by('-date_created')[:4])
+        }
+        fresh_posts = [post.id for post in fresh['posts']]
         for category in context['categories']:
-            category.posts = Post.objects.filter(status='pub', type='post', category=category) \
-                .order_by('-date_created')[:4]
+            category.posts = list(
+                Post.objects.filter(status='pub', type='post', category=category)
+                .exclude(id__in=fresh_posts).order_by('-date_created')[:4]
+            )
+            category.start = timestamp(category.posts[-1].date_created)
+            print category.slug, category.start, category.posts[-1].date_created
+        context['categories'].insert(0, fresh)
         return context
 
 
@@ -69,8 +79,6 @@ class CategoryView(TemplateView):
             .order_by('-date_created')
         if start:
             context['posts'] = context['posts'].filter(date_created__lt=start)
-        else:
-            context['posts'] = context['posts'][4:self.POSTS_PER_CATEGORY + 5]
 
         context['posts'] = context['posts'][:self.POSTS_PER_CATEGORY + 1]
         if len(context['posts']) == self.POSTS_PER_CATEGORY + 1:

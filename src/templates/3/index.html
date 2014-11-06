@@ -33,7 +33,11 @@
                 {% endfor %}
                 </tr></table>
             </div>
-            <noindex><div class="b-category_next"><a href="{% url "category" category.slug %}">еще &raquo;</a></div></noindex>
+            {% if category.slug %}
+                <noindex><div class="b-category_next">
+                    <a href="{% url "category" category.slug %}?start={{ category.start }}">еще &raquo;</a>
+                </div></noindex>
+            {% endif %}
         </div>
     {% endfor %}
 
