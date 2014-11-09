@@ -15,3 +15,5 @@ Host: glader.ru
 Clean-param: start
 Clean-param: utm_medium
 Clean-param: utm_source
+Clean-param: utm_campaign
+Clean-param: utm_term

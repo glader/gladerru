@@ -1,8 +1,22 @@
 <div class="b-relative-posts">
     <div class="b-relative-posts_title">Еще почитать:</div>
-    <ul class="b-relative-posts_header">
-        {% for post in relative_posts %}
-            <li><a href="{{ post.get_absolute_url }}">{{ post.title }}</li>
-        {% endfor %}
-    </ul>
+    {% if ab == 'table' %}
+        <table class="b-category_body"><tr>
+            {% for post in relative_posts %}
+                    <td class="b-category_post">
+                        <a href="{{ post.get_absolute_url }}?utm_campaign=relative_posts&utm_term=table">
+                        <div class="b-category_post_img"><img src="{{ post.icon.src_150 }}" alt="{{ post.title }}"></div>
+                        <div class="b-category_post_title">{{ post.title }}</div>
+                        <div class="b-category_post_abstract">{{ post.abstract|default:"" }}</div>
+                    </a>
+                </td>
+            {% endfor %}
+        </tr></table>
+    {% else %}
+        <ul class="b-relative-posts_header">
+            {% for post in relative_posts %}
+                <li><a href="{{ post.get_absolute_url }}?utm_campaign=relative_posts&utm_term=list">{{ post.title }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </div>

@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 from datetime import datetime
+from random import choice
 import re
 from urllib import quote
 
@@ -234,7 +235,8 @@ def post_panel(post, user, mode='normal'):
 @register.inclusion_tag('block_relative_posts.html')
 def relative_posts(post):
     return {
-        'relative_posts': Post.objects.filter(category=post.category).exclude(pk=post.pk).order_by('-date_created')[:5]
+        'relative_posts': Post.objects.filter(category=post.category).exclude(pk=post.pk).order_by('-date_created')[:4],
+        'ab': choice(['table', 'list']),
     }
 
 
