@@ -17,6 +17,29 @@
 {% block extrahead %}
     <meta property="og:image" content="{{ post.icon }}"/>
     <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
+
+    <script type='text/javascript'>
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        (function() {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') +
+            '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        })();
+    </script>
+
+    <script type='text/javascript'>
+        googletag.cmd.push(function() {
+        googletag.defineSlot('/85092470/inner-right', [[200, 200], [240, 400], [250, 250]], 'div-gpt-ad-1416770753001-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+        });
+    </script>
 {% endblock %}
 
 {% block scripts %}
@@ -30,6 +53,15 @@
     <div style="clear:both">
         <div class="b-feed b-post">
         <div class="item">
+            <div style="float: right;">
+                <!-- inner-right -->
+                <div id='div-gpt-ad-1416770753001-0'>
+                    <script type='text/javascript'>
+                    googletag.cmd.push(function() { googletag.display('div-gpt-ad-1416770753001-0'); });
+                    </script>
+                </div>
+            </div>
+
             <div class="text g-line b-post_content">
                 <p>
                     {{ post.content|safe }}
