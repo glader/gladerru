@@ -39,6 +39,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.middleware.doc.XViewMiddleware',
+    'core.middleware.Redirection',
     'core.middleware.LastLogin',
     'core.middleware.UserReferer',
 )

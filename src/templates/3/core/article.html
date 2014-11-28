@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block extrahead %}
+    <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
     <meta property="og:image" content="{{ article.icon }}"/>
 {% endblock %}
 

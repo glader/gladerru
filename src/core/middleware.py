@@ -1,5 +1,9 @@
 from datetime import datetime
 
+from django.http import HttpResponsePermanentRedirect
+
+from core.models import Redirect
+
 
 class UserReferer:
     def process_request(self, request):
@@ -14,3 +18,13 @@ class LastLogin:
             user = request.user.get_profile()
             user.last_visit = datetime.now()
             user.save()
+
+
+class Redirection:
+    def process_response(self, request, response):
+        if response.status_code == 404:
+            destination = Redirect.find(request.META['PATH_INFO'])
+            if destination:
+                return HttpResponsePermanentRedirect(destination)
+
+        return response
