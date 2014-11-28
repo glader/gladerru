@@ -356,19 +356,10 @@ class Post(models.Model, VoteMixin, UIDMixin):
         return self.title
 
     def get_absolute_url(self):
-        if self.type == 'post':
-            return reverse('post', args=[self.category.slug, self.id])
-        else:
+        if self.name:
             return reverse('article', args=[self.name])
-
-    def can_edit(self, user):
-        if not user:
-            return False
-        if not user.is_authenticated():
-            return False
-        if user.get_profile().is_moderator:
-            return True
-        return self.author == user
+        else:
+            return reverse('post', args=[self.category.slug, self.id])
 
     def save(self, *args, **kwargs):
         self.hidden = self.status != 'pub'
