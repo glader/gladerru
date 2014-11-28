@@ -361,6 +361,9 @@ class Post(models.Model, VoteMixin, UIDMixin):
         else:
             return reverse('post', args=[self.category.slug, self.id])
 
+    def can_edit(self, user):
+        return user.is_superuser
+
     def save(self, *args, **kwargs):
         self.hidden = self.status != 'pub'
         super(Post, self).save(*args, **kwargs)
