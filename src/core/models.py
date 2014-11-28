@@ -500,7 +500,7 @@ class Keyword(models.Model):
 class Redirect(models.Model):
     u"""Редиректы"""
     source = models.CharField(verbose_name=u"Откуда", max_length=200)
-    destination = models.CharField(verbose_name=u"Откуда", max_length=200)
+    destination = models.CharField(verbose_name=u"Куда", max_length=200)
 
     def __unicode__(self):
         return self.source

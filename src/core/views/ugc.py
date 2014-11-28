@@ -75,8 +75,8 @@ class CategoryView(TemplateView):
 
         start = parse_timestamp(self.request.GET.get('start'))
         context['posts'] = Post.objects\
-            .filter(hidden=False, category=context['category'], type='post', icon__isnull=False) \
-            .order_by('-date_created')
+            .filter(hidden=False, category=context['category'], type='post') \
+            .exclude(icon='').order_by('-date_created')
         if start:
             context['posts'] = context['posts'].filter(date_created__lt=start)
 

@@ -243,7 +243,8 @@ def relative_posts(post):
 def relative_articles(article):
     return {
         'relative_posts': Post.objects.filter(rubric=article.rubric).exclude(pk=article.pk)
-                              .order_by('-date_created')[:10]
+                              .order_by('-date_created')[:4],
+        'ab': 'table',
     }
 
 
