@@ -1,7 +1,6 @@
 # encoding: utf-8
 
 from datetime import datetime
-from random import choice
 import re
 from urllib import quote
 
@@ -36,8 +35,8 @@ def top_menu(level2='all_posts', level1=None):
     submenu = {
         'posts': categories + [['new', '/post/new', u'написать', u'Предложить новость']],
         'articles': [
-            ['newbie', '/skills/newbie', u'новичку', u'как начать кататься на сноуборде и что для этого нужно'],
-            ['beginner', '/skills/beginner', u'опытным райдерам', u'тонкости и интересные моменты сноубординга'],
+            ['newbie', '/skills/newbie', u'новичок', u'никогда не брал доску в руки'],
+            ['beginner', '/skills/beginner', u'начинающий', u'умеешь спускаться елочкой'],
             ['freestyle', '/skills/freestyle', u'фристайл', u'те, кто хочет прыгать с трамплинов'],
             ['freeride', '/skills/freeride', u'фрирайд', u'тем, кто хочет катать в больших горах'],
             ['jibbing', '/skills/jibbing', u'джиббинг', u'тем, кто хочет слайдить по перилам'],
@@ -236,7 +235,7 @@ def post_panel(post, user, mode='normal'):
 def relative_posts(post):
     return {
         'relative_posts': Post.objects.filter(category=post.category).exclude(pk=post.pk).order_by('-date_created')[:4],
-        'ab': choice(['table', 'list']),
+        'ab': 'table',
     }
 
 
