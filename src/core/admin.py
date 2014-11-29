@@ -20,12 +20,6 @@ class PostAdmin(admin.ModelAdmin):
     exclude = ('tags',)
 
 
-class RubricAdmin(admin.ModelAdmin):
-    list_display = ('name', 'title')
-    ordering = ('title',)
-    search_fields = ('name', 'title')
-
-
 class SkillAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug')
     search_fields = ('title', 'slug')
@@ -64,7 +58,6 @@ admin.site.register(models.Skill, SkillAdmin)
 admin.site.register(models.Comment, CommentAdmin)
 admin.site.register(models.Tag, TagAdmin)
 admin.site.register(models.Post, PostAdmin)
-admin.site.register(models.Rubric, RubricAdmin)
 admin.site.register(models.Word, WordAdmin)
 admin.site.register(models.Photo, PhotoAdmin)
 admin.site.register(models.Redirect)

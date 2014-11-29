@@ -8,7 +8,7 @@ from django.views.generic import TemplateView, DetailView, FormView
 from django.conf import settings
 
 from core.forms import FeedbackForm
-from core.models import Rubric, Post, Word, Skill
+from core.models import Post, Word, Skill
 from core.utils.common import clean_choice
 from core.utils.search import search as search_provider
 
@@ -51,20 +51,6 @@ class ArticleView(TemplateView):
                 'previous': page > 0 and (page - 1, menu[page - 1]) or None,
                 'next': page < len(menu) - 1 and (page + 1, menu[page + 1]) or None,
                 }
-
-
-class RubricView(TemplateView):
-    template_name = 'core/rubric.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(RubricView, self).get_context_data(**kwargs)
-        context['rubric'] = get_object_or_404(Rubric, name=kwargs['name'])
-        context['children'] = Rubric.objects.filter(parent=context['rubric'])
-        context['articles'] = Post.objects.filter(rubric=context['rubric'])
-
-        if context['rubric'].template:
-            self.template_name = 'special/%s' % context['rubric'].template
-        return context
 
 
 class DictionaryView(TemplateView):
@@ -215,8 +201,7 @@ class SkillsView(TemplateView):
                 block.append(skills[code])
                 dop_blocks.append(('text_%s.jpg' % code, block[1], block[2] + 90, skills[code]))
 
-        return self.render_to_response({'blocks': blocks + dop_blocks,
-                                        'rubrics': sorted(Rubric.objects.all(), key=lambda r: r.title)})
+        return self.render_to_response({'blocks': blocks + dop_blocks})
 
 
 class SkillView(TemplateView):

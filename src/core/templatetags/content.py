@@ -79,14 +79,6 @@ def top_menu(level2='all_posts', level1=None):
     return {'level1': level1, 'level2': level2, 'submenu': level1 and submenu[level1] or []}
 
 
-@register.inclusion_tag("block_dop_menu.html")
-def dop_menu(type):
-    if not type:
-        return {'items': []}
-    title = {'movie_menu': u'Фильмы', 'articles_menu': u'Статьи', 'world_menu': u'Мир'}.get(type, "").upper()
-    return {'items': Post.objects.filter(rubric__name=type), 'title': title}
-
-
 @register.filter
 def decimal_cut(value, numbers=1):
     format = "%%0.%df" % numbers
@@ -242,7 +234,7 @@ def relative_posts(post):
 @register.inclusion_tag('block_relative_posts.html')
 def relative_articles(article):
     return {
-        'relative_posts': Post.objects.filter(rubric=article.rubric).exclude(pk=article.pk)
+        'relative_posts': Post.objects.filter(skill=article.skill).exclude(pk=article.pk)
                               .order_by('-date_created')[:4],
         'ab': 'table',
     }

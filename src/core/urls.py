@@ -8,7 +8,6 @@ from django.contrib.auth.views import password_reset
 urlpatterns = patterns(
     '',
     url(r'^content/(?P<pk>[^/]+)\.htm$', ArticleView.as_view(), name='article'),
-    url(r'^rubric/(?P<name>[^/]+)$', RubricView.as_view(), name='rubric'),
 
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$', CategoryView.as_view(),
         name='category'),

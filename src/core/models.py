@@ -282,32 +282,6 @@ class Comment(models.Model):
         verbose_name_plural = u"Комментарии"
 
 
-class Rubric(models.Model):
-    name = models.CharField(max_length=250, null=True, blank=True, unique=True, verbose_name=u"Имя элемента")
-    parent = models.ForeignKey('self', verbose_name=u"Родитель", null=True, blank=True)
-    template = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Шаблон")
-    title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
-    content = models.TextField(null=True, blank=True, verbose_name=u"Содержание элемента")
-    abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
-    image = YFField(upload_to='gladerru', null=True, blank=True, verbose_name=u"Картинка")
-    menu_type = models.CharField(max_length=50, null=True, blank=True, verbose_name=u"Тип меню")
-    order = models.CharField(max_length=255, null=True, blank=True, verbose_name=u"Порядок")
-    skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
-    url = models.URLField(max_length=250, null=True, blank=True, verbose_name=u"URL")
-    meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
-                                        null=True, blank=True, default=None)
-
-    def __unicode__(self):
-        return self.title
-
-    def get_absolute_url(self):
-        return reverse('rubric', args=[self.name])
-
-    class Meta:
-        verbose_name = u"Рубрика"
-        verbose_name_plural = u"Рубрики"
-
-
 STATUSES = (
     ('pub', u'Опубликовано'),
     ('save', u'Черновик'),
@@ -340,7 +314,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
     last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
                                              editable=False)
-    rubric = models.ForeignKey(Rubric, null=True, blank=True, verbose_name=u"Рубрика")
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
     icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
