@@ -11,13 +11,21 @@
 
 {% block content %}
     {{ form.media }}
+
+    {% if object.status == 'save' %}<p><strong>Пост сохранен и отправлен на рассмотрение модератору</strong>.</p>{% endif %}
     <form method="POST" id="editform" enctype="multipart/form-data">
         <table class="b-form">
             {% csrf_token %}
             {{ form }}
 
             <tr><td colspan="2">
-                <input type="submit" value="Сохранить">
+                <input type="submit" name="action" value="Сохранить">
+
+                {% if request.user.is_superuser %}
+                    <br><br>
+                    <input type="submit" name="action" value="Опубликовать">
+                    <input type="submit" name="action" value="Забанить">
+                {% endif %}
             </td></tr>
         </table>
     </form>

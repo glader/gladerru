@@ -140,6 +140,22 @@ class EditPostView(UpdateView):
             return super(EditPostView, self).dispatch(request, *args, **kwargs)
         raise Http404
 
+    def post(self, request, *args, **kwargs):
+        if self.request.user.is_superuser:
+            if request.POST.get('action') == u'Опубликовать':
+                post = self.get_object()
+                post.status = 'pub'
+                post.save()
+                return HttpResponseRedirect(post.get_absolute_url())
+
+            if request.POST.get('action') == u'Забанить':
+                post = self.get_object()
+                post.status = 'ban'
+                post.save()
+                return HttpResponseRedirect(post.get_absolute_url())
+
+        return super(EditPostView, self).post(request, *args, **kwargs)
+
     def get_success_url(self):
         obj = self.get_object()
         return reverse('post', args=[obj.category.slug, obj.id])
