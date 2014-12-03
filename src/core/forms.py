@@ -61,7 +61,7 @@ class RegistrationForm(CommonForm):
                             widget=forms.TextInput(attrs={'class': 'g-hidden'}))
     password1 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
     password2 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
-    retpath = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
+    next = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
 
     def free_credentials(self, s):
         u""" Проверяет строку на емейл, логин или имя пользователя """
@@ -158,7 +158,7 @@ class RegistrationForm(CommonForm):
 class LoginForm(CommonForm):
     login = forms.CharField(label=u'Логин', max_length=100)
     passwd = forms.CharField(label=u'Пароль', max_length=100, widget=forms.PasswordInput)
-    retpath = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
+    next = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
 
     def get_user(self, s):
         u""" Проверяет строку на емейл, логин или имя пользователя """

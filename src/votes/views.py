@@ -38,13 +38,13 @@ def add_post_vote(request):
         }
 
     else:
-        if 'retpath' in request.GET:
-            return HttpResponseRedirect(request.GET['retpath'])
+        if 'next' in request.GET:
+            return HttpResponseRedirect(request.GET['next'])
         else:
             return JsonErrorResponse(form.str_errors())
 
-    if 'retpath' in request.GET:
-        return HttpResponseRedirect(request.GET['retpath'])
+    if 'next' in request.GET:
+        return HttpResponseRedirect(request.GET['next'])
     else:
         return HttpResponse(simplejson.dumps(result))
 

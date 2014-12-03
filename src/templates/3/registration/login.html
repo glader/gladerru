@@ -27,7 +27,7 @@
                 <h2 id="login-form-link">Я зарегистрирован на сайте</h2>
                 <div class="b-login-form">
                     <form method='post' action="{% url "login" %}">
-                        {{ login_form.retpath }}
+                        {{ login_form.next }}
                         Имя:<br>
                         {{ login_form.login }}<br><br>
                         Пароль:<br>
@@ -40,7 +40,7 @@
                 <h2 id="registration-form-link">Новый участник</h2>
                 <div class="b-registration-form">
                     <form method='post' action="{% url "registration" %}">
-                        {{ registration_form.retpath }}
+                        {{ registration_form.next }}
                         {{ registration_form.login }}
                         Email <span class='grey'>(обязательно)</span>:<br>
                         {{ registration_form.email }}<br><br>

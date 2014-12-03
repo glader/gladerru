@@ -165,21 +165,21 @@ def registration(request):
         if form.is_valid():
             form.save()
             auth.login(request, form.user)
-            retpath = request.POST.get('retpath') or form.user.get_absolute_url()
+            next = request.POST.get('next') or form.user.get_absolute_url()
             if 'referer' in request.session:
                 profile = form.user.get_profile()
                 profile.referer = request.session['referer']
                 profile.save()
             if request.is_ajax():
-                return HttpResponse(simplejson.dumps({'success': True, 'retpath': retpath}))
+                return HttpResponse(simplejson.dumps({'success': True, 'next': next}))
             else:
-                return HttpResponseRedirect(retpath)
+                return HttpResponseRedirect(next)
 
         elif request.is_ajax():
             return JsonErrorResponse(form.str_errors())
 
     else:
-        form = RegistrationForm(initial={'retpath': request.GET.get('next')})
+        form = RegistrationForm(initial={'next': request.GET.get('next')})
 
     return render_to_response(request, 'registration/login.html', {'registration_form': form,
                                                                    'login_form': LoginForm()})
@@ -191,17 +191,17 @@ def login(request):
         if form.is_valid():
             user = form.user
             auth.login(request, user)
-            retpath = request.POST.get('retpath') or form.user.get_absolute_url()
+            next = request.POST.get('next') or form.user.get_absolute_url()
             if request.is_ajax():
-                return HttpResponse(simplejson.dumps({'success': True, 'retpath': retpath}))
+                return HttpResponse(simplejson.dumps({'success': True, 'next': next}))
             else:
-                return HttpResponseRedirect(retpath)
+                return HttpResponseRedirect(next)
 
         elif request.is_ajax():
             return JsonErrorResponse(form.str_errors())
 
     else:
-        login_form = LoginForm(initial={'retpath': request.GET.get('next')})
+        login_form = LoginForm(initial={'next': request.GET.get('next')})
 
     registration_form = RegistrationForm(initial=request.GET)
     return render_to_response(request, 'registration/login.html', locals())

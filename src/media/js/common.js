@@ -74,7 +74,7 @@ function submitLoginForm(event){
     $.post( "/auth/login",
             {     login: login,
                   passwd: passwd,
-                  retpath: $('#login_form #id_retpath').val() || ''
+                  next: $('#login_form #id_next').val() || ''
              },
               function(json){
                   if(json.success){
@@ -83,7 +83,7 @@ function submitLoginForm(event){
                         event.data.callback();
                         $('#login_popup').togglePopup();
                     }else{
-                        window.location = json.retpath;
+                        window.location = json.next;
                     }
                   }
                   if(json.error){
@@ -110,7 +110,7 @@ function submitRegForm(event){
             { name: login,
                   email: $('#registration_form #id_email').val() || '',
                   password1: password1, password2: password2,
-                  retpath: $('#registration_form #id_retpath').val() || ''
+                  next: $('#registration_form #id_next').val() || ''
              },
               function(json){
                   if(json.success){
@@ -119,7 +119,7 @@ function submitRegForm(event){
                         event.data.callback();
                         $('#login_popup').togglePopup();
                     }else{
-                        window.location = json.retpath;
+                        window.location = json.next;
                     }
                   }
                   if(json.error){
@@ -177,13 +177,13 @@ function init(){
 	}
 
     if( ! logged_in ){
-        $('#login-link').bind("click", {retpath: '/', form: 'login'}, showLoginForm);
-        $('#registration-link').bind("click", {retpath: '/'}, showLoginForm);
-        $('#top_menu_new').bind("click", {retpath: '/post/new'}, showLoginForm);
+        $('#login-link').bind("click", {next: '/', form: 'login'}, showLoginForm);
+        $('#registration-link').bind("click", {next: '/'}, showLoginForm);
+        $('#top_menu_new').bind("click", {next: '/post/new'}, showLoginForm);
 
         $('.js-login_required').each(function(){
-        	retpath = $(this).metadata().retpath;
-        	$(this).bind("click", {retpath: retpath}, showLoginForm);
+        	next = $(this).metadata().next;
+        	$(this).bind("click", {next: next}, showLoginForm);
         });
     }
 
@@ -193,9 +193,9 @@ function init(){
         if( logged_in ){
             addPostVotes(post, klass, 1);
         }else{
-            retpath = "/votes/add_post_vote?post=" + post + "&klass=" + klass
-                        + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#" + post)
-            showLoginForm(null, retpath);
+            next = "/votes/add_post_vote?post=" + post + "&klass=" + klass
+                        + "&vote=1&next=" + escape(cut_anchor(document.location) + "#" + post)
+            showLoginForm(null, next);
         }
         return false;
     });
@@ -226,9 +226,9 @@ function init(){
         if( logged_in ){
             addCommentVote(comment, 1);
         }else{
-            retpath = "/ajax/add_comment_vote?comment=" + comment
-                        + "&vote=1&retpath=" + escape(cut_anchor(document.location) + "#c" + comment)
-            showLoginForm(null, retpath);
+            next = "/ajax/add_comment_vote?comment=" + comment
+                        + "&vote=1&next=" + escape(cut_anchor(document.location) + "#c" + comment)
+            showLoginForm(null, next);
         }
         return false;
     });
@@ -251,16 +251,16 @@ function init(){
     document.documentElement.id = "js";
 };
 
-function showLoginForm(event, retpath, callback){
+function showLoginForm(event, next, callback){
     if( event ){
-        retpath = event.data.retpath;
+        next = event.data.next;
         form = event.data.form;
     }else{
         form = 'registration';
     }
 
-    $('#login_form #id_retpath').val(retpath);
-    $('#registration_form #id_retpath').val(retpath);
+    $('#login_form #id_next').val(next);
+    $('#registration_form #id_next').val(next);
 
     if( form == 'login' ){
         $('#login_form_block').removeClass('g-hidden');
