@@ -2,7 +2,7 @@
 {% load content %}
 {% load russian %}
 
-{% block title %}{{ post.title }} - {{ parent.title }}{{ block.super }}{% endblock %}
+{% block title %}{{ post.title }}{% endblock %}
 
 {% block description %}
     {% if post.meta_description %}

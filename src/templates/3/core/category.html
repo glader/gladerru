@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load content %}
 
-{% block title %}{{ category.title }} - {{ block.super }}{% endblock %}
+{% block title %}{{ category.title }}{% endblock %}
 
 {% block extrahead %}
     <link rel="canonical" href="http://{{ DOMAIN }}{{ category.get_absolute_url }}" />

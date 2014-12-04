@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load content %}
 
-{% block title %}Вопросы и ответы{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}Вопросы и ответы{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %}{% endblock %}
 
 {% block top_menu %}
     {% top_menu 'all' %}

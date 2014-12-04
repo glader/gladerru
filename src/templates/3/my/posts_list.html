@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load content %}
 
-{% block title %}{% if title %}{{ title }}{% else %}Все сообщения{% endif %}{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}{% if title %}{{ title }}{% else %}Все сообщения{% endif %}{% ifnotequal page_number 1 %}, стр. {{ page_number }}{% endifnotequal %}{% endblock %}
 
 {% block page_title %}{% if title %}{{ title }}{% else %}Все сообщения{% endif %}{% endblock %}
 

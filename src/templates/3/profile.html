@@ -11,7 +11,7 @@
 	{% endifequal %}
 {% endblock %}
 
-{% block title %}Профиль пользователя {{ domain_user.name }} - {{ block.super }}{% endblock %}
+{% block title %}Профиль пользователя {{ domain_user.name }}{% endblock %}
 
 {% block content %}
 {% with domain_user.get_absolute_url as url %}

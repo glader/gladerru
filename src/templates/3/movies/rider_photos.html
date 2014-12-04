@@ -1,7 +1,7 @@
 {% extends "tab_movies.html" %}
 {% load content %}
 
-{% block title %}{{ title|striptags }}{% ifnotequal page_obj.number 1 %}, стр. {{ page_obj.number }}{% endifnotequal %} - {{ block.super }}{% endblock %}
+{% block title %}{{ title|striptags }}{% ifnotequal page_obj.number 1 %}, стр. {{ page_obj.number }}{% endifnotequal %}{% endblock %}
 
 {% block top_menu %}
     {% top_menu 'people' %}

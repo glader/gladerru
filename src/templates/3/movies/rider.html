@@ -15,7 +15,7 @@
 
 {% block breadcrumbs %}<a href="{% url "movies" %}">Сноубордические фильмы</a> / <a href="{% url "people" %}">Райдеры</a> / {{ item.title }}{% endblock %}
 
-{% block title %}{{ item.title }} - райдеры - {{ block.super }}{% endblock %}
+{% block title %}{{ item.title }}{% endblock %}
 
 {% block page_title %}{{ item.title }}{% endblock %}
 
