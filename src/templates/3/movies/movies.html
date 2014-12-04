@@ -12,31 +12,29 @@
     {% top_menu year %}
 {% endblock %}
 
-{% block page_title %}Сноубордические фильмы{% endblock %}
+{% block page_title %}Сноубордические фильмы{% if year != 'all' %} {{ year }} года{% endif %}{% endblock %}
 
-{% block title %}Сноубордические фильмы{% endblock %}
+{% block title %}Сноубордические фильмы{% if year != 'all' %} {{ year }} года{% endif %}{% endblock %}
 
 {% block content %}
 	<table class="sortable b-movie-list">
 		<tr>
+            <th>&nbsp;</th>
             <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Наименование</span></span></th>
             <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Студия</span></span></th>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Год</span></span></th>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Тизер</span></span></th>
-            <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Фильм</span></span></th>
-            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Торрент</span></span></th>
-            <th class="sorttable_alpha"><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Треки</span></span></th>
+            {% if year == 'all' %}
+                <th><span class="b-pseudo-link" title="Сортировка по столбцу"><span>Год</span></span></th>
+            {% endif %}
 		</tr>
 
 	{% for movie in object_list %}
 		<tr>
+            <td class="b-movie-list-icon">{% if movie.full_movie %}<img src="{% static "design/3/img/icons/type-movie.png" %}" alt="есть видео">{% endif %}</td>
 			<td>{{ movie|link }}</td>
 			<td>{% if movie.studio %}{{ movie.studio|link }}{% endif %}</td>
-            <td>{{ movie.year|default:"" }}</td>
-            <td class="center">{% if movie.teaser %}есть{% endif %}</td>
-            <td class="center">{% if movie.full_movie %}есть{% endif %}</td>
-            <td class="center">{% if movie.torrent %}<a href="{{ movie.torrent }}"><img src="{% static "design/3/img/b-movie-list/disk.png" %}" alt="Скачать торрент"></a>{% else %}&nbsp;{% endif %}</td>
-            <td class="center">{% if movie.has_songs %}<img src="{% static "design/3/img/b-movie-list/music.png" %}" alt="Скачать торрент">{% else %}&nbsp;{% endif %}</td>
+            {% if year == 'all' %}
+                <td>{{ movie.year|default:"" }}</td>
+            {% endif %}
 		</tr>
 	{% endfor %}
 	</table>

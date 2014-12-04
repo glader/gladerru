@@ -1,8 +1,7 @@
 /* Таблица фильмов (begin) */ /**/
 .b-movie-list
 {
-    width: 100%; 
-    color: #403F3F; 
+    color: #403F3F;
     line-height: 18px;
     margin-top: 20px;
 }
@@ -25,7 +24,12 @@
 
 .b-movie-list td
 {
-    padding: 3px 0 0 0; 
+    padding: 3px 30px 0 0;
+}
+
+td.b-movie-list-icon
+{
+    padding: 3px 5px;
 }
 
 /* Таблица фильмов (end) */ /**/
