@@ -217,7 +217,6 @@ def post_panel(post, user, mode='normal'):
     return {
         'post': post,
         'user': user,
-        'already_voted': post.get_vote(user) is not None,
         'mode': mode,
         'klass': post.__class__.__name__.lower(),
     }
