@@ -53,14 +53,15 @@ class IndexView(TemplateView):
             'title': u'Свежее',
             'posts': list(Post.objects.filter(status='pub', type='post').order_by('-date_created')[:4])
         }
+        fresh['posts'].sort(key=lambda post: (post.is_sticky and 2 or 1, post.date_created), reverse=True)
         fresh_posts = [post.id for post in fresh['posts']]
         for category in context['categories']:
             category.posts = list(
                 Post.objects.filter(status='pub', type='post', category=category)
                 .exclude(id__in=fresh_posts).order_by('-date_created')[:4]
             )
+            category.posts.sort(key=lambda post: (post.is_sticky and 2 or 1, post.date_created), reverse=True)
             category.start = timestamp(category.posts[-1].date_created)
-            print category.slug, category.start, category.posts[-1].date_created
         context['categories'].insert(0, fresh)
         return context
 

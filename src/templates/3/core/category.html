@@ -15,7 +15,7 @@
     <div class="b-category_body">
         <table><tr>
         {% for post in posts %}
-            <td class="b-category_post_first b-category_post_inlist">
+            <td class="b-category_post_first b-category_post_inlist {% if post.is_sticky %}b-category_post_sticky{% endif %}">
                 <a href="{{ post.get_absolute_url }}">
                     <div class="b-category_post_first_img"><img src="{{ post.icon.src_500 }}" alt="{{ post.title }}"></div>
                     <div class="b-category_post_title">{{ post.title }}</div>

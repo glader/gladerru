@@ -18,7 +18,7 @@
                 <table><tr>
                 {% for post in category.posts %}
                     {% if forloop.first %}
-                        <td class="b-category_post_first">
+                        <td class="b-category_post_first {% if post.is_sticky %}b-category_post_sticky{% endif %}">
                             <a href="{{ post.get_absolute_url }}">
                                 <div class="b-category_post_first_img"><img src="{{ post.icon.src_500 }}" alt="{{ post.title }}"></div>
                     {% else %}

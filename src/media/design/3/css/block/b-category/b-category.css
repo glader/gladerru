@@ -133,3 +133,7 @@
     padding: 20px 0;
     border-bottom: 1px grey dotted;
 }
+
+.b-category_post_sticky {
+    background-color: #ffedcc;
+}

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from datetime import date
+
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
@@ -312,8 +314,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name=u"Количество комментариев")
     hidden = models.BooleanField(default=False, verbose_name=u"Скрытый")
-    last_comment_date = models.DateTimeField(null=True, blank=True, verbose_name=u"Дата последнего комментария",
-                                             editable=False)
+    sticky_to = models.DateField(verbose_name=u"Приклеен до", null=True, blank=True, default=None)
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name=u"Умение")
     icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
@@ -327,6 +328,10 @@ class Post(models.Model, VoteMixin, UIDMixin):
 
     def __unicode__(self):
         return self.title
+
+    @property
+    def is_sticky(self):
+        return self.sticky_to and self.sticky_to > date.today()
 
     def get_absolute_url(self):
         if self.name:
