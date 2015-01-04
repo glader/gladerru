@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 
 from django.conf import settings
+from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
 
@@ -133,6 +134,32 @@ class Movie(models.Model, VoteMixin):
         return "%s_%s" % (self.__class__.__name__.lower(), self.id)
 
     def save(self, *args, **kwargs):
+        report = u''
+        if self.pk:
+            prev = self.__class__.objects.get(pk=self.pk)
+            header = u"Измененные поля фильма %s (%s)" % (self.title, self.get_absolute_url())
+            for field in self._meta.fields:
+                if field.name in ('comment_count', 'last_comment_date'):
+                    continue
+
+                if getattr(self, field.name) != getattr(prev, field.name):
+                    report += u"%s: '%s' -> '%s'\n" % \
+                              (field.verbose_name, getattr(prev, field.name) or '-', getattr(self, field.name) or '-')
+        else:
+            header = u"Новый фильм %s (%s)" % (self.title, self.get_absolute_url())
+            for field in self._meta.fields:
+                if field.name in ('comment_count', 'last_comment_date'):
+                    continue
+                report += u"%s: '%s'\n" % (field.verbose_name, getattr(self, field.name) or '-')
+
+        if report:
+            send_mail(
+                u"Glader.ru: %s" % header,
+                report,
+                None,
+                ['glader.ru@gmail.com']
+            )
+
         if self.pk:
             movie = Movie.objects.get(pk=self.pk)
             if self.teaser and not movie.teaser:

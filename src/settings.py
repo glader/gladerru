@@ -72,6 +72,7 @@ INSTALLED_APPS = (
     'gunicorn',
     'django_russian',
     'redactor',
+    'reversion',
 
     'bookkeeping',
     'discounts',

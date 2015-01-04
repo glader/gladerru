@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.contrib import admin
-from . import models
+import reversion
+
+from movies import models
 
 
 class Man2MovieInline(admin.TabularInline):
@@ -35,17 +37,17 @@ class StudioAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title')
 
 
-class MovieAdmin(admin.ModelAdmin):
+class MovieAdmin(reversion.VersionAdmin):
     list_display = ('title', 'studio', 'year')
     ordering = ('-year', 'title')
     raw_id_fields = ('studio',)
     search_fields = ('slug', 'title')
     inlines = (Man2MovieInline, SongInline)
     fieldsets = (
-        (None, {'fields': ('title', 'slug', 'studio', 'year', 'teaser')}),
+        (None, {'fields': ('title', 'slug', 'studio', 'year', 'teaser', 'full_movie')}),
         ('Other', {
             'classes': ('collapse',),
-            'fields': ('full_movie', 'content', 'url', 'torrent', 'has_songs', 'cover', 'rating',
+            'fields': ('content', 'url', 'torrent', 'has_songs', 'cover', 'rating',
                        'dt_teaser_added', 'dt_fullmovie_added', 'dt_soundtrack_added', 'meta_description')}),
     )
 
