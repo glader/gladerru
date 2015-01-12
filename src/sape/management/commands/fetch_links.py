@@ -34,7 +34,7 @@ class Command(NoArgsCommand):
         site_links = {link.link_id: link for link in Link.objects.all()}
 
         for link in links:
-            if link['status'] != 'OK':
+            if link['status'] not in ('OK', 'ERROR'):
                 continue
 
             if link['id'] in site_links:
