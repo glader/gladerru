@@ -25,3 +25,7 @@ YAFOTKI_STORAGE_OPTIONS = {
     'post': '%(YAFOTKI_POST)s',
     'host': '%(YAFOTKI_HOST)s',
 }
+
+SAPE_LOGIN = ''
+SAPE_PASSWORD = ''
+SAPE_SITE_ID = 111

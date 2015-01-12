@@ -52,6 +52,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
     'core.context.profile',
     'core.context.domain',
+    'sape.context.links',
 )
 
 ROOT_URLCONF = 'urls'
@@ -81,6 +82,7 @@ INSTALLED_APPS = (
     'votes',
     'movies',
     'mountains',
+    'sape',
 )
 
 # Absolute path to the directory that holds media.
