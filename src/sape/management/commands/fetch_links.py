@@ -53,7 +53,7 @@ class Command(NoArgsCommand):
                 stat['new'] += 1
 
         for link in site_links.values():
-            log.info('Link %s removed', link['link_id'])
+            log.info('Link %s removed', link.link_id)
             stat['del'] += 1
             link.delete()
 
