@@ -26,6 +26,13 @@ class Command(NoArgsCommand):
         if any(imap(lambda link: link['status'] == 'ERROR', links)):
             mail_admins(u'glader.ru: битые ссылки', u'На сайте glader.ru обнаружены линки в статусе ERROR.')
 
+        if any(imap(lambda link: link['status'] == 'WAIT_WM', links)):
+            mail_admins(
+                u'glader.ru: новые ссылки',
+                u'На сайте glader.ru обнаружены линки в статусе WAIT_WM. '
+                u'http://www.sape.ru/submit_orders.php?site_id=%s' % settings.SAPE_SITE_ID,
+            )
+
         log.info('%s links fetched', len(links))
 
         pages = server.sape.get_site_pages(38739)
