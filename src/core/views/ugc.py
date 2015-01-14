@@ -13,7 +13,6 @@ from django.core.mail import mail_admins
 
 from core.forms import PostForm, LoginForm, RegistrationForm
 from core.models import Post, NewsCategory
-from core.utils.common import slug
 from core.views.common import render_to_response
 from core.decorators import class_view_decorator
 
@@ -101,6 +100,11 @@ def post_view(request, slug, post_id):
     return render_to_response(request, 'core/post.html', context)
 
 
+def post_htm_view(request, category_slug, post_slug):
+    post = get_object_or_404(Post, slug=post_slug)
+    return post_view(request, category_slug, post.id)
+
+
 def user_post(request, user, post_id):
     post = get_object_or_404(Post, pk=post_id, hidden=False)
     return HttpResponseRedirect(post.get_absolute_url())
@@ -114,7 +118,6 @@ class AddPostView(CreateView):
     def form_valid(self, form):
         post = form.save(commit=False)
         post.author = self.request.user
-        post.slug = slug(post.title)
         if self.request.user.is_superuser:
             post.status = 'pub'
             post.save()

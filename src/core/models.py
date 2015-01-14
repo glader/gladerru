@@ -300,7 +300,6 @@ TYPES = (
 
 
 class Post(models.Model, VoteMixin, UIDMixin):
-    name = models.CharField(max_length=250, null=True, blank=True, default=None, verbose_name=u"Имя элемента")
     author = models.ForeignKey(User, null=True, blank=True, verbose_name=u"Автор")
     date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name=u"Заголовок")
@@ -308,7 +307,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
 
     category = models.ForeignKey('NewsCategory', verbose_name=u"Категория", null=True, blank=True, default=None)
     content = RedactorField(null=True, blank=True, verbose_name=u"Содержание")
-    status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name=u"Статус")
+    status = models.CharField(choices=STATUSES, default='save', max_length=50, verbose_name=u"Статус")
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name=u"Тип поста")
 
     abstract = models.TextField(null=True, blank=True, verbose_name=u"Анонс")
@@ -319,6 +318,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
     icon = YFField(verbose_name=u"Иконка", null=True, blank=True, upload_to='gladerru', default=None)
     meta_description = models.TextField(verbose_name=u"Description", help_text=u"meta-description",
                                         null=True, blank=True, default=None)
+    meta_keywords = models.TextField(verbose_name=u"Keywords", help_text=u"meta-keywords",
+                                     null=True, blank=True, default=None)
 
     tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
     comments = generic.GenericRelation(Comment)
@@ -334,8 +335,10 @@ class Post(models.Model, VoteMixin, UIDMixin):
         return self.sticky_to and self.sticky_to > date.today()
 
     def get_absolute_url(self):
-        if self.name:
-            return reverse('article', args=[self.name])
+        if self.skill:
+            return reverse('article', args=[self.slug])
+        elif self.slug:
+            return reverse('post_htm', args=[self.category.slug, self.slug])
         else:
             return reverse('post', args=[self.category.slug, self.id])
 
@@ -344,6 +347,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
 
     def save(self, *args, **kwargs):
         self.hidden = self.status != 'pub'
+        if not self.slug:
+            self.slug = slug(self.title)
         super(Post, self).save(*args, **kwargs)
 
     class Meta:

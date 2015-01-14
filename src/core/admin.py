@@ -12,12 +12,24 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'title', 'category', 'author', 'status', 'date_created')
+    list_display = ('id', 'title', 'slug', 'skill', 'category', 'author', 'status', 'date_created')
     ordering = ('-date_created',)
     list_filter = ('status', 'skill')
-    search_fields = ('name', 'title', 'slug')
+    search_fields = ('title', 'slug')
     raw_id_fields = ('author',)
     exclude = ('tags',)
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'title', 'slug', 'icon', 'skill', 'category', 'abstract', 'content', 'status',
+                'meta_description', 'meta_keywords'
+            )
+        }),
+        ('Other', {
+            'classes': ('collapse',),
+            'fields': ('sticky_to', 'author', 'type', 'comment_count', 'hidden')}),
+    )
 
 
 class SkillAdmin(admin.ModelAdmin):

@@ -11,6 +11,7 @@ urlpatterns = patterns(
 
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$', CategoryView.as_view(),
         name='category'),
+    url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/([^\s]+).htm$', post_htm_view, name='post_htm'),
     url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_view, name='post'),
 
     url(r'^terms/(?P<slug>[^/]+)$', DictionaryWordView.as_view(), name='dictionary_word'),

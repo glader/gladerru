@@ -89,7 +89,7 @@ def decimal_cut(value, numbers=1):
 def type_name(item):
     u"""Имя для иконки в поиске"""
     if isinstance(item, Post):
-        if item.name:
+        if item.skill:
             return 'article'
         else:
             return 'post'

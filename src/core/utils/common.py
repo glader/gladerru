@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 from hashlib import md5
-
 import cPickle as pickle
-
 import re
+import string
 
 from django.conf import settings
 from django.core.cache import cache
@@ -13,8 +12,8 @@ from django.core.mail import mail_admins, EmailMessage
 translit = {u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g', u'д': u'd', u'е': u'e',
             u'ж': u'zh', u'з': u'z', u'и': u'i', u'й': u'j', u'к': u'k', u'л': u'l',
             u'м': u'm', u'н': u'n', u'о': u'o', u'п': u'p', u'р': u'r', u'с': u's',
-            u'т': u't', u'у': u'u', u'ф': u'f', u'х': u'x', u'ц': u'cz', u'ч': u'ch',
-            u'ш': u'sh', u'щ': u'shh', u'ъ': u'_d', u'ы': u'yi', u'ь': u'y', u'э': u'ye',
+            u'т': u't', u'у': u'u', u'ф': u'f', u'х': u'h', u'ц': u'c', u'ч': u'ch',
+            u'ш': u'sh', u'щ': u'shh', u'ъ': u'_d', u'ы': u'y', u'ь': u'y', u'э': u'ye',
             u'ю': u'yu', u'я': u'ya', u'ё': u'yo',
             u'æ': u'e',
             u'á': u'a', u'é': u'e', u'ć': u'c',
@@ -38,7 +37,10 @@ def rus2translit(text):
 
 
 def slug(title):
-    return re.sub("\s+", "-", rus2translit(title.strip())).lower()
+    if not title:
+        return u""
+
+    return re.sub("[%s]+" % string.punctuation, "-", re.sub("\s+", "-", rus2translit(title.strip()))).lower()
 
 
 def send_html_mail(subject, message, recipient_list):
