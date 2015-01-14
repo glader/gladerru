@@ -18,7 +18,7 @@ class ArticleView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(ArticleView, self).get_context_data(**kwargs)
-        context['article'] = get_object_or_404(Post, name=kwargs['pk'])
+        context['article'] = get_object_or_404(Post, slug=kwargs['pk'])
         context['page_identifier'] = 'post_%s' % context['article'].id
         context.update(self.get_article_content(context['article']))
         return context
