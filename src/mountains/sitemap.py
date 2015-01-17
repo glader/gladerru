@@ -5,5 +5,5 @@ from .models import Mountain
 
 
 sitemaps = {
-    'mountain': GenericSitemap({"queryset": Mountain.objects.all()}, changefreq="daily"),
+    'mountain': GenericSitemap({"queryset": Mountain.objects.all()}, changefreq="weekly"),
 }

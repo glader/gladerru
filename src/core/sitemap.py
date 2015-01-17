@@ -1,10 +1,11 @@
 # coding: utf8
 
 from django.contrib.sitemaps import GenericSitemap
-from .models import Post, Photo
+from core import models
 
 
 sitemaps = {
-    'post': GenericSitemap({"queryset": Post.objects.all()}, changefreq="weekly"),
-    'photo': GenericSitemap({"queryset": Photo.objects.all()}, changefreq="weekly"),
+    'post': GenericSitemap({"queryset": models.Post.objects.filter(type='post')}, changefreq="monthly"),
+    'rubric': GenericSitemap({"queryset": models.NewsCategory.objects.all()}, changefreq="daily"),
+    'skill': GenericSitemap({"queryset": models.Skill.objects.all()}, changefreq="daily"),
 }
