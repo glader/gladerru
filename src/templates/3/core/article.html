@@ -26,28 +26,34 @@
 {% endblock %}
 
 {% block content %}
-    <div class="b-static-text">
-    <a name="{{ article.name }}"></a>
-
-    {% if menu %}
-        <ul>
-            {% for m in menu %}
-                <li>{% ifequal forloop.counter0 page %}<strong>{{ m }}</strong>{% else %}<a href="{{ article.get_absolute_url }}?page={{ forloop.counter0 }}">{{ m }}</a>{% endifequal %}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
-
-    {{ content|default:""|safe }}
-
-    {% if previous %}
-        <a href="{{ article.get_absolute_url }}?page={{ previous.0 }}" style="float:left"><- {{ previous.1 }}</a>
-    {% endif %}
-
-    {% if next %}
-        <a href="{{ article.get_absolute_url }}?page={{ next.0 }}" style="float:right">{{ next.1 }} -></a>
-    {% endif %}
-
+    <div style="float: right;">
+        <!-- inner-right -->
+        <div data-ablock="8590" class="AdvertoneBlock" style="display:inline-block"></div>
     </div>
+
+    <div class="b-static-text text g-line b-post_content">
+        <a name="{{ article.name }}"></a>
+
+        {% if menu %}
+            <ul>
+                {% for m in menu %}
+                    <li>{% ifequal forloop.counter0 page %}<strong>{{ m }}</strong>{% else %}<a href="{{ article.get_absolute_url }}?page={{ forloop.counter0 }}">{{ m }}</a>{% endifequal %}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {{ content|default:""|safe }}
+
+        {% if previous %}
+            <a href="{{ article.get_absolute_url }}?page={{ previous.0 }}" style="float:left"><- {{ previous.1 }}</a>
+        {% endif %}
+
+        {% if next %}
+            <a href="{{ article.get_absolute_url }}?page={{ next.0 }}" style="float:right">{{ next.1 }} -></a>
+        {% endif %}
+    </div>
+
+    <div data-ablock="8914" class="AdvertoneBlock" style="display:inline-block"></div>
 
     {% if article.type == 'post' %}
         {% post_panel article user %}
