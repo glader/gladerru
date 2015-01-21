@@ -11,6 +11,7 @@
     {{ block.super }}
 
     {% include "block_social_scripts.html" %}
+    <script type="text/javascript" async class="AdvertoneJS" src="//static.advertone.ru/js/advertone_async.js"></script>
 {% endblock %}
 
 {% block description %}
@@ -24,6 +25,11 @@
 {% block page_title %}{{ movie.title }}{% endblock %}
 
 {% block content %}
+    <div style="float: right;">
+        <!-- inner-right -->
+        <div data-ablock="9003" class="AdvertoneBlock" style="display:inline-block"></div>
+    </div>
+
 	<div class="b-movie">
 		{% if movie.cover %}
 			<a href="{{ movie.cover.src }}" class="float_right"><img src="{{ movie.cover.src|thumbnail }}" alt="{{ movie.title }} - обложка" border="0"></a>
@@ -75,7 +81,7 @@
 	    </tbody></table>
 	</div>
 
-    {% post_panel movie user %}
+    <div data-ablock="9005" class="AdvertoneBlock" style="display:inline-block"></div>
 
     <div class="b-relative-movies">
         <div class="b-relative-movies_title">Еще посмотреть:</div>
