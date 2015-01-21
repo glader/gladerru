@@ -25,8 +25,10 @@ class ArticleView(TemplateView):
 
     def get_article_content(self, item):
         if not (item.content and '<cut' in item.content):
+            print "!!"
             return {'content': item.content}
 
+        print "here"
         pages = re.findall('<cut text="([^"]+)">(.+?)(?=<cut)', item.content, re.S)
 
         try:
