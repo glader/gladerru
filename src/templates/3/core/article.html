@@ -27,10 +27,12 @@
 {% endblock %}
 
 {% block content %}
-    <div style="float: right;">
-        <!-- inner-right -->
-        <div data-ablock="8590" class="AdvertoneBlock" style="display:inline-block"></div>
-    </div>
+    {% if article.type == 'post' %}
+        <div style="float: right;">
+            <!-- inner-right -->
+            <div data-ablock="8590" class="AdvertoneBlock" style="display:inline-block"></div>
+        </div>
+    {% endif %}
 
     <div class="b-static-text text g-line b-post_content">
         <a name="{{ article.name }}"></a>
@@ -54,10 +56,8 @@
         {% endif %}
     </div>
 
-    <div data-ablock="8914" class="AdvertoneBlock" style="display:inline-block"></div>
-
     {% if article.type == 'post' %}
-        {% post_panel article user %}
+        <div data-ablock="8914" class="AdvertoneBlock" style="display:inline-block"></div>
 
         {% relative_articles article %}
 
