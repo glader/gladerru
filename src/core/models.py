@@ -335,7 +335,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
         return self.sticky_to and self.sticky_to > date.today()
 
     def get_absolute_url(self):
-        if self.skill:
+        if self.skill or self.type == 'page':
             return reverse('article', args=[self.slug])
         elif self.slug:
             return reverse('post_htm', args=[self.category.slug, self.slug])
