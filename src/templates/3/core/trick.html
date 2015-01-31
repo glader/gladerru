@@ -1,4 +1,4 @@
-{% extends "item_common_article.html" %}
+{% extends "base.html" %}
 {% load content %}
 
 {% block top_menu %}
@@ -12,6 +12,8 @@
 {% endblock %}
 
 {% block title %}{{ object.title }}{% endblock %}
+
+{% block page_title %}{{ object.title }}{% endblock %}
 
 {% block content %}
     {{ object.abstract|default:""|safe }}

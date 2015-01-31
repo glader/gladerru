@@ -1,5 +1,9 @@
-{% extends "item_common_mountain.html" %}
+{% extends "base.html" %}
 {% load content %}
+
+{% block top_menu %}
+    {% top_menu 'map' %}
+{% endblock %}
 
 {% block title %}{{ mountain.title }} {{ block.super }}{% endblock %}
 

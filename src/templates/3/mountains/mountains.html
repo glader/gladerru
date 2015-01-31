@@ -1,4 +1,4 @@
-{% extends "item_common_world.html" %}
+{% extends "base.html" %}
 {% load content %}
 
 {% block title %}ГЛК на карте{% endblock %}
@@ -6,6 +6,8 @@
 {% block top_menu %}
     {% top_menu 'map' %}
 {% endblock %}
+
+{% block page_title %}ГЛК{% endblock %}
 
 {% block scripts %}
     {{ block.super }}

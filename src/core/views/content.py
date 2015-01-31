@@ -1,6 +1,4 @@
 # -*- coding: utf-8 -*-
-
-import re
 import logging
 
 from django.shortcuts import get_object_or_404
@@ -20,39 +18,7 @@ class ArticleView(TemplateView):
         context = super(ArticleView, self).get_context_data(**kwargs)
         context['article'] = get_object_or_404(Post, slug=kwargs['pk'])
         context['page_identifier'] = 'post_%s' % context['article'].id
-        context.update(self.get_article_content(context['article']))
         return context
-
-    def get_article_content(self, item):
-        if not (item.content and '<cut' in item.content):
-            print "!!"
-            return {'content': item.content}
-
-        print "here"
-        pages = re.findall('<cut text="([^"]+)">(.+?)(?=<cut)', item.content, re.S)
-
-        try:
-            page = int(self.request.GET.get('page', 0))
-        except ValueError:
-            page = 0
-        if page >= len(pages):
-            page = 0
-
-        menu = []
-        content = ''
-        i = 0
-        for part in pages:
-            menu.append(part[0])
-            if i == page:
-                content = part[1]
-            i += 1
-
-        return {'content': content,
-                'menu': menu,
-                'page': page,
-                'previous': page > 0 and (page - 1, menu[page - 1]) or None,
-                'next': page < len(menu) - 1 and (page + 1, menu[page + 1]) or None,
-                }
 
 
 class DictionaryView(TemplateView):
