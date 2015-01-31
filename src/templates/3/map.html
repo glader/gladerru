@@ -13,7 +13,7 @@
        <div class="content">
        <div class="text">
        	
-		{% items_list items %}
+       {% for i in items %}{{ i|link }}{% if not forloop.last %}, {% endif %}{% endfor %}
 
        </div>
        </div>

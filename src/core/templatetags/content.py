@@ -1,18 +1,14 @@
 # encoding: utf-8
-
-from datetime import datetime
 import re
 from urllib import quote
 
 from django import template
-from django.template import Context, loader, TemplateDoesNotExist
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.contrib.auth.models import User
 from django.conf import settings
 
 from core.models import Post, Photo, Tag, NewsCategory
-from core.utils.common import cached
 from core.utils.thumbnails import get_thumbnail_url
 
 from movies.models import Photo as ManPhoto
@@ -95,21 +91,6 @@ def type_name(item):
             return 'post'
     return item.__class__.__name__.lower()
 
-
-@register.inclusion_tag('block_pagination.html', takes_context=True)
-def pagination(context, url=""):
-    if not url:
-        url = context['request'].get_full_path()
-
-    # TODO: сделать с разбором query_string
-    if 'start=' in url:
-        url = re.sub('start=\d+&?', '', url)
-        if url.endswith('?'):
-            url = url[:-1]
-    context['url'] = url
-    return context
-
-
 ##########################################################
 
 
@@ -118,49 +99,6 @@ def linebreaks(text):
     if not text:
         return ""
     return re.sub('\r?\n', '<br/>\n', text)
-
-
-##########################################################
-
-
-@register.inclusion_tag('block_items_list.html')
-def items_list(items):
-    return {'items': items}
-
-
-@register.inclusion_tag('block_items_ul_list.html')
-def items_ul_list(items):
-    return {'items': items}
-
-
-@register.inclusion_tag('block_items_table_list.html')
-def items_table_list(items):
-    return {'items': items}
-
-######################################################
-
-
-@cached(cache_key='last_conversations', timeout_seconds=settings.CACHE_LONG_TIMEOUT)
-def get_last_coversations():
-    items = list(Post.objects.all().order_by('-last_comment_date')[:15])
-    anno = datetime(1900, 1, 1)
-    items.sort(key=lambda i: i.last_comment_date or anno, reverse=True)
-    items = items[:20]
-
-    authors_ids = [item.author_id for item in items if hasattr(item, 'author_id')]
-    authors = User.objects.in_bulk(authors_ids)
-    for item in items:
-        if hasattr(item, 'author_id'):
-            item.author_name = authors[item.author_id].name
-        else:
-            item.author_name = None
-
-    return items
-
-
-@register.inclusion_tag('block_last_conversations.html')
-def last_conversations():
-    return {'last_conversations': get_last_coversations()}
 
 
 @register.filter
@@ -208,8 +146,22 @@ def post_status(post):
 def add_referrer(html, referrer):
     return re.sub(r'href="(http://[^"]+)"', r'href="\1#referrer=%s"' % referrer, html)
 
+
 ################################################################################
 # Блоги
+
+@register.inclusion_tag('block_pagination.html', takes_context=True)
+def pagination(context, url=""):
+    if not url:
+        url = context['request'].get_full_path()
+
+    # TODO: сделать с разбором query_string
+    if 'start=' in url:
+        url = re.sub('start=\d+&?', '', url)
+        if url.endswith('?'):
+            url = url[:-1]
+    context['url'] = url
+    return context
 
 
 @register.inclusion_tag('block_post_panel.html')
@@ -237,16 +189,6 @@ def relative_articles(article):
                               .order_by('-date_created')[:4],
         'ab': 'table',
     }
-
-
-@register.simple_tag
-def yadirect(block_name):
-    template = "yadirect/%s.html" % block_name
-    try:
-        t = loader.get_template(template)
-        return t.render(Context({'debug': settings.DEBUG}))
-    except TemplateDoesNotExist:
-        return "Шаблон не найден"
 
 
 @register.filter

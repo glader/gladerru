@@ -29,8 +29,6 @@
 			{% if item.angles %}<tr><td valign="top"><b>Углы стойки:</b></td><td>{{ item.angles }}</td></tr>{% endif %}
 			{% if item.footsize %}<tr><td valign="top"><b>Размер ноги:</b></td><td>{{ item.footsize }}</td></tr>{% endif %}
 			{% if country %}<tr><td valign="top"><b>Родился:</b></td><td>{{ country }}</td></tr>{% endif %}
-
-			{% if sponsors %}<tr><td valign="top"><b>Спонсоры:</b></td><td valign="top">{% items_list sponsors %}</td></tr>{% endif %}
 		</tbody></table>
 
        	{{ item.content|safe }}
@@ -63,10 +61,6 @@
             {% if more_author_photos %}
                 <div><a href="{% url "man_author_photos" item.slug %}">Все снятые {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</a></div>
             {% endif %}
-		{% endif %}
-
-		{% if interviews %}<h3>Интервью</h3>
-			{% items_ul_list interviews %}
 		{% endif %}
 	</div>
 {% endblock %}
