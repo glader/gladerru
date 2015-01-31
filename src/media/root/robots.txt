@@ -3,6 +3,7 @@ Disallow: /auth
 Disallow: /best
 Disallow: /feeds/posts
 Disallow: /feeds/best
+Disallow: /feeds/tags
 Disallow: /files
 Disallow: /forum
 Disallow: /index.pl
@@ -10,6 +11,7 @@ Disallow: /post/new
 Disallow: /search
 Disallow: /studio
 Disallow: /tags
+Disallow: /users
 Disallow: /wp
 Host: glader.ru
 Clean-param: start
