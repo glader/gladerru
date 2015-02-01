@@ -10,6 +10,10 @@
     <script type='text/javascript' src='{% static "js/player_utils.js" %}'></script>
 {% endblock scripts %}
 
+{% block extrahead %}
+    <link rel="canonical" href="http://{{ DOMAIN }}{% url "soundtracks" %}" />
+{% endblock %}
+
 {% block top_menu %}
     {% top_menu 'soundtracks' %}
 {% endblock %}
