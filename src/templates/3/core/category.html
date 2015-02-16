@@ -3,10 +3,6 @@
 
 {% block title %}{{ category.title }}{% endblock %}
 
-{% block extrahead %}
-    <link rel="canonical" href="http://{{ DOMAIN }}{{ category.get_absolute_url }}" />
-{% endblock %}
-
 {% block top_menu %}
     {% top_menu category.slug %}
 {% endblock %}
@@ -31,6 +27,4 @@
         </noindex></td>
         </tr></table>
     </div>
-
-    {# {% pagination %} #}
 {% endblock page %}
