@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 import xmlrpclib
 from itertools import imap
 
@@ -26,7 +27,7 @@ class Command(NoArgsCommand):
         if any(imap(lambda link: link['status'] == 'ERROR', links)):
             mail_admins(u'glader.ru: битые ссылки', u'На сайте glader.ru обнаружены линки в статусе ERROR.')
 
-        if any(imap(lambda link: link['status'] == 'WAIT_WM', links)):
+        if any(imap(lambda link: link['status'] == 'WAIT_WM', links)) and datetime.now().hour == 8:
             mail_admins(
                 u'glader.ru: новые ссылки',
                 u'На сайте glader.ru обнаружены линки в статусе WAIT_WM. '
