@@ -29,5 +29,10 @@
 				{% endfor %}
 			</ul>
 		{% endif %}
+
+        {% if sape_links %}
+            <br>
+            <p>Спонсор рубрики: {{ sape_links }}</p>
+        {% endif %}
 	</div>
 {% endblock %}
