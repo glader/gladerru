@@ -34,7 +34,7 @@ def yandex_search(query):
         <page>0</page>
     </request>""" % escape(query.encode('utf8'))
 
-    answer = urllib2.urlopen("http://xmlsearch.yandex.ru/xmlsearch?user=%s&key=%s" %
+    answer = urllib2.urlopen("https://xmlsearch.yandex.ru/xmlsearch?user=%s&key=%s" %
                              (settings.YANDEX_XML_LOGIN, settings.YANDEX_XML_KEY), xml).read()
 
     log = logging.getLogger('search_raw')
