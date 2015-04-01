@@ -34,4 +34,9 @@
 	    {% endfor %}
 	    </ul>
 	</div>
+
+    {% if sape_links %}
+        <br>
+        <p>Спонсор страницы: {{ sape_links }}</p>
+    {% endif %}
 {% endblock %}
