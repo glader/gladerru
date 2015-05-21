@@ -87,6 +87,7 @@ class FeedbackView(FormView):
 
     def form_valid(self, form):
         form.send()
+        return super(FeedbackView, self).form_valid(form)
 
 
 class SkillsView(TemplateView):
