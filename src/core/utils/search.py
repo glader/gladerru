@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-import urllib2
-from cgi import escape
-import re
 from xml.etree import cElementTree as ET
 import logging
 import logging.handlers
+import re
+import requests
 
 from django.conf import settings
 
@@ -28,14 +27,15 @@ def base_search(query):
 
 
 def yandex_search(query):
-    xml = """<?xml version="1.0" encoding="utf-8"?>
-    <request>
-        <query>%s site:glader.ru</query>
-        <page>0</page>
-    </request>""" % escape(query.encode('utf8'))
-
-    answer = urllib2.urlopen("https://xmlsearch.yandex.ru/xmlsearch?user=%s&key=%s" %
-                             (settings.YANDEX_XML_LOGIN, settings.YANDEX_XML_KEY), xml).read()
+    answer = requests.get(
+        "https://yandex.ru/search/xml",
+        params={
+            'user': settings.YANDEX_XML_LOGIN,
+            'key': settings.YANDEX_XML_KEY,
+            'query': u'%s site:glader.ru' % query,
+            'page': 0,
+        }
+    ).content
 
     log = logging.getLogger('search_raw')
     log.setLevel(logging.INFO)
