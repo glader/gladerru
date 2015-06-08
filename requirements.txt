@@ -9,7 +9,7 @@ gunicorn==19.3.0
 html5lib==0.99999
 logging==0.4.9.6
 MySQL-python==1.2.5
-Pillow==2.8.1
+Pillow==2.8.2
 pymongo==3.0.2
 python-memcached==1.54
 pytils==0.3
