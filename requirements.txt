@@ -1,7 +1,7 @@
 beautifulsoup4==4.3.2
 celery==3.1.18
 django-reversion==1.8.7
-django-wysiwyg-redactor==0.4.7
+django-wysiwyg-redactor==0.4.8
 Django==1.6.11   # rq.filter: <1.7
 django_yafotki==0.7.3
 easywebdav==1.2.0
