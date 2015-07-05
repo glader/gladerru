@@ -22,7 +22,7 @@
 
 {% block title %}{{ movie.title }} - сноубордические фильмы{% endblock %}
 
-{% block page_title %}{{ movie.title }}{% endblock %}
+{% block page_title %}{{ movie.title }}{% if request.user.is_superuser %} <small><a href="/admind/movies/movie/{{ movie.id }}/">ред</a></small>{% endif %}{% endblock %}
 
 {% block content %}
     <div style="float: right;">
