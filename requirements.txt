@@ -11,7 +11,7 @@ logging==0.4.9.6
 MySQL-python==1.2.5
 Pillow==2.9.0
 pymongo==3.0.3
-python-memcached==1.54
+python-memcached==1.56
 pytils==0.3
 simplejson==3.8.0
 South==1.0.2
