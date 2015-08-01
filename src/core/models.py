@@ -321,7 +321,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     meta_keywords = models.TextField(verbose_name=u"Keywords", help_text=u"meta-keywords",
                                      null=True, blank=True, default=None)
 
-    tags = models.ManyToManyField(Tag, verbose_name=u"Теги", null=True, blank=True)
+    tags = models.ManyToManyField(Tag, verbose_name=u"Теги")
     comments = generic.GenericRelation(Comment)
 
     all = GenericManager()

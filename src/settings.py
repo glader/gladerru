@@ -38,7 +38,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.doc.XViewMiddleware',
     'core.middleware.Redirection',
     'core.middleware.LastLogin',
     'core.middleware.UserReferer',
@@ -69,20 +68,20 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'south',
-    'gunicorn',
+
     'django_russian',
+    'gunicorn',
     'redactor',
     'reversion',
+    'timelog',
 
     'bookkeeping',
-    'discounts',
-    'timelog',
     'core',
-    'votes',
-    'movies',
+    'discounts',
     'mountains',
+    'movies',
     'sape',
+    'votes',
 )
 
 # Absolute path to the directory that holds media.

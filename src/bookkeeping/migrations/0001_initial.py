@@ -1,38 +1,28 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Record'
-        db.create_table(u'bookkeeping_record', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('account', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('amount', self.gf('django.db.models.fields.DecimalField')(max_digits=12, decimal_places=2)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('comment', self.gf('django.db.models.fields.TextField')()),
-        ))
-        db.send_create_signal(u'bookkeeping', ['Record'])
+    dependencies = [
+    ]
 
-
-    def backwards(self, orm):
-        # Deleting model 'Record'
-        db.delete_table(u'bookkeeping_record')
-
-
-    models = {
-        u'bookkeeping.record': {
-            'Meta': {'ordering': "['-created']", 'object_name': 'Record'},
-            'account': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'amount': ('django.db.models.fields.DecimalField', [], {'max_digits': '12', 'decimal_places': '2'}),
-            'comment': ('django.db.models.fields.TextField', [], {}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'})
-        }
-    }
-
-    complete_apps = ['bookkeeping']
+    operations = [
+        migrations.CreateModel(
+            name='Record',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('account', models.CharField(max_length=50, verbose_name='\u0410\u043a\u043a\u0430\u0443\u043d\u0442', choices=[(b'glader', 'Glader'), (b'skyslayer', 'Skyslayer')])),
+                ('amount', models.DecimalField(verbose_name='\u0421\u0443\u043c\u043c\u0430', max_digits=12, decimal_places=2)),
+                ('created', models.DateTimeField(auto_now_add=True, verbose_name='\u0414\u043e\u0431\u0430\u0432\u043b\u0435\u043d\u043e')),
+                ('comment', models.TextField(verbose_name='\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435')),
+            ],
+            options={
+                'ordering': ['-created'],
+                'verbose_name': '\u0417\u0430\u043f\u0438\u0441\u044c',
+                'verbose_name_plural': '\u0417\u0430\u043f\u0438\u0441\u0438',
+            },
+        ),
+    ]

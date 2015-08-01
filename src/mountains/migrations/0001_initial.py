@@ -1,159 +1,109 @@
 # -*- coding: utf-8 -*-
-from south.utils import datetime_utils as datetime
-from south.db import db
-from south.v2 import SchemaMigration
-from django.db import models
+from __future__ import unicode_literals
+
+from django.db import models, migrations
+import votes.models
+import yafotki.fields
 
 
-class Migration(SchemaMigration):
+class Migration(migrations.Migration):
 
-    def forwards(self, orm):
-        # Adding model 'Region'
-        db.create_table(u'mountains_region', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-            ('order', self.gf('django.db.models.fields.PositiveIntegerField')()),
-        ))
-        db.send_create_signal(u'mountains', ['Region'])
+    dependencies = [
+    ]
 
-        # Adding model 'District'
-        db.create_table(u'mountains_district', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250)),
-        ))
-        db.send_create_signal(u'mountains', ['District'])
-
-        # Adding model 'Mountain'
-        db.create_table(u'mountains_mountain', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=250, unique=True, null=True, blank=True)),
-            ('title', self.gf('django.db.models.fields.CharField')(max_length=250, null=True, blank=True)),
-            ('content', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('status', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('address', self.gf('django.db.models.fields.CharField')(max_length=200, null=True, blank=True)),
-            ('district', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mountains.District'], null=True, blank=True)),
-            ('has_ratrack', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('hidden', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('image', self.gf('yafotki.fields.YFField')(default=None, max_length=255, null=True, blank=True)),
-            ('lifts', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('latitude', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
-            ('longitude', self.gf('django.db.models.fields.CharField')(max_length=20, null=True, blank=True)),
-            ('longest', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('nightwork', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('oldschool', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('overfall', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('pistelength', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('pistes', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('prices', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('rating', self.gf('django.db.models.fields.FloatField')(default=0.0)),
-            ('region', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mountains.Region'])),
-            ('service', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('snowpark', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('tel', self.gf('django.db.models.fields.CharField')(max_length=250, null=True, blank=True)),
-            ('url', self.gf('django.db.models.fields.URLField')(max_length=250, null=True, blank=True)),
-            ('webcam', self.gf('django.db.models.fields.URLField')(max_length=250, null=True, blank=True)),
-            ('work_time', self.gf('django.db.models.fields.TextField')(max_length=50, null=True, blank=True)),
-            ('email', self.gf('django.db.models.fields.EmailField')(max_length=75, null=True, blank=True)),
-            ('newbie', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('parking', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('rental', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('room', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('safe', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('has_service', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('cafe', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('hotel', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-            ('has_light', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('has_show', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('check_date', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
-            ('proof_url', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
-        ))
-        db.send_create_signal(u'mountains', ['Mountain'])
-
-        # Adding model 'MountainPhoto'
-        db.create_table(u'mountains_mountainphoto', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('mountain', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mountains.Mountain'])),
-            ('image', self.gf('yafotki.fields.YFField')(max_length=255)),
-        ))
-        db.send_create_signal(u'mountains', ['MountainPhoto'])
-
-
-    def backwards(self, orm):
-        # Deleting model 'Region'
-        db.delete_table(u'mountains_region')
-
-        # Deleting model 'District'
-        db.delete_table(u'mountains_district')
-
-        # Deleting model 'Mountain'
-        db.delete_table(u'mountains_mountain')
-
-        # Deleting model 'MountainPhoto'
-        db.delete_table(u'mountains_mountainphoto')
-
-
-    models = {
-        u'mountains.district': {
-            'Meta': {'object_name': 'District'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        },
-        u'mountains.mountain': {
-            'Meta': {'object_name': 'Mountain'},
-            'address': ('django.db.models.fields.CharField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
-            'cafe': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'check_date': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
-            'content': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'district': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mountains.District']", 'null': 'True', 'blank': 'True'}),
-            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'null': 'True', 'blank': 'True'}),
-            'has_light': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'has_ratrack': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'has_service': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'has_show': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'hidden': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'hotel': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('yafotki.fields.YFField', [], {'default': 'None', 'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'latitude': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
-            'lifts': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'longest': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'longitude': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True', 'blank': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'unique': 'True', 'null': 'True', 'blank': 'True'}),
-            'newbie': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'nightwork': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'oldschool': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'overfall': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'parking': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'pistelength': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'pistes': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'prices': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'proof_url': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'rating': ('django.db.models.fields.FloatField', [], {'default': '0.0'}),
-            'region': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mountains.Region']"}),
-            'rental': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'room': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'safe': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            'service': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'snowpark': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
-            'status': ('django.db.models.fields.CharField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'}),
-            'tel': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-            'url': ('django.db.models.fields.URLField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-            'webcam': ('django.db.models.fields.URLField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-            'work_time': ('django.db.models.fields.TextField', [], {'max_length': '50', 'null': 'True', 'blank': 'True'})
-        },
-        u'mountains.mountainphoto': {
-            'Meta': {'object_name': 'MountainPhoto'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'image': ('yafotki.fields.YFField', [], {'max_length': '255'}),
-            'mountain': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mountains.Mountain']"})
-        },
-        u'mountains.region': {
-            'Meta': {'ordering': "['order']", 'object_name': 'Region'},
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'order': ('django.db.models.fields.PositiveIntegerField', [], {}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '250'})
-        }
-    }
-
-    complete_apps = ['mountains']
+    operations = [
+        migrations.CreateModel(
+            name='District',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=250, verbose_name='\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435')),
+            ],
+            options={
+                'verbose_name': '\u041e\u0431\u043b\u0430\u0441\u0442\u044c',
+                'verbose_name_plural': '\u041e\u0431\u043b\u0430\u0441\u0442\u0438',
+            },
+        ),
+        migrations.CreateModel(
+            name='Mountain',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('slug', models.CharField(max_length=250, unique=True, null=True, verbose_name='\u041a\u043e\u0434 \u0433\u043e\u0440\u044b', blank=True)),
+                ('title', models.CharField(max_length=250, null=True, verbose_name='\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435', blank=True)),
+                ('content', models.TextField(null=True, verbose_name='\u0421\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435 \u044d\u043b\u0435\u043c\u0435\u043d\u0442\u0430', blank=True)),
+                ('status', models.CharField(max_length=50, null=True, verbose_name='\u0421\u0442\u0430\u0442\u0443\u0441', blank=True)),
+                ('address', models.CharField(max_length=200, null=True, verbose_name='\u0410\u0434\u0440\u0435\u0441', blank=True)),
+                ('has_ratrack', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u0440\u0430\u0442\u0440\u0430\u043a')),
+                ('hidden', models.BooleanField(default=False, verbose_name='\u0421\u043a\u0440\u044b\u0442\u044b\u0439')),
+                ('image', yafotki.fields.YFField(default=None, upload_to=b'gladerru', max_length=255, blank=True, null=True, verbose_name='\u0421\u0445\u0435\u043c\u0430 \u0442\u0440\u0430\u0441\u0441')),
+                ('lifts', models.TextField(null=True, verbose_name='\u041f\u043e\u0434\u044a\u0435\u043c\u043d\u0438\u043a\u0438', blank=True)),
+                ('latitude', models.CharField(max_length=20, null=True, verbose_name='\u0428\u0438\u0440\u043e\u0442\u0430', blank=True)),
+                ('longitude', models.CharField(max_length=20, null=True, verbose_name='\u0414\u043e\u043b\u0433\u043e\u0442\u0430', blank=True)),
+                ('longest', models.CharField(max_length=50, null=True, verbose_name='\u0421\u0430\u043c\u0430\u044f \u0434\u043b\u0438\u043d\u043d\u0430\u044f \u0442\u0440\u0430\u0441\u0441\u0430', blank=True)),
+                ('nightwork', models.TextField(help_text='\u0414\u043e \u0441\u043a\u043e\u043b\u044c\u043a\u0438', null=True, verbose_name='\u041d\u043e\u0447\u043d\u0430\u044f \u0440\u0430\u0431\u043e\u0442\u0430', blank=True)),
+                ('oldschool', models.BooleanField(default=False, verbose_name='\u041e\u043b\u0434\u0441\u043a\u0443\u043b')),
+                ('overfall', models.CharField(max_length=50, null=True, verbose_name='\u041f\u0435\u0440\u0435\u043f\u0430\u0434 \u0432\u044b\u0441\u043e\u0442', blank=True)),
+                ('pistelength', models.CharField(max_length=50, null=True, verbose_name='\u041e\u0431\u0449\u0430\u044f \u0434\u043b\u0438\u043d\u0430 \u0442\u0440\u0430\u0441\u0441', blank=True)),
+                ('pistes', models.CharField(max_length=50, null=True, verbose_name='\u041a\u043e\u043b-\u0432\u043e \u0442\u0440\u0430\u0441\u0441', blank=True)),
+                ('prices', models.TextField(null=True, verbose_name='\u0426\u0435\u043d\u044b', blank=True)),
+                ('rating', models.FloatField(default=0.0, verbose_name='\u0420\u0435\u0439\u0442\u0438\u043d\u0433')),
+                ('service', models.TextField(null=True, verbose_name='\u0423\u0441\u043b\u0443\u0433\u0438', blank=True)),
+                ('snowpark', models.TextField(null=True, verbose_name='\u0421\u043d\u043e\u0443\u043f\u0430\u0440\u043a', blank=True)),
+                ('tel', models.CharField(max_length=250, null=True, verbose_name='\u0422\u0435\u043b\u0435\u0444\u043e\u043d\u044b', blank=True)),
+                ('url', models.URLField(max_length=250, null=True, verbose_name='URL', blank=True)),
+                ('webcam', models.URLField(max_length=250, null=True, verbose_name='Web \u043a\u0430\u043c\u0435\u0440\u0430', blank=True)),
+                ('work_time', models.TextField(max_length=50, null=True, verbose_name='\u0412\u0440\u0435\u043c\u044f \u0440\u0430\u0431\u043e\u0442\u044b', blank=True)),
+                ('email', models.EmailField(max_length=254, null=True, verbose_name='Email', blank=True)),
+                ('interactive_map', models.TextField(default=None, null=True, verbose_name='\u0418\u043d\u0442\u0435\u0440\u0430\u043a\u0442. \u043a\u0430\u0440\u0442\u0430', blank=True)),
+                ('newbie', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u0443\u0447\u0435\u0431\u043d\u044b\u0439 \u0441\u043a\u043b\u043e\u043d')),
+                ('parking', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u043f\u043b\u0430\u0442\u043d\u0430\u044f \u0441\u0442\u043e\u044f\u043d\u043a\u0430')),
+                ('rental', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u043f\u0440\u043e\u043a\u0430\u0442 \u043e\u0431\u043e\u0440\u0443\u0434\u043e\u0432\u0430\u043d\u0438\u044f')),
+                ('room', models.BooleanField(default=False, verbose_name='\u041a\u043e\u043c\u043d\u0430\u0442\u0430 \u0434\u043b\u044f \u043f\u0435\u0440\u0435\u043e\u0434\u0435\u0432\u0430\u043d\u0438\u044f')),
+                ('safe', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u043a\u0430\u043c\u0435\u0440\u0430 \u0445\u0440\u0430\u043d\u0435\u043d\u0438\u044f')),
+                ('has_service', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u043c\u0430\u0441\u0442\u0435\u0440\u0441\u043a\u0430\u044f/\u0441\u0435\u0440\u0432\u0438\u0441')),
+                ('cafe', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u043a\u0430\u0444\u0435')),
+                ('hotel', models.TextField(null=True, verbose_name='\u0413\u043e\u0441\u0442\u0438\u043d\u0438\u0446\u0430', blank=True)),
+                ('has_light', models.BooleanField(default=False, verbose_name='\u0415\u0441\u0442\u044c \u043e\u0441\u0432\u0435\u0449\u0435\u043d\u0438\u0435 \u0442\u0440\u0430\u0441\u0441')),
+                ('has_show', models.BooleanField(default=False, verbose_name='\u0418\u0441\u043a\u0443\u0441\u0441\u0442\u0432\u0435\u043d\u043d\u044b\u0439 \u0441\u043d\u0435\u0433')),
+                ('check_date', models.DateField(null=True, verbose_name='\u0414\u0430\u0442\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438', blank=True)),
+                ('proof_url', models.TextField(null=True, verbose_name='\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a \u0434\u0430\u043d\u043d\u044b\u0445', blank=True)),
+                ('meta_description', models.TextField(default=None, help_text='meta-description', null=True, verbose_name='Description', blank=True)),
+                ('district', models.ForeignKey(verbose_name='\u041e\u0431\u043b\u0430\u0441\u0442\u044c', blank=True, to='mountains.District', null=True)),
+            ],
+            options={
+                'verbose_name': '\u0413\u043e\u0440\u0430',
+                'verbose_name_plural': '\u0413\u043e\u0440\u044b',
+            },
+            bases=(models.Model, votes.models.VoteMixin),
+        ),
+        migrations.CreateModel(
+            name='MountainPhoto',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('image', yafotki.fields.YFField(upload_to=b'gladerru', max_length=255, verbose_name='\u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430')),
+                ('mountain', models.ForeignKey(verbose_name=b'\xd0\x93\xd0\xbe\xd1\x80\xd0\xb0', to='mountains.Mountain')),
+            ],
+            options={
+                'verbose_name': '\u0424\u043e\u0442\u043e \u0433\u043e\u0440\u044b',
+                'verbose_name_plural': '\u0424\u043e\u0442\u043e \u0433\u043e\u0440',
+            },
+        ),
+        migrations.CreateModel(
+            name='Region',
+            fields=[
+                ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
+                ('title', models.CharField(max_length=250, verbose_name='\u041d\u0430\u0437\u0432\u0430\u043d\u0438\u0435')),
+                ('order', models.PositiveIntegerField(verbose_name='\u041f\u043e\u0440\u044f\u0434\u043e\u043a')),
+                ('meta_description', models.TextField(default=None, help_text='meta-description', null=True, verbose_name='Description', blank=True)),
+            ],
+            options={
+                'ordering': ['order'],
+                'verbose_name': '\u0420\u0435\u0433\u0438\u043e\u043d',
+                'verbose_name_plural': '\u0420\u0435\u0433\u0438\u043e\u043d\u044b',
+            },
+        ),
+        migrations.AddField(
+            model_name='mountain',
+            name='region',
+            field=models.ForeignKey(verbose_name='\u0420\u0435\u0433\u0438\u043e\u043d', to='mountains.Region'),
+        ),
+    ]

@@ -14,7 +14,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'log/email'
 
 SECRET_KEY = '12345'
-
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static', 'upload')
 
 try:
@@ -28,9 +27,6 @@ LOG_LEVEL = logging.DEBUG
 for name, handler in LOGGING['handlers'].items():
     if 'filename' in handler:
         handler['filename'] = os.path.join(LOG_PATH, os.path.basename(handler['filename']))
-
-south_logger = logging.getLogger('south')
-south_logger.setLevel(logging.INFO)
 
 INSTALLED_APPS += (
     'django_nose',
