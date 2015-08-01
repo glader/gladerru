@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from bs4 import BeautifulSoup, element
 import random
 import re
@@ -49,15 +50,15 @@ class CommonForm(forms.Form):
     def errors_list(self):
         return [unicode(message) for k, l in self.errors.items() for message in l]
 
-    def str_errors(self, divider=u". "):
+    def str_errors(self, divider='. '):
         return divider.join(self.errors_list())
 
 
 class RegistrationForm(CommonForm):
-    email = forms.EmailField(max_length=100, error_messages={'required': u'Укажите свой email'})
-    name = forms.CharField(label=u'Имя пользователя', required=False)
-    login = forms.CharField(label=u'Логин', required=False,
-                            help_text=u'Поле для отсечения автоматических регистраторов',
+    email = forms.EmailField(max_length=100, error_messages={'required': 'Укажите свой email'})
+    name = forms.CharField(label='Имя пользователя', required=False)
+    login = forms.CharField(label='Логин', required=False,
+                            help_text='Поле для отсечения автоматических регистраторов',
                             widget=forms.TextInput(attrs={'class': 'g-hidden'}))
     password1 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
     password2 = forms.CharField(max_length=100, required=False, widget=forms.TextInput)
@@ -90,17 +91,17 @@ class RegistrationForm(CommonForm):
             if self.free_credentials(self.cleaned_data['name']):
                 return self.cleaned_data['name']
             else:
-                raise forms.ValidationError(u'Это имя уже занято :(')
+                raise forms.ValidationError('Это имя уже занято :(')
 
     def clean_email(self):
         if self.free_credentials(self.cleaned_data['email']):
             return self.cleaned_data['email']
         else:
-            raise forms.ValidationError(u'В базе уже есть пользователь с введенным email')
+            raise forms.ValidationError('В базе уже есть пользователь с введенным email')
 
     def clean_login(self):
         if len(self.cleaned_data['login']) > 0:
-            raise forms.ValidationError(u'Извините, роботов не регистрируем')
+            raise forms.ValidationError('Извините, роботов не регистрируем')
 
     def generate_password(self):
         vowels = 'euioa'
@@ -125,7 +126,7 @@ class RegistrationForm(CommonForm):
             p1 = self.cleaned_data['password1']
             p2 = self.cleaned_data['password2']
             if not p1 == p2:
-                raise forms.ValidationError(u'Введенные пароли не одинаковые')
+                raise forms.ValidationError('Введенные пароли не одинаковые')
             password = p1
         else:
             password = self.generate_password()
@@ -156,12 +157,12 @@ class RegistrationForm(CommonForm):
 
 
 class LoginForm(CommonForm):
-    login = forms.CharField(label=u'Логин', max_length=100)
-    passwd = forms.CharField(label=u'Пароль', max_length=100, widget=forms.PasswordInput)
+    login = forms.CharField(label='Логин', max_length=100)
+    passwd = forms.CharField(label='Пароль', max_length=100, widget=forms.PasswordInput)
     next = forms.CharField(max_length=2000, required=False, widget=forms.HiddenInput)
 
     def get_user(self, s):
-        u""" Проверяет строку на емейл, логин или имя пользователя """
+        """ Проверяет строку на емейл, логин или имя пользователя """
         return User.objects.get(Q(username=s) | Q(email=s) | Q(first_name=s))
 
     def clean(self):
@@ -171,14 +172,14 @@ class LoginForm(CommonForm):
         try:
             user = self.get_user(login)
         except User.DoesNotExist:
-            raise forms.ValidationError(u'Логин или пароль не верен')
+            raise forms.ValidationError('Логин или пароль не верен')
 
         auth_user = authenticate(username=user.username, password=passwd)
         if auth_user:
             self.user = auth_user
             return self.cleaned_data
         else:
-            raise forms.ValidationError(u'Логин или пароль не верен')
+            raise forms.ValidationError('Логин или пароль не верен')
 
 
 class ProfileForm(forms.ModelForm):
@@ -195,21 +196,21 @@ class ProfileForm(forms.ModelForm):
 
 
 class PostForm(ModelForm):
-    title = forms.CharField(label=u'Заголовок', widget=forms.TextInput(attrs={'size': '100'}))
-    abstract = forms.CharField(label=u'Анонс', widget=forms.Textarea(attrs={'cols': 100, 'rows': 5}))
-    icon = forms.ImageField(label=u'Картинка')
+    title = forms.CharField(label='Заголовок', widget=forms.TextInput(attrs={'size': '100'}))
+    abstract = forms.CharField(label='Анонс', widget=forms.Textarea(attrs={'cols': 100, 'rows': 5}))
+    icon = forms.ImageField(label='Картинка')
 
     def clean_title(self):
         return sanitizeHTML(self.cleaned_data['title'])
 
     def clean_content(self):
         if not self.cleaned_data['content']:
-            raise forms.ValidationError(u'Введите текст новости.')
+            raise forms.ValidationError('Введите текст новости.')
         return sanitizeHTML(self.cleaned_data['content'], mode='strict')
 
     def clean(self):
         if not self.cleaned_data['category']:
-            raise forms.ValidationError(u'Укажите желаемую категорию новости')
+            raise forms.ValidationError('Укажите желаемую категорию новости')
         return super(PostForm, self).clean()
 
     class Meta:
@@ -218,12 +219,12 @@ class PostForm(ModelForm):
 
 
 class FeedbackForm(CommonForm):
-    name = forms.CharField(label=u'Имя', required=False)
-    email = forms.EmailField(label=u'Email', required=False, error_messages={'invalid': u'Введенный email некорректен'})
-    message = forms.CharField(label=u'Сообщение*',
-                              error_messages={'required': u'Введите текст сообщения'},
+    name = forms.CharField(label='Имя', required=False)
+    email = forms.EmailField(label='Email', required=False, error_messages={'invalid': 'Введенный email некорректен'})
+    message = forms.CharField(label='Сообщение*',
+                              error_messages={'required': 'Введите текст сообщения'},
                               widget=forms.Textarea())
-    code = forms.CharField(label="Код", required=False, widget=forms.HiddenInput)
+    code = forms.CharField(label='Код', required=False, widget=forms.HiddenInput)
 
     def clean_message(self):
         if '[url=' in self.cleaned_data.get('message', ''):
@@ -232,10 +233,10 @@ class FeedbackForm(CommonForm):
             return self.cleaned_data.get('message')
 
     def send(self):
-        text = u"Сообщение со страницы обратной связи:<br>"
+        text = 'Сообщение со страницы обратной связи:<br>'
         if self.cleaned_data['name']:
-            text += u"Имя отправителя: '%s'<br>" % self.cleaned_data['name']
+            text += 'Имя отправителя: "%s"<br>' % self.cleaned_data['name']
         if self.cleaned_data['email']:
-            text += u"Обратный адрес: '%s'<br>" % self.cleaned_data['email']
+            text += 'Обратный адрес: "%s"<br>' % self.cleaned_data['email']
         text += self.cleaned_data['message']
-        notice_admin(text, subject=u"Обратная связь")
+        notice_admin(text, subject='Обратная связь')

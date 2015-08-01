@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.contrib import admin
 from . import models
 from django.contrib.auth.models import User, Permission
@@ -97,7 +98,7 @@ admin.site.register(Permission)
 
 class NewsCategoryAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'order')
-    prepopulated_fields = {"slug": ("title",)}
+    prepopulated_fields = {'slug': ('title',)}
     ordering = ('order',)
 
 

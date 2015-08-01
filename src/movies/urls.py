@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.conf.urls import patterns, url
 from django.views.generic import ListView, RedirectView
 from django.contrib.auth.decorators import permission_required

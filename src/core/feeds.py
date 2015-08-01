@@ -1,4 +1,5 @@
 # -*- coding:utf-8 -*-
+from __future__ import unicode_literals
 from django.contrib.syndication.views import Feed
 from django.conf import settings
 from models import Post
@@ -6,9 +7,9 @@ from models import Post
 
 class AllPosts(Feed):
     """ Свежие сообщения в блоге """
-    title = u"Glader.ru: последние сообщения"
-    link = "http://%s" % settings.DOMAIN
-    description = "Свежие сообщения на сайте сноуборд-энциклопедии Glader.ru"
+    title = 'Glader.ru: последние сообщения'
+    link = 'http://%s' % settings.DOMAIN
+    description = 'Свежие сообщения на сайте сноуборд-энциклопедии Glader.ru'
     title_template = 'feeds/all_title.html'
     description_template = 'feeds/all_description.html'
 
@@ -20,7 +21,7 @@ class AllPosts(Feed):
 
     def item_author_name(self, item):
         author = item.author
-        return author and author.first_name or ""
+        return author and author.first_name or ''
 
     def item_link(self, item):
         return item.get_absolute_url()

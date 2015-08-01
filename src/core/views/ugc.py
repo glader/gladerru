@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 from datetime import datetime
 import simplejson
 
@@ -49,7 +49,7 @@ class IndexView(TemplateView):
         context = super(IndexView, self).get_context_data(**kwargs)
         context['categories'] = list(NewsCategory.objects.all().order_by('order'))
         fresh = {
-            'title': u'Свежее',
+            'title': 'Свежее',
             'posts': list(Post.objects.filter(status='pub', type='post').order_by('-date_created')[:4])
         }
         fresh['posts'].sort(key=lambda post: (post.is_sticky and 2 or 1, post.date_created), reverse=True)
@@ -66,7 +66,7 @@ class IndexView(TemplateView):
 
 
 class CategoryView(TemplateView):
-    template_name = "core/category.html"
+    template_name = 'core/category.html'
     POSTS_PER_CATEGORY = 20
 
     def get_context_data(self, **kwargs):
@@ -146,13 +146,13 @@ class EditPostView(UpdateView):
 
     def post(self, request, *args, **kwargs):
         if self.request.user.is_superuser:
-            if request.POST.get('action') == u'Опубликовать':
+            if request.POST.get('action') == 'Опубликовать':
                 post = self.get_object()
                 post.status = 'pub'
                 post.save()
                 return HttpResponseRedirect(post.get_absolute_url())
 
-            if request.POST.get('action') == u'Забанить':
+            if request.POST.get('action') == 'Забанить':
                 post = self.get_object()
                 post.status = 'ban'
                 post.save()

@@ -1,4 +1,5 @@
 # encoding: utf-8
+from __future__ import unicode_literals
 import re
 from urllib import quote
 
@@ -21,39 +22,39 @@ def VK_API_ID():
     return settings.VK_API_ID
 
 
-@register.inclusion_tag("block_top_menu.html")
+@register.inclusion_tag('block_top_menu.html')
 def top_menu(level2='all_posts', level1=None):
     level2 = str(level2)
     categories = [
-        [category.slug, category.get_absolute_url(), category.title, u""]
+        [category.slug, category.get_absolute_url(), category.title, '']
         for category in NewsCategory.objects.all()
     ]
     submenu = {
-        'posts': categories + [['new', '/post/new', u'написать', u'Предложить новость']],
+        'posts': categories + [['new', '/post/new', 'написать', 'Предложить новость']],
         'articles': [
-            ['newbie', '/skills/newbie', u'новичок', u'никогда не брал доску в руки'],
-            ['beginner', '/skills/beginner', u'начинающий', u'умеешь спускаться елочкой'],
-            ['freestyle', '/skills/freestyle', u'фристайл', u'те, кто хочет прыгать с трамплинов'],
-            ['freeride', '/skills/freeride', u'фрирайд', u'тем, кто хочет катать в больших горах'],
-            ['jibbing', '/skills/jibbing', u'джиббинг', u'тем, кто хочет слайдить по перилам'],
-            ['carving', '/skills/carving', u'карвинг', u'тем, кто хочет резать дуги'],
-            ['dictionary', '/terms/', u'словарь', u'Словарь всяких терминов'],
+            ['newbie', '/skills/newbie', 'новичок', 'никогда не брал доску в руки'],
+            ['beginner', '/skills/beginner', 'начинающий', 'умеешь спускаться елочкой'],
+            ['freestyle', '/skills/freestyle', 'фристайл', 'те, кто хочет прыгать с трамплинов'],
+            ['freeride', '/skills/freeride', 'фрирайд', 'тем, кто хочет катать в больших горах'],
+            ['jibbing', '/skills/jibbing', 'джиббинг', 'тем, кто хочет слайдить по перилам'],
+            ['carving', '/skills/carving', 'карвинг', 'тем, кто хочет резать дуги'],
+            ['dictionary', '/terms/', 'словарь', 'Словарь всяких терминов'],
         ],
         'movies': [
-            ['2014', '/movies/2014/', u'2014', u'Фильмы 2014 года'],
-            ['2013', '/movies/2013/', u'2013', u'Фильмы 2013 года'],
-            ['all', '/movies/all/', u'все', u'Все фильмы'],
-            ['teasers', '/movies/teasers/', u'тизеры', u'Тизеры к фильмам'],
-            ['soundtracks', '/movies/soundtracks/', u'саундтреки', u'Музыкальные треки к фильмам'],
-            ['studies', '/studies/', u'студии', u'Авторы фильмов'],
-            ['people', '/people/', u'райдеры', u'Участники съемок'],
+            ['2014', '/movies/2014/', '2014', 'Фильмы 2014 года'],
+            ['2013', '/movies/2013/', '2013', 'Фильмы 2013 года'],
+            ['all', '/movies/all/', 'все', 'Все фильмы'],
+            ['teasers', '/movies/teasers/', 'тизеры', 'Тизеры к фильмам'],
+            ['soundtracks', '/movies/soundtracks/', 'саундтреки', 'Музыкальные треки к фильмам'],
+            ['studies', '/studies/', 'студии', 'Авторы фильмов'],
+            ['people', '/people/', 'райдеры', 'Участники съемок'],
         ],
         'mountains': [
-            ['map', '/mountains', u'карта', u'Горки: информация, фотографии, цены, отзывы.'],
+            ['map', '/mountains', 'карта', 'Горки: информация, фотографии, цены, отзывы.'],
         ],
         'profile': [
-            ['drafts', '/my/drafts', u'черновики', u'начатое и неоконченное'],
-            ['settings', '/my/settings', u'настройки', u''],
+            ['drafts', '/my/drafts', 'черновики', 'начатое и неоконченное'],
+            ['settings', '/my/settings', 'настройки', ''],
         ]
     }
 
@@ -72,12 +73,12 @@ def top_menu(level2='all_posts', level1=None):
         return None, None
 
     level1, level2 = find_levels(level1, level2)
-    return {'level1': level1, 'level2': level2, 'submenu': level1 and submenu[level1] or []}
+    return {'level1': level1, 'level2': level2, 'submen': level1 and submenu[level1] or []}
 
 
 @register.filter
 def decimal_cut(value, numbers=1):
-    format = "%%0.%df" % numbers
+    format = '%%0.%df' % numbers
     return format % value
 
 
@@ -97,7 +98,7 @@ def type_name(item):
 @register.filter
 def linebreaks(text):
     if not text:
-        return ""
+        return ''
     return re.sub('\r?\n', '<br/>\n', text)
 
 
@@ -109,37 +110,37 @@ def el(dic, key):
 @register.filter
 def link(item):
     if not item:
-        return u"[Отсутствует объект]"
+        return '[Отсутствует объект]'
 
     if isinstance(item, Tag):
-        return mark_safe(u'<a href="%s" rel="tag">%s</a>' % (item.get_absolute_url(), item.title))
+        return mark_safe('<a href="%s" rel="tag">%s</a>' % (item.get_absolute_url(), item.title))
 
     if isinstance(item, User):
-        return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.name))
+        return mark_safe('<a href="%s">%s</a>' % (item.get_absolute_url(), item.name))
 
     if isinstance(item, Photo) or isinstance(item, ManPhoto):
-        return mark_safe(u'<a href="%s"><img class="userphoto" src="%s" alt="%s"></a>'
+        return mark_safe('<a href="%s"><img class="userphoto" src="%s" alt="%s"></a>'
                          % (item.get_absolute_url(), thumbnail(item.yandex_fotki_image_src), item.title))
 
-    return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
+    return mark_safe('<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
 
 
 @register.simple_tag
 def post_edit_link(post, user):
     if post.can_edit(user):
         return mark_safe('(<a href="%s">ред.</a>)' % reverse('edit_post', args=[post.pk]))
-    return ""
+    return ''
 
 
 @register.simple_tag
 def post_status(post):
     if post.status == 'save':
-        return u"(черновик)"
+        return '(черновик)'
     if post.status == 'del':
-        return u"(удален)"
+        return '(удален)'
     if post.status == 'deferred':
-        return u"(будет опубликован %s)" % post.date_created
-    return u""
+        return '(будет опубликован %s)' % post.date_created
+    return ''
 
 
 @register.filter
@@ -151,7 +152,7 @@ def add_referrer(html, referrer):
 # Блоги
 
 @register.inclusion_tag('block_pagination.html', takes_context=True)
-def pagination(context, url=""):
+def pagination(context, url=''):
     if not url:
         url = context['request'].get_full_path()
 
@@ -207,7 +208,7 @@ def is_extremebits(torrent):
 @register.simple_tag
 def get_admin_url(object):
     u"""Ссылка на редактирование эелмента"""
-    return u"/admind/%(app_label)s/%(module_name)s/%(object_id)s/" % {
+    return '/admind/%(app_label)s/%(module_name)s/%(object_id)s/' % {
         'app_label': object._meta.app_label,
         'module_name': object._meta.module_name,
         'object_id': quote(unicode(object.pk).encode('utf8'))

@@ -1,4 +1,5 @@
 # encoding: utf-8
+from __future__ import unicode_literals
 from django import template
 
 register = template.Library()
@@ -7,22 +8,22 @@ register = template.Library()
 @register.filter
 def good_or_bad(rating):
     if rating > 0:
-        return "good"
+        return 'good'
     elif rating < 0:
-        return "bad"
+        return 'bad'
     else:
-        return "zero"
+        return 'zero'
 
 
 @register.filter
 def signed_number(number):
     if number > 0:
-        return "+%d" % number
+        return '+%d' % number
     else:
-        return "%d" % number
+        return '%d' % number
 
 
 @register.filter
 def decimal_cut(value, numbers=1):
-    format = "%%0.%df" % numbers
+    format = '%%0.%df' % numbers
     return format % value

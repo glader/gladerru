@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.contrib.auth.models import User
 from django.contrib.contenttypes import generic
 from django.contrib.contenttypes.models import ContentType
@@ -6,18 +7,18 @@ from django.db import models
 
 
 class ItemVote(models.Model):
-    user = models.ForeignKey(User, verbose_name=u"Пользователь")
-    vote = models.IntegerField(verbose_name=u"Оценка")
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name=u"Дата создания", editable=False)
-    ip = models.CharField(verbose_name=u"IP", null=True, blank=True, max_length=30)
+    user = models.ForeignKey(User, verbose_name='Пользователь')
+    vote = models.IntegerField(verbose_name='Оценка')
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
+    ip = models.CharField(verbose_name='IP', null=True, blank=True, max_length=30)
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     item = generic.GenericForeignKey()
 
     class Meta:
-        verbose_name = u"Оценка"
-        verbose_name_plural = u"Оценки"
+        verbose_name = 'Оценка'
+        verbose_name_plural = 'Оценки'
 
 
 class VoteMixin(object):

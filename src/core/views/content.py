@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import logging
 
 from django.shortcuts import get_object_or_404
@@ -67,10 +68,10 @@ class SearchView(TemplateView):
         query = self.request.POST.get('query', '')
         if query:
             log = logging.getLogger('django.search')
-            log.info(u"%s\t%s", request.META['REMOTE_ADDR'], query)
+            log.info('%s\t%s', request.META['REMOTE_ADDR'], query)
             context = {'result': search_provider(query), 'query': query}
         else:
-            context = {'msg': u"Введите строку для поиска"}
+            context = {'msg': 'Введите строку для поиска'}
 
         return self.render_to_response(context)
 

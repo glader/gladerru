@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from django.conf import settings
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -116,8 +117,8 @@ class ManPhotosView(ListView):
     def get_context_data(self, **kwargs):
         context = super(ManPhotosView, self).get_context_data(**kwargs)
         context['title'] = mark_safe(
-            u'%s - фотографии с %s участием' %
-            (link(self.man), self.man.gender == 'm' and u'его' or u'её')
+            '%s - фотографии с %s участием' %
+            (link(self.man), self.man.gender == 'm' and 'его' or 'её')
         )
         return context
 
@@ -134,8 +135,8 @@ class AuthorPhotosView(ListView):
     def get_context_data(self, **kwargs):
         context = super(AuthorPhotosView, self).get_context_data(**kwargs)
         context['title'] = mark_safe(
-            u'%s - фотографии %s авторства' %
-            (link(self.man), self.man.gender == 'm' and u'его' or u'её')
+            '%s - фотографии %s авторства' %
+            (link(self.man), self.man.gender == 'm' and 'его' or 'её')
         )
         return context
 

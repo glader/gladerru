@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from mountains.sitemap import sitemaps as mountain_sitemap
 from movies.sitemap import sitemaps as movies_sitemap
 from core.sitemap import sitemaps as core_sitemap

@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from hashlib import md5
-
 import cPickle as pickle
-
 import re
 
 from django.conf import settings
@@ -10,23 +9,23 @@ from django.core.cache import cache
 from django.template import Context, loader
 from django.core.mail import mail_admins, EmailMessage
 
-translit = {u'а': u'a', u'б': u'b', u'в': u'v', u'г': u'g', u'д': u'd', u'е': u'e',
-            u'ж': u'zh', u'з': u'z', u'и': u'i', u'й': u'j', u'к': u'k', u'л': u'l',
-            u'м': u'm', u'н': u'n', u'о': u'o', u'п': u'p', u'р': u'r', u'с': u's',
-            u'т': u't', u'у': u'u', u'ф': u'f', u'х': u'x', u'ц': u'cz', u'ч': u'ch',
-            u'ш': u'sh', u'щ': u'shh', u'ъ': u'_d', u'ы': u'yi', u'ь': u'y', u'э': u'ye',
-            u'ю': u'yu', u'я': u'ya', u'ё': u'yo',
-            u'æ': u'e',
-            u'á': u'a', u'é': u'e', u'ć': u'c',
-            u'ä': u'a', u'ü': u'u', u'ö': u'o',
-            u'å': u'a', u'ů': u'u',
-            u'č': u'c', u'š': u's', u'ř': u'r', u'ž': u'z', u'ě': u'e',
-            u'ø': u'o',
+translit = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e',
+            'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l',
+            'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's',
+            'т': 't', 'у': '', 'ф': 'f', 'х': 'x', 'ц': 'cz', 'ч': 'ch',
+            'ш': 'sh', 'щ': 'shh', 'ъ': '_d', 'ы': 'yi', 'ь': 'y', 'э': 'ye',
+            'ю': 'y', 'я': 'ya', 'ё': 'yo',
+            'æ': 'e',
+            'á': 'a', 'é': 'e', 'ć': 'c',
+            'ä': 'a', 'ü': '', 'ö': 'o',
+            'å': 'a', 'ů': '',
+            'č': 'c', 'š': 's', 'ř': 'r', 'ž': 'z', 'ě': 'e',
+            'ø': 'o',
             }
 
 
 def rus2translit(text):
-    res = u''
+    res = ''
     for c in text:
         if c in translit:
             res += translit[c]
@@ -38,19 +37,19 @@ def rus2translit(text):
 
 
 def slug(title):
-    return re.sub("\s+", "-", rus2translit(title.strip())).lower()
+    return re.sub('\s+', '-', rus2translit(title.strip())).lower()
 
 
 def send_html_mail(subject, message, recipient_list):
     if not isinstance(recipient_list, list):
         recipient_list = [recipient_list]
     message = EmailMessage(subject, message, to=recipient_list)
-    message.content_subtype = "html"
+    message.content_subtype = 'html'
     message.send()
 
 
-def notice_admin(text, subject=u"Glader.ru: Ошибка на сайте"):
-    text = "<html><body>%s</body></html>" % text
+def notice_admin(text, subject='Glader.ru: Ошибка на сайте'):
+    text = '<html><body>%s</body></html>' % text
     mail_admins(subject, text, html_message=text)
 
 
@@ -96,7 +95,7 @@ def process_template(template, context):
     """ Обрабатывает шаблон, в котором первая строка считается заголовком """
     t = loader.get_template(template)
     c = Context(context)
-    subject, content = t.render(c).split("\n", 1)
+    subject, content = t.render(c).split('\n', 1)
     return subject, content
 
 

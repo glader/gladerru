@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import os
 
 from django.core.management.base import NoArgsCommand
@@ -19,10 +20,10 @@ class Command(NoArgsCommand):
         cursor = connection.cursor()
 
         # FIXME: переписать это дело на один запрос
-        print "posts"
+        print 'posts'
         i = 0
         for p in Post.objects.all():
-            cursor.execute("SELECT SUM(vote) FROM core_itemvote WHERE object_id=%s and content_type_id=52", [p.id])
+            cursor.execute('SELECT SUM(vote) FROM core_itemvote WHERE object_id=%s and content_type_id=52', [p.id])
             p.rating = cursor.fetchone()[0] or 0
 
             comments = p.comments.all().order_by('-date_created')
@@ -37,10 +38,10 @@ class Command(NoArgsCommand):
             print i, chr(13),
             i += 1
 
-        print "movies"
+        print 'movies'
         i = 0
         for m in Movie.objects.all():
-            cursor.execute("SELECT SUM(vote) FROM core_itemvote WHERE object_id=%s and content_type_id=37", [m.id])
+            cursor.execute('SELECT SUM(vote) FROM core_itemvote WHERE object_id=%s and content_type_id=37', [m.id])
             m.rating = int(cursor.fetchone()[0] or 0)
             if m.content:
                 m.rating += 0.5
@@ -66,7 +67,7 @@ class Command(NoArgsCommand):
             print i, chr(13),
             i += 1
 
-        print "tags"
+        print 'tags'
         i = 0
         for t in Tag.objects.all():
             t.size = t.post_set.all().count() + t.photo_set.all().count()
@@ -75,7 +76,7 @@ class Command(NoArgsCommand):
             print i, chr(13),
             i += 1
 
-        print "users"
+        print 'users'
         for u in User.objects.all():
             profile = u.get_profile()
             profile.calculate()
@@ -87,4 +88,4 @@ class Command(NoArgsCommand):
             profile.rating = rating
             profile.save()
 
-        log.info(u"recalc")
+        log.info('recalc')

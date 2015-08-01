@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from datetime import datetime
 from random import choice
 
@@ -19,12 +20,12 @@ class Command(NoArgsCommand):
         count = 0
         for item in Post.all.filter(status='deferred', date_created__lt=datetime.now()):
 
-            log.info(u"Deferred publication for post %s (%s)", item.pk, item.get_absolute_url())
+            log.info('Deferred publication for post %s (%s)', item.pk, item.get_absolute_url())
             if item.author.username == 'LAhmatyi':
                 author = User.objects.get(username=choice(AUTHORS))
                 item.author = author
                 item.abstract = 'LAhmatyi'
-                log.info(u"Author changed to %s for post %s (%s)", author.username, item.pk, item.get_absolute_url())
+                log.info('Author changed to %s for post %s (%s)', author.username, item.pk, item.get_absolute_url())
 
                 for p in Photo.objects.filter(post=item):
                     p.author = author
@@ -35,4 +36,4 @@ class Command(NoArgsCommand):
 
             count += 1
 
-        log.info(u"publish deferred: %s processed", count)
+        log.info('publish deferred: %s processed', count)

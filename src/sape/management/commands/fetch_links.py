@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from datetime import datetime
 import xmlrpclib
 from itertools import imap
@@ -25,13 +26,13 @@ class Command(NoArgsCommand):
         links = server.sape.get_site_links(38739)
 
         if any(imap(lambda link: link['status'] == 'ERROR', links)):
-            mail_admins(u'glader.ru: битые ссылки', u'На сайте glader.ru обнаружены линки в статусе ERROR.')
+            mail_admins('glader.ru: битые ссылки', 'На сайте glader.ru обнаружены линки в статусе ERROR.')
 
         if any(imap(lambda link: link['status'] == 'WAIT_WM', links)) and datetime.now().hour == 8:
             mail_admins(
-                u'glader.ru: новые ссылки',
-                u'На сайте glader.ru обнаружены линки в статусе WAIT_WM. '
-                u'http://www.sape.ru/submit_orders.php?site_id=%s' % settings.SAPE_SITE_ID,
+                'glader.ru: новые ссылки',
+                'На сайте glader.ru обнаружены линки в статусе WAIT_WM. '
+                'http://www.sape.ru/submit_orders.php?site_id=%s' % settings.SAPE_SITE_ID,
             )
 
         log.info('%s links fetched', len(links))

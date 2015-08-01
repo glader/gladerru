@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 import os
 
 from django.core.management.base import NoArgsCommand
@@ -8,7 +9,7 @@ from core.views.ugc import add_to_yaphoto
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
-        d = u".\\data"
+        d = '.\\data'
 
         with open('images', 'r') as l:
             log = l.read()
@@ -27,4 +28,4 @@ class Command(NoArgsCommand):
                 print url
 
                 with open('images', 'a') as l:
-                    l.write("%s\t%s\n" % (path.encode('utf8'), url))
+                    l.write('%s\t%s\n' % (path.encode('utf8'), url))

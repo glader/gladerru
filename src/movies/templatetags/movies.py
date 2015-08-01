@@ -1,4 +1,5 @@
 # encoding: utf-8
+from __future__ import unicode_literals
 import re
 
 from django import template
@@ -49,9 +50,9 @@ def other_pages(page, total):
 @register.filter
 def link(item):
     if not item:
-        return u"[Отсутствует объект]"
+        return '[Отсутствует объект]'
 
-    return mark_safe(u'<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
+    return mark_safe('<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
 
 
 @register.inclusion_tag('block_riders.html')

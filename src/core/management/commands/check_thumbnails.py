@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from itertools import chain
 
 from django.core.management.base import NoArgsCommand
@@ -38,4 +39,4 @@ class Command(NoArgsCommand):
             except IOError, e:
                 print e
 
-        log.info(u"%s/%s thumbnails processed", count, total)
+        log.info('%s/%s thumbnails processed', count, total)
