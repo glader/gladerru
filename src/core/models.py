@@ -523,3 +523,4 @@ class Image(models.Model):
 
 
 User.name = property(lambda u: u.first_name or u.username)
+User.get_profile = lambda u: Profile.objects.get(user=u)
