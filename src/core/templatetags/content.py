@@ -73,7 +73,7 @@ def top_menu(level2='all_posts', level1=None):
         return None, None
 
     level1, level2 = find_levels(level1, level2)
-    return {'level1': level1, 'level2': level2, 'submen': level1 and submenu[level1] or []}
+    return {'level1': level1, 'level2': level2, 'submenu': level1 and submenu[level1] or []}
 
 
 @register.filter
