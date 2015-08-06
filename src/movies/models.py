@@ -76,6 +76,13 @@ class Man(models.Model):
                 self.hidden = False
                 break
 
+        if self.pk:
+            prev = self.__class__.objects.get(pk=self.pk)
+            if self.primary_synonim and not prev.primary_synonim:
+                self.rider.update(rider=self.primary_synonim)
+                self.photographer.update(photographer=self.primary_synonim)
+                Man2Movie.objects.filter(man=self).update(man=self.primary_synonim)
+
         super(Man, self).save(*args, **kwargs)
 
     class Meta:

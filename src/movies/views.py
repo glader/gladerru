@@ -72,7 +72,7 @@ class PeopleView(TemplateView):
     template_name = 'movies/people.html'
 
     def get_context_data(self, **kwargs):
-        riders = Man.interesting.all().order_by('title')
+        riders = Man.interesting.filter(primary_synonim__isnull=True).order_by('title')
         present_letters = {}
 
         for r in riders:
