@@ -20,6 +20,7 @@ urlpatterns = patterns(
     url(r'^movies/soundtracks/$', views.SoundtracksView.as_view(), name='soundtracks'),
     url(r'^movies/(?P<year>[^/]+)/$', views.MoviesViews.as_view(), name='movies_by_year'),
     url(r'^movies/(?P<year>[^/]+)/(?P<slug>[^/]+)$', views.MovieView.as_view(), name='movie'),
+    url(r'^people/compare$', views.CompareView.as_view(), name='people_compare'),
     url(r'^people/(?P<slug>[^/]+)/photos$', views.ManPhotosView.as_view(), name='man_photos'),
     url(r'^people/(?P<slug>[^/]+)/author_photos$', views.AuthorPhotosView.as_view(), name='man_author_photos'),
     url(r'^people/(?P<slug>[^/]+)$', views.ManView.as_view(), name='man'),

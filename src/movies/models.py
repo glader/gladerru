@@ -83,6 +83,17 @@ class Man(models.Model):
                 self.photographer.update(photographer=self.primary_synonim)
                 Man2Movie.objects.filter(man=self).update(man=self.primary_synonim)
 
+                content_fields = (
+                    'content', 'angles', 'birthday', 'footsize', 'gender', 'image', 'ridingsince',
+                    'stance', 'width', 'url',
+                )
+                for field in content_fields:
+                    if getattr(self, field, None) and not getattr(self.primary_synonim, field, None):
+                        setattr(self.primary_synonim, field, getattr(self, field, None))
+
+                self.primary_synonim.hidden = False
+                self.primary_synonim.save()
+
         super(Man, self).save(*args, **kwargs)
 
     class Meta:

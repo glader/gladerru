@@ -1,10 +1,16 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+from Levenshtein import distance
+
 from django.conf import settings
+from django.contrib.auth.decorators import permission_required
+from django.core.urlresolvers import reverse
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 from django.views.generic import View, TemplateView, DetailView, ListView
+
+from core.decorators import class_view_decorator
 
 from .models import Movie, Song, Man, Studio, Man2Movie, Photo
 from .templatetags.movies import link
@@ -81,6 +87,39 @@ class PeopleView(TemplateView):
         return {'alphabet_letters': settings.ALPHABET_LETTERS, 'present_letters': present_letters}
 
 
+@class_view_decorator(permission_required('movies.can_edit_man'))
+class CompareView(TemplateView):
+    template_name = 'movies/compare.html'
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(**kwargs)
+        context['pairs'] = []
+
+        man = list(Man.objects.filter(primary_synonim__isnull=True).order_by('id'))
+
+        for m1 in man:
+            for m2 in man:
+                if m1.id >= m2.id:
+                    continue
+
+                dist = distance(m1.title, m2.title)
+                if dist >= 4:
+                    continue
+
+                context['pairs'].append((m1, m2, dist))
+
+        context['pairs'].sort(key=lambda pair: (pair[2], pair[0].title))
+        return self.render_to_response(context)
+
+    def post(self, request, *args, **kwargs):
+        man_from = Man.objects.get(pk=request.POST['from'])
+        man_to = Man.objects.get(pk=request.POST['to'])
+
+        man_from.primary_synonim = man_to
+        man_from.save()
+        return HttpResponseRedirect(reverse('people_compare'))
+
+
 class ManView(DetailView):
     model = Man
     template_name = 'movies/rider.html'
@@ -152,7 +191,7 @@ class AddRidersView(View):
             rider_name = slug(rider_title)
             try:
                 rider = Man.objects.get(slug=rider_name)
-                if rider.primary_synonim:
+                while rider.primary_synonim:
                     rider = rider.primary_synonim
 
             except Man.DoesNotExist:

@@ -220,6 +220,10 @@ def local_env():
     local('ENV\\Scripts\\pip install -r requirements_test.txt ')
 
 
+def enter(args=''):
+    local('cd src && ..\\ENV\\Scripts\\python manage.py %s' % args)
+
+
 def local_migrate():
     with settings(warn_only=True):
         local('cd src && ..\\ENV\\Scripts\\python manage.py schemamigration core --auto')
