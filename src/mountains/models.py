@@ -69,7 +69,7 @@ class Mountain(models.Model, VoteMixin):
     tel = models.CharField(max_length=250, null=True, blank=True, verbose_name='Телефоны')
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name='URL')
     webcam = models.URLField(max_length=250, null=True, blank=True, verbose_name='Web камера')
-    work_time = models.TextField(max_length=50, null=True, blank=True, verbose_name='Время работы')
+    work_time = models.TextField(null=True, blank=True, verbose_name='Время работы')
     email = models.EmailField(null=True, blank=True, verbose_name='Email')
     interactive_map = models.TextField(verbose_name='Интеракт. карта', null=True, blank=True, default=None)
 
