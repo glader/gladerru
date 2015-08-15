@@ -8,6 +8,7 @@ from .models import Record
 
 class Overview(CreateView):
     model = Record
+    fields = ['account', 'amount', 'comment']
     template_name = 'bookkeeping/index.html'
     success_url = '/bookkeeping/'
 
