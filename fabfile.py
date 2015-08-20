@@ -156,7 +156,7 @@ def upstart():
 def cron():
     with settings(user='root'):
         run('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
-        run('/etc/init.d/cron restart')
+        run('restart cron')
 
 
 def logrotate():
