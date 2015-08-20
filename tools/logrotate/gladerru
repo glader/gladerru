@@ -1,0 +1,6 @@
+/var/log/projects/gladerru/*.log {
+	size=100M
+    rotate 10
+    missingok
+	compress
+}

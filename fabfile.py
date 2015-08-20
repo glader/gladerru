@@ -97,6 +97,7 @@ def production(mode=""):
     nginx()
     upstart()
     cron()
+    logrotate()
     if mode != 'no_dump':
         dump()
         migrate()
@@ -154,8 +155,13 @@ def upstart():
 
 def cron():
     with settings(user='root'):
-        sudo('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
-        sudo('/etc/init.d/cron restart')
+        run('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
+        run('/etc/init.d/cron restart')
+
+
+def logrotate():
+    with settings(user='root'):
+        run('cp %(directory)s/tools/logrotate/gladerru /etc/logrotate.d/gladerru' % env)
 
 
 def dump():

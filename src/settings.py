@@ -134,7 +134,6 @@ REDACTOR_OPTIONS = {
 REDACTOR_UPLOAD_HANDLER = 'yafotki.handlers.FotkiUploader'
 
 LOG_PATH = '/var/log/projects/gladerru'
-TIMELOG_LOG = os.path.join(LOG_PATH, 'time.log')
 
 LOGGING = {
     'version': 1,
@@ -186,10 +185,8 @@ LOGGING = {
         },
         'timelog': {
             'level': 'DEBUG',
-            'class': 'logging.handlers.RotatingFileHandler',
-            'filename': TIMELOG_LOG,
-            'maxBytes': 1024 * 1024 * 5,  # 5 MB
-            'backupCount': 5,
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOG_PATH, 'time.log'),
             'formatter': 'plain',
         },
     },
