@@ -6,13 +6,11 @@ from urllib import quote
 from django import template
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
-from django.contrib.auth.models import User
 from django.conf import settings
 
-from core.models import Post, Photo, Tag, NewsCategory
+from core.models import Post, Tag, NewsCategory
 from core.utils.thumbnails import get_thumbnail_url
-
-from movies.models import Photo as ManPhoto
+from movies.models import Man
 
 register = template.Library()
 
@@ -45,7 +43,7 @@ def top_menu(level2='all_posts', level1=None):
             ['2013', '/movies/2013/', '2013', 'Фильмы 2013 года'],
             ['all', '/movies/all/', 'все', 'Все фильмы'],
             ['teasers', '/movies/teasers/', 'тизеры', 'Тизеры к фильмам'],
-            ['soundtracks', '/movies/soundtracks/', 'саундтреки', 'Музыкальные треки к фильмам'],
+            # ['soundtracks', '/movies/soundtracks/', 'саундтреки', 'Музыкальные треки к фильмам'],
             ['studies', '/studies/', 'студии', 'Авторы фильмов'],
             ['people', '/people/', 'райдеры', 'Участники съемок'],
         ],
@@ -112,15 +110,8 @@ def link(item):
     if not item:
         return '[Отсутствует объект]'
 
-    if isinstance(item, Tag):
-        return mark_safe('<a href="%s" rel="tag">%s</a>' % (item.get_absolute_url(), item.title))
-
-    if isinstance(item, User):
-        return mark_safe('<a href="%s">%s</a>' % (item.get_absolute_url(), item.name))
-
-    if isinstance(item, Photo) or isinstance(item, ManPhoto):
-        return mark_safe('<a href="%s"><img class="userphoto" src="%s" alt="%s"></a>'
-                         % (item.get_absolute_url(), thumbnail(item.yandex_fotki_image_src), item.title))
+    if isinstance(item, Man):
+        return mark_safe('<a href="%s" rel="nofollow">%s</a>' % (item.get_absolute_url(), item.title))
 
     return mark_safe('<a href="%s">%s</a>' % (item.get_absolute_url(), item.title))
 
