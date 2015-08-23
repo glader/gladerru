@@ -13,6 +13,7 @@ Disallow: /studio
 Disallow: /tags
 Disallow: /users
 Disallow: /wp
+Disallow: /*start=
 Host: glader.ru
 Clean-param: start
 Clean-param: utm_medium
