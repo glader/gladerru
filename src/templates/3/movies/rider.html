@@ -13,7 +13,7 @@
     {% endif %}
 {% endblock %}
 
-{% block title %}{{ item.title|safe }}{% endblock %}
+{% block title %}Райдер {{ item.title|safe }}{% endblock %}
 
 {% block page_title %}{{ item.title|safe }}{% if request.user.is_superuser %} <small><a href="/admind/movies/man/{{ item.id }}/">ред</a></small>{% endif %}{% endblock %}
 
