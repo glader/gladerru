@@ -18,7 +18,7 @@
     {% include "block_social_scripts.html" %}
 {% endblock %}
 
-{% block page_title %}{{ article.title }}{% endblock %}
+{% block page_title %}{{ article.title }}{% if request.user.is_superuser %} <small><a href="/admind/core/post/{{ article.id }}/">ред</a></small>{% endif %}{% endblock %}
 
 {% block title %}{{ article.title }} {{ block.super }}{% endblock %}
 
