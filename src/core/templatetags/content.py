@@ -169,7 +169,8 @@ def post_panel(post, user, mode='normal'):
 @register.inclusion_tag('block_relative_posts.html')
 def relative_posts(post):
     return {
-        'relative_posts': Post.objects.filter(category=post.category).exclude(pk=post.pk).order_by('-date_created')[:4],
+        'relative_posts': Post.objects.filter(category=post.category, status='pub')
+                              .exclude(pk=post.pk).order_by('-date_created')[:4],
         'ab': 'table',
     }
 
@@ -177,7 +178,7 @@ def relative_posts(post):
 @register.inclusion_tag('block_relative_posts.html')
 def relative_articles(article):
     return {
-        'relative_posts': Post.objects.filter(skill=article.skill).exclude(pk=article.pk)
+        'relative_posts': Post.objects.filter(skill=article.skill, status='pub').exclude(pk=article.pk)
                               .order_by('-date_created')[:4],
         'ab': 'table',
     }
