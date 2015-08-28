@@ -7,7 +7,7 @@
 
 {% block title %}ГЛК "{{ mountain.title }}" {{ block.super }}{% endblock %}
 
-{% block page_title %}ГЛК "{{ mountain.title }}"{% endblock %}
+{% block page_title %}ГЛК "{{ mountain.title }}"{% if request.user.is_superuser %} <small><a href="/admind/mountains/mountain/{{ mountain.id }}/">ред</a></small>{% endif %}{% endblock %}
 
 {% block description %}
     {% if mountain.meta_description %}
