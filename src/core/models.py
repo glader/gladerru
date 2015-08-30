@@ -231,7 +231,7 @@ class Skill(models.Model):
     title = models.CharField(verbose_name='Название', max_length=200)
     slug = models.CharField(verbose_name='Код', max_length=200)
     description = models.TextField(verbose_name='Описание')
-    image = YFField(verbose_name='Картинка', upload_to='gladerr', null=True, blank=True, default=None)
+    image = YFField(verbose_name='Картинка', upload_to='gladerru', null=True, blank=True, default=None)
     meta_description = models.TextField(verbose_name='Description', help_text='meta-description',
                                         null=True, blank=True, default=None)
 
@@ -316,7 +316,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     hidden = models.BooleanField(default=False, verbose_name='Скрытый')
     sticky_to = models.DateField(verbose_name='Приклеен до', null=True, blank=True, default=None)
     skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name='Умение')
-    icon = YFField(verbose_name='Иконка', null=True, blank=True, upload_to='gladerr', default=None)
+    icon = YFField(verbose_name='Иконка', null=True, blank=True, upload_to='gladerru', default=None)
     meta_description = models.TextField(verbose_name='Description', help_text='meta-description',
                                         null=True, blank=True, default=None)
     meta_keywords = models.TextField(verbose_name='Keywords', help_text='meta-keywords',
@@ -514,13 +514,9 @@ class NewsCategory(models.Model):
         return reverse('category', args=[self.slug])
 
     class Meta:
+        ordering = ('order',)
         verbose_name = 'Категория новостей'
         verbose_name_plural = 'Категории новостей'
-
-
-class Image(models.Model):
-    u"""Картинки"""
-    upload = YFField(upload_to='gladerr')
 
 
 User.name = property(lambda u: u.first_name or u.username)

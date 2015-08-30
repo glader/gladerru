@@ -51,7 +51,7 @@ class Mountain(models.Model, VoteMixin):
     district = models.ForeignKey(District, null=True, blank=True, verbose_name='Область')
     has_ratrack = models.BooleanField(default=False, verbose_name='Есть ратрак')
     hidden = models.BooleanField(default=False, verbose_name='Скрытый')
-    image = YFField(upload_to='gladerr', null=True, blank=True, verbose_name='Схема трасс', default=None)
+    image = YFField(upload_to='gladerru', null=True, blank=True, verbose_name='Схема трасс', default=None)
     lifts = models.TextField(null=True, blank=True, verbose_name='Подъемники')
     latitude = models.CharField(max_length=20, null=True, blank=True, verbose_name='Широта')
     longitude = models.CharField(max_length=20, null=True, blank=True, verbose_name='Долгота')
@@ -106,7 +106,7 @@ class Mountain(models.Model, VoteMixin):
 
 class MountainPhoto(models.Model):
     mountain = models.ForeignKey(Mountain, verbose_name='Гора')
-    image = YFField(upload_to='gladerr', verbose_name='Картинка')
+    image = YFField(upload_to='gladerru', verbose_name='Картинка')
 
     class Meta:
         verbose_name = 'Фото горы'

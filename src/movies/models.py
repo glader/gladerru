@@ -42,7 +42,7 @@ class Man(models.Model):
         ('f', 'Девочка'),
     )
     gender = models.CharField(choices=GENDER_CHOICES, default='m', max_length=1, verbose_name='Пол')
-    image = YFField(verbose_name='Портрет', upload_to='gladerr', null=True, blank=True, default=None)
+    image = YFField(verbose_name='Портрет', upload_to='gladerru', null=True, blank=True, default=None)
     ridingsince = models.PositiveIntegerField(null=True, blank=True, verbose_name='Катается с года')
     stance = models.CharField(max_length=50, null=True, blank=True, verbose_name='Стойка')
     width = models.CharField(max_length=50, null=True, blank=True, verbose_name='Ширина')
@@ -126,7 +126,7 @@ class Movie(models.Model, VoteMixin):
     studio = models.ForeignKey(Studio, verbose_name='Студия', null=True, blank=True)
     content = models.TextField(verbose_name='Описание', null=True, blank=True)
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name='URL')
-    cover = YFField(verbose_name='Обложка', upload_to='gladerr', null=True, blank=True, default=None)
+    cover = YFField(verbose_name='Обложка', upload_to='gladerru', null=True, blank=True, default=None)
     torrent = models.URLField(max_length=250, null=True, blank=True, verbose_name='Ссылка на торрент')
     teaser = models.TextField(verbose_name='Тизер', null=True, blank=True)
     full_movie = models.TextField(verbose_name='Видео', null=True, blank=True)
