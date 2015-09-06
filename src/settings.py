@@ -51,7 +51,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
     'core.context.profile',
     'core.context.domain',
-    'sape.context.links',
 )
 
 ROOT_URLCONF = 'urls'
@@ -80,7 +79,6 @@ INSTALLED_APPS = (
     'discounts',
     'mountains',
     'movies',
-    'sape',
     'votes',
 )
 
