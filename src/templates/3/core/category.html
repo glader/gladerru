@@ -7,6 +7,10 @@
     {% top_menu category.slug %}
 {% endblock %}
 
+{% block extrahead %}
+    <link rel="canonical" href="http://{{ DOMAIN }}{{ category.get_absolute_url }}" />
+{% endblock %}
+
 {% block page %}
     <div class="b-category_body">
         <table><tr>
