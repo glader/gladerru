@@ -25,7 +25,7 @@ def sanitizeHTML(value, mode='none'):
     else:
         valid_tags = []
 
-    valid_attrs = 'href src pic user page class text title alt style colspan rowspan'.split()
+    valid_attrs = 'href src pic user page class text title alt style colspan rowspan rel'.split()
     # параметры видеороликов
     valid_attrs += 'width height classid codebase id name value flashvars webkitallowfullscreen mozallowfullscreen ' \
                    'allowfullscreen allowscriptaccess ' \
