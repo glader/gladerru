@@ -11,7 +11,7 @@ env.directory = '/home/%s/projects/gladerru' % SSH_USER
 env.manage_dir = env.directory + '/src'
 env.user = SSH_USER
 env.activate = 'source %s/ENV/bin/activate' % env.directory
-env.www_ssh_key = 'ssh-dss AAAAB3NzaC1kc3MAAACAbN+8KDO1jkRluNqiqO2KjkaSn4Qs66zBcV+JaUFrnoVt5tBaEMGW56ihtd1zmPqSufpDKTMXKneZWLAx8evFobvU5S32OKtFpR6oylZwIWg0SQNtjBE7lFHC5VnN4BtjpLp6DBzUOt6mTXYyCjaYhorMWmyw5641KXOsW0V7et0AAAAVALlYgGve+sIVrw7MTQFD4Hvb1utVAAAAgAGktSDpYw1sEC9tA593z3Ymk9r4J939DsKiL3d+RK/RXfY9KgoFtMHmCzL8goYpyWdaE2XQzCrIfp3EFW41NUWUfxsaDzXSEg4Q/CYAfJm7nNDpwv1eAq3c0Mw7RMGEw3pxsAnQrq0snHI7cVhdZ12Z6wO147+ybAbOXW7XF04sAAAAgGzFeuezmdfyS0N4VE42/kgC4SusMTxYOj5nrb8VRvzQ08Msa5FChXIWv0Fj5hMpOVX/gc4uEkbt7knpjqouo+K+8jadQ4I+sRidqG13U6b2UGJy844THSqL3HIhuPmhvWPOFjJbsNFxcoakSqLxn3ewkDzco7CH/aYo9u9VrLwk dsa-key-20080514'
+env.www_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAlgcYVZYvzu1GX4Td+RLt9BIqUr33gkTz6MW2MHvWS/+9eKueA6+N7Bei2NqTBNg2HLUY0uOyG1NBmzoWZglht70iChcGLMVkvciQ1/QQfr5bvIbfgpPHuZMwn4ElFiiabhnZe9wALp+jjg0TnolWxbAfwJUmv2UDXXSiYDrfBes= glader hosting rsa-key-20150528'
 env.forward_agent = True
 
 if not env.hosts:
@@ -89,7 +89,7 @@ def init_mysql():
         run('/etc/init.d/mysql restart')
 
 
-def production(mode=""):
+def production(mode=''):
     upload()
     static()
     environment()
@@ -165,19 +165,7 @@ def logrotate():
 
 
 def dump():
-    with cd(env.directory):
-        tmp_filename = run("date +/tmp/gladerru_backup_%Y%m%d_%H%M.sql.gz")
-        month_dir = date.today().strftime("%Y_%m")
-        backup_dir = "Backup/db/%s" % month_dir
-        webdav_command =\
-        "import easywebdav;"\
-        "webdav = easywebdav.connect('webdav.yandex.ru', username='%s', password='%s', protocol='https');"\
-        "webdav.mkdirs('%s');"\
-        "webdav.upload('%s', '%s/%s');" % (DUMP_ACCOUNT_NAME, DUMP_PASSWORD, backup_dir, tmp_filename, backup_dir, tmp_filename.split('/')[-1])
-
-        run("mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s | gzip > " % globals() + tmp_filename)
-        virtualenv('python -c "%s"' % webdav_command)
-        run("rm %s" % tmp_filename)
+    manage_py('make_dump')
 
 
 def manage_py(command):
@@ -237,11 +225,12 @@ def local_migrate():
 
 
 def update_local_db():
-    run("mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s > gladerru.sql" % globals())
-    get("gladerru.sql", "gladerru.sql")
-    run("rm gladerru.sql")
-    local("mysql -uroot %(DATABASE_DB)s < gladerru.sql" % globals())
-    local("del gladerru.sql")
+    run('mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s |gzip > gladerru.sql.gz' % globals())
+    get('gladerru.sql.gz', 'gladerru.sql.gz')
+    run('rm gladerru.sql.gz')
+    local('gzip -d gladerru.sql.gz')
+    local('mysql -uroot %(DATABASE_DB)s < gladerru.sql' % globals())
+    local('del gladerru.sql')
 
 
 def local_celery():
@@ -254,5 +243,5 @@ def local_static():
 
 def make_backup():
     today = date.today().replace(day=1)
-    run("mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s | gzip > gladerru.sql.gz" % globals())
-    get("gladerru.sql.gz", "gladerru.sql.%s.gz" % today.strftime('%Y%m%d'))
+    run('mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s | gzip > gladerru.sql.gz' % globals())
+    get('gladerru.sql.gz', 'gladerru.sql.%s.gz' % today.strftime('%Y%m%d'))

@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'bookkeeping',
     'core',
     'discounts',
+    'dump',
     'mountains',
     'movies',
     'votes',
