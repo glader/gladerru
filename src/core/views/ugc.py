@@ -101,7 +101,7 @@ def post_view(request, slug, post_id):
 
 
 def post_htm_view(request, category_slug, post_slug):
-    post = get_object_or_404(Post, slug=post_slug)
+    post = get_object_or_404(Post, slug=post_slug, hidden=False)
     return post_view(request, category_slug, post.id)
 
 
