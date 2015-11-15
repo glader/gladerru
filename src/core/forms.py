@@ -42,8 +42,7 @@ def sanitizeHTML(value, mode='none'):
         elif isinstance(tag, element.Comment):
             tag.extract()
 
-    result = soup.renderContents().decode('utf8')
-    return re.sub('</(glader|cut)>', '', result)
+    return soup.renderContents().decode('utf8')
 
 
 class CommonForm(forms.Form):
