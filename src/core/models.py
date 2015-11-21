@@ -14,7 +14,7 @@ from redactor.fields import RedactorField
 from yafotki.fields import YFField
 from votes.models import VoteMixin
 
-from core.utils.common import cached, slug
+from core.utils.common import cached, slug, count_text_len
 
 
 class GenericManager(models.Manager):
@@ -308,6 +308,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
 
     category = models.ForeignKey('NewsCategory', verbose_name='Категория', null=True, blank=True, default=None)
     content = RedactorField(null=True, blank=True, verbose_name='Содержание')
+    text_len = models.PositiveIntegerField(verbose_name='Длина текста', default=0)
     status = models.CharField(choices=STATUSES, default='save', max_length=50, verbose_name='Статус')
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name='Тип поста')
 
@@ -348,8 +349,12 @@ class Post(models.Model, VoteMixin, UIDMixin):
 
     def save(self, *args, **kwargs):
         self.hidden = self.status != 'pub'
+
         if not self.slug:
             self.slug = slug(self.title)
+
+        self.text_len = count_text_len(self.content or '')
+
         super(Post, self).save(*args, **kwargs)
 
     class Meta:

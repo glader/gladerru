@@ -5,6 +5,7 @@ import cPickle as pickle
 import re
 import string
 
+import bs4
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Context, loader
@@ -108,3 +109,14 @@ def clean_choice(variant, variants):
         return variant
     else:
         return variants[0]
+
+
+def count_text_len(html):
+    tree = bs4.BeautifulSoup(html)
+    strings = []
+    for t in tree.find_all():
+        for c in t.contents:
+            if isinstance(c, bs4.element.NavigableString):
+                strings.append(unicode(c).strip())
+
+    return sum(map(len, strings))

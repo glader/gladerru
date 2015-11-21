@@ -13,7 +13,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'slug', 'skill', 'category', 'author', 'status', 'date_created')
+    list_display = ('id', 'title', 'slug', 'skill', 'category', 'author', 'status', 'date_created', 'text_len')
     ordering = ('-date_created',)
     list_filter = ('status', 'skill')
     search_fields = ('title', 'slug')
