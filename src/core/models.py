@@ -308,7 +308,6 @@ class Post(models.Model, VoteMixin, UIDMixin):
 
     category = models.ForeignKey('NewsCategory', verbose_name='Категория', null=True, blank=True, default=None)
     content = RedactorField(null=True, blank=True, verbose_name='Содержание')
-    text_len = models.PositiveIntegerField(verbose_name='Длина текста', default=0)
     status = models.CharField(choices=STATUSES, default='save', max_length=50, verbose_name='Статус')
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name='Тип поста')
 
@@ -322,6 +321,11 @@ class Post(models.Model, VoteMixin, UIDMixin):
                                         null=True, blank=True, default=None)
     meta_keywords = models.TextField(verbose_name='Keywords', help_text='meta-keywords',
                                      null=True, blank=True, default=None)
+
+    text_len = models.PositiveIntegerField(verbose_name='Длина текста', default=0)
+    in_index = models.NullBooleanField(verbose_name='В индексе', blank=True, default=None)
+    used = models.BooleanField(verbose_name='Использовано', default=False)
+    position = models.FloatField(verbose_name='Позиция', blank=True, default=None)
 
     tags = models.ManyToManyField(Tag, verbose_name='Теги')
     comments = generic.GenericRelation(Comment)
