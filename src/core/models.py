@@ -343,10 +343,8 @@ class Post(models.Model, VoteMixin, UIDMixin):
     def get_absolute_url(self):
         if self.skill or self.type == 'page':
             return reverse('article', args=[self.slug])
-        elif self.slug:
-            return reverse('post_htm', args=[self.category.slug, self.slug])
         else:
-            return reverse('post', args=[self.category.slug, self.id])
+            return reverse('post_htm', args=[self.category.slug, self.slug])
 
     def can_edit(self, user):
         return user.is_superuser

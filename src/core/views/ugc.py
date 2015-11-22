@@ -6,7 +6,7 @@ import simplejson
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect, Http404
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, CreateView, UpdateView
 from django.core.mail import mail_admins
@@ -92,17 +92,18 @@ def post_view(request, slug, post_id):
     if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
         raise Http404
 
+    return HttpResponsePermanentRedirect(post.get_absolute_url())
+
+
+def post_htm_view(request, category_slug, post_slug):
+    post = get_object_or_404(Post, slug=post_slug, hidden=False)
+
     context = {'post': post,
                'can_edit': post.can_edit(request.user),
                'page_identifier': 'post_%s' % post.id,
                }
 
     return render_to_response(request, 'core/post.html', context)
-
-
-def post_htm_view(request, category_slug, post_slug):
-    post = get_object_or_404(Post, slug=post_slug, hidden=False)
-    return post_view(request, category_slug, post.id)
 
 
 def user_post(request, user, post_id):
