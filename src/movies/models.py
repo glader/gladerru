@@ -9,7 +9,6 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 from yafotki.fields import YFField
-from votes.models import VoteMixin
 
 from core.utils.thumbnails import make_thumbnail
 from .utils import ID3
@@ -120,7 +119,7 @@ class Studio(models.Model):
         verbose_name_plural = 'Студии'
 
 
-class Movie(models.Model, VoteMixin):
+class Movie(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100, unique=True)
     slug = models.CharField(verbose_name='Код', max_length=100, unique=True)
     studio = models.ForeignKey(Studio, verbose_name='Студия', null=True, blank=True)
@@ -263,7 +262,7 @@ class Song(models.Model):
         ordering = ('movie', 'order')
 
 
-class Photo(models.Model, VoteMixin):
+class Photo(models.Model):
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name='Заголовок')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
     rider = models.ForeignKey(Man, verbose_name='Райдер', null=True, blank=True, related_name='rider')

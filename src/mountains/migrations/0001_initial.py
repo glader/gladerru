@@ -2,7 +2,6 @@
 from __future__ import unicode_literals
 
 from django.db import models, migrations
-import votes.models
 import yafotki.fields
 
 
@@ -73,7 +72,7 @@ class Migration(migrations.Migration):
                 'verbose_name': '\u0413\u043e\u0440\u0430',
                 'verbose_name_plural': '\u0413\u043e\u0440\u044b',
             },
-            bases=(models.Model, votes.models.VoteMixin),
+            bases=(models.Model,),
         ),
         migrations.CreateModel(
             name='MountainPhoto',

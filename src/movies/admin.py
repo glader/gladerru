@@ -38,7 +38,7 @@ class StudioAdmin(admin.ModelAdmin):
     search_fields = ('slug', 'title')
 
 
-class MovieAdmin(reversion.VersionAdmin):
+class MovieAdmin(reversion.admin.VersionAdmin):
     list_display = ('title', 'studio', 'year')
     ordering = ('-year', 'title')
     raw_id_fields = ('studio',)

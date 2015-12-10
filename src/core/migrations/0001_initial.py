@@ -5,7 +5,6 @@ from django.db import models, migrations
 import redactor.fields
 import core.models
 from django.conf import settings
-import votes.models
 import yafotki.fields
 
 
@@ -92,7 +91,7 @@ class Migration(migrations.Migration):
                 'verbose_name': '\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f',
                 'verbose_name_plural': '\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u0438',
             },
-            bases=(models.Model, votes.models.VoteMixin, core.models.UIDMixin),
+            bases=(models.Model, core.models.UIDMixin),
         ),
         migrations.CreateModel(
             name='Post',
@@ -118,7 +117,7 @@ class Migration(migrations.Migration):
                 'verbose_name': '\u041f\u043e\u0441\u0442',
                 'verbose_name_plural': '\u041f\u043e\u0441\u0442\u044b',
             },
-            bases=(models.Model, votes.models.VoteMixin, core.models.UIDMixin),
+            bases=(models.Model, core.models.UIDMixin),
         ),
         migrations.CreateModel(
             name='Profile',

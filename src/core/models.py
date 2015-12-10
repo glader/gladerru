@@ -4,7 +4,7 @@ from datetime import date
 
 from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.contenttypes import generic
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -12,7 +12,6 @@ from django.core.cache import cache
 
 from redactor.fields import RedactorField
 from yafotki.fields import YFField
-from votes.models import VoteMixin
 
 from core.utils.common import cached, slug, count_text_len
 
@@ -257,7 +256,7 @@ class Comment(models.Model):
 
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    item = generic.GenericForeignKey()
+    item = GenericForeignKey()
     ip = models.CharField(verbose_name='IP', null=True, blank=True, max_length=30)
 
     all = GenericManager()
@@ -300,7 +299,7 @@ TYPES = (
 )
 
 
-class Post(models.Model, VoteMixin, UIDMixin):
+class Post(models.Model, UIDMixin):
     author = models.ForeignKey(User, null=True, blank=True, verbose_name='Автор')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name='Заголовок')
@@ -328,7 +327,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
     position = models.FloatField(verbose_name='Позиция', blank=True, default=None)
 
     tags = models.ManyToManyField(Tag, verbose_name='Теги')
-    comments = generic.GenericRelation(Comment)
+    comments = GenericRelation(Comment)
 
     all = GenericManager()
     objects = GenericManager(hidden=False)
@@ -364,7 +363,7 @@ class Post(models.Model, VoteMixin, UIDMixin):
         verbose_name_plural = 'Посты'
 
 
-class Photo(models.Model, VoteMixin, UIDMixin):
+class Photo(models.Model, UIDMixin):
     slug = models.CharField(max_length=250, null=True, blank=True, verbose_name='Код картинки')
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name='Заголовок')
     content = models.TextField(null=True, blank=True, verbose_name='Содержание элемента')
@@ -440,7 +439,7 @@ class Word(models.Model, UIDMixin):
                     )
     type = models.CharField(choices=DICTIONARIES, default='common', verbose_name='Словарь', max_length=20)
 
-    comments = generic.GenericRelation(Comment)
+    comments = GenericRelation(Comment)
 
     def get_absolute_url(self):
         if self.is_trick:

@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.db import models
 
 from yafotki.fields import YFField
-from votes.models import VoteMixin
 
 
 class Region(models.Model):
@@ -41,7 +40,7 @@ class District(models.Model):
         verbose_name_plural = 'Области'
 
 
-class Mountain(models.Model, VoteMixin):
+class Mountain(models.Model):
     slug = models.CharField(max_length=250, null=True, blank=True, unique=True, verbose_name='Код горы')
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name='Название')
     content = models.TextField(null=True, blank=True, verbose_name='Содержание элемента')
