@@ -30,7 +30,7 @@ class PostAdmin(admin.ModelAdmin):
         }),
         ('Other', {
             'classes': ('collapse',),
-            'fields': ('author', 'date_created', 'sticky_to', 'type', 'comment_count', 'hidden',
+            'fields': ('author', 'sticky_to', 'type', 'comment_count', 'hidden',
                        'text_len', 'in_index', 'used', 'position')}),
     )
 
