@@ -13,7 +13,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'slug', 'skill', 'category', 'author', 'status', 'date_created',
+    list_display = ('title', 'skill', 'category', 'status', 'date_created',
                     'text_len', 'in_index', 'used', 'position')
     ordering = ('-date_created',)
     list_filter = ('status', 'skill', 'in_index', 'used')
@@ -30,7 +30,7 @@ class PostAdmin(admin.ModelAdmin):
         }),
         ('Other', {
             'classes': ('collapse',),
-            'fields': ('sticky_to', 'author', 'type', 'comment_count', 'hidden',
+            'fields': ('author', 'date_created', 'sticky_to', 'type', 'comment_count', 'hidden',
                        'text_len', 'in_index', 'used', 'position')}),
     )
 
