@@ -220,7 +220,7 @@ def enter(args=''):
 
 def local_migrate():
     with settings(warn_only=True):
-        local('cd src && ..\\ENV\\Scripts\\python manage.py schemamigration core --auto')
+        local('cd src && ..\\ENV\\Scripts\\python manage.py makemigrations')
     local('cd src && ..\\ENV\\Scripts\\python manage.py migrate')
 
 

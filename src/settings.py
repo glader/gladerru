@@ -78,6 +78,7 @@ INSTALLED_APPS = (
     'core',
     'discounts',
     'dump',
+    'landingpages',
     'mountains',
     'movies',
 )

@@ -1,0 +1,17 @@
+<h1>Покупайте наши сепульки!</h1>
+
+{% if variant_button == 'red' %}
+    Красная кнопка
+{% endif %}
+
+{% if variant_button == 'blue' %}
+    Синяя кнопка
+{% endif %}
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="hash" value="{{ hash }}">
+    Ваше имя <input type="text" name="name"><br>
+    <input type="submit" value="Подать заявку">
+</form>

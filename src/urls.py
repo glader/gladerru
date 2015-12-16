@@ -10,9 +10,10 @@ admin.autodiscover()
 urlpatterns = patterns(
     '',
     (r'^admind/', include(admin.site.urls)),
-    (r'^redactor/', include('redactor.urls')),
     (r'^bookkeeping/', include('bookkeeping.urls')),
     (r'^dynamic_sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemap.sitemaps}),
+    (r'^lp/', include('landingpages.urls', namespace='lp')),
+    (r'^redactor/', include('redactor.urls')),
     (r'^', include('discounts.urls')),
     (r'^', include('mountains.urls')),
     (r'^', include('movies.urls')),
