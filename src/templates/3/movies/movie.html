@@ -46,7 +46,7 @@
 
 	        <tr><td valign="top"><strong>Торрент:</strong></td><td>
 	            {% if movie.torrent %}
-	                <a href="{{ movie.torrent }}">скачать</a> <!-- <a href="/content/torrents.htm" target="_blank"><img src="{% static "design/3/img/icons/question.png" %}"></a>-->
+	                <a href="{{ movie.torrent }}" rel="nofollow">скачать</a> <!-- <a href="/content/torrents.htm" target="_blank"><img src="{% static "design/3/img/icons/question.png" %}"></a>-->
                     {% if movie.torrent|is_extremebits %}<span title="Этот торрент устарел. Дайте в комментариях ссылку на свежий." style="border-bottom: 1px dashed #317CB4" onclick="alert('Этот торрент устарел. Дайте в комментариях ссылку на свежий.')">помочь сайту</span>{% endif %}
                 {% else %}
 	                <span title="Вы можете попросить или предложить ссылку на торрент в комментариях." onclick="alert('Вы можете попросить или предложить ссылку на торрент в комментариях.')" style="border-bottom: 1px dashed #317CB4">пока нету</span>
