@@ -19,9 +19,9 @@
 
 {% block content %}
 	<div class="b-studio">
-        {% if studio.image %}<a href="{{ studio.image.url }}" class="float_right"><img src="{% static "{{ studio.image.get_thumbnail_url }}" %}" alt="{{ studio.title }} - логотип" border="0"></a><br>{% endif %}
+        {% if studio.image %}<a href="{{ studio.image.url }}" class="float_right" rel="nofollow"><img src="{% static "{{ studio.image.get_thumbnail_url }}" %}" alt="{{ studio.title }} - логотип" border="0"></a><br>{% endif %}
 
-		{% if studio.url %}<strong>Адрес:</strong> <a href="{{ studio.url }}" title="Официальный сайт">{{ studio.url }}</a><br/><br/>{% endif %}
+		{% if studio.url %}<strong>Адрес:</strong> <a href="{{ studio.url }}" title="Официальный сайт" rel="nofollow">{{ studio.url }}</a><br/><br/>{% endif %}
 
        	{{ studio.content|safe }}
 

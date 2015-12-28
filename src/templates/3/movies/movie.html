@@ -32,7 +32,7 @@
 
 	<div class="b-movie">
 		{% if movie.cover %}
-			<a href="{{ movie.cover.src }}" class="float_right"><img src="{{ movie.cover.src|thumbnail }}" alt="{{ movie.title }} - обложка" border="0"></a>
+			<a href="{{ movie.cover.src }}" class="float_right" rel="nofollow"><img src="{{ movie.cover.src|thumbnail }}" alt="{{ movie.title }} - обложка" border="0"></a>
 		{% endif %}
 
 	    <table class="b-movie_info"><tbody>
@@ -41,7 +41,7 @@
 	        <tr><td valign="top"><strong>Год:</strong></td><td>{{ movie.year|default:"-" }}</td></tr>
 
 	        {% if movie.url %}
-	        	<tr><td valign="top"><strong>Адрес:</strong></td><td><a href="{{ movie.url }}">{{ movie.url }}</a></td></tr>
+	        	<tr><td valign="top"><strong>Адрес:</strong></td><td><a href="{{ movie.url }}" rel="nofollow">{{ movie.url }}</a></td></tr>
 	       	{% endif %}
 
 	        <tr><td valign="top"><strong>Торрент:</strong></td><td>
