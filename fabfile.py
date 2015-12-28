@@ -187,6 +187,10 @@ def restart():
     run('sudo restart gladerru')
 
 
+def remote(args=''):
+    manage_py(args)
+
+
 # -----------------------------------------------------------------------
 # https://yandextank.readthedocs.org/en/latest/install.html
 
