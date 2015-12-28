@@ -9,7 +9,7 @@ from core.models import Post
 
 class Command(NoArgsCommand):
     def handle_noargs(self, **options):
-        for post in Post.objects.all().filter(pk=2980):
+        for post in Post.objects.all():
             if not post.content:
                 continue
 
