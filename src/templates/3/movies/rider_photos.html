@@ -12,7 +12,7 @@
 {% block content %}
     <div class="b-feed b-static-text">
         {% for photo in object_list %}
-            <a href="{{ photo.yandex_fotki_image_src }}" target="_blank"><img src="{{ photo.yandex_fotki_image_src|thumbnail }}"></a>
+            <a href="{{ photo.yandex_fotki_image_src }}" target="_blank" rel="nofollow"><img src="{{ photo.yandex_fotki_image_src|thumbnail }}"></a>
         {% endfor %}
     </div>
 

@@ -45,7 +45,7 @@
 
 		{% if photos %}<h3>Фотографии с {% ifequal item.gender 'm' %}его{% else %}её{% endifequal %} участием</h3>
 			{% for p in photos %}
-				<a href="{{ p.yandex_fotki_image_src }}" target="_blank"><img src="{{ p.yandex_fotki_image_src|thumbnail }}"></a>
+				<a href="{{ p.yandex_fotki_image_src }}" target="_blank" rel="nofollow"><img src="{{ p.yandex_fotki_image_src|thumbnail }}"></a>
 			{% endfor %}
 			</ul>
             {% if more_photos %}
@@ -55,7 +55,7 @@
 
 		{% if author_photos %}<h3>Сделанные {% ifequal item.gender 'm' %}им{% else %}ей{% endifequal %} фотографии</h3>
 			{% for p in author_photos %}
-				<a href="{{ p.yandex_fotki_image_src }}" target="_blank"><img src="{{ p.yandex_fotki_image_src|thumbnail }}"></a>
+				<a href="{{ p.yandex_fotki_image_src }}" target="_blank" rel="nofollow"><img src="{{ p.yandex_fotki_image_src|thumbnail }}"></a>
 			{% endfor %}
 			</ul>
             {% if more_author_photos %}
