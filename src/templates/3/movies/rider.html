@@ -19,7 +19,7 @@
 
 {% block content %}
 	<div class="b-static-text">
-        {% if item.image %}<a href="{{ item.image.src }}" style="float: right;"><img src="{{ item.image.src|thumbnail }}" alt="{{ item.title }} - портрет" border="0"></a><br>{% endif %}
+        {% if item.image %}<a href="{{ item.image.src }}" style="float: right;" rel="nofollow"><img src="{{ item.image.src|thumbnail }}" alt="{{ item.title }} - портрет" border="0"></a><br>{% endif %}
 
 		<table border="0" cellspacing="5"><tbody>
 
