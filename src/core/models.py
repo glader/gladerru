@@ -324,7 +324,7 @@ class Post(models.Model, UIDMixin):
     text_len = models.PositiveIntegerField(verbose_name='Длина текста', default=0)
     in_index = models.NullBooleanField(verbose_name='В индексе', blank=True, default=None)
     used = models.BooleanField(verbose_name='Использовано', default=False)
-    position = models.FloatField(verbose_name='Позиция', blank=True, default=None)
+    position = models.FloatField(verbose_name='Позиция', null=True, blank=True, default=None)
 
     tags = models.ManyToManyField(Tag, verbose_name='Теги')
     comments = GenericRelation(Comment)
