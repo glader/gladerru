@@ -87,7 +87,7 @@ class CategoryView(TemplateView):
         return context
 
 
-def post_view(request, slug, post_id):
+def post_redirect(request, slug, post_id):
     post = get_object_or_404(Post, pk=post_id)
     if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
         raise Http404
@@ -95,15 +95,17 @@ def post_view(request, slug, post_id):
     return HttpResponsePermanentRedirect(post.get_absolute_url())
 
 
-def post_htm_view(request, category_slug, post_slug):
-    post = get_object_or_404(Post, slug=post_slug, hidden=False)
+def post(request, category_slug, post_slug):
+    post_object = get_object_or_404(Post, slug=post_slug, hidden=False)
+    template = post_object.type == 'post' and 'core/post.html' or 'core/static_page.html'
 
-    context = {'post': post,
-               'can_edit': post.can_edit(request.user),
-               'page_identifier': 'post_%s' % post.id,
-               }
+    context = {
+        'post': post_object,
+        'can_edit': post_object.can_edit(request.user),
+        'page_identifier': 'post_%s' % post_object.id,  # Для Discus
+    }
 
-    return render_to_response(request, 'core/post.html', context)
+    return render_to_response(request, template, context)
 
 
 def user_post(request, user, post_id):

@@ -341,9 +341,9 @@ class Post(models.Model, UIDMixin):
 
     def get_absolute_url(self):
         if self.skill or self.type == 'page':
-            return reverse('article', args=[self.slug])
+            return reverse('post', args=['content', self.slug])
         else:
-            return reverse('post_htm', args=[self.category.slug, self.slug])
+            return reverse('post', args=[self.category.slug, self.slug])
 
     def can_edit(self, user):
         return user.is_superuser

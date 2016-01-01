@@ -8,12 +8,10 @@ from django.contrib.auth.views import password_reset
 
 urlpatterns = patterns(
     '',
-    url(r'^content/(?P<pk>[^/]+)\.htm$', ArticleView.as_view(), name='article'),
-
-    url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$', CategoryView.as_view(),
+    url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$',
+        CategoryView.as_view(),
         name='category'),
-    url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/([^\s]+).htm$', post_htm_view, name='post_htm'),
-    url(r'^(ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_view, name='post'),
+    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/([^\s]+).htm$', post, name='post'),
 
     url(r'^terms/(?P<slug>[^/]+)$', DictionaryWordView.as_view(), name='dictionary_word'),
     url(r'^terms/', DictionaryView.as_view(), name='dictionary'),
@@ -44,5 +42,6 @@ urlpatterns = patterns(
     url(r'^$', IndexView.as_view(), name='index'),
 
     # Old urls
+    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_redirect),
     url(r'^users/([^/]+)/posts/(\d+)$', user_post),
 )

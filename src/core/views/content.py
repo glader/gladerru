@@ -12,16 +12,6 @@ from core.utils.common import clean_choice
 from core.utils.search import search as search_provider
 
 
-class ArticleView(TemplateView):
-    template_name = 'core/article.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ArticleView, self).get_context_data(**kwargs)
-        context['article'] = get_object_or_404(Post, slug=kwargs['pk'])
-        context['page_identifier'] = 'post_%s' % context['article'].id
-        return context
-
-
 class DictionaryView(TemplateView):
     template_name = 'core/dictionary.html'
 
