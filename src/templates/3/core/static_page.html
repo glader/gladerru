@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load content %}
+
+{% block extrahead %}
+    <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
+    <meta property="og:image" content="{{ post.icon }}"/>
+{% endblock %}
+
+{% block page_title %}{{ post.title }}{% if request.user.is_superuser %} <small><a href="/admind/core/post/{{ post.id }}/">ред</a></small>{% endif %}{% endblock %}
+
+{% block title %}{{ post.title }} {{ block.super }}{% endblock %}
+
+{% block content %}
+    <div class="b-static-text text g-line b-post_content">
+        {{ post.content|default:""|safe }}
+    </div>
+{% endblock %}
