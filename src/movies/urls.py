@@ -15,7 +15,7 @@ urlpatterns = patterns(
         ListView.as_view(queryset=Studio.objects.all().order_by('title'), template_name='movies/studies.html'),
         name='studies',
     ),
-    url(r'^movies/$', RedirectView.as_view(permanent=False, url='/movies/2014/'), name='movies'),
+    url(r'^movies/$', RedirectView.as_view(permanent=False, url='/movies/2015/'), name='movies'),
     url(r'^movies/teasers/$', views.TeasersView.as_view(), name='teasers'),
     url(r'^movies/soundtracks/$', views.SoundtracksView.as_view(), name='soundtracks'),
     url(r'^movies/(?P<year>[^/]+)/$', views.MoviesViews.as_view(), name='movies_by_year'),
