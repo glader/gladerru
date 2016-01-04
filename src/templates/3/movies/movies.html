@@ -2,10 +2,12 @@
 {% load content %}
 {% load staticfiles %}
 
-{% block scripts %}
+{% block extrahead %}
     {{ block.super }}
 
     <script type="text/javascript" src="{% static "js/sorttable.js" %}"></script>
+
+    <meta name="robots" content="noindex,follow"/>
 {% endblock %}
 
 {% block top_menu %}
