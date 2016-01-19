@@ -39,10 +39,6 @@
 {% block content %}
 
 <script type="text/javascript">
-
-colors = ['317CB4', '000000', 'CC0000', 'CC6600', 'CCCC00', '66CC00', '00CC66', '00CCCC', '0066CC', '0000CC', '6600CC', 'CC00CC', 'CC0066'];
-color_index = Math.floor(Math.random() * colors.length);
-
 yandex_partner_id = 8400;
 yandex_site_bg_color = 'FFFFFF';
 yandex_stat_id = 24;
@@ -52,16 +48,13 @@ yandex_direct_type = 'vertical';
 yandex_direct_limit = 1;
 yandex_direct_title_font_size = 3;
 yandex_direct_links_underline = true;
-yandex_direct_title_color = colors[color_index];
+yandex_direct_title_color = 'CC00CC';
 yandex_direct_url_color = '666666';
 yandex_direct_text_color = '000000';
 yandex_direct_hover_color = 'CC0000';
 yandex_direct_sitelinks_color = '317CB4';
 yandex_direct_favicon = true;
 yandex_no_sitelinks = false;
-
-yadid = yandex_stat_id.toString() + '0' + color_index.toString();
-yandex_stat_id = parseInt(yadid);
 
 document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
 </script>
@@ -72,20 +65,20 @@ document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/con
         <div class="item">
             <div style="float: right;">
 
-<!-- admitad.banner: ndz80dnnq1b6a5f065c41a479c6d7c ТРАЕКТОРИЯ -->
-<a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/ndz80dnnq1b6a5f065c41a479c6d7c/?i=4">
-    <img width="336" height="280" border="0" src="https://ad.admitad.com/b/ndz80dnnq1b6a5f065c41a479c6d7c/" alt="ТРАЕКТОРИЯ"/>
-</a>
-<!-- /admitad.banner -->
-<br><br>
+                <!-- admitad.banner: ndz80dnnq1b6a5f065c41a479c6d7c ТРАЕКТОРИЯ -->
+                <a target="_blank" rel="nofollow" href="https://ad.admitad.com/g/ndz80dnnq1b6a5f065c41a479c6d7c/?i=4">
+                    <img width="336" height="280" border="0" src="https://ad.admitad.com/b/ndz80dnnq1b6a5f065c41a479c6d7c/" alt="ТРАЕКТОРИЯ"/>
+                </a>
+                <!-- /admitad.banner -->
+                <br><br>
 
 
-<!-- /85092470/glader_post_right -->
-<div id='div-gpt-ad-1450960661235-0'>
-<script type='text/javascript'>
-googletag.cmd.push(function() { googletag.display('div-gpt-ad-1450960661235-0'); });
-</script>
-</div>
+                <!-- /85092470/glader_post_right -->
+                <div id='div-gpt-ad-1450960661235-0'>
+                <script type='text/javascript'>
+                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1450960661235-0'); });
+                </script>
+                </div>
             </div>
 
             <div class="text g-line b-post_content">
@@ -94,11 +87,41 @@ googletag.cmd.push(function() { googletag.display('div-gpt-ad-1450960661235-0');
                 </p>
             </div>
 
-            <div data-ablock="8914" class="AdvertoneBlock" style="display:inline-block"></div>
+            <script type="text/javascript">
+                colors = ['', '317CB4', '000000', 'CC0000', 'CC6600', 'CCCC00', '66CC00', '00CC66', '00CCCC', '0066CC', '0000CC', '6600CC', 'CC00CC', 'CC0066'];
+                color_index = Math.floor(Math.random() * colors.length) + 1;
 
-<br><br>
-<div id="bn_89155218e8">загрузка...</div>
-<script type="text/javascript" src="//recreativ.ru/rcode.89155218e8.js"></script> 
+                borders = ['', 'ad', 'block', 'collapse', 'none'];
+                border_type = Math.floor(Math.random() * borders.length) + 1;
+
+                yandex_partner_id = 8400;
+                yandex_site_bg_color = 'FFFFFF';
+                yandex_stat_id = 25;
+                yandex_ad_format = 'direct';
+                yandex_font_size = 1;
+                yandex_direct_type = 'horizontal';
+                yandex_direct_limit = 3;
+                yandex_direct_border_type = borders[border_type];
+                yandex_direct_border_color = '000000';
+                yandex_direct_title_font_size = 3;
+                yandex_direct_links_underline = true;
+                yandex_direct_title_color = colors[color_index];
+                yandex_direct_url_color = '666666';
+                yandex_direct_text_color = '000000';
+                yandex_direct_hover_color = 'CC0000';
+                yandex_direct_sitelinks_color = '317CB4';
+                yandex_direct_favicon = true;
+                yandex_no_sitelinks = false;
+
+                yadid = yandex_stat_id.toString() + '0' + color_index.toString() + '0' + border_type.toString();
+                yandex_stat_id = parseInt(yadid);
+
+                document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
+            </script>
+
+            <br><br>
+            <div id="bn_89155218e8">загрузка...</div>
+            <script type="text/javascript" src="//recreativ.ru/rcode.89155218e8.js"></script>
 
             {% relative_posts post %}
 
