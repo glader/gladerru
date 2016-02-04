@@ -17,16 +17,14 @@
 {% block extrahead %}
     <meta property="og:image" content="{{ post.icon }}"/>
     <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
-    <script type="text/javascript" async class="AdvertoneJS" src="//static.advertone.ru/js/advertone_async.js"></script>
 
-<script type='text/javascript'>
-  googletag.cmd.push(function() {
-    googletag.defineSlot('/85092470/glader_post_header', [[800, 211], [600, 250]], 'div-gpt-ad-1451128144902-0').addService(googletag.pubads());
-    googletag.pubads().enableSingleRequest();
-    googletag.enableServices();
-  });
-</script>
-
+    <script type='text/javascript'>
+      googletag.cmd.push(function() {
+        googletag.defineSlot('/85092470/glader_post_header', [[800, 211], [600, 250]], 'div-gpt-ad-1451128144902-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+      });
+    </script>
 {% endblock %}
 
 {% block scripts %}
@@ -88,12 +86,6 @@ document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/con
             </div>
 
             <script type="text/javascript">
-                colors = ['', '317CB4', '000000', 'CC0000', 'CC6600', 'CCCC00', '66CC00', '00CC66', '00CCCC', '0066CC', '0000CC', '6600CC', 'CC00CC', 'CC0066'];
-                color_index = Math.floor(Math.random() * colors.length) + 1;
-
-                borders = ['', 'ad', 'block', 'collapse', 'none'];
-                border_type = Math.floor(Math.random() * borders.length) + 1;
-
                 yandex_partner_id = 8400;
                 yandex_site_bg_color = 'FFFFFF';
                 yandex_stat_id = 25;
@@ -101,20 +93,17 @@ document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/con
                 yandex_font_size = 1;
                 yandex_direct_type = 'horizontal';
                 yandex_direct_limit = 3;
-                yandex_direct_border_type = borders[border_type];
+                yandex_direct_border_type = 'none';
                 yandex_direct_border_color = '000000';
                 yandex_direct_title_font_size = 3;
                 yandex_direct_links_underline = true;
-                yandex_direct_title_color = colors[color_index];
+                yandex_direct_title_color = '0000CC';
                 yandex_direct_url_color = '666666';
                 yandex_direct_text_color = '000000';
                 yandex_direct_hover_color = 'CC0000';
                 yandex_direct_sitelinks_color = '317CB4';
                 yandex_direct_favicon = true;
                 yandex_no_sitelinks = false;
-
-                yadid = yandex_stat_id.toString() + '0' + color_index.toString() + '0' + border_type.toString();
-                yandex_stat_id = parseInt(yadid);
 
                 document.write('<scr'+'ipt type="text/javascript" src="//an.yandex.ru/system/context.js"></scr'+'ipt>');
             </script>
