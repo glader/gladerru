@@ -17,17 +17,6 @@
 {% block extrahead %}
     <meta property="og:image" content="{{ post.icon }}"/>
     <link rel="canonical" href="http://{{ DOMAIN }}{{ post.get_absolute_url }}" />
-
-    <script type='text/javascript'>
-      googletag.cmd.push(function() {
-        googletag.defineSlot('/85092470/glader_post_header', [[800, 211], [600, 250]], 'div-gpt-ad-1451128144902-0').addService(googletag.pubads());
-        googletag.defineSlot('/85092470/glader_internal_1_728_90', [728, 90], 'div-gpt-ad-1456125887637-0').addService(googletag.pubads());
-        googletag.defineSlot('/85092470/glader_internal_2_728_90', [728, 90], 'div-gpt-ad-1456125887637-1').addService(googletag.pubads());
-        googletag.pubads().enableSingleRequest();
-        googletag.pubads().collapseEmptyDivs();
-        googletag.enableServices();
-      });
-    </script>
 {% endblock %}
 
 {% block scripts %}
