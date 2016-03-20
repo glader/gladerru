@@ -1,6 +1,7 @@
 .b-post_content
 {
-    width: 800px;
+    width: 790px;
+    overflow: hidden;
     font-size: 15px;
     line-height: 20px;
     color: #000000;
