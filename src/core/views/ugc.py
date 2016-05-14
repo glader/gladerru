@@ -124,7 +124,7 @@ class AddPostView(CreateView):
         if self.request.user.is_superuser:
             post.status = 'pub'
             post.save()
-            self.success_url = reverse('post', args=[post.category.slug, post.id])
+            self.success_url = post.get_absolute_url()
         else:
             post.status = 'save'
             post.save()
