@@ -249,4 +249,4 @@ def make_backup():
     today = date.today().replace(day=1)
     run('mysqldump -u %(DATABASE_USER)s -p%(DATABASE_PASSWORD)s -h %(DATABASE_HOST)s %(DATABASE_DB)s | gzip > gladerru.sql.gz' % globals())
     get('gladerru.sql.gz', 'gladerru.sql.%s.gz' % today.strftime('%Y%m%d'))
-    run('del gladerru.sql.gz')
+    run('rm gladerru.sql.gz')
