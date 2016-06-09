@@ -6,10 +6,6 @@
     {% top_menu 'posts' %}
 {% endblock %}
 
-{% block extrahead %}
-    <script type="text/javascript" async class="AdvertoneJS" src="//static.advertone.ru/js/advertone_async.js"></script>
-{%endblock %}
-
 {% block title %}{% if start %}Лучшие сообщения{% else %}Лучший сноубордический сайт{% endif %} {{ block.super }}{% endblock %}
 
 {% block page %}
@@ -45,7 +41,6 @@
         </div>
 
         {% if forloop.first %}
-            <div data-ablock="13892" class="AdvertoneBlock" style="display:inline-block; margin-bottom:20px; margin-top: 20px;"></div>
 	    {% endif %}
     {% endfor %}
 
