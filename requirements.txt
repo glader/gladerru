@@ -1,5 +1,5 @@
 beautifulsoup4==4.4.1
-django-reversion==2.0.1
+django-reversion==2.0.4
 django-timelog==0.4
 django-wysiwyg-redactor==0.4.9
 Django==1.9.7
