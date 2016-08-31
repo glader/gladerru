@@ -1,7 +1,7 @@
 beautifulsoup4==4.5.1
 django-reversion==2.0.6
 django-timelog==0.4
-django-wysiwyg-redactor==0.4.9
+django-wysiwyg-redactor==0.4.9.1
 Django==1.10
 django_yafotki==0.7.3
 gunicorn==19.6.0
