@@ -11,6 +11,6 @@ Pillow==3.4.2
 python-Levenshtein==0.12.0
 python-memcached==1.58
 pytils==0.3
-simplejson==3.9.0
+simplejson==3.10.0
 git+https://github.com/glader/django_russian.git#egg=django_russian==0.1
 YaDiskClient==0.4.3
