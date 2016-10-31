@@ -2,12 +2,12 @@
 from __future__ import unicode_literals
 
 import simplejson
+
 from django.db import models
 
 
 class JSONField(models.TextField):
-    """ Поле для хранения данных, сериализованных в JSON. """
-    __metaclass__ = models.SubfieldBase
+    """ Поле для хранения данных, сериализованных в simplejson. """
 
     editable = False
     serialize = False
@@ -19,6 +19,11 @@ class JSONField(models.TextField):
     class JSONList(list):
         def __str__(self):
             return simplejson.dumps(self, sort_keys=True)
+
+    def from_db_value(self, value, expression, connection, context):
+        if value is None:
+            return value
+        return simplejson.loads(value)
 
     def get_prep_value(self, value):
         if value is not None:

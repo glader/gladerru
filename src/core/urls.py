@@ -1,13 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 from views.content import *
 from views.ugc import *
 from feeds import *
 from django.contrib.auth.views import password_reset
 
-urlpatterns = patterns(
-    '',
+urlpatterns = [
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$',
         CategoryView.as_view(),
         name='category'),
@@ -44,4 +43,4 @@ urlpatterns = patterns(
     # Old urls
     url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_redirect),
     url(r'^users/([^/]+)/posts/(\d+)$', user_post),
-)
+]

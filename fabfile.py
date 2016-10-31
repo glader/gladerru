@@ -30,8 +30,9 @@ def init():
 
         run('apt-get update')
         run('apt-get upgrade -y')
-        run('apt-get install -y mc nginx mysql-client python-setuptools python-dev rrdtool sendmail memcached fail2ban')
+        run('apt-get install -y mc nginx mysql-client python-setuptools python-dev python-pip rrdtool sendmail memcached fail2ban')
         run('apt-get build-dep -y python-mysqldb')
+        run('pip install --upgrade virtualenv')
         run('apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev')  # Pillow dependencies
 
         if not exists('/home/%s' % SSH_USER):
@@ -126,11 +127,10 @@ def static():
 
 
 def environment():
-    with settings(user=SSH_USER):
-        with cd(env.directory):
-            with settings(warn_only=True):
-                run('python virtualenv.py ENV')
-            virtualenv('pip install -r requirements.txt')
+    with cd(env.directory):
+        with settings(warn_only=True):
+            run('virtualenv ENV')
+        virtualenv('pip install -r requirements.txt')
 
 
 def local_settings():
@@ -214,7 +214,7 @@ def run_local():
 
 def local_env():
     with settings(warn_only=True):
-        local('c:\\python\\python virtualenv.py ENV --system-site-packages')
+        local('virtualenv.exe ENV --system-site-packages')
     local('ENV\\Scripts\\pip install -r requirements_test.txt ')
 
 
