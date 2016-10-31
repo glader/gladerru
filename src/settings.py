@@ -12,20 +12,16 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL = 'glader.ru@gmail.com'
 
 AUTH_PROFILE_MODULE = 'core.Profile'
 
+BASE_DIR = os.path.dirname(__file__)
 FORCE_SCRIPT_NAME = ""
 TIME_ZONE = 'Asia/Yekaterinburg'
 LANGUAGE_CODE = 'ru-ru'
 SITE_ID = 1
 USE_I18N = True
 SECRET_KEY = '12345'
-
-TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
-    'django.template.loaders.app_directories.Loader',
-)
+ROOT_URLCONF = 'urls'
 
 DEBUG = False
-TEMPLATE_DEBUG = False
 TIMING = True
 LOG_LEVEL = logging.WARNING
 INTERNAL_IPS = ('127.0.0.1',)
@@ -43,21 +39,27 @@ MIDDLEWARE_CLASSES = (
     'core.middleware.UserReferer',
 )
 
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.static',
-    'django.core.context_processors.request',
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates/3')
+        ],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.template.context_processors.csrf',
+                'django.contrib.messages.context_processors.messages',
 
-    'core.context.profile',
-    'core.context.domain',
-)
-
-ROOT_URLCONF = 'urls'
-
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates/3'),
-)
+                'core.context.profile',
+                'core.context.domain',
+            ],
+        },
+    },
+]
 
 INSTALLED_APPS = (
     'django.contrib.auth',
@@ -82,9 +84,6 @@ INSTALLED_APPS = (
     'mountains',
     'movies',
 )
-
-# Absolute path to the directory that holds media.
-BASE_DIR = os.path.dirname(__file__)
 
 ALLOWED_HOSTS = ('glader.ru', 'glader_local.ru')
 

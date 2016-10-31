@@ -4,7 +4,7 @@ from django.conf.urls import url
 from views.content import *
 from views.ugc import *
 from feeds import *
-from django.contrib.auth.views import password_reset
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$',
@@ -23,15 +23,15 @@ urlpatterns = [
 
     url(r'^auth/login$', login, name='login'),
     url(r'^auth/registration$', registration, name='registration'),
-    url(r'^auth/logout$', 'django.contrib.auth.views.logout', name='logout'),
-    url(r'^auth/reset$', password_reset, name='password_reset'),
-    url(r'^auth/password_reset/done/$', 'django.contrib.auth.views.password_reset_done', name='password_reset_done'),
-    url(r'^auth/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', 'django.contrib.auth.views.password_reset_confirm',
+    url(r'^auth/logout$', auth_views.logout, name='logout'),
+    url(r'^auth/reset$', auth_views.password_reset, name='password_reset'),
+    url(r'^auth/password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
+    url(r'^auth/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$', auth_views.password_reset_confirm,
         name='password_reset_confirm'),
-    url(r'^auth/reset/done/$', 'django.contrib.auth.views.password_reset_complete', name='password_reset_complete'),
+    url(r'^auth/reset/done/$', auth_views.password_reset_complete, name='password_reset_complete'),
 
     # Feeds
-    (r'^feeds/all', AllPosts()),
+    url(r'^feeds/all', AllPosts()),
 
     # Editing
     url(r'^post/new$', AddPostView.as_view(), name='new_post'),

@@ -5,12 +5,12 @@ import os
 import zipfile
 
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from YaDiskClient.YaDiskClient import YaDisk, YaDiskException
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, **options):
         disk = YaDisk(settings.DUMP_ACCOUNT_NAME, settings.DUMP_PASSWORD)
 
         def save_mkdir(dir):
