@@ -8,12 +8,11 @@ from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, CreateView, UpdateView
+from django.views.generic import View, TemplateView, CreateView, UpdateView
 from django.core.mail import mail_admins
 
 from core.forms import PostForm, LoginForm, RegistrationForm
 from core.models import Post, NewsCategory
-from core.views.common import render_to_response
 from core.decorators import class_view_decorator
 
 
@@ -95,17 +94,23 @@ def post_redirect(request, slug, post_id):
     return HttpResponsePermanentRedirect(post.get_absolute_url())
 
 
-def post(request, category_slug, post_slug):
-    post_object = get_object_or_404(Post, slug=post_slug, hidden=False)
-    template = post_object.type == 'post' and 'core/post.html' or 'core/static_page.html'
+class PostView(TemplateView):
+    def dispatch(self, request, category_slug, post_slug, *args, **kwargs):
+        self.object = get_object_or_404(Post, slug=post_slug, hidden=False)
 
-    context = {
-        'post': post_object,
-        'can_edit': post_object.can_edit(request.user),
-        'page_identifier': 'post_%s' % post_object.id,  # Для Discus
-    }
+        return super(PostView, self).dispatch(request, *args, **kwargs)
 
-    return render_to_response(request, template, context)
+    def get_template_names(self):
+        return [self.object.type == 'post' and 'core/post.html' or 'core/static_page.html']
+
+    def get(self, request, *args, **kwargs):
+        context = {
+            'post': self.object,
+            'can_edit': self.object.can_edit(request.user),
+            'page_identifier': 'post_%s' % self.object.id,  # Для Discus
+        }
+
+        return self.render_to_response(context)
 
 
 def user_post(request, user, post_id):
@@ -182,8 +187,15 @@ class TempPostView(EditPostView):
 ###############################################################################
 # Авторизация
 
-def registration(request):
-    if request.POST:
+
+class RegistrationView(TemplateView):
+    template_name = 'registration/login.html'
+
+    def get(self, request, *args, **kwargs):
+        form = RegistrationForm(initial={'next': request.GET.get('next')})
+        return self.render_to_response({'registration_form': form, 'login_form': LoginForm()})
+
+    def post(self, request, *args, **kwargs):
         form = RegistrationForm(request.POST)
         if form.is_valid():
             form.save()
@@ -201,15 +213,16 @@ def registration(request):
         elif request.is_ajax():
             return JsonErrorResponse(form.str_errors())
 
-    else:
-        form = RegistrationForm(initial={'next': request.GET.get('next')})
 
-    return render_to_response(request, 'registration/login.html', {'registration_form': form,
-                                                                   'login_form': LoginForm()})
+class LoginView(TemplateView):
+    template_name = 'registration/login.html'
 
+    def get(self, request, *args, **kwargs):
+        form = LoginForm(initial={'next': request.GET.get('next')})
+        return self.render_to_response({'registration_form': RegistrationForm(initial=request.GET),
+                                        'login_form': form})
 
-def login(request):
-    if request.POST:
+    def post(self, request, *args, **kwargs):
         form = LoginForm(request.POST)
         if form.is_valid():
             user = form.user
@@ -222,9 +235,3 @@ def login(request):
 
         elif request.is_ajax():
             return JsonErrorResponse(form.str_errors())
-
-    else:
-        login_form = LoginForm(initial={'next': request.GET.get('next')})
-
-    registration_form = RegistrationForm(initial=request.GET)
-    return render_to_response(request, 'registration/login.html', locals())

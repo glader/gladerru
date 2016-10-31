@@ -10,7 +10,8 @@ urlpatterns = [
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$',
         CategoryView.as_view(),
         name='category'),
-    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/([^\s]+).htm$', post, name='post'),
+    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/([^\s]+).htm$',
+        PostView.as_view(), name='post'),
 
     url(r'^terms/(?P<slug>[^/]+)$', DictionaryWordView.as_view(), name='dictionary_word'),
     url(r'^terms/', DictionaryView.as_view(), name='dictionary'),
@@ -21,8 +22,8 @@ urlpatterns = [
     url(r'^search', SearchView.as_view(), name='search'),
     url(r'^feedback', FeedbackView.as_view(), name='feedback'),
 
-    url(r'^auth/login$', login, name='login'),
-    url(r'^auth/registration$', registration, name='registration'),
+    url(r'^auth/login$', LoginView.as_view(), name='login'),
+    url(r'^auth/registration$', RegistrationView.as_view(), name='registration'),
     url(r'^auth/logout$', auth_views.logout, name='logout'),
     url(r'^auth/reset$', auth_views.password_reset, name='password_reset'),
     url(r'^auth/password_reset/done/$', auth_views.password_reset_done, name='password_reset_done'),
