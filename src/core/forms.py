@@ -20,7 +20,8 @@ def sanitizeHTML(value, mode='none'):
         Если mode==strict - все теги кроме разрешенных
     """
     if mode == 'strict':
-        valid_tags = 'p i em strong b u a h1 h2 h3 h4 pre br div span img blockquote object param embed iframe ' \
+        valid_tags = 'p i em strong b u a h1 h2 h3 h4 pre br div span ul ol li img ' \
+                     'blockquote object param embed iframe ' \
                      'table thead tbody tr td'.split()
     else:
         valid_tags = []
