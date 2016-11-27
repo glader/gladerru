@@ -210,8 +210,11 @@ class RegistrationView(TemplateView):
             else:
                 return HttpResponseRedirect(next)
 
-        elif request.is_ajax():
-            return JsonErrorResponse(form.str_errors())
+        else:
+            if request.is_ajax():
+                return JsonErrorResponse(form.str_errors())
+            else:
+                return self.render_to_response({'registration_form': form, 'login_form': LoginForm()})
 
 
 class LoginView(TemplateView):
@@ -233,5 +236,11 @@ class LoginView(TemplateView):
             else:
                 return HttpResponseRedirect(next)
 
-        elif request.is_ajax():
-            return JsonErrorResponse(form.str_errors())
+        else:
+            if request.is_ajax():
+                return JsonErrorResponse(form.str_errors())
+            else:
+                return self.render_to_response({
+                    'registration_form': RegistrationForm(initial=request.GET),
+                    'login_form': form,
+                })
