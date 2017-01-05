@@ -10,18 +10,23 @@
 {% block page_title %}Обратная связь{% endblock %}
 
 {% block content %}
+    {% if saved %}
+        <div>Ваше сообщение отправлено.</div>
 
-    {% if message %}
-        <div>{{ message }}</div>
     {% else %}
-        <form action="{% url "feedback" %}" method="POST">
-        <table border="0">
-            {{ form }}
-        <tr><td></td><td>
-            <input type="submit" value="Отправить сообщение">
-        </td></tr>
-        </table>
-        </form>
-        <div>Звездочкой отмечены обязательные поля.</div>
+        {% if message %}
+            <div>{{ message }}</div>
+            
+        {% else %}
+            <form action="{% url "feedback" %}" method="POST">
+            <table border="0">
+                {{ form }}
+            <tr><td></td><td>
+                <input type="submit" value="Отправить сообщение">
+            </td></tr>
+            </table>
+            </form>
+            <div>Звездочкой отмечены обязательные поля.</div>
+        {% endif %}
     {% endif %}
 {% endblock %}
