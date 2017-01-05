@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.db.models import Q
 from django.forms.models import ModelForm
+from captcha.fields import ReCaptchaField
 
 from core.models import Profile, Post
 from core.utils.common import notice_admin, process_template, send_html_mail
@@ -225,6 +226,7 @@ class FeedbackForm(CommonForm):
                               error_messages={'required': 'Введите текст сообщения'},
                               widget=forms.Textarea())
     code = forms.CharField(label='Код', required=False, widget=forms.HiddenInput)
+    captcha = ReCaptchaField()
 
     def clean_message(self):
         if '[url=' in self.cleaned_data.get('message', ''):

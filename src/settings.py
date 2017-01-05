@@ -76,6 +76,7 @@ INSTALLED_APPS = (
     'redactor',
     'reversion',
     'timelog',
+    'captcha',
 
     'bookkeeping',
     'core',
@@ -123,6 +124,8 @@ CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для пра�
 ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 
 VK_API_ID = 2009513
+
+NOCAPTCHA = True
 
 # Redactor
 REDACTOR_OPTIONS = {
