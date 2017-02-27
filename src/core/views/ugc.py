@@ -1,19 +1,21 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime
-import simplejson
 
+from datetime import datetime
+
+import simplejson
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.core.mail import mail_admins
 from django.core.urlresolvers import reverse
+from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
-from django.views.generic import View, TemplateView, CreateView, UpdateView
-from django.core.mail import mail_admins
+from django.views.generic import TemplateView, CreateView, UpdateView
 
+from core.decorators import class_view_decorator
 from core.forms import PostForm, LoginForm, RegistrationForm
 from core.models import Post, NewsCategory
-from core.decorators import class_view_decorator
 
 
 class JsonResponse(HttpResponse):
@@ -49,7 +51,10 @@ class IndexView(TemplateView):
         context['categories'] = list(NewsCategory.objects.all().order_by('order'))
         fresh = {
             'title': 'Свежее',
-            'posts': list(Post.objects.filter(status='pub', type='post').order_by('-date_created')[:4])
+            'posts': list(Post.objects.filter(status='pub', type='post')
+                          .filter(Q(category__isnull=False) | Q(skill__isnull=False))
+                          .order_by('-date_created')[:4]
+                          )
         }
         fresh['posts'].sort(key=lambda post: (post.is_sticky and 2 or 1, post.date_created), reverse=True)
         fresh_posts = [post.id for post in fresh['posts']]
