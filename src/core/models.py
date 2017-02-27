@@ -341,9 +341,13 @@ class Post(models.Model, UIDMixin):
 
     def get_absolute_url(self):
         if self.skill or self.type == 'page':
-            return reverse('post', args=['content', self.slug])
+            rubric = 'content'
+        elif self.category:
+            rubric = self.category.slug
         else:
-            return reverse('post', args=[self.category.slug, self.slug])
+            rubric = 'other'
+
+        return reverse('post', args=[rubric, self.slug])
 
     def can_edit(self, user):
         return user.is_superuser

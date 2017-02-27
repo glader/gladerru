@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$',
         CategoryView.as_view(),
         name='category'),
-    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/([^\s]+).htm$',
+    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video|other)/([^\s]+).htm$',
         PostView.as_view(), name='post'),
 
     url(r'^terms/(?P<slug>[^/]+)$', DictionaryWordView.as_view(), name='dictionary_word'),
@@ -42,6 +42,6 @@ urlpatterns = [
     url(r'^$', IndexView.as_view(), name='index'),
 
     # Old urls
-    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)/(\d+)$', post_redirect),
+    url(r'^(content|ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video|other)/(\d+)$', post_redirect),
     url(r'^users/([^/]+)/posts/(\d+)$', user_post),
 ]
