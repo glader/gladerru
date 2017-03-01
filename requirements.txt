@@ -3,7 +3,7 @@ django-recaptcha==1.2.1
 django-reversion==2.0.8
 django-timelog==0.4
 django-wysiwyg-redactor==0.4.9.1
-Django==1.10.5
+Django==1.10.6
 django_yafotki==0.7.3
 gunicorn==19.6.0
 logging==0.4.9.6
