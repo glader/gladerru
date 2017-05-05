@@ -8,10 +8,10 @@ django_yafotki==0.7.3
 gunicorn==19.7.1
 logging==0.4.9.6
 MySQL-python==1.2.5
-Pillow==4.1.0
+Pillow==4.1.1
 python-Levenshtein==0.12.0
 python-memcached==1.58
 pytils==0.3
 simplejson==3.10.0
 git+https://github.com/glader/django_russian.git#egg=django_russian==0.1
-YaDiskClient==0.4.3
+YaDiskClient==0.4.5
