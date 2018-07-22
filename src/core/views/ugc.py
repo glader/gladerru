@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 
 from datetime import datetime
 
-import simplejson
+import json
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_admins
@@ -21,7 +21,7 @@ from core.models import Post, NewsCategory
 class JsonResponse(HttpResponse):
     """ HttpResponse descendant, which return response with ``application/json`` mimetype. """
     def __init__(self, data):
-        super(JsonResponse, self).__init__(content=simplejson.dumps(data), mimetype='application/json')
+        super(JsonResponse, self).__init__(content=json.dumps(data), mimetype='application/json')
 
 
 class JsonErrorResponse(JsonResponse):
@@ -211,7 +211,7 @@ class RegistrationView(TemplateView):
                 profile.referer = request.session['referer']
                 profile.save()
             if request.is_ajax():
-                return HttpResponse(simplejson.dumps({'success': True, 'next': next}))
+                return HttpResponse(json.dumps({'success': True, 'next': next}))
             else:
                 return HttpResponseRedirect(next)
 
@@ -237,7 +237,7 @@ class LoginView(TemplateView):
             auth.login(request, user)
             next = request.POST.get('next') or form.user.get_absolute_url()
             if request.is_ajax():
-                return HttpResponse(simplejson.dumps({'success': True, 'next': next}))
+                return HttpResponse(json.dumps({'success': True, 'next': next}))
             else:
                 return HttpResponseRedirect(next)
 
