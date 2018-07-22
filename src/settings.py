@@ -76,11 +76,8 @@ INSTALLED_APPS = (
     'reversion',
     'captcha',
 
-    'bookkeeping',
     'core',
     'discounts',
-    'dump',
-    'landingpages',
     'mountains',
     'movies',
 )
