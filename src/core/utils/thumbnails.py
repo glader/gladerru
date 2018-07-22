@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from hashlib import md5
 from PIL import Image
-from StringIO import StringIO
+from io import StringIO
 import imghdr
 import os
 import urllib

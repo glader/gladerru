@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from hashlib import md5
-import cPickle as pickle
+import pickle
 import re
 import string
 
@@ -117,6 +117,6 @@ def count_text_len(html):
     for t in tree.find_all():
         for c in t.contents:
             if isinstance(c, bs4.element.NavigableString):
-                strings.append(unicode(c).strip())
+                strings.append(str(c).strip())
 
     return sum(map(len, strings))

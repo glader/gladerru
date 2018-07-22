@@ -30,6 +30,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='mountainphoto',
             name='mountain',
-            field=models.ForeignKey(verbose_name='\u0413\u043e\u0440\u0430', to='mountains.Mountain'),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u0413\u043e\u0440\u0430', to='mountains.Mountain'),
         ),
     ]

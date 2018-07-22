@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 from yafotki.fields import YFField
@@ -47,7 +47,7 @@ class Mountain(models.Model):
     status = models.CharField(max_length=50, null=True, blank=True, verbose_name='Статус')
 
     address = models.CharField(max_length=200, null=True, blank=True, verbose_name='Адрес')
-    district = models.ForeignKey(District, null=True, blank=True, verbose_name='Область')
+    district = models.ForeignKey(District, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name='Область')
     has_ratrack = models.BooleanField(default=False, verbose_name='Есть ратрак')
     hidden = models.BooleanField(default=False, verbose_name='Скрытый')
     image = YFField(upload_to='gladerru', null=True, blank=True, verbose_name='Схема трасс', default=None)
@@ -62,7 +62,7 @@ class Mountain(models.Model):
     pistes = models.CharField(max_length=50, null=True, blank=True, verbose_name='Кол-во трасс')
     prices = models.TextField(null=True, blank=True, verbose_name='Цены')
     rating = models.FloatField(default=0.0, verbose_name='Рейтинг')
-    region = models.ForeignKey(Region, verbose_name='Регион')
+    region = models.ForeignKey(Region, on_delete=models.DO_NOTHING, verbose_name='Регион')
     service = models.TextField(null=True, blank=True, verbose_name='Услуги')
     snowpark = models.TextField(null=True, blank=True, verbose_name='Сноупарк')
     tel = models.CharField(max_length=250, null=True, blank=True, verbose_name='Телефоны')
@@ -104,7 +104,7 @@ class Mountain(models.Model):
 
 
 class MountainPhoto(models.Model):
-    mountain = models.ForeignKey(Mountain, verbose_name='Гора')
+    mountain = models.ForeignKey(Mountain, on_delete=models.DO_NOTHING, verbose_name='Гора')
     image = YFField(upload_to='gladerru', verbose_name='Картинка')
 
     class Meta:

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.conf.urls import url
-from views.content import *
-from views.ugc import *
-from feeds import *
+from core.views.content import *
+from core.views.ugc import *
+from core.feeds import *
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [

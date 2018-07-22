@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Discount(models.Model):
-    user = models.ForeignKey(User, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Пользователь')
     city = models.CharField(verbose_name='Город', max_length=200)
     card = models.CharField(verbose_name='Карточка', max_length=200)
     discount = models.CharField(verbose_name='Скидка', max_length=20)

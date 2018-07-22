@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('check_date', models.DateField(null=True, verbose_name='\u0414\u0430\u0442\u0430 \u043e\u0431\u0440\u0430\u0431\u043e\u0442\u043a\u0438', blank=True)),
                 ('proof_url', models.TextField(null=True, verbose_name='\u0418\u0441\u0442\u043e\u0447\u043d\u0438\u043a \u0434\u0430\u043d\u043d\u044b\u0445', blank=True)),
                 ('meta_description', models.TextField(default=None, help_text='meta-description', null=True, verbose_name='Description', blank=True)),
-                ('district', models.ForeignKey(verbose_name='\u041e\u0431\u043b\u0430\u0441\u0442\u044c', blank=True, to='mountains.District', null=True)),
+                ('district', models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u041e\u0431\u043b\u0430\u0441\u0442\u044c', blank=True, to='mountains.District', null=True)),
             ],
             options={
                 'verbose_name': '\u0413\u043e\u0440\u0430',
@@ -79,7 +79,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('image', yafotki.fields.YFField(upload_to=b'gladerru', max_length=255, verbose_name='\u041a\u0430\u0440\u0442\u0438\u043d\u043a\u0430')),
-                ('mountain', models.ForeignKey(verbose_name=b'\xd0\x93\xd0\xbe\xd1\x80\xd0\xb0', to='mountains.Mountain')),
+                ('mountain', models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name=b'\xd0\x93\xd0\xbe\xd1\x80\xd0\xb0', to='mountains.Mountain')),
             ],
             options={
                 'verbose_name': '\u0424\u043e\u0442\u043e \u0433\u043e\u0440\u044b',
@@ -103,6 +103,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='mountain',
             name='region',
-            field=models.ForeignKey(verbose_name='\u0420\u0435\u0433\u0438\u043e\u043d', to='mountains.Region'),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u0420\u0435\u0433\u0438\u043e\u043d', to='mountains.Region'),
         ),
     ]

@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from itertools import groupby
 
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
@@ -32,7 +32,7 @@ def discounts(request):
 
 
 def discount_new(request):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
 
     if request.method == 'POST':
@@ -49,7 +49,7 @@ def discount_new(request):
 
 
 def discount_edit(request, discount_id):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
 
     discount = get_object_or_404(Discount, pk=discount_id)
@@ -68,7 +68,7 @@ def discount_edit(request, discount_id):
 
 
 def discount_delete(request, discount_id):
-    if not request.user.is_authenticated():
+    if not request.user.is_authenticated:
         raise Http404
 
     discount = get_object_or_404(Discount, pk=discount_id)

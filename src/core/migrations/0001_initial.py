@@ -29,8 +29,8 @@ class Migration(migrations.Migration):
                 ('local_url', models.CharField(default=b'', max_length=100, verbose_name='\u0410\u0434\u0440\u0435\u0441')),
                 ('object_id', models.PositiveIntegerField()),
                 ('ip', models.CharField(max_length=30, null=True, verbose_name='IP', blank=True)),
-                ('author', models.ForeignKey(verbose_name='\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c', to=settings.AUTH_USER_MODEL)),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('author', models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c', to=settings.AUTH_USER_MODEL)),
+                ('content_type', models.ForeignKey(on_delete=models.DO_NOTHING, to='contenttypes.ContentType')),
             ],
             options={
                 'verbose_name': '\u041a\u043e\u043c\u043c\u0435\u043d\u0442\u0430\u0440\u0438\u0439',
@@ -84,8 +84,8 @@ class Migration(migrations.Migration):
                 ('rating', models.FloatField(default=0.0, verbose_name='\u0420\u0435\u0439\u0442\u0438\u043d\u0433')),
                 ('best', models.DateTimeField(null=True, verbose_name='\u041d\u0430 \u0433\u043b\u0430\u0432\u043d\u043e\u0439', blank=True)),
                 ('local_url', models.CharField(default=b'', max_length=70, verbose_name='\u0410\u0434\u0440\u0435\u0441')),
-                ('author', models.ForeignKey(related_name='core_user', verbose_name='\u0410\u0432\u0442\u043e\u0440', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
-                ('photographer', models.ForeignKey(related_name='core_photographer', verbose_name='\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444', blank=True, to='movies.Man', null=True)),
+                ('author', models.ForeignKey(on_delete=models.DO_NOTHING, related_name='core_user', verbose_name='\u0410\u0432\u0442\u043e\u0440', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('photographer', models.ForeignKey(on_delete=models.DO_NOTHING, related_name='core_photographer', verbose_name='\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444', blank=True, to='movies.Man', null=True)),
             ],
             options={
                 'verbose_name': '\u0424\u043e\u0442\u043e\u0433\u0440\u0430\u0444\u0438\u044f',
@@ -110,8 +110,8 @@ class Migration(migrations.Migration):
                 ('icon', yafotki.fields.YFField(default=None, upload_to=b'gladerru', max_length=255, blank=True, null=True, verbose_name='\u0418\u043a\u043e\u043d\u043a\u0430')),
                 ('meta_description', models.TextField(default=None, help_text='meta-description', null=True, verbose_name='Description', blank=True)),
                 ('meta_keywords', models.TextField(default=None, help_text='meta-keywords', null=True, verbose_name='Keywords', blank=True)),
-                ('author', models.ForeignKey(verbose_name='\u0410\u0432\u0442\u043e\u0440', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
-                ('category', models.ForeignKey(default=None, blank=True, to='core.NewsCategory', null=True, verbose_name='\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f')),
+                ('author', models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u0410\u0432\u0442\u043e\u0440', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('category', models.ForeignKey(on_delete=models.DO_NOTHING, default=None, blank=True, to='core.NewsCategory', null=True, verbose_name='\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f')),
             ],
             options={
                 'verbose_name': '\u041f\u043e\u0441\u0442',
@@ -149,7 +149,7 @@ class Migration(migrations.Migration):
                 ('pub_post_count', models.PositiveIntegerField(default=0, verbose_name='\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043f\u043e\u0441\u0442\u043e\u0432')),
                 ('unread_news_count', models.PositiveIntegerField(default=0, verbose_name='\u041a\u043e\u043b\u0438\u0447\u0435\u0441\u0442\u0432\u043e \u043d\u0435\u043f\u0440\u043e\u0447\u0438\u0442\u0430\u043d\u043d\u044b\u0445 \u0430\u043d\u043e\u043d\u0441\u043e\u0432')),
                 ('send_news', models.BooleanField(default=True, verbose_name='\u041e\u0442\u0441\u044b\u043b\u0430\u0442\u044c \u043d\u043e\u0432\u043e\u0441\u0442\u0438 \u0441\u0430\u0439\u0442\u0430')),
-                ('user', models.ForeignKey(verbose_name='\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('user', models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u041f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u044c', blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
                 'verbose_name': '\u041f\u0440\u043e\u0444\u0438\u043b\u044c',
@@ -195,9 +195,9 @@ class Migration(migrations.Migration):
                 ('posts', models.TextField(default=b'', verbose_name='\u041f\u043e\u0441\u0442\u044b')),
                 ('need_recalc', models.BooleanField(default=False, verbose_name='\u0422\u0440\u0435\u0431\u0443\u0435\u0442 \u043f\u0435\u0440\u0435\u0441\u0447\u0435\u0442\u0430')),
                 ('meta_description', models.TextField(default=None, help_text='meta-description', null=True, verbose_name='Description', blank=True)),
-                ('category', models.ForeignKey(default=None, blank=True, to='core.NewsCategory', null=True, verbose_name='\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f')),
-                ('parent', models.ForeignKey(related_name='parent_tag', verbose_name='\u0420\u043e\u0434\u0438\u0442\u0435\u043b\u044c', blank=True, to='core.Tag', null=True)),
-                ('primary_synonim', models.ForeignKey(related_name='synonim', verbose_name='\u041e\u0441\u043d\u043e\u0432\u043d\u043e\u0439 \u0441\u0438\u043d\u043e\u043d\u0438\u043c', blank=True, to='core.Tag', null=True)),
+                ('category', models.ForeignKey(on_delete=models.DO_NOTHING, default=None, blank=True, to='core.NewsCategory', null=True, verbose_name='\u041a\u0430\u0442\u0435\u0433\u043e\u0440\u0438\u044f')),
+                ('parent', models.ForeignKey(on_delete=models.DO_NOTHING, related_name='parent_tag', verbose_name='\u0420\u043e\u0434\u0438\u0442\u0435\u043b\u044c', blank=True, to='core.Tag', null=True)),
+                ('primary_synonim', models.ForeignKey(on_delete=models.DO_NOTHING, related_name='synonim', verbose_name='\u041e\u0441\u043d\u043e\u0432\u043d\u043e\u0439 \u0441\u0438\u043d\u043e\u043d\u0438\u043c', blank=True, to='core.Tag', null=True)),
             ],
             options={
                 'ordering': ['-type', '-size'],
@@ -225,7 +225,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='post',
             name='skill',
-            field=models.ForeignKey(verbose_name='\u0423\u043c\u0435\u043d\u0438\u0435', blank=True, to='core.Skill', null=True),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, verbose_name='\u0423\u043c\u0435\u043d\u0438\u0435', blank=True, to='core.Skill', null=True),
         ),
         migrations.AddField(
             model_name='post',
@@ -235,11 +235,11 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='photo',
             name='post',
-            field=models.ForeignKey(related_name='core_post', verbose_name='\u041f\u043e\u0441\u0442', blank=True, to='core.Post', null=True),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, related_name='core_post', verbose_name='\u041f\u043e\u0441\u0442', blank=True, to='core.Post', null=True),
         ),
         migrations.AddField(
             model_name='photo',
             name='rider',
-            field=models.ForeignKey(related_name='core_rider', verbose_name='\u0420\u0430\u0439\u0434\u0435\u0440', blank=True, to='movies.Man', null=True),
+            field=models.ForeignKey(on_delete=models.DO_NOTHING, related_name='core_rider', verbose_name='\u0420\u0430\u0439\u0434\u0435\u0440', blank=True, to='movies.Man', null=True),
         ),
     ]

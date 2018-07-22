@@ -85,7 +85,7 @@ class Command(NoArgsCommand):
             for t in tree.find_all():
                 for c in t.contents:
                     if isinstance(c, bs4.element.NavigableString):
-                        strings.append(unicode(c).strip())
+                        strings.append(str(c).strip())
 
             string = get_longest(strings)
             if not len(string):

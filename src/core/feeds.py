@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.contrib.syndication.views import Feed
 from django.conf import settings
-from models import Post
+from core.models import Post
 
 
 class AllPosts(Feed):

@@ -52,7 +52,7 @@ class Command(NoArgsCommand):
                             changed = True
 
                 if changed:
-                    post.content = unicode(tree)
+                    post.content = str(tree)
                     post.save()
 
             except Exception, e:

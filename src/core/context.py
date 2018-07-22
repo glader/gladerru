@@ -4,7 +4,7 @@ from django.conf import settings
 
 
 def profile(request):
-    if request.user.is_authenticated():
+    if request.user.is_authenticated:
         return {'profile': request.user.get_profile()}
     else:
         return {}

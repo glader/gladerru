@@ -15,7 +15,7 @@ env.www_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAlgcYVZYvzu1GX4Td+RLt9BIqU
 env.forward_agent = True
 
 if not env.hosts:
-    env.hosts = ['82.196.9.202']
+    env.hosts = ['82.196.5.107']
 
 
 def virtualenv(command):
@@ -25,15 +25,11 @@ def virtualenv(command):
 
 def init():
     with settings(user='root'):
-        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise main')
-        append('/etc/apt/sources.list', 'deb-src http://archive.ubuntu.com/ubuntu precise-updates main')
-
         run('apt-get update')
         run('apt-get upgrade -y')
-        run('apt-get install -y mc nginx mysql-client python-setuptools python-dev python-pip rrdtool sendmail memcached fail2ban')
+        run('apt-get install -y mc nginx mysql-client libmysqlclient-dev python-setuptools python-dev python-pip rrdtool sendmail memcached fail2ban')
         run('apt-get build-dep -y python-mysqldb')
         run('pip install --upgrade virtualenv')
-        run('apt-get install libtiff4-dev libjpeg8-dev zlib1g-dev libfreetype6-dev liblcms2-dev libwebp-dev')  # Pillow dependencies
 
         if not exists('/home/%s' % SSH_USER):
             run('yes | adduser --disabled-password %s' % SSH_USER)
@@ -51,9 +47,6 @@ def init():
 
         if exists('/etc/nginx/sites-enabled/default'):
             run('rm /etc/nginx/sites-enabled/default')
-
-        if not exists('/etc/nginx/listen'):
-            put('tools/nginx/listen', '/etc/nginx/listen', use_sudo=True)
 
         if not exists('/etc/nginx/sites-available/90-gladerru.conf'):
             run('touch /etc/nginx/sites-available/90-gladerru.conf')
@@ -151,6 +144,10 @@ def nginx():
 
 def upstart():
     run('cp %(directory)s/tools/upstart/gladerru.conf /etc/init/gladerru.conf' % env, shell=False)
+    """sudo systemctl start gladerru
+sudo systemctl enable gladerru
+sudo systemctl restart gladerru
+"""
 
 
 def cron():

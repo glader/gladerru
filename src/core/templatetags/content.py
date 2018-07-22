@@ -1,10 +1,10 @@
 # encoding: utf-8
 from __future__ import unicode_literals
 import re
-from urllib import quote
+from urllib.parse import quote
 
 from django import template
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.conf import settings
 
@@ -203,7 +203,7 @@ def get_admin_url(object):
     return '/admind/%(app_label)s/%(module_name)s/%(object_id)s/' % {
         'app_label': object._meta.app_label,
         'module_name': object._meta.module_name,
-        'object_id': quote(unicode(object.pk).encode('utf8'))
+        'object_id': quote(str(object.pk).encode('utf8'))
     }
 
 

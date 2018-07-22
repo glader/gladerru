@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from hashlib import md5
-import cPickle as pickle
+import pickle
 import re
 
 from django.conf import settings

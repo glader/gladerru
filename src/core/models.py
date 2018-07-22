@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 from datetime import date
 
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
-from django.db import models
 from django.core.cache import cache
-
+from django.db import models
+from django.urls import reverse
 from redactor.fields import RedactorField
 from yafotki.fields import YFField
 
@@ -34,8 +34,8 @@ class Tag(models.Model):
     title = models.CharField(max_length=200, verbose_name='Название')
     checked = models.BooleanField(default=False, verbose_name='Проверен')
     primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name='Основной синоним',
-                                        null=True, blank=True)
-    parent = models.ForeignKey('self', related_name='parent_tag', verbose_name='Родитель', null=True, blank=True)
+                                        null=True, blank=True, on_delete=models.DO_NOTHING)
+    parent = models.ForeignKey('self', related_name='parent_tag', verbose_name='Родитель', null=True, blank=True, on_delete=models.DO_NOTHING)
     TYPES = ((10, 'Вид спорта'),
              (20, 'Категория'),
              (30, 'Тег')
@@ -46,7 +46,7 @@ class Tag(models.Model):
     need_recalc = models.BooleanField(verbose_name='Требует пересчета', default=False)
     meta_description = models.TextField(verbose_name='Description', help_text='meta-description',
                                         null=True, blank=True, default=None)
-    category = models.ForeignKey('NewsCategory', verbose_name='Категория', null=True, blank=True, default=None)
+    category = models.ForeignKey('NewsCategory', verbose_name='Категория', null=True, blank=True, default=None, on_delete=models.DO_NOTHING)
 
     tags = None
 
@@ -162,7 +162,7 @@ class Tag(models.Model):
 
 
 class Profile(models.Model):
-    user = models.ForeignKey(User, null=True, blank=True, verbose_name='Пользователь')
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name='Пользователь')
 
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
     date_changed = models.DateTimeField(auto_now=True, verbose_name='Дата изменения', editable=False)
@@ -246,7 +246,7 @@ class Skill(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(User, verbose_name='Пользователь')
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Пользователь')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
     content = models.TextField(null=True, blank=True, verbose_name='Содержание')
     status = models.CharField(max_length=50, null=True, blank=True, verbose_name='Статус')
@@ -254,7 +254,7 @@ class Comment(models.Model):
     order = models.CharField(max_length=255, null=True, blank=True, verbose_name='Порядок')
     local_url = models.CharField(verbose_name='Адрес', default='', max_length=100)
 
-    content_type = models.ForeignKey(ContentType)
+    content_type = models.ForeignKey(ContentType, on_delete=models.DO_NOTHING)
     object_id = models.PositiveIntegerField()
     item = GenericForeignKey()
     ip = models.CharField(verbose_name='IP', null=True, blank=True, max_length=30)
@@ -300,12 +300,12 @@ TYPES = (
 
 
 class Post(models.Model, UIDMixin):
-    author = models.ForeignKey(User, null=True, blank=True, verbose_name='Автор')
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name='Автор')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name='Заголовок')
     slug = models.SlugField(verbose_name='Урл', max_length=255, null=True, blank=True, default=None)
 
-    category = models.ForeignKey('NewsCategory', verbose_name='Категория', null=True, blank=True, default=None)
+    category = models.ForeignKey('NewsCategory', on_delete=models.DO_NOTHING, verbose_name='Категория', null=True, blank=True, default=None)
     content = RedactorField(null=True, blank=True, verbose_name='Содержание')
     status = models.CharField(choices=STATUSES, default='save', max_length=50, verbose_name='Статус')
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name='Тип поста')
@@ -314,7 +314,7 @@ class Post(models.Model, UIDMixin):
     comment_count = models.PositiveIntegerField(default=0, blank=True, verbose_name='Количество комментариев')
     hidden = models.BooleanField(default=False, verbose_name='Скрытый')
     sticky_to = models.DateField(verbose_name='Приклеен до', null=True, blank=True, default=None)
-    skill = models.ForeignKey(Skill, null=True, blank=True, verbose_name='Умение')
+    skill = models.ForeignKey(Skill, on_delete=models.DO_NOTHING, null=True, blank=True, verbose_name='Умение')
     icon = YFField(verbose_name='Иконка', null=True, blank=True, upload_to='gladerru', default=None)
     meta_description = models.TextField(verbose_name='Description', help_text='meta-description',
                                         null=True, blank=True, default=None)
@@ -374,10 +374,10 @@ class Photo(models.Model, UIDMixin):
     status = models.CharField(choices=STATUSES, default='pub', max_length=50, verbose_name='Статус')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
 
-    author = models.ForeignKey(User, verbose_name='Автор', null=True, blank=True, related_name='core_user')
-    post = models.ForeignKey(Post, verbose_name='Пост', null=True, blank=True, related_name='core_post')
-    rider = models.ForeignKey('movies.Man', verbose_name='Райдер', null=True, blank=True, related_name='core_rider')
-    photographer = models.ForeignKey('movies.Man', verbose_name='Фотограф', null=True, blank=True,
+    author = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='Автор', null=True, blank=True, related_name='core_user')
+    post = models.ForeignKey(Post, on_delete=models.DO_NOTHING, verbose_name='Пост', null=True, blank=True, related_name='core_post')
+    rider = models.ForeignKey('movies.Man', on_delete=models.DO_NOTHING, verbose_name='Райдер', null=True, blank=True, related_name='core_rider')
+    photographer = models.ForeignKey('movies.Man', on_delete=models.DO_NOTHING, verbose_name='Фотограф', null=True, blank=True,
                                      related_name='core_photographer')
     place = models.CharField(max_length=250, null=True, blank=True, verbose_name='Место')
 
@@ -391,7 +391,7 @@ class Photo(models.Model, UIDMixin):
     objects = GenericManager(status='pub')
 
     def __unicode__(self):
-        return self.title or unicode(self.id)
+        return self.title or str(self.id)
 
     @property
     def hidden(self):
@@ -403,7 +403,7 @@ class Photo(models.Model, UIDMixin):
     def can_edit(self, user):
         if not user:
             return False
-        if not user.is_authenticated():
+        if not user.is_authenticated:
             return False
         if user.get_profile().is_moderator:
             return True

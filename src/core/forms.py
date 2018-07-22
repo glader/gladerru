@@ -49,7 +49,7 @@ def sanitizeHTML(value, mode='none'):
 
 class CommonForm(forms.Form):
     def errors_list(self):
-        return [unicode(message) for k, l in self.errors.items() for message in l]
+        return [str(message) for k, l in self.errors.items() for message in l]
 
     def str_errors(self, divider='. '):
         return divider.join(self.errors_list())

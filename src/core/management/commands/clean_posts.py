@@ -12,7 +12,7 @@ def drop_empty_tag(tag):
     empty = True
     for child in tag.contents:
         if isinstance(child, bs4.element.NavigableString):
-            if len(unicode(child).strip()) > 0:
+            if len(str(child).strip()) > 0:
                 empty = False
                 break
         else:

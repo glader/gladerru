@@ -7,7 +7,7 @@ import simplejson
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_admins
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
@@ -93,7 +93,7 @@ class CategoryView(TemplateView):
 
 def post_redirect(request, slug, post_id):
     post = get_object_or_404(Post, pk=post_id)
-    if not (post.status == 'pub' or (request.user.is_authenticated() and post.can_edit(request.user))):
+    if not (post.status == 'pub' or (request.user.is_authenticated and post.can_edit(request.user))):
         raise Http404
 
     return HttpResponsePermanentRedirect(post.get_absolute_url())

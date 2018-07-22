@@ -28,8 +28,7 @@ INTERNAL_IPS = ('127.0.0.1',)
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 
-MIDDLEWARE_CLASSES = (
-    'timelog.middleware.TimeLogMiddleware',
+MIDDLEWARE = (
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -75,7 +74,6 @@ INSTALLED_APPS = (
     'gunicorn',
     'redactor',
     'reversion',
-    'timelog',
     'captcha',
 
     'bookkeeping',

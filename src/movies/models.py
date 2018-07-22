@@ -5,7 +5,7 @@ from datetime import datetime
 
 from django.conf import settings
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.db import models
 
 from yafotki.fields import YFField
@@ -47,7 +47,7 @@ class Man(models.Model):
     width = models.CharField(max_length=50, null=True, blank=True, verbose_name='Ширина')
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name='URL')
     hidden = models.BooleanField(verbose_name='Скрыт', default=False)
-    primary_synonim = models.ForeignKey('self', related_name='synonim', verbose_name='Основной синоним',
+    primary_synonim = models.ForeignKey('self', on_delete=models.DO_NOTHING, related_name='synonim', verbose_name='Основной синоним',
                                         null=True, blank=True)
     meta_description = models.TextField(verbose_name='Description', help_text='meta-description',
                                         null=True, blank=True, default=None)
@@ -122,7 +122,7 @@ class Studio(models.Model):
 class Movie(models.Model):
     title = models.CharField(verbose_name='Название', max_length=100, unique=True)
     slug = models.CharField(verbose_name='Код', max_length=100, unique=True)
-    studio = models.ForeignKey(Studio, verbose_name='Студия', null=True, blank=True)
+    studio = models.ForeignKey(Studio, on_delete=models.DO_NOTHING, verbose_name='Студия', null=True, blank=True)
     content = models.TextField(verbose_name='Описание', null=True, blank=True)
     url = models.URLField(max_length=250, null=True, blank=True, verbose_name='URL')
     cover = YFField(verbose_name='Обложка', upload_to='gladerru', null=True, blank=True, default=None)
@@ -202,8 +202,8 @@ class Movie(models.Model):
 
 
 class Man2Movie(models.Model):
-    man = models.ForeignKey(Man, verbose_name='Человек')
-    movie = models.ForeignKey(Movie, verbose_name='Фильм')
+    man = models.ForeignKey(Man, on_delete=models.DO_NOTHING, verbose_name='Человек')
+    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING, verbose_name='Фильм')
     ROLES = (('actor', 'Райдер'),
              ('director', 'Режиссер'),
              )
@@ -218,7 +218,7 @@ class Man2Movie(models.Model):
 
 
 class Song(models.Model):
-    movie = models.ForeignKey(Movie, verbose_name='Фильм')
+    movie = models.ForeignKey(Movie, on_delete=models.DO_NOTHING, verbose_name='Фильм')
     performer = models.CharField(max_length=200, null=True, blank=True, verbose_name='Исполнитель')
     title = models.CharField(max_length=200, null=True, blank=True, verbose_name='Название')
     duration = models.PositiveIntegerField(default=0, blank=True, verbose_name='Длительность')
@@ -236,7 +236,6 @@ class Song(models.Model):
         if self.file and not (self.performer or self.title):
             try:
                 path = os.path.join(settings.STATIC_ROOT, self.file.name)
-                os.chmod(path, 0644)
                 id3info = ID3.ID3(path)
                 self.performer = id3info['ARTIST'].decode('cp1251')
                 self.title = id3info['TITLE'].decode('cp1251')
@@ -244,8 +243,8 @@ class Song(models.Model):
                     self.movie.has_songs = True
                     self.movie.dt_soundtrack_added = datetime.now()
                     self.movie.save()
-            except ID3.InvalidTagError, message:
-                print 'Invalid ID3 tag:', message
+            except ID3.InvalidTagError as message:
+                print('Invalid ID3 tag:', message)
 
         if not self.order:
             songs = self.movie.song_set.all().order_by('-order')
@@ -265,15 +264,15 @@ class Song(models.Model):
 class Photo(models.Model):
     title = models.CharField(max_length=250, null=True, blank=True, verbose_name='Заголовок')
     date_created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания', editable=False)
-    rider = models.ForeignKey(Man, verbose_name='Райдер', null=True, blank=True, related_name='rider')
-    photographer = models.ForeignKey(Man, verbose_name='Фотограф', null=True, blank=True, related_name='photographer')
+    rider = models.ForeignKey(Man, on_delete=models.DO_NOTHING, verbose_name='Райдер', null=True, blank=True, related_name='rider')
+    photographer = models.ForeignKey(Man, on_delete=models.DO_NOTHING, verbose_name='Фотограф', null=True, blank=True, related_name='photographer')
     yandex_fotki_image_src = models.CharField(null=True, blank=True, verbose_name='Путь к картинке', max_length=255)
 
     rating = models.IntegerField(verbose_name='Рейтинг', default=0,
                                  help_text='Был составлен по переходам при случайном показе')
 
     def __unicode__(self):
-        return self.title or unicode(self.id)
+        return self.title or str(self.id)
 
     @property
     def uid(self):
