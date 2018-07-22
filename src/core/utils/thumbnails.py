@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from hashlib import md5
-from PIL import Image
-from io import StringIO
+# coding: utf-8
 import imghdr
 import os
 import urllib
+from hashlib import md5
+from io import StringIO
 
+from PIL import Image
 from django.conf import settings
 
 

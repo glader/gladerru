@@ -1,19 +1,13 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
+# coding: utf-8
 from django.conf import settings
-from django.contrib.auth.decorators import permission_required
-from django.urls import reverse
 from django.http import HttpResponsePermanentRedirect, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.utils.safestring import mark_safe
 from django.views.generic import View, TemplateView, DetailView, ListView
 
-from core.decorators import class_view_decorator
-
-from .models import Movie, Song, Man, Studio, Man2Movie, Photo
-from .templatetags.movies import link
-from .utils.common import slug
+from movies.models import Movie, Song, Man, Studio, Man2Movie, Photo
+from movies.templatetags.movies import link
+from movies.utils.common import slug
 
 
 class StudioView(DetailView):

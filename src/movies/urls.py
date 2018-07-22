@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django.conf.urls import url
-from django.views.generic import ListView, RedirectView
 from django.contrib.auth.decorators import permission_required
+from django.views.generic import ListView, RedirectView
 
-from . import views
-from .models import Studio
+from movies import views
+from movies.models import Studio
 
 urlpatterns = [
     url(r'^studies/(?P<slug>[^/]+)$', views.StudioView.as_view(), name='studio'),

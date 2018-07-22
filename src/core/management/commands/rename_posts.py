@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 
 from django.db import connection
 from django.core.management.base import NoArgsCommand

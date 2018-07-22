@@ -1,10 +1,8 @@
-from __future__ import unicode_literals
-
 from django.conf import settings
 from django.conf.urls import include, url
-from django.urls import path
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap as sitemap_view
+from django.urls import path
 
 import sitemap
 

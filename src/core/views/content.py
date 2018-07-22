@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 import logging
 
+from django.conf import settings
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView, DetailView, FormView
-from django.conf import settings
 
 from core.forms import FeedbackForm
 from core.models import Post, Word, Skill

@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-import os
+# coding: utf-8
 import logging
 import logging.handlers
+import os
 
 from django.conf import settings
 

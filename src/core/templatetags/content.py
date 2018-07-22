@@ -1,12 +1,11 @@
-# encoding: utf-8
-from __future__ import unicode_literals
+# coding: utf-8
 import re
 from urllib.parse import quote
 
 from django import template
+from django.conf import settings
 from django.urls import reverse
 from django.utils.safestring import mark_safe
-from django.conf import settings
 
 from core.models import Post, Tag, NewsCategory
 from core.utils.thumbnails import get_thumbnail_url

@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 # Django settings for gladerru project.
-from __future__ import unicode_literals
 import os
 import logging
 

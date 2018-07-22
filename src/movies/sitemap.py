@@ -1,8 +1,7 @@
-# coding: utf8
-from __future__ import unicode_literals
+# coding: utf-8
 from django.contrib.sitemaps import GenericSitemap
-from .models import Man, Movie, Studio
 
+from movies.models import Man, Movie, Studio
 
 sitemaps = {
     'man': GenericSitemap({'queryset': Man.objects.all()}, changefreq='monthly'),

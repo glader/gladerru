@@ -1,8 +1,7 @@
-# encoding: utf-8
-from __future__ import unicode_literals
+# coding: utf-8
 from django import template
 
-from ..views import get_mountains
+from mountains.views import get_mountains
 
 register = template.Library()
 

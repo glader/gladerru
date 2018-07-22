@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django.conf import settings
 from django.views.generic import TemplateView, DetailView
 
-from .models import Mountain, Region
+from mountains.models import Mountain, Region
 
 
 class MountainsView(TemplateView):

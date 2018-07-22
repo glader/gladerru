@@ -1,13 +1,12 @@
-# encoding: utf-8
-from __future__ import unicode_literals
+# coding: utf-8
 import re
 
 from django import template
-from django.utils.safestring import mark_safe
-from django.core.paginator import QuerySetPaginator
 from django.conf import settings
+from django.core.paginator import QuerySetPaginator
+from django.utils.safestring import mark_safe
 
-from ..models import Movie, Man, Song
+from movies.models import Movie, Man, Song
 
 register = template.Library()
 

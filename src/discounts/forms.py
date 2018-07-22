@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django import forms
 
-from .models import Discount
+from discounts.models import Discount
 
 
 class DiscountForm(forms.ModelForm):

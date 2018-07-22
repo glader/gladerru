@@ -1,9 +1,7 @@
-# coding: utf8
-from __future__ import unicode_literals
+# coding: utf-8
 from django.contrib.sitemaps import GenericSitemap
 
-from .models import Mountain
-
+from mountains.models import Mountain
 
 sitemaps = {
     'mountain': GenericSitemap({'queryset': Mountain.objects.all()}, changefreq='weekly'),

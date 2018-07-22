@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from bs4 import BeautifulSoup, element
+# coding: utf-8
 import random
 import re
 
+from bs4 import BeautifulSoup, element
+from captcha.fields import ReCaptchaField
+from django import forms
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User
-from django import forms
 from django.db.models import Q
 from django.forms.models import ModelForm
-from captcha.fields import ReCaptchaField
 
 from core.models import Profile, Post
 from core.utils.common import notice_admin, process_template, send_html_mail

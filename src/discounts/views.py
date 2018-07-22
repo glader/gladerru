@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from itertools import groupby
 
-from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
+from django.urls import reverse
 
-from .forms import DiscountForm
-from .models import Discount
+from discounts.forms import DiscountForm
+from discounts.models import Discount
 
 
 def render_to_response(request, template_name, context_dict={}, cookies={}):

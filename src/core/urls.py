@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django.conf.urls import url
+from django.contrib.auth import views as auth_views
+
+from core.feeds import *
 from core.views.content import *
 from core.views.ugc import *
-from core.feeds import *
-from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^(?P<slug>ekipirovka|gory|obzory|obuchenie|sorevnovaniya|foto|video)$',

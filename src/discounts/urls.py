@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django.conf.urls import url
-from . import views
 
+from discounts import views
 
 urlpatterns = [
     url(r'^discounts/(\d+)/edit$', views.discount_edit, name='discount_edit'),

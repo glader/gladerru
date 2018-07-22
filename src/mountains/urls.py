@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django.conf.urls import url
 
-from . import views
-
+from mountains import views
 
 urlpatterns = [
     url(r'^mountains/(?P<slug>[^/]+)$', views.MountainView.as_view(), name='mountain'),

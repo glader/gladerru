@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# coding: utf-8
 # Проверяет <glader page=""> и <ItemLink> на правильность
 
 import re

@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-
+# coding: utf-8
+import json
 from datetime import datetime
 
-import json
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.core.mail import mail_admins
-from django.urls import reverse
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponsePermanentRedirect, Http404
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 from django.views.generic import TemplateView, CreateView, UpdateView
 
 from core.decorators import class_view_decorator

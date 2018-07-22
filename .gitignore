@@ -6,3 +6,4 @@ log
 fab_settings.py
 local_settings.py
 /static
+__pycache__

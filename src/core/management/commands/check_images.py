@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from bs4 import BeautifulSoup, Tag, Comment
 
 from django.core.management.base import NoArgsCommand

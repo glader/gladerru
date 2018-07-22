@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 import bs4
 import requests
 from xml.etree import cElementTree as ET

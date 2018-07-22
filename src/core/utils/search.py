@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from xml.etree import cElementTree as ET
+# coding: utf-8
 import logging
 import logging.handlers
 import re
-import requests
+from xml.etree import cElementTree as ET
 
+import requests
 from django.conf import settings
 
 from core.models import Post

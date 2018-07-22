@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
-from hashlib import md5
+# coding: utf-8
 import pickle
 import re
 import string
+from hashlib import md5
 
 import bs4
 from django.conf import settings
 from django.core.cache import cache
-from django.template import Context, loader
 from django.core.mail import mail_admins, EmailMessage
+from django.template import Context, loader
 
 translit = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e',
             'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l',

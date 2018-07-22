@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 from django.contrib import admin
 
-from . import models
+from mountains import models
 
 
 class MountainPhotoInline(admin.TabularInline):

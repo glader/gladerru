@@ -1,17 +1,15 @@
-# -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+# coding: utf-8
 import os
 from datetime import datetime
 
 from django.conf import settings
 from django.core.mail import send_mail
-from django.urls import reverse
 from django.db import models
-
+from django.urls import reverse
 from yafotki.fields import YFField
 
 from core.utils.thumbnails import make_thumbnail
-from .utils import ID3
+from movies.utils import ID3
 
 
 class GenericManager(models.Manager):
