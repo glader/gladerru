@@ -1,13 +1,13 @@
 # coding: utf-8
 import os
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.views.ugc import add_to_yaphoto
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         d = '.\\data'
 
         with open('images', 'r') as l:

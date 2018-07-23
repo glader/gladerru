@@ -1,7 +1,7 @@
 # coding: utf-8
 import os
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.conf import settings
 from django.db import connection
 from django.contrib.auth.models import User
@@ -14,8 +14,8 @@ settings.TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../templat
 log = logging.getLogger('django.cron')
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         cursor = connection.cursor()
 
         # FIXME: переписать это дело на один запрос

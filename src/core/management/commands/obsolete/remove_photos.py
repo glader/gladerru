@@ -1,14 +1,14 @@
 # coding: utf-8
 import os
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Photo
 from urllib2 import urlopen
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         for i, photo in enumerate(Photo.objects.filter(yandex_fotki_image_id__isnull=False).order_by('pk')):
             print i, chr(13),
             try:

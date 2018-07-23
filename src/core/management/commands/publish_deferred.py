@@ -2,7 +2,7 @@
 from datetime import datetime
 from random import choice
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
 from core.models import Post, Photo
@@ -14,8 +14,8 @@ AUTHORS = ['LAhmatyi', 'tinki', 'skyslayer', 'akafist', 'prophoter']
 log = logging.getLogger('django.cron')
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         count = 0
         for item in Post.all.filter(status='deferred', date_created__lt=datetime.now()):
 

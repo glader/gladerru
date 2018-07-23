@@ -2,7 +2,7 @@
 from xml.etree import cElementTree as ET
 
 import requests
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post
 
@@ -51,8 +51,8 @@ def search(query):
         return None
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         prev = {int(l.split()[0].strip()) for l in open('index.log').readlines()}
 
         for post in Post.objects.filter(status='pub').order_by('-id'):

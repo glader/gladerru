@@ -4,7 +4,7 @@ import requests
 from xml.etree import cElementTree as ET
 
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post
 
@@ -47,17 +47,17 @@ def get_position(query):
 
 def search(query):
     positions = []
-    for w in xrange(15, 30):
+    for w in range(15, 30):
         q = b' '.join(query.encode('utf8').replace(b'"', b'\\"').split(b' ')[:w])
         position = 1000
-        for _ in xrange(3):
+        for _ in range(3):
             try:
                 position = get_position(q)
                 break
             except Exception:
-                print '.'
+                print('.')
 
-        print w, position
+        print(w, position)
         if position <= 10:
             positions.append(position)
 
@@ -67,8 +67,8 @@ def search(query):
         return 1000
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         prev = {int(l.split()[0].strip()) for l in open('pos.log').readlines()}
 
         for post in Post.objects.filter(status='pub').order_by('-id'):
@@ -94,8 +94,8 @@ class Command(NoArgsCommand):
 
             open('test', 'a').write(b'%s: %s\n' % (post.id, s))
 
-            print '-' * 40
-            print post.id
+            print('-' * 40)
+            print(post.id)
 
             avg_position = search(string)
 

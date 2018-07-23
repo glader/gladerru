@@ -1,12 +1,12 @@
 # coding: utf-8
 from datetime import datetime, timedelta
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.db import connection
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         cursor = connection.cursor()
         two_weeks = (datetime.now() - timedelta(14)).date().strftime("%Y-%m-%d")
 

@@ -2,12 +2,12 @@
 import os
 
 from django.test import Client
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.conf import settings
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         settings.ALLOWED_HOSTS = ['*']
 
         c = Client()

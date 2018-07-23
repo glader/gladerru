@@ -1,7 +1,7 @@
 # coding: utf-8
 from bs4 import BeautifulSoup
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post
 from movies.models import Movie, Studio
@@ -28,8 +28,8 @@ def process(content, used=False):
     return content
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         for post in Post.objects.all():
             content = process(post.content, post.used)
 

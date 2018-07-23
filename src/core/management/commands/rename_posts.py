@@ -1,13 +1,13 @@
 # coding: utf-8
 
 from django.db import connection
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         cursor = connection.cursor()
         cursor.execute(
             'SELECT DISTINCT p1.slug FROM core_post p1 JOIN core_post p2 ON p1.id < p2.id AND p1.slug=p2.slug'

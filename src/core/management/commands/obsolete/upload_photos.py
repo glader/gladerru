@@ -1,14 +1,14 @@
 # coding: utf-8
 import os
 from django.conf import settings
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Photo
 from core.views.ugc import add_to_yaphoto
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         for photo in Photo.objects.filter(image__isnull=False, yandex_fotki_image_id__isnull=True).order_by('pk'):
             print "PHOTO", photo.id, photo.image
             id, url = add_to_yaphoto(open(os.path.join(settings.THUMBNAIL_ROOT, photo.image.path), 'rb'))

@@ -1,6 +1,6 @@
 # coding: utf-8
 import re
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 from django.conf import settings
 from xml.etree import ElementTree as ET
 import httplib
@@ -11,7 +11,7 @@ from core.models import Post
 from bs4 import BeautifulSoup
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     def get_image(self, post):
         tree = BeautifulSoup(post.content.encode('utf8'), from_encoding='utf8')
         try:
@@ -26,7 +26,7 @@ class Command(NoArgsCommand):
         except IndexError:
             pass
 
-    def handle_noargs(self, **options):
+    def handle(self, *args, **options):
         for post in Post.objects.filter(type='post'):
             try:
                 if not post.icon:

@@ -1,19 +1,19 @@
 # coding: utf-8
+import logging
 from itertools import chain
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Photo as CorePhoto
-from movies.models import Man, Movie, Photo
-from mountains.models import Mountain, MountainPhoto
 from core.utils.thumbnails import make_thumbnail
-import logging
+from mountains.models import Mountain, MountainPhoto
+from movies.models import Man, Movie, Photo
 
 log = logging.getLogger('django.cron')
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         count = 0
         total = 0
 
@@ -35,7 +35,7 @@ class Command(NoArgsCommand):
                 count += make_thumbnail(str(image_url))
                 total += 1
 
-            except IOError, e:
-                print e
+            except IOError as e:
+                print(e)
 
         log.info('%s/%s thumbnails processed', count, total)

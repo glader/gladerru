@@ -2,7 +2,7 @@
 import bs4
 import re
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post
 
@@ -25,13 +25,13 @@ def drop_empty_tag(tag):
             tag.hidden = True
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         for post in Post.objects.all():
             if not post.content:
                 continue
 
-            print post.id
+            print(post.id)
             tree = bs4.BeautifulSoup(post.content.encode('utf8'), from_encoding='utf8')
 
             for tag in tree.find_all('br'):

@@ -1,13 +1,13 @@
 # coding: utf-8
 from bs4 import BeautifulSoup, element
 
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post
 
 
-class Command(NoArgsCommand):
-    def handle_noargs(self, **options):
+class Command(BaseCommand):
+    def handle(self, *args, **options):
         for post in Post.objects.all():
             if '/people/' not in post.content:
                 continue

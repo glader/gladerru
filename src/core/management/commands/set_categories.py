@@ -1,10 +1,10 @@
 # coding: utf-8
-from django.core.management.base import NoArgsCommand
+from django.core.management.base import BaseCommand
 
 from core.models import Post, NewsCategory
 
 
-class Command(NoArgsCommand):
+class Command(BaseCommand):
     def get_category(self, post):
         tags = post.tags.filter(type=30)
         categories = set([tag.category for tag in tags if tag.category])
@@ -17,7 +17,7 @@ class Command(NoArgsCommand):
 
         return None
 
-    def handle_noargs(self, **options):
+    def handle(self, *args, **options):
         other = NewsCategory.objects.get(title='Обзоры')
 
         for post in Post.objects.all():
