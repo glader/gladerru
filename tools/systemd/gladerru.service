@@ -3,10 +3,10 @@ Description=gladerru
 After=network.target
 
 [Service]
-User=sammy
-Group=www-data
-WorkingDirectory=/home/sammy/myproject
-ExecStart=/home/sammy/myproject/myprojectenv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/home/sammy/myproject/myproject.sock myproject.wsgi:application
+User=www
+Group=www
+WorkingDirectory=/home/www/projects/gladerru/src
+ExecStart=/home/www/projects/gladerru/ENV/bin/gunicorn wsgi:application --workers 2 --bind 'unix:/home/www/projects/gladerru/wsgi.sock' --log-file /var/log/projects/gladerru/gunicorn_errors.log
 
 [Install]
 WantedBy=multi-user.target

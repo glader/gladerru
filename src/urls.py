@@ -11,7 +11,6 @@ admin.autodiscover()
 urlpatterns = [
     path('admind/', admin.site.urls),
     url(r'^dynamic_sitemap\.xml$', sitemap_view, {'sitemaps': sitemap.sitemaps}),
-    url(r'^redactor/', include('redactor.urls')),
     url(r'^', include('discounts.urls')),
     url(r'^', include('mountains.urls')),
     url(r'^', include('movies.urls')),

@@ -71,7 +71,6 @@ INSTALLED_APPS = (
 
     'django_russian',
     'gunicorn',
-    'redactor',
     'reversion',
     'captcha',
 
@@ -120,14 +119,6 @@ ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 VK_API_ID = 2009513
 
 NOCAPTCHA = True
-
-# Redactor
-REDACTOR_OPTIONS = {
-    'lang': 'ru',
-    'buttonSource': True,
-    'linkNofollow': True,
-}
-REDACTOR_UPLOAD_HANDLER = 'yafotki.handlers.FotkiUploader'
 
 LOG_PATH = '/var/log/projects/gladerru'
 

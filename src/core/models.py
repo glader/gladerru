@@ -8,7 +8,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.core.cache import cache
 from django.db import models
 from django.urls import reverse
-from redactor.fields import RedactorField
 from yafotki.fields import YFField
 
 from core.utils.common import cached, slug, count_text_len
@@ -304,7 +303,7 @@ class Post(models.Model, UIDMixin):
     slug = models.SlugField(verbose_name='Урл', max_length=255, null=True, blank=True, default=None)
 
     category = models.ForeignKey('NewsCategory', on_delete=models.DO_NOTHING, verbose_name='Категория', null=True, blank=True, default=None)
-    content = RedactorField(null=True, blank=True, verbose_name='Содержание')
+    content = models.TextField(null=True, blank=True, verbose_name='Содержание')
     status = models.CharField(choices=STATUSES, default='save', max_length=50, verbose_name='Статус')
     type = models.CharField(choices=TYPES, default='post', max_length=15, verbose_name='Тип поста')
 

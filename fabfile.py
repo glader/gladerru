@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-
+# coding: utf-8
 from datetime import date
 
 from fabric.api import *
@@ -15,7 +14,7 @@ env.www_ssh_key = 'ssh-rsa AAAAB3NzaC1yc2EAAAABJQAAAIEAlgcYVZYvzu1GX4Td+RLt9BIqU
 env.forward_agent = True
 
 if not env.hosts:
-    env.hosts = ['82.196.5.107']
+    env.hosts = ['188.246.227.206']
 
 
 def virtualenv(command):
@@ -25,11 +24,11 @@ def virtualenv(command):
 
 def init():
     with settings(user='root'):
-        run('apt-get update')
-        run('apt-get upgrade -y')
-        run('apt-get install -y mc nginx mysql-client libmysqlclient-dev python-setuptools python-dev python-pip rrdtool sendmail memcached fail2ban')
-        run('apt-get build-dep -y python-mysqldb')
-        run('pip install --upgrade virtualenv')
+        run('apt-get update -q', warn_only=True)
+        #run('apt-get upgrade -y')
+        #run('apt-get install -y mc nginx mysql-client libmysqlclient-dev python-setuptools python-dev python-pip rrdtool sendmail memcached fail2ban git')
+        #run('apt-get build-dep -y python-mysqldb')
+        #run('pip install --upgrade virtualenv')
 
         if not exists('/home/%s' % SSH_USER):
             run('yes | adduser --disabled-password %s' % SSH_USER)
@@ -72,14 +71,14 @@ def init():
 
 
 def init_mysql():
-    with settings(host_string='82.196.15.15', user='root'):
-        run('apt-get update')
-        run('apt-get upgrade -y')
-        run('apt-get install -y fail2ban mc')
+    with settings(user='root'):
+        run('apt-get update -q', warn_only=True)
+        #run('apt-get upgrade -y')
+        #run('apt-get install -y fail2ban mc')
         run('DEBIAN_FRONTEND=noninteractive apt-get -q -y install mysql-server')
         run('mysqladmin -u root password mysecretpasswordgoeshere111')
 
-        sed('/etc/mysql/my.cnf', 'bind-address.+$', 'bind-address = ::')
+        #sed('/etc/mysql/my.cnf', 'bind-address.+$', 'bind-address = ::')
         run('/etc/init.d/mysql restart')
 
 
