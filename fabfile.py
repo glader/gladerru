@@ -152,7 +152,7 @@ sudo systemctl restart gladerru
 def cron():
     with settings(user='root'):
         run('cp %(directory)s/tools/cron/gladerru /etc/cron.d/gladerru' % env)
-        run('restart cron')
+        run('systemctl restart cron')
 
 
 def logrotate():
