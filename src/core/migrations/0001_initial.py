@@ -1,7 +1,6 @@
 # coding: utf-8
 
 from django.db import models, migrations
-import redactor.fields
 import core.models
 from django.conf import settings
 import yafotki.fields
@@ -99,7 +98,7 @@ class Migration(migrations.Migration):
                 ('date_created', models.DateTimeField(auto_now_add=True, verbose_name='\u0414\u0430\u0442\u0430 \u0441\u043e\u0437\u0434\u0430\u043d\u0438\u044f')),
                 ('title', models.CharField(max_length=250, null=True, verbose_name='\u0417\u0430\u0433\u043e\u043b\u043e\u0432\u043e\u043a', blank=True)),
                 ('slug', models.SlugField(default=None, max_length=255, blank=True, null=True, verbose_name='\u0423\u0440\u043b')),
-                ('content', redactor.fields.RedactorField(null=True, verbose_name='\u0421\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435', blank=True)),
+                ('content', models.TextField(null=True, verbose_name='\u0421\u043e\u0434\u0435\u0440\u0436\u0430\u043d\u0438\u0435', blank=True)),
                 ('status', models.CharField(default=b'save', max_length=50, verbose_name='\u0421\u0442\u0430\u0442\u0443\u0441', choices=[(b'pub', '\u041e\u043f\u0443\u0431\u043b\u0438\u043a\u043e\u0432\u0430\u043d\u043e'), (b'save', '\u0427\u0435\u0440\u043d\u043e\u0432\u0438\u043a'), (b'deferred', '\u041e\u0442\u043b\u043e\u0436\u0435\u043d\u043e'), (b'del', '\u0423\u0434\u0430\u043b\u0435\u043d\u043e'), (b'ban', '\u0417\u0430\u0431\u0430\u043d\u0435\u043d\u043e'), (b'premoderate', '\u041f\u0440\u0435\u043c\u043e\u0434\u0435\u0440\u0430\u0446\u0438\u044f')])),
                 ('type', models.CharField(default=b'post', max_length=15, verbose_name='\u0422\u0438\u043f \u043f\u043e\u0441\u0442\u0430', choices=[(b'post', '\u041f\u043e\u0441\u0442'), (b'page', '\u0421\u0442\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0430\u044f \u0441\u0442\u0440\u0430\u043d\u0438\u0446\u0430')])),
                 ('abstract', models.TextField(null=True, verbose_name='\u0410\u043d\u043e\u043d\u0441', blank=True)),
