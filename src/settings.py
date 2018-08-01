@@ -2,6 +2,14 @@
 # Django settings for gladerru project.
 import os
 import logging
+import raven
+
+BASE_DIR = os.path.dirname(__file__)
+
+try:
+    RELEASE = open(os.path.join(BASE_DIR, '..', 'release')).read()
+except Exception:
+    RELEASE = 'dev'
 
 APPEND_SLASH = False
 
@@ -11,7 +19,6 @@ SERVER_EMAIL = DEFAULT_FROM_EMAIL = 'glader.ru@gmail.com'
 
 AUTH_PROFILE_MODULE = 'core.Profile'
 
-BASE_DIR = os.path.dirname(__file__)
 FORCE_SCRIPT_NAME = ""
 TIME_ZONE = 'Asia/Yekaterinburg'
 LANGUAGE_CODE = 'ru-ru'
@@ -69,10 +76,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
 
+    'captcha',
     'django_russian',
     'gunicorn',
+    'raven.contrib.django.raven_compat',
     'reversion',
-    'captcha',
 
     'core',
     'discounts',
@@ -119,6 +127,13 @@ ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
 VK_API_ID = 2009513
 
 NOCAPTCHA = True
+
+# Sentry
+RAVEN_CONFIG = {
+    'dsn': 'https://b05c4511cec248a38bc9bc4a52755013@sentry.io/265386',
+    'release': RELEASE,
+}
+
 
 LOG_PATH = '/var/log/projects/gladerru'
 

@@ -95,6 +95,7 @@ def production(mode=''):
         dump()
         migrate()
     collect_static()
+    put_release_file()
     restart()
 
 
@@ -179,6 +180,14 @@ def collect_static():
     with settings(user=SSH_USER):
         run('mkdir -p /home/www/projects/gladerru/static')
         manage_py('collectstatic -c --noinput')
+
+
+def put_release_file():
+    local('git log -n 1 --format=oneline >> release')
+
+    directory = env.directory[env.env_type]
+    put('release', directory + '/release')
+    local('rm release')
 
 
 def restart():
