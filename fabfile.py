@@ -88,7 +88,7 @@ def production(mode=''):
     environment()
     local_settings()
     nginx()
-    upstart()
+    systemd()
     cron()
     logrotate()
     if mode != 'no_dump':
@@ -141,8 +141,10 @@ def nginx():
     #sudo('/etc/init.d/nginx reload', shell=False)
 
 
-def upstart():
-    run('cp %(directory)s/tools/upstart/gladerru.conf /etc/init/gladerru.conf' % env, shell=False)
+def systemd():
+    with settings(user='root'):
+        run('cp %(directory)s/tools/systemd/gladerru.service /lib/systemd/system/gladerru.service' % env, shell=False)
+#    run('cp %(directory)s/tools/upstart/gladerru.conf /etc/init/gladerru.conf' % env, shell=False)
     """sudo systemctl start gladerru
 sudo systemctl enable gladerru
 sudo systemctl restart gladerru
@@ -180,7 +182,8 @@ def collect_static():
 
 
 def restart():
-    run('sudo restart gladerru')
+    with settings(user='root'):
+        run('systemctl restart gladerru')
 
 
 def remote(args=''):
