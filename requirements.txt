@@ -9,4 +9,4 @@ Pillow==5.2.0
 python-memcached==1.59
 pytils==0.3
 git+https://github.com/glader/django_russian.git#egg=django_russian==0.1
-git+https://github.com/glader/django_yafotki.git#egg=django_yafotki==0.7.5
+git+https://github.com/glader/django_yafotki.git#egg=django_yafotki==0.7.6
