@@ -183,10 +183,9 @@ def collect_static():
 
 
 def put_release_file():
-    local('git log -n 1 --format=oneline >> release')
+    local('git log -n 1 --format=oneline > release')
 
-    directory = env.directory[env.env_type]
-    put('release', directory + '/release')
+    put('release', env.directory + '/release')
     local('rm release')
 
 
