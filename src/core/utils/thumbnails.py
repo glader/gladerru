@@ -10,7 +10,7 @@ from django.conf import settings
 
 
 def get_thumbnail_path(image_url):
-    thumbnail_file = md5(image_url).hexdigest()
+    thumbnail_file = md5(image_url.encode('utf-8')).hexdigest()
     thumbnail_dir = thumbnail_file[0:2]
     return '%s/%s' % (thumbnail_dir, thumbnail_file)
 
