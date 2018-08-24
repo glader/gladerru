@@ -136,20 +136,21 @@ def local_settings():
                 backup=False
             )
 
+            upload_template(
+                'tools/dump/dump.sh',
+                '../tools/dump/dump.sh',
+                globals(),
+                backup=False
+            )
+
 
 def nginx():
     run('cp %(directory)s/tools/nginx/90-gladerru.conf /etc/nginx/sites-available/90-gladerru.conf' % env, shell=False)
-    #sudo('/etc/init.d/nginx reload', shell=False)
 
 
 def systemd():
     with settings(user='root'):
         run('cp %(directory)s/tools/systemd/gladerru.service /lib/systemd/system/gladerru.service' % env, shell=False)
-#    run('cp %(directory)s/tools/upstart/gladerru.conf /etc/init/gladerru.conf' % env, shell=False)
-    """sudo systemctl start gladerru
-sudo systemctl enable gladerru
-sudo systemctl restart gladerru
-"""
 
 
 def cron():
@@ -164,7 +165,8 @@ def logrotate():
 
 
 def dump():
-    manage_py('make_dump')
+    if env.env_type == 'production':
+        run('/home/www/projects/gladerru/tools/dump/dump.sh')
 
 
 def manage_py(command):

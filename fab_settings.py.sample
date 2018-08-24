@@ -14,7 +14,7 @@ YAFOTKI_HOST = 'api-fotki.yandex.ru'
 
 SSH_USER = 'www'
 
-DUMP_ACCOUNT_NAME = 'glader.dump'
-DUMP_PASSWORD = ''
+DUMP_HOST = ''
+DUMP_USER = ''
 
 LOADOSOPHIA_TOKEN = ''
