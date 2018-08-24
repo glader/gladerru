@@ -11,4 +11,4 @@ MAILTO="glader.ru@gmail.com"
 45      5       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py maintenance > /dev/null
 0       6       *       *       *       www /home/www/projects/gladerru/ENV/bin/python /home/www/projects/gladerru/src/manage.py generate_sitemap > /dev/null
 
-0       */6     *       *       *       www /home/www/projects/gladerru/tools/dump/dump.sh > /dev/null
+0       0       *       *       *       www /home/www/projects/gladerru/tools/dump/dump.sh > /dev/null

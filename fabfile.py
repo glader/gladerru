@@ -92,7 +92,7 @@ def production(mode=''):
     cron()
     logrotate()
     if mode != 'no_dump':
-        dump()
+        # dump()
         migrate()
     collect_static()
     put_release_file()
@@ -165,8 +165,7 @@ def logrotate():
 
 
 def dump():
-    if env.env_type == 'production':
-        run('/home/www/projects/gladerru/tools/dump/dump.sh')
+    run('/home/www/projects/gladerru/tools/dump/dump.sh')
 
 
 def manage_py(command):
