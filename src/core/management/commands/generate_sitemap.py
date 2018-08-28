@@ -14,4 +14,4 @@ class Command(BaseCommand):
         response = c.get('/dynamic_sitemap.xml')
 
         with open(os.path.join(settings.STATIC_ROOT, 'root', 'sitemap.xml'), 'w') as xml:
-            xml.write(response.content)
+            xml.write(response.content.decode('utf-8'))
