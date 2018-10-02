@@ -91,10 +91,10 @@ INSTALLED_APPS = (
 ALLOWED_HOSTS = ('glader.ru', 'glader_local.ru')
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, '..', 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "media"),
+    os.path.join(BASE_DIR, 'core', 'static'),
 )
 
 THUMBNAIL_ROOT = '/var/cache/gladerru/thumbnails'  # os.path.join(MEDIA_ROOT, 'data/thumbnails')
