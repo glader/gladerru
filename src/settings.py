@@ -122,8 +122,6 @@ CACHES = {
 CACHE_MIDDLEWARE_KEY_PREFIX = CACHE_ROOT = 'glader.ru/'
 CACHE_LONG_TIMEOUT = 60 * 60 * 24  # Долгий таймаут, для практически не изменяющихся данных
 
-ACCESSLOG_PATH = '/var/log/projects/gladerru/access.log'
-
 VK_API_ID = 2009513
 
 NOCAPTCHA = True

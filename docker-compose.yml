@@ -1,0 +1,54 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gladerru_backend:latest
+    command: python manage.py runserver 0.0.0.0:8000
+    env_file: docker.env
+    depends_on:
+      - mysql
+    volumes:
+      - media:/app/media
+    ports:
+      - 8000:8000
+
+  cron:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: gladerru_backend:latest
+    command: pwd
+    env_file: docker.env
+    depends_on:
+      - mysql
+    volumes:
+      - media:/app/media
+
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    image: gladerru_nginx:latest
+    env_file: docker.env
+    depends_on:
+      - backend
+    volumes:
+      - media:/app/media
+    ports:
+      - 80:80
+
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: docker
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  db:
+  media:
