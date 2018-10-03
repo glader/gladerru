@@ -11,7 +11,7 @@ import logging
 
 AUTHORS = ['LAhmatyi', 'tinki', 'skyslayer', 'akafist', 'prophoter']
 
-log = logging.getLogger('django.cron')
+log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):

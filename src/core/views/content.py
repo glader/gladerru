@@ -56,7 +56,7 @@ class SearchView(TemplateView):
     def post(self, request, *args, **kwargs):
         query = self.request.POST.get('query', '')
         if query:
-            log = logging.getLogger('django.search')
+            log = logging.getLogger(__name__)
             log.info('%s\t%s', request.META['REMOTE_ADDR'], query)
             context = {'result': search_provider(query), 'query': query}
         else:

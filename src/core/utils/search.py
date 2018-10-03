@@ -37,7 +37,7 @@ def yandex_search(query):
         }
     ).content
 
-    log = logging.getLogger('search_raw')
+    log = logging.getLogger(__name__)
     log.setLevel(logging.INFO)
     handler = logging.handlers.RotatingFileHandler(settings.LOGGING['handlers']['search']['filename'] + '_raw',
                                                    maxBytes=1000000)

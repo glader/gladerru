@@ -11,7 +11,7 @@ import logging
 
 settings.TEMPLATE_DIRS = (os.path.join(os.path.dirname(__file__), '../../templates/3'), )
 
-log = logging.getLogger('django.cron')
+log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):

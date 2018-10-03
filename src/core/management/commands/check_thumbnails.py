@@ -9,7 +9,7 @@ from core.utils.thumbnails import make_thumbnail
 from mountains.models import Mountain, MountainPhoto
 from movies.models import Man, Movie, Photo
 
-log = logging.getLogger('django.cron')
+log = logging.getLogger(__name__)
 
 
 class Command(BaseCommand):

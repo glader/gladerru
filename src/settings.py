@@ -132,86 +132,55 @@ RAVEN_CONFIG = {
     'release': RELEASE,
 }
 
-
-LOG_PATH = '/var/log/projects/gladerru'
-
+# Logging
 LOGGING = {
     'version': 1,
-    'disable_existing_loggers': True,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse',
+        },
+    },
     'formatters': {
         'verbose': {
-            'format': '%(asctime)s %(name)-15s %(levelname)s %(message)s'
-        },
-        'simple': {
-            'format': '%(asctime)s %(levelname)s %(message)s'
-        },
-        'plain': {
-            'format': '%(asctime)s %(message)s'
-        },
-    },
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-            'formatter': 'simple'
-        },
-        'file': {
-            'level': 'WARNING',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_PATH, 'traceback.log'),
-            'formatter': 'verbose',
-        },
-        'mail_admin': {
-            'level': 'ERROR',
-            'class': 'django.utils.log.AdminEmailHandler',
-        },
-        'queue': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_PATH, 'queue.log'),
-            'formatter': 'simple',
-        },
-        'search': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_PATH, 'search.log'),
-            'formatter': 'simple',
-        },
-        'timelog': {
-            'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_PATH, 'time.log'),
-            'formatter': 'plain',
-        },
-    },
-    'loggers': {
-        'django.cron': {
-            'handlers': ['cron'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'django.search': {
-            'handlers': ['search'],
-            'level': 'INFO',
-            'propagate': True,
-        },
-        'queue': {
-            'handlers': ['queue'],
-            'level': 'INFO',
-            'propagate': False,
-        },
-        'django': {
-            'handlers': ['mail_admin', 'file'],
-            'level': 'WARNING',
-            'propagate': True,
-        },
-        'timelog.middleware': {
-            'handlers': ['timelog'],
-            'level': 'DEBUG',
-            'propogate': False,
+            'format':
+                '%(asctime)s %(name)-15s %(levelname)s %(message)s',
         }
     },
+    'handlers': {
+        'plain': {
+            'level': 'INFO',
+            'filters': ['require_debug_false'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        },
+        'debug': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose'
+        }
+    },
+    'loggers': {
+        '': {
+            'handlers': ['plain', 'debug'],
+            'level': 'DEBUG',
+        },
+        'py.warnings': {
+            'level': 'ERROR'
+        },
+        'urllib3': {
+            'level': 'WARNING'
+        },
+        'requests': {
+            'level': 'WARNING'
+        },
+    }
 }
+
 
 try:
     from local_settings import *
