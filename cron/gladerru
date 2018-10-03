@@ -1,0 +1,15 @@
+# Cron actions for glader.ru
+#minute (0-59),
+#|      hour (0-23),
+#|      |       day of the month (1-31),
+#|      |       |       month of the year (1-12),
+#|      |       |       |       day of the week (0-6 with 0=Sunday).
+#|      |       |       |       |       commands
+
+0       6       *       *       *       python /app/manage.py generate_sitemap > /proc/1/fd/1 2>/proc/1/fd/2
+
+0       0       *       *       *       /home/www/projects/gladerru/tools/dump/dump.sh > /proc/1/fd/1 2>/proc/1/fd/2
+
+*       *       *       *       *       echo `date` > /proc/1/fd/1 2>/proc/1/fd/2
+
+

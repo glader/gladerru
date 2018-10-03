@@ -13,9 +13,10 @@ services:
       - 8000:8000
 
   cron:
-    build: .
-    image: gladerru_backend:latest
-    command: pwd
+    build:
+      context: .
+      dockerfile: cron/Dockerfile
+    image: gladerru_cron:latest
     env_file: docker.env
     depends_on:
       - postgres

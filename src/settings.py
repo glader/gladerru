@@ -165,12 +165,6 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'django.utils.log.AdminEmailHandler',
         },
-        'cron': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(LOG_PATH, 'cron.log'),
-            'formatter': 'verbose',
-        },
         'queue': {
             'level': 'INFO',
             'class': 'logging.FileHandler',
